@@ -1,4 +1,4 @@
-/* === 3D DIAGRAM WRAPPER === */
+/* === WRAPPER === */
 .diagram3d-wrapper {
   position: relative;
   width: 100%;
@@ -14,15 +14,42 @@
 .diagram3d-hint {
   text-align: center;
   font-size: 0.8rem;
-  color: var(--text-tertiary, #999);
-  margin-bottom: 12px;
+  color: var(--text-tertiary, #94A3B8);
+  margin-bottom: 8px;
   letter-spacing: 0.5px;
+}
+
+/* === LEGEND === */
+.diagram3d-legend {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 16px;
+  font-size: 0.8rem;
+  color: var(--text-secondary, #64748B);
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.legend-line {
+  display: inline-block;
+  width: 28px;
+  height: 3px;
+  border-radius: 2px;
+}
+.legend-money {
+  background: #10B981;
+}
+.legend-data {
+  background: #3B82F6;
 }
 
 /* === VIEWPORT === */
 .diagram3d-viewport {
   width: 100%;
-  min-height: 500px;
+  min-height: 520px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,264 +60,311 @@
 /* === 3D SCENE === */
 .diagram3d-scene {
   position: relative;
-  width: 500px;
-  height: 500px;
+  width: 560px;
+  height: 480px;
   transform-style: preserve-3d;
   cursor: grab;
-  transition: transform 0.05s linear;
+  transition: transform 0.3s ease;
 }
 
-/* === NODES - absolute positioned by inline style (left/top) === */
-.diagram3d-node {
+/* === FLOOR === */
+.diagram3d-floor {
   position: absolute;
-  transform: translate(-50%, -50%);
-  transform-style: preserve-3d;
-  opacity: 0;
-  z-index: 5;
+  inset: -20px;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(59,130,246,0.04) 0%, transparent 70%),
+    linear-gradient(rgba(148,163,184,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148,163,184,0.06) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  transform: translateZ(-2px);
 }
-.diagram3d-visible .diagram3d-node {
-  animation: nodeAppear 0.6s ease forwards;
+
+/* === NODES === */
+.d3-node {
+  position: absolute;
+  transform-style: preserve-3d;
+  z-index: 5;
+  opacity: 0;
+}
+.diagram3d-visible .d3-node {
+  animation: d3NodeIn 0.6s ease forwards;
   animation-delay: var(--delay, 0s);
 }
-
-@keyframes nodeAppear {
-  from { opacity: 0; transform: translate(-50%, -50%) translateZ(-40px) scale(0.8); }
+@keyframes d3NodeIn {
+  from { opacity: 0; transform: translate(-50%, -50%) translateZ(-30px) scale(0.85); }
   to { opacity: 1; transform: translate(-50%, -50%) translateZ(0) scale(1); }
 }
 
-/* === 3D NODE BODY === */
-.node-3d-body {
+/* Node positions — matching Image 2 layout:
+   Driver (bottom-left), Charger (bottom-right),
+   Server (center-left), CPO (center-right), GCSS (top-center) */
+.d3-node-driver  { left: 80px;  top: 400px; }
+.d3-node-charger { left: 300px; top: 400px; }
+.d3-node-server  { left: 120px; top: 220px; }
+.d3-node-cpo     { left: 370px; top: 220px; }
+.d3-node-gcss    { left: 280px; top: 60px; }
+
+/* Card container */
+.d3-node-card {
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.3s ease;
 }
-.node-3d-body:hover {
-  transform: translateZ(12px);
+.d3-node-card:hover {
+  transform: translateZ(8px) scale(1.04);
 }
 
-/* Top face of the 3D box */
-.node-3d-top {
+/* Shadow underneath */
+.d3-node-shadow {
   position: absolute;
-  top: -20px;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 14px;
-  transform: translateZ(20px);
+  inset: 6px -2px -6px -2px;
+  border-radius: 16px;
+  background: rgba(0,0,0,0.08);
+  transform: translateZ(-4px);
+  filter: blur(4px);
 }
-.node-gcss .node-3d-top {
-  background: linear-gradient(135deg, var(--primary, #F57C00), #FF9800);
-  box-shadow: 0 0 30px rgba(245, 124, 0, 0.3);
-}
-.node-server .node-3d-top {
-  background: linear-gradient(135deg, #5C6BC0, #7986CB);
-  box-shadow: 0 0 20px rgba(92, 107, 192, 0.3);
-}
-.node-driver .node-3d-top {
-  background: linear-gradient(135deg, #26A69A, #4DB6AC);
-  box-shadow: 0 0 20px rgba(38, 166, 154, 0.3);
-}
-.node-charger .node-3d-top {
-  background: linear-gradient(135deg, #42A5F5, #64B5F6);
-  box-shadow: 0 0 20px rgba(66, 165, 245, 0.3);
-}
-.node-cpo .node-3d-top {
-  background: linear-gradient(135deg, #AB47BC, #CE93D8);
-  box-shadow: 0 0 20px rgba(171, 71, 188, 0.3);
+.d3-shadow-gcss {
+  inset: 8px -4px -8px -4px;
+  background: rgba(245, 124, 0, 0.15);
+  filter: blur(8px);
 }
 
 /* Front face */
-.node-3d-front {
+.d3-node-face {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px 24px;
-  min-width: 110px;
-  border-radius: 14px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  background: var(--glass-bg, rgba(255,255,255,0.85));
-  border: 1px solid var(--glass-border, rgba(255,255,255,0.2));
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  padding: 18px 22px;
+  min-width: 100px;
+  border-radius: 16px;
+  background: var(--card-bg, #fff);
+  border: 1.5px solid var(--glass-border, rgba(0,0,0,0.06));
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  transform: translateZ(4px);
   z-index: 2;
 }
 
-[data-theme="dark"] .node-3d-front,
-.dark .node-3d-front {
-  background: rgba(39, 35, 32, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+[data-theme="dark"] .d3-node-face,
+.dark .d3-node-face {
+  background: rgba(30, 30, 40, 0.95);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
-.node-gcss .node-3d-front {
-  min-width: 140px;
-  padding: 24px 28px;
+/* Colored top edge accent */
+.d3-node-face::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 12px;
+  right: 12px;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+}
+.d3-face-driver::before  { background: linear-gradient(90deg, #26A69A, #4DB6AC); }
+.d3-face-charger::before { background: linear-gradient(90deg, #42A5F5, #64B5F6); }
+.d3-face-server::before  { background: linear-gradient(90deg, #5C6BC0, #7986CB); }
+.d3-face-cpo::before     { background: linear-gradient(90deg, #AB47BC, #CE93D8); }
+.d3-face-gcss::before    { background: linear-gradient(90deg, var(--primary, #F57C00), #FF9800); left: 8px; right: 8px; height: 4px; }
+
+/* GCSS is larger */
+.d3-face-gcss {
+  min-width: 130px;
+  padding: 22px 28px;
+  border: 2px solid rgba(245, 124, 0, 0.2);
 }
 
-.node-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+/* Node icon */
+.d3-node-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 8px;
 }
-.node-gcss .node-icon {
-  background: rgba(245, 124, 0, 0.12);
-  color: var(--primary, #F57C00);
-}
-.node-server .node-icon {
-  background: rgba(92, 107, 192, 0.12);
-  color: #5C6BC0;
-}
-.node-driver .node-icon {
-  background: rgba(38, 166, 154, 0.12);
-  color: #26A69A;
-}
-.node-charger .node-icon {
-  background: rgba(66, 165, 245, 0.12);
-  color: #42A5F5;
-}
-.node-cpo .node-icon {
-  background: rgba(171, 71, 188, 0.12);
-  color: #AB47BC;
-}
+.d3-face-driver .d3-node-icon  { background: rgba(38, 166, 154, 0.1); color: #26A69A; }
+.d3-face-charger .d3-node-icon { background: rgba(66, 165, 245, 0.1); color: #42A5F5; }
+.d3-face-server .d3-node-icon  { background: rgba(92, 107, 192, 0.1); color: #5C6BC0; }
+.d3-face-cpo .d3-node-icon     { background: rgba(171, 71, 188, 0.1); color: #AB47BC; }
+.d3-face-gcss .d3-node-icon    { background: rgba(245, 124, 0, 0.1); color: var(--primary, #F57C00); }
 
-.node-label {
-  font-size: 0.85rem;
+/* Labels */
+.d3-node-label {
+  font-size: 0.82rem;
   font-weight: 700;
-  color: var(--text-primary, #1a1a1a);
+  color: var(--text-primary, #1e293b);
   white-space: nowrap;
-  letter-spacing: 0.2px;
+}
+[data-theme="dark"] .d3-node-label,
+.dark .d3-node-label {
+  color: #e2e8f0;
+}
+.d3-node-sub {
+  font-size: 0.65rem;
+  color: var(--text-tertiary, #94A3B8);
+  font-weight: 500;
+  margin-top: 2px;
 }
 
-/* === CONNECTION LINES (HTML divs) === */
-.diagram3d-conn {
+/* === CONNECTION LINES === */
+.conn {
   position: absolute;
-  height: 2px;
-  pointer-events: none;
+  height: 0;
+  border-top: 2px dashed;
+  transform-origin: 0 0;
   z-index: 1;
   overflow: visible;
 }
-.conn-data {
-  background: repeating-linear-gradient(
-    90deg,
-    #42A5F5 0px, #42A5F5 8px,
-    transparent 8px, transparent 13px
-  );
-  opacity: 0.5;
-}
-.conn-money {
-  background: repeating-linear-gradient(
-    90deg,
-    #FF9800 0px, #FF9800 8px,
-    transparent 8px, transparent 13px
-  );
-  opacity: 0.5;
-}
+.conn-money { border-color: rgba(16, 185, 129, 0.4); }
+.conn-data  { border-color: rgba(59, 130, 246, 0.35); }
 
-/* Animated particle traveling along the line */
-.conn-particle {
+/* Animated flow particle */
+.conn-flow {
   position: absolute;
-  top: -3px;
-  width: 8px;
-  height: 8px;
+  top: -4px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  animation: particleMove 2s linear infinite;
+  animation: flowMove 2.5s linear infinite;
 }
-.particle-data {
-  background: #42A5F5;
-  box-shadow: 0 0 8px #42A5F5;
-}
-.particle-money {
-  background: #FF9800;
-  box-shadow: 0 0 8px #FF9800;
+.conn-flow-money { background: #10B981; box-shadow: 0 0 6px #10B981; }
+.conn-flow-data  { background: #3B82F6; box-shadow: 0 0 6px #3B82F6; }
+
+@keyframes flowMove {
+  0%   { left: 0; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { left: calc(100% - 6px); opacity: 0; }
 }
 
-@keyframes particleMove {
-  0% { left: 0%; }
-  100% { left: calc(100% - 8px); }
+/* === CONNECTION POSITIONS (matching node layout) ===
+   Driver(80,400) Charger(300,400) Server(120,220) CPO(370,220) GCSS(280,60) */
+
+/* Driver(80,400) → Charger(300,400): horizontal, money */
+.conn-driver-charger {
+  left: 80px;
+  top: 400px;
+  width: 220px;
+  transform: rotate(0deg);
 }
 
-/* Connection labels */
-.conn-label {
-  position: absolute;
-  transform: translate(-50%, -20px);
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 8px;
-  white-space: nowrap;
-  pointer-events: none;
-  z-index: 3;
+/* Charger(300,400) → Server(120,220): diagonal up-left, data */
+.conn-charger-server {
+  left: 300px;
+  top: 400px;
+  width: 250px;
+  transform: rotate(-136deg);
 }
-.conn-label-data {
-  color: #42A5F5;
-  background: rgba(66, 165, 245, 0.1);
+
+/* Driver(80,400) → Server(120,220): up, data */
+.conn-driver-server {
+  left: 80px;
+  top: 400px;
+  width: 185px;
+  transform: rotate(-102deg);
 }
-.conn-label-money {
-  color: #FF9800;
-  background: rgba(245, 124, 0, 0.1);
+
+/* Server(120,220) → CPO(370,220): horizontal, data */
+.conn-server-cpo {
+  left: 120px;
+  top: 220px;
+  width: 250px;
+  transform: rotate(0deg);
+}
+
+/* CPO(370,220) → GCSS(280,60): diagonal up-left, money */
+.conn-cpo-gcss {
+  left: 370px;
+  top: 220px;
+  width: 185px;
+  transform: rotate(-120deg);
 }
 
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
   .diagram3d-scene {
-    width: 360px;
+    width: 400px;
     height: 360px;
-    transform: scale(0.72) rotateX(-20deg) rotateZ(45deg);
+    transform: scale(0.85) rotateX(-25deg) rotateZ(40deg) !important;
   }
   .diagram3d-viewport {
     min-height: 400px;
   }
-  .node-3d-front {
+  /* Scale down node positions */
+  .d3-node-driver  { left: 56px;  top: 300px; }
+  .d3-node-charger { left: 220px; top: 300px; }
+  .d3-node-server  { left: 85px;  top: 165px; }
+  .d3-node-cpo     { left: 270px; top: 165px; }
+  .d3-node-gcss    { left: 200px; top: 45px; }
+
+  .conn-driver-charger { left: 56px;  top: 300px; width: 164px; }
+  .conn-charger-server { left: 220px; top: 300px; width: 190px; transform: rotate(-135deg); }
+  .conn-driver-server  { left: 56px;  top: 300px; width: 140px; transform: rotate(-102deg); }
+  .conn-server-cpo     { left: 85px;  top: 165px; width: 185px; }
+  .conn-cpo-gcss       { left: 270px; top: 165px; width: 140px; transform: rotate(-120deg); }
+
+  .d3-node-face {
     padding: 14px 16px;
-    min-width: 85px;
+    min-width: 80px;
   }
-  .node-gcss .node-3d-front {
-    min-width: 110px;
-    padding: 18px 20px;
+  .d3-face-gcss {
+    min-width: 100px;
+    padding: 16px 20px;
   }
-  .node-icon {
-    width: 38px;
-    height: 38px;
+  .d3-node-icon {
+    width: 40px;
+    height: 40px;
   }
-  .node-icon svg {
-    width: 20px;
-    height: 20px;
+  .d3-node-icon svg {
+    width: 24px;
+    height: 24px;
   }
-  .node-label {
-    font-size: 0.75rem;
-  }
-  .conn-label {
-    font-size: 0.6rem;
-  }
+  .d3-node-label { font-size: 0.75rem; }
 }
 
 @media (max-width: 480px) {
   .diagram3d-scene {
-    width: 300px;
+    width: 320px;
     height: 300px;
-    transform: scale(0.6) rotateX(-20deg) rotateZ(45deg);
+    transform: scale(0.7) rotateX(-20deg) rotateZ(35deg) !important;
   }
   .diagram3d-viewport {
-    min-height: 340px;
+    min-height: 320px;
   }
-  .node-3d-front {
+  .d3-node-driver  { left: 45px;  top: 250px; }
+  .d3-node-charger { left: 180px; top: 250px; }
+  .d3-node-server  { left: 70px;  top: 135px; }
+  .d3-node-cpo     { left: 220px; top: 135px; }
+  .d3-node-gcss    { left: 160px; top: 35px; }
+
+  .conn-driver-charger { left: 45px;  top: 250px; width: 135px; }
+  .conn-charger-server { left: 180px; top: 250px; width: 155px; transform: rotate(-135deg); }
+  .conn-driver-server  { left: 45px;  top: 250px; width: 118px; transform: rotate(-102deg); }
+  .conn-server-cpo     { left: 70px;  top: 135px; width: 150px; }
+  .conn-cpo-gcss       { left: 220px; top: 135px; width: 115px; transform: rotate(-120deg); }
+
+  .d3-node-face {
     padding: 10px 12px;
-    min-width: 70px;
+    min-width: 65px;
   }
-  .node-gcss .node-3d-front {
-    min-width: 90px;
-    padding: 14px 16px;
+  .d3-face-gcss {
+    min-width: 80px;
+    padding: 12px 14px;
   }
-  .node-icon {
+  .d3-node-icon {
     width: 32px;
     height: 32px;
   }
-  .node-label {
-    font-size: 0.65rem;
+  .d3-node-icon svg {
+    width: 20px;
+    height: 20px;
   }
+  .d3-node-label { font-size: 0.65rem; }
+  .d3-node-sub { font-size: 0.55rem; }
+  .diagram3d-legend { font-size: 0.7rem; gap: 16px; }
 }
