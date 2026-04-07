@@ -1,0 +1,74 @@
+import { Inter, Manrope, JetBrains_Mono } from 'next/font/google';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages, setRequestLocale } from 'next-intl/server';
+import { ThemeProvider } from '@/providers/ThemeProvider';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import ScrollProgress from '@/components/layout/ScrollProgress';
+import ScrollToTop from '@/components/ui/ScrollToTop';
+import GlobalEffects from '@/components/effects/GlobalEffects';
+import { routing } from '@/i18n/routing';
+import '../globals.css';
+import '../enhancements.css';
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-body',
+  display: 'swap',
+});
+
+const manrope = Manrope({
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+});
+
+export default async function LocaleLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const messages = await getMessages();
+
+  return (
+    <html
+      lang={locale}
+      className={`${inter.variable} ${manrope.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('gcss-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}})()`,
+          }}
+        />
+      </head>
+      <body>
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProvider>
+            <ScrollProgress />
+            <GlobalEffects />
+            <Header />
+            <main>{children}</main>
+            <Footer />
+            <ScrollToTop />
+          </ThemeProvider>
+        </NextIntlClientProvider>
+      </body>
+    </html>
+  );
+}

@@ -1,0 +1,592 @@
+/* ============================================
+   GCSS - Enhancements
+   Fluid Glass Design, Glassmorphism, 3D Effects
+   ============================================ */
+
+/* --- Enhanced Color Palette --- */
+:root {
+  --gradient-primary: linear-gradient(135deg, #E6A817 0%, #D4890A 100%);
+  --gradient-accent: linear-gradient(135deg, #1A1A2E 0%, #2D2D44 100%);
+  --gradient-warm: linear-gradient(135deg, #F5B731 0%, #E6A817 100%);
+  --gradient-cool: linear-gradient(135deg, #E6A817 0%, #F5C946 100%);
+  --gradient-hero: linear-gradient(135deg, #0c0a09 0%, #1c1917 40%, #0c0a09 100%);
+  --gradient-mesh: radial-gradient(at 40% 20%, rgba(230, 168, 23, 0.08) 0px, transparent 50%),
+                   radial-gradient(at 80% 0%, rgba(245, 183, 49, 0.06) 0px, transparent 50%),
+                   radial-gradient(at 0% 50%, rgba(212, 137, 10, 0.05) 0px, transparent 50%),
+                   radial-gradient(at 80% 50%, rgba(230, 168, 23, 0.04) 0px, transparent 50%),
+                   radial-gradient(at 0% 100%, rgba(245, 201, 70, 0.05) 0px, transparent 50%);
+  --neon-blue: 0 0 20px rgba(230, 168, 23, 0.2);
+  --neon-purple: 0 0 20px rgba(26, 26, 46, 0.2);
+}
+
+/* --- Glassmorphism --- */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-md);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: var(--border-light);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+/* Header glass styles are in globals.css — no overrides needed here */
+
+.card {
+  background: var(--dark-card);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.float-badge {
+  background: var(--dark-elevated);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-light);
+}
+
+.pricing-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* --- Animated Mesh Background --- */
+.mesh-bg {
+  position: relative;
+}
+
+.mesh-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-mesh);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mesh-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* --- 3D Card Tilt Effect --- */
+.tilt-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.4s ease;
+}
+
+.tilt-card:hover {
+  transform: perspective(1000px) rotateX(1.5deg) rotateY(-1.5deg) scale(1.015);
+}
+
+.tilt-card .card-inner {
+  transform: translateZ(20px);
+}
+
+/* --- 3D Floating Elements --- */
+.float-3d {
+  animation: float3d 6s ease-in-out infinite;
+}
+
+@keyframes float3d {
+  0%, 100% { transform: translateY(0) rotateX(0) rotateY(0); }
+  25% { transform: translateY(-10px) rotateX(2deg) rotateY(-2deg); }
+  50% { transform: translateY(-5px) rotateX(-1deg) rotateY(1deg); }
+  75% { transform: translateY(-12px) rotateX(1deg) rotateY(-1deg); }
+}
+
+/* --- Glowing Borders --- */
+.glow-border {
+  position: relative;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: var(--gradient-primary);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glow-border:hover::before {
+  opacity: 1;
+}
+
+/* --- Animated Gradient Text --- */
+.gradient-text-animated {
+  background: linear-gradient(90deg, #E6A817, #D4890A, #F5C946, #E6A817);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 4s ease infinite;
+}
+
+/* --- Typing text: fixed dimensions to prevent layout shift --- */
+.typing-text {
+  display: inline-block;
+  min-height: 1.2em;
+  min-width: 380px;
+  vertical-align: bottom;
+}
+.typing-text::after {
+  content: '|';
+  animation: blink 0.7s step-end infinite;
+  margin-left: 2px;
+  -webkit-text-fill-color: var(--primary, #E6A817);
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+@media (max-width: 1024px) {
+  .typing-text { min-width: 300px; }
+}
+@media (max-width: 768px) {
+  .typing-text { min-width: 240px; }
+}
+@media (max-width: 480px) {
+  .typing-text { min-width: 180px; }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+/* --- Particle dots background --- */
+.particles-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.particles-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, rgba(230, 168, 23, 0.2) 0%, transparent 100%),
+    radial-gradient(2px 2px at 40% 70%, rgba(230, 168, 23, 0.1) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 20%, rgba(245, 201, 70, 0.15) 0%, transparent 100%),
+    radial-gradient(2px 2px at 80% 50%, rgba(230, 168, 23, 0.08) 0%, transparent 100%),
+    radial-gradient(1px 1px at 10% 80%, rgba(230, 168, 23, 0.12) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 10%, rgba(245, 183, 49, 0.1) 0%, transparent 100%),
+    radial-gradient(2px 2px at 30% 50%, rgba(212, 137, 10, 0.08) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 80%, rgba(230, 168, 23, 0.06) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 10%, rgba(230, 168, 23, 0.1) 0%, transparent 100%),
+    radial-gradient(2px 2px at 15% 60%, rgba(245, 201, 70, 0.08) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+  animation: particlesDrift 20s linear infinite;
+}
+
+@keyframes particlesDrift {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-20px); }
+}
+
+/* --- Enhanced Hero --- */
+.hero {
+  background: var(--gradient-mesh);
+  position: relative;
+}
+
+.hero::before {
+  background: var(--gradient-glow);
+}
+
+/* --- Enhanced Hero Image with 3D --- */
+.hero-image-placeholder {
+  transform: perspective(800px) rotateY(-5deg) rotateX(2deg);
+  transition: transform 0.5s ease;
+  border: 1px solid var(--border-subtle);
+}
+
+.hero-image-placeholder:hover {
+  transform: perspective(800px) rotateY(0deg) rotateX(0deg) scale(1.02);
+}
+
+/* --- Gradient Orbs (decorative) --- */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+.orb-blue {
+  background: rgba(230, 168, 23, 0.2);
+}
+
+.orb-purple {
+  background: rgba(26, 26, 46, 0.2);
+}
+
+.orb-cyan {
+  background: rgba(6, 182, 212, 0.15);
+}
+
+.orb-pink {
+  background: rgba(236, 72, 153, 0.15);
+}
+
+/* --- Enhanced Buttons --- */
+/* base colours/shadow already in components.css; add shimmer + glow only */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+/* box-shadow on hover already in components.css; keep transform only if not there */
+/* components.css covers hover box-shadow & translateY — no override needed here */
+
+.btn-accent {
+  box-shadow: 0 0 15px rgba(230, 168, 23, 0.15);
+}
+
+/* --- Enhanced Card Icons with distinct colors --- */
+.card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: rgba(230, 168, 23, 0.2);
+  color: #E6A817;
+  box-shadow: 0 4px 14px rgba(230, 168, 23, 0.18);
+}
+
+.card:nth-child(2) .card-icon {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38BDF8;
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.18);
+}
+
+.card:nth-child(3) .card-icon {
+  background: rgba(248, 113, 113, 0.2);
+  color: #F87171;
+  box-shadow: 0 4px 14px rgba(248, 113, 113, 0.18);
+}
+
+.card:nth-child(4) .card-icon {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10B981;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.18);
+}
+
+.card:nth-child(5) .card-icon {
+  background: rgba(236, 72, 153, 0.2);
+  color: #EC4899;
+  box-shadow: 0 4px 14px rgba(236, 72, 153, 0.18);
+}
+
+.card:nth-child(6) .card-icon {
+  background: rgba(139, 92, 246, 0.2);
+  color: #8B5CF6;
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.18);
+}
+
+/* --- Enhanced Section Headers --- */
+.section-label {
+  background: var(--primary-dim);
+  color: var(--primary);
+  font-weight: 600;
+  border: 1px solid rgba(230,168,23,0.2);
+}
+
+/* --- Model Cards Enhancement --- */
+.model-card .model-icon {
+  background: var(--primary);
+  color: var(--black);
+  box-shadow: 0 8px 24px rgba(230, 168, 23, 0.15);
+}
+
+.model-card:nth-child(2) .model-icon {
+  background: var(--dark-elevated);
+  color: var(--text-primary);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Matrix Enhancement --- */
+.matrix-header {
+  background: var(--primary);
+  color: var(--black);
+}
+
+.matrix-column:nth-child(3) .matrix-header {
+  background: linear-gradient(135deg, #EB5A3C, #D4452A);
+  color: white;
+}
+
+/* --- Pricing Card Enhancement --- */
+.pricing-card.featured {
+  border-color: rgba(230,168,23,0.3);
+  background: var(--glass-bg);
+  position: relative;
+  box-shadow: var(--shadow-glow);
+}
+
+.pricing-card.featured::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(230,168,23,0.2), rgba(230,168,23,0.05));
+  z-index: -1;
+  pointer-events: none;
+}
+
+.pricing-card.featured::before {
+  background: var(--primary);
+  color: var(--black);
+}
+
+/* --- Smooth Page Transition --- */
+body {
+  background: var(--black);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* --- Dark/Light Toggle Button --- */
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  color: var(--text-primary);
+  border-color: var(--border-light);
+}
+
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+  width: 18px;
+  height: 18px;
+  transition: all 0.3s ease;
+}
+
+/* Default (light) theme - show moon icon to switch to dark */
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+
+/* Dark theme - show sun icon to switch to light */
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+/* --- Language Switcher --- */
+.lang-switcher {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: 100px;
+  padding: 3px;
+  flex-shrink: 0;
+}
+
+.lang-btn {
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+  color: var(--text-tertiary);
+  background: transparent;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.lang-btn.active {
+  color: var(--text-primary);
+  background: var(--glass-bg);
+  border-color: var(--border-light);
+}
+
+.lang-btn:not(.active):hover {
+  color: var(--text-primary);
+}
+
+/* --- AI Image Containers --- */
+.ai-image {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.ai-image:hover {
+  transform: scale(1.02);
+}
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.image-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.4) 100%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* --- Animated Background Gradient for Hero --- */
+.hero-gradient-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: -1;
+  background: var(--gradient-mesh);
+  animation: meshMove 15s ease-in-out infinite;
+}
+
+@keyframes meshMove {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* --- Scroll Progress Bar --- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--primary);
+  z-index: 10001;
+  transition: width 0.1s ease;
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 10px rgba(230,168,23,0.5);
+}
+
+/* --- Enhanced CTA --- */
+/* .cta-section and .cta-section::before are fully defined in sections.css — no override needed */
+
+/* --- Hover glow effect on cards --- */
+.card::before,
+.model-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(230, 168, 23, 0.04), transparent 40%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover::before,
+.model-card:hover::before {
+  opacity: 1;
+}
+
+.card, .model-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- Animated number ticker --- */
+.ticker {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Loading shimmer for images --- */
+.shimmer {
+  background: linear-gradient(90deg, var(--dark-surface) 25%, var(--dark-elevated) 50%, var(--dark-surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* --- Map dots enhancement --- */
+/* .map-dot background/shadow already in sections.css — no override needed */
+
+/* --- Noise Texture Overlay --- */
+/* Override sections.css hero::after { display: none } so texture renders */
+.hero::after {
+  display: block !important;
+}
+
+.hero::after,
+.cta-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+/* --- Responsive Tweaks for New Elements --- */
+@media (max-width: 1024px) {
+  .header-actions .lang-switcher { order: -1; }
+  .header-actions .theme-toggle { width: 36px; height: 36px; }
+  .orb { display: none; }
+  .typing-text { min-width: 200px; }
+}
+
+@media (max-width: 480px) {
+  .header-actions { gap: 6px; }
+  .lang-btn { font-size: 0.7rem; padding: 3px 6px; }
+  .typing-text { min-width: 160px; }
+}

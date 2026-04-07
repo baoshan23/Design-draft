@@ -1,0 +1,124 @@
+/* ============================================
+   GCSS - Global Charger System Service
+   Main Stylesheet - Fluid Glass Design
+   ============================================ */
+
+/* --- CSS Variables --- */
+:root {
+  /* --- Clean Light Theme (Default) --- */
+  --black: #ffffff;
+  --dark: #F1F2F4;
+  --dark-surface: #F1F2F4;
+  --dark-card: #ffffff;
+  --dark-elevated: #ffffff;
+  --grey: #e5e7eb;
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-light: rgba(0, 0, 0, 0.1);
+  --border-medium: rgba(0, 0, 0, 0.15);
+
+  --cream: #1c1917;
+  --taupe: #44403c;
+  --text-primary: #383838;
+  --text-secondary: #666666;
+  --text-tertiary: #757575;
+  --text-muted: #8a8a8a;
+
+  --primary: #FEBF1D;
+  --primary-hover: #FFD04A;
+  --primary-dim: rgba(254, 191, 29, 0.12);
+  --primary-glow: rgba(254, 191, 29, 0.06);
+
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-bg-hover: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --glass-blur: blur(20px);
+
+  --gradient-dark: linear-gradient(180deg, transparent 0%, var(--black) 100%);
+  --gradient-glow: radial-gradient(ellipse at 50% 0%, rgba(254,191,29,0.06) 0%, transparent 60%);
+
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.1);
+  --shadow-glow: 0 0 40px rgba(254,191,29,0.08);
+
+  /* Legacy shadow aliases */
+  --shadow: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-xl: 0 16px 48px rgba(0,0,0,0.1);
+
+  /* Typography */
+  --font-body: 'Inter', 'PingFang SC', system-ui, -apple-system, sans-serif;
+  --font-main: 'Inter', 'PingFang SC', system-ui, -apple-system, sans-serif;
+  --font-display: 'Manrope', 'PingFang SC', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Status colors */
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+
+  /* Legacy variable aliases for compatibility */
+  --primary-dark: #E6A817;
+  --primary-light: #FFD04A;
+  --primary-bg: var(--primary-dim);
+  --accent: #F1F2F4;
+  --accent-light: #e5e7eb;
+  --dark-2: var(--dark-surface);
+  --dark-3: var(--grey);
+  --gray-600: var(--text-secondary);
+  --gray-500: var(--text-tertiary);
+  --gray-400: var(--text-tertiary);
+  --gray-300: var(--border-medium);
+  --gray-200: var(--border-light);
+  --gray-100: var(--dark-surface);
+  --gray-50: var(--dark);
+  --white: #ffffff;
+
+  /* Spacing */
+  --header-height: 72px;
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --max-width: 1200px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Dark Theme Override --- */
+[data-theme="dark"] {
+  --black: #0c0a09;
+  --dark: #1c1917;
+  --dark-surface: #211e1b;
+  --dark-card: #272320;
+  --dark-elevated: #2c2825;
+  --grey: #44403c;
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-light: rgba(255, 255, 255, 0.1);
+  --border-medium: rgba(255, 255, 255, 0.16);
+  --cream: #faf8f5;
+  --taupe: #d6d3cd;
+  --text-primary: #faf8f5;
+  --text-secondary: #a8a29e;
+  --text-tertiary: #78716c;
+  --text-muted: #57534e;
+  --primary: #E6A817;
+  --primary-hover: #F5C946;
+  --primary-dim: rgba(230, 168, 23, 0.12);
+  --primary-glow: rgba(230, 168, 23, 0.06);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-bg-hover: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.07);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.25);
+  --shadow-md: 0 8px 32px rgba(0,0,0,0.35);
+  --shadow-lg: 0 16px 64px rgba(0,0,0,0.45);
+  --shadow: 0 2px 8px rgba(0,0,0,0.3);
+  --shadow-xl: 0 16px 64px rgba(0,0,0,0.5);
+  --white: #0c0a09;
+  --gray-50: #1c1917;
+  --gray-100: #211e1b;
+  --gray-200: #44403c;
+  --gray-300: rgba(255, 255, 255, 0.16);
+  --gray-400: #78716c;
+  --gray-500: #78716c;
+  --gray-600: #a8a29e;
+}

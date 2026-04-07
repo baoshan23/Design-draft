@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0;url=/en/">
+  <title>GCSS - Redirecting...</title>
+  <script>
+    // Detect browser language and redirect
+    var lang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+    if (lang.startsWith('zh')) {
+      window.location.replace('/zh/');
+    } else {
+      window.location.replace('/en/');
+    }
+  </script>
+</head>
+<body>
+  <p>Redirecting... <a href="/en/">Click here</a> if not redirected.</p>
+</body>
+</html>

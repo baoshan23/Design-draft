@@ -1,0 +1,36 @@
+/* ============================================
+   GCSS - Global Charger System Service
+   Main Stylesheet - Fluid Glass Design
+   ============================================ */
+
+@import './styles/tokens.css';
+@import './styles/base.css';
+@import './styles/components.css';
+@import './styles/sections.css';
+@import './styles/pages.css';
+@import './styles/pages-extracted.css';
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .animate-on-scroll {
+    opacity: 1;
+    transform: none;
+  }
+
+  .glass-card:hover,
+  .tilt-card:hover,
+  .hero-image-placeholder:hover,
+  .ai-image:hover,
+  .btn-primary:hover,
+  .btn-accent:hover {
+    transform: none;
+  }
+}

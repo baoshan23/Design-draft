@@ -1,0 +1,1467 @@
+{
+  "nav": {
+    "home": "Home",
+    "product": "Product",
+    "pricing": "Pricing",
+    "community": "Community",
+    "forum": "Forum",
+    "docs": "Documentation",
+    "contact": "Contact",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "demo": "Live Demo",
+    "login": "Log In"
+  },
+  "hero": {
+    "badge": "Single-Tenant Architecture",
+    "tagline": "Free Deploy  ·  Flexible Upgrade  ·  Fully Customizable",
+    "title1": "Deploy Your EV Charging",
+    "title2": "Management System",
+    "desc": "OCPP charge point management platform, designed for charging operators, enterprise users and developers. Supports OCPP 1.6 standard protocol, compatible with mainstream charger brands.",
+    "desc2": "Helping new and investment-oriented charging operators quickly build and manage charging stations. With a lightweight platform as the core, leverage a complete remote management, settlement and operation system to easily run a profitable business.",
+    "cta1": "Try Now",
+    "cta2": "Install Now",
+    "stat1": "Downloads",
+    "stat2": "Charge Points",
+    "stat3": "Countries"
+  },
+  "businessFlow": {
+    "label": "Business Flow",
+    "title": "Self-Operated Business Flow",
+    "desc": "A seamless charging experience from user to charger",
+    "user": "User",
+    "userDesc": "Scan QR code via H5 or APP to pay",
+    "merchant": "Charging Merchant",
+    "merchantDesc": "Select from different charging operators",
+    "pile": "Charging Pile",
+    "pileDesc": "Start charging on the corresponding charger",
+    "cta": "Learn More About Products"
+  },
+  "models": {
+    "label": "Business Models",
+    "title": "Flexible Operating Models for Every Scale",
+    "desc": "Whether you're an independent operator or building a platform, GCSS adapts to your business model.",
+    "b2c": {
+      "title": "Independent Operator (B2C)",
+      "desc": "Perfect for new operators and investors. Manage your own charging stations with remote monitoring, automated billing, and smart computing."
+    },
+    "b2b": {
+      "title": "Master Network Platform (B2B2C)",
+      "desc": "For enterprises building large-scale charging networks. Multi-tenant architecture supporting unlimited operators with a unified Super Admin console."
+    },
+    "learnmore": "Learn More"
+  },
+  "features": {
+    "label": "Core Features",
+    "title": "Everything You Need to Run EV Charging",
+    "desc": "A comprehensive suite of tools for station management, billing, analytics, and operations.",
+    "f1": {
+      "title": "Station Management",
+      "desc": "Real-time monitoring of all chargers. Online/offline/charging status with remote start, stop, and reboot capabilities."
+    },
+    "f2": {
+      "title": "Smart Rate Management",
+      "desc": "Flexible TOU pricing strategies. Define peak/off-peak rates to maximize revenue while optimizing grid load."
+    },
+    "f3": {
+      "title": "Fault Alerts",
+      "desc": "Automatic fault detection for network outages, overcurrent, and hardware failures. Instant push notifications."
+    },
+    "f4": {
+      "title": "RFID Card Support",
+      "desc": "Issue VIP or fleet RFID cards. Manage account balances and track offline consumption records."
+    },
+    "f5": {
+      "title": "OTA Firmware Updates",
+      "desc": "Remotely upgrade charger firmware. Keep your entire network on the latest version without physical intervention."
+    },
+    "f6": {
+      "title": "Analytics Dashboard",
+      "desc": "Multi-dimensional data analysis with visual reports. Track revenue, utilization, and operational metrics in real-time."
+    }
+  },
+  "matrix": {
+    "label": "Feature Support",
+    "title": "Comprehensive Feature Coverage",
+    "desc": "From mobile apps to platform management, every aspect of your charging business is covered.",
+    "app": {
+      "title": "APP",
+      "li1": "QR Code Scan to Charge",
+      "li2": "RFID Card Activation",
+      "li3": "VIN Code Auto-Start",
+      "li4": "Google Maps Navigation",
+      "li5": "Multiple Login Methods",
+      "li6": "Reservation Charging",
+      "li7": "Multi-Language Switching",
+      "li8": "Push Notifications"
+    },
+    "cpms": {
+      "title": "CPMS",
+      "li1": "Charge Point Management",
+      "li2": "Station Management",
+      "li3": "Rate Configuration",
+      "li4": "RFID Card Top-up",
+      "li5": "Order Management",
+      "li6": "Financial Management",
+      "li7": "Remote Diagnostics",
+      "li8": "Alert Notifications",
+      "li9": "OTA Firmware Upgrade",
+      "li10": "Coupon Management",
+      "li11": "Fleet Management"
+    },
+    "platform": {
+      "title": "Platform Management",
+      "li1": "Platform Statistics",
+      "li2": "Revenue & Fee Configuration",
+      "li3": "Operator Management",
+      "li4": "Menu & Permission Config",
+      "li5": "User Management",
+      "li6": "System Log Viewer"
+    }
+  },
+  "map": {
+    "label": "Global Coverage",
+    "title": "Powering Chargers Across the Globe",
+    "desc": "Our platform serves operators in 100+ countries, supporting localized payments, languages, and compliance requirements."
+  },
+  "lang": {
+    "label": "Multilingual",
+    "title": "Multi-Language Switching · Caring Service for Global Users",
+    "desc": "Smart geo-detection automatically switches to local languages. Full Unicode support for Chinese, Arabic, Khmer, and more.",
+    "viewMore": "View More Languages"
+  },
+  "payment": {
+    "label": "Payments",
+    "title": "Global Payment Matrix",
+    "desc": "150+ currencies supported with PCI-DSS certified security. Direct settlement to local bank accounts."
+  },
+  "trusted": {
+    "label": "Trusted by leading operators worldwide"
+  },
+  "steps": {
+    "label": "How It Works",
+    "title": "Go Live in 3 Simple Steps",
+    "desc": "From signup to your first charging session — get operational faster than any other platform.",
+    "s1": {
+      "title": "Deploy & Configure",
+      "desc": "Download GCSS or start with our cloud SaaS. Set up your operator profile, branding, and payment gateways in minutes."
+    },
+    "s2": {
+      "title": "Connect Chargers",
+      "desc": "Register your OCPP-compatible charge points. Auto-discovery and remote configuration make setup effortless."
+    },
+    "s3": {
+      "title": "Start Earning",
+      "desc": "Go live with your branded app and web portal. Accept payments, monitor sessions, and scale your network globally."
+    }
+  },
+  "testimonials": {
+    "label": "Testimonials",
+    "title": "What Our Operators Say",
+    "desc": "Hear from charging operators who transformed their business with GCSS.",
+    "t1": {
+      "text": "GCSS helped us deploy 200+ chargers across Thailand in under a month. The multi-language support and GrabPay integration were game-changers for our local market.",
+      "name": "Somchai Thongprasert",
+      "role": "CEO, GreenCharge Thailand"
+    },
+    "t2": {
+      "text": "The B2B2C platform model let us onboard 15 sub-operators within our first quarter. Revenue tracking and automated settlements saved us countless hours.",
+      "name": "Maria Lindström",
+      "role": "COO, Nordic EV Networks"
+    },
+    "t3": {
+      "text": "We switched from a competitor to GCSS and cut our operational costs by 40%. The OTA firmware updates alone save us 2 technician trips per station per year.",
+      "name": "Ahmed Khalil",
+      "role": "Founder, ChargeHub MENA"
+    }
+  },
+  "cta": {
+    "badge": "No credit card required",
+    "title": "Ready to Get Started?",
+    "desc": "Deploy your EV charging management system in minutes. Free tier available with no credit card required.",
+    "btn1": "Try Live Demo",
+    "btn2": "Explore Products",
+    "btn3": "Talk to Sales",
+    "trust1": "Free forever plan",
+    "trust2": "5-minute setup",
+    "trust3": "24/7 support"
+  },
+  "footer": {
+    "desc": "Global Charger System Service. The ultimate OCPP-compatible EV charging management platform.",
+    "product": "Product",
+    "features": "Features",
+    "pricing": "Pricing",
+    "livedemo": "Live Demo",
+    "documentation": "Documentation",
+    "community": "Community",
+    "forum": "Forum",
+    "helpcenter": "Help Center",
+    "contactsales": "Contact Sales",
+    "whatsapp": "WhatsApp",
+    "company": "Company",
+    "about": "About Us",
+    "careers": "Careers",
+    "partners": "Partners",
+    "blog": "Blog",
+    "copyright": "© 2026 GCSS (Global Charger System Service). All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "dropdown": {
+    "b2c": {
+      "desc": "Independent charging station management"
+    },
+    "b2b": {
+      "desc": "Multi-tenant network management"
+    },
+    "blog": {
+      "desc": "Latest news, tutorials and updates"
+    },
+    "forum": {
+      "desc": "Discuss with the community"
+    },
+    "faq": {
+      "desc": "Frequently asked questions"
+    }
+  },
+  "index": {
+    "smartops": {
+      "label": "Smart Operations",
+      "title": "Intelligent Operations Center",
+      "desc": "Automated operations tools with data-driven growth strategies. Monitor your entire charging network from a single pane of glass.",
+      "li1": "Remote fault troubleshooting & system diagnostics",
+      "li2": "OTA firmware updates across the network",
+      "li3": "Deep analytics with multi-dimensional reports",
+      "li4": "Fleet management & enterprise support"
+    },
+    "mobile": {
+      "label": "Mobile Experience",
+      "title": "Ultimate Mobile App & H5 Experience",
+      "desc": "Native App and lightweight H5 web experience. QR scan to charge, smart navigation, seamless login across platforms.",
+      "li1": "QR code, RFID, VIN code auto-start",
+      "li2": "Google Maps & Apple Maps navigation",
+      "li3": "Facebook, Google & Apple ID login",
+      "li4": "Real-time charging status & notifications"
+    }
+  },
+  "product": {
+    "subnav": {
+      "overview": "System Overview",
+      "features": "Feature Highlights",
+      "license": "Purchase & License",
+      "changelog": "Changelog",
+      "gallery": "Product Gallery",
+      "support": "After-sales Service",
+      "demo": "System Demo"
+    },
+    "badge": "Enterprise Edition",
+    "title1": "OCPP CPMS",
+    "title2": "Enterprise Edition (B2C)",
+    "desc": "A fully-featured, independently deployable EV charging management platform with global payment support, multi-language capabilities, and complete OCPP protocol coverage.",
+    "cta1": "Try Live Demo",
+    "cta2": "View Pricing",
+    "float1": "Full OCPP Support",
+    "float2": "20+ Languages",
+    "stat1": "Charge Points",
+    "stat2": "Operators",
+    "stat3": "Currencies",
+    "f1": {
+      "title": "Independent Deployment",
+      "desc": "Full control over your infrastructure. Deploy on your own servers with complete data sovereignty and security."
+    },
+    "f2": {
+      "title": "Multi-Language Support",
+      "desc": "English, Chinese, French, Japanese, Korean and more. Smart geo-detection for automatic language switching."
+    },
+    "f3": {
+      "title": "10+ Country Payments",
+      "desc": "Accept payments globally with support for 150+ currencies across major payment gateways and local methods."
+    },
+    "f4": {
+      "title": "Brand Customization",
+      "desc": "White-label everything: logo, colors, domain, app name. Make the platform truly yours with zero coding."
+    },
+    "f5": {
+      "title": "Full OCPP Support",
+      "desc": "Complete OCPP 1.6 protocol implementation with visual command interface for real-time charger management."
+    },
+    "f6": {
+      "title": "Complete Documentation",
+      "desc": "Comprehensive API docs, integration guides, and video tutorials for fast onboarding and deployment."
+    },
+    "features": {
+      "label": "Feature Highlights",
+      "title": "Powerful Features for Modern EV Charging",
+      "desc": "Everything you need to build, manage, and scale your EV charging business globally."
+    },
+    "ff1": {
+      "title": "Instant Scan to Start",
+      "desc": "Users scan a QR code and begin charging instantly. No app download required with H5 web support."
+    },
+    "ff2": {
+      "title": "Smart Health Monitor",
+      "desc": "Real-time charger health monitoring with predictive fault detection and automated alert notifications."
+    },
+    "ff3": {
+      "title": "Cross-Channel Login",
+      "desc": "Seamless authentication via Google, Facebook, Apple ID, and more. One-tap sign-in across all platforms."
+    },
+    "ff4": {
+      "title": "Data Visualization Core",
+      "desc": "Comprehensive analytics dashboards with real-time charts for revenue, utilization, and operational metrics."
+    },
+    "ff5": {
+      "title": "OCPP Visual Command",
+      "desc": "Full OCPP 1.6 support with a visual command interface. Send commands, view responses, and debug in real-time."
+    },
+    "ff6": {
+      "title": "Cross-Platform Matrix",
+      "desc": "Native iOS & Android apps, H5 web app, and Mini Programs. Reach every user on every device."
+    },
+    "ui": {
+      "title": "Stunning UI Design that Elevates User Experience",
+      "desc": "Every pixel is crafted to deliver an intuitive, beautiful experience that keeps users coming back.",
+      "li1": "Modern, clean interface with consistent design language",
+      "li2": "Responsive design optimized for all screen sizes",
+      "li3": "Accessibility-first approach with WCAG compliance",
+      "li4": "Smooth animations and micro-interactions"
+    },
+    "brand": {
+      "title": "Your Brand. Your Rules.",
+      "desc": "Complete white-labeling solution that makes the platform indistinguishable from your own product.",
+      "li1": "Use your own domain with SSL certificate",
+      "li2": "Match your brand colors and style",
+      "li3": "Publish under your own brand on App Store & Google Play"
+    },
+    "uicustom": {
+      "title": "Exclusive UI Customization Service",
+      "desc": "Our design team works with you to create a unique interface that perfectly represents your brand identity. Custom layouts, icons, and user flows tailored to your business."
+    },
+    "zeroconfig": {
+      "title": "Zero-Touch Configuration",
+      "desc": "Set it and forget it. Automated deployment, auto-scaling, and self-healing infrastructure that keeps your system running without manual intervention."
+    },
+    "pay": {
+      "label": "Payments",
+      "title": "Global Payment Matrix",
+      "desc": "150+ currencies supported with PCI-DSS certified security. Direct settlement to local bank accounts.",
+      "asia": "Asia",
+      "europe": "Europe",
+      "oceania": "Oceania",
+      "africa": "Africa",
+      "southamerica": "South America",
+      "northamerica": "North America"
+    },
+    "lang": {
+      "label": "Multilingual",
+      "title": "20+ Global Languages",
+      "desc": "Smart geo-detection automatically switches to local languages. Full Unicode support for all scripts."
+    },
+    "langreq": {
+      "title": "Need a language we don't support yet?",
+      "desc": "Submit a request and we'll add it to our roadmap.",
+      "name": "Language Name",
+      "email": "Your Email",
+      "submit": "Submit Request"
+    },
+    "app": {
+      "title": "APP / H5 - Ultimate User Experience",
+      "desc": "Native App and lightweight H5 web app deliver seamless charging experiences on any device.",
+      "li1": "QR scan charging - start in seconds",
+      "li2": "Smart navigation to nearest charging stations",
+      "li3": "Seamless login via Google, Facebook, Apple ID",
+      "li4": "Station reservation system",
+      "li5": "Real-time charging status tracking"
+    },
+    "ops": {
+      "title": "Smart Operations Center",
+      "desc": "Automated operations with data-driven growth. Reduce costs and increase efficiency with intelligent tools.",
+      "li1": "Remote troubleshooting and diagnostics",
+      "li2": "OTA firmware updates across all chargers",
+      "li3": "Smart fault prediction with AI-powered analytics",
+      "li4": "Fleet management for enterprise operators",
+      "li5": "Deep analytics with multi-dimensional reports"
+    },
+    "license": {
+      "label": "Pricing",
+      "title": "Purchase & License",
+      "desc": "Choose the plan that fits your business. Start free and scale as you grow."
+    },
+    "plan1": {
+      "name": "Community Edition",
+      "price": "Free",
+      "period": "Forever free",
+      "f1": "Free download & deployment",
+      "f2": "Stripe payment integration",
+      "f3": "Developer edition features",
+      "f4": "Basic OCPP 1.6 support",
+      "f5": "Community forum access",
+      "f6": "Includes GCSS brand watermark",
+      "btn": "Download Free"
+    },
+    "plan2": {
+      "name": "Enterprise Standard",
+      "period": "one-time payment",
+      "f1": "All Community features",
+      "f2": "Hosted cloud deployment",
+      "f3": "Custom branding (no watermark)",
+      "f4": "Multi-language support",
+      "f5": "Global payment gateways",
+      "f6": "Fast launch setup",
+      "f7": "Email support",
+      "btn": "Get Started"
+    },
+    "plan3": {
+      "name": "Enterprise Plus",
+      "period": "one-time payment",
+      "f1": "Full enterprise ecosystem",
+      "f2": "Native iOS & Android apps",
+      "f3": "Multi-tenant architecture",
+      "f4": "Google Play & App Store publishing",
+      "f5": "White-label everything",
+      "f6": "Dedicated account manager",
+      "f7": "1-on-1 technical support",
+      "f8": "Custom feature development",
+      "btn": "Contact Sales"
+    },
+    "changelog": {
+      "label": "Changelog",
+      "title": "Release History",
+      "desc": "Stay up to date with the latest improvements and features."
+    },
+    "gallery": {
+      "label": "Gallery",
+      "title": "Product Gallery",
+      "desc": "See GCSS in action across mobile, web, and management interfaces.",
+      "home": "Home Screen",
+      "charging": "Charging View",
+      "map": "Map View",
+      "payment": "Payment View"
+    },
+    "support": {
+      "label": "Support",
+      "title": "Complete Support, Zero Worries",
+      "desc": "We are with you every step of the way, from deployment to daily operations.",
+      "s1": {
+        "title": "Step-by-step Video Tutorials",
+        "desc": "Detailed video walkthroughs covering every feature, from basic setup to advanced configurations."
+      },
+      "s2": {
+        "title": "Complete Technical Documentation",
+        "desc": "Comprehensive API references, integration guides, and deployment manuals always up to date."
+      },
+      "s3": {
+        "title": "Official Community Forum",
+        "desc": "Connect with other operators, share best practices, and get answers from the GCSS community."
+      },
+      "s4": {
+        "title": "1-on-1 Direct Technical Support",
+        "desc": "Enterprise customers get dedicated technical support with guaranteed response times."
+      }
+    },
+    "demo": {
+      "label": "Demo",
+      "title": "System Demo",
+      "desc": "Experience GCSS firsthand. Choose your edition to explore the live system.",
+      "b2c": {
+        "title": "B2C Edition",
+        "desc": "Single Operator Edition"
+      },
+      "b2b": {
+        "title": "B2B2C Edition",
+        "desc": "Multi-tenant Platform Edition"
+      },
+      "tab": {
+        "live": "Live Demo",
+        "access": "Access Link",
+        "credentials": "Login Credentials"
+      },
+      "tab1": "Live Demo",
+      "tab2": "Access Link",
+      "tab3": "Login Credentials",
+      "access": {
+        "title": "Demo Access Links",
+        "admin": "Global Admin Panel",
+        "merchant": "Merchant Panel",
+        "h5": "H5 Web App",
+        "visit": "Visit"
+      },
+      "admin": {
+        "title": "Global Admin Panel",
+        "desc": "Full system management with multi-tenant control, analytics, and configuration.",
+        "btn": "Open Admin Panel"
+      },
+      "merchant": {
+        "title": "Merchant Panel",
+        "desc": "Operator-level dashboard for station management, billing, and customer service.",
+        "btn": "Open Merchant Panel"
+      },
+      "mobile": {
+        "title": "APP Experience",
+        "desc": "Scan to download the demo app"
+      },
+      "h5": {
+        "title": "H5 Web Experience",
+        "desc": "Scan to open H5 web app",
+        "scan": "Scan to open H5 web app"
+      },
+      "mobileapp": {
+        "scan": "Scan to download the demo app"
+      },
+      "links": "Demo Access Links",
+      "visit": "Visit",
+      "username": "Username",
+      "password": "Password",
+      "cred": {
+        "admin": "Global Admin Panel",
+        "merchant": "Merchant Panel",
+        "username": "Username",
+        "password": "Password"
+      },
+      "status": {
+        "label": "System Status",
+        "online": "Online"
+      },
+      "latency": "Server Latency",
+      "connection": {
+        "label": "Connection",
+        "secure": "Secure (SSL)"
+      }
+    },
+    "cta": {
+      "title": "Ready to Get Started?",
+      "desc": "Deploy your EV charging management system in minutes. Free tier available with no credit card required.",
+      "btn1": "Get Started Free",
+      "btn2": "Contact Sales"
+    }
+  },
+  "pricing": {
+    "label": "Pricing",
+    "title": "Simple, Transparent Pricing",
+    "desc": "Choose the plan that fits your business. From free community edition to full enterprise platform.",
+    "b2c": {
+      "label": "B2C Plans",
+      "title": "Independent Operator (B2C)",
+      "desc": "Perfect for single operators managing their own charging stations."
+    },
+    "b2b": {
+      "label": "B2B2C Plans",
+      "title": "Master Network Platform (B2B2C)",
+      "desc": "For enterprises building large-scale multi-tenant charging networks."
+    },
+    "getstarted": "Get Started",
+    "buynow": "Buy Now",
+    "contactsales": "Contact Sales",
+    "h5free": {
+      "name": "H5 Free",
+      "f1": "OCPP 1.6 protocol",
+      "f2": "Free all features",
+      "f3": "Limited SDK",
+      "f4": "Stripe payment only",
+      "f5": "Includes GCSS branding",
+      "f6": "Suitable for H5 applications"
+    },
+    "h5ent": {
+      "name": "H5 Enterprise",
+      "f1": "All free features",
+      "f2": "Custom branding / Logo",
+      "f3": "Hosted cloud service",
+      "f4": "Quick deployment",
+      "f5": "1 year free upgrades",
+      "f6": "7x12 tech support",
+      "f7": "1 fixed payment gateway",
+      "f8": "1 system language customization",
+      "f9": "8 country/region payment integrations"
+    },
+    "appent": {
+      "name": "APP Enterprise",
+      "f1": "Published to Google Play",
+      "f2": "Published to App Store",
+      "f3": "Basic email notifications",
+      "f4": "1 year free upgrades",
+      "f5": "7x12 tech support",
+      "f6": "1 fixed payment gateway",
+      "f7": "1 free system language customization",
+      "f8": "7 backend system language customizations"
+    },
+    "h5plat": {
+      "name": "H5 Platform",
+      "f1": "All basic SaaS features",
+      "f2": "SaaS 5 instances",
+      "f3": "3.5 year free feature updates",
+      "f4": "7x24 tech support",
+      "f5": "7.2 fixed payment gateways",
+      "f6": "6 H5 system language customizations",
+      "f7": "1 backend system customization"
+    },
+    "appplat": {
+      "name": "APP Platform",
+      "f1": "Published to Google Play & App Store",
+      "f2": "All SaaS features",
+      "f3": "SaaS 5 instances",
+      "f4": "3.5 year free feature updates",
+      "f5": "7x24 tech support",
+      "f6": "7.2 fixed payment gateways",
+      "f7": "6 H5 system language customizations"
+    },
+    "compare": {
+      "label": "Compare Plans",
+      "title": "Full Feature Comparison",
+      "desc": "See exactly what's included in each plan across all product tiers."
+    },
+    "table": {
+      "feature": "Feature",
+      "cpms": "CPMS",
+      "dashboard": "Dashboard",
+      "device": "Device Management",
+      "station": "Station Management",
+      "rate": "Rate Configuration",
+      "order": "Order Management",
+      "account": "Account Management",
+      "nfc": "NFC Management",
+      "reports": "Business Reports",
+      "stats": "Business Statistics",
+      "superadmin": "Super Admin",
+      "platformstats": "Platform Statistics",
+      "operator": "Operator Management",
+      "permission": "Menu & Permission Config",
+      "usermgmt": "User Management",
+      "syslog": "System Log Viewer",
+      "description": "Description",
+      "delivery": "Delivery Method",
+      "endpoints": "User-facing Endpoints",
+      "reglogin": "Registration / Login",
+      "qrscan": "QR Scan Charging",
+      "reservation": "Reservation Charging",
+      "langswitching": "Language Switching",
+      "mapnav": "Map Navigation",
+      "iccard": "IC Card Management"
+    }
+  },
+  "blog": {
+    "label": "Blog",
+    "title": "Insights &",
+    "title2": "Updates",
+    "desc": "Industry news, product updates, guides, and case studies from the world of EV charging.",
+    "filter": {
+      "all": "All Posts",
+      "product": "Product Updates",
+      "news": "Industry News",
+      "guide": "Guides",
+      "case": "Case Studies",
+      "industry": "Industry News",
+      "guides": "Guides",
+      "cases": "Case Studies"
+    },
+    "featured": {
+      "cat": "Product Update",
+      "title": "GCSS 3.0: The Next Generation EV Charging Platform is Here",
+      "desc": "We're thrilled to announce the official launch of GCSS 3.0 - featuring a completely redesigned dashboard, multi-tenant architecture, and support for OCPP 1.6J protocol. This release represents months of development and feedback from operators worldwide.",
+      "team": "GCSS Team",
+      "date": "Mar 15, 2026",
+      "readtime": "8 min read"
+    },
+    "post1": {
+      "cat": "Guide",
+      "title": "How to Set Up Your First EV Charging Station with GCSS",
+      "desc": "A step-by-step guide covering everything from server installation to your first charging session. Get started in under 5 minutes."
+    },
+    "post2": {
+      "cat": "News",
+      "title": "GCSS Expands to 100+ Countries: Global Charging Network Milestone",
+      "desc": "Our platform now powers charging stations across more than 100 countries, with localized payment and language support in every region."
+    },
+    "post3": {
+      "cat": "Case Study",
+      "title": "How a CPO in Thailand Built a Profitable Network with GCSS",
+      "desc": "Learn how a charge point operator in Bangkok grew from 10 to 500 chargers using the GCSS B2C platform with automated billing."
+    },
+    "post4": {
+      "cat": "Guide",
+      "title": "Understanding OCPP 1.6: The Protocol Behind Smart Charging",
+      "desc": "A comprehensive overview of the Open Charge Point Protocol and how GCSS leverages it for reliable charger communication."
+    },
+    "post5": {
+      "cat": "Product Update",
+      "title": "New Payment Gateways: M-PESA, PIX, and GrabPay Now Supported",
+      "desc": "Expanding our global payment matrix with 15 new payment methods across Africa, South America, and Southeast Asia."
+    },
+    "post6": {
+      "cat": "Industry",
+      "title": "The Rise of EV Fleet Charging: Trends for 2026 and Beyond",
+      "desc": "Fleet electrification is accelerating worldwide. Here's what operators need to know about managing fleet charging infrastructure."
+    },
+    "readmore": "Read More",
+    "newsletter": {
+      "label": "Newsletter",
+      "title": "Stay in the Loop",
+      "desc": "Get the latest EV charging insights delivered to your inbox. No spam, unsubscribe anytime.",
+      "placeholder": "Enter your email",
+      "btn": "Subscribe"
+    },
+    "minread": "min read"
+  },
+  "contact": {
+    "label": "Contact Us",
+    "title1": "Let's Build the Future of",
+    "title2": "EV Charging Together",
+    "desc": "Have questions about our platform? Ready to start your project? Our team is here to help you every step of the way.",
+    "business": {
+      "title": "Business Communication",
+      "desc": "Sales inquiries, partnership opportunities, and business development."
+    },
+    "tech": {
+      "title": "Technical Support",
+      "desc": "Installation help, bug reports, and technical troubleshooting."
+    },
+    "quick": {
+      "title": "Quick Connect",
+      "desc": "Email us directly or visit our community forum for fast answers.",
+      "email": "Email Us",
+      "forum": "Community Forum"
+    },
+    "form": {
+      "title": "Send Us a",
+      "title2": "Message",
+      "desc": "Fill out the form and our team will get back to you within 24 hours. We're excited to learn about your EV charging project.",
+      "phone": "Phone & WhatsApp",
+      "email": "Email",
+      "office": "Office Locations",
+      "hk": "Hong Kong",
+      "cn": "Mainland China",
+      "card": {
+        "title": "Get in Touch"
+      },
+      "firstname": "First Name",
+      "lastname": "Last Name",
+      "workemail": "Work Email",
+      "phonenum": "Phone Number",
+      "country": {
+        "label": "Country",
+        "select": "Select your country"
+      },
+      "help": {
+        "label": "How can we help?",
+        "placeholder": "Tell us about your project, the number of chargers you plan to manage, or any questions you have..."
+      },
+      "submit": "Send Message",
+      "success": "Message sent successfully! We will get back to you within 24 hours.",
+      "phone": {
+        "hours": "Available Mon-Fri, 9am-6pm HKT"
+      },
+      "office": {
+        "hk": "Hong Kong",
+        "cn": "Mainland China"
+      }
+    },
+    "office": {
+      "label": "Our Offices",
+      "title": "Located Where It Matters",
+      "desc": "Serving clients globally from our offices in Asia.",
+      "hk": {
+        "title": "Hong Kong",
+        "desc": "Headquarters & Business Development"
+      },
+      "cn": {
+        "title": "Shenzhen",
+        "desc": "R&D Center & Technical Support"
+      },
+      "sea": {
+        "title": "Southeast Asia",
+        "desc": "Regional Operations & Partnerships"
+      }
+    },
+    "cta": {
+      "title": "Ready to Deploy?",
+      "desc": "Start your EV charging business today with GCSS. Free community edition available.",
+      "btn1": "View Pricing",
+      "btn2": "Try Live Demo"
+    }
+  },
+  "forum": {
+    "sidebar": {
+      "sections": "Sections",
+      "all": "All",
+      "announce": "Official Announcements",
+      "title": "B2C Enterprise",
+      "discuss": "Discussion & Sharing",
+      "myposts": "My Posts",
+      "tags": "Tags",
+      "title": "B2B2C Platform",
+      "install": "Installation & Deployment",
+      "help": "Help Requests",
+      "feature": "Feature Suggestions",
+      "random": "Random Discussion",
+      "usage": "Usage Sharing",
+      "bugs": "Bug Reports",
+      "updates": "Version Updates",
+      "following": "Following",
+      "stats": "Forum Stats"
+    },
+    "title": "Community Forum",
+    "newtopic": "New Topic",
+    "post1": {
+      "title": "GCSS 3.0.1 Public Beta Release",
+      "tag": "Official Announcement",
+      "comments": "100 comments",
+      "views": "1000 views",
+      "excerpt": "We're excited to announce the public beta of GCSS 3.0.1, featuring improved dashboard performance, Thai/Khmer language support, and GrabPay payment fixes."
+    },
+    "post2": {
+      "title": "How to configure multi-rate billing strategies",
+      "tag": "Usage Sharing",
+      "comments": "45 comments",
+      "views": "520 views"
+    },
+    "post3": {
+      "title": "Feature Request: Support for OCPP 2.0.1",
+      "tag": "Feature Suggestions",
+      "comments": "23 comments",
+      "views": "340 views"
+    },
+    "post4": {
+      "title": "Bug: Dashboard charts not loading on Safari",
+      "tag": "Bug Reports",
+      "comments": "12 comments",
+      "views": "180 views"
+    },
+    "post5": {
+      "title": "Getting started with GCSS - Installation Guide",
+      "tag": "Installation & Deployment",
+      "comments": "67 comments",
+      "views": "890 views"
+    },
+    "hero": {
+      "title": "GCSS Community Forum",
+      "desc": "Ask questions, share experiences, and connect with EV charging operators worldwide."
+    },
+    "tag": {
+      "announce": "Announcements",
+      "general": "General Discussion",
+      "install": "Installation & Setup",
+      "feature": "Feature Requests",
+      "bug": "Bug Reports",
+      "usage": "Tips & Sharing",
+      "ocpp": "OCPP Protocol",
+      "payment": "Payment Integration"
+    },
+    "stats": {
+      "discussions": "discussions",
+      "posts": "posts",
+      "members": "members"
+    },
+    "sort": {
+      "latest": "Latest",
+      "top": "Top",
+      "newest": "Newest"
+    },
+    "search": "Search",
+    "replies": "replies",
+    "loadmore": "Load More Discussions",
+    "post6": {
+      "title": "Best practices for multi-rate billing strategies in Southeast Asia"
+    }
+  },
+  "docs": {
+    "tab": {
+      "install": "Installation",
+      "doc": "Documentation"
+    },
+    "sidebar": {
+      "install": "Installation Deployment",
+      "online": "Online Installation",
+      "upgrade": "Online Upgrade",
+      "manual": "Functional Manual",
+      "cpo": "CPO Tutorial",
+      "user": "User Guide Tutorial",
+      "admin": "Super Admin Tutorial",
+      "faqLabel": "FAQ",
+      "faq": {
+        "general": "General Questions",
+        "technical": "Technical Questions"
+      },
+      "faqlink": "Frequently Asked Questions",
+      "getting": {
+        "started": "Getting Started"
+      },
+      "introduction": "Introduction",
+      "requirements": "System Requirements",
+      "installation": "Installation",
+      "firstlogin": "First Login",
+      "platform": "Platform Guide",
+      "dashboard": "Dashboard Overview",
+      "stations": "Station Management",
+      "chargers": "Charger Management",
+      "rates": "Rate Configuration",
+      "orders": "Order Management",
+      "users": "User Management",
+      "ocppLabel": "OCPP Protocol",
+      "ocpp": {
+        "overview": "OCPP Overview",
+        "commands": "Visual Commands",
+        "diagnostics": "Diagnostics"
+      },
+      "paymentLabel": "Payment Integration",
+      "payment": {
+        "setup": "Payment Setup",
+        "gateways": "Payment Gateways"
+      },
+      "apiLabel": "API Reference",
+      "api": {
+        "auth": "Authentication",
+        "endpoints": "Endpoints",
+        "webhooks": "Webhooks"
+      }
+    },
+    "install": {
+      "title": "Installation Guide",
+      "step1": {
+        "title": "Step 1: Prepare a Linux Server",
+        "desc": "GCSS supports deployment on mainstream Linux distributions including CentOS, Ubuntu, and Debian. The following CPU architectures are supported:",
+        "req": "Ensure your server has at least 2 CPU cores, 4GB RAM, and 40GB disk space for a smooth installation. A clean OS installation is recommended."
+      },
+      "step2": {
+        "title": "Step 2: Run Installation Script",
+        "desc": "Connect to your server via SSH and run the following command to start the automated installation:",
+        "note": "The script will automatically detect your system environment, install required dependencies, and configure the GCSS platform. The entire process typically takes 5-10 minutes depending on your server specs and network speed.",
+        "warning": "Make sure ports 80, 443, and 8080 are open in your firewall before running the installation."
+      },
+      "step3": {
+        "title": "Step 3: Access Admin Panel",
+        "desc": "Once the installation completes, the script will display the access URL for your admin panel. Open your browser and navigate to the provided URL (typically http://your-server-ip:port).",
+        "note": "Log in with the default administrator credentials shown at the end of the installation output. We strongly recommend changing the default password immediately after your first login."
+      },
+      "intro": "Follow these steps to install GCSS on your server."
+    },
+    "doc": {
+      "title": "Documentation",
+      "brand": {
+        "desc": "Brand profile documentation content coming soon. This section will cover GCSS brand guidelines, logos, and media resources."
+      },
+      "cpo": {
+        "desc": "CPO system documentation content coming soon. This section will provide in-depth details about the Charge Point Operator management system."
+      },
+      "quicklinks": "Quick Links",
+      "preface": "Preface",
+      "intro": "Product Introduction",
+      "funclist": "Functional List",
+      "structure": "Product Structure Diagram",
+      "updates": "Update Records",
+      "troubleshoot": "Troubleshooting",
+      "billing": "Billing & Tariff Strategies",
+      "config": "Configuration Guide"
+    },
+    "search": {
+      "placeholder": "Search docs..."
+    },
+    "toc": {
+      "title": "On this page"
+    },
+    "nav": {
+      "next": "Next"
+    },
+    "intro": {
+      "title": "Getting Started with GCSS",
+      "desc": "Welcome to the GCSS documentation. This guide will walk you through setting up your EV charging management platform from scratch.",
+      "info": "GCSS supports OCPP 1.6 protocol and can be deployed on any Linux server. The entire installation typically takes 5-10 minutes."
+    },
+    "req": {
+      "title": "System Requirements",
+      "desc": "Before installing GCSS, ensure your server meets the following minimum requirements:",
+      "component": "Component",
+      "minimum": "Minimum",
+      "recommended": "Recommended",
+      "cpu": {
+        "min": "2 cores",
+        "rec": "4 cores"
+      },
+      "ram": "RAM",
+      "disk": "Disk Space",
+      "os": "Operating System",
+      "arch": "CPU Architecture",
+      "tip": "A clean OS installation is recommended for best results. GCSS installs all required dependencies automatically."
+    },
+    "login": {
+      "title": "First Login",
+      "desc": "After installation, access the admin panel to configure your platform.",
+      "access": {
+        "title": "Accessing the Admin Panel",
+        "desc": "Open your browser and navigate to your server's IP address with the admin port:"
+      },
+      "credentials": {
+        "title": "Default Credentials",
+        "desc": "Use the following default credentials to log in:"
+      },
+      "field": "Field",
+      "value": "Value",
+      "username": "Username",
+      "password": "Password",
+      "warning": "Important: Change the default password immediately after your first login. Go to Settings → Account → Change Password.",
+      "next": {
+        "title": "What's Next?",
+        "desc": "After logging in, you can:",
+        "li1": "Add your first charging station",
+        "li2": "Configure billing rates and payment gateways",
+        "li3": "Set up user accounts and permissions",
+        "li4": "Connect chargers via OCPP protocol",
+        "li5": "Customize branding and language settings"
+      }
+    }
+  },
+  "login": {
+    "visual": {
+      "title": "Empowering EV Management for the Future"
+    },
+    "title": "Welcome Back",
+    "subtitle": "Log in to your GCSS account",
+    "usernameLabel": "Username",
+    "username": {
+      "placeholder": "Enter your username"
+    },
+    "passwordLabel": "Password",
+    "password": {
+      "placeholder": "Enter your password"
+    },
+    "captchaLabel": "Captcha",
+    "captcha": {
+      "placeholder": "Enter captcha code"
+    },
+    "forgot": "Forgot Password?",
+    "btn": "Log In",
+    "noaccount": "Don't have an account?",
+    "register": "Register"
+  },
+  "register": {
+    "visual": {
+      "title": "Empowering EV Management for the Future"
+    },
+    "title": "Create Account",
+    "subtitle": "Start managing your EV charging network",
+    "usernameLabel": "Username",
+    "username": {
+      "placeholder": "Choose a username"
+    },
+    "passwordLabel": "Password",
+    "password": {
+      "placeholder": "Create a password"
+    },
+    "confirmLabel": "Confirm Password",
+    "confirm": {
+      "placeholder": "Confirm your password"
+    },
+    "firstnameLabel": "First Name",
+    "firstname": {
+      "placeholder": "Enter your first name"
+    },
+    "lastnameLabel": "Last Name",
+    "lastname": {
+      "placeholder": "Enter your last name"
+    },
+    "emailLabel": "Email",
+    "email": {
+      "placeholder": "Enter your email address"
+    },
+    "phoneLabel": "Phone",
+    "phone": {
+      "placeholder": "Enter your phone number"
+    },
+    "companyLabel": "Company",
+    "company": {
+      "placeholder": "Enter your company name (optional)"
+    },
+    "btn": "Create Account",
+    "hasaccount": "Already have an account?",
+    "login": "Log In"
+  },
+  "forgot": {
+    "title": "Forgot Password",
+    "desc": "Enter your email address and we'll send you a verification code to reset your password.",
+    "emailLabel": "Email Address",
+    "email": {
+      "placeholder": "your@email.com"
+    },
+    "code": {
+      "placeholder": "Enter verification code"
+    },
+    "sendcode": "Send Code",
+    "verify": "Verify",
+    "newpwTitle": "Set New Password",
+    "newpwDesc": "Create a strong password for your account.",
+    "newpwLabel": "New Password",
+    "newpw": {
+      "placeholder": "Enter new password"
+    },
+    "confirmpwLabel": "Confirm Password",
+    "confirmpw": {
+      "placeholder": "Confirm new password"
+    },
+    "vcodeLabel": "Verification Code",
+    "vcode": {
+      "placeholder": "Enter code from email"
+    },
+    "setpw": "Set New Password",
+    "back": "Back to Login",
+    "visual": {
+      "title": "Empowering EV Management for the Future"
+    }
+  },
+  "b2b": {
+    "label": "B2B Platform",
+    "hero": {
+      "title": "Build Your Own EV Charging SaaS Platform",
+      "desc": "The ultimate multi-tenant solution, supporting unlimited operator onboarding, automated hierarchical management, all controlled through a unified Super Admin console to effortlessly manage your global charging network.",
+      "cta1": "Become a Platform Operator",
+      "cta2": "Contact Sales"
+    },
+    "nav": {
+      "overview": "Overview",
+      "modes": "Modes",
+      "revenue": "Revenue",
+      "features": "Features",
+      "advantages": "Advantages",
+      "profit": "Profit",
+      "support": "Support",
+      "pricing": "Pricing",
+      "aftersales": "After-Sales",
+      "releases": "Releases",
+      "demo": "Demo"
+    },
+    "overview": {
+      "title": "OCPP CPMS Platform Edition – B2B",
+      "platform": "Platform",
+      "platformItems": [
+        "Super Admin",
+        "Global Management",
+        "Financial Settlement",
+        "Data Analytics"
+      ],
+      "operator": "Operator",
+      "operatorItems": [
+        "Merchant Panel",
+        "Station Management",
+        "User Management",
+        "Order Management"
+      ],
+      "user": "User",
+      "userItems": [
+        "User App",
+        "Scan to Charge",
+        "Account Management"
+      ],
+      "center": "APP · CPMS · ADMIN",
+      "model": "Self-Operated + Operator Model"
+    },
+    "modes": {
+      "title": "Diversified Operation Modes for Ultimate Flexibility",
+      "desc": "Multiple ready-made platform operation modes to perfectly meet your diverse operational needs.",
+      "mode1": {
+        "title": "Unified Network Aggregation",
+        "desc": "Seamlessly integrate third-party partners into your proprietary network, aggregate industry resources, and unify O&M management under your partnership framework."
+      },
+      "mode2": {
+        "title": "Self-Operated Model",
+        "desc": "Build and manage your own charging stations with complete control over membership, product pricing, transaction processing, and financial settlement — all centralized in your management system."
+      },
+      "mode3": {
+        "title": "SaaS Franchise Model",
+        "desc": "Through franchise agreements, invite partners to join your platform with revenue sharing, SaaS fee collection, and tiered management, leveraging existing resources for rapid expansion."
+      },
+      "mode4": {
+        "title": "Hybrid Operation Mode",
+        "desc": "Combine the advantages of self-operation, franchising, and SaaS billing. Enable third-party operators to run their business on your platform for maximum market coverage."
+      }
+    },
+    "revenue": {
+      "title": "Diversified Revenue Channels for Maximum Profitability",
+      "desc": "Unlock multiple monetization paths through diversified channels to achieve sustainable income and maximize your platform's overall ROI.",
+      "brand": "Brand Value Amplification",
+      "item1": {
+        "title": "Operator Commission & SaaS Fees",
+        "desc": "Operators joining your network ensure continuous platform revenue. Through customizable commission rates and tiered SaaS billing models, create a stable and scalable income stream."
+      },
+      "item2": {
+        "title": "Fund Settlement & Cash Flow",
+        "desc": "All payment transactions generate fund deposits within the platform, creating cash flow income. Leverage settlement cycles to maximize financial efficiency."
+      },
+      "item3": {
+        "title": "Self-Operated Charging Revenue",
+        "desc": "Run charging stations directly on the platform with 100% direct sales revenue from every transaction."
+      },
+      "item4": {
+        "title": "Advertising & Promotion Revenue",
+        "desc": "Offer advertising placements across App, H5, and push notification channels. Operators can purchase ad spots for targeted marketing campaigns."
+      }
+    },
+    "features": {
+      "title": "Key Features",
+      "feat1": {
+        "title": "Cross-Platform Access",
+        "desc": "Support responsive web (H5), native mobile apps, and flexible architecture for seamless third-party integration."
+      },
+      "feat2": {
+        "title": "Flexible Deployment",
+        "desc": "Choose between GCSS hosted deployment, private on-premise servers, or full cloud SaaS hosting based on your enterprise needs."
+      },
+      "feat3": {
+        "title": "Powerful APIs & High Scalability",
+        "desc": "Complete set of open APIs for seamless third-party integration, with deep secondary development support from our engineering team."
+      }
+    },
+    "advantages": {
+      "title": "Exquisite UI/UX, Extraordinary Experience",
+      "desc": "Modern, intuitive interfaces with meticulous layout and rigorous interaction design that deeply fits user workflows.",
+      "buildTitle": "Build Your Own EV Charging SaaS Platform",
+      "buildDesc": "Not just operating charging stations — manage entire charging networks. The ultimate multi-tenant solution for CPOs, fleet managers, and energy providers.",
+      "unlimited": "Unlimited Merchants",
+      "unlimitedDesc": "Support unlimited sub-merchants (hotels, malls, fleet operators, etc.)",
+      "autoBilling": "Automated Billing",
+      "autoBillingDesc": "System automatically calculates platform commission and merchant settlement amounts.",
+      "superAdmin": "Super Admin Control",
+      "superAdminDesc": "Unified control panel for global oversight with real-time statistics.",
+      "payment1": "Users pay via App or credit card",
+      "payment2": "System automatically deducts platform service fees",
+      "payment3": "Remaining balance auto-settled to merchant accounts"
+    },
+    "profit": {
+      "title": "Diversified Revenue Model",
+      "subtitle": "Beyond just electricity fees. Our system unlocks 4 streams of passive income.",
+      "stream1": {
+        "title": "Automated Platform Fees",
+        "desc": "Customize charging commission rates per operator. The system automatically calculates and settles platform fees for each transaction."
+      },
+      "stream2": {
+        "title": "Value-Added Services",
+        "desc": "Enable \"reserved parking\" fees, charging time surcharges, and session management charges. Operators can customize their own pricing strategies."
+      },
+      "stream3": {
+        "title": "Ad Revenue",
+        "desc": "In-App, H5, and push notification ad placements. Operators purchase impressions and targeted campaigns at premium rates."
+      },
+      "stream4": {
+        "title": "VIP Memberships",
+        "desc": "Offer VIP membership tiers (e.g., $9.99/month) for discounted charging rates, priority station access, and exclusive perks."
+      }
+    },
+    "support": {
+      "title": "Multi-Platform Feature Support",
+      "app": "APP",
+      "cpms": "CPMS",
+      "admin": "Platform Management",
+      "appFeatures": [
+        "QR Code Scanning",
+        "Card Activation",
+        "VIN Code Activation",
+        "Google Maps Navigation",
+        "Multiple Login Methods",
+        "Scheduled Charging",
+        "Multi-Language Support",
+        "Push Notifications"
+      ],
+      "cpmsFeatures": [
+        "Charger Management",
+        "Station Management",
+        "Rate Management",
+        "RFID Card Top-Up",
+        "Order Management",
+        "Financial Management",
+        "User Center",
+        "Scheduled Charging"
+      ],
+      "cpmsFeatures2": [
+        "Multi-Dimensional Analytics",
+        "Remote Diagnostics",
+        "Alarm Notifications",
+        "Firmware Upgrades",
+        "System Log Diagnostics",
+        "Coupon Management",
+        "Fleet Management"
+      ],
+      "adminFeatures": [
+        "Platform Statistics",
+        "Revenue & Fee Configuration",
+        "Operator Management",
+        "Permission Control",
+        "User Management",
+        "System Log Queries"
+      ]
+    },
+    "pricing": {
+      "title": "7×24 Professional Technical Support",
+      "desc": "From deployment to daily operations, our engineering team protects your business around the clock.",
+      "standard": {
+        "title": "Platform Standard",
+        "price": "$18,600",
+        "features": [
+          "Web application",
+          "Free deployment, maintenance, updates",
+          "Admin panel / Merchant panel (shared)",
+          "Pure web H5 / WeChat Mini Program",
+          "All basic SaaS features",
+          "3 years free updates",
+          "7×24 technical support",
+          "2 payment gateways | 2 languages"
+        ]
+      },
+      "enhanced": {
+        "title": "Platform Enhanced",
+        "price": "$34,200",
+        "features": [
+          "Includes iOS & Android applications",
+          "Individual branding & customization",
+          "Dedicated mobile App (iOS & Android)",
+          "Listed on Google Play & Apple App Store",
+          "All basic SaaS features",
+          "3 years free updates",
+          "7×24 technical support",
+          "2 payment gateways | 2 languages"
+        ]
+      },
+      "cta": "Contact Sales"
+    },
+    "aftersales": {
+      "title": "Comprehensive Support, Zero Worries",
+      "desc": "With a \"customer-first\" service philosophy, leveraging comprehensive knowledge base, 1-on-1 technical support, step-by-step video tutorials, and an active community forum.",
+      "item1": {
+        "title": "Video Deployment Guide",
+        "desc": "Step-by-step video tutorials walking you through the entire process from server configuration to successful launch."
+      },
+      "item2": {
+        "title": "Complete Knowledge Base",
+        "desc": "Access installation manuals and user documentation to ensure your team can get started seamlessly."
+      },
+      "item3": {
+        "title": "Community Forum",
+        "desc": "Industry exchange, technical support, feature feedback, and official system announcements — all in one professional hub."
+      },
+      "item4": {
+        "title": "1-on-1 Dedicated Support",
+        "desc": "Direct access to dedicated support experts for personalized assistance and the latest platform updates."
+      }
+    },
+    "releases": {
+      "label": "Release History",
+      "title": "Platform Release Timeline",
+      "desc": "Track the evolution of our B2B platform with major releases, new features, and continuous improvements.",
+      "latest": "Latest",
+      "v3_2": {
+        "version": "v3.2",
+        "date": "March 2026",
+        "summary": "Enhanced multi-tenant analytics and operator dashboard redesign.",
+        "f1": "Real-time cross-operator analytics dashboard",
+        "f2": "Customizable operator branding themes",
+        "f3": "Automated monthly settlement reports"
+      },
+      "v3_1": {
+        "version": "v3.1",
+        "date": "January 2026",
+        "summary": "OCPP 2.0.1 support and expanded payment gateway integrations.",
+        "f1": "Full OCPP 2.0.1 protocol support with ISO 15118",
+        "f2": "Added M-PESA, GrabPay, TrueMoney payment gateways",
+        "f3": "Smart load balancing across charging stations"
+      },
+      "v3_0": {
+        "version": "v3.0",
+        "date": "October 2025",
+        "summary": "Major platform upgrade with Super Admin console and multi-level permissions.",
+        "f1": "Super Admin global control panel",
+        "f2": "Multi-level operator hierarchy management",
+        "f3": "Platform-wide revenue sharing configuration"
+      },
+      "v2_5": {
+        "version": "v2.5",
+        "date": "July 2025",
+        "summary": "Mobile app white-labeling and multi-language expansion.",
+        "f1": "White-label mobile app for operators",
+        "f2": "12 new language packs (30+ languages total)",
+        "f3": "QR code-based charger provisioning"
+      },
+      "v2_0": {
+        "version": "v2.0",
+        "date": "March 2025",
+        "summary": "Initial B2B platform launch with core SaaS capabilities.",
+        "f1": "Multi-tenant architecture with isolated data",
+        "f2": "Operator self-service onboarding portal",
+        "f3": "Integrated billing and invoicing system"
+      }
+    },
+    "demo": {
+      "title": "System Demo",
+      "tabs": {
+        "demo": "System Demo",
+        "url": "URL Login",
+        "credentials": "Credentials"
+      },
+      "admin": {
+        "title": "Global Admin Panel",
+        "subtitle": "全球运营总后台",
+        "account": "admin",
+        "pass": "123456"
+      },
+      "merchant": {
+        "title": "Merchant Panel",
+        "subtitle": "商户管理后台",
+        "account": "test_merchant",
+        "pass": "123456"
+      },
+      "demoAccount": "Demo Account",
+      "account": "Account",
+      "password": "Password",
+      "launch": "Launch",
+      "mobileDemo": "Mobile App Demo",
+      "webDemo": "Web App Demo"
+    }
+  },
+  "faq": {
+    "label": "FAQ",
+    "title": "Frequently Asked",
+    "title2": "Questions",
+    "desc": "Find answers to the most common questions about GCSS EV charging management platform.",
+    "search": "Search questions...",
+    "categories": {
+      "all": "All",
+      "general": "General",
+      "technical": "Technical",
+      "billing": "Billing",
+      "integration": "Integration"
+    },
+    "items": {
+      "q1": "What is GCSS?",
+      "a1": "GCSS (Global Charger System Service) is a comprehensive EV charging management platform that enables operators to manage charging stations, users, payments, and analytics from a single dashboard. It supports both B2C (individual station) and B2B (multi-tenant network) deployment models.",
+      "c1": "general",
+      "q2": "Is there a free version available?",
+      "a2": "Yes! GCSS offers a free Community Edition that includes core charging station management features. You can upgrade to Pro or Enterprise plans as your business grows to unlock advanced features like multi-site management, custom branding, and priority support.",
+      "c2": "billing",
+      "q3": "What charger protocols are supported?",
+      "a3": "GCSS supports OCPP 1.6 and OCPP 2.0.1 protocols, which are compatible with the vast majority of EV chargers on the market. We also support integration with chargers via proprietary APIs on request.",
+      "c3": "technical",
+      "q4": "How do I deploy GCSS on my own server?",
+      "a4": "GCSS can be deployed using Docker containers on any Linux-based server. We provide detailed deployment guides in our documentation, and our support team can assist with the initial setup. The platform requires minimal server resources — 2 CPU cores and 4GB RAM are sufficient for most deployments.",
+      "c4": "technical",
+      "q5": "What payment gateways are supported?",
+      "a5": "GCSS integrates with Stripe, PayPal, Alipay, WeChat Pay, and multiple local payment processors. You can configure multiple payment methods simultaneously and manage all transactions from the unified dashboard.",
+      "c5": "integration",
+      "q6": "Can I white-label the platform?",
+      "a6": "Yes, the Pro and Enterprise plans include full white-labeling capabilities. You can customize the logo, color scheme, domain name, and email templates to match your brand identity. The mobile app can also be published under your own brand.",
+      "c6": "general",
+      "q7": "How does billing and revenue sharing work?",
+      "a7": "GCSS handles all billing automatically. You set your charging rates, and the platform manages session billing, payment processing, and revenue reports. For B2B operators, the multi-tenant system supports revenue sharing between network operators and station owners with configurable split ratios.",
+      "c7": "billing",
+      "q8": "Is there an API for third-party integrations?",
+      "a8": "Yes, GCSS provides a comprehensive RESTful API that allows you to integrate with your existing systems — including fleet management, CRM, ERP, and energy management platforms. Full API documentation with interactive examples is available in our docs.",
+      "c8": "integration",
+      "q9": "What kind of support do you offer?",
+      "a9": "Community Edition users get access to our forum and documentation. Pro users receive email support with 24-hour response time. Enterprise customers get dedicated support with a named account manager, priority response, and custom SLA agreements.",
+      "c9": "general",
+      "q10": "Can I manage multiple locations from one dashboard?",
+      "a10": "Absolutely. GCSS is designed for multi-site management. You can monitor all your charging stations across different locations in real-time, compare performance metrics, and manage operations centrally. The B2B platform extends this further with multi-tenant capabilities.",
+      "c10": "general"
+    },
+    "noResults": "No questions match your search.",
+    "cta": {
+      "title": "Still have questions?",
+      "desc": "Our team is here to help. Reach out and we'll get back to you as soon as possible.",
+      "btn1": "Contact Us",
+      "btn2": "Visit Forum"
+    }
+  }
+}
