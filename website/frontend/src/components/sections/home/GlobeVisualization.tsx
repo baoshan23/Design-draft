@@ -35,6 +35,20 @@ export default function GlobeVisualization() {
   const [dims, setDims] = useState({ w: 700, h: 500 });
   const [worldData, setWorldData] = useState<FeatureCollection<Geometry> | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const zoomRef = useRef(1.7); // divisor: lower = more zoomed in
+  const MIN_ZOOM = 1.2; // max zoom in
+  const MAX_ZOOM = 2.3; // max zoom out
+  const projectionRef = useRef<d3.GeoProjection | null>(null);
+
+  const handleZoom = (dir: 'in' | 'out') => {
+    const step = 0.15;
+    if (dir === 'in') zoomRef.current = Math.max(MIN_ZOOM, zoomRef.current - step);
+    else zoomRef.current = Math.min(MAX_ZOOM, zoomRef.current + step);
+    if (projectionRef.current) {
+      const { w, h } = dims;
+      projectionRef.current.scale(Math.min(w, h) / zoomRef.current);
+    }
+  };
 
   // Intersection observer — only start when visible
   useEffect(() => {
@@ -78,11 +92,12 @@ export default function GlobeVisualization() {
 
     // Projection
     const projection = d3.geoOrthographic()
-      .scale(Math.min(w, h) / 1.7)
+      .scale(Math.min(w, h) / zoomRef.current)
       .center([0, 0])
       .translate([w / 2, h / 2])
       .clipAngle(90);
 
+    projectionRef.current = projection;
     const path = d3.geoPath().projection(projection);
 
     // Defs
@@ -147,6 +162,7 @@ export default function GlobeVisualization() {
     const timer = d3.timer((elapsed) => {
       const rotate = projection.rotate();
       projection.rotate([rotate[0] - 0.3, rotate[1]]);
+      projection.scale(Math.min(w, h) / zoomRef.current);
 
       globe.selectAll('path').attr('d', path as any);
 
@@ -275,6 +291,38 @@ export default function GlobeVisualization() {
         height={dims.h}
         style={{ position: 'relative', zIndex: 10 }}
       />
+      {/* Zoom Controls */}
+      <div style={{
+        position: 'absolute', bottom: 16, right: 16, zIndex: 20,
+        display: 'flex', flexDirection: 'column', gap: 4,
+      }}>
+        <button
+          onClick={() => handleZoom('in')}
+          style={{
+            width: 36, height: 36, borderRadius: 8,
+            background: 'rgba(15, 23, 42, 0.8)', border: '1px solid rgba(96,165,250,0.3)',
+            color: '#93c5fd', fontSize: '1.2rem', fontWeight: 700,
+            cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            backdropFilter: 'blur(8px)', transition: 'background 0.2s',
+          }}
+          onMouseEnter={e => (e.currentTarget.style.background = 'rgba(30, 58, 138, 0.8)')}
+          onMouseLeave={e => (e.currentTarget.style.background = 'rgba(15, 23, 42, 0.8)')}
+          aria-label="Zoom in"
+        >+</button>
+        <button
+          onClick={() => handleZoom('out')}
+          style={{
+            width: 36, height: 36, borderRadius: 8,
+            background: 'rgba(15, 23, 42, 0.8)', border: '1px solid rgba(96,165,250,0.3)',
+            color: '#93c5fd', fontSize: '1.2rem', fontWeight: 700,
+            cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            backdropFilter: 'blur(8px)', transition: 'background 0.2s',
+          }}
+          onMouseEnter={e => (e.currentTarget.style.background = 'rgba(30, 58, 138, 0.8)')}
+          onMouseLeave={e => (e.currentTarget.style.background = 'rgba(15, 23, 42, 0.8)')}
+          aria-label="Zoom out"
+        >−</button>
+      </div>
     </div>
   );
 }
