@@ -132,23 +132,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </section>
 
-      {/* Trusted By Bar */}
-      <section className="trusted-bar">
-        <div className="container">
-          <p className="trusted-label">{t('trusted.label')}</p>
-          <div className="marquee">
-  <div className="marquee-track">
-    {['ChargePoint', 'EVBox', 'Wallbox', 'ABB E-mobility', 'Schneider', 'Delta', 'BYD', 'Kempower', 'Tritium', 'Autel'].map((name) => (
-      <span key={name} className="marquee-item">{name}</span>
-    ))}
-    {['ChargePoint', 'EVBox', 'Wallbox', 'ABB E-mobility', 'Schneider', 'Delta', 'BYD', 'Kempower', 'Tritium', 'Autel'].map((name) => (
-      <span key={`${name}-dup`} className="marquee-item">{name}</span>
-    ))}
-  </div>
-</div>
-        </div>
-      </section>
-
       {/* EV Charger Manufacturers Bar */}
       <section className="trusted-bar">
         <div className="container">
@@ -159,6 +142,23 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <span key={name} className="marquee-item">{name}</span>
     ))}
     {['Star Charge', 'TELD', 'YKC', 'Sinexcel', 'EN+', 'KSTAR', 'Winline', 'UUGreenPower', 'Growatt', 'Infypower', 'Pilot', 'Hopewind'].map((name) => (
+      <span key={`${name}-dup`} className="marquee-item">{name}</span>
+    ))}
+  </div>
+</div>
+        </div>
+      </section>
+
+      {/* Trusted By Bar */}
+      <section className="trusted-bar">
+        <div className="container">
+          <p className="trusted-label">{t('trusted.label')}</p>
+          <div className="marquee">
+  <div className="marquee-track">
+    {['ChargePoint', 'EVBox', 'Wallbox', 'ABB E-mobility', 'Schneider', 'Delta', 'BYD', 'Kempower', 'Tritium', 'Autel'].map((name) => (
+      <span key={name} className="marquee-item">{name}</span>
+    ))}
+    {['ChargePoint', 'EVBox', 'Wallbox', 'ABB E-mobility', 'Schneider', 'Delta', 'BYD', 'Kempower', 'Tritium', 'Autel'].map((name) => (
       <span key={`${name}-dup`} className="marquee-item">{name}</span>
     ))}
   </div>
