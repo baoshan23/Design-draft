@@ -300,15 +300,15 @@
     "stat2": "Operators",
     "stat3": "Currencies",
     "f1": {
-      "title": "Independent Deployment",
-      "desc": "Full control over your infrastructure. Deploy on your own servers with complete data sovereignty and security."
+      "title": "Independent Deployment: Dual-Mode",
+      "desc": "Supports private deployment to ensure data sovereignty and system security. Provides a standardized one-click deployment solution to significantly reduce launch and maintenance costs."
     },
     "f2": {
       "title": "Multi-Language Support",
-      "desc": "English, Chinese, French, Japanese, Korean and more. Smart geo-detection for automatic language switching."
+      "desc": "English, Spanish, Russian, Portuguese, Czech, Vietnamese, Khmer, Arabic, Chinese, French, Japanese, Korean and more. Smart geo-detection for automatic language switching."
     },
     "f3": {
-      "title": "10+ Country Payments",
+      "title": "30+ Country Payments",
       "desc": "Accept payments globally with support for 150+ currencies across major payment gateways and local methods."
     },
     "f4": {
