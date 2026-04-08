@@ -186,128 +186,39 @@ export default function BusinessDiagram3D() {
     </div>
   );
 
-  /* ── B2B2C Diagram ────────────────────────────────────── */
+  /* ── B2B2C Diagram (CPOs → Super Admin only) ───────── */
   const b2b2cDiagram = (
     <div className="bf-canvas bf-canvas-b2b2c" key="b2b2c">
-      <svg className="bf-svg" viewBox="0 0 800 560" preserveAspectRatio="xMidYMid meet">
+      <svg className="bf-svg" viewBox="0 0 800 280" preserveAspectRatio="xMidYMid meet">
         <ArrowDefs prefix="b" />
 
-        {/* ═══ FULL B2C FLOW (copied from B2C tab) ═══ */}
-
-        {/* Scan: User → QR */}
-        <path id="b-s1" d="M 172,75 L 258,75" fill="none" stroke="#9CA3AF" strokeWidth="2" strokeDasharray="6 4" markerEnd="url(#b-ay)" />
-        <text x="215" y="63" textAnchor="middle" className="bf-arrow-label bf-arrow-label-gray">scan</text>
-
-        {/* Scan: QR → Charger */}
-        <path id="b-s2" d="M 378,75 L 468,75" fill="none" stroke="#9CA3AF" strokeWidth="2" strokeDasharray="6 4" markerEnd="url(#b-ay)" />
-        <text x="423" y="63" textAnchor="middle" className="bf-arrow-label bf-arrow-label-gray">scan</text>
-
-        {/* Money: Charger → Server */}
-        <path id="b-m1" d="M 510,122 Q 430,172 342,213" fill="none" stroke="#10B981" strokeWidth="2.5" markerEnd="url(#b-ag)" opacity="0.85" />
-        <FlowDot pathId="b-m1" color="#10B981" dur="2s" />
-
-        {/* Data: Charger → Server */}
-        <path id="b-d1" d="M 548,122 Q 460,172 360,213" fill="none" stroke="#3B82F6" strokeWidth="2.5" markerEnd="url(#b-ab)" opacity="0.85" />
-        <FlowDot pathId="b-d1" color="#3B82F6" dur="2.2s" />
-
-        {/* Data: Server → User */}
-        <path id="b-d2" d="M 250,258 Q 178,200 120,122" fill="none" stroke="#3B82F6" strokeWidth="2.5" markerEnd="url(#b-ab)" opacity="0.85" />
-        <FlowDot pathId="b-d2" color="#3B82F6" dur="2s" />
-
-        {/* Money: Server → CPO (same as B2C) */}
-        <path id="b-m2" d="M 395,252 L 518,252" fill="none" stroke="#10B981" strokeWidth="2.5" markerEnd="url(#b-ag)" opacity="0.85" />
-        <FlowDot pathId="b-m2" color="#10B981" dur="1.5s" />
-
-        {/* Data: Server → CPO (same as B2C) */}
-        <path id="b-d3" d="M 395,272 L 518,272" fill="none" stroke="#3B82F6" strokeWidth="2.5" markerEnd="url(#b-ab)" opacity="0.85" />
-        <FlowDot pathId="b-d3" color="#3B82F6" dur="1.7s" />
-
-        {/* ═══ B2B2C EXTENSION: All CPOs → Super Admin ═══ */}
-
-        {/* Divider */}
-        <line x1="50" y1="335" x2="750" y2="335" stroke="var(--bf-divider, #CBD5E1)" strokeWidth="1" strokeDasharray="4 4" opacity="0.6" />
-
         {/* Money: CPO 1 → Super Admin */}
-        <path id="b-ca1g" d="M 135,415 L 365,500" fill="none" stroke="#10B981" strokeWidth="2" markerEnd="url(#b-ag)" opacity="0.8" />
+        <path id="b-ca1g" d="M 135,110 L 365,195" fill="none" stroke="#10B981" strokeWidth="2.5" markerEnd="url(#b-ag)" opacity="0.85" />
         <FlowDot pathId="b-ca1g" color="#10B981" dur="2s" />
 
         {/* Data: CPO 1 → Super Admin */}
-        <path id="b-ca1b" d="M 143,420 L 373,505" fill="none" stroke="#3B82F6" strokeWidth="2" markerEnd="url(#b-ab)" opacity="0.8" />
+        <path id="b-ca1b" d="M 143,116 L 373,201" fill="none" stroke="#3B82F6" strokeWidth="2.5" markerEnd="url(#b-ab)" opacity="0.85" />
         <FlowDot pathId="b-ca1b" color="#3B82F6" dur="2.2s" />
 
         {/* Money: CPO 2 → Super Admin */}
-        <path id="b-ca2g" d="M 395,435 L 395,495" fill="none" stroke="#10B981" strokeWidth="2" markerEnd="url(#b-ag)" opacity="0.8" />
+        <path id="b-ca2g" d="M 395,125 L 395,190" fill="none" stroke="#10B981" strokeWidth="2.5" markerEnd="url(#b-ag)" opacity="0.85" />
         <FlowDot pathId="b-ca2g" color="#10B981" dur="1.3s" />
 
         {/* Data: CPO 2 → Super Admin */}
-        <path id="b-ca2b" d="M 405,435 L 405,495" fill="none" stroke="#3B82F6" strokeWidth="2" markerEnd="url(#b-ab)" opacity="0.8" />
+        <path id="b-ca2b" d="M 405,125 L 405,190" fill="none" stroke="#3B82F6" strokeWidth="2.5" markerEnd="url(#b-ab)" opacity="0.85" />
         <FlowDot pathId="b-ca2b" color="#3B82F6" dur="1.5s" />
 
         {/* Money: CPO 3 → Super Admin */}
-        <path id="b-ca3g" d="M 655,415 L 435,500" fill="none" stroke="#10B981" strokeWidth="2" markerEnd="url(#b-ag)" opacity="0.8" />
+        <path id="b-ca3g" d="M 655,110 L 435,195" fill="none" stroke="#10B981" strokeWidth="2.5" markerEnd="url(#b-ag)" opacity="0.85" />
         <FlowDot pathId="b-ca3g" color="#10B981" dur="2s" />
 
         {/* Data: CPO 3 → Super Admin */}
-        <path id="b-ca3b" d="M 647,420 L 427,505" fill="none" stroke="#3B82F6" strokeWidth="2" markerEnd="url(#b-ab)" opacity="0.8" />
+        <path id="b-ca3b" d="M 647,116 L 427,201" fill="none" stroke="#3B82F6" strokeWidth="2.5" markerEnd="url(#b-ab)" opacity="0.85" />
         <FlowDot pathId="b-ca3b" color="#3B82F6" dur="2.2s" />
       </svg>
 
-      {/* ── 3D Nodes: Full B2C flow ── */}
-
-      {/* User / Driver */}
-      <div className="bf-node bf-c-teal" style={{ left: 105, top: 75, animationDelay: '0s' }}>
-        <div className="bf-3d-top" />
-        <div className="bf-3d-right" />
-        <div className="bf-front">
-          <div className="bf-icon">{ico.user}</div>
-          <span className="bf-label">{t('driver')}</span>
-        </div>
-      </div>
-
-      {/* QR Code */}
-      <div className="bf-node bf-c-gray" style={{ left: 320, top: 75, animationDelay: '0.08s' }}>
-        <div className="bf-3d-top" />
-        <div className="bf-3d-right" />
-        <div className="bf-front">
-          <div className="bf-icon">{ico.qr}</div>
-          <span className="bf-label">{t('qrCode')}</span>
-        </div>
-      </div>
-
-      {/* EV Charger */}
-      <div className="bf-node bf-c-blue" style={{ left: 535, top: 75, animationDelay: '0.16s' }}>
-        <div className="bf-3d-top" />
-        <div className="bf-3d-right" />
-        <div className="bf-front">
-          <div className="bf-icon">{ico.charger}</div>
-          <span className="bf-label">{t('charger')}</span>
-        </div>
-      </div>
-
-      {/* Server */}
-      <div className="bf-node bf-c-indigo" style={{ left: 320, top: 260, animationDelay: '0.24s' }}>
-        <div className="bf-3d-top" />
-        <div className="bf-3d-right" />
-        <div className="bf-front">
-          <div className="bf-icon">{ico.server}</div>
-          <span className="bf-label">{t('server')}</span>
-        </div>
-      </div>
-
-      {/* CPO (from B2C flow — connected to server) */}
-      <div className="bf-node bf-c-purple" style={{ left: 590, top: 260, animationDelay: '0.32s' }}>
-        <div className="bf-3d-top" />
-        <div className="bf-3d-right" />
-        <div className="bf-front">
-          <div className="bf-icon">{ico.monitor}</div>
-          <span className="bf-label">CPO</span>
-        </div>
-      </div>
-
-      {/* ── B2B2C Extension: Multiple CPOs (each has own server) ── */}
-
-      {/* CPO 1 (the one from B2C above, shown again in the row) */}
-      <div className="bf-node bf-c-purple" style={{ left: 120, top: 395, animationDelay: '0.36s' }}>
+      {/* CPO 1 */}
+      <div className="bf-node bf-c-purple" style={{ left: 120, top: 75, animationDelay: '0s' }}>
         <div className="bf-3d-top" />
         <div className="bf-3d-right" />
         <div className="bf-front">
@@ -316,8 +227,8 @@ export default function BusinessDiagram3D() {
         </div>
       </div>
 
-      {/* CPO 2 (standalone — own server, NOT connected to B2C server) */}
-      <div className="bf-node bf-c-purple" style={{ left: 400, top: 395, animationDelay: '0.42s' }}>
+      {/* CPO 2 */}
+      <div className="bf-node bf-c-purple" style={{ left: 400, top: 75, animationDelay: '0.08s' }}>
         <div className="bf-3d-top" />
         <div className="bf-3d-right" />
         <div className="bf-front">
@@ -326,8 +237,8 @@ export default function BusinessDiagram3D() {
         </div>
       </div>
 
-      {/* CPO 3 (standalone — own server, NOT connected to B2C server) */}
-      <div className="bf-node bf-c-purple" style={{ left: 670, top: 395, animationDelay: '0.48s' }}>
+      {/* CPO 3 */}
+      <div className="bf-node bf-c-purple" style={{ left: 670, top: 75, animationDelay: '0.16s' }}>
         <div className="bf-3d-top" />
         <div className="bf-3d-right" />
         <div className="bf-front">
@@ -337,7 +248,7 @@ export default function BusinessDiagram3D() {
       </div>
 
       {/* Super Admin */}
-      <div className="bf-node bf-c-orange" style={{ left: 400, top: 530, animationDelay: '0.54s' }}>
+      <div className="bf-node bf-c-orange" style={{ left: 400, top: 225, animationDelay: '0.24s' }}>
         <div className="bf-3d-top" />
         <div className="bf-3d-right" />
         <div className="bf-front bf-front-lg">
