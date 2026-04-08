@@ -215,10 +215,10 @@ function DiagramCanvas({ type }: { type: 'B2C' | 'B2B' }) {
     // Outer rect
     node.append('rect')
       .attr('width', 90).attr('height', 90).attr('x', -45).attr('y', -45).attr('rx', 16)
-      .attr('fill', '#1e293b')
+      .attr('fill', '#ffffff')
       .attr('stroke', (d: Node) => nodeColors[d.type] || '#475569')
       .attr('stroke-width', 2)
-      .style('filter', 'drop-shadow(0 8px 16px rgba(0,0,0,0.4))');
+      .style('filter', 'drop-shadow(0 4px 12px rgba(0,0,0,0.1))');
 
     // Inner glow rect
     node.append('rect')
@@ -232,7 +232,7 @@ function DiagramCanvas({ type }: { type: 'B2C' | 'B2B' }) {
     node.append('foreignObject')
       .attr('x', -16).attr('y', -20).attr('width', 32).attr('height', 32)
       .append('xhtml:div')
-      .style('color', 'white')
+      .style('color', (d: Node) => nodeColors[d.type] || '#475569')
       .style('display', 'flex')
       .style('justify-content', 'center')
       .style('align-items', 'center')
@@ -241,7 +241,7 @@ function DiagramCanvas({ type }: { type: 'B2C' | 'B2B' }) {
     // Labels
     node.append('text')
       .attr('dy', 35).attr('text-anchor', 'middle')
-      .attr('fill', '#94a3b8').attr('font-size', '11px')
+      .attr('fill', '#666666').attr('font-size', '11px')
       .attr('font-weight', '600').attr('font-family', 'monospace')
       .text((d: Node) => d.label);
 
@@ -249,11 +249,6 @@ function DiagramCanvas({ type }: { type: 'B2C' | 'B2B' }) {
       link.attr('d', (d: Link) => {
         const s = d.source as Node;
         const t = d.target as Node;
-        if (s.id === 'server' && t.id === 'user') {
-          const dx = t.x! - s.x!; const dy = t.y! - s.y!;
-          const dr = Math.sqrt(dx * dx + dy * dy);
-          return `M${s.x},${s.y}A${dr},${dr} 0 0,1 ${t.x},${t.y}`;
-        }
         return `M${s.x},${s.y}L${t.x},${t.y}`;
       });
       node.attr('transform', (d: Node) => `translate(${d.x},${d.y})`);
@@ -263,36 +258,36 @@ function DiagramCanvas({ type }: { type: 'B2C' | 'B2B' }) {
   }, [type]);
 
   return (
-    <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: '#0f172a', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(51,65,85,0.5)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+    <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: 'var(--card-bg, #ffffff)', borderRadius: 20, overflow: 'hidden', border: '1px solid var(--border-subtle, rgba(0,0,0,0.06))', boxShadow: '0 8px 32px rgba(0,0,0,0.08), 0 0 0 1px var(--border-subtle, rgba(0,0,0,0.04))' }}>
       {/* Dot grid bg */}
-      <div style={{ position: 'absolute', inset: 0, opacity: 0.1, backgroundImage: 'radial-gradient(#334155 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+      <div style={{ position: 'absolute', inset: 0, opacity: 0.25, backgroundImage: 'radial-gradient(var(--border-medium, rgba(0,0,0,0.12)) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
 
       {/* Title overlay */}
       <div style={{ position: 'absolute', top: 24, left: 24, zIndex: 10 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-          <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#3b82f6', boxShadow: '0 0 8px rgba(59,130,246,0.8)' }} />
-          <span style={{ fontSize: '1rem', fontWeight: 800, color: 'white', fontFamily: 'monospace', letterSpacing: '-0.02em' }}>
+          <div style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--primary, #FEBF1D)', boxShadow: '0 0 8px var(--primary-dim, rgba(254,191,29,0.4))' }} />
+          <span style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary, #383838)', fontFamily: 'monospace', letterSpacing: '-0.02em' }}>
             {type === 'B2C' ? 'B2C_ECOSYSTEM' : 'B2B_ENTERPRISE'}
           </span>
         </div>
-        <p style={{ fontSize: '0.65rem', color: '#64748b', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em' }}>System Architecture Visualization</p>
+        <p style={{ fontSize: '0.65rem', color: 'var(--text-tertiary, #757575)', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em' }}>System Architecture Visualization</p>
       </div>
 
       <svg ref={svgRef} style={{ width: '100%', height: '100%' }} />
 
       {/* Legend */}
-      <div style={{ position: 'absolute', bottom: 20, right: 20, display: 'flex', flexDirection: 'column', gap: 8, background: 'rgba(15,23,42,0.85)', backdropFilter: 'blur(12px)', padding: '14px 18px', borderRadius: 14, border: '1px solid rgba(51,65,85,0.5)', fontSize: '0.6rem', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em', color: '#94a3b8' }}>
+      <div style={{ position: 'absolute', bottom: 20, right: 20, display: 'flex', flexDirection: 'column', gap: 8, background: 'var(--glass-bg, rgba(255,255,255,0.9))', backdropFilter: 'blur(12px)', padding: '14px 18px', borderRadius: 14, border: '1px solid var(--border-subtle, rgba(0,0,0,0.06))', fontSize: '0.6rem', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-tertiary, #757575)', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#3b82f6', boxShadow: '0 0 8px rgba(59,130,246,0.5)' }} />
+          <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#3b82f6' }} />
           <span>Data Flow</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#10b981', boxShadow: '0 0 8px rgba(16,185,129,0.5)' }} />
+          <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#10b981' }} />
           <span>Revenue Flow</span>
         </div>
         {type === 'B2B' && (
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#a78bfa', boxShadow: '0 0 8px rgba(167,139,250,0.5)' }} />
+            <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#a78bfa' }} />
             <span>Admin Control</span>
           </div>
         )}
@@ -305,19 +300,19 @@ function DiagramCanvas({ type }: { type: 'B2C' | 'B2B' }) {
             initial={{ opacity: 0, scale: 0.9, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 16 }}
-            style={{ position: 'absolute', bottom: 20, left: 20, width: 260, background: 'rgba(15,23,42,0.95)', backdropFilter: 'blur(16px)', padding: 20, borderRadius: 16, border: '1px solid rgba(71,85,105,0.5)', boxShadow: '0 16px 32px rgba(0,0,0,0.4)', zIndex: 20 }}
+            style={{ position: 'absolute', bottom: 20, left: 20, width: 260, background: 'var(--glass-bg, rgba(255,255,255,0.95))', backdropFilter: 'blur(16px)', padding: 20, borderRadius: 16, border: '1px solid var(--border-subtle, rgba(0,0,0,0.06))', boxShadow: '0 8px 24px rgba(0,0,0,0.1)', zIndex: 20 }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
               <div>
-                <div style={{ fontSize: '1rem', fontWeight: 700, color: 'white', fontFamily: 'monospace' }}>{selectedNode.label}</div>
+                <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary, #383838)', fontFamily: 'monospace' }}>{selectedNode.label}</div>
                 <div style={{ fontSize: '0.6rem', color: nodeColors[selectedNode.type], fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em', marginTop: 2 }}>Type: {selectedNode.type}</div>
               </div>
-              <button onClick={() => setSelectedNode(null)} style={{ background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', fontSize: '1.1rem', lineHeight: 1 }}>×</button>
+              <button onClick={() => setSelectedNode(null)} style={{ background: 'none', border: 'none', color: 'var(--text-tertiary, #757575)', cursor: 'pointer', fontSize: '1.1rem', lineHeight: 1 }}>×</button>
             </div>
-            <div style={{ height: 3, width: '100%', background: '#1e293b', borderRadius: 2, overflow: 'hidden', marginBottom: 12 }}>
+            <div style={{ height: 3, width: '100%', background: 'var(--dark-surface, #F1F2F4)', borderRadius: 2, overflow: 'hidden', marginBottom: 12 }}>
               <motion.div style={{ height: '100%', background: nodeColors[selectedNode.type] }} initial={{ width: 0 }} animate={{ width: '100%' }} transition={{ duration: 0.8 }} />
             </div>
-            <p style={{ fontSize: '0.75rem', color: '#94a3b8', lineHeight: 1.6, fontFamily: 'monospace' }}>
+            <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary, #666)', lineHeight: 1.6, fontFamily: 'monospace' }}>
               {nodeDescs[selectedNode.type] || ''}
             </p>
           </motion.div>
@@ -347,22 +342,6 @@ export default function BusinessDiagram3D() {
 
   return (
     <div ref={ref} style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(30px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}>
-      {/* Legend bar */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: 20, marginBottom: 14, fontSize: '0.78rem', color: '#64748b' }}>
-        <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <span style={{ width: 20, height: 3, borderRadius: 2, background: '#10B981', display: 'inline-block' }} />
-          {t('money')}
-        </span>
-        <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <span style={{ width: 20, height: 3, borderRadius: 2, background: '#3B82F6', display: 'inline-block' }} />
-          {t('data')}
-        </span>
-        <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <span style={{ width: 20, height: 3, borderRadius: 2, background: '#94a3b8', borderTop: '2px dashed #94a3b8', display: 'inline-block' }} />
-          {t('scan')}
-        </span>
-      </div>
-
       {/* Tabs */}
       <div style={{ display: 'flex', justifyContent: 'center', gap: 4, marginBottom: 20 }}>
         <button
@@ -389,7 +368,7 @@ export default function BusinessDiagram3D() {
 
       {/* Diagram with glow border */}
       <div style={{ position: 'relative' }}>
-        <div style={{ position: 'absolute', inset: -2, background: 'linear-gradient(135deg, rgba(59,130,246,0.15), rgba(16,185,129,0.15))', borderRadius: 22, filter: 'blur(8px)', opacity: 0.4, transition: 'opacity 0.5s', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', inset: -2, background: 'linear-gradient(135deg, var(--primary-dim, rgba(254,191,29,0.12)), rgba(16,185,129,0.08))', borderRadius: 22, filter: 'blur(8px)', opacity: 0.5, transition: 'opacity 0.5s', pointerEvents: 'none' }} />
         <AnimatePresence mode="wait">
           <motion.div
             key={tab}
