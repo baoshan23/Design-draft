@@ -250,7 +250,23 @@
       "li1": "QR code, RFID, VIN code auto-start",
       "li2": "Google Maps & Apple Maps navigation",
       "li3": "Facebook, Google & Apple ID login",
-      "li4": "Real-time charging status & notifications"
+      "li4": "Real-time charging status & notifications",
+      "card1": {
+        "title": "QR / RFID / VIN Auto-Start",
+        "desc": "Scan a QR code, tap an RFID card, or enter a VIN to instantly start a charging session."
+      },
+      "card2": {
+        "title": "Smart Map Navigation",
+        "desc": "Find nearby chargers with Google Maps & Apple Maps integration and real-time availability."
+      },
+      "card3": {
+        "title": "Social Login",
+        "desc": "One-tap sign in with Facebook, Google, or Apple ID. No extra passwords to remember."
+      },
+      "card4": {
+        "title": "Real-Time Status",
+        "desc": "Live charging progress, push notifications on completion, and full session history."
+      }
     }
   },
   "product": {

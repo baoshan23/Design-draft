@@ -250,7 +250,23 @@
       "li1": "二维码、RFID、VIN 码自动启动",
       "li2": "谷歌地图与苹果地图导航",
       "li3": "Facebook、Google 与 Apple ID 登录",
-      "li4": "实时充电状态与通知推送"
+      "li4": "实时充电状态与通知推送",
+      "card1": {
+        "title": "扫码 / RFID / VIN 自动启动",
+        "desc": "扫描二维码、刷 RFID 卡或输入 VIN 码，即可立即开始充电。"
+      },
+      "card2": {
+        "title": "智能地图导航",
+        "desc": "集成谷歌地图与苹果地图，实时查找附近可用充电桩。"
+      },
+      "card3": {
+        "title": "社交账号登录",
+        "desc": "一键使用 Facebook、Google 或 Apple ID 登录，无需额外密码。"
+      },
+      "card4": {
+        "title": "实时充电状态",
+        "desc": "实时充电进度、充电完成推送通知及完整会话记录。"
+      }
     }
   },
   "product": {
