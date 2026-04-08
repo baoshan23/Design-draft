@@ -106,8 +106,8 @@ export default function GlobeVisualization() {
     const oceanGrad = defs.append('radialGradient')
       .attr('id', 'gcss-ocean')
       .attr('cx', '50%').attr('cy', '50%').attr('r', '50%');
-    oceanGrad.append('stop').attr('offset', '0%').attr('stop-color', '#0f172a');
-    oceanGrad.append('stop').attr('offset', '100%').attr('stop-color', '#1e3a8a');
+    oceanGrad.append('stop').attr('offset', '0%').attr('stop-color', '#4C3D3D');
+    oceanGrad.append('stop').attr('offset', '100%').attr('stop-color', '#2a2020');
 
     const glow = defs.append('filter').attr('id', 'gcss-glow');
     glow.append('feGaussianBlur').attr('stdDeviation', '2.5').attr('result', 'coloredBlur');
@@ -123,7 +123,7 @@ export default function GlobeVisualization() {
       .datum({ type: 'Sphere' })
       .attr('d', path as any)
       .attr('fill', 'url(#gcss-ocean)')
-      .attr('stroke', '#1e40af')
+      .attr('stroke', '#C07F00')
       .attr('stroke-width', 1.5);
 
     // Graticule
@@ -131,7 +131,7 @@ export default function GlobeVisualization() {
       .datum(d3.geoGraticule()())
       .attr('d', path as any)
       .attr('fill', 'none')
-      .attr('stroke', '#3b82f6')
+      .attr('stroke', '#C07F00')
       .attr('stroke-width', 0.4)
       .attr('stroke-opacity', 0.15);
 
@@ -141,8 +141,8 @@ export default function GlobeVisualization() {
       .enter().append('path')
       .attr('class', 'country')
       .attr('d', path as any)
-      .attr('fill', '#172554')
-      .attr('stroke', '#60a5fa')
+      .attr('fill', '#5c4a3a')
+      .attr('stroke', '#FFD95A')
       .attr('stroke-width', 0.4)
       .style('opacity', 0.8);
 
@@ -178,7 +178,7 @@ export default function GlobeVisualization() {
         .append('path')
         .attr('class', 'arc')
         .attr('fill', 'none')
-        .attr('stroke', '#F57C00')
+        .attr('stroke', '#FFD95A')
         .attr('stroke-width', 1.5)
         .attr('stroke-linecap', 'round')
         .style('filter', 'url(#gcss-glow)')
@@ -217,20 +217,20 @@ export default function GlobeVisualization() {
 
       entered.append('circle')
         .attr('r', (d: any) => d.isOrigin ? 5 : 2.5)
-        .attr('fill', (d: any) => d.isOrigin ? '#F57C00' : '#22d3ee')
+        .attr('fill', (d: any) => d.isOrigin ? '#FFD95A' : '#FFF7D4')
         .attr('fill-opacity', 0.4)
         .attr('class', 'ripple');
 
       entered.append('circle')
         .attr('r', (d: any) => d.isOrigin ? 2.5 : 1.5)
-        .attr('fill', (d: any) => d.isOrigin ? '#FF9800' : '#cffafe')
+        .attr('fill', (d: any) => d.isOrigin ? '#C07F00' : '#FFD95A')
         .attr('class', 'dot');
 
       entered.append('text')
         .attr('text-anchor', 'middle')
         .attr('dy', -8)
         .attr('font-size', '9px')
-        .attr('fill', '#e0f2fe')
+        .attr('fill', '#FFF7D4')
         .attr('font-family', 'sans-serif')
         .attr('font-weight', '500')
         .text((d: any) => d.name)
@@ -274,15 +274,15 @@ export default function GlobeVisualization() {
         position: 'relative',
         borderRadius: '16px',
         overflow: 'hidden',
-        background: 'radial-gradient(circle at center, #1e3a8a 0%, #020617 70%)',
-        boxShadow: '0 0 60px rgba(30, 58, 138, 0.4), 0 0 120px rgba(30, 58, 138, 0.2), 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 0 80px rgba(2, 6, 23, 0.5)',
-        border: '1px solid rgba(96, 165, 250, 0.15)',
+        background: 'radial-gradient(circle at center, #4C3D3D 0%, #1a1210 70%)',
+        boxShadow: '0 0 60px rgba(192, 127, 0, 0.3), 0 0 120px rgba(192, 127, 0, 0.15), 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 0 80px rgba(26, 18, 16, 0.5)',
+        border: '1px solid rgba(255, 217, 90, 0.15)',
       }}
     >
       {!worldData && isVisible && (
         <div style={{
           position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
-          color: '#22d3ee', fontSize: '0.85rem', fontWeight: 500, zIndex: 20,
+          color: '#FFD95A', fontSize: '0.85rem', fontWeight: 500, zIndex: 20,
         }}>
           Loading globe...
         </div>
@@ -302,26 +302,26 @@ export default function GlobeVisualization() {
           onClick={() => handleZoom('in')}
           style={{
             width: 36, height: 36, borderRadius: 8,
-            background: 'rgba(15, 23, 42, 0.8)', border: '1px solid rgba(96,165,250,0.3)',
-            color: '#93c5fd', fontSize: '1.2rem', fontWeight: 700,
+            background: 'rgba(76, 61, 61, 0.8)', border: '1px solid rgba(255,217,90,0.3)',
+            color: '#FFD95A', fontSize: '1.2rem', fontWeight: 700,
             cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
             backdropFilter: 'blur(8px)', transition: 'background 0.2s',
           }}
-          onMouseEnter={e => (e.currentTarget.style.background = 'rgba(30, 58, 138, 0.8)')}
-          onMouseLeave={e => (e.currentTarget.style.background = 'rgba(15, 23, 42, 0.8)')}
+          onMouseEnter={e => (e.currentTarget.style.background = 'rgba(192, 127, 0, 0.5)')}
+          onMouseLeave={e => (e.currentTarget.style.background = 'rgba(76, 61, 61, 0.8)')}
           aria-label="Zoom in"
         >+</button>
         <button
           onClick={() => handleZoom('out')}
           style={{
             width: 36, height: 36, borderRadius: 8,
-            background: 'rgba(15, 23, 42, 0.8)', border: '1px solid rgba(96,165,250,0.3)',
-            color: '#93c5fd', fontSize: '1.2rem', fontWeight: 700,
+            background: 'rgba(76, 61, 61, 0.8)', border: '1px solid rgba(255,217,90,0.3)',
+            color: '#FFD95A', fontSize: '1.2rem', fontWeight: 700,
             cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
             backdropFilter: 'blur(8px)', transition: 'background 0.2s',
           }}
-          onMouseEnter={e => (e.currentTarget.style.background = 'rgba(30, 58, 138, 0.8)')}
-          onMouseLeave={e => (e.currentTarget.style.background = 'rgba(15, 23, 42, 0.8)')}
+          onMouseEnter={e => (e.currentTarget.style.background = 'rgba(192, 127, 0, 0.5)')}
+          onMouseLeave={e => (e.currentTarget.style.background = 'rgba(76, 61, 61, 0.8)')}
           aria-label="Zoom out"
         >−</button>
       </div>
