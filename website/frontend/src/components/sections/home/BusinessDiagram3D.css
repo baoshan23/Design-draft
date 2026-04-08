@@ -1,370 +1,352 @@
-/* === WRAPPER === */
-.diagram3d-wrapper {
+/* ================================================================
+   BusinessDiagram3D — 3D Isometric Business Flow
+   ================================================================ */
+
+/* ── Wrapper ─────────────────────────────────────────── */
+.bf-wrap {
   position: relative;
   width: 100%;
-  padding: 20px 0 40px;
+  padding: 16px 0 32px;
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
 }
-.diagram3d-wrapper.diagram3d-visible {
+.bf-wrap.bf-visible {
   opacity: 1;
   transform: translateY(0);
 }
-.diagram3d-hint {
-  text-align: center;
-  font-size: 0.8rem;
-  color: var(--text-tertiary, #94A3B8);
-  margin-bottom: 8px;
-  letter-spacing: 0.5px;
-}
 
-/* === LEGEND === */
-.diagram3d-legend {
+/* ── Legend ───────────────────────────────────────────── */
+.bf-legend {
   display: flex;
   justify-content: center;
   gap: 24px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   font-size: 0.8rem;
   color: var(--text-secondary, #64748B);
 }
-.legend-item {
+.bf-legend-item {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.legend-line {
+.bf-legend-swatch {
   display: inline-block;
-  width: 28px;
+  width: 24px;
   height: 3px;
   border-radius: 2px;
 }
-.legend-money {
-  background: #10B981;
-}
-.legend-data {
-  background: #3B82F6;
-}
+.bf-swatch-green { background: #10B981; }
+.bf-swatch-blue  { background: #3B82F6; }
+.bf-swatch-gray  { background: #9CA3AF; border-style: dashed; }
 
-/* === VIEWPORT === */
-.diagram3d-viewport {
-  width: 100%;
-  min-height: 520px;
+/* ── Tabs ────────────────────────────────────────────── */
+.bf-tabs {
   display: flex;
-  align-items: center;
   justify-content: center;
-  overflow: visible;
-  perspective: 1200px;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+.bf-tab {
+  padding: 8px 24px;
+  border: 1.5px solid var(--glass-border, rgba(0,0,0,0.08));
+  border-radius: 8px;
+  background: var(--card-bg, #fff);
+  color: var(--text-secondary, #64748B);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.bf-tab:hover {
+  border-color: var(--primary, #F57C00);
+  color: var(--primary, #F57C00);
+}
+.bf-tab-active {
+  background: var(--primary, #F57C00);
+  color: #fff;
+  border-color: var(--primary, #F57C00);
+}
+.bf-tab-active:hover {
+  color: #fff;
+}
+[data-theme="dark"] .bf-tab,
+.dark .bf-tab {
+  background: rgba(30, 30, 40, 0.8);
+  border-color: rgba(255,255,255,0.08);
+}
+[data-theme="dark"] .bf-tab-active,
+.dark .bf-tab-active {
+  background: var(--primary, #F57C00);
+  border-color: var(--primary, #F57C00);
 }
 
-/* === 3D SCENE === */
-.diagram3d-scene {
+/* ── Canvas (diagram container) ──────────────────────── */
+.bf-canvas-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+.bf-canvas {
   position: relative;
-  width: 560px;
-  height: 480px;
-  transform-style: preserve-3d;
-  cursor: grab;
-  transition: transform 0.3s ease;
+  width: 800px;
+  transform-origin: top center;
+}
+.bf-canvas-b2c {
+  height: 340px;
+}
+.bf-canvas-b2b2c {
+  height: 590px;
 }
 
-/* === FLOOR === */
-.diagram3d-floor {
+/* SVG arrow layer */
+.bf-svg {
   position: absolute;
-  inset: -20px;
-  border-radius: 24px;
-  background:
-    radial-gradient(circle at 50% 50%, rgba(59,130,246,0.04) 0%, transparent 70%),
-    linear-gradient(rgba(148,163,184,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148,163,184,0.06) 1px, transparent 1px);
-  background-size: 100% 100%, 40px 40px, 40px 40px;
-  transform: translateZ(-2px);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
 }
 
-/* === NODES === */
-.d3-node {
+/* SVG arrow label text */
+.bf-arrow-label {
+  font-size: 11px;
+  font-weight: 500;
+  font-family: inherit;
+}
+.bf-arrow-label-gray { fill: #9CA3AF; }
+
+/* ── 3D Nodes ────────────────────────────────────────── */
+.bf-node {
   position: absolute;
-  transform-style: preserve-3d;
+  transform: translate(-50%, -50%);
   z-index: 5;
   opacity: 0;
 }
-.diagram3d-visible .d3-node {
-  animation: d3NodeIn 0.6s ease forwards;
+.bf-visible .bf-node {
+  animation: bfNodeIn 0.5s ease forwards;
   animation-delay: var(--delay, 0s);
 }
-@keyframes d3NodeIn {
-  from { opacity: 0; transform: translate(-50%, -50%) translateZ(-30px) scale(0.85); }
-  to { opacity: 1; transform: translate(-50%, -50%) translateZ(0) scale(1); }
+/* Use inline animationDelay via style prop; fallback to --delay */
+@keyframes bfNodeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(12px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0) scale(1);
+  }
 }
 
-/* Node positions — matching Image 2 layout:
-   Driver (bottom-left), Charger (bottom-right),
-   Server (center-left), CPO (center-right), GCSS (top-center) */
-.d3-node-driver  { left: 80px;  top: 400px; }
-.d3-node-charger { left: 300px; top: 400px; }
-.d3-node-server  { left: 120px; top: 220px; }
-.d3-node-cpo     { left: 370px; top: 220px; }
-.d3-node-gcss    { left: 280px; top: 60px; }
-
-/* Card container */
-.d3-node-card {
+/* Front face (main visible face) */
+.bf-front {
   position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.3s ease;
-}
-.d3-node-card:hover {
-  transform: translateZ(8px) scale(1.04);
-}
-
-/* Shadow underneath */
-.d3-node-shadow {
-  position: absolute;
-  inset: 6px -2px -6px -2px;
-  border-radius: 16px;
-  background: rgba(0,0,0,0.08);
-  transform: translateZ(-4px);
-  filter: blur(4px);
-}
-.d3-shadow-gcss {
-  inset: 8px -4px -8px -4px;
-  background: rgba(245, 124, 0, 0.15);
-  filter: blur(8px);
-}
-
-/* Front face */
-.d3-node-face {
-  position: relative;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 18px 22px;
+  gap: 4px;
+  padding: 14px 20px;
   min-width: 100px;
-  border-radius: 16px;
-  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  background: var(--card-bg, #ffffff);
   border: 1.5px solid var(--glass-border, rgba(0,0,0,0.06));
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-  transform: translateZ(4px);
-  z-index: 2;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.bf-front:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+.bf-front-lg {
+  min-width: 130px;
+  padding: 16px 24px;
 }
 
-[data-theme="dark"] .d3-node-face,
-.dark .d3-node-face {
-  background: rgba(30, 30, 40, 0.95);
-  border-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-}
-
-/* Colored top edge accent */
-.d3-node-face::before {
+/* Colored top accent bar on front face */
+.bf-front::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 12px;
-  right: 12px;
+  left: 10px;
+  right: 10px;
   height: 3px;
   border-radius: 0 0 3px 3px;
 }
-.d3-face-driver::before  { background: linear-gradient(90deg, #26A69A, #4DB6AC); }
-.d3-face-charger::before { background: linear-gradient(90deg, #42A5F5, #64B5F6); }
-.d3-face-server::before  { background: linear-gradient(90deg, #5C6BC0, #7986CB); }
-.d3-face-cpo::before     { background: linear-gradient(90deg, #AB47BC, #CE93D8); }
-.d3-face-gcss::before    { background: linear-gradient(90deg, var(--primary, #F57C00), #FF9800); left: 8px; right: 8px; height: 4px; }
 
-/* GCSS is larger */
-.d3-face-gcss {
-  min-width: 130px;
-  padding: 22px 28px;
-  border: 2px solid rgba(245, 124, 0, 0.2);
+/* 3D Top Face */
+.bf-3d-top {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 100%;
+  margin-bottom: -1px;
+  height: 12px;
+  z-index: 2;
+  transform: skewX(-45deg);
+  transform-origin: bottom left;
+  border-radius: 4px 0 0 0;
 }
 
-/* Node icon */
-.d3-node-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
+/* 3D Right Face */
+.bf-3d-right {
+  position: absolute;
+  left: 100%;
+  margin-left: -1px;
+  top: 0;
+  width: 12px;
+  height: 100%;
+  z-index: 1;
+  transform: skewY(-45deg);
+  transform-origin: top left;
+  border-radius: 0 0 4px 0;
+}
+
+[data-theme="dark"] .bf-front,
+.dark .bf-front {
+  background: rgba(30, 30, 40, 0.95);
+  border-color: rgba(255,255,255,0.08);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+/* ── Node Icon ───────────────────────────────────────── */
+.bf-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 8px;
 }
-.d3-face-driver .d3-node-icon  { background: rgba(38, 166, 154, 0.1); color: #26A69A; }
-.d3-face-charger .d3-node-icon { background: rgba(66, 165, 245, 0.1); color: #42A5F5; }
-.d3-face-server .d3-node-icon  { background: rgba(92, 107, 192, 0.1); color: #5C6BC0; }
-.d3-face-cpo .d3-node-icon     { background: rgba(171, 71, 188, 0.1); color: #AB47BC; }
-.d3-face-gcss .d3-node-icon    { background: rgba(245, 124, 0, 0.1); color: var(--primary, #F57C00); }
 
-/* Labels */
-.d3-node-label {
-  font-size: 0.82rem;
+/* ── Node Label ──────────────────────────────────────── */
+.bf-label {
+  font-size: 0.78rem;
   font-weight: 700;
   color: var(--text-primary, #1e293b);
   white-space: nowrap;
 }
-[data-theme="dark"] .d3-node-label,
-.dark .d3-node-label {
+[data-theme="dark"] .bf-label,
+.dark .bf-label {
   color: #e2e8f0;
 }
-.d3-node-sub {
-  font-size: 0.65rem;
+.bf-sub {
+  font-size: 0.62rem;
   color: var(--text-tertiary, #94A3B8);
   font-weight: 500;
-  margin-top: 2px;
 }
 
-/* === CONNECTION LINES === */
-.conn {
-  position: absolute;
-  height: 0;
-  border-top: 2px dashed;
-  transform-origin: 0 0;
-  z-index: 1;
-  overflow: visible;
-}
-.conn-money { border-color: rgba(16, 185, 129, 0.4); }
-.conn-data  { border-color: rgba(59, 130, 246, 0.35); }
+/* ================================================================
+   COLOR VARIANTS
+   ================================================================ */
 
-/* Animated flow particle */
-.conn-flow {
-  position: absolute;
-  top: -4px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  animation: flowMove 2.5s linear infinite;
-}
-.conn-flow-money { background: #10B981; box-shadow: 0 0 6px #10B981; }
-.conn-flow-data  { background: #3B82F6; box-shadow: 0 0 6px #3B82F6; }
+/* ── Teal (User/Driver) ── */
+.bf-c-teal .bf-front::before { background: linear-gradient(90deg, #14b8a6, #2dd4bf); }
+.bf-c-teal .bf-3d-top  { background: linear-gradient(90deg, #5eead4, #99f6e4); }
+.bf-c-teal .bf-3d-right { background: linear-gradient(180deg, #0d9488, #0f766e); }
+.bf-c-teal .bf-icon     { background: rgba(20,184,166,0.1); color: #0d9488; }
 
-@keyframes flowMove {
-  0%   { left: 0; opacity: 0; }
-  10%  { opacity: 1; }
-  90%  { opacity: 1; }
-  100% { left: calc(100% - 6px); opacity: 0; }
-}
+[data-theme="dark"] .bf-c-teal .bf-3d-top,
+.dark .bf-c-teal .bf-3d-top { background: linear-gradient(90deg, #134e4a, #1a5c57); }
+[data-theme="dark"] .bf-c-teal .bf-3d-right,
+.dark .bf-c-teal .bf-3d-right { background: linear-gradient(180deg, #0c3c38, #0a302d); }
 
-/* === CONNECTION POSITIONS (matching node layout) ===
-   Driver(80,400) Charger(300,400) Server(120,220) CPO(370,220) GCSS(280,60) */
+/* ── Gray (QR Code) ── */
+.bf-c-gray .bf-front::before { background: linear-gradient(90deg, #9CA3AF, #D1D5DB); }
+.bf-c-gray .bf-3d-top  { background: linear-gradient(90deg, #D1D5DB, #E5E7EB); }
+.bf-c-gray .bf-3d-right { background: linear-gradient(180deg, #6B7280, #4B5563); }
+.bf-c-gray .bf-icon     { background: rgba(107,114,128,0.1); color: #6B7280; }
 
-/* Driver(80,400) → Charger(300,400): horizontal, money */
-.conn-driver-charger {
-  left: 80px;
-  top: 400px;
-  width: 220px;
-  transform: rotate(0deg);
-}
+[data-theme="dark"] .bf-c-gray .bf-3d-top,
+.dark .bf-c-gray .bf-3d-top { background: linear-gradient(90deg, #374151, #4B5563); }
+[data-theme="dark"] .bf-c-gray .bf-3d-right,
+.dark .bf-c-gray .bf-3d-right { background: linear-gradient(180deg, #1F2937, #111827); }
 
-/* Charger(300,400) → Server(120,220): diagonal up-left, data */
-.conn-charger-server {
-  left: 300px;
-  top: 400px;
-  width: 250px;
-  transform: rotate(-136deg);
-}
+/* ── Blue (EV Charger) ── */
+.bf-c-blue .bf-front::before { background: linear-gradient(90deg, #3B82F6, #60A5FA); }
+.bf-c-blue .bf-3d-top  { background: linear-gradient(90deg, #93C5FD, #BFDBFE); }
+.bf-c-blue .bf-3d-right { background: linear-gradient(180deg, #2563EB, #1D4ED8); }
+.bf-c-blue .bf-icon     { background: rgba(59,130,246,0.1); color: #2563EB; }
 
-/* Driver(80,400) → Server(120,220): up, data */
-.conn-driver-server {
-  left: 80px;
-  top: 400px;
-  width: 185px;
-  transform: rotate(-102deg);
-}
+[data-theme="dark"] .bf-c-blue .bf-3d-top,
+.dark .bf-c-blue .bf-3d-top { background: linear-gradient(90deg, #1e3a5f, #1e40af); }
+[data-theme="dark"] .bf-c-blue .bf-3d-right,
+.dark .bf-c-blue .bf-3d-right { background: linear-gradient(180deg, #1e3a5f, #172554); }
 
-/* Server(120,220) → CPO(370,220): horizontal, data */
-.conn-server-cpo {
-  left: 120px;
-  top: 220px;
-  width: 250px;
-  transform: rotate(0deg);
-}
+/* ── Indigo (Server) ── */
+.bf-c-indigo .bf-front::before { background: linear-gradient(90deg, #6366F1, #818CF8); }
+.bf-c-indigo .bf-3d-top  { background: linear-gradient(90deg, #A5B4FC, #C7D2FE); }
+.bf-c-indigo .bf-3d-right { background: linear-gradient(180deg, #4F46E5, #4338CA); }
+.bf-c-indigo .bf-icon     { background: rgba(99,102,241,0.1); color: #4F46E5; }
 
-/* CPO(370,220) → GCSS(280,60): diagonal up-left, money */
-.conn-cpo-gcss {
-  left: 370px;
-  top: 220px;
-  width: 185px;
-  transform: rotate(-120deg);
-}
+[data-theme="dark"] .bf-c-indigo .bf-3d-top,
+.dark .bf-c-indigo .bf-3d-top { background: linear-gradient(90deg, #312e81, #3730a3); }
+[data-theme="dark"] .bf-c-indigo .bf-3d-right,
+.dark .bf-c-indigo .bf-3d-right { background: linear-gradient(180deg, #312e81, #1e1b4b); }
 
-/* === RESPONSIVE === */
-@media (max-width: 768px) {
-  .diagram3d-scene {
-    width: 400px;
-    height: 360px;
-    transform: scale(0.85) rotateX(-25deg) rotateZ(40deg) !important;
+/* ── Purple (CPO) ── */
+.bf-c-purple .bf-front::before { background: linear-gradient(90deg, #8B5CF6, #A78BFA); }
+.bf-c-purple .bf-3d-top  { background: linear-gradient(90deg, #C4B5FD, #DDD6FE); }
+.bf-c-purple .bf-3d-right { background: linear-gradient(180deg, #7C3AED, #6D28D9); }
+.bf-c-purple .bf-icon     { background: rgba(139,92,246,0.1); color: #7C3AED; }
+
+[data-theme="dark"] .bf-c-purple .bf-3d-top,
+.dark .bf-c-purple .bf-3d-top { background: linear-gradient(90deg, #3b1f7e, #4c1d95); }
+[data-theme="dark"] .bf-c-purple .bf-3d-right,
+.dark .bf-c-purple .bf-3d-right { background: linear-gradient(180deg, #3b1f7e, #2e1065); }
+
+/* ── Orange (Super Admin) ── */
+.bf-c-orange .bf-front::before { background: linear-gradient(90deg, #F57C00, #FF9800); left: 8px; right: 8px; height: 4px; }
+.bf-c-orange .bf-front { border: 2px solid rgba(245,124,0,0.2); }
+.bf-c-orange .bf-3d-top  { background: linear-gradient(90deg, #FED7AA, #FFEDD5); }
+.bf-c-orange .bf-3d-right { background: linear-gradient(180deg, #EA580C, #C2410C); }
+.bf-c-orange .bf-icon     { background: rgba(245,124,0,0.1); color: #F57C00; }
+
+[data-theme="dark"] .bf-c-orange .bf-front { border-color: rgba(245,124,0,0.25); }
+[data-theme="dark"] .bf-c-orange .bf-3d-top,
+.dark .bf-c-orange .bf-3d-top { background: linear-gradient(90deg, #7c2d12, #9a3412); }
+[data-theme="dark"] .bf-c-orange .bf-3d-right,
+.dark .bf-c-orange .bf-3d-right { background: linear-gradient(180deg, #7c2d12, #431407); }
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 860px) {
+  .bf-canvas {
+    transform: scale(0.82);
+    margin-bottom: -60px;
   }
-  .diagram3d-viewport {
-    min-height: 400px;
+  .bf-canvas-b2b2c {
+    margin-bottom: -110px;
   }
-  /* Scale down node positions */
-  .d3-node-driver  { left: 56px;  top: 300px; }
-  .d3-node-charger { left: 220px; top: 300px; }
-  .d3-node-server  { left: 85px;  top: 165px; }
-  .d3-node-cpo     { left: 270px; top: 165px; }
-  .d3-node-gcss    { left: 200px; top: 45px; }
-
-  .conn-driver-charger { left: 56px;  top: 300px; width: 164px; }
-  .conn-charger-server { left: 220px; top: 300px; width: 190px; transform: rotate(-135deg); }
-  .conn-driver-server  { left: 56px;  top: 300px; width: 140px; transform: rotate(-102deg); }
-  .conn-server-cpo     { left: 85px;  top: 165px; width: 185px; }
-  .conn-cpo-gcss       { left: 270px; top: 165px; width: 140px; transform: rotate(-120deg); }
-
-  .d3-node-face {
-    padding: 14px 16px;
-    min-width: 80px;
-  }
-  .d3-face-gcss {
-    min-width: 100px;
-    padding: 16px 20px;
-  }
-  .d3-node-icon {
-    width: 40px;
-    height: 40px;
-  }
-  .d3-node-icon svg {
-    width: 24px;
-    height: 24px;
-  }
-  .d3-node-label { font-size: 0.75rem; }
 }
 
-@media (max-width: 480px) {
-  .diagram3d-scene {
-    width: 320px;
-    height: 300px;
-    transform: scale(0.7) rotateX(-20deg) rotateZ(35deg) !important;
+@media (max-width: 640px) {
+  .bf-canvas {
+    transform: scale(0.58);
+    margin-bottom: -140px;
   }
-  .diagram3d-viewport {
-    min-height: 320px;
+  .bf-canvas-b2b2c {
+    margin-bottom: -250px;
   }
-  .d3-node-driver  { left: 45px;  top: 250px; }
-  .d3-node-charger { left: 180px; top: 250px; }
-  .d3-node-server  { left: 70px;  top: 135px; }
-  .d3-node-cpo     { left: 220px; top: 135px; }
-  .d3-node-gcss    { left: 160px; top: 35px; }
+  .bf-legend {
+    gap: 14px;
+    font-size: 0.72rem;
+  }
+  .bf-tabs { gap: 2px; }
+  .bf-tab { padding: 6px 16px; font-size: 0.75rem; }
+}
 
-  .conn-driver-charger { left: 45px;  top: 250px; width: 135px; }
-  .conn-charger-server { left: 180px; top: 250px; width: 155px; transform: rotate(-135deg); }
-  .conn-driver-server  { left: 45px;  top: 250px; width: 118px; transform: rotate(-102deg); }
-  .conn-server-cpo     { left: 70px;  top: 135px; width: 150px; }
-  .conn-cpo-gcss       { left: 220px; top: 135px; width: 115px; transform: rotate(-120deg); }
-
-  .d3-node-face {
-    padding: 10px 12px;
-    min-width: 65px;
+@media (max-width: 420px) {
+  .bf-canvas {
+    transform: scale(0.44);
+    margin-bottom: -190px;
   }
-  .d3-face-gcss {
-    min-width: 80px;
-    padding: 12px 14px;
+  .bf-canvas-b2b2c {
+    margin-bottom: -330px;
   }
-  .d3-node-icon {
-    width: 32px;
-    height: 32px;
-  }
-  .d3-node-icon svg {
-    width: 20px;
-    height: 20px;
-  }
-  .d3-node-label { font-size: 0.65rem; }
-  .d3-node-sub { font-size: 0.55rem; }
-  .diagram3d-legend { font-size: 0.7rem; gap: 16px; }
 }
