@@ -221,7 +221,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </div>
                 <h3>{t('models.b2b.title')}</h3>
                 <p>{t('models.b2b.desc')}</p>
-                <Link href="/product" className="btn btn-accent" style={{ marginTop: 12 }}>{t('models.learnmore')}</Link>
+                <Link href="/b2b" className="btn btn-accent" style={{ marginTop: 12 }}>{t('models.learnmore')}</Link>
               </div>
             </ScrollAnimation>
           </div>
