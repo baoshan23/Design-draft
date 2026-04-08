@@ -157,7 +157,7 @@
     },
     "s2": {
       "title": "Connect Chargers",
-      "desc": "Register your OCPP-compatible charge points. Auto-discovery and remote configuration make setup effortless."
+      "desc": "Create a new charging pile, the system will automatically generate an exclusive URL, connect with one click, and you can go online and use it in a few seconds."
     },
     "s3": {
       "title": "Start Earning",
