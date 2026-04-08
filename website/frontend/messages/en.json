@@ -421,7 +421,7 @@
       "desc": "Choose the plan that fits your business. Start free and scale as you grow."
     },
     "plan1": {
-      "name": "Community Edition",
+      "name": "H5 Free Edition",
       "price": "Free",
       "period": "Forever free",
       "f1": "Free download & deployment",
@@ -433,7 +433,7 @@
       "btn": "Download Free"
     },
     "plan2": {
-      "name": "Enterprise Standard",
+      "name": "H5 Enterprise",
       "period": "one-time payment",
       "f1": "All Community features",
       "f2": "Hosted cloud deployment",
@@ -445,7 +445,7 @@
       "btn": "Get Started"
     },
     "plan3": {
-      "name": "Enterprise Plus",
+      "name": "APP Enterprise",
       "period": "one-time payment",
       "f1": "Full enterprise ecosystem",
       "f2": "Native iOS & Android apps",
