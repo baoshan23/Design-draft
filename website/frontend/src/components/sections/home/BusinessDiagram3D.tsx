@@ -93,18 +93,25 @@ function DiagramCanvas({ type }: { type: 'B2C' | 'B2B' }) {
     const links: Link[] = type === 'B2C' ? [
       { source: 'user', target: 'qr', type: 'interaction' },
       { source: 'qr', target: 'charger', type: 'interaction' },
-      { source: 'charger', target: 'server', type: 'flow', color: '#3b82f6' },
-      { source: 'server', target: 'cpo', type: 'flow', color: '#10b981' },
-      { source: 'server', target: 'user', type: 'flow', color: '#3b82f6' },
+      { source: 'charger', target: 'server', type: 'flow', color: '#3b82f6' },  // data
+      { source: 'charger', target: 'server', type: 'flow', color: '#10b981' },  // revenue
+      { source: 'server', target: 'user', type: 'flow', color: '#3b82f6' },     // data back
+      { source: 'server', target: 'cpo', type: 'flow', color: '#10b981' },      // revenue to CPO
+      { source: 'server', target: 'cpo', type: 'flow', color: '#3b82f6' },      // data to CPO
     ] : [
       { source: 'user', target: 'qr', type: 'interaction' },
       { source: 'qr', target: 'charger', type: 'interaction' },
-      { source: 'charger', target: 'server', type: 'flow', color: '#3b82f6' },
-      { source: 'server', target: 'cpo1', type: 'flow', color: '#10b981' },
-      { source: 'server', target: 'user', type: 'flow', color: '#3b82f6' },
-      { source: 'cpo1', target: 'admin', type: 'flow', color: '#a78bfa' },
-      { source: 'cpo2', target: 'admin', type: 'flow', color: '#a78bfa' },
-      { source: 'cpo3', target: 'admin', type: 'flow', color: '#a78bfa' },
+      { source: 'charger', target: 'server', type: 'flow', color: '#3b82f6' },  // data
+      { source: 'charger', target: 'server', type: 'flow', color: '#10b981' },  // revenue
+      { source: 'server', target: 'user', type: 'flow', color: '#3b82f6' },     // data back
+      { source: 'server', target: 'cpo1', type: 'flow', color: '#10b981' },     // revenue to CPO1
+      { source: 'server', target: 'cpo1', type: 'flow', color: '#3b82f6' },     // data to CPO1
+      { source: 'cpo1', target: 'admin', type: 'flow', color: '#10b981' },      // revenue % to admin
+      { source: 'cpo2', target: 'admin', type: 'flow', color: '#10b981' },      // revenue % to admin
+      { source: 'cpo3', target: 'admin', type: 'flow', color: '#10b981' },      // revenue % to admin
+      { source: 'cpo1', target: 'admin', type: 'flow', color: '#3b82f6' },      // data to admin
+      { source: 'cpo2', target: 'admin', type: 'flow', color: '#3b82f6' },      // data to admin
+      { source: 'cpo3', target: 'admin', type: 'flow', color: '#3b82f6' },      // data to admin
     ];
 
     // Fixed positions
