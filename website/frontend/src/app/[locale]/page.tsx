@@ -4,6 +4,7 @@ import CounterAnimation from '@/components/effects/CounterAnimation';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import { Link } from '@/i18n/navigation';
 import BusinessDiagram3D from '@/components/sections/home/BusinessDiagram3D';
+import GlobeVisualization from '@/components/sections/home/GlobeVisualization';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -707,20 +708,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <p>{t('map.desc')}</p>
             </div>
           </ScrollAnimation>
-          <ScrollAnimation>
-            <div className="map-container" style={{ background: 'linear-gradient(135deg, #0B1120 0%, #1a1a3e 50%, #0B1120 100%)' }}>
-              <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, rgba(26,26,62,0.4), rgba(11,17,32,0.4))', position: 'absolute', inset: 0 }} />
-              <div className="map-placeholder-text" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
-                <div style={{ fontSize: '2rem', fontWeight: 800, color: 'white', marginBottom: 8 }}>100+</div>
-                <div style={{ color: '#94A3B8' }}>Countries &amp; Growing</div>
-              </div>
-              <div className="map-dot" style={{ top: '35%', left: '20%' }} />
-              <div className="map-dot" style={{ top: '30%', left: '48%', animationDelay: '-0.5s' }} />
-              <div className="map-dot" style={{ top: '35%', left: '72%', animationDelay: '-1s' }} />
-              <div className="map-dot" style={{ top: '55%', left: '55%', animationDelay: '-1.5s' }} />
-              <div className="map-dot" style={{ top: '40%', left: '80%', animationDelay: '-2s' }} />
-            </div>
-          </ScrollAnimation>
+          <GlobeVisualization />
         </div>
       </section>
 
