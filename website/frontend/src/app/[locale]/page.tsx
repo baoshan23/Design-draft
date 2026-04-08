@@ -300,7 +300,22 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
           <div className="grid grid-3">
             <ScrollAnimation>
-              <div className="card">
+              <div className="card card-with-img">
+                <div className="card-img-placeholder">
+                  <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="20" width="240" height="120" rx="8" stroke="var(--text-tertiary)" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.4" />
+                    <rect x="40" y="45" width="60" height="40" rx="6" fill="var(--primary-dim)" stroke="var(--primary)" strokeWidth="1" opacity="0.6" />
+                    <circle cx="70" cy="58" r="4" fill="var(--primary)" opacity="0.5" />
+                    <rect x="42" y="72" width="56" height="3" rx="1.5" fill="var(--primary)" opacity="0.3" />
+                    <rect x="120" y="45" width="60" height="40" rx="6" fill="var(--primary-dim)" stroke="var(--primary)" strokeWidth="1" opacity="0.6" />
+                    <circle cx="150" cy="58" r="4" fill="#10B981" opacity="0.5" />
+                    <rect x="122" y="72" width="56" height="3" rx="1.5" fill="var(--primary)" opacity="0.3" />
+                    <rect x="200" y="45" width="60" height="40" rx="6" fill="var(--primary-dim)" stroke="var(--primary)" strokeWidth="1" opacity="0.4" />
+                    <circle cx="230" cy="58" r="4" fill="var(--text-tertiary)" opacity="0.4" />
+                    <rect x="40" y="100" width="220" height="6" rx="3" fill="var(--primary-dim)" opacity="0.4" />
+                    <rect x="40" y="112" width="140" height="6" rx="3" fill="var(--primary-dim)" opacity="0.25" />
+                  </svg>
+                </div>
                 <div className="card-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <rect x="3" y="3" width="7" height="7" rx="1" />
@@ -314,7 +329,22 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="card">
+              <div className="card card-with-img">
+                <div className="card-img-placeholder">
+                  <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="20" width="240" height="120" rx="8" stroke="var(--text-tertiary)" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.4" />
+                    <rect x="40" y="40" width="200" height="55" rx="6" fill="var(--primary-dim)" opacity="0.3" />
+                    <rect x="50" y="50" width="60" height="8" rx="2" fill="var(--primary)" opacity="0.4" />
+                    <text x="50" y="56" fontSize="5" fill="var(--primary)" opacity="0.5">Peak</text>
+                    <rect x="50" y="62" width="90" height="12" rx="2" fill="#10B981" opacity="0.3" />
+                    <rect x="50" y="78" width="50" height="12" rx="2" fill="#3B82F6" opacity="0.3" />
+                    <line x1="160" y1="48" x2="160" y2="90" stroke="var(--text-tertiary)" strokeWidth="1" strokeDasharray="3 3" opacity="0.3" />
+                    <circle cx="180" cy="55" r="12" stroke="var(--primary)" strokeWidth="1.5" fill="var(--primary-dim)" opacity="0.5" />
+                    <path d="M176 55l3 3 5-6" stroke="var(--primary)" strokeWidth="1.5" opacity="0.6" />
+                    <rect x="40" y="105" width="120" height="5" rx="2.5" fill="var(--primary-dim)" opacity="0.3" />
+                    <rect x="40" y="115" width="80" height="5" rx="2.5" fill="var(--primary-dim)" opacity="0.2" />
+                  </svg>
+                </div>
                 <div className="card-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
@@ -325,7 +355,20 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="card">
+              <div className="card card-with-img">
+                <div className="card-img-placeholder">
+                  <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="20" width="240" height="120" rx="8" stroke="var(--text-tertiary)" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.4" />
+                    <path d="M80 90 L140 50 L200 90" stroke="#EF4444" strokeWidth="2" fill="none" opacity="0.5" />
+                    <circle cx="140" cy="50" r="16" stroke="#EF4444" strokeWidth="1.5" fill="rgba(239,68,68,0.08)" />
+                    <line x1="140" y1="42" x2="140" y2="54" stroke="#EF4444" strokeWidth="2" opacity="0.7" />
+                    <circle cx="140" cy="60" r="1.5" fill="#EF4444" opacity="0.7" />
+                    <rect x="60" y="100" width="160" height="4" rx="2" fill="var(--primary-dim)" opacity="0.3" />
+                    <rect x="60" y="108" width="100" height="4" rx="2" fill="var(--primary-dim)" opacity="0.2" />
+                    <circle cx="70" cy="55" r="6" fill="#10B981" stroke="#10B981" strokeWidth="1" opacity="0.3" />
+                    <circle cx="210" cy="55" r="6" fill="#EF4444" stroke="#EF4444" strokeWidth="1" opacity="0.3" />
+                  </svg>
+                </div>
                 <div className="card-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
@@ -338,7 +381,21 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="card">
+              <div className="card card-with-img">
+                <div className="card-img-placeholder">
+                  <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="20" width="240" height="120" rx="8" stroke="var(--text-tertiary)" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.4" />
+                    <rect x="90" y="35" width="100" height="65" rx="8" fill="var(--primary-dim)" stroke="var(--primary)" strokeWidth="1" opacity="0.4" />
+                    <rect x="100" y="45" width="80" height="10" rx="3" fill="var(--primary)" opacity="0.15" />
+                    <rect x="100" y="60" width="80" height="3" rx="1.5" fill="var(--text-tertiary)" opacity="0.3" />
+                    <rect x="100" y="67" width="55" height="3" rx="1.5" fill="var(--text-tertiary)" opacity="0.2" />
+                    <rect x="100" y="78" width="36" height="14" rx="4" fill="var(--primary)" opacity="0.3" />
+                    <circle cx="60" cy="68" r="16" stroke="var(--primary)" strokeWidth="1.5" fill="var(--primary-dim)" opacity="0.4" />
+                    <path d="M54 68 h12 M60 62 v12" stroke="var(--primary)" strokeWidth="1.5" opacity="0.5" />
+                    <rect x="60" y="110" width="160" height="4" rx="2" fill="var(--primary-dim)" opacity="0.3" />
+                    <rect x="60" y="118" width="100" height="4" rx="2" fill="var(--primary-dim)" opacity="0.2" />
+                  </svg>
+                </div>
                 <div className="card-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <rect x="2" y="5" width="20" height="14" rx="2" />
@@ -350,7 +407,20 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="card">
+              <div className="card card-with-img">
+                <div className="card-img-placeholder">
+                  <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="20" width="240" height="120" rx="8" stroke="var(--text-tertiary)" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.4" />
+                    <rect x="100" y="35" width="80" height="50" rx="6" fill="var(--primary-dim)" stroke="var(--primary)" strokeWidth="1" opacity="0.4" />
+                    <rect x="110" y="45" width="60" height="6" rx="2" fill="var(--primary)" opacity="0.3" />
+                    <rect x="110" y="55" width="40" height="6" rx="2" fill="#10B981" opacity="0.3" />
+                    <rect x="110" y="65" width="50" height="6" rx="2" fill="var(--primary)" opacity="0.2" />
+                    <path d="M140 90 L140 105" stroke="var(--primary)" strokeWidth="1.5" opacity="0.4" />
+                    <polyline points="133 98 140 105 147 98" stroke="var(--primary)" strokeWidth="1.5" fill="none" opacity="0.4" />
+                    <rect x="115" y="108" width="50" height="20" rx="4" fill="var(--primary-dim)" stroke="var(--primary)" strokeWidth="1" opacity="0.3" />
+                    <path d="M132 118 l4-4 8 8" stroke="#10B981" strokeWidth="1.5" fill="none" opacity="0.5" />
+                  </svg>
+                </div>
                 <div className="card-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
@@ -363,7 +433,21 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="card">
+              <div className="card card-with-img">
+                <div className="card-img-placeholder">
+                  <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="20" width="240" height="120" rx="8" stroke="var(--text-tertiary)" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.4" />
+                    <rect x="45" y="95" width="25" height="30" rx="3" fill="#3B82F6" opacity="0.25" />
+                    <rect x="80" y="75" width="25" height="50" rx="3" fill="#10B981" opacity="0.3" />
+                    <rect x="115" y="60" width="25" height="65" rx="3" fill="var(--primary)" opacity="0.3" />
+                    <rect x="150" y="80" width="25" height="45" rx="3" fill="#8B5CF6" opacity="0.25" />
+                    <rect x="185" y="50" width="25" height="75" rx="3" fill="var(--primary)" opacity="0.35" />
+                    <rect x="220" y="65" width="25" height="60" rx="3" fill="#10B981" opacity="0.25" />
+                    <line x1="40" y1="125" x2="250" y2="125" stroke="var(--text-tertiary)" strokeWidth="1" opacity="0.3" />
+                    <polyline points="45 85 80 70 115 55 150 75 185 42 220 58" stroke="var(--primary)" strokeWidth="1.5" fill="none" opacity="0.5" />
+                    <circle cx="185" cy="42" r="3" fill="var(--primary)" opacity="0.6" />
+                  </svg>
+                </div>
                 <div className="card-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
