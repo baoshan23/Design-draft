@@ -18,6 +18,11 @@
   background: url(/images/hero-dark.png) center 40% / cover no-repeat !important;
 }
 
+/* B2C Product page hero background */
+.product-hero-bg {
+  background: url(/images/b2c_bg.svg) center center / cover no-repeat !important;
+}
+
 /* Hero EV Charging Illustration */
 .hero-illustration {
   position: absolute;
