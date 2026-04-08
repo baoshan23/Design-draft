@@ -526,7 +526,6 @@ export default async function ProductPage({ params }: { params: Promise<{ locale
                   <li><span className="check">&#10003;</span> <span>{t('product.plan1.f3')}</span></li>
                   <li><span className="check">&#10003;</span> <span>{t('product.plan1.f4')}</span></li>
                   <li><span className="check">&#10003;</span> <span>{t('product.plan1.f5')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan1.f6')}</span></li>
                 </ul>
                 <a href="#license" className="btn btn-outline" style={{ width: '100%' }}>{t('product.plan1.btn')}</a>
               </div>
@@ -560,8 +559,6 @@ export default async function ProductPage({ params }: { params: Promise<{ locale
                   <li><span className="check">&#10003;</span> <span>{t('product.plan3.f4')}</span></li>
                   <li><span className="check">&#10003;</span> <span>{t('product.plan3.f5')}</span></li>
                   <li><span className="check">&#10003;</span> <span>{t('product.plan3.f6')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan3.f7')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan3.f8')}</span></li>
                 </ul>
                 <Link href="/contact" className="btn btn-accent" style={{ width: '100%' }}>{t('product.plan3.btn')}</Link>
               </div>

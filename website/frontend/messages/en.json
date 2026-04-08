@@ -426,10 +426,9 @@
       "period": "Forever free",
       "f1": "Free download & deployment",
       "f2": "Stripe payment integration",
-      "f3": "Developer edition features",
-      "f4": "Basic OCPP 1.6 support",
-      "f5": "Community forum access",
-      "f6": "Includes GCSS brand watermark",
+      "f3": "Basic OCPP 1.6 support",
+      "f4": "Community forum access",
+      "f5": "Includes GCSS brand watermark",
       "btn": "Download Free"
     },
     "plan2": {
@@ -449,12 +448,10 @@
       "period": "one-time payment",
       "f1": "Full enterprise ecosystem",
       "f2": "Native iOS & Android apps",
-      "f3": "Multi-tenant architecture",
-      "f4": "Google Play & App Store publishing",
-      "f5": "White-label everything",
-      "f6": "Dedicated account manager",
-      "f7": "1-on-1 technical support",
-      "f8": "Custom feature development",
+      "f3": "Google Play & App Store publishing",
+      "f4": "White-label everything",
+      "f5": "Dedicated account manager",
+      "f6": "1-on-1 technical support",
       "btn": "Contact Sales"
     },
     "changelog": {
