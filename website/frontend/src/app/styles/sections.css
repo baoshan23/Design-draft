@@ -11,14 +11,11 @@
 
 /* Hero themed background */
 .hero-themed-bg {
-  background-image: url(/images/hero_liht.png);
-  background-position: center 40%;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: url(/images/hero_liht.png) center 40% / cover no-repeat !important;
 }
 
 [data-theme="dark"] .hero-themed-bg {
-  background-image: url(/images/hero-dark.png);
+  background: url(/images/hero-dark.png) center 40% / cover no-repeat !important;
 }
 
 /* Hero EV Charging Illustration */
