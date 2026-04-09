@@ -46,6 +46,30 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Check deployment secrets configured
+        run: |
+          echo "Checking required deployment secrets..."
+          if [[ -z "$SSH_KEY" ]] || [[ -z "$CI_HOST" ]] || [[ -z "$CI_USER" ]] || [[ -z "$CI_PATH" ]]; then
+            echo "⚠️  Deployment secrets not fully configured"
+            echo "To enable automatic deployment, add these secrets to:"
+            echo "Settings → Secrets and variables → Actions"
+            echo ""
+            echo "Required secrets:"
+            echo "  - SSH_KEY (private SSH key for server access)"
+            echo "  - CI_HOST (server IP/hostname)"
+            echo "  - CI_USER (SSH username)"
+            echo "  - CI_PATH (deployment directory path)"
+            echo ""
+            echo "Skipping deployment. Manual deployment available via SFTP."
+            exit 0
+          fi
+          echo "✅ All deployment secrets configured"
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          CI_HOST: ${{ secrets.CI_HOST }}
+          CI_USER: ${{ secrets.CI_USER }}
+          CI_PATH: ${{ secrets.CI_PATH }}
+
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
