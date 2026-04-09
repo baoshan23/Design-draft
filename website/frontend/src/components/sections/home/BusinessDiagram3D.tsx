@@ -67,9 +67,13 @@ export default function BusinessDiagram3D() {
           <h3>{t(`models.${tab === 'B2C' ? 'b2c' : 'b2b'}.detail`)}</h3>
         </div>
         <div className="explanation-flow">
-          {t.rich(`models.${tab === 'B2C' ? 'b2c' : 'b2b'}.flow`, {
-            li: (chunks) => <p key={Math.random()}>{chunks}</p>,
-          })}
+          {Array.isArray(t.raw(`models.${tab === 'B2C' ? 'b2c' : 'b2b'}.flow`)) ? (
+            (t.raw(`models.${tab === 'B2C' ? 'b2c' : 'b2b'}.flow`) as string[]).map((item, idx) => (
+              <p key={idx}>{item}</p>
+            ))
+          ) : (
+            <p>{t(`models.${tab === 'B2C' ? 'b2c' : 'b2b'}.flow`)}</p>
+          )}
         </div>
         <div className="explanation-summary">
           <p>{t(`models.${tab === 'B2C' ? 'b2c' : 'b2b'}.summary`)}</p>
