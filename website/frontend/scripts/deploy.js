@@ -3,10 +3,10 @@ const path = require('path');
 const fs = require('fs');
 
 const config = {
-  host: '47.242.75.250',
-  port: 22,
-  username: 'root',
-  password: 'Gcss123.',
+  host: process.env.SFTP_HOST || '47.242.75.250',
+  port: parseInt(process.env.SFTP_PORT || '22'),
+  username: process.env.SFTP_USER || 'root',
+  password: process.env.SFTP_PASSWORD,
 };
 
 const LOCAL_DIR = path.join(__dirname, '..', 'out');
@@ -56,25 +56,37 @@ async function deploy() {
   const sftp = new SftpClient();
   const startTime = Date.now();
 
+  // Validate config
+  if (!config.password) {
+    console.error('Error: SFTP_PASSWORD environment variable is not set');
+    process.exit(1);
+  }
+
   try {
     console.log('Connecting to server...');
-    await sftp.connect(config);
+    const connectPromise = sftp.connect(config);
+
+    // Add 15 second timeout
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('Connection timeout after 15 seconds')), 15000)
+    );
+
+    await Promise.race([connectPromise, timeoutPromise]);
     console.log('Connected!\n');
 
-    // Clean remote directory
-    console.log('Cleaning remote directory...');
+    // Ensure remote directory exists
+    console.log('Preparing remote directory...');
     try {
-      await sftp.rmdir(REMOTE_DIR, true);
+      await sftp.mkdir(REMOTE_DIR, true);
     } catch (e) {
-      // Directory may not exist yet
+      // Directory may already exist
     }
-    await sftp.mkdir(REMOTE_DIR, true);
 
     // Scan local files
     console.log('Scanning local files...');
     const files = getAllFiles(LOCAL_DIR);
     const totalSize = files.reduce((sum, f) => sum + f.size, 0);
-    
+
     console.log(`Found ${files.length} files (${formatSize(totalSize)})\n`);
 
     // Upload with progress

@@ -10,11 +10,20 @@
 @import './styles/pages.css';
 @import './styles/pages-extracted.css';
 
+/* --- System Font Fallback --- */
+html.gcss-html {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
 /* --- Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+  html {
+    scroll-behavior: auto;
+  }
 
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

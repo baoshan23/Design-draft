@@ -1,10 +1,10 @@
 const { Client } = require('ssh2');
 
 const config = {
-  host: '47.242.75.250',
-  port: 22,
-  username: 'root',
-  password: 'Gcss123.',
+  host: process.env.SSH_HOST || '47.242.75.250',
+  port: parseInt(process.env.SSH_PORT || '22'),
+  username: process.env.SSH_USER || 'root',
+  password: process.env.SSH_PASSWORD,
   keepaliveInterval: 10000,
   readyTimeout: 30000,
 };
@@ -33,6 +33,12 @@ function runCommand(conn, command) {
 
 async function setup() {
   const conn = new Client();
+
+  // Validate config
+  if (!config.password) {
+    console.error('Error: SSH_PASSWORD environment variable is not set');
+    process.exit(1);
+  }
 
   conn.on('error', (err) => {
     console.error('Connection error:', err.message);
