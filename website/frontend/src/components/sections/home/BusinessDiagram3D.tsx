@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import './BusinessDiagram3D.css';
 
 // Simple SVG Icons
@@ -17,6 +18,7 @@ const Icons = {
 
 export default function BusinessDiagram3D() {
   const [tab, setTab] = useState<'B2C' | 'B2B'>('B2C');
+  const t = useTranslations();
 
   return (
     <motion.div
@@ -51,6 +53,27 @@ export default function BusinessDiagram3D() {
         className="diagram-content"
       >
         {tab === 'B2C' ? <B2CDiagram /> : <B2BDiagram />}
+      </motion.div>
+
+      {/* Detailed Explanation */}
+      <motion.div
+        key={`explain-${tab}`}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.1 }}
+        className="diagram-explanation"
+      >
+        <div className="explanation-header">
+          <h3>{t(`models.${tab === 'B2C' ? 'b2c' : 'b2b'}.detail`)}</h3>
+        </div>
+        <div className="explanation-flow">
+          {t.rich(`models.${tab === 'B2C' ? 'b2c' : 'b2b'}.flow`, {
+            li: (chunks) => <p key={Math.random()}>{chunks}</p>,
+          })}
+        </div>
+        <div className="explanation-summary">
+          <p>{t(`models.${tab === 'B2C' ? 'b2c' : 'b2b'}.summary`)}</p>
+        </div>
       </motion.div>
     </motion.div>
   );
