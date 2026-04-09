@@ -1,18 +1,33 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import BusinessDiagram3D from './BusinessDiagram3D';
 import './DiagramModal.css';
 
+declare global {
+    interface Window {
+        openDiagramModal?: () => void;
+    }
+}
+
 export default function DiagramModal() {
     const [isOpen, setIsOpen] = useState(false);
+    const triggerRef = useRef<HTMLButtonElement>(null);
+
+    useEffect(() => {
+        window.openDiagramModal = () => setIsOpen(true);
+        return () => {
+            delete window.openDiagramModal;
+        };
+    }, []);
 
     return (
         <>
-            {/* Hidden button - will be triggered by parent Links */}
-            <div id="diagram-modal-trigger" style={{ display: 'none' }}>
-                <button onClick={() => setIsOpen(true)} />
-            </div>
+            <button
+                ref={triggerRef}
+                style={{ display: 'none' }}
+                aria-hidden="true"
+            />
 
             {/* Modal */}
             {isOpen && (
@@ -31,22 +46,6 @@ export default function DiagramModal() {
                     </div>
                 </div>
             )}
-
-            {/* Script to handle button clicks globally */}
-            <script
-                dangerouslySetInnerHTML={{
-                    __html: `
-            if (typeof window !== 'undefined') {
-              window.openDiagramModal = function() {
-                const trigger = document.getElementById('diagram-modal-trigger');
-                if (trigger && trigger.querySelector('button')) {
-                  trigger.querySelector('button').click();
-                }
-              };
-            }
-          `,
-                }}
-            />
         </>
     );
 }
