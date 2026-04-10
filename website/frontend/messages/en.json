@@ -651,22 +651,20 @@
     "h5plat": {
       "name": "H5 Platform",
       "f1": "All basic SaaS features",
-      "f2": "SaaS 5 instances",
-      "f3": "1 year free feature updates",
-      "f4": "7x24 tech support",
-      "f5": "2 country/region payment integrations",
-      "f6": "2 system language customizations",
-      "f7": "1 backend system customization"
+      "f2": "1 year free feature updates",
+      "f3": "7x24 tech support",
+      "f4": "2 country/region payment integrations",
+      "f5": "2 system language customizations",
+      "f6": "1 backend system customization"
     },
     "appplat": {
       "name": "APP Platform",
       "f1": "Published to Google Play & App Store",
       "f2": "All SaaS features",
-      "f3": "SaaS 5 instances",
-      "f4": "1 year free feature updates",
-      "f5": "7x24 tech support",
-      "f6": "2 country/region payment integrations",
-      "f7": "2 system language customizations"
+      "f3": "1 year free feature updates",
+      "f4": "7x24 tech support",
+      "f5": "2 country/region payment integrations",
+      "f6": "2 system language customizations"
     },
     "compare": {
       "label": "Compare Plans",

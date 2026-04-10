@@ -123,7 +123,6 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                   <li><span className="check">&#10003;</span> <span>{t('pricing.h5plat.f4')}</span></li>
                   <li><span className="check">&#10003;</span> <span>{t('pricing.h5plat.f5')}</span></li>
                   <li><span className="check">&#10003;</span> <span>{t('pricing.h5plat.f6')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('pricing.h5plat.f7')}</span></li>
                 </ul>
                 <div className="flex-col gap-sm">
                   <Link href="/contact" className="btn btn-accent" style={{ width: '100%' }}>{t('pricing.buynow')}</Link>
@@ -143,7 +142,6 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                   <li><span className="check">&#10003;</span> <span>{t('pricing.appplat.f4')}</span></li>
                   <li><span className="check">&#10003;</span> <span>{t('pricing.appplat.f5')}</span></li>
                   <li><span className="check">&#10003;</span> <span>{t('pricing.appplat.f6')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('pricing.appplat.f7')}</span></li>
                 </ul>
                 <div className="flex-col gap-sm">
                   <Link href="/contact" className="btn btn-accent" style={{ width: '100%' }}>{t('pricing.buynow')}</Link>
