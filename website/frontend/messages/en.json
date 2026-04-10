@@ -644,7 +644,7 @@
       "f3": "Basic email notifications",
       "f4": "1 year free upgrades",
       "f5": "7x12 tech support",
-      "f6": "1 fixed payment gateway",
+      "f6": "1 country/region payment integration",
       "f7": "1 free system language customization",
       "f8": "7 backend system language customizations"
     },
@@ -652,10 +652,10 @@
       "name": "H5 Platform",
       "f1": "All basic SaaS features",
       "f2": "SaaS 5 instances",
-      "f3": "3.5 year free feature updates",
+      "f3": "1 year free feature updates",
       "f4": "7x24 tech support",
-      "f5": "7.2 fixed payment gateways",
-      "f6": "6 H5 system language customizations",
+      "f5": "2 country/region payment integrations",
+      "f6": "2 system language customizations",
       "f7": "1 backend system customization"
     },
     "appplat": {
@@ -663,10 +663,10 @@
       "f1": "Published to Google Play & App Store",
       "f2": "All SaaS features",
       "f3": "SaaS 5 instances",
-      "f4": "3.5 year free feature updates",
+      "f4": "1 year free feature updates",
       "f5": "7x24 tech support",
-      "f6": "7.2 fixed payment gateways",
-      "f7": "6 H5 system language customizations"
+      "f6": "2 country/region payment integrations",
+      "f7": "2 system language customizations"
     },
     "compare": {
       "label": "Compare Plans",
