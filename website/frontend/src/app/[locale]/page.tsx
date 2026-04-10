@@ -6,6 +6,11 @@ import { Link } from '@/i18n/navigation';
 import BusinessModelsSection from '@/components/sections/home/BusinessModelsSection';
 import DiagramModal from '@/components/sections/home/DiagramModal';
 import GlobeVisualization from '@/components/sections/home/GlobeVisualization';
+import { routing } from '@/i18n/routing';
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
