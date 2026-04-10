@@ -1356,7 +1356,6 @@
         "features": [
           "Web application",
           "Free deployment, maintenance, updates",
-          "Admin panel & Merchant panel (separated)",
           "Pure web H5 / WeChat Mini Program",
           "All basic SaaS features",
           "3 years free updates",
@@ -1382,7 +1381,7 @@
     },
     "aftersales": {
       "title": "Comprehensive Support, Zero Worries",
-      "desc": "With a \"customer-first\" service philosophy, leveraging comprehensive knowledge base, 1-on-1 technical support, step-by-step video tutorials, and an active community forum.",
+      "desc": "With a \"customer-first\" service philosophy, leveraging comprehensive knowledge base, a professional technical team, step-by-step video tutorials, and an active community forum.",
       "item1": {
         "title": "Video Deployment Guide",
         "desc": "Step-by-step video tutorials walking you through the entire process from server configuration to successful launch."
@@ -1396,8 +1395,8 @@
         "desc": "Industry exchange, technical support, feature feedback, and official system announcements — all in one professional hub."
       },
       "item4": {
-        "title": "1-on-1 Dedicated Support",
-        "desc": "Direct access to dedicated support experts for personalized assistance and the latest platform updates."
+        "title": "Professional Technical Team",
+        "desc": "Direct access to our professional technical team for personalized assistance and the latest platform updates."
       }
     },
     "releases": {
