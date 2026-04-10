@@ -69,7 +69,7 @@
       "summary": "It is a direct, linear relationship. The CPO owns the charger, receives 100% of the data, and collects 100% of the processed revenue directly from the end-user."
     },
     "b2b": {
-      "title": "Master Network Platform (B2B2C)",
+      "title": "SaaS Platform Edition (B2B2C)",
       "desc": "For enterprises building large-scale charging networks. Multi-tenant architecture supporting unlimited operators with a unified Super Admin console.",
       "detail": "Platform / Franchise Ecosystem",
       "flow": [
@@ -610,7 +610,7 @@
     },
     "b2b": {
       "label": "B2B2C Plans",
-      "title": "Master Network Platform (B2B2C)",
+      "title": "SaaS Platform Edition (B2B2C)",
       "desc": "For enterprises building large-scale multi-tenant charging networks."
     },
     "getstarted": "Get Started",
@@ -620,7 +620,7 @@
       "name": "H5 Free",
       "f1": "OCPP 1.6 protocol",
       "f2": "Free all features",
-      "f3": "Limited SDK",
+      "f3": "English & Chinese only",
       "f4": "Stripe payment only",
       "f5": "Includes GCSS branding",
       "f6": "Suitable for H5 applications"
