@@ -1,0 +1,5 @@
+{
+  "name": "EV Ecosystem OS",
+  "description": "A high-fidelity technical visualization of EV charging network architectures (B2C & B2B), featuring real-time data flow simulations and hardware-grade UI.",
+  "requestFramePermissions": []
+}
