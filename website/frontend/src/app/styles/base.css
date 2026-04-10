@@ -129,6 +129,14 @@ p {
   align-items: stretch;
 }
 
+/* Ensure cards in grids take full height */
+.grid>.card,
+.grid>.glass-card,
+.grid>.model-card,
+.grid>.card-with-img {
+  height: 100%;
+}
+
 .grid-2 {
   grid-template-columns: repeat(2, 1fr);
 }

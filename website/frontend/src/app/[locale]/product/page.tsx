@@ -169,44 +169,26 @@ export default async function ProductPage({ params }: { params: Promise<{ locale
           <ScrollAnimation>
             <div className="grid grid-3">
               <div className="card glass-card tilt-card">
-                <div className="card-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M7 7h3v3H7zM14 7h3v3h-3zM7 14h3v3H7z" /></svg>
-                </div>
                 <h3>{t('product.ff1.title')}</h3>
                 <p>{t('product.ff1.desc')}</p>
               </div>
               <div className="card glass-card tilt-card">
-                <div className="card-icon" style={{ background: '#D1FAE5', color: '#065F46' }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>
-                </div>
                 <h3>{t('product.ff2.title')}</h3>
                 <p>{t('product.ff2.desc')}</p>
               </div>
               <div className="card glass-card tilt-card">
-                <div className="card-icon" style={{ background: '#F3E8FF', color: '#D4890A' }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" /></svg>
-                </div>
                 <h3>{t('product.ff3.title')}</h3>
                 <p>{t('product.ff3.desc')}</p>
               </div>
               <div className="card glass-card tilt-card">
-                <div className="card-icon" style={{ background: '#FEF3C7', color: '#92400E' }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>
-                </div>
                 <h3>{t('product.ff4.title')}</h3>
                 <p>{t('product.ff4.desc')}</p>
               </div>
               <div className="card glass-card tilt-card">
-                <div className="card-icon" style={{ background: '#FCE7F3', color: '#9D174D' }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
-                </div>
                 <h3>{t('product.ff5.title')}</h3>
                 <p>{t('product.ff5.desc')}</p>
               </div>
               <div className="card glass-card tilt-card">
-                <div className="card-icon" style={{ background: '#EDE9FE', color: '#5B21B6' }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="5" y="2" width="14" height="20" rx="2" /><line x1="12" y1="18" x2="12.01" y2="18" /></svg>
-                </div>
                 <h3>{t('product.ff6.title')}</h3>
                 <p>{t('product.ff6.desc')}</p>
               </div>

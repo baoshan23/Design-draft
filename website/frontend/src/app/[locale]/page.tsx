@@ -422,7 +422,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </ScrollAnimation>
           <div className="grid grid-4">
             <ScrollAnimation>
-              <div className="card card-with-img">
+              <div className="card card-with-img" style={{ height: '100%' }}>
                 <div className="card-img-placeholder">
                   <svg viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="20" y="15" width="240" height="110" rx="8" stroke="var(--text-tertiary)" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.4" />
@@ -440,17 +440,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     <rect x="100" y="105" width="80" height="4" rx="2" fill="var(--primary-dim)" opacity="0.2" />
                   </svg>
                 </div>
-                <div className="card-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" />
-                  </svg>
-                </div>
                 <h3>{t('index.mobile.card1.title')}</h3>
                 <p>{t('index.mobile.card1.desc')}</p>
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="card card-with-img">
+              <div className="card card-with-img" style={{ height: '100%' }}>
                 <div className="card-img-placeholder">
                   <svg viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="20" y="15" width="240" height="110" rx="8" stroke="var(--text-tertiary)" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.4" />
@@ -466,17 +461,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     <rect x="90" y="110" width="100" height="4" rx="2" fill="var(--primary-dim)" opacity="0.2" />
                   </svg>
                 </div>
-                <div className="card-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <polygon points="3 11 22 2 13 21 11 13 3 11" />
-                  </svg>
-                </div>
                 <h3>{t('index.mobile.card2.title')}</h3>
                 <p>{t('index.mobile.card2.desc')}</p>
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="card card-with-img">
+              <div className="card card-with-img" style={{ height: '100%' }}>
                 <div className="card-img-placeholder">
                   <svg viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="20" y="15" width="240" height="110" rx="8" stroke="var(--text-tertiary)" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.4" />
@@ -490,17 +480,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     <rect x="100" y="105" width="80" height="4" rx="2" fill="var(--primary-dim)" opacity="0.2" />
                   </svg>
                 </div>
-                <div className="card-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" />
-                  </svg>
-                </div>
                 <h3>{t('index.mobile.card3.title')}</h3>
                 <p>{t('index.mobile.card3.desc')}</p>
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="card card-with-img">
+              <div className="card card-with-img" style={{ height: '100%' }}>
                 <div className="card-img-placeholder">
                   <svg viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="20" y="15" width="240" height="110" rx="8" stroke="var(--text-tertiary)" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.4" />
@@ -514,11 +499,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     <rect x="90" y="70" width="65" height="6" rx="3" fill="#10B981" opacity="0.25" />
                     <rect x="80" y="98" width="120" height="5" rx="2.5" fill="var(--primary-dim)" opacity="0.3" />
                     <rect x="100" y="108" width="80" height="4" rx="2" fill="var(--primary-dim)" opacity="0.2" />
-                  </svg>
-                </div>
-                <div className="card-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
                   </svg>
                 </div>
                 <h3>{t('index.mobile.card4.title')}</h3>
