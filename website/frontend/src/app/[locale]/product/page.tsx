@@ -484,71 +484,6 @@ export default async function ProductPage({ params }: { params: Promise<{ locale
         </div>
       </section>
 
-      {/* ==================== Section 3: Purchase & License ==================== */}
-      <section className="section" id="license">
-        <div className="container">
-          <ScrollAnimation>
-            <div className="section-header">
-              <span className="section-label">{t('product.license.label')}</span>
-              <h2>{t('product.license.title')}</h2>
-              <p>{t('product.license.desc')}</p>
-            </div>
-          </ScrollAnimation>
-
-          <ScrollAnimation>
-            <div className="pricing-cards">
-              {/* Community Edition */}
-              <div className="pricing-card glass-card tilt-card">
-                <div className="plan-name">{t('product.plan1.name')}</div>
-                <div className="plan-price">{t('product.plan1.price')}</div>
-                <div className="plan-period">{t('product.plan1.period')}</div>
-                <ul className="plan-features">
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan1.f1')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan1.f2')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan1.f3')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan1.f4')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan1.f5')}</span></li>
-                </ul>
-                <a href="#license" className="btn btn-outline" style={{ width: '100%' }}>{t('product.plan1.btn')}</a>
-              </div>
-
-              {/* Enterprise Standard */}
-              <div className="pricing-card featured glass-card tilt-card">
-                <div className="plan-name">{t('product.plan2.name')}</div>
-                <div className="plan-price"><span className="currency">$</span>300</div>
-                <div className="plan-period">{t('product.plan2.period')}</div>
-                <ul className="plan-features">
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan2.f1')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan2.f2')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan2.f3')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan2.f4')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan2.f5')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan2.f6')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan2.f7')}</span></li>
-                </ul>
-                <a href="#license" className="btn btn-primary" style={{ width: '100%' }}>{t('product.plan2.btn')}</a>
-              </div>
-
-              {/* Enterprise Plus */}
-              <div className="pricing-card glass-card tilt-card">
-                <div className="plan-name">{t('product.plan3.name')}</div>
-                <div className="plan-price"><span className="currency">$</span>16,900</div>
-                <div className="plan-period">{t('product.plan3.period')}</div>
-                <ul className="plan-features">
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan3.f1')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan3.f2')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan3.f3')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan3.f4')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan3.f5')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan3.f6')}</span></li>
-                </ul>
-                <Link href="/contact" className="btn btn-accent" style={{ width: '100%' }}>{t('product.plan3.btn')}</Link>
-              </div>
-            </div>
-          </ScrollAnimation>
-        </div>
-      </section>
-
       {/* ==================== Section 4: Changelog ==================== */}
       <section className="section section-dark" id="changelog">
         <div className="container">
@@ -742,6 +677,71 @@ export default async function ProductPage({ params }: { params: Promise<{ locale
                   <span style={{ fontWeight: 600 }}>{t('product.demo.connection.label')}</span>
                   <span style={{ color: 'var(--gray-500)' }}>{t('product.demo.connection.secure')}</span>
                 </div>
+              </div>
+            </div>
+          </ScrollAnimation>
+        </div>
+      </section>
+
+      {/* ==================== Section 8: Purchase & License ==================== */}
+      <section className="section section-alt" id="license">
+        <div className="container">
+          <ScrollAnimation>
+            <div className="section-header">
+              <span className="section-label">{t('product.license.label')}</span>
+              <h2>{t('product.license.title')}</h2>
+              <p>{t('product.license.desc')}</p>
+            </div>
+          </ScrollAnimation>
+
+          <ScrollAnimation>
+            <div className="pricing-cards">
+              {/* Community Edition */}
+              <div className="pricing-card glass-card tilt-card">
+                <div className="plan-name">{t('product.plan1.name')}</div>
+                <div className="plan-price">{t('product.plan1.price')}</div>
+                <div className="plan-period">{t('product.plan1.period')}</div>
+                <ul className="plan-features">
+                  <li><span className="check">&#10003;</span> <span>{t('product.plan1.f1')}</span></li>
+                  <li><span className="check">&#10003;</span> <span>{t('product.plan1.f2')}</span></li>
+                  <li><span className="check">&#10003;</span> <span>{t('product.plan1.f3')}</span></li>
+                  <li><span className="check">&#10003;</span> <span>{t('product.plan1.f4')}</span></li>
+                  <li><span className="check">&#10003;</span> <span>{t('product.plan1.f5')}</span></li>
+                </ul>
+                <a href="#license" className="btn btn-outline" style={{ width: '100%' }}>{t('product.plan1.btn')}</a>
+              </div>
+
+              {/* Enterprise Standard */}
+              <div className="pricing-card featured glass-card tilt-card">
+                <div className="plan-name">{t('product.plan2.name')}</div>
+                <div className="plan-price"><span className="currency">$</span>300</div>
+                <div className="plan-period">{t('product.plan2.period')}</div>
+                <ul className="plan-features">
+                  <li><span className="check">&#10003;</span> <span>{t('product.plan2.f1')}</span></li>
+                  <li><span className="check">&#10003;</span> <span>{t('product.plan2.f2')}</span></li>
+                  <li><span className="check">&#10003;</span> <span>{t('product.plan2.f3')}</span></li>
+                  <li><span className="check">&#10003;</span> <span>{t('product.plan2.f4')}</span></li>
+                  <li><span className="check">&#10003;</span> <span>{t('product.plan2.f5')}</span></li>
+                  <li><span className="check">&#10003;</span> <span>{t('product.plan2.f6')}</span></li>
+                  <li><span className="check">&#10003;</span> <span>{t('product.plan2.f7')}</span></li>
+                </ul>
+                <a href="#license" className="btn btn-primary" style={{ width: '100%' }}>{t('product.plan2.btn')}</a>
+              </div>
+
+              {/* Enterprise Plus */}
+              <div className="pricing-card glass-card tilt-card">
+                <div className="plan-name">{t('product.plan3.name')}</div>
+                <div className="plan-price"><span className="currency">$</span>16,900</div>
+                <div className="plan-period">{t('product.plan3.period')}</div>
+                <ul className="plan-features">
+                  <li><span className="check">&#10003;</span> <span>{t('product.plan3.f1')}</span></li>
+                  <li><span className="check">&#10003;</span> <span>{t('product.plan3.f2')}</span></li>
+                  <li><span className="check">&#10003;</span> <span>{t('product.plan3.f3')}</span></li>
+                  <li><span className="check">&#10003;</span> <span>{t('product.plan3.f4')}</span></li>
+                  <li><span className="check">&#10003;</span> <span>{t('product.plan3.f5')}</span></li>
+                  <li><span className="check">&#10003;</span> <span>{t('product.plan3.f6')}</span></li>
+                </ul>
+                <Link href="/contact" className="btn btn-accent" style={{ width: '100%' }}>{t('product.plan3.btn')}</Link>
               </div>
             </div>
           </ScrollAnimation>

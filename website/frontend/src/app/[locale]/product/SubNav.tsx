@@ -6,11 +6,11 @@ import { useTranslations } from 'next-intl';
 const sections = [
   { id: 'overview', key: 'product.subnav.overview' },
   { id: 'features', key: 'product.subnav.features' },
-  { id: 'license', key: 'product.subnav.license' },
   { id: 'changelog', key: 'product.subnav.changelog' },
   { id: 'gallery', key: 'product.subnav.gallery' },
   { id: 'support', key: 'product.subnav.support' },
   { id: 'demo', key: 'product.subnav.demo' },
+  { id: 'license', key: 'product.subnav.license' },
 ];
 
 export default function SubNav() {

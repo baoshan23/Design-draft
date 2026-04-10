@@ -312,45 +312,6 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
         </div>
       </section>
 
-      {/* ==================== Section 9: Pricing ==================== */}
-      <section className="section section-alt" id="pricing">
-        <div className="container">
-          <ScrollAnimation>
-            <div className="section-header">
-              <span className="section-label">{t('b2b.nav.pricing')}</span>
-              <h2>{t('b2b.pricing.title')}</h2>
-              <p>{t('b2b.pricing.desc')}</p>
-            </div>
-          </ScrollAnimation>
-          <div className="grid-2" style={{ maxWidth: 900, margin: '0 auto', gap: 32 }}>
-            <ScrollAnimation>
-              <div className="pricing-card glass-card">
-                <h3>{t('b2b.pricing.standard.title')}</h3>
-                <div className="pricing-amount">{t('b2b.pricing.standard.price')}</div>
-                <ul className="pricing-features">
-                  {(t.raw('b2b.pricing.standard.features') as string[]).map((f, i) => (
-                    <li key={i}><CheckIcon /><span>{f}</span></li>
-                  ))}
-                </ul>
-                <Link href="/contact" className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>{t('b2b.pricing.cta')}</Link>
-              </div>
-            </ScrollAnimation>
-            <ScrollAnimation style={{ transitionDelay: '0.1s' }}>
-              <div className="pricing-card glass-card featured">
-                <h3>{t('b2b.pricing.enhanced.title')}</h3>
-                <div className="pricing-amount">{t('b2b.pricing.enhanced.price')}</div>
-                <ul className="pricing-features">
-                  {(t.raw('b2b.pricing.enhanced.features') as string[]).map((f, i) => (
-                    <li key={i}><CheckIcon /><span>{f}</span></li>
-                  ))}
-                </ul>
-                <Link href="/contact" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>{t('b2b.pricing.cta')}</Link>
-              </div>
-            </ScrollAnimation>
-          </div>
-        </div>
-      </section>
-
       {/* ==================== Section 10: After-Sales ==================== */}
       <section className="section" id="aftersales">
         <div className="container">
@@ -458,6 +419,45 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                   </div>
                   <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{t('b2b.demo.webDemo')}</div>
                 </div>
+              </div>
+            </ScrollAnimation>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== Section 13: Pricing ==================== */}
+      <section className="section" id="pricing">
+        <div className="container">
+          <ScrollAnimation>
+            <div className="section-header">
+              <span className="section-label">{t('b2b.nav.pricing')}</span>
+              <h2>{t('b2b.pricing.title')}</h2>
+              <p>{t('b2b.pricing.desc')}</p>
+            </div>
+          </ScrollAnimation>
+          <div className="grid-2" style={{ maxWidth: 900, margin: '0 auto', gap: 32 }}>
+            <ScrollAnimation>
+              <div className="pricing-card glass-card">
+                <h3>{t('b2b.pricing.standard.title')}</h3>
+                <div className="pricing-amount">{t('b2b.pricing.standard.price')}</div>
+                <ul className="pricing-features">
+                  {(t.raw('b2b.pricing.standard.features') as string[]).map((f, i) => (
+                    <li key={i}><CheckIcon /><span>{f}</span></li>
+                  ))}
+                </ul>
+                <Link href="/contact" className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>{t('b2b.pricing.cta')}</Link>
+              </div>
+            </ScrollAnimation>
+            <ScrollAnimation style={{ transitionDelay: '0.1s' }}>
+              <div className="pricing-card glass-card featured">
+                <h3>{t('b2b.pricing.enhanced.title')}</h3>
+                <div className="pricing-amount">{t('b2b.pricing.enhanced.price')}</div>
+                <ul className="pricing-features">
+                  {(t.raw('b2b.pricing.enhanced.features') as string[]).map((f, i) => (
+                    <li key={i}><CheckIcon /><span>{f}</span></li>
+                  ))}
+                </ul>
+                <Link href="/contact" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>{t('b2b.pricing.cta')}</Link>
               </div>
             </ScrollAnimation>
           </div>
