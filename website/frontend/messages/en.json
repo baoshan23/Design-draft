@@ -1308,7 +1308,7 @@
     },
     "support": {
       "title": "Multi-Platform Feature Support",
-      "app": "APP",
+      "app": "App/H5",
       "cpms": "CPMS",
       "admin": "Platform Management",
       "appFeatures": [

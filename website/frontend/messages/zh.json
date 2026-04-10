@@ -1308,7 +1308,7 @@
     },
     "support": {
       "title": "多种功能支持",
-      "app": "APP",
+      "app": "App/H5",
       "cpms": "CPMS",
       "admin": "平台管理",
       "appFeatures": [
