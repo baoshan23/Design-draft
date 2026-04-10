@@ -351,18 +351,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <ScrollAnimation>
               <div className="card card-with-img" style={{ height: '100%' }}>
                 <div className="card-img-placeholder">
-                  <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="20" y="20" width="240" height="120" rx="8" stroke="var(--text-tertiary)" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.4" />
-                    <rect x="45" y="95" width="25" height="30" rx="3" fill="#3B82F6" opacity="0.25" />
-                    <rect x="80" y="75" width="25" height="50" rx="3" fill="#10B981" opacity="0.3" />
-                    <rect x="115" y="60" width="25" height="65" rx="3" fill="var(--primary)" opacity="0.3" />
-                    <rect x="150" y="80" width="25" height="45" rx="3" fill="#8B5CF6" opacity="0.25" />
-                    <rect x="185" y="50" width="25" height="75" rx="3" fill="var(--primary)" opacity="0.35" />
-                    <rect x="220" y="65" width="25" height="60" rx="3" fill="#10B981" opacity="0.25" />
-                    <line x1="40" y1="125" x2="250" y2="125" stroke="var(--text-tertiary)" strokeWidth="1" opacity="0.3" />
-                    <polyline points="45 85 80 70 115 55 150 75 185 42 220 58" stroke="var(--primary)" strokeWidth="1.5" fill="none" opacity="0.5" />
-                    <circle cx="185" cy="42" r="3" fill="var(--primary)" opacity="0.6" />
-                  </svg>
+                  <img
+                    src="/images/dashboard-home.png"
+                    alt="Analytics Dashboard"
+                    className="card-image"
+                  />
                 </div>
                 <h3>{t('features.f6.title')}</h3>
                 <p>{t('features.f6.desc')}</p>
