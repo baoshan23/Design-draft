@@ -61,6 +61,7 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                 <div className="plan-name">{t('pricing.h5ent.name')}</div>
                 <div className="plan-price"><span className="currency">$</span>300</div>
                 <div className="plan-period">USD</div>
+                <div style={{ fontSize: '0.78rem', color: 'var(--gray-500)', marginTop: 4, marginBottom: 8, textAlign: 'center' }}>{t('pricing.h5ent.priceNote')}</div>
                 <ul className="plan-features">
                   <li><span className="check">&#10003;</span> <span>{t('pricing.h5ent.f1')}</span></li>
                   <li><span className="check">&#10003;</span> <span>{t('pricing.h5ent.f2')}</span></li>
@@ -70,7 +71,6 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                   <li><span className="check">&#10003;</span> <span>{t('pricing.h5ent.f6')}</span></li>
                   <li><span className="check">&#10003;</span> <span>{t('pricing.h5ent.f7')}</span></li>
                   <li><span className="check">&#10003;</span> <span>{t('pricing.h5ent.f8')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('pricing.h5ent.f9')}</span></li>
                 </ul>
                 <Link href="/contact" className="btn btn-accent" style={{ width: '100%' }}>{t('pricing.buynow')}</Link>
               </div>
@@ -174,7 +174,7 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                   <tr>
                     <th>{t('pricing.table.feature')}</th>
                     <th>H5 Free<br /><small style={{ fontWeight: 500, color: 'var(--gray-500)' }}>$0</small></th>
-                    <th>H5 Enterprise<br /><small style={{ fontWeight: 500, color: 'var(--gray-500)' }}>$300</small></th>
+                    <th>H5 Enterprise<br /><small style={{ fontWeight: 500, color: 'var(--gray-500)' }}>$300 + $1,200/yr</small></th>
                     <th>APP Enterprise<br /><small style={{ fontWeight: 500, color: 'var(--gray-500)' }}>$13,900</small></th>
                     <th>H5 Platform<br /><small style={{ fontWeight: 500, color: 'var(--gray-500)' }}>$18,800</small></th>
                     <th>APP Platform<br /><small style={{ fontWeight: 500, color: 'var(--gray-500)' }}>$34,200</small></th>

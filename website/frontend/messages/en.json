@@ -627,15 +627,15 @@
     },
     "h5ent": {
       "name": "H5 Enterprise",
+      "priceNote": "+ $1,200/year server fee",
       "f1": "All free features",
       "f2": "Custom branding / Logo",
       "f3": "Hosted cloud service",
       "f4": "Quick deployment",
       "f5": "1 year free upgrades",
       "f6": "7x12 tech support",
-      "f7": "1 fixed payment gateway",
-      "f8": "1 system language customization",
-      "f9": "8 country/region payment integrations"
+      "f7": "1 system language customization",
+      "f8": "1 country/region payment integration"
     },
     "appent": {
       "name": "APP Enterprise",
