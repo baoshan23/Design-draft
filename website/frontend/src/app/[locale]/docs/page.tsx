@@ -365,6 +365,16 @@ systemctl status gcss`}</code></pre>
               <li>{t('docs.login.next.li5')}</li>
             </ul>
 
+            <h2 id="dashboard">{t('docs.sidebar.dashboard')}</h2>
+            <p>The main dashboard provides real-time analytics and management controls for monitoring your charging infrastructure and operations.</p>
+            <div style={{ width: '100%', marginTop: 24, borderRadius: 'var(--radius-lg)', overflow: 'hidden', border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-lg)' }}>
+              <img
+                src="/images/dashboard-home.png"
+                alt="Analytics Dashboard Home Page"
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+              />
+            </div>
+
             {/* Previous / Next Navigation */}
             <div className="docs-nav">
               <div></div>
