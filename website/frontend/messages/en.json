@@ -1351,12 +1351,12 @@
       "title": "7×24 Professional Technical Support",
       "desc": "From deployment to daily operations, our engineering team protects your business around the clock.",
       "standard": {
-        "title": "Platform Standard",
+        "title": "H5 Platform Edition",
         "price": "$18,600",
         "features": [
           "Web application",
           "Free deployment, maintenance, updates",
-          "Admin panel / Merchant panel (shared)",
+          "Admin panel & Merchant panel (separated)",
           "Pure web H5 / WeChat Mini Program",
           "All basic SaaS features",
           "3 years free updates",
@@ -1365,7 +1365,7 @@
         ]
       },
       "enhanced": {
-        "title": "Platform Enhanced",
+        "title": "App Platform Edition",
         "price": "$34,200",
         "features": [
           "Includes iOS & Android applications",
