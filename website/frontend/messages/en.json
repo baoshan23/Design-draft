@@ -274,13 +274,13 @@
       "label": "Mobile Experience",
       "title": "Ultimate Mobile App Experience",
       "desc": "Native mobile app for iOS & Android. QR scan to charge, smart navigation, seamless login across platforms.",
-      "li1": "QR code, RFID, VIN code auto-start",
+      "li1": "QR code and RFID auto-start",
       "li2": "Google Maps & Apple Maps navigation",
       "li3": "Facebook, Google & Apple ID login",
       "li4": "Real-time charging status & notifications",
       "card1": {
-        "title": "QR / RFID / VIN Auto-Start",
-        "desc": "Scan a QR code, tap an RFID card, or enter a VIN to instantly start a charging session."
+        "title": "QR / RFID Auto-Start",
+        "desc": "Scan a QR code or tap an RFID card to instantly start a charging session."
       },
       "card2": {
         "title": "Smart Map Navigation",
@@ -1314,7 +1314,6 @@
       "appFeatures": [
         "QR Code Scanning",
         "Card Activation",
-        "VIN Code Activation",
         "Google Maps Navigation",
         "Multiple Login Methods",
         "Scheduled Charging",
