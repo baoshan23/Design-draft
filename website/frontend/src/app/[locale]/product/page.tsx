@@ -5,6 +5,7 @@ import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import SubNav from './SubNav';
 import DemoTabs from './DemoTabs';
 import LanguageRequestForm from './LanguageRequestForm';
+import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
 
 export const metadata = {
   title: 'Product - GCSS | EV Charging Management Platform',
@@ -363,6 +364,7 @@ export default async function ProductPage({ params }: { params: Promise<{ locale
                   </div>
                 </div>
               </div>
+              <PaymentRequestForm />
             </div>
           </ScrollAnimation>
 
