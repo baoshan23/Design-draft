@@ -280,7 +280,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
         </div>
       </section>
 
-      {/* ==================== Section 8: Feature Support ==================== */}
+      {/* ==================== Section 8: Feature Support Matrix ==================== */}
       <section className="section" id="support">
         <div className="container">
           <ScrollAnimation>
@@ -289,36 +289,89 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               <h2>{t('b2b.support.title')}</h2>
             </div>
           </ScrollAnimation>
-          <div className="grid-3">
-            {/* APP Column */}
-            <ScrollAnimation>
-              <div className="b2b-support-col glass-card">
-                <div className="b2b-support-header">{t('b2b.support.app')}</div>
-                <ul className="b2b-support-list">
-                  {rawList('b2b.support.appFeatures').map((f, i) => <li key={i}>{f}</li>)}
+          <ScrollAnimation>
+            <div className="support-matrix">
+              {/* APP / H5 column */}
+              <div className="support-col" data-accent="rose">
+                <div className="support-col-header">
+                  <div className="support-col-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="5" y="2" width="14" height="20" rx="2.5" />
+                      <line x1="12" y1="18" x2="12" y2="18" />
+                    </svg>
+                  </div>
+                  <div className="support-col-title">{t('b2b.support.app')}</div>
+                </div>
+                <ul className="support-col-list">
+                  {rawList('b2b.support.appFeatures').map((f, i) => (
+                    <li key={i} style={{ ['--i' as string]: i }}>
+                      <span className="support-row-dot" aria-hidden="true" />
+                      <span className="support-row-text">{f}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
-            </ScrollAnimation>
-            {/* CPMS Column */}
-            <ScrollAnimation style={{ transitionDelay: '0.1s' }}>
-              <div className="b2b-support-col glass-card">
-                <div className="b2b-support-header">{t('b2b.support.cpms')}</div>
-                <ul className="b2b-support-list">
-                  {rawList('b2b.support.cpmsFeatures').map((f, i) => <li key={i}>{f}</li>)}
-                  {rawList('b2b.support.cpmsFeatures2').map((f, i) => <li key={`2-${i}`}>{f}</li>)}
+
+              {/* CPMS column */}
+              <div className="support-col" data-accent="gold">
+                <div className="support-col-header">
+                  <div className="support-col-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="4" y="4" width="16" height="16" rx="2" />
+                      <rect x="9" y="9" width="6" height="6" />
+                      <line x1="9" y1="1" x2="9" y2="4" />
+                      <line x1="15" y1="1" x2="15" y2="4" />
+                      <line x1="9" y1="20" x2="9" y2="23" />
+                      <line x1="15" y1="20" x2="15" y2="23" />
+                      <line x1="20" y1="9" x2="23" y2="9" />
+                      <line x1="20" y1="14" x2="23" y2="14" />
+                      <line x1="1" y1="9" x2="4" y2="9" />
+                      <line x1="1" y1="14" x2="4" y2="14" />
+                    </svg>
+                  </div>
+                  <div className="support-col-title">{t('b2b.support.cpms')}</div>
+                </div>
+                <ul className="support-col-list">
+                  {rawList('b2b.support.cpmsFeatures').map((f, i) => (
+                    <li key={i} style={{ ['--i' as string]: i }}>
+                      <span className="support-row-dot" aria-hidden="true" />
+                      <span className="support-row-text">{f}</span>
+                    </li>
+                  ))}
+                  {rawList('b2b.support.cpmsFeatures2').map((f, i) => {
+                    const idx = i + 8;
+                    return (
+                      <li key={`2-${i}`} style={{ ['--i' as string]: idx }}>
+                        <span className="support-row-dot" aria-hidden="true" />
+                        <span className="support-row-text">{f}</span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
-            </ScrollAnimation>
-            {/* Admin Column */}
-            <ScrollAnimation style={{ transitionDelay: '0.2s' }}>
-              <div className="b2b-support-col glass-card">
-                <div className="b2b-support-header">{t('b2b.support.admin')}</div>
-                <ul className="b2b-support-list">
-                  {rawList('b2b.support.adminFeatures').map((f, i) => <li key={i}>{f}</li>)}
+
+              {/* Platform Management column */}
+              <div className="support-col" data-accent="emerald">
+                <div className="support-col-header">
+                  <div className="support-col-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      <path d="M9 12l2 2 4-4" />
+                    </svg>
+                  </div>
+                  <div className="support-col-title">{t('b2b.support.admin')}</div>
+                </div>
+                <ul className="support-col-list">
+                  {rawList('b2b.support.adminFeatures').map((f, i) => (
+                    <li key={i} style={{ ['--i' as string]: i }}>
+                      <span className="support-row-dot" aria-hidden="true" />
+                      <span className="support-row-text">{f}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
-            </ScrollAnimation>
-          </div>
+            </div>
+          </ScrollAnimation>
         </div>
       </section>
 
