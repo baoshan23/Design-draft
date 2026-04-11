@@ -42,11 +42,16 @@ type LinkType = {
     end: string;
     color: string;
     dashed: boolean;
-    // Parallel Y-shift for duplicate routes (same endpoints, different flow
-    // type) so the two straight lines don't collide.
-    offsetY?: number;
 };
 
+// --- B2C FLOW ---------------------------------------------------------
+// Clean grid: 5 columns × 2 rows, all nodes on z=0.
+//
+//   User ─→ QR ─→ Charger ─→ Server ─→ CPO     (main flow, y=+3)
+//    │                         ▲
+//    ▼                         │
+//   Wallet ─→ Payment ─────────┘              (payment loop, y=-4)
+// ----------------------------------------------------------------------
 const b2cLinks: LinkType[] = [
     { start: 'user', end: 'qr', color: 'data', dashed: true },
     { start: 'qr', end: 'charger', color: 'data', dashed: true },
@@ -57,23 +62,37 @@ const b2cLinks: LinkType[] = [
     { start: 'payment', end: 'server', color: 'money', dashed: false },
 ];
 
+// --- B2B FLOW ---------------------------------------------------------
+// Clean 7-column grid. CPOs fan out from Server and fan back into the
+// Fee wallet → Admin. No duplicate arrows.
+//
+//                              CPO 1 ─┐
+//                              │       │
+//   User ─→ QR ─→ Charger ─→ Server ─→ CPO 2 ─→ Wallet(Fee) ─→ Admin
+//    │                        │       │
+//    │                        │       │
+//    ▼                        │       │
+//   Wallet ─→ Payment ──┘     CPO 3 ─┘
+// ----------------------------------------------------------------------
 const b2bLinks: LinkType[] = [
+    // Main data flow (top row)
     { start: 'user', end: 'qr', color: 'data', dashed: true },
     { start: 'qr', end: 'charger', color: 'data', dashed: true },
     { start: 'charger', end: 'server', color: 'data', dashed: false },
+    // Server fans out to all 3 CPOs
     { start: 'server', end: 'cpo1', color: 'data', dashed: false },
+    { start: 'server', end: 'cpo2', color: 'data', dashed: false },
+    { start: 'server', end: 'cpo3', color: 'data', dashed: false },
+    // CPOs fan into the Fee wallet (revenue flow)
+    { start: 'cpo1', end: 'wallet_cpo', color: 'revenue', dashed: false },
+    { start: 'cpo2', end: 'wallet_cpo', color: 'revenue', dashed: false },
+    { start: 'cpo3', end: 'wallet_cpo', color: 'revenue', dashed: false },
+    // Fee wallet → Admin
+    { start: 'wallet_cpo', end: 'admin', color: 'revenue', dashed: false },
+    // Payment loop (bottom row)
     { start: 'user', end: 'wallet_user', color: 'money', dashed: true },
     { start: 'wallet_user', end: 'payment', color: 'money', dashed: false },
     { start: 'payment', end: 'server', color: 'money', dashed: false },
-    { start: 'cpo1', end: 'wallet_cpo', color: 'revenue', dashed: false },
-    { start: 'wallet_cpo', end: 'admin', color: 'revenue', dashed: false },
-    { start: 'cpo1', end: 'admin', color: 'data', dashed: false },
-    // cpo2 → admin has two flow types, offset in Y so both stay straight & visible
-    { start: 'cpo2', end: 'admin', color: 'data', dashed: false, offsetY: 0.55 },
-    { start: 'cpo2', end: 'admin', color: 'revenue', dashed: false, offsetY: -0.55 },
-    // cpo3 → admin same treatment
-    { start: 'cpo3', end: 'admin', color: 'data', dashed: false, offsetY: 0.55 },
-    { start: 'cpo3', end: 'admin', color: 'revenue', dashed: false, offsetY: -0.55 },
 ];
 
 const flowColor = (role: string) => {
@@ -148,21 +167,16 @@ interface EdgeProps {
     endPos: [number, number, number];
     color: string;
     dashed: boolean;
-    offsetY?: number;
     reducedMotion: boolean;
 }
-const Edge = ({ startPos, endPos, color, dashed, offsetY = 0, reducedMotion }: EdgeProps) => {
+const Edge = ({ startPos, endPos, color, dashed, reducedMotion }: EdgeProps) => {
     const lineRef = useRef<any>(null);
 
-    // Apply Y offset to both endpoints so the line stays perfectly straight
-    const s: [number, number, number] = [startPos[0], startPos[1] + offsetY, startPos[2]];
-    const e: [number, number, number] = [endPos[0], endPos[1] + offsetY, endPos[2]];
-
-    // Exact midpoint → QuadraticBezierLine degenerates to a straight line
+    // Exact midpoint → QuadraticBezierLine renders a straight line
     const mid: [number, number, number] = [
-        (s[0] + e[0]) / 2,
-        (s[1] + e[1]) / 2,
-        (s[2] + e[2]) / 2,
+        (startPos[0] + endPos[0]) / 2,
+        (startPos[1] + endPos[1]) / 2,
+        (startPos[2] + endPos[2]) / 2,
     ];
 
     const hex = flowColor(color);
@@ -177,8 +191,8 @@ const Edge = ({ startPos, endPos, color, dashed, offsetY = 0, reducedMotion }: E
         <group>
             <QuadraticBezierLine
                 ref={lineRef}
-                start={s}
-                end={e}
+                start={startPos}
+                end={endPos}
                 mid={mid}
                 color={hex}
                 lineWidth={3}
@@ -187,7 +201,7 @@ const Edge = ({ startPos, endPos, color, dashed, offsetY = 0, reducedMotion }: E
                 dashSize={dashed ? 0.5 : 2}
                 gapSize={dashed ? 0.5 : 0.2}
             />
-            <ArrowHead start={s} end={e} color={color} />
+            <ArrowHead start={startPos} end={endPos} color={color} />
         </group>
     );
 };
@@ -224,7 +238,7 @@ const NodeCard = ({ node, index, reducedMotion }: NodeCardProps) => {
     });
 
     return (
-        <Float speed={1.6} rotationIntensity={0.08} floatIntensity={0.18}>
+        <Float speed={1.2} rotationIntensity={0.02} floatIntensity={0.06}>
             <group
                 ref={groupRef}
                 position={node.pos}
@@ -312,13 +326,8 @@ interface SceneProps {
     reducedMotion: boolean;
 }
 const Scene = ({ nodes, links, type, reducedMotion }: SceneProps) => {
-    const groupRef = useRef<THREE.Group>(null);
-
-    useFrame((state) => {
-        if (!groupRef.current || reducedMotion) return;
-        groupRef.current.rotation.y = Math.sin(state.clock.getElapsedTime() * 0.1) * 0.04;
-        groupRef.current.rotation.x = Math.cos(state.clock.getElapsedTime() * 0.1) * 0.015;
-    });
+    // Static group — no sway. Professional diagrams don't wobble; the
+    // user can still orbit via OrbitControls if they want a different angle.
 
     const getNodePos = (id: string): [number, number, number] => {
         const node = nodes.find((n) => n.id === id);
@@ -329,7 +338,7 @@ const Scene = ({ nodes, links, type, reducedMotion }: SceneProps) => {
     };
 
     return (
-        <group ref={groupRef} position={[type === 'B2B' ? -2 : 0, 0, 0]}>
+        <group position={[type === 'B2B' ? -1 : 0, 0, 0]}>
             {links.map((link, i) => (
                 <Edge
                     key={i}
@@ -337,7 +346,6 @@ const Scene = ({ nodes, links, type, reducedMotion }: SceneProps) => {
                     endPos={getNodePos(link.end)}
                     color={link.color}
                     dashed={link.dashed}
-                    offsetY={link.offsetY}
                     reducedMotion={reducedMotion}
                 />
             ))}
@@ -377,18 +385,24 @@ export default function Diagram3D({ type }: DiagramProps) {
         return () => mq.removeEventListener('change', handler);
     }, []);
 
-    // Localized node arrays — keyed on `locale` (stable string) to avoid
-    // new array identity on every render when next-intl returns a fresh
-    // `t` closure.
+    // Localized node arrays — Swiss-Modernism grid layout, all on z=0.
+    //
+    // B2C: 5-column grid, main flow on row y=+3, payment loop on y=-5.
+    // B2B: 7-column grid, same structure plus CPO fan & Fee/Admin chain.
+    //
+    // Column X pitch = 7 units (B2C) / 6 units (B2B). Nodes never overlap,
+    // arrows are always straight horizontal/vertical/diagonal.
     const b2cNodes = useMemo<NodeData[]>(
         () => [
-            { id: 'user', label: t('models.diagram.nodes.user'), icon: User, pos: [-10, 0, 4], color: GOLD_BRIGHT },
-            { id: 'qr', label: t('models.diagram.nodes.qr'), icon: QrCode, pos: [-4, 4, 2], color: GOLD_BRIGHT },
-            { id: 'charger', label: t('models.diagram.nodes.charger'), icon: Zap, pos: [2, 4, 0], color: GOLD_PRIMARY },
-            { id: 'wallet_user', label: t('models.diagram.nodes.wallet'), icon: Wallet, pos: [-4, -4, 4], color: GOLD_AMBER },
-            { id: 'payment', label: t('models.diagram.nodes.payment'), icon: CreditCard, pos: [2, -4, 2], color: GOLD_AMBER },
-            { id: 'server', label: t('models.diagram.nodes.server'), icon: Server, pos: [8, 0, -2], color: GOLD_PRIMARY },
-            { id: 'cpo', label: t('models.diagram.nodes.cpo'), icon: Building2, pos: [14, 0, 0], color: GOLD_DEEP },
+            // Main flow — top row (y=+3)
+            { id: 'user', label: t('models.diagram.nodes.user'), icon: User, pos: [-14, 3, 0], color: GOLD_BRIGHT },
+            { id: 'qr', label: t('models.diagram.nodes.qr'), icon: QrCode, pos: [-7, 3, 0], color: GOLD_BRIGHT },
+            { id: 'charger', label: t('models.diagram.nodes.charger'), icon: Zap, pos: [0, 3, 0], color: GOLD_PRIMARY },
+            { id: 'server', label: t('models.diagram.nodes.server'), icon: Server, pos: [7, 3, 0], color: GOLD_PRIMARY },
+            { id: 'cpo', label: t('models.diagram.nodes.cpo'), icon: Building2, pos: [14, 3, 0], color: GOLD_DEEP },
+            // Payment loop — bottom row (y=-5)
+            { id: 'wallet_user', label: t('models.diagram.nodes.wallet'), icon: Wallet, pos: [-14, -5, 0], color: GOLD_AMBER },
+            { id: 'payment', label: t('models.diagram.nodes.payment'), icon: CreditCard, pos: [-7, -5, 0], color: GOLD_AMBER },
         ],
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [locale]
@@ -396,17 +410,21 @@ export default function Diagram3D({ type }: DiagramProps) {
 
     const b2bNodes = useMemo<NodeData[]>(
         () => [
-            { id: 'user', label: t('models.diagram.nodes.user'), icon: User, pos: [-12, 0, 4], color: GOLD_BRIGHT },
-            { id: 'qr', label: t('models.diagram.nodes.qr'), icon: QrCode, pos: [-6, 4, 2], color: GOLD_BRIGHT },
-            { id: 'charger', label: t('models.diagram.nodes.charger'), icon: Zap, pos: [0, 4, 0], color: GOLD_PRIMARY },
-            { id: 'wallet_user', label: t('models.diagram.nodes.wallet'), icon: Wallet, pos: [-6, -4, 4], color: GOLD_AMBER },
-            { id: 'payment', label: t('models.diagram.nodes.payment'), icon: CreditCard, pos: [0, -4, 2], color: GOLD_AMBER },
-            { id: 'server', label: t('models.diagram.nodes.server'), icon: Server, pos: [6, 0, -2], color: GOLD_PRIMARY },
-            { id: 'cpo1', label: t('models.diagram.nodes.cpo1'), icon: Building2, pos: [12, 5, 0], color: GOLD_DEEP },
-            { id: 'cpo2', label: t('models.diagram.nodes.cpo2'), icon: Building2, pos: [12, 0, 0], color: GOLD_DEEP },
-            { id: 'cpo3', label: t('models.diagram.nodes.cpo3'), icon: Building2, pos: [12, -5, 0], color: GOLD_DEEP },
-            { id: 'wallet_cpo', label: t('models.diagram.nodes.walletFee'), icon: Wallet, pos: [16, 8, 0], color: GOLD_AMBER },
-            { id: 'admin', label: t('models.diagram.nodes.admin'), icon: ShieldCheck, pos: [20, 0, -4], color: GOLD_DEEP },
+            // Main flow — top row (y=+3) left of CPO fan
+            { id: 'user', label: t('models.diagram.nodes.user'), icon: User, pos: [-18, 3, 0], color: GOLD_BRIGHT },
+            { id: 'qr', label: t('models.diagram.nodes.qr'), icon: QrCode, pos: [-12, 3, 0], color: GOLD_BRIGHT },
+            { id: 'charger', label: t('models.diagram.nodes.charger'), icon: Zap, pos: [-6, 3, 0], color: GOLD_PRIMARY },
+            { id: 'server', label: t('models.diagram.nodes.server'), icon: Server, pos: [0, 3, 0], color: GOLD_PRIMARY },
+            // CPO fan — column at x=6, symmetric around y=3
+            { id: 'cpo1', label: t('models.diagram.nodes.cpo1'), icon: Building2, pos: [6, 9, 0], color: GOLD_DEEP },
+            { id: 'cpo2', label: t('models.diagram.nodes.cpo2'), icon: Building2, pos: [6, 3, 0], color: GOLD_DEEP },
+            { id: 'cpo3', label: t('models.diagram.nodes.cpo3'), icon: Building2, pos: [6, -3, 0], color: GOLD_DEEP },
+            // Fee & Admin — right side
+            { id: 'wallet_cpo', label: t('models.diagram.nodes.walletFee'), icon: Wallet, pos: [13, 3, 0], color: GOLD_AMBER },
+            { id: 'admin', label: t('models.diagram.nodes.admin'), icon: ShieldCheck, pos: [20, 3, 0], color: GOLD_DEEP },
+            // Payment loop — bottom row (y=-5)
+            { id: 'wallet_user', label: t('models.diagram.nodes.wallet'), icon: Wallet, pos: [-18, -5, 0], color: GOLD_AMBER },
+            { id: 'payment', label: t('models.diagram.nodes.payment'), icon: CreditCard, pos: [-12, -5, 0], color: GOLD_AMBER },
         ],
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [locale]
@@ -436,7 +454,7 @@ export default function Diagram3D({ type }: DiagramProps) {
                 cursor: 'move',
             }}
         >
-            <Canvas camera={{ position: [4, 2, 28], fov: 48 }} dpr={[1, 2]}>
+            <Canvas camera={{ position: [0, 1, 34] , fov: 52 }} dpr={[1, 2]}>
                 <color attach="background" args={[BG_DEEP]} />
                 <fog attach="fog" args={[BG_DEEP, 30, 70]} />
 
@@ -451,15 +469,15 @@ export default function Diagram3D({ type }: DiagramProps) {
                 ))}
 
                 <Grid
-                    position={[0, -8, 0]}
-                    args={[80, 80]}
+                    position={[0, -10, 0]}
+                    args={[100, 100]}
                     cellSize={2}
                     cellThickness={0.5}
                     cellColor={GOLD_DEEP}
                     sectionSize={10}
                     sectionThickness={1}
                     sectionColor={GOLD_PRIMARY}
-                    fadeDistance={50}
+                    fadeDistance={60}
                     fadeStrength={1.2}
                     infiniteGrid={false}
                 />
@@ -475,12 +493,13 @@ export default function Diagram3D({ type }: DiagramProps) {
                     enablePan
                     enableZoom
                     enableRotate
-                    minDistance={10}
-                    maxDistance={55}
+                    minDistance={14}
+                    maxDistance={70}
                     maxPolarAngle={Math.PI / 1.45}
                     minPolarAngle={Math.PI / 4}
                     enableDamping
                     dampingFactor={0.08}
+                    target={[0, 0, 0]}
                 />
             </Canvas>
 
