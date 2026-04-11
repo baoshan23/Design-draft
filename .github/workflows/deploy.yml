@@ -46,26 +46,20 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Check deployment secrets configured
-        id: check_secrets
+      - name: Verify deployment secrets configured
         run: |
-          if [[ -z "$SSH_KEY" ]] || [[ -z "$CI_HOST" ]] || [[ -z "$CI_USER" ]] || [[ -z "$CI_PATH" ]]; then
-            echo "secrets_configured=false" >> $GITHUB_OUTPUT
-            echo "⚠️  Deployment secrets not fully configured"
-            echo "To enable automatic deployment, add these secrets to:"
-            echo "Settings → Secrets and variables → Actions"
-            echo ""
-            echo "Required secrets:"
-            echo "  - SSH_KEY (private SSH key for server access)"
-            echo "  - CI_HOST (server IP/hostname)"
-            echo "  - CI_USER (SSH username)"
-            echo "  - CI_PATH (deployment directory path)"
-            echo ""
-            echo "Build completed successfully. Skipping deployment."
-          else
-            echo "secrets_configured=true" >> $GITHUB_OUTPUT
-            echo "✅ All deployment secrets configured"
+          missing=()
+          [[ -z "$SSH_KEY" ]] && missing+=("SSH_KEY")
+          [[ -z "$CI_HOST" ]] && missing+=("CI_HOST")
+          [[ -z "$CI_USER" ]] && missing+=("CI_USER")
+          [[ -z "$CI_PATH" ]] && missing+=("CI_PATH")
+          if [[ ${#missing[@]} -gt 0 ]]; then
+            echo "::error::Deployment secrets missing: ${missing[*]}"
+            echo "::error::Add them at Settings → Secrets and variables → Actions, then re-run."
+            echo "::error::Required: SSH_KEY (private key), CI_HOST (47.242.75.250), CI_USER (root), CI_PATH (/var/www/gcss-website)"
+            exit 1
           fi
+          echo "✅ All deployment secrets present"
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
           CI_HOST: ${{ secrets.CI_HOST }}
@@ -73,14 +67,12 @@ jobs:
           CI_PATH: ${{ secrets.CI_PATH }}
 
       - name: Download build artifacts
-        if: steps.check_secrets.outputs.secrets_configured == 'true'
         uses: actions/download-artifact@v4
         with:
           name: frontend-build
           path: ${{ env.BUILD_DIR }}
 
       - name: Setup SSH
-        if: steps.check_secrets.outputs.secrets_configured == 'true'
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/deploy_key
@@ -90,7 +82,6 @@ jobs:
           echo "  StrictHostKeyChecking=accept-new" >> ~/.ssh/config
 
       - name: Deploy to server
-        if: steps.check_secrets.outputs.secrets_configured == 'true'
         run: |
           rsync -avz --delete \
             -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
