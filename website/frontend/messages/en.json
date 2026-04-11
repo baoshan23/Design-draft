@@ -208,16 +208,13 @@
   "lang": {
     "label": "Multilingual",
     "title": "Multi-Language Switching · Caring Service for Global Users",
-    "desc": "Smart geo-detection automatically switches to local languages. Full Unicode support for Chinese, Arabic, Khmer, and more.",
+    "desc": "Full Unicode support for Chinese, Arabic, Khmer, and more.",
     "viewMore": "View More Languages"
   },
   "payment": {
     "label": "Payments",
     "title": "Global Payment Matrix",
     "desc": "100+ currencies supported with PCI-DSS certified security. Direct settlement to local bank accounts."
-  },
-  "trusted": {
-    "label": "Trusted by leading operators worldwide"
   },
   "manufacturers": {
     "label": "Compatible with leading EV charger manufacturers"
@@ -372,7 +369,7 @@
     },
     "f2": {
       "title": "Multi-Language Support",
-      "desc": "English, Spanish, Russian, Portuguese, Czech, Vietnamese, Khmer, Arabic, Chinese, French, Japanese, Korean and more. Smart geo-detection for automatic language switching."
+      "desc": "English, Spanish, Russian, Portuguese, Czech, Vietnamese, Khmer, Arabic, Chinese, French, Japanese, Korean and more."
     },
     "f3": {
       "title": "30+ Country Payments",
@@ -456,7 +453,7 @@
     "lang": {
       "label": "Multilingual",
       "title": "20+ Global Languages",
-      "desc": "Smart geo-detection automatically switches to local languages. Full Unicode support for all scripts."
+      "desc": "Full Unicode support for all scripts."
     },
     "langreq": {
       "title": "Need a language we don't support yet?",

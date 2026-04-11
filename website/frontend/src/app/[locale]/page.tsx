@@ -141,27 +141,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <p className="trusted-label">{t('manufacturers.label')}</p>
           <div className="marquee">
             <div className="marquee-track marquee-track-reverse">
-              {['Star Charge', 'TELD', 'YKC', 'Sinexcel', 'EN+', 'KSTAR', 'Winline', 'UUGreenPower', 'Growatt', 'Infypower', 'Pilot', 'Hopewind'].map((name) => (
+              {['TiTans', 'Daoer', 'winline', 'yes', 'jingyi', 'shiyou', 'xundao', 'Fullwatt', 'TOPSTAR', 'UNIT', 'Xupernova', 'wolun', 'Willdigits', 'lingao', 'diangshanjia', 'LV C-CHONG', 'Lifud', 'Delixi', 'Evcity', 'bomern'].map((name) => (
                 <span key={name} className="marquee-item">{name}</span>
               ))}
-              {['Star Charge', 'TELD', 'YKC', 'Sinexcel', 'EN+', 'KSTAR', 'Winline', 'UUGreenPower', 'Growatt', 'Infypower', 'Pilot', 'Hopewind'].map((name) => (
-                <span key={`${name}-dup`} className="marquee-item">{name}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Trusted By Bar */}
-      <section className="trusted-bar">
-        <div className="container">
-          <p className="trusted-label">{t('trusted.label')}</p>
-          <div className="marquee">
-            <div className="marquee-track">
-              {['Powerdot', 'Spirii', 'Atlante', 'Kople', 'Voltio', 'Statiq', 'Vourity', 'Etrel', 'ChargeUp', 'Plugzio'].map((name) => (
-                <span key={name} className="marquee-item">{name}</span>
-              ))}
-              {['Powerdot', 'Spirii', 'Atlante', 'Kople', 'Voltio', 'Statiq', 'Vourity', 'Etrel', 'ChargeUp', 'Plugzio'].map((name) => (
+              {['TiTans', 'Daoer', 'winline', 'yes', 'jingyi', 'shiyou', 'xundao', 'Fullwatt', 'TOPSTAR', 'UNIT', 'Xupernova', 'wolun', 'Willdigits', 'lingao', 'diangshanjia', 'LV C-CHONG', 'Lifud', 'Delixi', 'Evcity', 'bomern'].map((name) => (
                 <span key={`${name}-dup`} className="marquee-item">{name}</span>
               ))}
             </div>
