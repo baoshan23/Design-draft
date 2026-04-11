@@ -64,12 +64,29 @@ export const PAYMENT_ICONS: Record<string, ReactNode> = {
     </svg>
   ),
   JCB: <TextLogo bg="#0E4C96" fg="white" text="JCB" fontSize={7} fontWeight={800} />,
-  // New additions for the regional layout
-  DragonPay: <TextLogo bg="#003E7E" fg="white" text="DP" fontSize={7} />,
-  Boost: <TextLogo bg="#EE2E24" fg="white" text="B" fontSize={8} />,
-  SEPA: <TextLogo bg="#00458B" fg="white" text="SEPA" fontSize={5} fontWeight={800} />,
-  TrustPay: <TextLogo bg="#00A1DE" fg="white" text="TP" fontSize={7} />,
+  UnionPay: <TextLogo bg="#E21836" fg="white" text="UP" fontSize={5} />,
+  Razorpay: (
+    <svg width="22" height="22" viewBox="0 0 24 24">
+      <rect width="24" height="24" rx="4" fill="#072654" />
+      <path d="M9 5l-3 14h3l1.5-7L14 19h3L13 5H9z" fill="#3395FF" />
+    </svg>
+  ),
+  PayTM: <TextLogo bg="#00BAF2" fg="white" text="PT" fontSize={6} />,
+  DANA: <TextLogo bg="#118EEA" fg="white" text="D" fontSize={6} />,
+  OVO: <TextLogo bg="#4C2A86" fg="white" text="OVO" fontSize={8} />,
+  KakaoPay: <TextLogo bg="#FFCD00" fg="#3C1E1E" text="KP" fontSize={6} />,
+  'LINE Pay': <TextLogo bg="#06C755" fg="white" text="LP" fontSize={6} />,
+  'Mercado Pago': <TextLogo bg="#009EE3" fg="white" text="MP" fontSize={5} />,
 };
+
+// Original flat display order used in the homepage "Global Payment Matrix"
+// section. Order is deliberate — most recognizable brands first.
+export const PAYMENT_METHODS_FLAT: string[] = [
+  'Visa', 'Mastercard', 'PayPal', 'Alipay', 'WeChat Pay', 'Apple Pay',
+  'Google Pay', 'Stripe', 'GrabPay', 'TrueMoney', 'GCash', 'M-PESA',
+  'Neosurf', 'Skrill', 'PIX', 'JCB', 'UnionPay', 'Razorpay', 'PayTM',
+  'DANA', 'OVO', 'KakaoPay', 'LINE Pay', 'Mercado Pago',
+];
 
 function TextLogo({
   bg,
@@ -94,15 +111,3 @@ function TextLogo({
   );
 }
 
-// Regions in the order they appear on the homepage.
-export const PAYMENT_REGIONS: { id: string; methods: string[] }[] = [
-  {
-    id: 'asia',
-    methods: ['Alipay', 'WeChat Pay', 'GrabPay', 'GCash', 'TrueMoney', 'DragonPay', 'Boost', 'JCB'],
-  },
-  { id: 'europe', methods: ['Stripe', 'SEPA', 'TrustPay', 'Skrill', 'Neosurf'] },
-  { id: 'oceania', methods: ['Visa', 'Mastercard', 'Apple Pay', 'Google Pay'] },
-  { id: 'africa', methods: ['M-PESA', 'PayPal'] },
-  { id: 'southAmerica', methods: ['PIX', 'Visa', 'Mastercard'] },
-  { id: 'northAmerica', methods: ['Stripe', 'Apple Pay', 'Google Pay', 'PayPal'] },
-];
