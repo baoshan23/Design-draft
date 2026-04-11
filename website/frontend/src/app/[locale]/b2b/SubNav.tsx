@@ -11,9 +11,9 @@ const sections = [
   { id: 'profit', key: 'b2b.nav.profit' },
   { id: 'support', key: 'b2b.nav.support' },
   { id: 'aftersales', key: 'b2b.nav.aftersales' },
-  { id: 'releases', key: 'b2b.nav.releases' },
   { id: 'demo', key: 'b2b.nav.demo' },
   { id: 'pricing', key: 'b2b.nav.pricing' },
+  { id: 'releases', key: 'b2b.nav.releases' },
 ];
 
 export default function SubNav() {

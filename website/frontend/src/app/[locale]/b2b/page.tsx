@@ -411,45 +411,6 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
         </div>
       </section>
 
-      {/* ==================== Section 11: Release History ==================== */}
-      <section className="section" id="releases">
-        <div className="container">
-          <ScrollAnimation>
-            <div className="section-header">
-              <span className="section-label">{t('b2b.releases.label')}</span>
-              <h2>{t('b2b.releases.title')}</h2>
-              <p>{t('b2b.releases.desc')}</p>
-            </div>
-          </ScrollAnimation>
-          <div style={{ maxWidth: 720, margin: '0 auto' }}>
-            {(['v3_2', 'v3_1', 'v3_0', 'v2_5', 'v2_0'] as const).map((ver, i) => (
-              <ScrollAnimation key={ver}>
-                <div className="release-item" style={{ display: 'flex', gap: 20, marginBottom: 32, position: 'relative', paddingLeft: 32 }}>
-                  <div style={{ position: 'absolute', left: 0, top: 6, width: 12, height: 12, borderRadius: '50%', background: i === 0 ? 'var(--primary)' : 'var(--border-medium)', boxShadow: i === 0 ? '0 0 12px rgba(230,168,23,0.4)' : 'none' }} />
-                  {i < 4 && <div style={{ position: 'absolute', left: 5, top: 20, width: 2, height: 'calc(100% + 12px)', background: 'var(--border-subtle)' }} />}
-                  <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
-                      <span style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--text-primary)' }}>{t(`b2b.releases.${ver}.version`)}</span>
-                      <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)' }}>{t(`b2b.releases.${ver}.date`)}</span>
-                      {i === 0 && <span style={{ fontSize: '0.7rem', padding: '2px 8px', borderRadius: 100, background: 'var(--primary-dim)', color: 'var(--primary)', fontWeight: 600 }}>{t('b2b.releases.latest')}</span>}
-                    </div>
-                    <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: 8 }}>{t(`b2b.releases.${ver}.summary`)}</p>
-                    <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 4 }}>
-                      {([1, 2, 3] as const).map((n) => (
-                        <li key={n} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-                          <CheckIcon />
-                          <span>{t(`b2b.releases.${ver}.f${n}`)}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </ScrollAnimation>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ==================== Section 12: System Demo ==================== */}
       <section className="section section-alt" id="demo">
         <div className="container">
@@ -535,6 +496,45 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                 <Link href="/contact" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>{t('b2b.pricing.cta')}</Link>
               </div>
             </ScrollAnimation>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== Section 14: Release History (end of page) ==================== */}
+      <section className="section section-alt" id="releases">
+        <div className="container">
+          <ScrollAnimation>
+            <div className="section-header">
+              <span className="section-label">{t('b2b.releases.label')}</span>
+              <h2>{t('b2b.releases.title')}</h2>
+              <p>{t('b2b.releases.desc')}</p>
+            </div>
+          </ScrollAnimation>
+          <div style={{ maxWidth: 720, margin: '0 auto' }}>
+            {(['v3_2', 'v3_1', 'v3_0', 'v2_5', 'v2_0'] as const).map((ver, i) => (
+              <ScrollAnimation key={ver}>
+                <div className="release-item" style={{ display: 'flex', gap: 20, marginBottom: 32, position: 'relative', paddingLeft: 32 }}>
+                  <div style={{ position: 'absolute', left: 0, top: 6, width: 12, height: 12, borderRadius: '50%', background: i === 0 ? 'var(--primary)' : 'var(--border-medium)', boxShadow: i === 0 ? '0 0 12px rgba(230,168,23,0.4)' : 'none' }} />
+                  {i < 4 && <div style={{ position: 'absolute', left: 5, top: 20, width: 2, height: 'calc(100% + 12px)', background: 'var(--border-subtle)' }} />}
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
+                      <span style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--text-primary)' }}>{t(`b2b.releases.${ver}.version`)}</span>
+                      <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)' }}>{t(`b2b.releases.${ver}.date`)}</span>
+                      {i === 0 && <span style={{ fontSize: '0.7rem', padding: '2px 8px', borderRadius: 100, background: 'var(--primary-dim)', color: 'var(--primary)', fontWeight: 600 }}>{t('b2b.releases.latest')}</span>}
+                    </div>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: 8 }}>{t(`b2b.releases.${ver}.summary`)}</p>
+                    <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 4 }}>
+                      {([1, 2, 3] as const).map((n) => (
+                        <li key={n} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                          <CheckIcon />
+                          <span>{t(`b2b.releases.${ver}.f${n}`)}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </ScrollAnimation>
+            ))}
           </div>
         </div>
       </section>
