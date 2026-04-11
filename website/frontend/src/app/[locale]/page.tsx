@@ -162,10 +162,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <p className="trusted-label">{t('trusted.label')}</p>
           <div className="marquee">
             <div className="marquee-track">
-              {['ChargePoint', 'EVBox', 'Wallbox', 'ABB E-mobility', 'Schneider', 'Delta', 'BYD', 'Kempower', 'Tritium', 'Autel'].map((name) => (
+              {['Powerdot', 'Spirii', 'Atlante', 'Kople', 'Voltio', 'Statiq', 'Vourity', 'Etrel', 'ChargeUp', 'Plugzio'].map((name) => (
                 <span key={name} className="marquee-item">{name}</span>
               ))}
-              {['ChargePoint', 'EVBox', 'Wallbox', 'ABB E-mobility', 'Schneider', 'Delta', 'BYD', 'Kempower', 'Tritium', 'Autel'].map((name) => (
+              {['Powerdot', 'Spirii', 'Atlante', 'Kople', 'Voltio', 'Statiq', 'Vourity', 'Etrel', 'ChargeUp', 'Plugzio'].map((name) => (
                 <span key={`${name}-dup`} className="marquee-item">{name}</span>
               ))}
             </div>
