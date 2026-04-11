@@ -27,7 +27,7 @@ export default function Footer() {
             <h4>{t('product')}</h4>
             <Link href="/b2c">{t('features')}</Link>
             <Link href="/pricing">{t('pricing')}</Link>
-            <Link href={{ pathname: '/b2c', hash: 'demo' }}>{t('livedemo')}</Link>
+            <Link href="/demo">{t('livedemo')}</Link>
             <Link href="/docs">{t('documentation')}</Link>
           </div>
 

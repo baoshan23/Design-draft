@@ -240,7 +240,7 @@ export default function Header() {
             </svg>
           </button>
 
-          <Link href={{ pathname: '/b2c', hash: 'demo' }} className="btn-demo">
+          <Link href="/demo" className="btn-demo">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 3.5v9l6-4.5-6-4.5z" /></svg>
             <span>{t('demo')}</span>
           </Link>

@@ -281,6 +281,18 @@
     "trust2": "5-minute setup",
     "trust3": "24/7 support"
   },
+  "demo": {
+    "page": {
+      "title": "Live Demo — See Both Editions Side by Side",
+      "desc": "Try the GCSS B2C single-operator system and the B2B2C multi-tenant platform in one place. Scan a QR code, log into the admin or merchant panel, or preview the web experience.",
+      "jumpB2c": "Jump to B2C Demo",
+      "jumpB2b": "Jump to B2B2C Demo",
+      "b2cHeading": "B2C Enterprise Demo",
+      "b2bHeading": "B2B2C Platform Demo",
+      "viewB2cProduct": "Read the B2C product page",
+      "viewB2bProduct": "Read the B2B2C product page"
+    }
+  },
   "changelog": {
     "label": "What's New",
     "title": "Changelog",

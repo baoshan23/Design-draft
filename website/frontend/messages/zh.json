@@ -281,6 +281,18 @@
     "trust2": "5 分钟快速部署",
     "trust3": "7x24 小时支持"
   },
+  "demo": {
+    "page": {
+      "title": "在线演示 — 两大版本同屏对比",
+      "desc": "在同一页面体验 GCSS B2C 单运营商系统与 B2B2C 多租户平台。扫描二维码，登录管理后台或商户后台，或预览网页端体验。",
+      "jumpB2c": "前往 B2C 演示",
+      "jumpB2b": "前往 B2B2C 演示",
+      "b2cHeading": "B2C 企业版演示",
+      "b2bHeading": "B2B2C 平台版演示",
+      "viewB2cProduct": "查看 B2C 产品页面",
+      "viewB2bProduct": "查看 B2B2C 产品页面"
+    }
+  },
   "changelog": {
     "label": "最新动态",
     "title": "更新日志",
