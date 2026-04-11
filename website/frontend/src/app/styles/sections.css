@@ -1446,3 +1446,115 @@ html {
 }
 
 /* --- Forum --- */
+/* --- Changelog --- */
+.changelog-section {
+  background: linear-gradient(180deg, transparent 0%, rgba(192, 127, 0, 0.03) 50%, transparent 100%);
+}
+
+.changelog-timeline {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.changelog-timeline::before {
+  content: '';
+  position: absolute;
+  left: 22px;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: linear-gradient(180deg,
+    rgba(255, 217, 90, 0.5) 0%,
+    rgba(255, 217, 90, 0.15) 50%,
+    transparent 100%);
+  pointer-events: none;
+}
+
+.changelog-entry {
+  padding: 22px 26px 22px 56px;
+  border-radius: var(--radius-lg);
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.changelog-entry::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 28px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #FFD95A, #C07F00);
+  box-shadow:
+    0 0 0 3px rgba(26, 18, 16, 0.9),
+    0 0 12px rgba(255, 217, 90, 0.55);
+}
+
+.changelog-entry:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 24px rgba(192, 127, 0, 0.15);
+}
+
+.changelog-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  font-size: 0.78rem;
+}
+
+.changelog-version {
+  color: var(--primary);
+  font-weight: 700;
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  letter-spacing: 0.02em;
+}
+
+.changelog-date {
+  color: var(--text-tertiary);
+}
+
+.changelog-tag {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(192, 127, 0, 0.12);
+  border: 1px solid rgba(255, 217, 90, 0.28);
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+}
+
+.changelog-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  color: var(--text-primary);
+}
+
+.changelog-desc {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .changelog-entry {
+    padding: 20px 22px 20px 48px;
+  }
+  .changelog-entry::before {
+    left: 12px;
+    width: 12px;
+    height: 12px;
+  }
+  .changelog-timeline::before {
+    left: 18px;
+  }
+}

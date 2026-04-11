@@ -7,6 +7,7 @@ import { Link } from '@/i18n/navigation';
 import BusinessModelsSection from '@/components/sections/home/BusinessModelsSection';
 import { DiagramModalProvider } from '@/components/sections/home/DiagramModal';
 import GlobeVisualization from '@/components/sections/home/GlobeVisualization';
+import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -615,6 +616,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               ))}
             </div>
           </ScrollAnimation>
+          <ScrollAnimation style={{ transitionDelay: '0.15s' }}>
+            <PaymentRequestForm />
+          </ScrollAnimation>
         </div>
       </section>
 
@@ -747,6 +751,44 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </svg>
                 <span>{t('cta.trust3')}</span>
               </div>
+            </div>
+          </ScrollAnimation>
+        </div>
+      </section>
+
+      {/* Changelog Section */}
+      <section className="section changelog-section" id="changelog">
+        <div className="container">
+          <ScrollAnimation>
+            <div className="section-header">
+              <span className="section-label">{t('changelog.label')}</span>
+              <h2>{t('changelog.title')}</h2>
+              <p>{t('changelog.desc')}</p>
+            </div>
+          </ScrollAnimation>
+          <div className="changelog-timeline">
+            {(['v1', 'v2', 'v3', 'v4'] as const).map((key, i) => (
+              <ScrollAnimation key={key} style={{ transitionDelay: `${i * 0.08}s` }}>
+                <article className="changelog-entry glass-card">
+                  <div className="changelog-meta">
+                    <span className="changelog-version">{t(`changelog.${key}.version`)}</span>
+                    <span className="changelog-date">{t(`changelog.${key}.date`)}</span>
+                    <span className="changelog-tag">{t(`changelog.${key}.tag`)}</span>
+                  </div>
+                  <h3 className="changelog-title">{t(`changelog.${key}.title`)}</h3>
+                  <p className="changelog-desc">{t(`changelog.${key}.desc`)}</p>
+                </article>
+              </ScrollAnimation>
+            ))}
+          </div>
+          <ScrollAnimation style={{ transitionDelay: '0.4s' }}>
+            <div style={{ textAlign: 'center', marginTop: 32 }}>
+              <Link href="/blog" className="btn btn-secondary">
+                <span>{t('changelog.viewAll')}</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </Link>
             </div>
           </ScrollAnimation>
         </div>

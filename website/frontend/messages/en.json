@@ -214,7 +214,18 @@
   "payment": {
     "label": "Payments",
     "title": "Global Payment Matrix",
-    "desc": "100+ currencies supported with PCI-DSS certified security. Direct settlement to local bank accounts."
+    "desc": "100+ currencies supported with PCI-DSS certified security. Direct settlement to local bank accounts.",
+    "request": {
+      "title": "Need a local payment method we don't support yet?",
+      "desc": "Tell us which method you need and where you operate — we'll prioritize it on our integration roadmap.",
+      "method": "Payment Method",
+      "methodPlaceholder": "e.g. Bizum, PromptPay, PayNow",
+      "country": "Country / Region",
+      "countryPlaceholder": "e.g. Spain, Thailand, Singapore",
+      "email": "Your Email",
+      "submit": "Submit Request",
+      "submitted": "Request received ✓"
+    }
   },
   "manufacturers": {
     "label": "Compatible with leading EV charger manufacturers"
@@ -267,6 +278,40 @@
     "trust1": "Free forever plan",
     "trust2": "5-minute setup",
     "trust3": "24/7 support"
+  },
+  "changelog": {
+    "label": "What's New",
+    "title": "Changelog",
+    "desc": "Recent updates, improvements, and new features shipping in the GCSS platform.",
+    "v1": {
+      "version": "v2.4.0",
+      "date": "April 2026",
+      "tag": "Feature",
+      "title": "Interactive global coverage map",
+      "desc": "Replaced the homepage 3D globe with an interactive 2D Natural Earth world map. Pan, zoom, and hover 17 coverage countries with animated arcs from China."
+    },
+    "v2": {
+      "version": "v2.3.0",
+      "date": "March 2026",
+      "tag": "Platform",
+      "title": "B2B2C platform documentation",
+      "desc": "Expanded the B2B page with architecture overview, multi-tenant demo access (Global Admin + Merchant panels), and updated pricing tiers."
+    },
+    "v3": {
+      "version": "v2.2.0",
+      "date": "February 2026",
+      "tag": "Hardware",
+      "title": "20 new charger brands supported",
+      "desc": "Added OCPP compatibility for TiTans, Fullwatt, TOPSTAR, Xupernova, Lifud, Delixi, and 14 more leading manufacturers."
+    },
+    "v4": {
+      "version": "v2.1.0",
+      "date": "January 2026",
+      "tag": "Localization",
+      "title": "Multi-language & multi-currency",
+      "desc": "Full Unicode support for Chinese, Arabic, Khmer, and more. 100+ currencies across major payment gateways and local methods."
+    },
+    "viewAll": "View full release notes"
   },
   "footer": {
     "desc": "Global Charger System Service. The ultimate OCPP-compatible EV charging management platform.",

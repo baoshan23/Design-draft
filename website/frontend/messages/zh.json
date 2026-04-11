@@ -214,7 +214,18 @@
   "payment": {
     "label": "支付",
     "title": "全球支付矩阵",
-    "desc": "支持全球 100+ 种货币结算。依托 PCI-DSS 金融级安全认证，直接打款至本地银行账户。"
+    "desc": "支持全球 100+ 种货币结算。依托 PCI-DSS 金融级安全认证，直接打款至本地银行账户。",
+    "request": {
+      "title": "需要我们尚未支持的本地支付方式？",
+      "desc": "告诉我们您所需的支付方式以及运营地区，我们会将其纳入接入优先级。",
+      "method": "支付方式",
+      "methodPlaceholder": "例如 Bizum、PromptPay、PayNow",
+      "country": "国家 / 地区",
+      "countryPlaceholder": "例如 西班牙、泰国、新加坡",
+      "email": "您的邮箱",
+      "submit": "提交申请",
+      "submitted": "已提交 ✓"
+    }
   },
   "manufacturers": {
     "label": "兼容全球领先充电桩制造商"
@@ -267,6 +278,40 @@
     "trust1": "永久免费计划",
     "trust2": "5 分钟快速部署",
     "trust3": "7x24 小时支持"
+  },
+  "changelog": {
+    "label": "最新动态",
+    "title": "更新日志",
+    "desc": "GCSS 平台最近的更新、优化和新功能。",
+    "v1": {
+      "version": "v2.4.0",
+      "date": "2026 年 4 月",
+      "tag": "新功能",
+      "title": "全球覆盖互动地图",
+      "desc": "首页 3D 地球已替换为交互式 2D Natural Earth 世界地图。支持拖动、缩放和悬停查看 17 个覆盖国家，并带有来自中国的动态弧线动画。"
+    },
+    "v2": {
+      "version": "v2.3.0",
+      "date": "2026 年 3 月",
+      "tag": "平台",
+      "title": "B2B2C 平台文档升级",
+      "desc": "B2B 页面新增架构概览、多租户演示入口（全球运营总后台 + 商户管理后台）以及更新后的定价方案。"
+    },
+    "v3": {
+      "version": "v2.2.0",
+      "date": "2026 年 2 月",
+      "tag": "硬件兼容",
+      "title": "新增 20 家充电桩品牌支持",
+      "desc": "新增对 TiTans、Fullwatt、TOPSTAR、Xupernova、Lifud、Delixi 等 20 家主流制造商的 OCPP 兼容支持。"
+    },
+    "v4": {
+      "version": "v2.1.0",
+      "date": "2026 年 1 月",
+      "tag": "本地化",
+      "title": "多语言与多币种",
+      "desc": "全面支持中文、阿拉伯语、高棉语等 Unicode 字符集，覆盖 100+ 种货币的主流支付网关与本地支付方式。"
+    },
+    "viewAll": "查看完整版本日志"
   },
   "footer": {
     "desc": "Global Charger System Service - 终极 OCPP 兼容 EV 充电管理平台。",
