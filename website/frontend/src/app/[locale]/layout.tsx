@@ -1,6 +1,5 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
-import Script from 'next/script';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -32,10 +31,13 @@ export default async function LocaleLayout({
       className="gcss-html"
       suppressHydrationWarning
     >
+      <head>
+        {/* External theme init — runs synchronously before body paint
+            to prevent dark-mode FOUC. Intentionally an external src so
+            React 19 / Next 16 don't flag it as an inline script. */}
+        <script src="/theme-init.js" />
+      </head>
       <body>
-        <Script id="gcss-theme-init" strategy="beforeInteractive">
-          {`(function(){try{var t=localStorage.getItem('gcss-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}})()`}
-        </Script>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
             <ScrollProgress />
