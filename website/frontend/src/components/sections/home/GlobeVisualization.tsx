@@ -208,16 +208,24 @@ export default function GlobeVisualization() {
     };
 
     const arcsGroup = root.append('g').attr('class', 'arcs');
-    const links = COUNTRIES.map(t => ({
-      ...buildArc([ORIGIN.lng, ORIGIN.lat], [t.lng, t.lat]),
-      name: t.name,
-    }));
+
+    // Flatten each arc's MultiLineString into independent segments so
+    // each segment is its own simple path — no subpath-animation quirks,
+    // and the antimeridian split renders reliably.
+    type ArcSegment = { coords: [number, number][]; name: string; parentIdx: number };
+    const arcSegments: ArcSegment[] = [];
+    COUNTRIES.forEach((t, i) => {
+      const ml = buildArc([ORIGIN.lng, ORIGIN.lat], [t.lng, t.lat]);
+      ml.coordinates.forEach(seg => {
+        if (seg.length >= 2) arcSegments.push({ coords: seg as [number, number][], name: t.name, parentIdx: i });
+      });
+    });
 
     const arcs = arcsGroup.selectAll('.arc')
-      .data(links)
+      .data(arcSegments)
       .enter().append('path')
       .attr('class', 'arc')
-      .attr('d', path as any)
+      .attr('d', (d) => path({ type: 'LineString', coordinates: d.coords } as any))
       .attr('fill', 'none')
       .attr('stroke', '#FFD95A')
       .attr('stroke-width', 1.4)
@@ -294,9 +302,10 @@ export default function GlobeVisualization() {
       .attr('stroke-linejoin', 'round')
       .text((d: any) => d.name);
 
-    // Arc draw animation (staggered)
+    // Arc draw animation (staggered by parent arc, not segment, so both
+    // halves of a split arc animate together)
     arcs.transition()
-      .delay((_, i) => 400 + i * 120)
+      .delay((d: any) => 400 + d.parentIdx * 120)
       .duration(1400)
       .ease(d3.easeCubicOut)
       .attr('stroke-dashoffset', 0)
