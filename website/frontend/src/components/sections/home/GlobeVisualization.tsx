@@ -160,37 +160,56 @@ export default function GlobeVisualization() {
         d3.select(this).attr('stroke-opacity', 0.35).attr('stroke-width', 0.4);
       });
 
-    // Arcs — build great circles with antimeridian splitting so paths
-    // like China → French Polynesia go across the Pacific (wrap) rather
-    // than backward across the whole map.
-    const buildGreatCircle = (
+    // Arcs — pick the short-way direction (unwrap longitudes so the
+    // endpoint is within 180° of the origin), linearly interpolate in
+    // lng/lat space, then split at the antimeridian so e.g. China →
+    // French Polynesia draws eastward across the Pacific instead of
+    // backward across the entire map.
+    const buildArc = (
       a: [number, number],
       b: [number, number]
     ): GeoJSON.MultiLineString => {
-      const interp = d3.geoInterpolate(a, b);
-      const steps = 128;
-      const segments: [number, number][][] = [[]];
-      let prev: [number, number] | null = null;
+      const [lng1, lat1] = a;
+      let [lng2, lat2] = b;
+      // Unwrap: force lng2 into [lng1 - 180, lng1 + 180]
+      while (lng2 - lng1 > 180) lng2 -= 360;
+      while (lng1 - lng2 > 180) lng2 += 360;
+
+      const steps = 96;
+      const raw: [number, number][] = [];
       for (let i = 0; i <= steps; i++) {
-        const p = interp(i / steps) as [number, number];
-        if (prev && Math.abs(p[0] - prev[0]) > 180) {
-          // Antimeridian crossing — close current segment at edge,
-          // open a new one at the opposite edge
-          const sign = prev[0] > 0 ? 1 : -1;
-          const edgeA: [number, number] = [sign * 180, (prev[1] + p[1]) / 2];
-          const edgeB: [number, number] = [-sign * 180, (prev[1] + p[1]) / 2];
-          segments[segments.length - 1].push(edgeA);
-          segments.push([edgeB]);
+        const t = i / steps;
+        // Lat curve: slight arch for a nicer flight-path look
+        const arch = Math.sin(Math.PI * t) * 6;
+        raw.push([
+          lng1 + (lng2 - lng1) * t,
+          lat1 + (lat2 - lat1) * t + arch,
+        ]);
+      }
+
+      // Normalize into (-180, 180] and split whenever the normalized
+      // longitude wraps.
+      const normalize = (lng: number) => ((((lng + 180) % 360) + 360) % 360) - 180;
+
+      const segments: [number, number][][] = [[]];
+      let prevNorm: [number, number] | null = null;
+      for (const p of raw) {
+        const np: [number, number] = [normalize(p[0]), p[1]];
+        if (prevNorm && Math.abs(np[0] - prevNorm[0]) > 180) {
+          const sign = prevNorm[0] > 0 ? 1 : -1;
+          const midLat = (prevNorm[1] + np[1]) / 2;
+          segments[segments.length - 1].push([sign * 180, midLat]);
+          segments.push([[-sign * 180, midLat]]);
         }
-        segments[segments.length - 1].push(p);
-        prev = p;
+        segments[segments.length - 1].push(np);
+        prevNorm = np;
       }
       return { type: 'MultiLineString', coordinates: segments };
     };
 
     const arcsGroup = root.append('g').attr('class', 'arcs');
     const links = COUNTRIES.map(t => ({
-      ...buildGreatCircle([ORIGIN.lng, ORIGIN.lat], [t.lng, t.lat]),
+      ...buildArc([ORIGIN.lng, ORIGIN.lat], [t.lng, t.lat]),
       name: t.name,
     }));
 
