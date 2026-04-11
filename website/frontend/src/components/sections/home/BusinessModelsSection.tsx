@@ -2,9 +2,11 @@
 
 import { useTranslations } from 'next-intl';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
+import { useDiagramModal } from './DiagramModal';
 
 export default function BusinessModelsSection() {
     const t = useTranslations();
+    const { openDiagramModal } = useDiagramModal();
 
     return (
         <section className="section section-alt" id="models">
@@ -30,7 +32,7 @@ export default function BusinessModelsSection() {
                             <button
                                 className="btn btn-accent"
                                 style={{ marginTop: 12 }}
-                                onClick={() => window.openDiagramModal?.('B2C')}
+                                onClick={() => openDiagramModal('B2C')}
                             >
                                 {t('models.learnmore')}
                             </button>
@@ -50,7 +52,7 @@ export default function BusinessModelsSection() {
                             <button
                                 className="btn btn-accent"
                                 style={{ marginTop: 12 }}
-                                onClick={() => window.openDiagramModal?.('B2B')}
+                                onClick={() => openDiagramModal('B2B')}
                             >
                                 {t('models.learnmore')}
                             </button>

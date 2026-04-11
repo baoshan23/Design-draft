@@ -8,6 +8,13 @@ export const metadata = {
   description: 'Build your own EV charging SaaS platform with GCSS B2B solution. Multi-tenant, unlimited operators, automated billing, Super Admin control.',
 };
 
+// Demo-only credentials displayed on the page so visitors can try the sandbox.
+// Not real secrets — do not add production credentials here.
+const DEMO_CREDS = {
+  admin: { account: 'admin', pass: '123456' },
+  merchant: { account: 'test_merchant', pass: '123456' },
+};
+
 function CheckIcon() {
   return (
     <svg viewBox="0 0 20 20" fill="currentColor" style={{ width: 16, height: 16, flexShrink: 0 }}>
@@ -20,6 +27,11 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations();
+
+  const rawList = (key: string): string[] => {
+    const v = t.raw(key);
+    return Array.isArray(v) ? (v as string[]) : [];
+  };
 
   const modeIcons = [
     <svg key="net" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" /></svg>,
@@ -129,11 +141,9 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
             <div className="b2b-arch">
               <div className="b2b-arch-box glass-card">
                 <h3>{t('b2b.overview.operator')}</h3>
-                {(['operatorItems'] as const).map(() =>
-                  (t.raw('b2b.overview.operatorItems') as string[]).map((item, i) => (
-                    <div key={i} className="b2b-arch-item">{item}</div>
-                  ))
-                )}
+                {rawList('b2b.overview.operatorItems').map((item, i) => (
+                  <div key={i} className="b2b-arch-item">{item}</div>
+                ))}
               </div>
               <div className="b2b-arch-center glass-card">
                 <div className="b2b-arch-center-text">{t('b2b.overview.center')}</div>
@@ -141,7 +151,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               </div>
               <div className="b2b-arch-box glass-card">
                 <h3>{t('b2b.overview.platform')}</h3>
-                {(t.raw('b2b.overview.platformItems') as string[]).map((item, i) => (
+                {rawList('b2b.overview.platformItems').map((item, i) => (
                   <div key={i} className="b2b-arch-item">{item}</div>
                 ))}
               </div>
@@ -151,7 +161,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24 }}>
               <div className="b2b-arch-box glass-card" style={{ minWidth: 200 }}>
                 <h3>{t('b2b.overview.user')}</h3>
-                {(t.raw('b2b.overview.userItems') as string[]).map((item, i) => (
+                {rawList('b2b.overview.userItems').map((item, i) => (
                   <div key={i} className="b2b-arch-item">{item}</div>
                 ))}
               </div>
@@ -231,7 +241,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
             ))}
             <ScrollAnimation style={{ transitionDelay: `${feats.length * 0.1}s` }}>
               <div className="glass-card" style={{ padding: 28, borderRadius: 'var(--radius-lg)', marginTop: 32 }}>
-                <h4 style={{ fontWeight: 700, marginBottom: 20 }}>Payment Flow</h4>
+                <h4 style={{ fontWeight: 700, marginBottom: 20 }}>{t('b2b.advantages.paymentTitle')}</h4>
                 {[t('b2b.advantages.payment1'), t('b2b.advantages.payment2'), t('b2b.advantages.payment3')].map((step, i) => (
                   <div key={i} className="b2b-payment-step">
                     <div className="b2b-step-num">{i + 1}</div>
@@ -285,7 +295,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               <div className="b2b-support-col glass-card">
                 <div className="b2b-support-header">{t('b2b.support.app')}</div>
                 <ul className="b2b-support-list">
-                  {(t.raw('b2b.support.appFeatures') as string[]).map((f, i) => <li key={i}>{f}</li>)}
+                  {rawList('b2b.support.appFeatures').map((f, i) => <li key={i}>{f}</li>)}
                 </ul>
               </div>
             </ScrollAnimation>
@@ -294,8 +304,8 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               <div className="b2b-support-col glass-card">
                 <div className="b2b-support-header">{t('b2b.support.cpms')}</div>
                 <ul className="b2b-support-list">
-                  {(t.raw('b2b.support.cpmsFeatures') as string[]).map((f, i) => <li key={i}>{f}</li>)}
-                  {(t.raw('b2b.support.cpmsFeatures2') as string[]).map((f, i) => <li key={`2-${i}`}>{f}</li>)}
+                  {rawList('b2b.support.cpmsFeatures').map((f, i) => <li key={i}>{f}</li>)}
+                  {rawList('b2b.support.cpmsFeatures2').map((f, i) => <li key={`2-${i}`}>{f}</li>)}
                 </ul>
               </div>
             </ScrollAnimation>
@@ -304,7 +314,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               <div className="b2b-support-col glass-card">
                 <div className="b2b-support-header">{t('b2b.support.admin')}</div>
                 <ul className="b2b-support-list">
-                  {(t.raw('b2b.support.adminFeatures') as string[]).map((f, i) => <li key={i}>{f}</li>)}
+                  {rawList('b2b.support.adminFeatures').map((f, i) => <li key={i}>{f}</li>)}
                 </ul>
               </div>
             </ScrollAnimation>
@@ -391,17 +401,17 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                   <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: 4 }}>{t('b2b.demo.admin.title')}</h3>
                   <div style={{ color: 'var(--text-tertiary)', fontSize: '0.85rem', marginBottom: 16 }}>{t('b2b.demo.admin.subtitle')}</div>
                   <div style={{ fontSize: '0.82rem', color: 'var(--text-tertiary)', marginBottom: 10 }}>{t('b2b.demo.demoAccount')}</div>
-                  <div className="b2b-demo-field"><span>{t('b2b.demo.account')}:</span><code>{t('b2b.demo.admin.account')}</code></div>
-                  <div className="b2b-demo-field"><span>{t('b2b.demo.password')}:</span><code>{t('b2b.demo.admin.pass')}</code></div>
-                  <a className="btn btn-secondary" style={{ marginTop: 16 }}>{t('b2b.demo.launch')}</a>
+                  <div className="b2b-demo-field"><span>{t('b2b.demo.account')}:</span><code>{DEMO_CREDS.admin.account}</code></div>
+                  <div className="b2b-demo-field"><span>{t('b2b.demo.password')}:</span><code>{DEMO_CREDS.admin.pass}</code></div>
+                  <button type="button" className="btn btn-secondary" style={{ marginTop: 16 }}>{t('b2b.demo.launch')}</button>
                 </div>
                 <div className="glass-card" style={{ padding: 28, borderRadius: 'var(--radius-lg)' }}>
                   <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: 4 }}>{t('b2b.demo.merchant.title')}</h3>
                   <div style={{ color: 'var(--text-tertiary)', fontSize: '0.85rem', marginBottom: 16 }}>{t('b2b.demo.merchant.subtitle')}</div>
                   <div style={{ fontSize: '0.82rem', color: 'var(--text-tertiary)', marginBottom: 10 }}>{t('b2b.demo.demoAccount')}</div>
-                  <div className="b2b-demo-field"><span>{t('b2b.demo.account')}:</span><code>{t('b2b.demo.merchant.account')}</code></div>
-                  <div className="b2b-demo-field"><span>{t('b2b.demo.password')}:</span><code>{t('b2b.demo.merchant.pass')}</code></div>
-                  <a className="btn btn-secondary" style={{ marginTop: 16 }}>{t('b2b.demo.launch')}</a>
+                  <div className="b2b-demo-field"><span>{t('b2b.demo.account')}:</span><code>{DEMO_CREDS.merchant.account}</code></div>
+                  <div className="b2b-demo-field"><span>{t('b2b.demo.password')}:</span><code>{DEMO_CREDS.merchant.pass}</code></div>
+                  <button type="button" className="btn btn-secondary" style={{ marginTop: 16 }}>{t('b2b.demo.launch')}</button>
                 </div>
               </div>
             </ScrollAnimation>
@@ -441,7 +451,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                 <h3>{t('b2b.pricing.standard.title')}</h3>
                 <div className="pricing-amount">{t('b2b.pricing.standard.price')}</div>
                 <ul className="pricing-features">
-                  {(t.raw('b2b.pricing.standard.features') as string[]).map((f, i) => (
+                  {rawList('b2b.pricing.standard.features').map((f, i) => (
                     <li key={i}><CheckIcon /><span>{f}</span></li>
                   ))}
                 </ul>
@@ -453,7 +463,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                 <h3>{t('b2b.pricing.enhanced.title')}</h3>
                 <div className="pricing-amount">{t('b2b.pricing.enhanced.price')}</div>
                 <ul className="pricing-features">
-                  {(t.raw('b2b.pricing.enhanced.features') as string[]).map((f, i) => (
+                  {rawList('b2b.pricing.enhanced.features').map((f, i) => (
                     <li key={i}><CheckIcon /><span>{f}</span></li>
                   ))}
                 </ul>

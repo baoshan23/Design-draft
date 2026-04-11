@@ -5,13 +5,8 @@ import CounterAnimation from '@/components/effects/CounterAnimation';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import { Link } from '@/i18n/navigation';
 import BusinessModelsSection from '@/components/sections/home/BusinessModelsSection';
-import DiagramModal from '@/components/sections/home/DiagramModal';
+import { DiagramModalProvider } from '@/components/sections/home/DiagramModal';
 import GlobeVisualization from '@/components/sections/home/GlobeVisualization';
-import { routing } from '@/i18n/routing';
-
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -41,7 +36,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const t = await getTranslations();
 
   return (
-    <>
+    <DiagramModalProvider>
       {/* Hero Section */}
       <section className="hero hero-themed-bg">
         <div className="container">
@@ -190,7 +185,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <ScrollAnimation>
             <div className="steps-timeline">
               <div className="step-card">
-                <div className="step-number">Step 1</div>
+                <div className="step-number">{t('steps.stepLabel', { n: 1 })}</div>
                 <div className="step-icon">
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
@@ -207,7 +202,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </svg>
               </div>
               <div className="step-card">
-                <div className="step-number">Step 2</div>
+                <div className="step-number">{t('steps.stepLabel', { n: 2 })}</div>
                 <div className="step-icon">
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -222,7 +217,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </svg>
               </div>
               <div className="step-card">
-                <div className="step-number">Step 3</div>
+                <div className="step-number">{t('steps.stepLabel', { n: 3 })}</div>
                 <div className="step-icon">
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
@@ -774,8 +769,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </section>
 
-      {/* Diagram Modal - Client Component */}
-      <DiagramModal />
-    </>
+    </DiagramModalProvider>
   );
 }

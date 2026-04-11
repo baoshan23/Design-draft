@@ -6,6 +6,11 @@ import SubNav from './SubNav';
 import DemoTabs from './DemoTabs';
 import LanguageRequestForm from './LanguageRequestForm';
 
+export const metadata = {
+  title: 'Product - GCSS | EV Charging Management Platform',
+  description: 'Explore GCSS features: real-time station management, automated billing, multi-tenant SaaS, OCPP 1.6 support, and a complete toolkit for EV charging operators.',
+};
+
 /* Reusable check-mark SVG */
 function CheckIcon() {
   return (

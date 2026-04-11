@@ -96,22 +96,28 @@ export default function Header() {
           </Link>
 
           {/* Product dropdown */}
-          <div className={`nav-dropdown${openDropdown === 'product' ? ' mobile-dropdown-open' : ''}`}>
-            <a
-              className={isActive('/product') ? 'active' : ''}
-              onClick={(e) => {
-                if (mobileOpen) {
-                  e.preventDefault();
-                  toggleDropdown('product');
-                }
-              }}
-              href={mobileOpen ? undefined : undefined}
-              style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}
+          <div
+            className={`nav-dropdown${openDropdown === 'product' ? ' mobile-dropdown-open open' : ''}`}
+            onFocus={() => setOpenDropdown('product')}
+            onBlur={(e) => {
+              if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                setOpenDropdown((prev) => (prev === 'product' ? null : prev));
+              }
+            }}
+          >
+            <button
+              type="button"
+              className={`nav-dropdown-trigger${isActive('/product') ? ' active' : ''}`}
+              onClick={() => toggleDropdown('product')}
+              aria-haspopup="true"
+              aria-expanded={openDropdown === 'product'}
+              aria-controls="product-dropdown-menu"
+              style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, background: 'none', border: 'none', font: 'inherit', color: 'inherit', padding: 0 }}
             >
               {t('product')}
               {mobileOpen && <ChevronDown />}
-            </a>
-            <div className="nav-dropdown-menu">
+            </button>
+            <div id="product-dropdown-menu" className="nav-dropdown-menu" role="menu">
               <Link href={{ pathname: '/product', hash: 'overview' }} onClick={closeMenu}>
                 <div className="dropdown-icon icon-gradient--gold">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
@@ -146,21 +152,28 @@ export default function Header() {
           </Link>
 
           {/* Community dropdown */}
-          <div className={`nav-dropdown${openDropdown === 'community' ? ' mobile-dropdown-open' : ''}`}>
-            <a
-              className={isActive('/blog') || isActive('/forum') || isActive('/faq') ? 'active' : ''}
-              onClick={(e) => {
-                if (mobileOpen) {
-                  e.preventDefault();
-                  toggleDropdown('community');
-                }
-              }}
-              style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}
+          <div
+            className={`nav-dropdown${openDropdown === 'community' ? ' mobile-dropdown-open open' : ''}`}
+            onFocus={() => setOpenDropdown('community')}
+            onBlur={(e) => {
+              if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                setOpenDropdown((prev) => (prev === 'community' ? null : prev));
+              }
+            }}
+          >
+            <button
+              type="button"
+              className={`nav-dropdown-trigger${isActive('/blog') || isActive('/forum') || isActive('/faq') ? ' active' : ''}`}
+              onClick={() => toggleDropdown('community')}
+              aria-haspopup="true"
+              aria-expanded={openDropdown === 'community'}
+              aria-controls="community-dropdown-menu"
+              style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, background: 'none', border: 'none', font: 'inherit', color: 'inherit', padding: 0 }}
             >
               {t('community')}
               {mobileOpen && <ChevronDown />}
-            </a>
-            <div className="nav-dropdown-menu">
+            </button>
+            <div id="community-dropdown-menu" className="nav-dropdown-menu" role="menu">
               <Link href="/blog" onClick={closeMenu}>
                 <div className="dropdown-icon icon-gradient--blue">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
