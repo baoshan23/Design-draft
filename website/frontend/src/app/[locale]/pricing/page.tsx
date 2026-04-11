@@ -230,7 +230,7 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
             <h2>{t('cta.title')}</h2>
             <p>{t('cta.desc')}</p>
             <div className="cta-buttons">
-              <Link href={{ pathname: '/product', hash: 'demo' }} className="btn btn-primary btn-lg">{t('cta.btn1')}</Link>
+              <Link href={{ pathname: '/b2c', hash: 'demo' }} className="btn btn-primary btn-lg">{t('cta.btn1')}</Link>
               <Link href="/contact" className="btn btn-secondary btn-lg">{t('pricing.contactsales')}</Link>
             </div>
           </div>

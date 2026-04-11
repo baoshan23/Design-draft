@@ -107,7 +107,7 @@ export default function Header() {
           >
             <button
               type="button"
-              className={`nav-dropdown-trigger${isActive('/product') ? ' active' : ''}`}
+              className={`nav-dropdown-trigger${isActive('/b2c') || isActive('/b2b') ? ' active' : ''}`}
               onClick={() => toggleDropdown('product')}
               aria-haspopup="true"
               aria-expanded={openDropdown === 'product'}
@@ -118,7 +118,7 @@ export default function Header() {
               {mobileOpen && <ChevronDown />}
             </button>
             <div id="product-dropdown-menu" className="nav-dropdown-menu" role="menu">
-              <Link href={{ pathname: '/product', hash: 'overview' }} onClick={closeMenu}>
+              <Link href={{ pathname: '/b2c', hash: 'overview' }} onClick={closeMenu}>
                 <div className="dropdown-icon icon-gradient--gold">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                     <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -240,7 +240,7 @@ export default function Header() {
             </svg>
           </button>
 
-          <Link href={{ pathname: '/product', hash: 'demo' }} className="btn-demo">
+          <Link href={{ pathname: '/b2c', hash: 'demo' }} className="btn-demo">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 3.5v9l6-4.5-6-4.5z" /></svg>
             <span>{t('demo')}</span>
           </Link>

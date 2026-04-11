@@ -292,7 +292,7 @@ export default function ContactPage() {
             <p style={{ maxWidth: 500, margin: '0 auto 28px' }}>{t('contact.cta.desc')}</p>
             <div className="cta-buttons">
               <Link href="/pricing" className="btn btn-primary btn-lg">{t('contact.cta.btn1')}</Link>
-              <Link href={{ pathname: '/product', hash: 'demo' }} className="btn btn-secondary btn-lg">{t('contact.cta.btn2')}</Link>
+              <Link href={{ pathname: '/b2c', hash: 'demo' }} className="btn btn-secondary btn-lg">{t('contact.cta.btn2')}</Link>
             </div>
           </div>
         </ScrollAnimation>

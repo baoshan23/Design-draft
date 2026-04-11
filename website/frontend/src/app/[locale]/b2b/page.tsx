@@ -240,14 +240,26 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               </ScrollAnimation>
             ))}
             <ScrollAnimation style={{ transitionDelay: `${feats.length * 0.1}s` }}>
-              <div className="glass-card" style={{ padding: 28, borderRadius: 'var(--radius-lg)', marginTop: 32 }}>
-                <h4 style={{ fontWeight: 700, marginBottom: 20 }}>{t('b2b.advantages.paymentTitle')}</h4>
-                {[t('b2b.advantages.payment1'), t('b2b.advantages.payment2'), t('b2b.advantages.payment3')].map((step, i) => (
-                  <div key={i} className="b2b-payment-step">
-                    <div className="b2b-step-num">{i + 1}</div>
-                    <span>{step}</span>
-                  </div>
-                ))}
+              <div className="b2b-payment-flow-wrap">
+                <h4 className="b2b-payment-flow-title">{t('b2b.advantages.paymentTitle')}</h4>
+                <div className="b2b-payment-flow" role="list">
+                  {[t('b2b.advantages.payment1'), t('b2b.advantages.payment2'), t('b2b.advantages.payment3')].map((step, i, arr) => (
+                    <div key={i} className="b2b-payment-step-wrap" role="listitem">
+                      <div className="b2b-payment-step-card" style={{ ['--i' as string]: i }}>
+                        <div className="b2b-payment-step-num">{i + 1}</div>
+                        <div className="b2b-payment-step-text">{step}</div>
+                      </div>
+                      {i < arr.length - 1 && (
+                        <div className="b2b-payment-step-arrow" aria-hidden="true">
+                          <svg width="32" height="20" viewBox="0 0 32 20" fill="none">
+                            <line x1="2" y1="10" x2="26" y2="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeDasharray="3 4" />
+                            <path d="M22 4 L30 10 L22 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                          </svg>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             </ScrollAnimation>
           </div>

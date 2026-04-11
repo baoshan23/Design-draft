@@ -22,7 +22,7 @@ export default function DemoTabs() {
             </div>
             <h4 style={{ marginBottom: 8 }}>{t('product.demo.merchant.title')}</h4>
             <p style={{ fontSize: '0.85rem' }}>{t('product.demo.merchant.desc')}</p>
-            <a href="/product" className="btn btn-accent btn-sm" style={{ marginTop: 16 }}>{t('product.demo.merchant.btn')}</a>
+            <a href="/b2c" className="btn btn-accent btn-sm" style={{ marginTop: 16 }}>{t('product.demo.merchant.btn')}</a>
           </div>
           <div className="card" style={{ textAlign: 'center', padding: 32 }}>
             <div className="card-icon" style={{ margin: '0 auto 16px' }}>
@@ -30,7 +30,7 @@ export default function DemoTabs() {
             </div>
             <h4 style={{ marginBottom: 8 }}>{t('product.demo.h5.title')}</h4>
             <p style={{ fontSize: '0.85rem' }}>{t('product.demo.h5.desc')}</p>
-            <a href="/product" className="btn btn-primary btn-sm" style={{ marginTop: 16 }}>{t('product.demo.h5.btn')}</a>
+            <a href="/b2c" className="btn btn-primary btn-sm" style={{ marginTop: 16 }}>{t('product.demo.h5.btn')}</a>
           </div>
         </div>
 
@@ -64,7 +64,7 @@ export default function DemoTabs() {
                   <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>{link.label}</div>
                   <div style={{ fontSize: '0.8rem', color: 'var(--gray-500)' }}>{link.url}</div>
                 </div>
-                <a href="/product" className="btn btn-sm btn-outline">{t('product.demo.access.visit')}</a>
+                <a href="/b2c" className="btn btn-sm btn-outline">{t('product.demo.access.visit')}</a>
               </div>
             ))}
           </div>

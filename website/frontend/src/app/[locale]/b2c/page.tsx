@@ -8,8 +8,8 @@ import LanguageRequestForm from './LanguageRequestForm';
 import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
 
 export const metadata = {
-  title: 'Product - GCSS | EV Charging Management Platform',
-  description: 'Explore GCSS features: real-time station management, automated billing, multi-tenant SaaS, OCPP 1.6 support, and a complete toolkit for EV charging operators.',
+  title: 'B2C Model - GCSS | Direct Operator EV Charging Platform',
+  description: 'GCSS B2C solution for direct operators: real-time station management, automated billing, OCPP 1.6 support, and the complete toolkit to run your own charging network.',
 };
 
 /* Reusable check-mark SVG */
@@ -21,7 +21,7 @@ function CheckIcon() {
   );
 }
 
-export default async function ProductPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function B2CPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations();
@@ -491,66 +491,6 @@ export default async function ProductPage({ params }: { params: Promise<{ locale
         </div>
       </section>
 
-      {/* ==================== Section 4: Changelog ==================== */}
-      <section className="section section-dark" id="changelog">
-        <div className="container">
-          <ScrollAnimation>
-            <div className="section-header">
-              <span className="section-label" style={{ background: 'rgba(37,99,235,0.2)', color: '#60A5FA' }}>{t('product.changelog.label')}</span>
-              <h2>{t('product.changelog.title')}</h2>
-              <p>{t('product.changelog.desc')}</p>
-            </div>
-          </ScrollAnimation>
-
-          <ScrollAnimation>
-            <div className="timeline" style={{ maxWidth: 700, margin: '0 auto' }}>
-              <div className="timeline-item">
-                <div className="timeline-date">{t('product.changelog.r1date')}</div>
-                <div className="timeline-title" style={{ color: 'var(--text-primary)' }}>{t('product.changelog.r1title')}</div>
-                <ul style={{ marginTop: 12, paddingLeft: 0 }}>
-                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-                    <span style={{ color: '#10B981', fontWeight: 700, flexShrink: 0 }}>FIX</span> {t('product.changelog.r1f1')}
-                  </li>
-                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-                    <span style={{ color: '#E6A817', fontWeight: 700, flexShrink: 0 }}>NEW</span> {t('product.changelog.r1f2')}
-                  </li>
-                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-                    <span style={{ color: '#F59E0B', fontWeight: 700, flexShrink: 0 }}>UPD</span> {t('product.changelog.r1f3')}
-                  </li>
-                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-                    <span style={{ color: '#10B981', fontWeight: 700, flexShrink: 0 }}>FIX</span> {t('product.changelog.r1f4')}
-                  </li>
-                </ul>
-              </div>
-              <div className="timeline-item">
-                <div className="timeline-date">{t('product.changelog.r2date')}</div>
-                <div className="timeline-title" style={{ color: 'var(--text-primary)' }}>{t('product.changelog.r2title')}</div>
-                <ul style={{ marginTop: 12, paddingLeft: 0 }}>
-                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-                    <span style={{ color: '#E6A817', fontWeight: 700, flexShrink: 0 }}>NEW</span> {t('product.changelog.r2f1')}
-                  </li>
-                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-                    <span style={{ color: '#E6A817', fontWeight: 700, flexShrink: 0 }}>NEW</span> {t('product.changelog.r2f2')}
-                  </li>
-                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-                    <span style={{ color: '#E6A817', fontWeight: 700, flexShrink: 0 }}>NEW</span> {t('product.changelog.r2f3')}
-                  </li>
-                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-                    <span style={{ color: '#E6A817', fontWeight: 700, flexShrink: 0 }}>NEW</span> {t('product.changelog.r2f4')}
-                  </li>
-                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-                    <span style={{ color: '#F59E0B', fontWeight: 700, flexShrink: 0 }}>UPD</span> {t('product.changelog.r2f5')}
-                  </li>
-                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-                    <span style={{ color: '#F59E0B', fontWeight: 700, flexShrink: 0 }}>UPD</span> {t('product.changelog.r2f6')}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </ScrollAnimation>
-        </div>
-      </section>
-
       {/* ==================== Section 5: Product Gallery ==================== */}
       <section className="section" id="gallery">
         <div className="container">
@@ -767,6 +707,66 @@ export default async function ProductPage({ params }: { params: Promise<{ locale
             </div>
           </div>
         </ScrollAnimation>
+      </section>
+
+      {/* ==================== Changelog (always last on the page) ==================== */}
+      <section className="section section-dark" id="changelog">
+        <div className="container">
+          <ScrollAnimation>
+            <div className="section-header">
+              <span className="section-label" style={{ background: 'rgba(37,99,235,0.2)', color: '#60A5FA' }}>{t('product.changelog.label')}</span>
+              <h2>{t('product.changelog.title')}</h2>
+              <p>{t('product.changelog.desc')}</p>
+            </div>
+          </ScrollAnimation>
+
+          <ScrollAnimation>
+            <div className="timeline" style={{ maxWidth: 700, margin: '0 auto' }}>
+              <div className="timeline-item">
+                <div className="timeline-date">{t('product.changelog.r1date')}</div>
+                <div className="timeline-title" style={{ color: 'var(--text-primary)' }}>{t('product.changelog.r1title')}</div>
+                <ul style={{ marginTop: 12, paddingLeft: 0 }}>
+                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                    <span style={{ color: '#10B981', fontWeight: 700, flexShrink: 0 }}>FIX</span> {t('product.changelog.r1f1')}
+                  </li>
+                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                    <span style={{ color: '#E6A817', fontWeight: 700, flexShrink: 0 }}>NEW</span> {t('product.changelog.r1f2')}
+                  </li>
+                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                    <span style={{ color: '#F59E0B', fontWeight: 700, flexShrink: 0 }}>UPD</span> {t('product.changelog.r1f3')}
+                  </li>
+                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                    <span style={{ color: '#10B981', fontWeight: 700, flexShrink: 0 }}>FIX</span> {t('product.changelog.r1f4')}
+                  </li>
+                </ul>
+              </div>
+              <div className="timeline-item">
+                <div className="timeline-date">{t('product.changelog.r2date')}</div>
+                <div className="timeline-title" style={{ color: 'var(--text-primary)' }}>{t('product.changelog.r2title')}</div>
+                <ul style={{ marginTop: 12, paddingLeft: 0 }}>
+                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                    <span style={{ color: '#E6A817', fontWeight: 700, flexShrink: 0 }}>NEW</span> {t('product.changelog.r2f1')}
+                  </li>
+                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                    <span style={{ color: '#E6A817', fontWeight: 700, flexShrink: 0 }}>NEW</span> {t('product.changelog.r2f2')}
+                  </li>
+                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                    <span style={{ color: '#E6A817', fontWeight: 700, flexShrink: 0 }}>NEW</span> {t('product.changelog.r2f3')}
+                  </li>
+                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                    <span style={{ color: '#E6A817', fontWeight: 700, flexShrink: 0 }}>NEW</span> {t('product.changelog.r2f4')}
+                  </li>
+                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                    <span style={{ color: '#F59E0B', fontWeight: 700, flexShrink: 0 }}>UPD</span> {t('product.changelog.r2f5')}
+                  </li>
+                  <li style={{ padding: '4px 0', fontSize: '0.9rem', color: 'var(--gray-400)', display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                    <span style={{ color: '#F59E0B', fontWeight: 700, flexShrink: 0 }}>UPD</span> {t('product.changelog.r2f6')}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </ScrollAnimation>
+        </div>
       </section>
     </>
   );
