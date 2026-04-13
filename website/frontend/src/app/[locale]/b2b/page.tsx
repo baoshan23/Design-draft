@@ -58,13 +58,6 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
     <svg key="chat" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>,
     <svg key="target" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg>,
   ];
-  const profitColors = ['primary-dim', 'success-dim', 'blue-dim', 'purple-dim'];
-  const profitIcons = [
-    <svg key="z" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E6A817" strokeWidth="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>,
-    <svg key="p" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M9 21V9" /></svg>,
-    <svg key="a" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>,
-    <svg key="v" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>,
-  ];
 
   return (
     <>
@@ -289,32 +282,6 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                 </div>
               </div>
             </ScrollAnimation>
-          </div>
-        </div>
-      </section>
-
-      {/* ==================== Section 7: Revenue Model ==================== */}
-      <section className="section section-alt" id="profit">
-        <div className="container">
-          <ScrollAnimation>
-            <div className="section-header">
-              <span className="section-label">{t('b2b.nav.profit')}</span>
-              <h2>{t('b2b.profit.title')}</h2>
-              <p>{t('b2b.profit.subtitle')}</p>
-            </div>
-          </ScrollAnimation>
-          <div className="grid-4">
-            {(['stream1', 'stream2', 'stream3', 'stream4'] as const).map((stream, i) => (
-              <ScrollAnimation key={stream} style={{ transitionDelay: `${i * 0.1}s` }}>
-                <div className="card glass-card" style={{ textAlign: 'center', height: '100%' }}>
-                  <div style={{ width: 56, height: 56, borderRadius: 14, background: i === 0 ? 'var(--primary-dim)' : i === 1 ? 'rgba(16,185,129,0.1)' : i === 2 ? 'rgba(59,130,246,0.1)' : 'rgba(139,92,246,0.1)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
-                    {profitIcons[i]}
-                  </div>
-                  <h3>{t(`b2b.profit.${stream}.title`)}</h3>
-                  <p>{t(`b2b.profit.${stream}.desc`)}</p>
-                </div>
-              </ScrollAnimation>
-            ))}
           </div>
         </div>
       </section>

@@ -8,7 +8,6 @@ const sections = [
   { id: 'modes', key: 'b2b.nav.modes' },
   { id: 'revenue', key: 'b2b.nav.revenue' },
   { id: 'features', key: 'b2b.nav.features' },
-  { id: 'profit', key: 'b2b.nav.profit' },
   { id: 'support', key: 'b2b.nav.support' },
   { id: 'aftersales', key: 'b2b.nav.aftersales' },
   { id: 'demo', key: 'b2b.nav.demo' },
