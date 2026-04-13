@@ -463,11 +463,23 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
           </ScrollAnimation>
 
           <ScrollAnimation>
-            <div className="grid grid-4">
-              <ImagePlaceholder variant="phone" aspectRatio="9/16" label={t('product.gallery.home')} />
-              <ImagePlaceholder variant="ev-station" aspectRatio="9/16" label={t('product.gallery.charging')} />
-              <ImagePlaceholder variant="hero" aspectRatio="9/16" label={t('product.gallery.map')} />
-              <ImagePlaceholder variant="dashboard" aspectRatio="9/16" label={t('product.gallery.payment')} />
+            <div className="grid grid-4 gallery-grid">
+              <div className="gallery-phone">
+                <Image src="/images/Mobile_home.png" alt={t('product.gallery.home')} width={390} height={844} style={{ width: '100%', height: 'auto', borderRadius: 24 }} />
+                <span className="gallery-label">{t('product.gallery.home')}</span>
+              </div>
+              <div className="gallery-phone">
+                <Image src="/images/mobile_ charge.png" alt={t('product.gallery.charging')} width={390} height={844} style={{ width: '100%', height: 'auto', borderRadius: 24 }} />
+                <span className="gallery-label">{t('product.gallery.charging')}</span>
+              </div>
+              <div className="gallery-phone">
+                <Image src="/images/Mobile-Map.png" alt={t('product.gallery.map')} width={390} height={844} style={{ width: '100%', height: 'auto', borderRadius: 24 }} />
+                <span className="gallery-label">{t('product.gallery.map')}</span>
+              </div>
+              <div className="gallery-phone">
+                <Image src="/images/Mobile_payment.png" alt={t('product.gallery.payment')} width={390} height={844} style={{ width: '100%', height: 'auto', borderRadius: 24 }} />
+                <span className="gallery-label">{t('product.gallery.payment')}</span>
+              </div>
             </div>
           </ScrollAnimation>
         </div>
