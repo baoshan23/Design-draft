@@ -327,7 +327,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <ScrollAnimation>
               <div className="card card-with-img" style={{ height: '100%' }}>
                 <div className="card-img-placeholder">
-                  <Image src="/images/login.png" alt={t('index.mobile.card3.title')} width={390} height={844} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12 }} />
+                  <Image src="/images/login.jpg" alt={t('index.mobile.card3.title')} width={390} height={844} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12 }} />
                 </div>
                 <h3>{t('index.mobile.card3.title')}</h3>
                 <p>{t('index.mobile.card3.desc')}</p>
