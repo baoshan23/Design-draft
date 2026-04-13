@@ -318,7 +318,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <ScrollAnimation>
               <div className="card card-with-img" style={{ height: '100%' }}>
                 <div className="card-img-placeholder">
-                  <ImagePlaceholder variant="api" fill hideLabel label={t('index.mobile.card2.title')} />
+                  <Image src="/images/Mobile-Map.png" alt={t('index.mobile.card2.title')} width={390} height={844} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12 }} />
                 </div>
                 <h3>{t('index.mobile.card2.title')}</h3>
                 <p>{t('index.mobile.card2.desc')}</p>
