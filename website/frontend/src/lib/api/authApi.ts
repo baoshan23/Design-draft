@@ -74,6 +74,9 @@ export async function apiRegister(payload: {
 export async function apiLogin(payload: {
     identifier: string;
     password: string;
+    captcha?:
+        | { provider: 'turnstile'; token: string }
+        | { provider: 'tencent'; ticket: string; randstr: string };
 }): Promise<{ user: AuthUser; session: AuthSession }> {
     const apiBase = getApiBase();
     return await fetchJson<{ user: AuthUser; session: AuthSession }>(`${apiBase}/auth/login`, {
@@ -141,10 +144,19 @@ export async function apiChangePassword(
     });
 }
 
+export type UserForumTopic = {
+    categorySlug: string;
+    slug: string;
+    title: string;
+    createdAt: string;
+    replyCount: number;
+};
+
 export type UserDashboardData = {
     forumTopics: number;
     forumPosts: number;
     activeSessions: number;
+    recentTopics: UserForumTopic[];
 };
 
 export async function apiUserDashboard(token: string): Promise<{ user: AuthUser; dashboard: UserDashboardData }> {

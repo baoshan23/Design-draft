@@ -31,6 +31,8 @@ export default function BlogEditor({ initial, locale, onLocaleChange, onSave, sa
     tags: initial?.tags?.join(', ') || '',
     metaTitle: initial?.metaTitle || '',
     metaDescription: initial?.metaDescription || '',
+    seoKeywords: (initial as any)?.seoKeywords || '',
+    seoSubKeywords: (initial as any)?.seoSubKeywords || '',
     ogImageUrl: initial?.ogImageUrl || '',
   });
 
@@ -47,6 +49,8 @@ export default function BlogEditor({ initial, locale, onLocaleChange, onSave, sa
     tags: form.tags.split(',').map(t => t.trim()).filter(Boolean),
     metaTitle: form.metaTitle,
     metaDescription: form.metaDescription,
+    seoKeywords: form.seoKeywords,
+    seoSubKeywords: form.seoSubKeywords,
     ogImageUrl: form.ogImageUrl,
   }), [form, locale]);
 
@@ -151,6 +155,18 @@ export default function BlogEditor({ initial, locale, onLocaleChange, onSave, sa
           <label className="form-label">{t('metaDescription')}</label>
           <textarea className="form-input" rows={3} placeholder={t('metaDescPlaceholder')} value={form.metaDescription} onChange={e => set('metaDescription', e.target.value)} />
           <span className="blog-editor-char-count">{form.metaDescription.length}/160</span>
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">{t('seoKeywords')}</label>
+          <input className="form-input" placeholder={t('seoKeywordsPlaceholder')} value={form.seoKeywords} onChange={e => set('seoKeywords', e.target.value)} />
+          <span className="blog-editor-hint">{t('seoKeywordsHint')}</span>
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">{t('seoSubKeywords')}</label>
+          <textarea className="form-input" rows={2} placeholder={t('seoSubKeywordsPlaceholder')} value={form.seoSubKeywords} onChange={e => set('seoSubKeywords', e.target.value)} />
+          <span className="blog-editor-hint">{t('seoSubKeywordsHint')}</span>
         </div>
 
         <div className="form-group">

@@ -1332,7 +1332,11 @@
     },
     "captchaLabel": "验证码",
     "captcha": {
-      "placeholder": "请输入验证码"
+      "placeholder": "请输入验证码",
+      "verify": "验证",
+      "verified": "已验证",
+      "loading": "加载中...",
+      "error": "验证码验证失败，请重试。"
     },
     "forgot": "忘记密码？",
     "btn": "登录",
@@ -1345,7 +1349,8 @@
       "global": "覆盖全球17+国家和地区"
     },
     "errors": {
-      "invalid": "用户名或密码错误。"
+      "invalid": "用户名或密码错误。",
+      "captchaRequired": "请完成验证码验证。"
     }
   },
   "register": {
@@ -1409,12 +1414,19 @@
     "roleAdmin": "管理员",
     "roleUser": "成员",
     "adminPanel": "管理面板",
-    "editProfile": "编辑资料",
+    "welcomeBack": "欢迎回来，{name}",
+    "nav": {
+      "overview": "概览",
+      "posts": "我的帖子",
+      "profile": "个人资料",
+      "security": "安全设置"
+    },
     "saveProfile": "保存修改",
-    "cancel": "取消",
     "profileUpdated": "资料更新成功。",
     "profileError": "资料更新失败。",
     "fields": {
+      "username": "用户名",
+      "email": "邮箱",
       "firstName": "名",
       "lastName": "姓",
       "phone": "电话",
@@ -1429,17 +1441,27 @@
       "activeSessions": "活跃会话"
     },
     "security": {
-      "title": "安全设置",
       "changePassword": "修改密码",
       "currentPassword": "当前密码",
       "newPassword": "新密码",
       "confirmPassword": "确认新密码",
-      "updatePassword": "更新密码"
+      "updatePassword": "更新密码",
+      "sessionsTitle": "活跃会话",
+      "sessionsDesc": "您当前在各设备上有 {count} 个活跃会话。"
     },
     "passwordChanged": "密码修改成功。",
     "passwordError": "密码修改失败。",
     "passwordMismatch": "两次输入的新密码不一致。",
     "passwordTooShort": "密码至少需要8个字符。",
+    "newTopic": "发起话题",
+    "noPosts": "暂无帖子",
+    "noPostsDesc": "在社区论坛中发起第一个讨论。",
+    "postCol": {
+      "title": "话题",
+      "replies": "回复",
+      "date": "日期",
+      "view": "查看"
+    },
     "quickLinks": {
       "title": "快捷入口",
       "forum": "社区论坛",
@@ -2193,6 +2215,12 @@
     "metaTitlePlaceholder": "自定义搜索引擎标题（最多 60 字符）",
     "metaDescription": "SEO 描述",
     "metaDescPlaceholder": "自定义搜索引擎描述（最多 160 字符）",
+    "seoKeywords": "SEO 关键词",
+    "seoKeywordsPlaceholder": "主要关键词（逗号分隔）",
+    "seoKeywordsHint": "搜索引擎的目标关键词，建议 3-5 个。",
+    "seoSubKeywords": "SEO 辅助关键词",
+    "seoSubKeywordsPlaceholder": "长尾词和辅助关键词",
+    "seoSubKeywordsHint": "辅助关键词和短语，帮助覆盖相关搜索。",
     "ogImage": "社交分享图片 (OG)",
     "coverImage": "封面图片 URL",
     "author": "作者",

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { useRouter } from '@/i18n/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import { getAuthToken } from '@/lib/api/authApi';
 import { apiAdminCreateBlogPost } from '@/lib/api/adminApi';
@@ -45,6 +45,10 @@ export default function NewBlogPostPage() {
     return (
         <div className="dashboard-page">
             <div className="dashboard-inner" style={{ maxWidth: 1100 }}>
+                <Link href="/admin/blog" className="blog-article-back" style={{ marginBottom: 16 }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6" /></svg>
+                    {t('backToAdmin')}
+                </Link>
                 <h1 className="dashboard-profile-name">{t('newPost')}</h1>
                 {msg && <div className={`form-banner form-banner--${msg.type}`}>{msg.text}</div>}
                 <BlogEditor

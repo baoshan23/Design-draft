@@ -52,6 +52,8 @@ export type AdminBlogPost = {
     status: string;
     metaTitle?: string;
     metaDescription?: string;
+    seoKeywords?: string;
+    seoSubKeywords?: string;
     ogImageUrl?: string;
 };
 

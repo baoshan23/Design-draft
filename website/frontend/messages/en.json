@@ -1332,7 +1332,11 @@
     },
     "captchaLabel": "Captcha",
     "captcha": {
-      "placeholder": "Enter captcha code"
+      "placeholder": "Enter captcha code",
+      "verify": "Verify",
+      "verified": "Verified",
+      "loading": "Loading...",
+      "error": "Captcha verification failed. Please try again."
     },
     "forgot": "Forgot Password?",
     "btn": "Log In",
@@ -1345,7 +1349,8 @@
       "global": "Global coverage across 17+ countries"
     },
     "errors": {
-      "invalid": "Invalid username or password."
+      "invalid": "Invalid username or password.",
+      "captchaRequired": "Please complete the captcha verification."
     }
   },
   "register": {
@@ -1409,12 +1414,19 @@
     "roleAdmin": "Admin",
     "roleUser": "Member",
     "adminPanel": "Admin Panel",
-    "editProfile": "Edit Profile",
+    "welcomeBack": "Welcome back, {name}",
+    "nav": {
+      "overview": "Overview",
+      "posts": "My Posts",
+      "profile": "Profile",
+      "security": "Security"
+    },
     "saveProfile": "Save Changes",
-    "cancel": "Cancel",
     "profileUpdated": "Profile updated successfully.",
     "profileError": "Failed to update profile.",
     "fields": {
+      "username": "Username",
+      "email": "Email",
       "firstName": "First Name",
       "lastName": "Last Name",
       "phone": "Phone",
@@ -1429,17 +1441,27 @@
       "activeSessions": "Active Sessions"
     },
     "security": {
-      "title": "Security",
       "changePassword": "Change Password",
       "currentPassword": "Current Password",
       "newPassword": "New Password",
       "confirmPassword": "Confirm New Password",
-      "updatePassword": "Update Password"
+      "updatePassword": "Update Password",
+      "sessionsTitle": "Active Sessions",
+      "sessionsDesc": "You currently have {count} active session(s) across devices."
     },
     "passwordChanged": "Password changed successfully.",
     "passwordError": "Failed to change password.",
     "passwordMismatch": "New passwords do not match.",
     "passwordTooShort": "Password must be at least 8 characters.",
+    "newTopic": "New Topic",
+    "noPosts": "No posts yet",
+    "noPostsDesc": "Start a discussion in the community forum.",
+    "postCol": {
+      "title": "Topic",
+      "replies": "Replies",
+      "date": "Date",
+      "view": "View"
+    },
     "quickLinks": {
       "title": "Quick Links",
       "forum": "Community Forum",
@@ -2193,6 +2215,12 @@
     "metaTitlePlaceholder": "Custom title for search engines (max 60 chars)",
     "metaDescription": "SEO Description",
     "metaDescPlaceholder": "Custom description for search engines (max 160 chars)",
+    "seoKeywords": "SEO Keywords",
+    "seoKeywordsPlaceholder": "Primary keywords (comma-separated)",
+    "seoKeywordsHint": "Main target keywords for search engines. 3-5 recommended.",
+    "seoSubKeywords": "SEO Sub Keywords",
+    "seoSubKeywordsPlaceholder": "Long-tail and secondary keywords",
+    "seoSubKeywordsHint": "Supporting keywords and phrases for related searches.",
     "ogImage": "Social Share Image (OG)",
     "coverImage": "Cover Image URL",
     "author": "Author",

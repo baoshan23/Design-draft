@@ -5352,8 +5352,195 @@
 }
 
 /* ============================================
-   User Dashboard
+   User Dashboard Portal
    ============================================ */
+
+/* Full portal layout with sidebar */
+.dash-portal {
+  display: flex;
+  min-height: 100vh;
+  padding-top: var(--header-height);
+  background: var(--black);
+}
+
+/* Sidebar */
+.dash-sidebar {
+  width: 260px;
+  min-width: 260px;
+  background: var(--dark);
+  border-right: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  position: sticky;
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+  overflow-y: auto;
+}
+
+.dash-sidebar-user {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 16px;
+}
+
+.dash-sidebar-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--primary), #D4890A);
+  color: #1c1917;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.4rem;
+  margin: 0 auto 12px;
+}
+
+.dash-sidebar-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.dash-sidebar-username {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+}
+
+.dash-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.dash-sidebar-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+  text-align: left;
+}
+
+.dash-sidebar-btn:hover {
+  background: var(--glass-bg-hover);
+  color: var(--text-primary);
+}
+
+.dash-sidebar-btn.active {
+  background: var(--primary-dim);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.dash-sidebar-btn--danger:hover {
+  color: var(--danger);
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.dash-sidebar-bottom {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Main content area */
+.dash-main {
+  flex: 1;
+  min-width: 0;
+  padding: 32px;
+}
+
+.dash-content {
+  max-width: 800px;
+}
+
+.dash-page-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 24px;
+  letter-spacing: -0.01em;
+}
+
+.dash-section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 16px;
+}
+
+.dash-section-desc {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+.dash-form-card {
+  background: var(--dark-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+@media (max-width: 768px) {
+  .dash-portal {
+    flex-direction: column;
+  }
+
+  .dash-sidebar {
+    width: 100%;
+    min-width: 0;
+    position: static;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 16px;
+    gap: 8px;
+    border-right: none;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .dash-sidebar-user {
+    display: none;
+  }
+
+  .dash-sidebar-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .dash-sidebar-bottom {
+    flex-direction: row;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .dash-main {
+    padding: 20px 16px;
+  }
+}
+
+/* Legacy dashboard-page class (admin pages still use it) */
 .dashboard-page {
   min-height: calc(100vh - var(--header-height));
   padding: calc(var(--header-height) + 40px) 20px 80px;
@@ -5840,6 +6027,14 @@
   color: var(--text-muted);
   text-align: right;
   margin-top: 4px;
+}
+
+.blog-editor-hint {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  line-height: 1.4;
 }
 
 .blog-editor-actions {

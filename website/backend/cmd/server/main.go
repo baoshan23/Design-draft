@@ -1,6 +1,7 @@
 package main
 
 import (
+    "bytes"
 	"bufio"
 	"context"
 	"crypto/subtle"
@@ -11,6 +12,7 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"net/url"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -455,9 +457,15 @@ func (s *server) handleAuthLogin(w http.ResponseWriter, r *http.Request) {
 	var req struct {
 		Identifier string `json:"identifier"`
 		Password   string `json:"password"`
+		Captcha    *captchaRequest `json:"captcha,omitempty"`
 	}
 	if err := decodeJSON(r, &req); err != nil {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+
+	if err := verifyCaptchaIfEnabled(r.Context(), clientIP(r), req.Captcha); err != nil {
+		writeJSON(w, http.StatusUnauthorized, map[string]string{"error": err.Error()})
 		return
 	}
 
@@ -476,6 +484,139 @@ func (s *server) handleAuthLogin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, http.StatusOK, map[string]interface{}{"user": user, "session": sess})
+}
+
+type captchaRequest struct {
+	Provider string `json:"provider"`
+	// Turnstile
+	Token string `json:"token,omitempty"`
+	// Tencent
+	Ticket string `json:"ticket,omitempty"`
+	Randstr string `json:"randstr,omitempty"`
+}
+
+func verifyCaptchaIfEnabled(ctx context.Context, ip string, captcha *captchaRequest) error {
+	mode := strings.ToLower(strings.TrimSpace(getenvDefault("CAPTCHA_PROVIDER", "none")))
+	if mode == "" {
+		mode = "none"
+	}
+	if mode == "none" || mode == "off" || mode == "false" || mode == "0" {
+		return nil
+	}
+
+	// If CAPTCHA is enabled by env, we require proof.
+	if captcha == nil || strings.TrimSpace(captcha.Provider) == "" {
+		return errors.New("captcha required")
+	}
+	provider := strings.ToLower(strings.TrimSpace(captcha.Provider))
+	if mode != "auto" && provider != mode {
+		return errors.New("invalid captcha provider")
+	}
+
+	// Keep verification calls bounded.
+	ctx, cancel := context.WithTimeout(ctx, 6*time.Second)
+	defer cancel()
+
+	switch provider {
+	case "turnstile":
+		secret := strings.TrimSpace(os.Getenv("TURNSTILE_SECRET_KEY"))
+		if secret == "" {
+			return errors.New("captcha not configured")
+		}
+		token := strings.TrimSpace(captcha.Token)
+		if token == "" {
+			return errors.New("captcha token missing")
+		}
+		ok, err := verifyTurnstile(ctx, secret, token, ip)
+		if err != nil {
+			return errors.New("captcha verification failed")
+		}
+		if !ok {
+			return errors.New("captcha verification failed")
+		}
+		return nil
+	case "tencent":
+		aid := strings.TrimSpace(os.Getenv("TENCENT_CAPTCHA_APP_ID"))
+		secret := strings.TrimSpace(os.Getenv("TENCENT_CAPTCHA_APP_SECRET_KEY"))
+		if aid == "" || secret == "" {
+			return errors.New("captcha not configured")
+		}
+		ticket := strings.TrimSpace(captcha.Ticket)
+		randstr := strings.TrimSpace(captcha.Randstr)
+		if ticket == "" || randstr == "" {
+			return errors.New("captcha token missing")
+		}
+		ok, err := verifyTencentCaptcha(ctx, aid, secret, ticket, randstr, ip)
+		if err != nil {
+			return errors.New("captcha verification failed")
+		}
+		if !ok {
+			return errors.New("captcha verification failed")
+		}
+		return nil
+	default:
+		return errors.New("invalid captcha provider")
+	}
+}
+
+func verifyTurnstile(ctx context.Context, secret, token, remoteIP string) (bool, error) {
+	vals := url.Values{}
+	vals.Set("secret", secret)
+	vals.Set("response", token)
+	if strings.TrimSpace(remoteIP) != "" {
+		vals.Set("remoteip", remoteIP)
+	}
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, "https://challenges.cloudflare.com/turnstile/v0/siteverify", bytes.NewBufferString(vals.Encode()))
+	if err != nil {
+		return false, err
+	}
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+
+	res, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return false, err
+	}
+	defer res.Body.Close()
+
+	var out struct {
+		Success bool `json:"success"`
+	}
+	if err := json.NewDecoder(res.Body).Decode(&out); err != nil {
+		return false, err
+	}
+	return out.Success, nil
+}
+
+func verifyTencentCaptcha(ctx context.Context, aid, appSecretKey, ticket, randstr, userIP string) (bool, error) {
+	vals := url.Values{}
+	vals.Set("aid", aid)
+	vals.Set("AppSecretKey", appSecretKey)
+	vals.Set("Ticket", ticket)
+	vals.Set("Randstr", randstr)
+	if strings.TrimSpace(userIP) != "" {
+		vals.Set("UserIP", userIP)
+	}
+	endpoint := "https://ssl.captcha.qq.com/ticket/verify?" + vals.Encode()
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, endpoint, nil)
+	if err != nil {
+		return false, err
+	}
+	res, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return false, err
+	}
+	defer res.Body.Close()
+
+	var out struct {
+		Response string `json:"response"`
+		EvilLevel string `json:"evil_level"`
+	}
+	if err := json.NewDecoder(res.Body).Decode(&out); err != nil {
+		return false, err
+	}
+	return strings.TrimSpace(out.Response) == "1", nil
 }
 
 func (s *server) handleAuthMe(w http.ResponseWriter, r *http.Request) {
@@ -720,6 +861,8 @@ func (s *server) handleAdminBlogPosts(w http.ResponseWriter, r *http.Request) {
 		Status          string   `json:"status"`
 		MetaTitle       string   `json:"metaTitle"`
 		MetaDescription string   `json:"metaDescription"`
+		SeoKeywords     string   `json:"seoKeywords"`
+		SeoSubKeywords  string   `json:"seoSubKeywords"`
 		OgImageURL      string   `json:"ogImageUrl"`
 	}
 	if err := decodeJSON(r, &req); err != nil {
@@ -738,6 +881,8 @@ func (s *server) handleAdminBlogPosts(w http.ResponseWriter, r *http.Request) {
 		Status:          req.Status,
 		MetaTitle:       req.MetaTitle,
 		MetaDescription: req.MetaDescription,
+		SeoKeywords:     req.SeoKeywords,
+		SeoSubKeywords:  req.SeoSubKeywords,
 		OgImageURL:      req.OgImageURL,
 	}
 
@@ -784,6 +929,7 @@ func (s *server) handleAdminBlogPost(w http.ResponseWriter, r *http.Request) {
 
 	var req struct {
 		Locale          string   `json:"locale"`
+		Slug            string   `json:"slug"`
 		Title           string   `json:"title"`
 		Excerpt         string   `json:"excerpt"`
 		ContentMD       string   `json:"contentMd"`
@@ -793,6 +939,8 @@ func (s *server) handleAdminBlogPost(w http.ResponseWriter, r *http.Request) {
 		Status          string   `json:"status"`
 		MetaTitle       string   `json:"metaTitle"`
 		MetaDescription string   `json:"metaDescription"`
+		SeoKeywords     string   `json:"seoKeywords"`
+		SeoSubKeywords  string   `json:"seoSubKeywords"`
 		OgImageURL      string   `json:"ogImageUrl"`
 	}
 	if err := decodeJSON(r, &req); err != nil {
@@ -810,6 +958,8 @@ func (s *server) handleAdminBlogPost(w http.ResponseWriter, r *http.Request) {
 		Status:          req.Status,
 		MetaTitle:       req.MetaTitle,
 		MetaDescription: req.MetaDescription,
+		SeoKeywords:     req.SeoKeywords,
+		SeoSubKeywords:  req.SeoSubKeywords,
 		OgImageURL:      req.OgImageURL,
 	}
 

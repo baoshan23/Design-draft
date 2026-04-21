@@ -417,9 +417,18 @@ func (s *Store) ChangePassword(ctx context.Context, userID int64, currentPasswor
 
 // UserDashboard holds stats visible to a logged-in user about their own activity.
 type UserDashboard struct {
-	ForumTopics int `json:"forumTopics"`
-	ForumPosts  int `json:"forumPosts"`
-	ActiveSessions int `json:"activeSessions"`
+	ForumTopics    int              `json:"forumTopics"`
+	ForumPosts     int              `json:"forumPosts"`
+	ActiveSessions int              `json:"activeSessions"`
+	RecentTopics   []UserForumTopic `json:"recentTopics"`
+}
+
+type UserForumTopic struct {
+	CategorySlug string    `json:"categorySlug"`
+	Slug         string    `json:"slug"`
+	Title        string    `json:"title"`
+	CreatedAt    time.Time `json:"createdAt"`
+	ReplyCount   int       `json:"replyCount"`
 }
 
 // GetUserDashboard returns activity stats for a specific user.
@@ -427,13 +436,35 @@ func (s *Store) GetUserDashboard(ctx context.Context, userID int64) (*UserDashbo
 	d := &UserDashboard{}
 	now := time.Now().UTC().Format(time.RFC3339)
 
-	// Count forum topics by this user (author_name matches username)
 	var username string
 	_ = s.db.QueryRowContext(ctx, `SELECT username FROM users WHERE id = ?;`, userID).Scan(&username)
 
 	if username != "" {
 		_ = s.db.QueryRowContext(ctx, `SELECT COUNT(1) FROM forum_topics WHERE author_name = ?;`, username).Scan(&d.ForumTopics)
 		_ = s.db.QueryRowContext(ctx, `SELECT COUNT(1) FROM forum_posts WHERE author_name = ?;`, username).Scan(&d.ForumPosts)
+
+		// Recent topics by this user
+		rows, err := s.db.QueryContext(ctx, `
+			SELECT c.slug, t.slug, i.title, t.created_at, t.reply_count
+			FROM forum_topics t
+			JOIN forum_categories c ON c.id = t.category_id
+			JOIN forum_topic_i18n i ON i.topic_id = t.id AND i.locale = 'en'
+			WHERE t.author_name = ?
+			ORDER BY t.created_at DESC LIMIT 5;`, username)
+		if err == nil {
+			defer rows.Close()
+			for rows.Next() {
+				var ft UserForumTopic
+				var createdAt string
+				if err := rows.Scan(&ft.CategorySlug, &ft.Slug, &ft.Title, &createdAt, &ft.ReplyCount); err == nil {
+					ft.CreatedAt, _ = parseTimeRFC3339(createdAt)
+					d.RecentTopics = append(d.RecentTopics, ft)
+				}
+			}
+		}
+	}
+	if d.RecentTopics == nil {
+		d.RecentTopics = []UserForumTopic{}
 	}
 
 	_ = s.db.QueryRowContext(ctx, `

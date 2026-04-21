@@ -35,7 +35,7 @@ export default function AdminRequestsPage() {
         const token = getAuthToken();
         if (!token) return;
         setLoading(true);
-        try { setRecords(await apiAdminListRequests(token, filter, 100)); } catch { /* */ }
+        try { setRecords((await apiAdminListRequests(token, filter, 100)) || []); } catch { /* */ }
         setLoading(false);
     }, [filter]);
 

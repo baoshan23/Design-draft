@@ -28,7 +28,7 @@ export default function AdminForumPage() {
         const token = getAuthToken();
         if (!token) return;
         setLoading(true);
-        try { setTopics(await apiAdminListForumTopics(token, locale)); } catch { /* */ }
+        try { setTopics((await apiAdminListForumTopics(token, locale)) || []); } catch { /* */ }
         setLoading(false);
     }, [locale]);
 

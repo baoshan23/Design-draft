@@ -29,6 +29,8 @@ type BlogPost struct {
 	Status          string    `json:"status"`
 	MetaTitle       string    `json:"metaTitle,omitempty"`
 	MetaDescription string    `json:"metaDescription,omitempty"`
+	SeoKeywords     string    `json:"seoKeywords,omitempty"`
+	SeoSubKeywords  string    `json:"seoSubKeywords,omitempty"`
 	OgImageURL      string    `json:"ogImageUrl,omitempty"`
 }
 
@@ -232,6 +234,8 @@ func (s *Store) migrate(ctx context.Context) error {
 	_, _ = s.db.ExecContext(ctx, `ALTER TABLE blog_posts ADD COLUMN meta_title TEXT NOT NULL DEFAULT '';`)
 	_, _ = s.db.ExecContext(ctx, `ALTER TABLE blog_posts ADD COLUMN meta_description TEXT NOT NULL DEFAULT '';`)
 	_, _ = s.db.ExecContext(ctx, `ALTER TABLE blog_posts ADD COLUMN og_image_url TEXT NOT NULL DEFAULT '';`)
+	_, _ = s.db.ExecContext(ctx, `ALTER TABLE blog_posts ADD COLUMN seo_keywords TEXT NOT NULL DEFAULT '';`)
+	_, _ = s.db.ExecContext(ctx, `ALTER TABLE blog_posts ADD COLUMN seo_sub_keywords TEXT NOT NULL DEFAULT '';`)
 	// Backfill updated_at for existing rows
 	_, _ = s.db.ExecContext(ctx, `UPDATE blog_posts SET updated_at = published_at WHERE updated_at = '';`)
 	return nil

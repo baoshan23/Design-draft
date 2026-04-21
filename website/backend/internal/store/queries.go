@@ -29,9 +29,9 @@ func parseTimeRFC3339(s string) (time.Time, error) {
 // scanBlogPost scans a blog post row with the new columns (status, updated_at, meta_*, og_image_url).
 func scanBlogPost(rows interface{ Scan(...any) error }, locale string) (BlogPost, error) {
 	var bp BlogPost
-	var publishedAt, updatedAt, tags, status, metaTitle, metaDesc, ogImage string
+	var publishedAt, updatedAt, tags, status, metaTitle, metaDesc, ogImage, seoKw, seoSubKw string
 	if err := rows.Scan(&bp.Slug, &bp.Title, &bp.Excerpt, &bp.ContentMD, &bp.CoverURL, &bp.AuthorName,
-		&publishedAt, &updatedAt, &tags, &status, &metaTitle, &metaDesc, &ogImage); err != nil {
+		&publishedAt, &updatedAt, &tags, &status, &metaTitle, &metaDesc, &ogImage, &seoKw, &seoSubKw); err != nil {
 		return bp, err
 	}
 	bp.PublishedAt, _ = parseTimeRFC3339(publishedAt)
@@ -43,11 +43,14 @@ func scanBlogPost(rows interface{ Scan(...any) error }, locale string) (BlogPost
 	bp.MetaTitle = metaTitle
 	bp.MetaDescription = metaDesc
 	bp.OgImageURL = ogImage
+	bp.SeoKeywords = seoKw
+	bp.SeoSubKeywords = seoSubKw
 	return bp, nil
 }
 
 const blogSelectCols = `p.slug, i.title, i.excerpt, i.content_md, p.cover_url, p.author_name,
-	p.published_at, p.updated_at, p.tags, p.status, p.meta_title, p.meta_description, p.og_image_url`
+	p.published_at, p.updated_at, p.tags, p.status, p.meta_title, p.meta_description, p.og_image_url,
+	p.seo_keywords, p.seo_sub_keywords`
 
 // ListAdminBlogPosts returns all posts (including drafts) for the admin panel.
 func (s *Store) ListAdminBlogPosts(ctx context.Context, locale string) ([]BlogPost, error) {
@@ -107,11 +110,11 @@ func (s *Store) CreateBlogPost(ctx context.Context, locale string, bp BlogPost) 
 	defer func() { _ = tx.Rollback() }()
 
 	res, err := tx.ExecContext(ctx, `
-		INSERT INTO blog_posts (slug, cover_url, author_name, published_at, updated_at, tags, status, meta_title, meta_description, og_image_url)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+		INSERT INTO blog_posts (slug, cover_url, author_name, published_at, updated_at, tags, status, meta_title, meta_description, og_image_url, seo_keywords, seo_sub_keywords)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
 		slug, bp.CoverURL, bp.AuthorName,
 		bp.PublishedAt.Format(time.RFC3339), now.Format(time.RFC3339),
-		encodeTags(bp.Tags), bp.Status, bp.MetaTitle, bp.MetaDescription, bp.OgImageURL)
+		encodeTags(bp.Tags), bp.Status, bp.MetaTitle, bp.MetaDescription, bp.OgImageURL, bp.SeoKeywords, bp.SeoSubKeywords)
 	if err != nil {
 		if isUniqueConstraint(err) {
 			return nil, errors.New("a post with this slug already exists")
@@ -160,10 +163,11 @@ func (s *Store) UpdateBlogPost(ctx context.Context, locale, slug string, bp Blog
 
 	if _, err := tx.ExecContext(ctx, `
 		UPDATE blog_posts SET cover_url = ?, author_name = ?, updated_at = ?, tags = ?,
-			status = ?, meta_title = ?, meta_description = ?, og_image_url = ?
+			status = ?, meta_title = ?, meta_description = ?, og_image_url = ?,
+			seo_keywords = ?, seo_sub_keywords = ?
 		WHERE id = ?;`,
 		bp.CoverURL, bp.AuthorName, now.Format(time.RFC3339), encodeTags(bp.Tags),
-		bp.Status, bp.MetaTitle, bp.MetaDescription, bp.OgImageURL, postID); err != nil {
+		bp.Status, bp.MetaTitle, bp.MetaDescription, bp.OgImageURL, bp.SeoKeywords, bp.SeoSubKeywords, postID); err != nil {
 		return nil, err
 	}
 

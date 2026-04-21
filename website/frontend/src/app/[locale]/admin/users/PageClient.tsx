@@ -27,7 +27,7 @@ export default function AdminUsersPage() {
         const token = getAuthToken();
         if (!token) return;
         setLoading(true);
-        try { setUsers(await apiAdminListUsers(token)); } catch { /* */ }
+        try { setUsers((await apiAdminListUsers(token)) || []); } catch { /* */ }
         setLoading(false);
     }, []);
 
