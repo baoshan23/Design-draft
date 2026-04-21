@@ -5252,24 +5252,38 @@
    Forum Thread Page (ft-*)
    ============================================ */
 .ft-back-link {
+  position: fixed;
+  left: 24px;
+  top: calc(var(--header-height) + 24px);
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--text-tertiary);
   text-decoration: none;
-  margin-bottom: 20px;
-  padding: 6px 12px 6px 8px;
+  padding: 8px 14px 8px 10px;
   border-radius: 100px;
-  border: 1px solid var(--border-light);
+  border: 1.5px solid var(--border-light);
+  background: var(--dark-card);
+  box-shadow: var(--shadow-sm);
   transition: all 0.2s;
+  z-index: 10;
 }
 
 .ft-back-link:hover {
   color: var(--primary);
   border-color: var(--primary);
   background: var(--primary-dim);
+  transform: scale(1.05);
+}
+
+@media (max-width: 900px) {
+  .ft-back-link {
+    position: static;
+    margin-bottom: 16px;
+    box-shadow: none;
+  }
 }
 
 .ft-title {
