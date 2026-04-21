@@ -5,12 +5,10 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useLocale, useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import MarkdownEditor from '@/components/ui/MarkdownEditor';
 import { apiMe, getAuthToken, isAuthApiEnabled, setAuthToken, type AuthUser } from '@/lib/api/authApi';
 import {
     apiGetForumTopic,
     apiPostForumReply,
-    apiUploadImage,
     apiVoteForumPost,
     type ApiForumPost,
     type ApiForumTopic,
@@ -250,26 +248,14 @@ export default function ForumTopicPage({ categorySlug, topicSlug }: { categorySl
                                 )}
 
                                 <form onSubmit={submitReply}>
-                                    <MarkdownEditor
+                                    <textarea
                                         id="forum-reply-editor"
+                                        className="form-input ft-reply-textarea"
                                         value={replyBody}
-                                        onChange={setReplyBody}
+                                        onChange={e => setReplyBody(e.target.value)}
                                         placeholder={t('forum.topic.replyPlaceholder')}
                                         disabled={replying || (authEnabled && !currentUser)}
-                                        textareaClassName="ft-textarea"
-                                        previewClassName="ft-preview blog-prose"
-                                        uploadImage={allowPost ? async (file) => { const res = await apiUploadImage(file); return res.url; } : undefined}
-                                        labels={{
-                                            write: t('forum.topic.write'), preview: t('forum.topic.preview'),
-                                            previewEmpty: t('forum.topic.previewEmpty'), markdownGuide: t('forum.topic.markdownGuide'),
-                                            uploading: t('forum.editor.uploading'), uploadFailed: t('forum.editor.uploadFailed'),
-                                            insertLink: t('forum.editor.insertLink'), insertImage: t('forum.editor.insertImage'),
-                                            undo: t('forum.editor.undo'), redo: t('forum.editor.redo'),
-                                            heading: t('forum.editor.heading'), bold: t('forum.editor.bold'),
-                                            italic: t('forum.editor.italic'), inlineCode: t('forum.editor.inlineCode'),
-                                            bulletList: t('forum.editor.bulletList'), numberedList: t('forum.editor.numberedList'),
-                                            table: t('forum.editor.table'), mention: t('forum.editor.mention'),
-                                        }}
+                                        rows={4}
                                     />
                                     <div className="ft-composer-actions">
                                         <button type="submit" className={`btn btn-primary${replying ? ' btn-loading' : ''}`} disabled={!canReply || !replyBody.trim()}>

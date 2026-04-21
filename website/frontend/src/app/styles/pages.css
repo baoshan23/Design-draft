@@ -5484,10 +5484,12 @@
   color: var(--text-tertiary);
 }
 
-.ft-textarea {
-  min-height: 140px;
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
+.ft-reply-textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  border-radius: var(--radius-md) !important;
 }
 
 .ft-composer-actions {
