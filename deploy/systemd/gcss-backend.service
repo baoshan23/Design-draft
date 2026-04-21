@@ -1,0 +1,39 @@
+[Unit]
+Description=GCSS Backend API Server
+After=network.target
+Documentation=https://github.com/anindya127/Gcss_website
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/gcss-backend
+ExecStart=/opt/gcss-backend/gcss-backend
+EnvironmentFile=/opt/gcss-backend/.env
+
+# Run as www-data (same as nginx, shared file permissions)
+User=www-data
+Group=www-data
+
+# Auto-restart on failure
+Restart=always
+RestartSec=5
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+# Logging to journald
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=gcss-backend
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/opt/gcss-backend/data
+
+# Resource limits
+LimitNOFILE=65536
+MemoryMax=512M
+
+[Install]
+WantedBy=multi-user.target

@@ -226,7 +226,9 @@
       "countryPlaceholder": "例如 西班牙、泰国、新加坡",
       "email": "您的邮箱",
       "submit": "提交申请",
-      "submitted": "已提交 ✓"
+      "submitting": "提交中…",
+      "submitted": "已提交 ✓",
+      "error": "发生错误，请重试。"
     }
   },
   "manufacturers": {
@@ -553,7 +555,10 @@
       "desc": "提交申请，我们会将其加入开发计划。",
       "name": "语言名称",
       "email": "您的邮箱",
-      "submit": "提交申请"
+      "submit": "提交申请",
+      "submitting": "提交中…",
+      "submitted": "已收到 ✓",
+      "error": "提交失败，请稍后重试。"
     },
     "app": {
       "title": "APP / H5 - 极致用户体验",
@@ -847,12 +852,24 @@
     "filter": {
       "all": "全部文章",
       "product": "产品更新",
+      "operations": "运营",
+      "ocpp": "OCPP",
+      "payments": "支付",
       "news": "行业新闻",
       "guide": "使用指南",
       "case": "案例研究",
       "industry": "行业新闻",
       "guides": "使用指南",
       "cases": "案例研究"
+    },
+    "post": {
+      "loading": "加载中…",
+      "none": "暂无文章。",
+      "back": "返回博客",
+      "notFound": "未找到文章。"
+    },
+    "pagination": {
+      "next": "下一页"
     },
     "featured": {
       "cat": "产品更新",
@@ -946,7 +963,9 @@
         "placeholder": "请介绍您的项目、计划管理的充电桩数量或任何问题..."
       },
       "submit": "发送消息",
+      "submitting": "发送中…",
       "success": "消息发送成功！我们将在24小时内回复您。",
+      "error": "发送失败，请重试，或邮件联系 support@gcss.hk。",
       "phone": {
         "hours": "周一至周五 9:00-18:00 (香港时间)"
       },
@@ -980,6 +999,8 @@
     }
   },
   "forum": {
+    "loading": "加载中…",
+    "empty": "暂无讨论。",
     "sidebar": {
       "sections": "版块",
       "all": "全部",
@@ -997,7 +1018,10 @@
       "bugs": "Bug 反馈",
       "updates": "版本更新",
       "following": "我的关注",
-      "stats": "论坛统计"
+      "stats": "论坛统计",
+      "categories": "分类",
+      "open": "打开侧边栏",
+      "close": "关闭侧边栏"
     },
     "title": "社区论坛",
     "newtopic": "发帖",
@@ -1057,7 +1081,77 @@
       "newest": "最新发布"
     },
     "search": "搜索",
+    "searchPlaceholder": "搜索话题…",
+    "searchClear": "清除",
     "replies": "回复",
+    "topic": {
+      "back": "返回论坛",
+      "loading": "加载话题…",
+      "notFound": "未找到话题。",
+      "likes": "点赞",
+      "reply": "回复",
+      "write": "编辑",
+      "preview": "预览",
+      "vote": "投票",
+      "score": "得分",
+      "upvote": "赞同",
+      "downvote": "反对",
+      "replyingTo": "正在回复",
+      "cancelReply": "取消",
+      "authLoading": "正在检查登录状态…",
+      "postingAs": "发布为",
+      "loginToReply": "请先登录再回复。",
+      "login": "登录",
+      "namePlaceholder": "您的姓名（可选）",
+      "replyPlaceholder": "用 Markdown 写下您的回复…",
+      "markdownHint": "支持 Markdown",
+      "markdownGuide": "Markdown 指南",
+      "previewEmpty": "暂无可预览内容。",
+      "clear": "清空",
+      "replySubmit": "发布回复",
+      "replying": "发布中…"
+    },
+    "editor": {
+      "uploading": "上传中…",
+      "uploadFailed": "上传失败",
+      "insertLink": "插入链接",
+      "insertImage": "插入图片",
+      "undo": "撤销",
+      "redo": "重做",
+      "heading": "标题",
+      "bold": "加粗",
+      "italic": "斜体",
+      "inlineCode": "行内代码",
+      "bulletList": "无序列表",
+      "numberedList": "有序列表",
+      "table": "表格",
+      "mention": "提及"
+    },
+    "new": {
+      "title": "发布新话题",
+      "subtitle": "发起讨论、提出问题，或与社区分享更新。",
+      "back": "返回论坛",
+      "category": "分类",
+      "type": "类型",
+      "typeOptions": {
+        "discussion": "讨论",
+        "question": "提问",
+        "announcement": "公告"
+      },
+      "topicTitle": "标题",
+      "titlePlaceholder": "给话题起一个清晰的标题…",
+      "labels": "标签",
+      "labelsPlaceholder": "添加标签（逗号或回车）…",
+      "addLabel": "添加",
+      "removeLabel": "移除标签",
+      "body": "内容",
+      "bodyPlaceholder": "用 Markdown 写下您的话题内容…",
+      "loginToPost": "请先登录再发帖。",
+      "create": "发布话题",
+      "creating": "发布中…",
+      "created": "发布成功！",
+      "failed": "发布失败。"
+    },
     "loadmore": "加载更多讨论",
     "post6": {
       "title": "东南亚多费率计费策略最佳实践"
@@ -1235,7 +1329,11 @@
     "forgot": "忘记密码？",
     "btn": "登录",
     "noaccount": "还没有账户？",
-    "register": "注册"
+    "register": "注册",
+    "success": "登录成功！正在跳转...",
+    "errors": {
+      "invalid": "用户名或密码错误。"
+    }
   },
   "register": {
     "visual": {
@@ -1277,7 +1375,12 @@
     },
     "btn": "创建账户",
     "hasaccount": "已有账户？",
-    "login": "登录"
+    "login": "登录",
+    "success": "账户创建成功！即将跳转到登录...",
+    "errors": {
+      "passwordMismatch": "两次输入的密码不一致。",
+      "generic": "注册失败，请重试。"
+    }
   },
   "forgot": {
     "title": "忘记密码",
@@ -1290,6 +1393,7 @@
       "placeholder": "输入验证码"
     },
     "sendcode": "发送验证码",
+    "sent": "已发送！",
     "verify": "验证",
     "newpwTitle": "设置新密码",
     "newpwDesc": "为您的账户创建一个强密码。",
@@ -1306,6 +1410,13 @@
       "placeholder": "输入邮件中的验证码"
     },
     "setpw": "设置新密码",
+    "success": "密码重置成功！正在跳转到登录...",
+    "demoCode": "演示验证码：{code}",
+    "errors": {
+      "sendFailed": "发送验证码失败，请重试。",
+      "passwordMismatch": "两次输入的密码不一致。",
+      "resetFailed": "重置密码失败，请检查验证码后重试。"
+    },
     "back": "返回登录",
     "visual": {
       "title": "赋能未来 EV 管理"
@@ -1662,6 +1773,275 @@
       "desc": "我们的团队随时为您提供帮助。联系我们，我们会尽快回复您。",
       "btn1": "联系我们",
       "btn2": "访问论坛"
+    }
+  },
+  "privacyPage": {
+    "label": "法律",
+    "title": "隐私政策",
+    "subtitle": "我们如何收集、使用并保护您在使用 GCSS 过程中产生的信息。",
+    "cta": "联系我们",
+    "secondaryCta": "查看服务条款",
+    "effective": "生效日期：2026 年 4 月 20 日。本页面为演示模板，内容可能会更新。",
+    "sections": {
+      "collect": {
+        "title": "我们收集哪些信息",
+        "p1": "我们会收集您主动提供的信息，以及您使用平台时产生的数据。",
+        "li1": "账号与联系方式（如姓名、邮箱、公司）",
+        "li2": "运营数据（如充电会话、站点状态、使用指标）",
+        "li3": "技术数据（如设备、浏览器、粗略位置、日志）"
+      },
+      "use": {
+        "title": "我们如何使用信息",
+        "p1": "我们使用信息来提供、维护并持续改进 GCSS。",
+        "li1": "提供服务与客户支持",
+        "li2": "提升可靠性、安全性与性能",
+        "li3": "合规要求与防止滥用"
+      },
+      "security": {
+        "title": "安全",
+        "p1": "我们采取行业通行的安全措施，但任何系统都无法保证 100% 安全。请使用强密码并限制管理员账号访问权限。"
+      },
+      "cookies": {
+        "title": "Cookie 与分析",
+        "p1": "我们可能使用 Cookie 或类似技术用于记住偏好设置，并了解网站使用情况。"
+      },
+      "rights": {
+        "title": "您的选择",
+        "p1": "根据您所在地区，您可以申请访问、更正或删除您的信息。"
+      },
+      "contact": {
+        "title": "联系我们",
+        "p1": "如对隐私有疑问，请联系我们，我们会尽快协助。"
+      }
+    },
+    "callout": "企业评估：我们可按需提供 DPA（数据处理协议）与安全问卷答复。"
+  },
+  "termsPage": {
+    "label": "法律",
+    "title": "服务条款",
+    "subtitle": "使用 GCSS 的规则，包括账号、合理使用、授权与责任限制。",
+    "cta": "联系我们",
+    "secondaryCta": "查看隐私政策",
+    "effective": "生效日期：2026 年 4 月 20 日。本页面为演示模板，可能不代表最终合同条款。",
+    "sections": {
+      "accept": {
+        "title": "接受条款",
+        "p1": "访问或使用 GCSS 即表示您同意本条款；若不同意，请勿使用服务。"
+      },
+      "accounts": {
+        "title": "账号",
+        "p1": "您需对账号下的所有活动负责。",
+        "li1": "提供真实准确的账号信息",
+        "li2": "妥善保管账号凭据与访问令牌",
+        "li3": "如怀疑账号被未授权使用，请及时通知我们"
+      },
+      "license": {
+        "title": "授权",
+        "p1": "在遵守本条款及相关协议的前提下，我们授予您有限的、非独占的访问与使用 GCSS 权利，用于内部业务目的。"
+      },
+      "use": {
+        "title": "合理使用",
+        "p1": "您承诺不以不当方式使用服务。",
+        "li1": "不得尝试访问未授权的系统或数据",
+        "li2": "不得干扰服务可用性或安全性",
+        "li3": "不得用于违反法律法规或侵犯第三方权利"
+      },
+      "availability": {
+        "title": "服务可用性",
+        "p1": "GCSS 可能会持续更新。为保障安全、可靠或合规，我们可能调整或暂停部分功能。"
+      },
+      "liability": {
+        "title": "责任限制",
+        "p1": "在法律允许范围内，GCSS 按“现状”提供，不作任何保证，我们的责任也将受到限制。"
+      },
+      "contact": {
+        "title": "联系我们",
+        "p1": "如有法律相关问题，请通过联系我们页面提交咨询。"
+      }
+    }
+  },
+  "aboutPage": {
+    "label": "公司",
+    "title": "关于 GCSS",
+    "subtitle": "GCSS（Global Charger System Service）帮助运营商与企业自信地部署、管理并扩展电动汽车充电网络。",
+    "cta": "联系团队",
+    "secondaryCta": "查看产品",
+    "cards": {
+      "mission": {
+        "title": "使命",
+        "desc": "让充电运营更简单、更可靠、更具盈利能力——覆盖任何地区。"
+      },
+      "build": {
+        "title": "我们在做什么",
+        "desc": "OCPP 管理、支付、计费、数据分析与管理工具——面向真实运营场景设计。"
+      },
+      "principles": {
+        "title": "理念",
+        "desc": "安全优先、以运营为中心、为集成而生——让您快速落地且值得信任。"
+      }
+    },
+    "sections": {
+      "why": {
+        "title": "为运营而生",
+        "p1": "我们聚焦日常运营的关键：在线率、远程控制、清晰结算与可执行的数据洞察。"
+      },
+      "values": {
+        "title": "您将获得",
+        "li1": "从设备接入到结算的一体化运营流程",
+        "li2": "面向充电桩与支付的可集成架构",
+        "li3": "让复杂系统更易用的设计与细节"
+      },
+      "global": {
+        "title": "全球化能力",
+        "p1": "从本地化支付到多语言体验，GCSS 面向跨境部署而设计。"
+      }
+    },
+    "callout": {
+      "title": "想要快速演示？",
+      "desc": "我们可根据您的市场与部署模式定制演示内容。"
+    }
+  },
+  "careersPage": {
+    "label": "公司",
+    "title": "加入我们",
+    "subtitle": "加入团队，一起打造现代化的充电运营软件——性能、可靠性与设计同样重要。",
+    "cta": "联系招聘",
+    "secondaryCta": "了解 GCSS",
+    "sections": {
+      "why": {
+        "label": "在 GCSS 工作",
+        "title": "为什么选择我们",
+        "desc": "我们做的是运营商真正会用到的系统，每一次改进都会落地到现场。"
+      },
+      "roles": {
+        "label": "常见岗位",
+        "title": "我们经常招聘的角色",
+        "desc": "如果没有完全匹配的岗位也欢迎联系——优秀的建设者不必被职位名称限制。"
+      },
+      "process": {
+        "title": "招聘流程",
+        "desc": "简洁、尊重、高效：聚焦真实能力，不做无意义的反复流程。"
+      }
+    },
+    "perks": {
+      "impact": {
+        "title": "真实影响力",
+        "desc": "您写的代码每天都会影响司机与运营商。"
+      },
+      "craft": {
+        "title": "工程追求",
+        "desc": "清晰架构、务实权衡、可度量的可靠性。"
+      },
+      "growth": {
+        "title": "成长空间",
+        "desc": "端到端负责项目，兼具指导与自主。"
+      }
+    },
+    "roles": {
+      "backend": {
+        "title": "后端 / 平台",
+        "desc": "构建支撑充电运营的 API、数据模型与集成能力。",
+        "li1": "Go/TypeScript 服务、API 设计与可观测性",
+        "li2": "多租户数据建模与安全认证",
+        "li3": "集成：OCPP、支付与第三方系统"
+      },
+      "frontend": {
+        "title": "前端 / Web",
+        "desc": "打造让复杂运营更直观的后台与工作流。",
+        "li1": "Next.js、组件体系与性能优化",
+        "li2": "面向运营的流程与信息架构",
+        "li3": "无障碍、国际化与设计细节"
+      },
+      "mobile": {
+        "title": "移动端",
+        "desc": "提供司机端体验：启动充电、支付与状态跟踪。",
+        "li1": "跨平台移动端基础能力",
+        "li2": "支付与充电会话生命周期体验",
+        "li3": "弱网与离线场景的稳定性"
+      },
+      "product": {
+        "title": "产品 / 解决方案",
+        "desc": "与客户共创，将真实运营需求转化为产品决策。",
+        "li1": "运营工作流调研",
+        "li2": "实施规划与上线推进",
+        "li3": "文档与赋能支持"
+      }
+    },
+    "process": {
+      "apply": "提交简要介绍与相关作品/案例。",
+      "screen": "快速沟通，确认岗位与期望匹配。",
+      "interview": "聚焦技术与业务的面试（不问无意义的题）。",
+      "offer": "快速反馈并给出明确下一步。"
+    },
+    "callout": "建议：附上您做过的项目链接（代码仓库、案例、线上产品等）。"
+  },
+  "partnersPage": {
+    "label": "生态合作",
+    "title": "合作伙伴",
+    "subtitle": "我们与充电桩厂商、支付机构与集成商合作，交付可靠的充电网络部署。",
+    "cta": "成为合作伙伴",
+    "secondaryCta": "查看定价",
+    "cards": {
+      "oem": {
+        "title": "充电桩厂商（OEM）",
+        "desc": "完成接入与验证，提升设备开通与运维效率。"
+      },
+      "payments": {
+        "title": "支付合作方",
+        "desc": "支持本地支付方式与合规结算流程。"
+      },
+      "integrators": {
+        "title": "系统集成商",
+        "desc": "交付端到端项目并长期运营客户网络。"
+      }
+    },
+    "sections": {
+      "benefits": {
+        "title": "合作权益",
+        "li1": "联合集成支持与技术验证",
+        "li2": "面向目标地区的联合市场协作",
+        "li3": "销售—实施—支持之间清晰协同与交付"
+      },
+      "getStarted": {
+        "title": "如何开始",
+        "p1": "告诉我们您的地区、产品与集成需求，我们将给出最快落地路径。"
+      }
+    },
+    "buttons": {
+      "contact": "联系我们",
+      "pricing": "查看定价"
+    }
+  },
+  "admin": {
+    "meta": {
+      "title": "管理后台",
+      "description": "仅管理员可访问的平台活动概览。"
+    },
+    "title": "管理后台",
+    "subtitle": "面向管理员的安全概览页（演示环境）。",
+    "signedInAs": "当前登录：{username}",
+    "actions": {
+      "backToSite": "返回网站",
+      "logout": "退出登录"
+    },
+    "loading": "正在加载后台概览…",
+    "errors": {
+      "unauthorized": "登录已过期或没有管理员权限。"
+    },
+    "kpis": {
+      "users": "用户数",
+      "admins": "管理员",
+      "sessions": "活跃会话",
+      "formRequests": "表单请求",
+      "blogPosts": "博客文章",
+      "forumTopics": "论坛话题",
+      "forumPosts": "论坛回复"
+    },
+    "nextSteps": {
+      "title": "下一步",
+      "item1": "新增用户管理：提升/降级管理员、禁用账号。",
+      "item2": "新增论坛内容管理：话题与回复的审核/处理。",
+      "item3": "新增请求审计：联系/支付/语言请求的查看与筛选。"
     }
   }
 }

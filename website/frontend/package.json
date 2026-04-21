@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "node scripts/build-export.js",
     "start": "next start",
-    "deploy": "next build && node scripts/deploy.js"
+    "deploy": "node scripts/build-export.js && node scripts/deploy.js"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +30,8 @@
     "next-intl": "^4.8.3",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
     "sharp": "^0.34.5",
     "three": "^0.183.2",
     "topojson-client": "^3.1.0",

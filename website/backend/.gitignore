@@ -1,0 +1,10 @@
+# Compiled binaries
+bin/
+*.exe
+
+# Runtime data
+data/
+node_modules/
+
+# Environment (secrets)
+.env

@@ -1,0 +1,903 @@
+package main
+
+import (
+	"bufio"
+	"context"
+	"crypto/subtle"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"io"
+	"log"
+	"net"
+	"net/http"
+	"os"
+	"path/filepath"
+	"strings"
+	"time"
+
+	"gcss-backend/internal/store"
+)
+
+type ContactRequest struct {
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	Email     string `json:"email"`
+	PhoneCode string `json:"phoneCode"`
+	Phone     string `json:"phone"`
+	Country   string `json:"country"`
+	Message   string `json:"message"`
+	Locale    string `json:"locale,omitempty"`
+}
+
+type PaymentRequest struct {
+	Method  string `json:"method"`
+	Country string `json:"country"`
+	Email   string `json:"email"`
+	Locale  string `json:"locale,omitempty"`
+}
+
+type LanguageRequest struct {
+	Name   string `json:"name"`
+	Email  string `json:"email"`
+	Locale string `json:"locale,omitempty"`
+}
+
+type StoredRecord struct {
+	Type      string      `json:"type"`
+	CreatedAt time.Time   `json:"createdAt"`
+	IP        string      `json:"ip,omitempty"`
+	UA        string      `json:"ua,omitempty"`
+	Payload   interface{} `json:"payload"`
+}
+
+type server struct {
+	allowedOrigins map[string]struct{}
+	allowAnyOrigin bool
+	dataFile       string
+	uploadDir      string
+	store          *store.Store
+}
+
+func main() {
+	port := getenvDefault("PORT", "8080")
+	dataFile := getenvDefault("DATA_FILE", filepath.Join("data", "requests.jsonl"))
+	dbPath := getenvDefault("DB_PATH", filepath.Join("data", "gcss.db"))
+	uploadDir := getenvDefault("UPLOAD_DIR", filepath.Join("data", "uploads"))
+	corsOrigins := getenvDefault("CORS_ORIGINS", "http://localhost:3000,https://v3.gcss.hk,https://gcss.hk,https://www.gcss.hk")
+
+	allowedOrigins, allowAny := parseOrigins(corsOrigins)
+	if err := ensureParentDir(dataFile); err != nil {
+		log.Fatalf("failed to ensure data directory: %v", err)
+	}
+	if err := ensureParentDir(dbPath); err != nil {
+		log.Fatalf("failed to ensure db directory: %v", err)
+	}
+	if err := os.MkdirAll(uploadDir, 0755); err != nil {
+		log.Fatalf("failed to ensure upload dir: %v", err)
+	}
+
+	st, err := store.Open(context.Background(), dbPath)
+	if err != nil {
+		log.Fatalf("failed to open sqlite db: %v", err)
+	}
+	defer func() {
+		_ = st.Close()
+	}()
+
+	s := &server{
+		allowedOrigins: allowedOrigins,
+		allowAnyOrigin: allowAny,
+		dataFile:       dataFile,
+		uploadDir:      uploadDir,
+		store:          st,
+	}
+
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", s.handleRoot)
+	mux.HandleFunc("/healthz", s.handleHealth)
+	mux.HandleFunc("/api/contact", s.withCORS(s.handleContact))
+	mux.HandleFunc("/api/requests/payment", s.withCORS(s.handlePaymentRequest))
+	mux.HandleFunc("/api/requests/language", s.withCORS(s.handleLanguageRequest))
+	// Auth
+	mux.HandleFunc("/api/auth/register", s.withCORS(s.handleAuthRegister))
+	mux.HandleFunc("/api/auth/login", s.withCORS(s.handleAuthLogin))
+	mux.HandleFunc("/api/auth/me", s.withCORS(s.handleAuthMe))
+	mux.HandleFunc("/api/auth/logout", s.withCORS(s.handleAuthLogout))
+	mux.HandleFunc("/api/auth/password/request-reset", s.withCORS(s.handleAuthRequestPasswordReset))
+	mux.HandleFunc("/api/auth/password/reset", s.withCORS(s.handleAuthResetPassword))
+	// Admin
+	mux.HandleFunc("/api/admin/overview", s.withCORS(s.handleAdminOverview))
+	// Blog
+	mux.HandleFunc("/api/blog/posts", s.withCORS(s.handleBlogPosts))
+	mux.HandleFunc("/api/blog/posts/", s.withCORS(s.handleBlogPost))
+	// Forum
+	mux.HandleFunc("/api/forum/categories", s.withCORS(s.handleForumCategories))
+	mux.HandleFunc("/api/forum/topics", s.withCORS(s.handleForumTopics))
+	mux.HandleFunc("/api/forum/topics/", s.withCORS(s.handleForumTopicRoutes))
+	mux.HandleFunc("/api/forum/posts/", s.withCORS(s.handleForumPostRoutes))
+	// Uploads
+	mux.HandleFunc("/api/uploads", s.withCORS(s.handleUploads))
+	mux.Handle("/uploads/", http.StripPrefix("/uploads/", http.FileServer(http.Dir(uploadDir))))
+
+	addr := ":" + port
+	log.Printf("GCSS backend listening on %s", addr)
+	log.Printf("CORS origins: %s", corsOrigins)
+	log.Printf("Data file: %s", dataFile)
+	log.Printf("DB path: %s", dbPath)
+	log.Printf("Upload dir: %s", uploadDir)
+
+	// Basic timeouts for safety.
+	h := http.TimeoutHandler(mux, 15*time.Second, `{"error":"timeout"}`)
+	srv := &http.Server{
+		Addr:              addr,
+		Handler:           h,
+		ReadHeaderTimeout: 5 * time.Second,
+		IdleTimeout:       60 * time.Second,
+	}
+
+	if err := srv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
+		log.Fatalf("server error: %v", err)
+	}
+}
+
+func (s *server) handleHealth(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
+}
+
+func (s *server) handleRoot(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "not found"})
+		return
+	}
+	if r.Method != http.MethodGet {
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
+		return
+	}
+
+	writeJSON(w, http.StatusOK, map[string]interface{}{
+		"name":    "gcss-backend",
+		"status":  "ok",
+		"healthz": "/healthz",
+		"api": map[string]string{
+			"contact":            "/api/contact",
+			"payment_request":    "/api/requests/payment",
+			"language_request":   "/api/requests/language",
+			"auth_register":      "/api/auth/register",
+			"auth_login":         "/api/auth/login",
+			"auth_me":            "/api/auth/me",
+			"auth_logout":        "/api/auth/logout",
+			"auth_reset_request": "/api/auth/password/request-reset",
+			"auth_reset":         "/api/auth/password/reset",
+			"admin_overview":     "/api/admin/overview",
+			"blog_posts":         "/api/blog/posts",
+			"blog_post":          "/api/blog/posts/{slug}",
+			"forum_categories":   "/api/forum/categories",
+			"forum_topics":       "/api/forum/topics?category={slug}",
+			"forum_topic":        "/api/forum/topics/{categorySlug}/{topicSlug}",
+			"forum_replies":      "/api/forum/topics/{categorySlug}/{topicSlug}/replies",
+		},
+	})
+}
+
+func (s *server) handleContact(w http.ResponseWriter, r *http.Request) {
+	if !methodOrOptions(w, r, http.MethodPost) {
+		return
+	}
+
+	var req ContactRequest
+	if err := decodeJSON(r, &req); err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+
+	// Minimal validation
+	if strings.TrimSpace(req.FirstName) == "" || strings.TrimSpace(req.LastName) == "" || strings.TrimSpace(req.Email) == "" || strings.TrimSpace(req.Phone) == "" || strings.TrimSpace(req.Country) == "" {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "missing required fields"})
+		return
+	}
+
+	if err := s.appendRecord(r, "contact", req); err != nil {
+		log.Printf("append record failed: %v", err)
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "failed to store request"})
+		return
+	}
+
+	writeJSON(w, http.StatusAccepted, map[string]string{"status": "received"})
+}
+
+func (s *server) handlePaymentRequest(w http.ResponseWriter, r *http.Request) {
+	if !methodOrOptions(w, r, http.MethodPost) {
+		return
+	}
+
+	var req PaymentRequest
+	if err := decodeJSON(r, &req); err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+	if strings.TrimSpace(req.Method) == "" || strings.TrimSpace(req.Country) == "" || strings.TrimSpace(req.Email) == "" {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "missing required fields"})
+		return
+	}
+
+	if err := s.appendRecord(r, "payment_request", req); err != nil {
+		log.Printf("append record failed: %v", err)
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "failed to store request"})
+		return
+	}
+
+	writeJSON(w, http.StatusAccepted, map[string]string{"status": "received"})
+}
+
+func (s *server) handleLanguageRequest(w http.ResponseWriter, r *http.Request) {
+	if !methodOrOptions(w, r, http.MethodPost) {
+		return
+	}
+
+	var req LanguageRequest
+	if err := decodeJSON(r, &req); err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+	if strings.TrimSpace(req.Name) == "" || strings.TrimSpace(req.Email) == "" {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "missing required fields"})
+		return
+	}
+
+	if err := s.appendRecord(r, "language_request", req); err != nil {
+		log.Printf("append record failed: %v", err)
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "failed to store request"})
+		return
+	}
+
+	writeJSON(w, http.StatusAccepted, map[string]string{"status": "received"})
+}
+
+func (s *server) appendRecord(r *http.Request, typ string, payload interface{}) error {
+	rec := StoredRecord{
+		Type:      typ,
+		CreatedAt: time.Now().UTC(),
+		IP:        clientIP(r),
+		UA:        r.UserAgent(),
+		Payload:   payload,
+	}
+	// Primary storage: SQLite
+	if s.store != nil {
+		if err := s.store.InsertFormRequest(r.Context(), rec.Type, rec.CreatedAt, rec.IP, rec.UA, payload); err != nil {
+			return err
+		}
+	}
+
+	// Secondary storage: JSONL file (useful as a simple audit log)
+	f, err := os.OpenFile(s.dataFile, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	bw := bufio.NewWriter(f)
+	defer bw.Flush()
+
+	b, err := json.Marshal(rec)
+	if err != nil {
+		return err
+	}
+	_, err = bw.Write(append(b, '\n'))
+	return err
+}
+
+func (s *server) withCORS(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		origin := r.Header.Get("Origin")
+		if origin != "" {
+			if s.allowAnyOrigin {
+				w.Header().Set("Access-Control-Allow-Origin", origin)
+				w.Header().Set("Vary", "Origin")
+			} else {
+				if _, ok := s.allowedOrigins[origin]; ok {
+					w.Header().Set("Access-Control-Allow-Origin", origin)
+					w.Header().Set("Vary", "Origin")
+				}
+			}
+			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+			w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+		}
+
+		// Security-ish defaults for JSON APIs
+		w.Header().Set("X-Content-Type-Options", "nosniff")
+
+		if r.Method == http.MethodOptions {
+			w.WriteHeader(http.StatusNoContent)
+			return
+		}
+
+		next(w, r)
+	}
+}
+
+func (s *server) handleAuthRegister(w http.ResponseWriter, r *http.Request) {
+	if !methodOrOptions(w, r, http.MethodPost) {
+		return
+	}
+
+	var req struct {
+		Username  string `json:"username"`
+		Password  string `json:"password"`
+		FirstName string `json:"firstName"`
+		LastName  string `json:"lastName"`
+		Email     string `json:"email"`
+		Phone     string `json:"phone"`
+		Company   string `json:"company"`
+	}
+	if err := decodeJSON(r, &req); err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+
+	user, err := s.store.CreateUser(r.Context(), req.Username, req.Email, req.FirstName, req.LastName, req.Phone, req.Company, req.Password)
+	if err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+	sess, err := s.store.CreateSession(r.Context(), user.ID, 30*24*time.Hour)
+	if err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "failed to create session"})
+		return
+	}
+	writeJSON(w, http.StatusCreated, map[string]interface{}{"user": user, "session": sess})
+}
+
+func (s *server) handleAuthLogin(w http.ResponseWriter, r *http.Request) {
+	if !methodOrOptions(w, r, http.MethodPost) {
+		return
+	}
+	var req struct {
+		Identifier string `json:"identifier"`
+		Password   string `json:"password"`
+	}
+	if err := decodeJSON(r, &req); err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+
+	user, err := s.store.AuthenticateUser(r.Context(), req.Identifier, req.Password)
+	if err != nil {
+		status := http.StatusBadRequest
+		if errors.Is(err, store.ErrInvalidCredentials) {
+			status = http.StatusUnauthorized
+		}
+		writeJSON(w, status, map[string]string{"error": err.Error()})
+		return
+	}
+	sess, err := s.store.CreateSession(r.Context(), user.ID, 30*24*time.Hour)
+	if err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "failed to create session"})
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]interface{}{"user": user, "session": sess})
+}
+
+func (s *server) handleAuthMe(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
+		return
+	}
+	token := bearerToken(r)
+	user, err := s.store.GetUserBySessionToken(r.Context(), token)
+	if err != nil {
+		writeJSON(w, http.StatusUnauthorized, map[string]string{"error": "unauthorized"})
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]interface{}{"user": user})
+}
+
+func (s *server) handleAuthLogout(w http.ResponseWriter, r *http.Request) {
+	if !methodOrOptions(w, r, http.MethodPost) {
+		return
+	}
+	token := bearerToken(r)
+	_ = s.store.RevokeSession(r.Context(), token)
+	writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
+}
+
+func (s *server) handleAuthRequestPasswordReset(w http.ResponseWriter, r *http.Request) {
+	if !methodOrOptions(w, r, http.MethodPost) {
+		return
+	}
+	var req struct {
+		Email string `json:"email"`
+	}
+	if err := decodeJSON(r, &req); err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+	code, expiresAt, _, err := s.store.CreatePasswordReset(r.Context(), req.Email, 15*time.Minute)
+	if err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+	resp := map[string]interface{}{"status": "ok", "expiresAt": expiresAt}
+	if truthyEnv("AUTH_RETURN_RESET_CODE") && code != "" {
+		resp["demoCode"] = code
+	}
+	writeJSON(w, http.StatusOK, resp)
+}
+
+func (s *server) handleAuthResetPassword(w http.ResponseWriter, r *http.Request) {
+	if !methodOrOptions(w, r, http.MethodPost) {
+		return
+	}
+	var req struct {
+		Email       string `json:"email"`
+		Code        string `json:"code"`
+		NewPassword string `json:"newPassword"`
+	}
+	if err := decodeJSON(r, &req); err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+	if err := s.store.ResetPasswordWithCode(r.Context(), req.Email, req.Code, req.NewPassword); err != nil {
+		status := http.StatusBadRequest
+		if errors.Is(err, store.ErrInvalidResetCode) {
+			status = http.StatusUnauthorized
+		}
+		writeJSON(w, status, map[string]string{"error": err.Error()})
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
+}
+
+func (s *server) requireAdmin(w http.ResponseWriter, r *http.Request) (*store.AuthUser, bool) {
+	token := bearerToken(r)
+	user, err := s.store.GetUserBySessionToken(r.Context(), token)
+	if err != nil {
+		writeJSON(w, http.StatusUnauthorized, map[string]string{"error": "unauthorized"})
+		return nil, false
+	}
+	if strings.ToLower(strings.TrimSpace(user.Role)) != "admin" {
+		writeJSON(w, http.StatusForbidden, map[string]string{"error": "forbidden"})
+		return nil, false
+	}
+	return user, true
+}
+
+func (s *server) handleAdminOverview(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
+		return
+	}
+	if _, ok := s.requireAdmin(w, r); !ok {
+		return
+	}
+	overview, err := s.store.GetAdminOverview(r.Context())
+	if err != nil {
+		log.Printf("GetAdminOverview error: %v", err)
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "failed to load overview"})
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]interface{}{"overview": overview})
+}
+
+func bearerToken(r *http.Request) string {
+	auth := strings.TrimSpace(r.Header.Get("Authorization"))
+	if auth == "" {
+		return ""
+	}
+	parts := strings.SplitN(auth, " ", 2)
+	if len(parts) != 2 {
+		return ""
+	}
+	if strings.ToLower(parts[0]) != "bearer" {
+		return ""
+	}
+	return strings.TrimSpace(parts[1])
+}
+
+func truthyEnv(key string) bool {
+	v := strings.ToLower(strings.TrimSpace(os.Getenv(key)))
+	switch v {
+	case "1", "true", "yes", "y", "on":
+		return true
+	default:
+		return false
+	}
+}
+
+func (s *server) handleBlogPosts(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
+		return
+	}
+	locale := r.URL.Query().Get("locale")
+	tag := r.URL.Query().Get("tag")
+	limit := parseIntDefault(r.URL.Query().Get("limit"), 20)
+
+	posts, err := s.store.ListBlogPosts(r.Context(), locale, tag, limit)
+	if err != nil {
+		log.Printf("ListBlogPosts error: %v", err)
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "failed to list posts"})
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]interface{}{"posts": posts})
+}
+
+func (s *server) handleBlogPost(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
+		return
+	}
+	slug := strings.TrimPrefix(r.URL.Path, "/api/blog/posts/")
+	slug = strings.Trim(slug, "/")
+	if slug == "" {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "not found"})
+		return
+	}
+	locale := r.URL.Query().Get("locale")
+
+	post, err := s.store.GetBlogPost(r.Context(), locale, slug)
+	if err != nil {
+		log.Printf("GetBlogPost error: %v", err)
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "failed to load post"})
+		return
+	}
+	if post == nil {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "not found"})
+		return
+	}
+	writeJSON(w, http.StatusOK, post)
+}
+
+func (s *server) handleForumCategories(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
+		return
+	}
+	locale := r.URL.Query().Get("locale")
+	cats, err := s.store.ListForumCategories(r.Context(), locale)
+	if err != nil {
+		log.Printf("ListForumCategories error: %v", err)
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "failed to list categories"})
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]interface{}{"categories": cats})
+}
+
+func (s *server) handleForumTopics(w http.ResponseWriter, r *http.Request) {
+	// Routes:
+	// - GET  /api/forum/topics?locale=&category=&q=&sort=&limit=
+	// - POST /api/forum/topics
+	if r.Method == http.MethodGet {
+		locale := r.URL.Query().Get("locale")
+		category := r.URL.Query().Get("category")
+		q := r.URL.Query().Get("q")
+		sort := r.URL.Query().Get("sort")
+		limit := parseIntDefault(r.URL.Query().Get("limit"), 20)
+
+		topics, err := s.store.ListForumTopics(r.Context(), locale, category, q, sort, limit)
+		if err != nil {
+			log.Printf("ListForumTopics error: %v", err)
+			writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "failed to list topics"})
+			return
+		}
+		writeJSON(w, http.StatusOK, map[string]interface{}{"topics": topics})
+		return
+	}
+
+	if !methodOrOptions(w, r, http.MethodPost) {
+		return
+	}
+
+	var req struct {
+		Locale     string   `json:"locale"`
+		Category   string   `json:"categorySlug"`
+		Title      string   `json:"title"`
+		BodyMD     string   `json:"bodyMd"`
+		TopicType  string   `json:"topicType"`
+		Tags       []string `json:"tags"`
+		AuthorName string   `json:"authorName"`
+	}
+	if err := decodeJSON(r, &req); err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+
+	authorName := strings.TrimSpace(req.AuthorName)
+	if token := bearerToken(r); token != "" {
+		if u, err := s.store.GetUserBySessionToken(r.Context(), token); err == nil && u != nil {
+			authorName = u.Username
+		}
+	}
+
+	topic, err := s.store.CreateForumTopic(r.Context(), req.Locale, req.Category, req.Title, req.BodyMD, req.TopicType, authorName, req.Tags)
+	if err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+	if topic == nil {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "not found"})
+		return
+	}
+	writeJSON(w, http.StatusAccepted, map[string]interface{}{"status": "received", "topic": topic})
+}
+
+func (s *server) handleForumTopicRoutes(w http.ResponseWriter, r *http.Request) {
+	// Routes:
+	// - GET  /api/forum/topics/{categorySlug}/{topicSlug}
+	// - POST /api/forum/topics/{categorySlug}/{topicSlug}/replies
+	path := strings.TrimPrefix(r.URL.Path, "/api/forum/topics/")
+	path = strings.Trim(path, "/")
+	parts := strings.Split(path, "/")
+	if len(parts) < 2 {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "not found"})
+		return
+	}
+	categorySlug := parts[0]
+	topicSlug := parts[1]
+	locale := r.URL.Query().Get("locale")
+
+	if len(parts) == 2 {
+		if r.Method != http.MethodGet {
+			writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
+			return
+		}
+		topic, posts, err := s.store.GetForumTopic(r.Context(), locale, categorySlug, topicSlug)
+		if err != nil {
+			log.Printf("GetForumTopic error: %v", err)
+			writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "failed to load topic"})
+			return
+		}
+		if topic == nil {
+			writeJSON(w, http.StatusNotFound, map[string]string{"error": "not found"})
+			return
+		}
+		writeJSON(w, http.StatusOK, map[string]interface{}{"topic": topic, "posts": posts})
+		return
+	}
+
+	if len(parts) == 3 && parts[2] == "replies" {
+		if !methodOrOptions(w, r, http.MethodPost) {
+			return
+		}
+		var req struct {
+			AuthorName string `json:"authorName"`
+			BodyMD     string `json:"bodyMd"`
+			ParentID   *int64 `json:"parentId"`
+			Locale     string `json:"locale,omitempty"`
+		}
+		if err := decodeJSON(r, &req); err != nil {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+			return
+		}
+		useLocale := locale
+		if strings.TrimSpace(req.Locale) != "" {
+			useLocale = req.Locale
+		}
+
+		authorName := strings.TrimSpace(req.AuthorName)
+		if token := bearerToken(r); token != "" {
+			if u, err := s.store.GetUserBySessionToken(r.Context(), token); err == nil && u != nil {
+				authorName = u.Username
+			}
+		}
+
+		post, err := s.store.AddForumReply(r.Context(), useLocale, categorySlug, topicSlug, authorName, req.BodyMD, req.ParentID)
+		if err != nil {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+			return
+		}
+		if post == nil {
+			writeJSON(w, http.StatusNotFound, map[string]string{"error": "not found"})
+			return
+		}
+		writeJSON(w, http.StatusAccepted, map[string]interface{}{"status": "received", "post": post})
+		return
+	}
+
+	writeJSON(w, http.StatusNotFound, map[string]string{"error": "not found"})
+}
+
+func (s *server) handleForumPostRoutes(w http.ResponseWriter, r *http.Request) {
+	// Routes:
+	// - POST /api/forum/posts/{postId}/vote
+	path := strings.TrimPrefix(r.URL.Path, "/api/forum/posts/")
+	path = strings.Trim(path, "/")
+	parts := strings.Split(path, "/")
+	if len(parts) != 2 || parts[1] != "vote" {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "not found"})
+		return
+	}
+	if !methodOrOptions(w, r, http.MethodPost) {
+		return
+	}
+
+	var postID int64
+	if _, err := fmt.Sscanf(parts[0], "%d", &postID); err != nil || postID <= 0 {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "invalid post id"})
+		return
+	}
+
+	var req struct {
+		Delta int `json:"delta"`
+	}
+	if err := decodeJSON(r, &req); err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+	if req.Delta != 1 && req.Delta != -1 {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "delta must be 1 or -1"})
+		return
+	}
+
+	likeCount, found, err := s.store.VoteForumPost(r.Context(), postID, req.Delta)
+	if err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+	if !found {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "not found"})
+		return
+	}
+
+	writeJSON(w, http.StatusOK, map[string]interface{}{"status": "ok", "likeCount": likeCount})
+}
+
+func (s *server) handleUploads(w http.ResponseWriter, r *http.Request) {
+	if !methodOrOptions(w, r, http.MethodPost) {
+		return
+	}
+
+	ct := strings.ToLower(strings.TrimSpace(r.Header.Get("Content-Type")))
+	if !strings.HasPrefix(ct, "multipart/form-data") {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "expected multipart/form-data"})
+		return
+	}
+
+	// 10MB max payload.
+	r.Body = http.MaxBytesReader(w, r.Body, 10<<20)
+	if err := r.ParseMultipartForm(10 << 20); err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "invalid multipart form"})
+		return
+	}
+
+	f, fh, err := r.FormFile("file")
+	if err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "missing file"})
+		return
+	}
+	defer func() { _ = f.Close() }()
+
+	ext := strings.ToLower(filepath.Ext(fh.Filename))
+	switch ext {
+	case ".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg":
+		// ok
+	default:
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "unsupported file type"})
+		return
+	}
+
+	name := fmt.Sprintf("%d%s", time.Now().UTC().UnixNano(), ext)
+	path := filepath.Join(s.uploadDir, name)
+	out, err := os.Create(path)
+	if err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "failed to store upload"})
+		return
+	}
+	defer func() { _ = out.Close() }()
+
+	if _, err := io.Copy(out, f); err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "failed to write upload"})
+		return
+	}
+
+	scheme := "http"
+	if r.TLS != nil {
+		scheme = "https"
+	}
+	if xf := strings.TrimSpace(r.Header.Get("X-Forwarded-Proto")); xf != "" {
+		parts := strings.Split(xf, ",")
+		if len(parts) > 0 {
+			scheme = strings.TrimSpace(parts[0])
+		}
+	}
+
+	url := fmt.Sprintf("%s://%s/uploads/%s", scheme, r.Host, name)
+	writeJSON(w, http.StatusOK, map[string]string{"status": "ok", "url": url})
+}
+
+func decodeJSON(r *http.Request, dst interface{}) error {
+	// Limit body size (1MB) to avoid abuse.
+	dec := json.NewDecoder(io.LimitReader(r.Body, 1<<20))
+	dec.DisallowUnknownFields()
+	if err := dec.Decode(dst); err != nil {
+		return fmt.Errorf("invalid json: %w", err)
+	}
+	// Ensure no trailing junk
+	var extra interface{}
+	if err := dec.Decode(&extra); err != io.EOF {
+		if err == nil {
+			return errors.New("invalid json: multiple values")
+		}
+		return errors.New("invalid json: trailing data")
+	}
+	return nil
+}
+
+func writeJSON(w http.ResponseWriter, status int, v interface{}) {
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(status)
+	_ = json.NewEncoder(w).Encode(v)
+}
+
+func methodOrOptions(w http.ResponseWriter, r *http.Request, method string) bool {
+	if r.Method == http.MethodOptions {
+		w.WriteHeader(http.StatusNoContent)
+		return false
+	}
+	if subtle.ConstantTimeCompare([]byte(r.Method), []byte(method)) != 1 {
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
+		return false
+	}
+	return true
+}
+
+func getenvDefault(key, def string) string {
+	v := strings.TrimSpace(os.Getenv(key))
+	if v == "" {
+		return def
+	}
+	return v
+}
+
+func ensureParentDir(filePath string) error {
+	dir := filepath.Dir(filePath)
+	if dir == "." {
+		return nil
+	}
+	return os.MkdirAll(dir, 0755)
+}
+
+func parseOrigins(csv string) (map[string]struct{}, bool) {
+	m := map[string]struct{}{}
+	parts := strings.Split(csv, ",")
+	for _, p := range parts {
+		o := strings.TrimSpace(p)
+		if o == "" {
+			continue
+		}
+		if o == "*" {
+			return m, true
+		}
+		m[o] = struct{}{}
+	}
+	return m, false
+}
+
+func clientIP(r *http.Request) string {
+	// If behind a trusted proxy, you can extend this to use X-Forwarded-For.
+	host, _, err := net.SplitHostPort(r.RemoteAddr)
+	if err == nil {
+		return host
+	}
+	if ip := net.ParseIP(r.RemoteAddr); ip != nil {
+		return r.RemoteAddr
+	}
+	return ""
+}
+
+func parseIntDefault(s string, def int) int {
+	s = strings.TrimSpace(s)
+	if s == "" {
+		return def
+	}
+	var n int
+	_, err := fmt.Sscanf(s, "%d", &n)
+	if err != nil {
+		return def
+	}
+	return n
+}

@@ -6,9 +6,32 @@
 # API Configuration
 NEXT_PUBLIC_API_URL=https://api.gcss.hk/api
 NEXT_PUBLIC_SITE_URL=https://gcss.hk
+
+# Feature flags
+# When enabled, forms (Contact / Payment request / Language request) will POST to NEXT_PUBLIC_API_URL.
+# When disabled or unset, forms behave as demo-only (show a success state without network calls).
+NEXT_PUBLIC_FORMS_API=false
+
+# When enabled, auth pages (Login / Register / Forgot Password) will call the backend auth endpoints.
+# When disabled or unset, auth pages behave as demo-only.
+NEXT_PUBLIC_AUTH_API=false
 ```
 
 ## Deployment & Scripts
+
+### Static export (out/)
+
+This project uses **Next.js static export** when deploying (generates an `out/` folder).
+
+- `npm run build` runs a normal production build (**no export**) for faster iteration and to avoid Windows/OneDrive occasionally locking `out/` (EBUSY).
+- `npm run export` runs the build with static export enabled (creates/refreshes `out/`).
+- `npm run deploy` runs `npm run export` and then uploads `out/` via SFTP.
+
+```env
+# When set to 1, Next.js will run with output: 'export' and generate the out/ directory.
+# This is set automatically by `npm run export` / `npm run deploy`.
+GCSS_EXPORT=1
+```
 
 ### SFTP Deployment (deploy.js)
 

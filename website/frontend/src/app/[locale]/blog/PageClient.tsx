@@ -1,22 +1,54 @@
 'use client';
 
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useEffect, useMemo, useState } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
+import { Link } from '@/i18n/navigation';
+import { apiListBlogPosts, type ApiBlogPost } from '@/lib/api/contentApi';
+import { listStaticBlogPosts } from '@/lib/content/staticContent';
 
 export default function BlogPage() {
+  const locale = useLocale();
   const t = useTranslations();
   const [activeFilter, setActiveFilter] = useState('all');
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
+  const [posts, setPosts] = useState<ApiBlogPost[]>(() => listStaticBlogPosts(locale));
+  const [loading, setLoading] = useState(false);
+
+  const filteredPosts = useMemo(() => {
+    if (activeFilter === 'all') return posts;
+    return posts.filter((p) => (p.tags || []).includes(activeFilter));
+  }, [posts, activeFilter]);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function run() {
+      setLoading(true);
+      try {
+        const data = await apiListBlogPosts(locale, activeFilter === 'all' ? undefined : activeFilter, 20);
+        if (!cancelled) setPosts(data);
+      } catch {
+        // Fall back to static content.
+        if (!cancelled) setPosts(listStaticBlogPosts(locale));
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+    void run();
+    return () => {
+      cancelled = true;
+    };
+  }, [locale, activeFilter]);
+
   const filters = [
     { key: 'all', label: t('blog.filter.all') },
     { key: 'product', label: t('blog.filter.product') },
-    { key: 'industry', label: t('blog.filter.industry') },
-    { key: 'guides', label: t('blog.filter.guides') },
-    { key: 'cases', label: t('blog.filter.cases') },
+    { key: 'operations', label: t('blog.filter.operations') },
+    { key: 'ocpp', label: t('blog.filter.ocpp') },
+    { key: 'payments', label: t('blog.filter.payments') },
   ];
 
   const handleSubscribe = (e: React.FormEvent) => {
@@ -62,16 +94,22 @@ export default function BlogPage() {
                 <ImagePlaceholder variant="hero" aspectRatio="16/9" label={t('blog.featured.cat')} />
               </div>
               <div className="featured-content">
-                <span className="post-category">{t('blog.featured.cat')}</span>
-                <h2><a href="/blog">{t('blog.featured.title')}</a></h2>
-                <p>{t('blog.featured.desc')}</p>
+                <span className="post-category">{filteredPosts[0]?.tags?.[0] ?? t('blog.featured.cat')}</span>
+                <h2>
+                  {filteredPosts[0] ? (
+                    <Link href={`/blog/${filteredPosts[0].slug}`}>{filteredPosts[0].title}</Link>
+                  ) : (
+                    <span>{t('blog.featured.title')}</span>
+                  )}
+                </h2>
+                <p>{filteredPosts[0]?.excerpt ?? t('blog.featured.desc')}</p>
                 <div className="post-meta">
                   <div className="author">
                     <div className="author-avatar">G</div>
-                    <span>{t('blog.featured.team')}</span>
+                    <span>{filteredPosts[0]?.authorName ?? t('blog.featured.team')}</span>
                   </div>
-                  <span>Mar 15, 2026</span>
-                  <span>8 min read</span>
+                  <span>{filteredPosts[0]?.publishedAt ? new Date(filteredPosts[0].publishedAt).toLocaleDateString(locale) : '—'}</span>
+                  <span>{filteredPosts[0]?.tags?.length ? `${filteredPosts[0].tags.length} tags` : '—'}</span>
                 </div>
               </div>
             </div>
@@ -81,119 +119,41 @@ export default function BlogPage() {
           <ScrollAnimation>
             <div className="blog-grid">
 
-              <div className="blog-card">
-                <div className="blog-card-img">
-                  <ImagePlaceholder variant="dashboard" aspectRatio="16/9" label={t('blog.post1.cat')} />
-                </div>
-                <div className="blog-card-body">
-                  <span className="post-category cat-guide">{t('blog.post1.cat')}</span>
-                  <h3><a href="/blog">{t('blog.post1.title')}</a></h3>
-                  <p>{t('blog.post1.desc')}</p>
-                  <div className="post-meta" style={{ marginBottom: 12 }}>
-                    <span>Feb 28, 2026</span>
-                    <span>5 min read</span>
+              {loading ? (
+                <div className="muted">{t('blog.post.loading')}</div>
+              ) : filteredPosts.length === 0 ? (
+                <div className="muted">{t('blog.post.none')}</div>
+              ) : (
+                filteredPosts.slice(1).map((p, idx) => (
+                  <div className="blog-card" key={p.slug}>
+                    <div className="blog-card-img">
+                      <ImagePlaceholder
+                        variant={idx % 2 === 0 ? 'dashboard' : 'api'}
+                        aspectRatio="16/9"
+                        label={(p.tags?.[0] || 'blog').toUpperCase()}
+                      />
+                    </div>
+                    <div className="blog-card-body">
+                      <span className="post-category cat-guide">{p.tags?.[0] ?? 'Blog'}</span>
+                      <h3>
+                        <Link href={`/blog/${p.slug}`}>{p.title}</Link>
+                      </h3>
+                      <p>{p.excerpt}</p>
+                      <div className="post-meta blog-post-meta-tight">
+                        <span>{p.publishedAt ? new Date(p.publishedAt).toLocaleDateString(locale) : '—'}</span>
+                        <span>{p.tags?.length ? `${p.tags.length} tags` : '—'}</span>
+                      </div>
+                      <Link href={`/blog/${p.slug}`} className="read-more">
+                        <span>{t('blog.readmore')}</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                          <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                      </Link>
+                    </div>
                   </div>
-                  <a href="/blog" className="read-more">
-                    <span>{t('blog.readmore')}</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
-                  </a>
-                </div>
-              </div>
-
-              <div className="blog-card">
-                <div className="blog-card-img">
-                  <ImagePlaceholder variant="api" aspectRatio="16/9" label={t('blog.post2.cat')} />
-                </div>
-                <div className="blog-card-body">
-                  <span className="post-category cat-news">{t('blog.post2.cat')}</span>
-                  <h3><a href="/blog">{t('blog.post2.title')}</a></h3>
-                  <p>{t('blog.post2.desc')}</p>
-                  <div className="post-meta" style={{ marginBottom: 12 }}>
-                    <span>Feb 20, 2026</span>
-                    <span>4 min read</span>
-                  </div>
-                  <a href="/blog" className="read-more">
-                    <span>{t('blog.readmore')}</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
-                  </a>
-                </div>
-              </div>
-
-              <div className="blog-card">
-                <div className="blog-card-img">
-                  <ImagePlaceholder variant="ev-station" aspectRatio="16/9" label={t('blog.post3.cat')} />
-                </div>
-                <div className="blog-card-body">
-                  <span className="post-category cat-case">{t('blog.post3.cat')}</span>
-                  <h3><a href="/blog">{t('blog.post3.title')}</a></h3>
-                  <p>{t('blog.post3.desc')}</p>
-                  <div className="post-meta" style={{ marginBottom: 12 }}>
-                    <span>Feb 10, 2026</span>
-                    <span>6 min read</span>
-                  </div>
-                  <a href="/blog" className="read-more">
-                    <span>{t('blog.readmore')}</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
-                  </a>
-                </div>
-              </div>
-
-              <div className="blog-card">
-                <div className="blog-card-img">
-                  <ImagePlaceholder variant="analytics" aspectRatio="16/9" label={t('blog.post4.cat')} />
-                </div>
-                <div className="blog-card-body">
-                  <span className="post-category cat-guide">{t('blog.post4.cat')}</span>
-                  <h3><a href="/blog">{t('blog.post4.title')}</a></h3>
-                  <p>{t('blog.post4.desc')}</p>
-                  <div className="post-meta" style={{ marginBottom: 12 }}>
-                    <span>Jan 28, 2026</span>
-                    <span>7 min read</span>
-                  </div>
-                  <a href="/blog" className="read-more">
-                    <span>{t('blog.readmore')}</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
-                  </a>
-                </div>
-              </div>
-
-              <div className="blog-card">
-                <div className="blog-card-img">
-                  <ImagePlaceholder variant="phone" aspectRatio="16/9" label={t('blog.post5.cat')} />
-                </div>
-                <div className="blog-card-body">
-                  <span className="post-category cat-product">{t('blog.post5.cat')}</span>
-                  <h3><a href="/blog">{t('blog.post5.title')}</a></h3>
-                  <p>{t('blog.post5.desc')}</p>
-                  <div className="post-meta" style={{ marginBottom: 12 }}>
-                    <span>Jan 15, 2026</span>
-                    <span>3 min read</span>
-                  </div>
-                  <a href="/blog" className="read-more">
-                    <span>{t('blog.readmore')}</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
-                  </a>
-                </div>
-              </div>
-
-              <div className="blog-card">
-                <div className="blog-card-img">
-                  <ImagePlaceholder variant="office" aspectRatio="16/9" label={t('blog.post6.cat')} />
-                </div>
-                <div className="blog-card-body">
-                  <span className="post-category cat-industry">{t('blog.post6.cat')}</span>
-                  <h3><a href="/blog">{t('blog.post6.title')}</a></h3>
-                  <p>{t('blog.post6.desc')}</p>
-                  <div className="post-meta" style={{ marginBottom: 12 }}>
-                    <span>Jan 5, 2026</span>
-                    <span>5 min read</span>
-                  </div>
-                  <a href="/blog" className="read-more">
-                    <span>{t('blog.readmore')}</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
-                  </a>
-                </div>
-              </div>
+                ))
+              )}
 
             </div>
           </ScrollAnimation>
@@ -203,7 +163,7 @@ export default function BlogPage() {
             <button className="page-btn active">1</button>
             <button className="page-btn">2</button>
             <button className="page-btn">3</button>
-            <button className="page-btn">
+            <button className="page-btn" aria-label={t('blog.pagination.next')} title={t('blog.pagination.next')}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6" /></svg>
             </button>
           </div>
@@ -217,7 +177,7 @@ export default function BlogPage() {
             <div className="newsletter">
               <span className="section-label">{t('blog.newsletter.label')}</span>
               <h2>{t('blog.newsletter.title')}</h2>
-              <p style={{ color: 'var(--text-tertiary)', marginTop: 8 }}>{t('blog.newsletter.desc')}</p>
+              <p className="blog-newsletter-desc">{t('blog.newsletter.desc')}</p>
               <form className="newsletter-form" onSubmit={handleSubscribe}>
                 <input
                   type="email"

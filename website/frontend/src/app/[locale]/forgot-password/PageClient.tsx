@@ -2,11 +2,14 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { Link } from '@/i18n/navigation';
 import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
+import { apiRequestPasswordReset, apiResetPassword, isAuthApiEnabled } from '@/lib/api/authApi';
 
 export default function ForgotPasswordPage() {
   const t = useTranslations();
+  const router = useRouter();
   const [step, setStep] = useState<1 | 2>(1);
   const [email, setEmail] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
@@ -15,21 +18,61 @@ export default function ForgotPasswordPage() {
   const [vcode, setVcode] = useState('');
   const [codeSent, setCodeSent] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
+  const [demoCode, setDemoCode] = useState<string | null>(null);
 
-  const handleSendCode = () => {
-    setCodeSent(true);
-    setTimeout(() => setCodeSent(false), 3000);
+  const handleSendCode = async () => {
+    setError('');
+    setDemoCode(null);
+
+    const useApi = isAuthApiEnabled();
+    if (!useApi) {
+      setCodeSent(true);
+      setTimeout(() => setCodeSent(false), 3000);
+      return;
+    }
+
+    try {
+      const res = await apiRequestPasswordReset(email);
+      if (res.demoCode) setDemoCode(res.demoCode);
+      setCodeSent(true);
+      setTimeout(() => setCodeSent(false), 3000);
+    } catch {
+      setError(t('forgot.errors.sendFailed'));
+    }
   };
 
   const handleVerify = (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
     setStep(2);
+    setVcode(verificationCode);
   };
 
-  const handleSetPassword = (e: React.FormEvent) => {
+  const handleSetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    setError('');
+
+    if (newPassword !== confirmPassword) {
+      setError(t('forgot.errors.passwordMismatch'));
+      return;
+    }
+
+    const useApi = isAuthApiEnabled();
+    if (!useApi) {
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 3000);
+      return;
+    }
+
+    try {
+      await apiResetPassword({ email, code: vcode, newPassword });
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 2000);
+      setTimeout(() => router.push('/login'), 650);
+    } catch {
+      setError(t('forgot.errors.resetFailed'));
+    }
   };
 
   return (
@@ -54,6 +97,18 @@ export default function ForgotPasswordPage() {
             <div>
               <h1>{t('forgot.title')}</h1>
               <p className="auth-subtitle">{t('forgot.desc')}</p>
+
+              {error && (
+                <div className="form-banner form-banner--error" style={{ marginBottom: 12 }}>
+                  {error}
+                </div>
+              )}
+              {demoCode && (
+                <div className="form-banner" style={{ marginBottom: 12 }}>
+                  {t('forgot.demoCode', { code: demoCode })}
+                </div>
+              )}
+
               <form onSubmit={handleVerify}>
                 <div className="form-group">
                   <label className="form-label">
@@ -85,7 +140,7 @@ export default function ForgotPasswordPage() {
                     onClick={handleSendCode}
                     disabled={codeSent}
                   >
-                    {codeSent ? 'Sent!' : t('forgot.sendcode')}
+                    {codeSent ? t('forgot.sent') : t('forgot.sendcode')}
                   </button>
                 </div>
                 <button
@@ -105,9 +160,15 @@ export default function ForgotPasswordPage() {
               <h1>{t('forgot.newpwTitle')}</h1>
               <p className="auth-subtitle">{t('forgot.newpwDesc')}</p>
 
+              {error && (
+                <div className="form-banner form-banner--error" style={{ marginBottom: 12 }}>
+                  {error}
+                </div>
+              )}
+
               {submitted && (
                 <div style={{ padding: '12px 16px', background: 'rgba(16,185,129,0.1)', border: '1px solid #10B981', borderRadius: 8, marginBottom: 16, color: '#065F46', fontWeight: 600, fontSize: '0.9rem' }}>
-                  Password reset successfully! Redirecting to login...
+                  {t('forgot.success')}
                 </div>
               )}
 

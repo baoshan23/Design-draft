@@ -3,10 +3,12 @@ import type { NextConfig } from 'next';
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
-const isProduction = process.env.NODE_ENV === 'production';
+const shouldExport = process.env.GCSS_EXPORT === '1';
 
 const nextConfig: NextConfig = {
-  output: isProduction ? 'export' : undefined,
+  // Static export is opt-in because Windows/OneDrive can lock the output folder (out/)
+  // and cause non-deploy builds to fail with EBUSY.
+  output: shouldExport ? 'export' : undefined,
   images: {
     unoptimized: true,
   },

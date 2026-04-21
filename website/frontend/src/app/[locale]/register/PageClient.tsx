@@ -2,11 +2,13 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
 import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
+import { apiRegister, isAuthApiEnabled, setAuthToken } from '@/lib/api/authApi';
 
 export default function RegisterPage() {
   const t = useTranslations();
+  const router = useRouter();
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -24,15 +26,41 @@ export default function RegisterPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setError(t('register.errors.passwordMismatch'));
       return;
     }
     setError('');
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+
+    const useApi = isAuthApiEnabled();
+    if (!useApi) {
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 3000);
+      return;
+    }
+
+    try {
+      const { session, user } = await apiRegister({
+        username: formData.username,
+        password: formData.password,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+      });
+      setAuthToken(session.token);
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 2000);
+
+      const role = (user?.role || '').toLowerCase();
+      const nextPath = role === 'admin' ? '/admin' : '/demo';
+      setTimeout(() => router.push(nextPath), 450);
+    } catch {
+      setError(t('register.errors.generic'));
+    }
   };
 
   return (
@@ -66,7 +94,7 @@ export default function RegisterPage() {
 
           {submitted && (
             <div style={{ padding: '12px 16px', background: 'rgba(16,185,129,0.1)', border: '1px solid #10B981', borderRadius: 8, marginBottom: 16, color: '#065F46', fontWeight: 600, fontSize: '0.9rem' }}>
-              Account created successfully! Redirecting to login...
+              {t('register.success')}
             </div>
           )}
 

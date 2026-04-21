@@ -18,15 +18,55 @@ export default function ContactPage() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    setSubmitError('');
+    setSubmitting(true);
+
+    const useApi = (process.env.NEXT_PUBLIC_FORMS_API || '').toLowerCase();
+    if (useApi !== '1' && useApi !== 'true' && useApi !== 'yes') {
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 3000);
+      setSubmitting(false);
+      return;
+    }
+
+    try {
+      const apiBase = process.env.NEXT_PUBLIC_API_URL || '/api';
+      const res = await fetch(`${apiBase}/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        const text = await res.text().catch(() => '');
+        throw new Error(text || `Request failed (${res.status})`);
+      }
+
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 3000);
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phoneCode: '+852',
+        phone: '',
+        country: '',
+        message: '',
+      });
+    } catch {
+      setSubmitError(t('contact.form.error'));
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const QrPlaceholder = () => (
@@ -112,12 +152,12 @@ export default function ContactPage() {
                 </div>
                 <h3>{t('contact.quick.title')}</h3>
                 <p>{t('contact.quick.desc')}</p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'center', marginTop: 8 }}>
-                  <a href="mailto:support@gcss.hk" className="btn btn-primary btn-sm" style={{ minWidth: 160 }}>
+                <div className="contact-quick-actions">
+                  <a href="mailto:support@gcss.hk" className="btn btn-primary btn-sm contact-quick-btn">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
                     <span>{t('contact.quick.email')}</span>
                   </a>
-                  <Link href="/forum" className="btn btn-secondary btn-sm" style={{ minWidth: 160 }}>
+                  <Link href="/forum" className="btn btn-secondary btn-sm contact-quick-btn">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>
                     <span>{t('contact.quick.forum')}</span>
                   </Link>
@@ -173,7 +213,7 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div style={{ marginTop: 32 }}>
+                <div className="contact-info-image">
                   <ImagePlaceholder variant="team" aspectRatio="16/9" label={t('contact.office.title')} />
                 </div>
               </div>
@@ -183,36 +223,42 @@ export default function ContactPage() {
                 <h3>{t('contact.form.card.title')}</h3>
 
                 {submitted && (
-                  <div style={{ padding: '12px 16px', background: 'rgba(16,185,129,0.1)', border: '1px solid #10B981', borderRadius: 8, marginBottom: 16, color: '#065F46', fontWeight: 600, fontSize: '0.9rem' }}>
+                  <div className="form-banner form-banner--success">
                     {t('contact.form.success')}
+                  </div>
+                )}
+
+                {submitError && (
+                  <div className="form-banner form-banner--error">
+                    {submitError}
                   </div>
                 )}
 
                 <form onSubmit={handleSubmit}>
                   <div className="form-row-2">
                     <div className="form-group">
-                      <label><span>{t('contact.form.firstname')}</span><span style={{ color: '#E6A817' }}>*</span></label>
-                      <input type="text" name="firstName" placeholder="John" required value={formData.firstName} onChange={handleChange} />
+                      <label htmlFor="contact-firstName"><span>{t('contact.form.firstname')}</span><span className="required-asterisk">*</span></label>
+                      <input id="contact-firstName" type="text" name="firstName" placeholder="John" required value={formData.firstName} onChange={handleChange} />
                     </div>
                     <div className="form-group">
-                      <label><span>{t('contact.form.lastname')}</span><span style={{ color: '#E6A817' }}>*</span></label>
-                      <input type="text" name="lastName" placeholder="Doe" required value={formData.lastName} onChange={handleChange} />
+                      <label htmlFor="contact-lastName"><span>{t('contact.form.lastname')}</span><span className="required-asterisk">*</span></label>
+                      <input id="contact-lastName" type="text" name="lastName" placeholder="Doe" required value={formData.lastName} onChange={handleChange} />
                     </div>
                   </div>
                   <div className="form-group">
-                    <label><span>{t('contact.form.workemail')}</span><span style={{ color: '#E6A817' }}>*</span></label>
-                    <input type="email" name="email" placeholder="john@company.com" required value={formData.email} onChange={handleChange} />
+                    <label htmlFor="contact-email"><span>{t('contact.form.workemail')}</span><span className="required-asterisk">*</span></label>
+                    <input id="contact-email" type="email" name="email" placeholder="john@company.com" required value={formData.email} onChange={handleChange} />
                   </div>
                   <div className="form-group">
-                    <label><span>{t('contact.form.phonenum')}</span><span style={{ color: '#E6A817' }}>*</span></label>
+                    <label htmlFor="contact-phone"><span>{t('contact.form.phonenum')}</span><span className="required-asterisk">*</span></label>
                     <div className="phone-field">
-                      <input type="text" className="code" value={formData.phoneCode} readOnly />
-                      <input type="tel" name="phone" placeholder="1234 5678" required value={formData.phone} onChange={handleChange} />
+                      <div className="code" aria-hidden="true">{formData.phoneCode}</div>
+                      <input id="contact-phone" type="tel" name="phone" placeholder="1234 5678" required value={formData.phone} onChange={handleChange} />
                     </div>
                   </div>
                   <div className="form-group">
-                    <label><span>{t('contact.form.country.label')}</span><span style={{ color: '#E6A817' }}>*</span></label>
-                    <select name="country" required value={formData.country} onChange={handleChange}>
+                    <label htmlFor="contact-country"><span>{t('contact.form.country.label')}</span><span className="required-asterisk">*</span></label>
+                    <select id="contact-country" name="country" required value={formData.country} onChange={handleChange}>
                       <option value="">{t('contact.form.country.select')}</option>
                       <option>Hong Kong</option>
                       <option>China</option>
@@ -233,12 +279,12 @@ export default function ContactPage() {
                     </select>
                   </div>
                   <div className="form-group">
-                    <label>{t('contact.form.help.label')}</label>
-                    <textarea name="message" placeholder={t('contact.form.help.placeholder')} value={formData.message} onChange={handleChange} />
+                    <label htmlFor="contact-message">{t('contact.form.help.label')}</label>
+                    <textarea id="contact-message" name="message" placeholder={t('contact.form.help.placeholder')} value={formData.message} onChange={handleChange} />
                   </div>
                   <button type="submit" className="submit-btn">
-                    <span>{t('contact.form.submit')}</span>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ display: 'inline', verticalAlign: 'middle', marginLeft: 6 }}><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
+                    <span>{submitting ? t('contact.form.submitting') : t('contact.form.submit')}</span>
+                    <svg className="contact-submit-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
                   </button>
                 </form>
               </div>
@@ -255,7 +301,7 @@ export default function ContactPage() {
             <div className="offices-section">
               <span className="section-label">{t('contact.office.label')}</span>
               <h2>{t('contact.office.title')}</h2>
-              <p style={{ maxWidth: 500, margin: '8px auto 0', color: 'var(--text-tertiary)' }}>{t('contact.office.desc')}</p>
+              <p className="contact-office-desc">{t('contact.office.desc')}</p>
 
               <div className="offices-grid">
                 <div className="office-card">
@@ -296,7 +342,7 @@ export default function ContactPage() {
         <ScrollAnimation>
           <div className="container">
             <h2>{t('contact.cta.title')}</h2>
-            <p style={{ maxWidth: 500, margin: '0 auto 28px' }}>{t('contact.cta.desc')}</p>
+            <p className="contact-cta-desc">{t('contact.cta.desc')}</p>
             <div className="cta-buttons">
               <Link href="/pricing" className="btn btn-primary btn-lg">{t('contact.cta.btn1')}</Link>
               <Link href={{ pathname: '/b2c', hash: 'demo' }} className="btn btn-secondary btn-lg">{t('contact.cta.btn2')}</Link>

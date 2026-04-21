@@ -2,6 +2,38 @@ const SftpClient = require('ssh2-sftp-client');
 const path = require('path');
 const fs = require('fs');
 
+function loadEnvFile(filePath) {
+  try {
+    if (!fs.existsSync(filePath)) return;
+    const content = fs.readFileSync(filePath, 'utf8');
+    for (const rawLine of content.split(/\r?\n/)) {
+      const line = rawLine.trim();
+      if (!line || line.startsWith('#')) continue;
+      const eq = line.indexOf('=');
+      if (eq <= 0) continue;
+
+      const key = line.slice(0, eq).trim();
+      let value = line.slice(eq + 1).trim();
+      if (!key) continue;
+
+      // Strip surrounding quotes
+      if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+        value = value.slice(1, -1);
+      }
+
+      if (process.env[key] === undefined) {
+        process.env[key] = value;
+      }
+    }
+  } catch {
+    // Ignore env load failures; deploy will validate required vars.
+  }
+}
+
+// Load local env for deploy (without adding a dependency on dotenv)
+loadEnvFile(path.join(__dirname, '..', '.env.local'));
+loadEnvFile(path.join(__dirname, '..', '.env'));
+
 const config = {
   host: process.env.SFTP_HOST || '47.242.75.250',
   port: parseInt(process.env.SFTP_PORT || '22'),

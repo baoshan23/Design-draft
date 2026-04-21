@@ -1,5 +1,6 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
+import Script from 'next/script';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -32,12 +33,17 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* External theme init — a plain <script src="..."> inside <head>
-            is render-blocking and runs synchronously before <body> is
-            parsed, so dark-mode applies before first paint.
-            Using next/script here triggers a React 19 "script inside
-            component" warning; the plain tag does not. */}
-        <script src="/theme-init.js" />
+        {/* Theme init needs to run before first paint to avoid flash.
+            React 19 warns about raw <script> tags in component output;
+            Next.js' <Script> integrates with App Router correctly. */}
+        <Script
+          id="gcss-theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html:
+              '(function(){try{var t=localStorage.getItem("gcss-theme");if(t==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();',
+          }}
+        />
       </head>
       <body>
         <NextIntlClientProvider messages={messages}>

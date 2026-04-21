@@ -226,7 +226,9 @@
       "countryPlaceholder": "e.g. Spain, Thailand, Singapore",
       "email": "Your Email",
       "submit": "Submit Request",
-      "submitted": "Request received ✓"
+      "submitting": "Submitting…",
+      "submitted": "Request received ✓",
+      "error": "Something went wrong. Please try again."
     }
   },
   "manufacturers": {
@@ -553,7 +555,10 @@
       "desc": "Submit a request and we'll add it to our roadmap.",
       "name": "Language Name",
       "email": "Your Email",
-      "submit": "Submit Request"
+      "submit": "Submit Request",
+      "submitting": "Submitting…",
+      "submitted": "Request received ✓",
+      "error": "Something went wrong. Please try again."
     },
     "app": {
       "title": "APP / H5 - Ultimate User Experience",
@@ -847,12 +852,24 @@
     "filter": {
       "all": "All Posts",
       "product": "Product Updates",
+      "operations": "Operations",
+      "ocpp": "OCPP",
+      "payments": "Payments",
       "news": "Industry News",
       "guide": "Guides",
       "case": "Case Studies",
       "industry": "Industry News",
       "guides": "Guides",
       "cases": "Case Studies"
+    },
+    "post": {
+      "loading": "Loading posts…",
+      "none": "No posts found.",
+      "back": "Back to blog",
+      "notFound": "Post not found."
+    },
+    "pagination": {
+      "next": "Next page"
     },
     "featured": {
       "cat": "Product Update",
@@ -946,7 +963,9 @@
         "placeholder": "Tell us about your project, the number of chargers you plan to manage, or any questions you have..."
       },
       "submit": "Send Message",
+      "submitting": "Sending…",
       "success": "Message sent successfully! We will get back to you within 24 hours.",
+      "error": "Something went wrong. Please try again, or email support@gcss.hk.",
       "phone": {
         "hours": "Available Mon-Fri, 9am-6pm HKT"
       },
@@ -980,6 +999,8 @@
     }
   },
   "forum": {
+    "loading": "Loading discussions…",
+    "empty": "No discussions yet.",
     "sidebar": {
       "sections": "Sections",
       "all": "All",
@@ -997,7 +1018,10 @@
       "bugs": "Bug Reports",
       "updates": "Version Updates",
       "following": "Following",
-      "stats": "Forum Stats"
+      "stats": "Forum Stats",
+      "categories": "Categories",
+      "open": "Open sidebar",
+      "close": "Close sidebar"
     },
     "title": "Community Forum",
     "newtopic": "New Topic",
@@ -1057,7 +1081,77 @@
       "newest": "Newest"
     },
     "search": "Search",
+    "searchPlaceholder": "Search topics…",
+    "searchClear": "Clear",
     "replies": "replies",
+    "topic": {
+      "back": "Back to forum",
+      "loading": "Loading topic…",
+      "notFound": "Topic not found.",
+      "likes": "likes",
+      "reply": "Reply",
+      "write": "Write",
+      "preview": "Preview",
+      "vote": "Vote",
+      "score": "Score",
+      "upvote": "Upvote",
+      "downvote": "Downvote",
+      "replyingTo": "Replying to",
+      "cancelReply": "Cancel",
+      "authLoading": "Checking login…",
+      "postingAs": "Posting as",
+      "loginToReply": "Please log in to reply.",
+      "login": "Log in",
+      "namePlaceholder": "Your name (optional)",
+      "replyPlaceholder": "Write your reply in Markdown…",
+      "markdownHint": "Markdown supported",
+      "markdownGuide": "Markdown guide",
+      "previewEmpty": "Nothing to preview yet.",
+      "clear": "Clear",
+      "replySubmit": "Post reply",
+      "replying": "Posting…"
+    },
+    "editor": {
+      "uploading": "Uploading…",
+      "uploadFailed": "Upload failed",
+      "insertLink": "Insert link",
+      "insertImage": "Insert image",
+      "undo": "Undo",
+      "redo": "Redo",
+      "heading": "Heading",
+      "bold": "Bold",
+      "italic": "Italic",
+      "inlineCode": "Inline code",
+      "bulletList": "Bullet list",
+      "numberedList": "Numbered list",
+      "table": "Table",
+      "mention": "Mention"
+    },
+    "new": {
+      "title": "Create a new topic",
+      "subtitle": "Start a discussion, ask a question, or share an update with the community.",
+      "back": "Back to forum",
+      "category": "Category",
+      "type": "Type",
+      "typeOptions": {
+        "discussion": "Discussion",
+        "question": "Question",
+        "announcement": "Announcement"
+      },
+      "topicTitle": "Title",
+      "titlePlaceholder": "Give your topic a clear title…",
+      "labels": "Labels",
+      "labelsPlaceholder": "Add labels (comma or Enter)…",
+      "addLabel": "Add",
+      "removeLabel": "Remove label",
+      "body": "Body",
+      "bodyPlaceholder": "Write your topic in Markdown…",
+      "loginToPost": "Please log in to create a topic.",
+      "create": "Create topic",
+      "creating": "Creating…",
+      "created": "Topic created!",
+      "failed": "Failed to create topic."
+    },
     "loadmore": "Load More Discussions",
     "post6": {
       "title": "Best practices for multi-rate billing strategies in Southeast Asia"
@@ -1235,7 +1329,11 @@
     "forgot": "Forgot Password?",
     "btn": "Log In",
     "noaccount": "Don't have an account?",
-    "register": "Register"
+    "register": "Register",
+    "success": "Login successful! Redirecting...",
+    "errors": {
+      "invalid": "Invalid username or password."
+    }
   },
   "register": {
     "visual": {
@@ -1277,7 +1375,12 @@
     },
     "btn": "Create Account",
     "hasaccount": "Already have an account?",
-    "login": "Log In"
+    "login": "Log In",
+    "success": "Account created successfully! Redirecting to login...",
+    "errors": {
+      "passwordMismatch": "Passwords do not match.",
+      "generic": "Registration failed. Please try again."
+    }
   },
   "forgot": {
     "title": "Forgot Password",
@@ -1290,6 +1393,7 @@
       "placeholder": "Enter verification code"
     },
     "sendcode": "Send Code",
+    "sent": "Sent!",
     "verify": "Verify",
     "newpwTitle": "Set New Password",
     "newpwDesc": "Create a strong password for your account.",
@@ -1306,6 +1410,13 @@
       "placeholder": "Enter code from email"
     },
     "setpw": "Set New Password",
+    "success": "Password reset successfully! Redirecting to login...",
+    "demoCode": "Demo verification code: {code}",
+    "errors": {
+      "sendFailed": "Failed to send verification code. Please try again.",
+      "passwordMismatch": "Passwords do not match.",
+      "resetFailed": "Password reset failed. Please check the code and try again."
+    },
     "back": "Back to Login",
     "visual": {
       "title": "Empowering EV Management for the Future"
@@ -1662,6 +1773,275 @@
       "desc": "Our team is here to help. Reach out and we'll get back to you as soon as possible.",
       "btn1": "Contact Us",
       "btn2": "Visit Forum"
+    }
+  },
+  "privacyPage": {
+    "label": "Legal",
+    "title": "Privacy Policy",
+    "subtitle": "How we collect, use, and protect information when you use GCSS.",
+    "cta": "Contact us",
+    "secondaryCta": "View Terms",
+    "effective": "Effective date: April 20, 2026. This policy is provided for demo purposes and may be updated.",
+    "sections": {
+      "collect": {
+        "title": "Information we collect",
+        "p1": "We collect information you provide directly and data generated by your use of the platform.",
+        "li1": "Account and contact details (e.g., name, email, company)",
+        "li2": "Operational data (e.g., charging sessions, station status, usage metrics)",
+        "li3": "Technical data (e.g., device, browser, approximate location, logs)"
+      },
+      "use": {
+        "title": "How we use information",
+        "p1": "We use information to provide, maintain, and improve GCSS.",
+        "li1": "Operate the service and support customers",
+        "li2": "Improve reliability, security, and performance",
+        "li3": "Comply with legal obligations and prevent abuse"
+      },
+      "security": {
+        "title": "Security",
+        "p1": "We apply industry-standard safeguards, but no system can be guaranteed 100% secure. Please use strong passwords and restrict access to admin accounts."
+      },
+      "cookies": {
+        "title": "Cookies & analytics",
+        "p1": "We may use cookies or similar technologies to remember preferences and understand how the site is used."
+      },
+      "rights": {
+        "title": "Your choices",
+        "p1": "Depending on your region, you may request access, correction, or deletion of your information."
+      },
+      "contact": {
+        "title": "Contact",
+        "p1": "Questions about privacy? Contact our team and we’ll help."
+      }
+    },
+    "callout": "Enterprise evaluations: we can provide a tailored DPA and security questionnaire response on request."
+  },
+  "termsPage": {
+    "label": "Legal",
+    "title": "Terms of Service",
+    "subtitle": "Rules for using GCSS, including accounts, acceptable use, licensing, and liability.",
+    "cta": "Contact us",
+    "secondaryCta": "View Privacy",
+    "effective": "Effective date: April 20, 2026. This page is a demo template and may not reflect final contractual terms.",
+    "sections": {
+      "accept": {
+        "title": "Acceptance",
+        "p1": "By accessing or using GCSS, you agree to these Terms. If you do not agree, do not use the service."
+      },
+      "accounts": {
+        "title": "Accounts",
+        "p1": "You are responsible for activity under your account.",
+        "li1": "Provide accurate account information",
+        "li2": "Maintain security of credentials and access tokens",
+        "li3": "Notify us promptly if you suspect unauthorized access"
+      },
+      "license": {
+        "title": "License",
+        "p1": "We grant you a limited, non-exclusive right to access and use GCSS for your internal business purposes, subject to these Terms and any applicable agreement."
+      },
+      "use": {
+        "title": "Acceptable use",
+        "p1": "You agree not to misuse the service.",
+        "li1": "Do not attempt to access systems or data you are not authorized to access",
+        "li2": "Do not interfere with service availability or security",
+        "li3": "Do not use GCSS to violate laws or third-party rights"
+      },
+      "availability": {
+        "title": "Availability",
+        "p1": "GCSS may change over time. We may suspend or modify features to maintain security, reliability, or compliance."
+      },
+      "liability": {
+        "title": "Liability",
+        "p1": "To the extent permitted by law, GCSS is provided “as is” without warranties, and our liability is limited."
+      },
+      "contact": {
+        "title": "Contact",
+        "p1": "For legal questions, reach out through our contact page."
+      }
+    }
+  },
+  "aboutPage": {
+    "label": "Company",
+    "title": "About GCSS",
+    "subtitle": "GCSS (Global Charger System Service) helps operators and enterprises deploy, manage, and scale EV charging with confidence.",
+    "cta": "Talk to us",
+    "secondaryCta": "Explore products",
+    "cards": {
+      "mission": {
+        "title": "Mission",
+        "desc": "Make EV charging operations simpler, more reliable, and more profitable—across any geography."
+      },
+      "build": {
+        "title": "What we build",
+        "desc": "OCPP management, payments, pricing, analytics, and admin tooling—designed for real-world operations."
+      },
+      "principles": {
+        "title": "Principles",
+        "desc": "Security-first, operator-focused, and built for integration—so you can move fast without breaking trust."
+      }
+    },
+    "sections": {
+      "why": {
+        "title": "Built for operators",
+        "p1": "We focus on the practical needs of day-to-day charging operations: uptime, remote control, settlement clarity, and actionable insights."
+      },
+      "values": {
+        "title": "What you can expect",
+        "li1": "A clean operational workflow—from provisioning to billing",
+        "li2": "Integration-ready architecture for chargers and payments",
+        "li3": "Design polish that makes complex systems feel simple"
+      },
+      "global": {
+        "title": "Global readiness",
+        "p1": "From localized payments to multi-language experiences, GCSS is designed for cross-border deployments."
+      }
+    },
+    "callout": {
+      "title": "Want a guided tour?",
+      "desc": "We’ll tailor a quick demo to your market and deployment model."
+    }
+  },
+  "careersPage": {
+    "label": "Company",
+    "title": "Careers",
+    "subtitle": "Join a team building modern EV charging software—where performance, reliability, and design all matter.",
+    "cta": "Contact recruitment",
+    "secondaryCta": "Learn about GCSS",
+    "sections": {
+      "why": {
+        "label": "Working at GCSS",
+        "title": "Why join us",
+        "desc": "We build production-grade systems for real operators—every improvement ships to the field."
+      },
+      "roles": {
+        "label": "Open roles",
+        "title": "Roles we often hire",
+        "desc": "Don’t see a perfect match? Reach out anyway—we’re always looking for strong builders."
+      },
+      "process": {
+        "title": "Hiring process",
+        "desc": "A simple, respectful process designed to evaluate real skills without endless loops."
+      }
+    },
+    "perks": {
+      "impact": {
+        "title": "Real-world impact",
+        "desc": "Work on software that affects drivers and operators every day."
+      },
+      "craft": {
+        "title": "Engineering craft",
+        "desc": "Clean architecture, pragmatic tradeoffs, and measurable reliability."
+      },
+      "growth": {
+        "title": "Room to grow",
+        "desc": "Own projects end-to-end with mentorship and autonomy."
+      }
+    },
+    "roles": {
+      "backend": {
+        "title": "Backend / Platform",
+        "desc": "Build APIs, data models, and integration layers that power charging operations.",
+        "li1": "Go/TypeScript services, API design, and observability",
+        "li2": "Multi-tenant data modeling and secure auth",
+        "li3": "Integrations: OCPP, payments, and third-party systems"
+      },
+      "frontend": {
+        "title": "Frontend / Web",
+        "desc": "Craft dashboards and workflows that make complex operations feel intuitive.",
+        "li1": "Next.js, component systems, and performance",
+        "li2": "Information architecture for operators",
+        "li3": "A11y, localization, and design polish"
+      },
+      "mobile": {
+        "title": "Mobile",
+        "desc": "Deliver driver experiences for starting sessions, payments, and charging status.",
+        "li1": "Cross-platform mobile foundations",
+        "li2": "Payments and session lifecycle UX",
+        "li3": "Offline and unreliable-network resilience"
+      },
+      "product": {
+        "title": "Product / Solutions",
+        "desc": "Work with customers to translate real-world operations into product decisions.",
+        "li1": "Operator workflow discovery",
+        "li2": "Implementation planning and rollout",
+        "li3": "Documentation and enablement"
+      }
+    },
+    "process": {
+      "apply": "Apply with a short intro and relevant work samples.",
+      "screen": "Quick conversation to align on role and expectations.",
+      "interview": "Focused technical + product interview (no trivia).",
+      "offer": "Decision and offer—fast feedback, clear next steps."
+    },
+    "callout": "Tip: include a link to something you’ve built—repos, case studies, or production work."
+  },
+  "partnersPage": {
+    "label": "Ecosystem",
+    "title": "Partners",
+    "subtitle": "We work with hardware OEMs, payment providers, and integrators to deliver reliable EV charging deployments.",
+    "cta": "Become a partner",
+    "secondaryCta": "See pricing",
+    "cards": {
+      "oem": {
+        "title": "Charger OEMs",
+        "desc": "Integrate and validate chargers for smooth provisioning and operations."
+      },
+      "payments": {
+        "title": "Payment partners",
+        "desc": "Enable localized payment methods and compliant settlement workflows."
+      },
+      "integrators": {
+        "title": "Integrators",
+        "desc": "Deliver end-to-end deployments and long-term operations for customers."
+      }
+    },
+    "sections": {
+      "benefits": {
+        "title": "Program benefits",
+        "li1": "Joint integration support and technical validation",
+        "li2": "Go-to-market collaboration for target regions",
+        "li3": "Clear handoff between sales, implementation, and support"
+      },
+      "getStarted": {
+        "title": "Get started",
+        "p1": "Tell us your region, product, and integration needs—we’ll propose the fastest path to production."
+      }
+    },
+    "buttons": {
+      "contact": "Contact us",
+      "pricing": "View pricing"
+    }
+  },
+  "admin": {
+    "meta": {
+      "title": "Admin Dashboard",
+      "description": "Admin-only overview of platform activity."
+    },
+    "title": "Admin Dashboard",
+    "subtitle": "A secure, admin-only view of your demo environment.",
+    "signedInAs": "Signed in as {username}",
+    "actions": {
+      "backToSite": "Back to site",
+      "logout": "Log out"
+    },
+    "loading": "Loading admin overview…",
+    "errors": {
+      "unauthorized": "Your session has expired or you do not have admin access."
+    },
+    "kpis": {
+      "users": "Users",
+      "admins": "Admins",
+      "sessions": "Active sessions",
+      "formRequests": "Form requests",
+      "blogPosts": "Blog posts",
+      "forumTopics": "Forum topics",
+      "forumPosts": "Forum posts"
+    },
+    "nextSteps": {
+      "title": "Next steps",
+      "item1": "Add user management: promote/demote admins, disable accounts.",
+      "item2": "Add moderation tools for forum topics and replies.",
+      "item3": "Add audit views for contact / payment / language requests."
     }
   }
 }

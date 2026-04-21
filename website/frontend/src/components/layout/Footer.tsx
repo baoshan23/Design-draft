@@ -41,9 +41,9 @@ export default function Footer() {
 
           <div className="footer-col">
             <h4>{t('company')}</h4>
-            <Link href="/contact">{t('about')}</Link>
-            <Link href="/contact">{t('careers')}</Link>
-            <Link href="/contact">{t('partners')}</Link>
+            <Link href="/about">{t('about')}</Link>
+            <Link href="/careers">{t('careers')}</Link>
+            <Link href="/partners">{t('partners')}</Link>
             <Link href="/blog">{t('blog')}</Link>
           </div>
         </div>
@@ -51,8 +51,8 @@ export default function Footer() {
         <div className="footer-bottom">
           <p>{t('copyright')}</p>
           <div className="footer-bottom-links">
-            <Link href="/docs">{t('privacy')}</Link>
-            <Link href="/docs">{t('terms')}</Link>
+            <Link href="/privacy">{t('privacy')}</Link>
+            <Link href="/terms">{t('terms')}</Link>
           </div>
         </div>
       </div>
