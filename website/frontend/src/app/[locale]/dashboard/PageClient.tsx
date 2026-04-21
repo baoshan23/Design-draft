@@ -1,9 +1,16 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link, useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/providers/AuthProvider';
+import {
+  getAuthToken,
+  apiUserDashboard,
+  apiUpdateProfile,
+  apiChangePassword,
+  type UserDashboardData,
+} from '@/lib/api/authApi';
 
 function formatDate(iso: string) {
   const d = new Date(iso);
@@ -15,7 +22,21 @@ export default function DashboardPage() {
   const t = useTranslations('dashboard');
   const tNav = useTranslations('nav');
   const router = useRouter();
-  const { user, loading, logout } = useAuth();
+  const { user, loading, logout, refresh } = useAuth();
+
+  const [dashData, setDashData] = useState<UserDashboardData | null>(null);
+
+  // Edit profile state
+  const [editing, setEditing] = useState(false);
+  const [profileForm, setProfileForm] = useState({ firstName: '', lastName: '', phone: '', company: '' });
+  const [profileSaving, setProfileSaving] = useState(false);
+  const [profileMsg, setProfileMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  // Change password state
+  const [showPwChange, setShowPwChange] = useState(false);
+  const [pwForm, setPwForm] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
+  const [pwSaving, setPwSaving] = useState(false);
+  const [pwMsg, setPwMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -23,9 +44,79 @@ export default function DashboardPage() {
     }
   }, [loading, user, router]);
 
+  // Fetch dashboard data
+  useEffect(() => {
+    const token = getAuthToken();
+    if (!token || !user) return;
+    let cancelled = false;
+    apiUserDashboard(token)
+      .then((res) => { if (!cancelled) setDashData(res.dashboard); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, [user]);
+
+  // Init profile form when user loads
+  useEffect(() => {
+    if (user) {
+      setProfileForm({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        phone: user.phone,
+        company: user.company || '',
+      });
+    }
+  }, [user]);
+
   const handleLogout = async () => {
     await logout();
     router.push('/login');
+  };
+
+  const handleProfileSave = async () => {
+    const token = getAuthToken();
+    if (!token) return;
+    setProfileSaving(true);
+    setProfileMsg(null);
+    try {
+      await apiUpdateProfile(token, profileForm);
+      await refresh();
+      setEditing(false);
+      setProfileMsg({ type: 'success', text: t('profileUpdated') });
+      setTimeout(() => setProfileMsg(null), 3000);
+    } catch (err) {
+      setProfileMsg({ type: 'error', text: err instanceof Error ? err.message : t('profileError') });
+    } finally {
+      setProfileSaving(false);
+    }
+  };
+
+  const handlePasswordChange = async () => {
+    if (pwForm.newPassword !== pwForm.confirmPassword) {
+      setPwMsg({ type: 'error', text: t('passwordMismatch') });
+      return;
+    }
+    if (pwForm.newPassword.length < 8) {
+      setPwMsg({ type: 'error', text: t('passwordTooShort') });
+      return;
+    }
+    const token = getAuthToken();
+    if (!token) return;
+    setPwSaving(true);
+    setPwMsg(null);
+    try {
+      await apiChangePassword(token, {
+        currentPassword: pwForm.currentPassword,
+        newPassword: pwForm.newPassword,
+      });
+      setPwForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
+      setShowPwChange(false);
+      setPwMsg({ type: 'success', text: t('passwordChanged') });
+      setTimeout(() => setPwMsg(null), 3000);
+    } catch (err) {
+      setPwMsg({ type: 'error', text: err instanceof Error ? err.message : t('passwordError') });
+    } finally {
+      setPwSaving(false);
+    }
   };
 
   if (loading) {
@@ -47,12 +138,10 @@ export default function DashboardPage() {
     <div className="dashboard-page">
       <div className="dashboard-inner">
 
-        {/* Profile Header */}
+        {/* Profile Card */}
         <section className="dashboard-profile-card">
           <div className="dashboard-profile-top">
-            <div className="dashboard-avatar-lg">
-              {initials}
-            </div>
+            <div className="dashboard-avatar-lg">{initials}</div>
             <div className="dashboard-profile-info">
               <h1 className="dashboard-profile-name">{user.firstName} {user.lastName}</h1>
               <p className="dashboard-profile-username">@{user.username}</p>
@@ -69,21 +158,64 @@ export default function DashboardPage() {
               </div>
             </div>
             <div className="dashboard-profile-actions">
+              <button type="button" className="btn btn-secondary btn-sm" onClick={() => setEditing(!editing)}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /></svg>
+                {t('editProfile')}
+              </button>
               {user.role === 'admin' && (
                 <Link href="/admin" className="btn btn-secondary btn-sm">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" /><circle cx="12" cy="12" r="3" /></svg>
                   {t('adminPanel')}
                 </Link>
               )}
               <button type="button" className="btn btn-secondary btn-sm btn-danger-outline" onClick={handleLogout}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" x2="9" y1="12" y2="12" /></svg>
                 {tNav('logout')}
               </button>
             </div>
           </div>
+
+          {/* Profile messages */}
+          {profileMsg && (
+            <div className={`form-banner form-banner--${profileMsg.type}`} style={{ marginTop: 16 }}>
+              {profileMsg.text}
+            </div>
+          )}
+
+          {/* Edit profile form */}
+          {editing && (
+            <div className="dashboard-edit-form">
+              <div className="auth-form-row">
+                <div className="form-group">
+                  <label className="form-label" htmlFor="edit-fn">{t('fields.firstName')}</label>
+                  <input id="edit-fn" className="form-input" value={profileForm.firstName} onChange={e => setProfileForm({ ...profileForm, firstName: e.target.value })} />
+                </div>
+                <div className="form-group">
+                  <label className="form-label" htmlFor="edit-ln">{t('fields.lastName')}</label>
+                  <input id="edit-ln" className="form-input" value={profileForm.lastName} onChange={e => setProfileForm({ ...profileForm, lastName: e.target.value })} />
+                </div>
+              </div>
+              <div className="auth-form-row">
+                <div className="form-group">
+                  <label className="form-label" htmlFor="edit-phone">{t('fields.phone')}</label>
+                  <input id="edit-phone" className="form-input" type="tel" value={profileForm.phone} onChange={e => setProfileForm({ ...profileForm, phone: e.target.value })} />
+                </div>
+                <div className="form-group">
+                  <label className="form-label" htmlFor="edit-company">{t('fields.company')}</label>
+                  <input id="edit-company" className="form-input" value={profileForm.company} onChange={e => setProfileForm({ ...profileForm, company: e.target.value })} />
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: 8 }}>
+                <button type="button" className={`btn btn-primary btn-sm${profileSaving ? ' btn-loading' : ''}`} disabled={profileSaving} onClick={handleProfileSave}>
+                  {t('saveProfile')}
+                </button>
+                <button type="button" className="btn btn-secondary btn-sm" onClick={() => setEditing(false)}>
+                  {t('cancel')}
+                </button>
+              </div>
+            </div>
+          )}
         </section>
 
-        {/* Quick Stats */}
+        {/* Stats Grid */}
         <section className="dashboard-stats-grid">
           <div className="dashboard-stat-card">
             <div className="dashboard-stat-icon dashboard-stat-icon--blue">
@@ -97,11 +229,13 @@ export default function DashboardPage() {
 
           <div className="dashboard-stat-card">
             <div className="dashboard-stat-icon dashboard-stat-icon--green">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
             </div>
             <div className="dashboard-stat-info">
-              <div className="dashboard-stat-label">{t('stats.phone')}</div>
-              <div className="dashboard-stat-value">{user.phone || '—'}</div>
+              <div className="dashboard-stat-label">{t('stats.forumActivity')}</div>
+              <div className="dashboard-stat-value">
+                {dashData ? `${dashData.forumTopics} ${t('stats.topics')}, ${dashData.forumPosts} ${t('stats.posts')}` : '—'}
+              </div>
             </div>
           </div>
 
@@ -120,10 +254,48 @@ export default function DashboardPage() {
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
             </div>
             <div className="dashboard-stat-info">
-              <div className="dashboard-stat-label">{t('stats.accountStatus')}</div>
-              <div className="dashboard-stat-value dashboard-stat-value--success">{t('stats.active')}</div>
+              <div className="dashboard-stat-label">{t('stats.activeSessions')}</div>
+              <div className="dashboard-stat-value">{dashData ? dashData.activeSessions : '—'}</div>
             </div>
           </div>
+        </section>
+
+        {/* Change Password */}
+        <section className="dashboard-profile-card">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <h2 className="dashboard-section-title" style={{ margin: 0 }}>{t('security.title')}</h2>
+            <button type="button" className="btn btn-secondary btn-sm" onClick={() => setShowPwChange(!showPwChange)}>
+              {t('security.changePassword')}
+            </button>
+          </div>
+
+          {pwMsg && (
+            <div className={`form-banner form-banner--${pwMsg.type}`} style={{ marginTop: 16 }}>
+              {pwMsg.text}
+            </div>
+          )}
+
+          {showPwChange && (
+            <div className="dashboard-edit-form">
+              <div className="form-group">
+                <label className="form-label" htmlFor="pw-current">{t('security.currentPassword')}</label>
+                <input id="pw-current" className="form-input" type="password" autoComplete="current-password" value={pwForm.currentPassword} onChange={e => setPwForm({ ...pwForm, currentPassword: e.target.value })} />
+              </div>
+              <div className="auth-form-row">
+                <div className="form-group">
+                  <label className="form-label" htmlFor="pw-new">{t('security.newPassword')}</label>
+                  <input id="pw-new" className="form-input" type="password" autoComplete="new-password" value={pwForm.newPassword} onChange={e => setPwForm({ ...pwForm, newPassword: e.target.value })} />
+                </div>
+                <div className="form-group">
+                  <label className="form-label" htmlFor="pw-confirm">{t('security.confirmPassword')}</label>
+                  <input id="pw-confirm" className="form-input" type="password" autoComplete="new-password" value={pwForm.confirmPassword} onChange={e => setPwForm({ ...pwForm, confirmPassword: e.target.value })} />
+                </div>
+              </div>
+              <button type="button" className={`btn btn-primary btn-sm${pwSaving ? ' btn-loading' : ''}`} disabled={pwSaving} onClick={handlePasswordChange}>
+                {t('security.updatePassword')}
+              </button>
+            </div>
+          )}
         </section>
 
         {/* Quick Links */}
@@ -139,7 +311,7 @@ export default function DashboardPage() {
               <span>{t('quickLinks.blog')}</span>
             </Link>
             <Link href="/docs" className="dashboard-quicklink">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" x2="8" y1="13" y2="13" /><line x1="16" x2="8" y1="17" y2="17" /></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
               <span>{t('quickLinks.docs')}</span>
             </Link>
             <Link href="/contact" className="dashboard-quicklink">

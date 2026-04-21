@@ -4669,6 +4669,15 @@
   transform: translateY(-2px);
 }
 
+.dashboard-edit-form {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .dashboard-profile-top {

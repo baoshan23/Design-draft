@@ -13,11 +13,61 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
+	"sync"
 	"time"
 
 	"gcss-backend/internal/store"
 )
+
+// ── Rate Limiter (in-memory, per-IP) ────────────────────────────
+
+type rateLimiter struct {
+	mu       sync.Mutex
+	buckets  map[string]*bucket
+	interval time.Duration
+	burst    int
+}
+
+type bucket struct {
+	tokens    int
+	lastReset time.Time
+}
+
+func newRateLimiter(interval time.Duration, burst int) *rateLimiter {
+	return &rateLimiter{
+		buckets:  make(map[string]*bucket),
+		interval: interval,
+		burst:    burst,
+	}
+}
+
+func (rl *rateLimiter) allow(key string) bool {
+	rl.mu.Lock()
+	defer rl.mu.Unlock()
+
+	b, ok := rl.buckets[key]
+	now := time.Now()
+	if !ok {
+		rl.buckets[key] = &bucket{tokens: rl.burst - 1, lastReset: now}
+		return true
+	}
+
+	if now.Sub(b.lastReset) >= rl.interval {
+		b.tokens = rl.burst - 1
+		b.lastReset = now
+		return true
+	}
+
+	if b.tokens > 0 {
+		b.tokens--
+		return true
+	}
+	return false
+}
+
+var emailRe = regexp.MustCompile(`^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$`)
 
 type ContactRequest struct {
 	FirstName string `json:"firstName"`
@@ -57,6 +107,7 @@ type server struct {
 	dataFile       string
 	uploadDir      string
 	store          *store.Store
+	authLimiter    *rateLimiter // rate limit login/register/reset
 }
 
 func main() {
@@ -91,6 +142,7 @@ func main() {
 		dataFile:       dataFile,
 		uploadDir:      uploadDir,
 		store:          st,
+		authLimiter:    newRateLimiter(1*time.Minute, 10), // 10 attempts per minute per IP
 	}
 
 	mux := http.NewServeMux()
@@ -106,6 +158,10 @@ func main() {
 	mux.HandleFunc("/api/auth/logout", s.withCORS(s.handleAuthLogout))
 	mux.HandleFunc("/api/auth/password/request-reset", s.withCORS(s.handleAuthRequestPasswordReset))
 	mux.HandleFunc("/api/auth/password/reset", s.withCORS(s.handleAuthResetPassword))
+	mux.HandleFunc("/api/auth/profile", s.withCORS(s.handleAuthUpdateProfile))
+	mux.HandleFunc("/api/auth/password/change", s.withCORS(s.handleAuthChangePassword))
+	// User dashboard
+	mux.HandleFunc("/api/user/dashboard", s.withCORS(s.handleUserDashboard))
 	// Admin
 	mux.HandleFunc("/api/admin/overview", s.withCORS(s.handleAdminOverview))
 	// Blog
@@ -173,6 +229,9 @@ func (s *server) handleRoot(w http.ResponseWriter, r *http.Request) {
 			"auth_logout":        "/api/auth/logout",
 			"auth_reset_request": "/api/auth/password/request-reset",
 			"auth_reset":         "/api/auth/password/reset",
+			"auth_profile":       "/api/auth/profile",
+			"auth_change_pw":     "/api/auth/password/change",
+			"user_dashboard":     "/api/user/dashboard",
 			"admin_overview":     "/api/admin/overview",
 			"blog_posts":         "/api/blog/posts",
 			"blog_post":          "/api/blog/posts/{slug}",
@@ -304,12 +363,15 @@ func (s *server) withCORS(next http.HandlerFunc) http.HandlerFunc {
 					w.Header().Set("Vary", "Origin")
 				}
 			}
-			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, OPTIONS")
 			w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+			w.Header().Set("Access-Control-Max-Age", "86400")
 		}
 
-		// Security-ish defaults for JSON APIs
+		// Security headers
 		w.Header().Set("X-Content-Type-Options", "nosniff")
+		w.Header().Set("X-Frame-Options", "DENY")
+		w.Header().Set("Referrer-Policy", "strict-origin-when-cross-origin")
 
 		if r.Method == http.MethodOptions {
 			w.WriteHeader(http.StatusNoContent)
@@ -325,6 +387,11 @@ func (s *server) handleAuthRegister(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if !s.authLimiter.allow(clientIP(r)) {
+		writeJSON(w, http.StatusTooManyRequests, map[string]string{"error": "too many requests, try again later"})
+		return
+	}
+
 	var req struct {
 		Username  string `json:"username"`
 		Password  string `json:"password"`
@@ -336,6 +403,19 @@ func (s *server) handleAuthRegister(w http.ResponseWriter, r *http.Request) {
 	}
 	if err := decodeJSON(r, &req); err != nil {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+
+	// Email format validation
+	if !emailRe.MatchString(strings.TrimSpace(req.Email)) {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "invalid email format"})
+		return
+	}
+
+	// Username validation (alphanumeric + underscore, 3-30 chars)
+	uname := strings.TrimSpace(req.Username)
+	if len(uname) < 3 || len(uname) > 30 {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "username must be 3-30 characters"})
 		return
 	}
 
@@ -356,6 +436,12 @@ func (s *server) handleAuthLogin(w http.ResponseWriter, r *http.Request) {
 	if !methodOrOptions(w, r, http.MethodPost) {
 		return
 	}
+
+	if !s.authLimiter.allow(clientIP(r)) {
+		writeJSON(w, http.StatusTooManyRequests, map[string]string{"error": "too many requests, try again later"})
+		return
+	}
+
 	var req struct {
 		Identifier string `json:"identifier"`
 		Password   string `json:"password"`
@@ -409,6 +495,12 @@ func (s *server) handleAuthRequestPasswordReset(w http.ResponseWriter, r *http.R
 	if !methodOrOptions(w, r, http.MethodPost) {
 		return
 	}
+
+	if !s.authLimiter.allow(clientIP(r)) {
+		writeJSON(w, http.StatusTooManyRequests, map[string]string{"error": "too many requests, try again later"})
+		return
+	}
+
 	var req struct {
 		Email string `json:"email"`
 	}
@@ -450,6 +542,101 @@ func (s *server) handleAuthResetPassword(w http.ResponseWriter, r *http.Request)
 		return
 	}
 	writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
+}
+
+// requireAuth extracts the bearer token and returns the authenticated user.
+func (s *server) requireAuth(w http.ResponseWriter, r *http.Request) (*store.AuthUser, bool) {
+	token := bearerToken(r)
+	user, err := s.store.GetUserBySessionToken(r.Context(), token)
+	if err != nil {
+		writeJSON(w, http.StatusUnauthorized, map[string]string{"error": "unauthorized"})
+		return nil, false
+	}
+	return user, true
+}
+
+func (s *server) handleAuthUpdateProfile(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodOptions {
+		w.WriteHeader(http.StatusNoContent)
+		return
+	}
+	if r.Method != http.MethodPut && r.Method != http.MethodPost {
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
+		return
+	}
+
+	user, ok := s.requireAuth(w, r)
+	if !ok {
+		return
+	}
+
+	var req struct {
+		FirstName string `json:"firstName"`
+		LastName  string `json:"lastName"`
+		Phone     string `json:"phone"`
+		Company   string `json:"company"`
+	}
+	if err := decodeJSON(r, &req); err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+
+	updated, err := s.store.UpdateUserProfile(r.Context(), user.ID, req.FirstName, req.LastName, req.Phone, req.Company)
+	if err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]interface{}{"user": updated})
+}
+
+func (s *server) handleAuthChangePassword(w http.ResponseWriter, r *http.Request) {
+	if !methodOrOptions(w, r, http.MethodPost) {
+		return
+	}
+
+	user, ok := s.requireAuth(w, r)
+	if !ok {
+		return
+	}
+
+	var req struct {
+		CurrentPassword string `json:"currentPassword"`
+		NewPassword     string `json:"newPassword"`
+	}
+	if err := decodeJSON(r, &req); err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+
+	if err := s.store.ChangePassword(r.Context(), user.ID, req.CurrentPassword, req.NewPassword); err != nil {
+		status := http.StatusBadRequest
+		if errors.Is(err, store.ErrInvalidCredentials) {
+			status = http.StatusUnauthorized
+		}
+		writeJSON(w, status, map[string]string{"error": err.Error()})
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
+}
+
+func (s *server) handleUserDashboard(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
+		return
+	}
+
+	user, ok := s.requireAuth(w, r)
+	if !ok {
+		return
+	}
+
+	dashboard, err := s.store.GetUserDashboard(r.Context(), user.ID)
+	if err != nil {
+		log.Printf("GetUserDashboard error: %v", err)
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "failed to load dashboard"})
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]interface{}{"user": user, "dashboard": dashboard})
 }
 
 func (s *server) requireAdmin(w http.ResponseWriter, r *http.Request) (*store.AuthUser, bool) {

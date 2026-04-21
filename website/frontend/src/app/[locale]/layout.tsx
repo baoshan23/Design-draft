@@ -1,6 +1,5 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
-import Script from 'next/script';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { AuthProvider } from '@/providers/AuthProvider';
 import Header from '@/components/layout/Header';
@@ -34,12 +33,9 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* Theme init needs to run before first paint to avoid flash.
-            React 19 warns about raw <script> tags in component output;
-            Next.js' <Script> integrates with App Router correctly. */}
-        <Script
-          id="gcss-theme-init"
-          strategy="beforeInteractive"
+        {/* Theme init runs before first paint to avoid dark-mode flash */}
+        <script
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html:
               '(function(){try{var t=localStorage.getItem("gcss-theme");if(t==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();',

@@ -302,6 +302,99 @@ func (s *Store) ResetPasswordWithCode(ctx context.Context, email, code, newPassw
 	return nil
 }
 
+// UpdateUserProfile updates mutable profile fields for the given user.
+func (s *Store) UpdateUserProfile(ctx context.Context, userID int64, firstName, lastName, phone, company string) (*AuthUser, error) {
+	firstName = strings.TrimSpace(firstName)
+	lastName = strings.TrimSpace(lastName)
+	phone = strings.TrimSpace(phone)
+	company = strings.TrimSpace(company)
+
+	if firstName == "" || lastName == "" {
+		return nil, errors.New("first name and last name are required")
+	}
+
+	_, err := s.db.ExecContext(ctx, `
+		UPDATE users SET first_name = ?, last_name = ?, phone = ?, company = ? WHERE id = ?;
+	`, firstName, lastName, phone, company, userID)
+	if err != nil {
+		return nil, err
+	}
+
+	var u AuthUser
+	var createdAt string
+	row := s.db.QueryRowContext(ctx, `
+		SELECT id, username, email, role, first_name, last_name, phone, company, created_at
+		FROM users WHERE id = ?;
+	`, userID)
+	if err := row.Scan(&u.ID, &u.Username, &u.Email, &u.Role, &u.FirstName, &u.LastName, &u.Phone, &u.Company, &createdAt); err != nil {
+		return nil, err
+	}
+	u.CreatedAt, _ = parseTimeRFC3339(createdAt)
+	return &u, nil
+}
+
+// ChangePassword verifies the current password and sets a new one.
+func (s *Store) ChangePassword(ctx context.Context, userID int64, currentPassword, newPassword string) error {
+	currentPassword = strings.TrimSpace(currentPassword)
+	newPassword = strings.TrimSpace(newPassword)
+	if currentPassword == "" || newPassword == "" {
+		return errors.New("both current and new password are required")
+	}
+	if len(newPassword) < 8 {
+		return errors.New("new password must be at least 8 characters")
+	}
+
+	var storedHash string
+	row := s.db.QueryRowContext(ctx, `SELECT password_hash FROM users WHERE id = ?;`, userID)
+	if err := row.Scan(&storedHash); err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return ErrInvalidCredentials
+		}
+		return err
+	}
+
+	if !verifyPassword(storedHash, currentPassword) {
+		return ErrInvalidCredentials
+	}
+
+	hash, err := hashPassword(newPassword)
+	if err != nil {
+		return err
+	}
+
+	_, err = s.db.ExecContext(ctx, `UPDATE users SET password_hash = ? WHERE id = ?;`, hash, userID)
+	return err
+}
+
+// UserDashboard holds stats visible to a logged-in user about their own activity.
+type UserDashboard struct {
+	ForumTopics int `json:"forumTopics"`
+	ForumPosts  int `json:"forumPosts"`
+	ActiveSessions int `json:"activeSessions"`
+}
+
+// GetUserDashboard returns activity stats for a specific user.
+func (s *Store) GetUserDashboard(ctx context.Context, userID int64) (*UserDashboard, error) {
+	d := &UserDashboard{}
+	now := time.Now().UTC().Format(time.RFC3339)
+
+	// Count forum topics by this user (author_name matches username)
+	var username string
+	_ = s.db.QueryRowContext(ctx, `SELECT username FROM users WHERE id = ?;`, userID).Scan(&username)
+
+	if username != "" {
+		_ = s.db.QueryRowContext(ctx, `SELECT COUNT(1) FROM forum_topics WHERE author_name = ?;`, username).Scan(&d.ForumTopics)
+		_ = s.db.QueryRowContext(ctx, `SELECT COUNT(1) FROM forum_posts WHERE author_name = ?;`, username).Scan(&d.ForumPosts)
+	}
+
+	_ = s.db.QueryRowContext(ctx, `
+		SELECT COUNT(1) FROM sessions
+		WHERE user_id = ? AND revoked_at IS NULL AND expires_at > ?;
+	`, userID, now).Scan(&d.ActiveSessions)
+
+	return d, nil
+}
+
 func newToken(bytes int) (string, error) {
 	b := make([]byte, bytes)
 	if _, err := rand.Read(b); err != nil {

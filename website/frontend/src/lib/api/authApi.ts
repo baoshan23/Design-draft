@@ -116,3 +116,41 @@ export async function apiResetPassword(payload: { email: string; code: string; n
         body: JSON.stringify(payload),
     });
 }
+
+export async function apiUpdateProfile(
+    token: string,
+    payload: { firstName: string; lastName: string; phone: string; company: string }
+): Promise<{ user: AuthUser }> {
+    const apiBase = getApiBase();
+    return await fetchJson<{ user: AuthUser }>(`${apiBase}/auth/profile`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify(payload),
+    });
+}
+
+export async function apiChangePassword(
+    token: string,
+    payload: { currentPassword: string; newPassword: string }
+): Promise<{ status: string }> {
+    const apiBase = getApiBase();
+    return await fetchJson<{ status: string }>(`${apiBase}/auth/password/change`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify(payload),
+    });
+}
+
+export type UserDashboardData = {
+    forumTopics: number;
+    forumPosts: number;
+    activeSessions: number;
+};
+
+export async function apiUserDashboard(token: string): Promise<{ user: AuthUser; dashboard: UserDashboardData }> {
+    const apiBase = getApiBase();
+    return await fetchJson<{ user: AuthUser; dashboard: UserDashboardData }>(`${apiBase}/user/dashboard`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` },
+    });
+}
