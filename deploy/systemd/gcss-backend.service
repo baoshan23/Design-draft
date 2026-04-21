@@ -9,9 +9,10 @@ WorkingDirectory=/opt/gcss-backend
 ExecStart=/opt/gcss-backend/gcss-backend
 EnvironmentFile=/opt/gcss-backend/.env
 
-# Run as www-data (same as nginx, shared file permissions)
-User=www-data
-Group=www-data
+# Run as nginx user (Alibaba Cloud Linux / RHEL)
+# Falls back to nobody if nginx user doesn't exist
+User=nginx
+Group=nginx
 
 # Auto-restart on failure
 Restart=always

@@ -893,23 +893,22 @@
   display: flex;
   align-items: flex-start;
   gap: 14px;
-  padding: 16px 0;
+  padding: 16px 14px;
   border-bottom: 1px solid var(--border-color);
-  transition: background 0.15s;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
   position: relative;
+  border-radius: 10px;
+  margin: 0 -14px;
 }
 
 .discussion-item:first-child {
-  border-top: 1px solid var(--border-color);
+  border-top: none;
 }
 
 .discussion-item:hover {
-  background: var(--hover-bg, rgba(0, 0, 0, 0.02));
-  margin: 0 -12px;
-  padding-left: 12px;
-  padding-right: 12px;
-  border-radius: 8px;
+  background: var(--glass-bg-hover, rgba(0, 0, 0, 0.02));
+  box-shadow: var(--shadow-sm);
 }
 
 .discussion-item.unread .discussion-title {
@@ -925,7 +924,7 @@
 .discussion-avatar {
   width: 42px;
   height: 42px;
-  border-radius: 50%;
+  border-radius: 12px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -935,6 +934,16 @@
   color: white;
   position: relative;
 }
+
+/* Deterministic avatar colors */
+.avatar-amber { background: linear-gradient(135deg, #F59E0B, #D97706); }
+.avatar-blue { background: linear-gradient(135deg, #3B82F6, #2563EB); }
+.avatar-emerald { background: linear-gradient(135deg, #10B981, #059669); }
+.avatar-violet { background: linear-gradient(135deg, #8B5CF6, #7C3AED); }
+.avatar-rose { background: linear-gradient(135deg, #F43F5E, #E11D48); }
+.avatar-cyan { background: linear-gradient(135deg, #06B6D4, #0891B2); }
+.avatar-orange { background: linear-gradient(135deg, #F97316, #EA580C); }
+.avatar-indigo { background: linear-gradient(135deg, #6366F1, #4F46E5); }
 
 .discussion-avatar .online-dot {
   position: absolute;

@@ -12,10 +12,60 @@ import {
 } from '@/lib/api/contentApi';
 import { listStaticForumCategories, listStaticForumTopics } from '@/lib/content/staticContent';
 
+const AVATAR_COLORS = ['avatar-amber', 'avatar-blue', 'avatar-emerald', 'avatar-violet', 'avatar-rose', 'avatar-cyan', 'avatar-orange', 'avatar-indigo'];
+
+function getAvatarColor(name: string): string {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  return AVATAR_COLORS[Math.abs(hash) % AVATAR_COLORS.length];
+}
+
 function formatShortDate(iso: string, locale: string) {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return iso;
   return d.toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+function truncateExcerpt(md: string, max = 120): string {
+  const plain = md.replace(/[#*_~`>\[\]()!|]/g, '').replace(/\n+/g, ' ').trim();
+  return plain.length > max ? plain.slice(0, max) + '...' : plain;
+}
+
+function LoadingSkeleton() {
+  return (
+    <>
+      {[0, 1, 2, 3, 4].map((i) => (
+        <li key={i} className="forum-skeleton" aria-hidden="true">
+          <div className="forum-skeleton-avatar" />
+          <div className="forum-skeleton-lines">
+            <div className="forum-skeleton-line" />
+            <div className="forum-skeleton-line" />
+            <div className="forum-skeleton-line" />
+          </div>
+        </li>
+      ))}
+    </>
+  );
+}
+
+function EmptyState({ t }: { t: (key: string) => string }) {
+  return (
+    <li>
+      <div className="forum-empty-state">
+        <div className="forum-empty-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+        </div>
+        <div className="forum-empty-title">{t('forum.emptyTitle')}</div>
+        <div className="forum-empty-desc">{t('forum.emptyDesc')}</div>
+        <Link href="/forum/new" className="forum-empty-cta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="12" x2="12" y1="5" y2="19" /><line x1="5" x2="19" y1="12" y2="12" /></svg>
+          {t('forum.newtopic')}
+        </Link>
+      </div>
+    </li>
+  );
 }
 
 export default function ForumPage() {
@@ -35,9 +85,7 @@ export default function ForumPage() {
   const stats = useMemo(() => {
     const discussions = topics.length;
     const replies = topics.reduce((acc, x) => acc + (x.replyCount || 0), 0);
-    // members is not modeled yet; keep a stable placeholder.
-    const members = 0;
-    return { discussions, replies, members };
+    return { discussions, replies };
   }, [topics]);
 
   useEffect(() => {
@@ -51,9 +99,7 @@ export default function ForumPage() {
       }
     }
     void run();
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, [locale]);
 
   useEffect(() => {
@@ -75,9 +121,7 @@ export default function ForumPage() {
       }
     }
     void run();
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, [locale, activeNav, activeSort, qDebounced]);
 
   useEffect(() => {
@@ -97,12 +141,27 @@ export default function ForumPage() {
         </div>
       </section>
 
+      {/* Mobile sidebar toggle (top) */}
+      <div className="forum-mobile-toggle" style={{ paddingTop: 16 }}>
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={() => setSidebarOpen((v) => !v)}
+          aria-controls="forum-sidebar"
+          aria-expanded={sidebarOpen}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" x2="21" y1="12" y2="12" /><line x1="3" x2="21" y1="6" y2="6" /><line x1="3" x2="21" y1="18" y2="18" /></svg>
+          {sidebarOpen ? t('forum.sidebar.close') : t('forum.sidebar.open')}
+        </button>
+      </div>
+
       {/* Forum Layout */}
       <div className="forum-container">
 
         {/* Sidebar */}
         <aside className={`forum-sidebar${sidebarOpen ? ' open' : ''}`} id="forum-sidebar">
           <Link href="/forum/new" className="new-topic-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ marginRight: 6 }}><line x1="12" x2="12" y1="5" y2="19" /><line x1="5" x2="19" y1="12" y2="12" /></svg>
             {t('forum.newtopic')}
           </Link>
 
@@ -148,9 +207,6 @@ export default function ForumPage() {
             <div>
               <strong>{stats.replies}</strong> {t('forum.stats.posts')}
             </div>
-            <div>
-              <strong>{stats.members}</strong> {t('forum.stats.members')}
-            </div>
           </div>
         </aside>
 
@@ -185,7 +241,7 @@ export default function ForumPage() {
                 />
                 {q ? (
                   <button type="button" className="forum-search-clear" onClick={() => setQ('')} aria-label={t('forum.searchClear')}>
-                    ×
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" x2="6" y1="6" y2="18" /><line x1="6" x2="18" y1="6" y2="18" /></svg>
                   </button>
                 ) : null}
               </div>
@@ -195,52 +251,39 @@ export default function ForumPage() {
           {/* Discussion List */}
           <ul className="discussion-list">
             {loading ? (
-              <li className="discussion-item">
-                <div className="discussion-content">
-                  <div className="muted">{t('forum.loading')}</div>
-                </div>
-              </li>
+              <LoadingSkeleton />
             ) : topics.length === 0 ? (
-              <li className="discussion-item">
-                <div className="discussion-content">
-                  <div className="muted">{t('forum.empty')}</div>
-                </div>
-              </li>
+              <EmptyState t={t} />
             ) : (
-              topics.map((topic) => (
-                <li className="discussion-item" key={`${topic.categorySlug}/${topic.slug}`}>
-                  <div className="discussion-avatar forum-avatar-blue">{topic.authorName?.slice(0, 1)?.toUpperCase() || 'G'}</div>
-                  <div className="discussion-content">
-                    <div className="discussion-title">
-                      {topic.tags?.[0] ? <span className="discussion-tag discussion-tag-soft">{topic.tags[0]}</span> : null}
-                      <Link href={`/forum/thread?c=${encodeURIComponent(topic.categorySlug)}&t=${encodeURIComponent(topic.slug)}`}>{topic.title}</Link>
+              topics.map((topic) => {
+                const authorName = topic.authorName || 'GCSS';
+                const avatarClass = getAvatarColor(authorName);
+                return (
+                  <li className="discussion-item" key={`${topic.categorySlug}/${topic.slug}`}>
+                    <div className={`discussion-avatar ${avatarClass}`}>
+                      {authorName.slice(0, 1).toUpperCase()}
                     </div>
-                    <div className="discussion-meta">
-                      <span>
-                        <span className="author">{topic.authorName}</span> · {formatShortDate(topic.updatedAt || topic.createdAt, locale)}
-                      </span>
+                    <div className="discussion-content">
+                      <div className="discussion-title">
+                        {topic.tags?.[0] ? <span className="discussion-tag discussion-tag-soft">{topic.tags[0]}</span> : null}
+                        <Link href={`/forum/thread?c=${encodeURIComponent(topic.categorySlug)}&t=${encodeURIComponent(topic.slug)}`}>{topic.title}</Link>
+                      </div>
+                      <div className="discussion-meta">
+                        <span>
+                          <span className="author">{authorName}</span> · {formatShortDate(topic.updatedAt || topic.createdAt, locale)}
+                        </span>
+                      </div>
+                      <div className="discussion-excerpt">{truncateExcerpt(topic.bodyMd)}</div>
                     </div>
-                    <div className="discussion-excerpt">{topic.bodyMd}</div>
-                  </div>
-                  <div className="discussion-stats">
-                    <span className="stat-count">{topic.replyCount}</span>
-                    <span className="stat-label">{t('forum.replies')}</span>
-                  </div>
-                </li>
-              ))
+                    <div className="discussion-stats">
+                      <span className="stat-count">{topic.replyCount}</span>
+                      <span className="stat-label">{t('forum.replies')}</span>
+                    </div>
+                  </li>
+                );
+              })
             )}
           </ul>
-
-          <div className="forum-mobile-toggle">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={() => setSidebarOpen((v) => !v)}
-              aria-controls="forum-sidebar"
-            >
-              {sidebarOpen ? t('forum.sidebar.close') : t('forum.sidebar.open')}
-            </button>
-          </div>
         </div>
 
       </div>

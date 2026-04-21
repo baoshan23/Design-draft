@@ -1001,6 +1001,8 @@
   "forum": {
     "loading": "Loading discussions…",
     "empty": "No discussions yet.",
+    "emptyTitle": "No discussions found",
+    "emptyDesc": "Be the first to start a conversation in this community.",
     "sidebar": {
       "sections": "Sections",
       "all": "All",
@@ -1331,6 +1333,11 @@
     "noaccount": "Don't have an account?",
     "register": "Register",
     "success": "Login successful! Redirecting...",
+    "features": {
+      "realtime": "Real-time charger monitoring & analytics",
+      "secure": "Enterprise-grade security & encryption",
+      "global": "Global coverage across 17+ countries"
+    },
     "errors": {
       "invalid": "Invalid username or password."
     }
@@ -1376,7 +1383,12 @@
     "btn": "Create Account",
     "hasaccount": "Already have an account?",
     "login": "Log In",
-    "success": "Account created successfully! Redirecting to login...",
+    "success": "Account created successfully! Redirecting...",
+    "features": {
+      "free": "Free account with full platform access",
+      "encrypted": "End-to-end encrypted data protection",
+      "api": "RESTful API for seamless integration"
+    },
     "errors": {
       "passwordMismatch": "Passwords do not match.",
       "generic": "Registration failed. Please try again."
