@@ -117,7 +117,7 @@ export default function AdminPageClient() {
                     </div>
                 </div>
 
-                {error && <div className="admin-alert admin-alert-error">{error}</div>}
+                {error && <div className="admin-alert admin-alert-error" role="alert">{error}</div>}
 
                 {loading ? (
                     <div className="admin-loading glass-card">{t('admin.loading')}</div>

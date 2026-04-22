@@ -90,7 +90,7 @@ export default function AdminProductsClient() {
                     </nav>
                 </header>
 
-                {error && <div className="admin-alert admin-alert-error">{error}</div>}
+                {error && <div className="admin-alert admin-alert-error" role="alert">{error}</div>}
 
                 {cycles && supports && servers && promos ? (
                     <>

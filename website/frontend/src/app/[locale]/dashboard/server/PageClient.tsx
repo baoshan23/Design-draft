@@ -88,7 +88,7 @@ export default function ServerInfoClient() {
         <>
             <h1 className="dash-page-title">{t('title')}</h1>
 
-            {error && <div className="form-banner form-banner--error">{error}</div>}
+            {error && <div className="form-banner form-banner--error" role="alert" aria-live="assertive">{error}</div>}
 
             {!servers ? (
                 <div className="dash-form-card">

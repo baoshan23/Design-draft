@@ -110,7 +110,7 @@ export default function AdminOrdersClient() {
                     </nav>
                 </header>
 
-                {error && <div className="admin-alert admin-alert-error">{error}</div>}
+                {error && <div className="admin-alert admin-alert-error" role="alert">{error}</div>}
 
                 {!orders ? (
                     <div className="admin-loading">{tCommon('loading')}</div>

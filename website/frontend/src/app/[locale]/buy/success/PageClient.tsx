@@ -74,7 +74,7 @@ export default function BuySuccessClient() {
                             {t('orderNumber')}: <code>{orderNum}</code>
                         </p>
                     )}
-                    {err && <div className="form-banner form-banner--error">{err}</div>}
+                    {err && <div className="form-banner form-banner--error" role="alert" aria-live="assertive">{err}</div>}
                     <div className="buy-success-actions">
                         <Link href="/dashboard/payments" className="btn btn-primary">
                             {t('viewInvoice')}

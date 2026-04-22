@@ -45,7 +45,7 @@ export default function PaymentHistoryClient() {
                 {loading ? (
                     <div className="dashboard-loading"><div className="dashboard-loading-spinner" /></div>
                 ) : error ? (
-                    <div className="form-banner form-banner--error">{error}</div>
+                    <div className="form-banner form-banner--error" role="alert" aria-live="assertive">{error}</div>
                 ) : invoices.length === 0 && orders.length === 0 ? (
                     <div className="dash-empty-state">
                         <div className="dash-empty-icon">

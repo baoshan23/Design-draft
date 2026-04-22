@@ -1425,6 +1425,8 @@
     "password": {
       "placeholder": "请输入密码"
     },
+    "passwordShow": "显示密码",
+    "passwordHide": "隐藏密码",
     "captchaLabel": "验证码",
     "captcha": {
       "placeholder": "请输入验证码",

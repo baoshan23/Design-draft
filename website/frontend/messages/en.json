@@ -1425,6 +1425,8 @@
     "password": {
       "placeholder": "Enter your password"
     },
+    "passwordShow": "Show password",
+    "passwordHide": "Hide password",
     "captchaLabel": "Captcha",
     "captcha": {
       "placeholder": "Enter captcha code",

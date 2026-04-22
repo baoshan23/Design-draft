@@ -140,7 +140,7 @@ export default function DashboardProfileClient() {
         <>
             <h1 className="dash-page-title">{t('profile.title')}</h1>
 
-            {profileMsg && <div className={`form-banner form-banner--${profileMsg.type}`}>{profileMsg.text}</div>}
+            {profileMsg && <div className={`form-banner form-banner--${profileMsg.type}`} role={profileMsg.type === 'error' ? 'alert' : 'status'} aria-live={profileMsg.type === 'error' ? 'assertive' : 'polite'}>{profileMsg.text}</div>}
 
             <div className="dash-form-card">
                 <h2 className="dash-section-title">{t('profile.subscription')}</h2>
@@ -199,7 +199,7 @@ export default function DashboardProfileClient() {
             <div className="dash-form-card">
                 <h2 className="dash-section-title">{t('email.title')}</h2>
                 {emailMsg && (
-                    <div className={`form-banner form-banner--${emailMsg.type}`}>{emailMsg.text}</div>
+                    <div className={`form-banner form-banner--${emailMsg.type}`} role={emailMsg.type === 'error' ? 'alert' : 'status'} aria-live={emailMsg.type === 'error' ? 'assertive' : 'polite'}>{emailMsg.text}</div>
                 )}
                 {emailStage === 'idle' ? (
                     <>
@@ -274,7 +274,7 @@ export default function DashboardProfileClient() {
 
             <div className="dash-form-card">
                 <h2 className="dash-section-title">{t('security.changePassword')}</h2>
-                {pwMsg && <div className={`form-banner form-banner--${pwMsg.type}`}>{pwMsg.text}</div>}
+                {pwMsg && <div className={`form-banner form-banner--${pwMsg.type}`} role={pwMsg.type === 'error' ? 'alert' : 'status'} aria-live={pwMsg.type === 'error' ? 'assertive' : 'polite'}>{pwMsg.text}</div>}
                 <div className="form-group">
                     <label className="form-label">{t('security.currentPassword')}</label>
                     <input

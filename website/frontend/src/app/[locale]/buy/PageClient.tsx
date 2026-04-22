@@ -93,7 +93,7 @@ export default function BuyClient() {
     if (error) {
         return (
             <section className="section container">
-                <div className="form-banner form-banner--error">{error}</div>
+                <div className="form-banner form-banner--error" role="alert" aria-live="assertive">{error}</div>
             </section>
         );
     }
@@ -131,62 +131,77 @@ export default function BuyClient() {
 
                     <div className="buy-block">
                         <h2 className="buy-block-title">{t('chooseBillingCycle')}</h2>
-                        <div className="buy-options-grid">
-                            {catalog.billingCycles.map((b) => (
-                                <button
-                                    key={b.id}
-                                    type="button"
-                                    className={`buy-option${cart.billingCycleId === b.id ? ' buy-option--active' : ''}`}
-                                    onClick={() => setCart((c) => ({ ...c, billingCycleId: b.id }))}
-                                >
-                                    <div className="buy-option-label">{labelFor(locale, b.labelEn, b.labelZh)}</div>
-                                    {b.multiplier < 1 && (
-                                        <div className="buy-option-sub">
-                                            {t('save', { pct: Math.round((1 - b.multiplier) * 100) })}
-                                        </div>
-                                    )}
-                                </button>
-                            ))}
+                        <div className="buy-options-grid" role="radiogroup">
+                            {catalog.billingCycles.map((b) => {
+                                const selected = cart.billingCycleId === b.id;
+                                return (
+                                    <button
+                                        key={b.id}
+                                        type="button"
+                                        role="radio"
+                                        aria-checked={selected}
+                                        className={`buy-option${selected ? ' buy-option--active' : ''}`}
+                                        onClick={() => setCart((c) => ({ ...c, billingCycleId: b.id }))}
+                                    >
+                                        <div className="buy-option-label">{labelFor(locale, b.labelEn, b.labelZh)}</div>
+                                        {b.multiplier < 1 && (
+                                            <div className="buy-option-sub">
+                                                {t('save', { pct: Math.round((1 - b.multiplier) * 100) })}
+                                            </div>
+                                        )}
+                                    </button>
+                                );
+                            })}
                         </div>
                     </div>
 
                     <div className="buy-block">
                         <h2 className="buy-block-title">{t('supportSystem')}</h2>
                         <div className="buy-options-grid buy-options-grid--support">
-                            {catalog.supportTiers.map((s) => (
-                                <button
-                                    key={s.id}
-                                    type="button"
-                                    className={`buy-option${cart.supportTierId === s.id ? ' buy-option--active' : ''}`}
-                                    onClick={() => setCart((c) => ({ ...c, supportTierId: s.id }))}
-                                >
-                                    <div className="buy-option-label">{labelFor(locale, s.labelEn, s.labelZh)}</div>
-                                    <div className="buy-option-price">
-                                        {s.priceCents === 0
-                                            ? t('free')
-                                            : s.pricingType === 'per_day'
-                                                ? `${formatUSD(s.priceCents)}/${t('perDay')}`
-                                                : formatUSD(s.priceCents)}
-                                    </div>
-                                </button>
-                            ))}
+                            {catalog.supportTiers.map((s) => {
+                                const selected = cart.supportTierId === s.id;
+                                return (
+                                    <button
+                                        key={s.id}
+                                        type="button"
+                                        role="radio"
+                                        aria-checked={selected}
+                                        className={`buy-option${selected ? ' buy-option--active' : ''}`}
+                                        onClick={() => setCart((c) => ({ ...c, supportTierId: s.id }))}
+                                    >
+                                        <div className="buy-option-label">{labelFor(locale, s.labelEn, s.labelZh)}</div>
+                                        <div className="buy-option-price">
+                                            {s.priceCents === 0
+                                                ? t('free')
+                                                : s.pricingType === 'per_day'
+                                                    ? `${formatUSD(s.priceCents)}/${t('perDay')}`
+                                                    : formatUSD(s.priceCents)}
+                                        </div>
+                                    </button>
+                                );
+                            })}
                         </div>
                     </div>
 
                     <div className="buy-block">
                         <h2 className="buy-block-title">{t('chooseServer')}</h2>
                         <div className="buy-options-grid buy-options-grid--server">
-                            {catalog.serverTiers.map((s) => (
-                                <button
-                                    key={s.id}
-                                    type="button"
-                                    className={`buy-option${cart.serverTierId === s.id ? ' buy-option--active' : ''}`}
-                                    onClick={() => setCart((c) => ({ ...c, serverTierId: s.id }))}
-                                >
-                                    <div className="buy-option-label">{labelFor(locale, s.labelEn, s.labelZh)}</div>
-                                    <div className="buy-option-price">{formatUSD(s.priceCents)}</div>
-                                </button>
-                            ))}
+                            {catalog.serverTiers.map((s) => {
+                                const selected = cart.serverTierId === s.id;
+                                return (
+                                    <button
+                                        key={s.id}
+                                        type="button"
+                                        role="radio"
+                                        aria-checked={selected}
+                                        className={`buy-option${selected ? ' buy-option--active' : ''}`}
+                                        onClick={() => setCart((c) => ({ ...c, serverTierId: s.id }))}
+                                    >
+                                        <div className="buy-option-label">{labelFor(locale, s.labelEn, s.labelZh)}</div>
+                                        <div className="buy-option-price">{formatUSD(s.priceCents)}</div>
+                                    </button>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>

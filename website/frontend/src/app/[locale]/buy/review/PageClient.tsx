@@ -267,7 +267,7 @@ export default function BuyReviewClient() {
                                 </button>
                             )}
                         </div>
-                        {promoMsg && <div className={`form-banner form-banner--${promoMsg.type}`} style={{ marginTop: 10 }}>{promoMsg.text}</div>}
+                        {promoMsg && <div className={`form-banner form-banner--${promoMsg.type}`} role={promoMsg.type === 'error' ? 'alert' : 'status'} aria-live={promoMsg.type === 'error' ? 'assertive' : 'polite'} style={{ marginTop: 10 }}>{promoMsg.text}</div>}
                     </div>
 
                     <div className="buy-block">
@@ -337,16 +337,16 @@ export default function BuyReviewClient() {
 
                     <div className="buy-block">
                         <h2 className="buy-block-title">{t('review.paymentMethod')}</h2>
-                        <div className="buy-provider-grid">
-                            <button type="button" className={`buy-provider${provider === 'stripe' ? ' buy-provider--active' : ''}`} onClick={() => setProvider('stripe')}>
+                        <div className="buy-provider-grid" role="radiogroup" aria-label={t('review.paymentMethod')}>
+                            <button type="button" role="radio" aria-checked={provider === 'stripe'} className={`buy-provider${provider === 'stripe' ? ' buy-provider--active' : ''}`} onClick={() => setProvider('stripe')}>
                                 <div className="buy-provider-label">{t('review.providerStripe')}</div>
                                 <div className="buy-provider-sub">{t('review.providerStripeDesc')}</div>
                             </button>
-                            <button type="button" className={`buy-provider${provider === 'paypal' ? ' buy-provider--active' : ''}`} onClick={() => setProvider('paypal')}>
+                            <button type="button" role="radio" aria-checked={provider === 'paypal'} className={`buy-provider${provider === 'paypal' ? ' buy-provider--active' : ''}`} onClick={() => setProvider('paypal')}>
                                 <div className="buy-provider-label">{t('review.providerPaypal')}</div>
                                 <div className="buy-provider-sub">{t('review.providerPaypalDesc')}</div>
                             </button>
-                            <button type="button" className={`buy-provider${provider === 'pingxx' ? ' buy-provider--active' : ''}`} onClick={() => setProvider('pingxx')}>
+                            <button type="button" role="radio" aria-checked={provider === 'pingxx'} className={`buy-provider${provider === 'pingxx' ? ' buy-provider--active' : ''}`} onClick={() => setProvider('pingxx')}>
                                 <div className="buy-provider-label">{t('review.providerPingxx')}</div>
                                 <div className="buy-provider-sub">{t('review.providerPingxxDesc')}</div>
                             </button>
@@ -394,7 +394,7 @@ export default function BuyReviewClient() {
                         <span>{formatUSD(pricing.total)}</span>
                     </div>
 
-                    {error && <div className="form-banner form-banner--error">{error}</div>}
+                    {error && <div className="form-banner form-banner--error" role="alert" aria-live="assertive">{error}</div>}
 
                     <button
                         type="button"

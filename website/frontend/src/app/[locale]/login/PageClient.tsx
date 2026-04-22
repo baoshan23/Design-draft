@@ -154,14 +154,14 @@ export default function LoginPage() {
           <p className="auth-subtitle">{t('login.subtitle')}</p>
 
           {submitted && (
-            <div className="form-banner form-banner--success">
+            <div className="form-banner form-banner--success" role="status" aria-live="polite">
               <CheckIcon />
               {t('login.success')}
             </div>
           )}
 
           {error && (
-            <div className="form-banner form-banner--error">
+            <div className="form-banner form-banner--error" role="alert" aria-live="assertive">
               <AlertIcon />
               {error}
             </div>
@@ -201,7 +201,8 @@ export default function LoginPage() {
                   type="button"
                   className="password-toggle"
                   onClick={() => setShowPassword(!showPassword)}
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  aria-label={showPassword ? t('login.passwordHide') : t('login.passwordShow')}
+                  aria-pressed={showPassword}
                 >
                   {showPassword ? <EyeOffIcon /> : <EyeIcon />}
                 </button>

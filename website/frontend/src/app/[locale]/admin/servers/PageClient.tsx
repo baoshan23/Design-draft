@@ -91,7 +91,7 @@ export default function AdminServersClient() {
                     </nav>
                 </header>
 
-                {error && <div className="admin-alert admin-alert-error">{error}</div>}
+                {error && <div className="admin-alert admin-alert-error" role="alert">{error}</div>}
 
                 {!servers ? (
                     <div className="admin-loading">{tCommon('loading')}</div>
