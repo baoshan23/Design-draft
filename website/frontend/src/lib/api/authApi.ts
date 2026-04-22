@@ -7,6 +7,8 @@ export type AuthUser = {
     lastName: string;
     phone: string;
     company?: string;
+    avatarUrl?: string;
+    coverUrl?: string;
     createdAt: string;
 };
 
@@ -194,4 +196,33 @@ export async function apiConfirmEmailChange(
 export async function apiPublicConfig(): Promise<{ config: Record<string, string> }> {
     const apiBase = getApiBase();
     return await fetchJson<{ config: Record<string, string> }>(`${apiBase}/public/config`, { method: 'GET' });
+}
+
+export async function apiUploadImage(token: string, file: File): Promise<string> {
+    const apiBase = getApiBase();
+    const form = new FormData();
+    form.append('file', file);
+    const res = await fetch(`${apiBase}/uploads`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: form,
+    });
+    if (!res.ok) {
+        const text = await res.text().catch(() => '');
+        throw new Error(text || `Upload failed (${res.status})`);
+    }
+    const data = await res.json();
+    return data.url as string;
+}
+
+export async function apiUpdateProfileImages(
+    token: string,
+    input: { avatarUrl?: string; coverUrl?: string }
+): Promise<{ user: AuthUser }> {
+    const apiBase = getApiBase();
+    return await fetchJson<{ user: AuthUser }>(`${apiBase}/auth/profile/images`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify(input),
+    });
 }

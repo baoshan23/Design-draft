@@ -1551,6 +1551,14 @@
       "personalInfo": "Personal information",
       "personalInfoDesc": "Your display name, phone number and company. Email changes have their own section below."
     },
+    "image": {
+      "changeAvatar": "Change profile photo",
+      "changeCover": "Change cover",
+      "uploading": "Uploading…",
+      "invalidType": "Please select an image file.",
+      "tooLarge": "Image must be smaller than 10 MB.",
+      "uploadFailed": "Upload failed. Please try again."
+    },
     "email": {
       "title": "Change email",
       "desc": "We'll send a 6-digit code to the new address. Current sessions stay signed in.",

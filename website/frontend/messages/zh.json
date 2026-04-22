@@ -1551,6 +1551,14 @@
       "personalInfo": "个人信息",
       "personalInfoDesc": "您的显示姓名、电话和公司。邮箱修改请见下方独立模块。"
     },
+    "image": {
+      "changeAvatar": "更换头像",
+      "changeCover": "更换封面",
+      "uploading": "上传中…",
+      "invalidType": "请选择图片文件。",
+      "tooLarge": "图片大小不能超过 10 MB。",
+      "uploadFailed": "上传失败，请重试。"
+    },
     "email": {
       "title": "修改邮箱",
       "desc": "我们会向新邮箱发送一组 6 位验证码。当前的登录会话会保持有效。",

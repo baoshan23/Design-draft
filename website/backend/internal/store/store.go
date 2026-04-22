@@ -368,6 +368,9 @@ func (s *Store) migrate(ctx context.Context) error {
 	// Email hash for encrypted email lookups + account disable
 	_, _ = s.db.ExecContext(ctx, `ALTER TABLE users ADD COLUMN email_hash TEXT NOT NULL DEFAULT '';`)
 	_, _ = s.db.ExecContext(ctx, `ALTER TABLE users ADD COLUMN disabled_at TEXT;`)
+	// User avatar + profile banner (customizable uploads)
+	_, _ = s.db.ExecContext(ctx, `ALTER TABLE users ADD COLUMN avatar_url TEXT NOT NULL DEFAULT '';`)
+	_, _ = s.db.ExecContext(ctx, `ALTER TABLE users ADD COLUMN cover_url TEXT NOT NULL DEFAULT '';`)
 	// Blog post enhancements
 	_, _ = s.db.ExecContext(ctx, `ALTER TABLE blog_posts ADD COLUMN status TEXT NOT NULL DEFAULT 'published';`)
 	_, _ = s.db.ExecContext(ctx, `ALTER TABLE blog_posts ADD COLUMN updated_at TEXT NOT NULL DEFAULT '';`)

@@ -166,6 +166,7 @@ func main() {
 	mux.HandleFunc("/api/auth/password/change", s.withCORS(s.handleAuthChangePassword))
 	mux.HandleFunc("/api/auth/email/change-request", s.withCORS(s.handleAuthEmailChangeRequest))
 	mux.HandleFunc("/api/auth/email/change-confirm", s.withCORS(s.handleAuthEmailChangeConfirm))
+	mux.HandleFunc("/api/auth/profile/images", s.withCORS(s.handleAuthUpdateImages))
 	// User dashboard
 	mux.HandleFunc("/api/user/dashboard", s.withCORS(s.handleUserDashboard))
 	// Public config (publishable keys only)
@@ -1184,6 +1185,45 @@ func (s *server) handleAdminRequests(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, http.StatusOK, map[string]interface{}{"requests": records})
+}
+
+// ── User avatar + cover image ──────────────────────────────────────────
+
+func (s *server) handleAuthUpdateImages(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPut && r.Method != http.MethodPost {
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
+		return
+	}
+	user, ok := s.requireAuth(w, r)
+	if !ok {
+		return
+	}
+	var req struct {
+		AvatarURL string `json:"avatarUrl"`
+		CoverURL  string `json:"coverUrl"`
+	}
+	if err := decodeJSON(r, &req); err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+	// Validate: only accept /uploads/ relative URLs (server-controlled path)
+	// or the explicit clear sentinel. Reject arbitrary external URLs so users
+	// can't point avatar at third-party tracking images.
+	for _, u := range []string{req.AvatarURL, req.CoverURL} {
+		if u == "" || u == "__CLEAR__" {
+			continue
+		}
+		if !strings.HasPrefix(u, "/uploads/") {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": "only /uploads/* paths are accepted"})
+			return
+		}
+	}
+	updated, err := s.store.UpdateUserImages(r.Context(), user.ID, req.AvatarURL, req.CoverURL)
+	if err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]interface{}{"user": updated})
 }
 
 // ── Admin: app_secrets / settings ──────────────────────────────────────

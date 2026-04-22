@@ -31,6 +31,8 @@ type AuthUser struct {
 	LastName  string    `json:"lastName"`
 	Phone     string    `json:"phone"`
 	Company   string    `json:"company,omitempty"`
+	AvatarURL string    `json:"avatarUrl,omitempty"`
+	CoverURL  string    `json:"coverUrl,omitempty"`
 	CreatedAt time.Time `json:"createdAt"`
 }
 
@@ -118,12 +120,12 @@ func (s *Store) AuthenticateUser(ctx context.Context, identifier, password strin
 	var passwordHash string
 	var disabledAt sql.NullString
 	row := s.db.QueryRowContext(ctx, `
-		SELECT id, username, email, role, first_name, last_name, phone, company, password_hash, created_at, disabled_at
+		SELECT id, username, email, role, first_name, last_name, phone, company, COALESCE(avatar_url, ''), COALESCE(cover_url, ''), password_hash, created_at, disabled_at
 		FROM users
 		WHERE username = ? OR email_hash = ? OR email = ?
 		LIMIT 1;
 	`, identifier, emailHash, idLower)
-	if err := row.Scan(&u.ID, &u.Username, &u.Email, &u.Role, &u.FirstName, &u.LastName, &u.Phone, &u.Company, &passwordHash, &createdAt, &disabledAt); err != nil {
+	if err := row.Scan(&u.ID, &u.Username, &u.Email, &u.Role, &u.FirstName, &u.LastName, &u.Phone, &u.Company, &u.AvatarURL, &u.CoverURL, &passwordHash, &createdAt, &disabledAt); err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return nil, ErrInvalidCredentials
 		}
@@ -192,7 +194,7 @@ func (s *Store) GetUserBySessionToken(ctx context.Context, token string) (*AuthU
 	var u AuthUser
 	var createdAt string
 	row := s.db.QueryRowContext(ctx, `
-		SELECT u.id, u.username, u.email, u.role, u.first_name, u.last_name, u.phone, u.company, u.created_at
+		SELECT u.id, u.username, u.email, u.role, u.first_name, u.last_name, u.phone, u.company, COALESCE(u.avatar_url, ''), COALESCE(u.cover_url, ''), u.created_at
 		FROM sessions s
 		JOIN users u ON u.id = s.user_id
 		WHERE s.token_hash = ?
@@ -200,7 +202,7 @@ func (s *Store) GetUserBySessionToken(ctx context.Context, token string) (*AuthU
 		  AND s.expires_at > ?
 		LIMIT 1;
 	`, tokenHash, now)
-	if err := row.Scan(&u.ID, &u.Username, &u.Email, &u.Role, &u.FirstName, &u.LastName, &u.Phone, &u.Company, &createdAt); err != nil {
+	if err := row.Scan(&u.ID, &u.Username, &u.Email, &u.Role, &u.FirstName, &u.LastName, &u.Phone, &u.Company, &u.AvatarURL, &u.CoverURL, &createdAt); err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return nil, ErrUnauthorized
 		}
@@ -364,10 +366,10 @@ func (s *Store) UpdateUserProfile(ctx context.Context, userID int64, firstName, 
 	var u AuthUser
 	var createdAt string
 	row := s.db.QueryRowContext(ctx, `
-		SELECT id, username, email, role, first_name, last_name, phone, company, created_at
+		SELECT id, username, email, role, first_name, last_name, phone, company, COALESCE(avatar_url, ''), COALESCE(cover_url, ''), created_at
 		FROM users WHERE id = ?;
 	`, userID)
-	if err := row.Scan(&u.ID, &u.Username, &u.Email, &u.Role, &u.FirstName, &u.LastName, &u.Phone, &u.Company, &createdAt); err != nil {
+	if err := row.Scan(&u.ID, &u.Username, &u.Email, &u.Role, &u.FirstName, &u.LastName, &u.Phone, &u.Company, &u.AvatarURL, &u.CoverURL, &createdAt); err != nil {
 		return nil, err
 	}
 	u.CreatedAt, _ = parseTimeRFC3339(createdAt)
@@ -379,6 +381,47 @@ func (s *Store) UpdateUserProfile(ctx context.Context, userID int64, firstName, 
 	u.Phone = s.enc.Decrypt(u.Phone)
 	u.Company = s.enc.Decrypt(u.Company)
 
+	return &u, nil
+}
+
+// UpdateUserImages sets/clears the avatar_url or cover_url. Pass empty string
+// for either field to leave it unchanged; pass the sentinel "__CLEAR__" to
+// reset it. Both are relative paths returned by /api/uploads.
+func (s *Store) UpdateUserImages(ctx context.Context, userID int64, avatarURL, coverURL string) (*AuthUser, error) {
+	if avatarURL != "" {
+		v := avatarURL
+		if v == "__CLEAR__" {
+			v = ""
+		}
+		if _, err := s.db.ExecContext(ctx, `UPDATE users SET avatar_url = ? WHERE id = ?;`, v, userID); err != nil {
+			return nil, err
+		}
+	}
+	if coverURL != "" {
+		v := coverURL
+		if v == "__CLEAR__" {
+			v = ""
+		}
+		if _, err := s.db.ExecContext(ctx, `UPDATE users SET cover_url = ? WHERE id = ?;`, v, userID); err != nil {
+			return nil, err
+		}
+	}
+	// Re-read + decrypt fresh user row.
+	var u AuthUser
+	var createdAt string
+	row := s.db.QueryRowContext(ctx, `
+		SELECT id, username, email, role, first_name, last_name, phone, company, COALESCE(avatar_url, ''), COALESCE(cover_url, ''), created_at
+		FROM users WHERE id = ?;
+	`, userID)
+	if err := row.Scan(&u.ID, &u.Username, &u.Email, &u.Role, &u.FirstName, &u.LastName, &u.Phone, &u.Company, &u.AvatarURL, &u.CoverURL, &createdAt); err != nil {
+		return nil, err
+	}
+	u.CreatedAt, _ = parseTimeRFC3339(createdAt)
+	u.Email = s.enc.Decrypt(u.Email)
+	u.FirstName = s.enc.Decrypt(u.FirstName)
+	u.LastName = s.enc.Decrypt(u.LastName)
+	u.Phone = s.enc.Decrypt(u.Phone)
+	u.Company = s.enc.Decrypt(u.Company)
 	return &u, nil
 }
 

@@ -1,9 +1,14 @@
 'use client';
 
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/providers/AuthProvider';
+import {
+    apiUploadImage,
+    apiUpdateProfileImages,
+    getAuthToken,
+} from '@/lib/api/authApi';
 
 function DashboardIcon() {
     return (
@@ -13,7 +18,6 @@ function DashboardIcon() {
         </svg>
     );
 }
-
 function PaymentsIcon() {
     return (
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -22,7 +26,6 @@ function PaymentsIcon() {
         </svg>
     );
 }
-
 function ServerIcon() {
     return (
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -33,7 +36,6 @@ function ServerIcon() {
         </svg>
     );
 }
-
 function LogoutIcon() {
     return (
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -43,7 +45,6 @@ function LogoutIcon() {
         </svg>
     );
 }
-
 function AdminIcon() {
     return (
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -51,13 +52,12 @@ function AdminIcon() {
         </svg>
     );
 }
-
-function ProfileAvatar({ initials, size = 96 }: { initials: string; size?: number }) {
-    // Decorative — the user's name is rendered immediately next to it.
+function CameraIcon() {
     return (
-        <div className="dash-profile-avatar" aria-hidden="true" style={{ width: size, height: size, fontSize: size / 2.4 }}>
-            {initials}
-        </div>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+            <circle cx="12" cy="13" r="4" />
+        </svg>
     );
 }
 
@@ -66,7 +66,12 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
     const tNav = useTranslations('nav');
     const pathname = usePathname();
     const router = useRouter();
-    const { user, loading, logout } = useAuth();
+    const { user, loading, logout, refresh } = useAuth();
+
+    const avatarInputRef = useRef<HTMLInputElement>(null);
+    const coverInputRef = useRef<HTMLInputElement>(null);
+    const [uploadBusy, setUploadBusy] = useState<'avatar' | 'cover' | null>(null);
+    const [uploadError, setUploadError] = useState<string>('');
 
     useEffect(() => {
         if (!loading && !user) router.push('/login');
@@ -93,14 +98,42 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
         router.push('/login');
     };
 
-    // Normalize pathname by stripping locale prefix for active-state matching.
     const path = pathname.replace(/^\/(en|zh)/, '') || '/';
 
-    const navItems: { href: '/dashboard' | '/dashboard/payments' | '/dashboard/server'; label: string; icon: ReactNode; match: (p: string) => boolean }[] = [
+    const navItems: {
+        href: '/dashboard' | '/dashboard/payments' | '/dashboard/server';
+        label: string;
+        icon: ReactNode;
+        match: (p: string) => boolean;
+    }[] = [
         { href: '/dashboard', label: t('nav.dashboard'), icon: <DashboardIcon />, match: (p) => p === '/dashboard' || p === '/dashboard/' },
         { href: '/dashboard/payments', label: t('nav.paymentHistory'), icon: <PaymentsIcon />, match: (p) => p.startsWith('/dashboard/payments') },
         { href: '/dashboard/server', label: t('nav.serverInfo'), icon: <ServerIcon />, match: (p) => p.startsWith('/dashboard/server') },
     ];
+
+    const uploadImage = async (kind: 'avatar' | 'cover', file: File) => {
+        const token = getAuthToken();
+        if (!token) return;
+        if (!file.type.startsWith('image/')) {
+            setUploadError(t('image.invalidType'));
+            return;
+        }
+        if (file.size > 10 * 1024 * 1024) {
+            setUploadError(t('image.tooLarge'));
+            return;
+        }
+        setUploadBusy(kind);
+        setUploadError('');
+        try {
+            const url = await apiUploadImage(token, file);
+            await apiUpdateProfileImages(token, kind === 'avatar' ? { avatarUrl: url } : { coverUrl: url });
+            await refresh();
+        } catch (e) {
+            setUploadError(e instanceof Error ? e.message : t('image.uploadFailed'));
+        } finally {
+            setUploadBusy(null);
+        }
+    };
 
     return (
         <div className="dash-portal">
@@ -146,9 +179,67 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
 
             <main className="dash-main" id="dash-main-content">
                 <header className="dash-profile-header">
-                    <div className="dash-profile-banner" aria-hidden="true" />
+                    <div
+                        className={`dash-profile-banner${user.coverUrl ? ' dash-profile-banner--image' : ''}`}
+                        style={user.coverUrl ? { backgroundImage: `url(${user.coverUrl})` } : undefined}
+                        aria-hidden="true"
+                    />
+                    <button
+                        type="button"
+                        className="dash-cover-edit-btn"
+                        onClick={() => coverInputRef.current?.click()}
+                        disabled={uploadBusy === 'cover'}
+                        aria-label={t('image.changeCover')}
+                    >
+                        <CameraIcon />
+                        <span>{uploadBusy === 'cover' ? t('image.uploading') : t('image.changeCover')}</span>
+                    </button>
+                    <input
+                        ref={coverInputRef}
+                        type="file"
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                        onChange={(e) => {
+                            const f = e.target.files?.[0];
+                            if (f) void uploadImage('cover', f);
+                            e.target.value = '';
+                        }}
+                    />
+
                     <div className="dash-profile-identity">
-                        <ProfileAvatar initials={initials} />
+                        <div className="dash-profile-avatar-wrap">
+                            {user.avatarUrl ? (
+                                /* eslint-disable-next-line @next/next/no-img-element */
+                                <img
+                                    className="dash-profile-avatar dash-profile-avatar--image"
+                                    src={user.avatarUrl}
+                                    alt=""
+                                    aria-hidden="true"
+                                />
+                            ) : (
+                                <div className="dash-profile-avatar" aria-hidden="true">{initials}</div>
+                            )}
+                            <button
+                                type="button"
+                                className="dash-avatar-edit-btn"
+                                onClick={() => avatarInputRef.current?.click()}
+                                disabled={uploadBusy === 'avatar'}
+                                aria-label={t('image.changeAvatar')}
+                            >
+                                <CameraIcon />
+                            </button>
+                            <input
+                                ref={avatarInputRef}
+                                type="file"
+                                accept="image/*"
+                                style={{ display: 'none' }}
+                                onChange={(e) => {
+                                    const f = e.target.files?.[0];
+                                    if (f) void uploadImage('avatar', f);
+                                    e.target.value = '';
+                                }}
+                            />
+                        </div>
                         <div className="dash-profile-meta">
                             <h2 className="dash-profile-name">
                                 {user.firstName} {user.lastName}
@@ -167,6 +258,12 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
                         </div>
                     </div>
                 </header>
+
+                {uploadError && (
+                    <div className="form-banner form-banner--error" role="alert" aria-live="assertive">
+                        {uploadError}
+                    </div>
+                )}
 
                 <div className="dash-content">{children}</div>
             </main>
