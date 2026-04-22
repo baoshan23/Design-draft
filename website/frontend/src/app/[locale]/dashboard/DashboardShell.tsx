@@ -53,8 +53,9 @@ function AdminIcon() {
 }
 
 function ProfileAvatar({ initials, size = 96 }: { initials: string; size?: number }) {
+    // Decorative — the user's name is rendered immediately next to it.
     return (
-        <div className="dash-profile-avatar" style={{ width: size, height: size, fontSize: size / 2.4 }}>
+        <div className="dash-profile-avatar" aria-hidden="true" style={{ width: size, height: size, fontSize: size / 2.4 }}>
             {initials}
         </div>
     );
@@ -103,20 +104,21 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
 
     return (
         <div className="dash-portal">
-            <aside className="dash-sidebar">
-                <div className="dash-sidebar-brand">
+            <aside className="dash-sidebar" aria-label={t('nav.dashboard')}>
+                <div className="dash-sidebar-brand" aria-hidden="true">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="var(--primary)">
                         <path d="M7 0l1.76 5.24L14 7l-5.24 1.76L7 14l-1.76-5.24L0 7l5.24-1.76L7 0z" transform="translate(5 5)" />
                     </svg>
                     <span>GCSS</span>
                 </div>
 
-                <nav className="dash-sidebar-nav">
+                <nav className="dash-sidebar-nav" aria-label={t('nav.dashboard')}>
                     {navItems.map((item) => (
                         <Link
                             key={item.href}
                             href={item.href}
                             className={`dash-sidebar-btn${item.match(path) ? ' active' : ''}`}
+                            aria-current={item.match(path) ? 'page' : undefined}
                         >
                             {item.icon}
                             <span>{item.label}</span>
@@ -142,20 +144,20 @@ export default function DashboardShell({ children }: { children: ReactNode }) {
                 </div>
             </aside>
 
-            <main className="dash-main">
-                <div className="dash-profile-header">
-                    <div className="dash-profile-banner" />
+            <main className="dash-main" id="dash-main-content">
+                <header className="dash-profile-header">
+                    <div className="dash-profile-banner" aria-hidden="true" />
                     <div className="dash-profile-identity">
                         <ProfileAvatar initials={initials} />
                         <div className="dash-profile-meta">
-                            <div className="dash-profile-name">
+                            <h2 className="dash-profile-name">
                                 {user.firstName} {user.lastName}
-                            </div>
+                            </h2>
                             <div className="dash-profile-email">{user.email}</div>
                             <div className="dash-profile-username">@{user.username}</div>
                         </div>
                     </div>
-                </div>
+                </header>
 
                 <div className="dash-content">{children}</div>
             </main>

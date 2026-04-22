@@ -5847,17 +5847,22 @@
   align-items: center;
   gap: 10px;
   width: 100%;
-  padding: 10px 14px;
-  font-size: 0.85rem;
+  padding: 12px 14px;
+  min-height: 44px; /* touch-target-size: ≥44pt */
+  font-size: 0.88rem;
   font-weight: 500;
   color: var(--text-secondary);
   background: none;
   border: none;
+  border-left: 3px solid transparent;
   border-radius: var(--radius);
   cursor: pointer;
-  transition: all 0.15s;
+  transition: background-color 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.18s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   text-align: left;
+  touch-action: manipulation;
 }
 
 .dash-sidebar-btn:hover {
@@ -5865,15 +5870,25 @@
   color: var(--text-primary);
 }
 
+.dash-sidebar-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--dark), 0 0 0 4px var(--primary);
+}
+
 .dash-sidebar-btn.active {
   background: var(--primary-dim);
   color: var(--primary);
   font-weight: 700;
+  border-left-color: var(--primary);
 }
 
 .dash-sidebar-btn--danger:hover {
   color: var(--danger);
   background: rgba(239, 68, 68, 0.08);
+}
+
+.dash-sidebar-btn--danger:focus-visible {
+  box-shadow: 0 0 0 2px var(--dark), 0 0 0 4px var(--danger);
 }
 
 .dash-sidebar-bottom {
@@ -5936,12 +5951,14 @@
     height: auto;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 16px;
-    gap: 8px;
+    padding: 8px 12px;
+    gap: 4px;
     border-right: none;
     border-bottom: 1px solid var(--border-light);
   }
 
+  /* Hide brand row + legacy user card on mobile — global site header already brands the page. */
+  .dash-sidebar-brand,
   .dash-sidebar-user {
     display: none;
   }
@@ -5950,6 +5967,19 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 4px;
+    flex: 1 1 auto;
+  }
+
+  .dash-sidebar-btn {
+    width: auto;
+    padding: 10px 12px;
+    min-height: 40px;
+    font-size: 0.82rem;
+    border-left: none;
+  }
+  .dash-sidebar-btn.active {
+    border-left: none;
+    border-bottom: 2px solid var(--primary);
   }
 
   .dash-sidebar-bottom {
@@ -5957,10 +5987,22 @@
     margin-top: 0;
     padding-top: 0;
     border-top: none;
+    gap: 4px;
   }
 
   .dash-main {
     padding: 20px 16px;
+  }
+}
+
+/* Respect user's reduced-motion preference across the dashboard shell. */
+@media (prefers-reduced-motion: reduce) {
+  .dash-sidebar-btn,
+  .dash-form-card,
+  .buy-option,
+  .buy-provider,
+  .order-step-icon {
+    transition: none !important;
   }
 }
 
@@ -6613,6 +6655,8 @@
   font-weight: 800;
   color: var(--text-primary);
   letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.2;
 }
 
 .dash-profile-email {
@@ -6677,6 +6721,7 @@
   width: 100%;
   border-collapse: collapse;
   margin-top: 16px;
+  font-variant-numeric: tabular-nums; /* align numbers in columns */
 }
 
 .dash-table th,
@@ -7085,6 +7130,13 @@
   font-weight: 800;
   color: var(--text-primary);
   margin: 8px 0 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.buy-summary-line,
+.buy-summary-row,
+.buy-review-line {
+  font-variant-numeric: tabular-nums;
 }
 .buy-checkout-btn {
   width: 100%;
