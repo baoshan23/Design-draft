@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Link, useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/providers/AuthProvider';
@@ -17,8 +18,10 @@ function formatDate(iso?: string) {
     return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
-export default function InvoicePrintClient({ number }: { number: string }) {
+export default function InvoicePrintClient() {
     const t = useTranslations('invoice');
+    const params = useSearchParams();
+    const number = params.get('n') || '';
     const router = useRouter();
     const { user, loading } = useAuth();
     const [invoice, setInvoice] = useState<Invoice | null>(null);
@@ -31,7 +34,7 @@ export default function InvoicePrintClient({ number }: { number: string }) {
     }, [loading, user, router]);
 
     useEffect(() => {
-        if (loading || !user) return;
+        if (loading || !user || !number) return;
         const token = getAuthToken();
         if (!token) return;
         apiGetInvoiceByNumber(token, number)

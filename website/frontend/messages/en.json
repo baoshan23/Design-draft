@@ -1618,6 +1618,7 @@
     "orderDetails": {
       "title": "Order Details",
       "back": "Back to payments",
+      "missingOrder": "No order specified.",
       "orderNumber": "Order",
       "total": "Total paid",
       "status": "Status",

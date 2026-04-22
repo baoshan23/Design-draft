@@ -83,7 +83,7 @@ export default function PaymentHistoryClient() {
                                         </span>
                                     </td>
                                     <td>
-                                        <Link href={`/invoices/${inv.invoiceNumber}` as AnyHref} className="dash-link">
+                                        <Link href={{ pathname: '/invoices', query: { n: inv.invoiceNumber } } as AnyHref} className="dash-link">
                                             {t('columns.view')}
                                         </Link>
                                     </td>
@@ -102,7 +102,7 @@ export default function PaymentHistoryClient() {
                                             </span>
                                         </td>
                                         <td>
-                                            <Link href={`/dashboard/orders/${o.orderNumber}` as AnyHref} className="dash-link">
+                                            <Link href={{ pathname: '/dashboard/orders', query: { n: o.orderNumber } } as AnyHref} className="dash-link">
                                                 {t('columns.orderDetails')}
                                             </Link>
                                         </td>
@@ -116,7 +116,7 @@ export default function PaymentHistoryClient() {
                                             {t('trackOrder')}: <code>{o.orderNumber}</code>
                                         </td>
                                         <td>
-                                            <Link href={`/dashboard/orders/${o.orderNumber}` as AnyHref} className="dash-link">
+                                            <Link href={{ pathname: '/dashboard/orders', query: { n: o.orderNumber } } as AnyHref} className="dash-link">
                                                 {t('columns.orderDetails')}
                                             </Link>
                                         </td>

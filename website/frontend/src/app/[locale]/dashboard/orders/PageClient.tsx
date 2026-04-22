@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { useAuth } from '@/providers/AuthProvider';
@@ -54,7 +55,7 @@ function stepMeta(kind: 'order' | 'server', stage: string) {
     }
 }
 
-function Stepper({ stages, current, labelFor }: { stages: string[]; current: string; labelFor: (s: string) => string }) {
+function Stepper({ kind, stages, current, labelFor }: { kind: 'order' | 'server'; stages: string[]; current: string; labelFor: (s: string) => string }) {
     const idx = Math.max(0, stages.indexOf(current));
     return (
         <ol className="order-stepper">
@@ -62,7 +63,7 @@ function Stepper({ stages, current, labelFor }: { stages: string[]; current: str
                 const state = i < idx ? 'done' : i === idx ? 'current' : 'pending';
                 return (
                     <li key={s} className={`order-step order-step--${state}`}>
-                        <div className="order-step-icon">{stepMeta(stages === ORDER_STAGES ? 'order' : 'server', s)}</div>
+                        <div className="order-step-icon">{stepMeta(kind, s)}</div>
                         <div className="order-step-label">{labelFor(s)}</div>
                         {i < stages.length - 1 && <div className="order-step-connector" />}
                     </li>
@@ -76,15 +77,17 @@ function formatUSD(cents: number, currency = 'USD') {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(cents / 100);
 }
 
-export default function OrderDetailsClient({ orderNumber }: { orderNumber: string }) {
+export default function OrderDetailsClient() {
     const t = useTranslations('dashboard.orderDetails');
+    const params = useSearchParams();
+    const orderNumber = params.get('n') || '';
     const { user, loading } = useAuth();
     const [order, setOrder] = useState<Order | null>(null);
     const [error, setError] = useState('');
     const [refreshing, setRefreshing] = useState(false);
 
     useEffect(() => {
-        if (loading || !user) return;
+        if (loading || !user || !orderNumber) return;
         const token = getAuthToken();
         if (!token) return;
         let cancelled = false;
@@ -102,12 +105,20 @@ export default function OrderDetailsClient({ orderNumber }: { orderNumber: strin
             }
         };
         void fetchIt();
-        // Poll every 10s while the order is not ready — stages advance admin-side.
         interval = setInterval(fetchIt, 10_000);
         return () => { cancelled = true; if (interval) clearInterval(interval); };
     }, [orderNumber, loading, user]);
 
     if (loading || !user) return null;
+
+    if (!orderNumber) {
+        return (
+            <>
+                <h1 className="dash-page-title">{t('title')}</h1>
+                <div className="form-banner form-banner--error">{t('missingOrder')}</div>
+            </>
+        );
+    }
 
     return (
         <>
@@ -145,6 +156,7 @@ export default function OrderDetailsClient({ orderNumber }: { orderNumber: strin
                             <h2 className="dash-section-title">{t('orderPipeline.title')}</h2>
                             <p className="dash-section-desc">{t('orderPipeline.desc')}</p>
                             <Stepper
+                                kind="order"
                                 stages={ORDER_STAGES}
                                 current={order.orderStage}
                                 labelFor={(s) => t(`orderPipeline.stages.${s}` as any) || s}
@@ -154,6 +166,7 @@ export default function OrderDetailsClient({ orderNumber }: { orderNumber: strin
                             <h2 className="dash-section-title">{t('serverPipeline.title')}</h2>
                             <p className="dash-section-desc">{t('serverPipeline.desc')}</p>
                             <Stepper
+                                kind="server"
                                 stages={SERVER_STAGES}
                                 current={order.serverStage}
                                 labelFor={(s) => t(`serverPipeline.stages.${s}` as any) || s}
