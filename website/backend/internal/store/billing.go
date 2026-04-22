@@ -605,6 +605,9 @@ func (s *Store) MarkOrderPaidWith(ctx context.Context, orderID int64, in MarkPai
 	); err != nil {
 		return err
 	}
+	if srv.Valid {
+		order.ServerTierID = &srv.Int64
+	}
 
 	// Derive invoice number from order.
 	invoiceNum := strings.Replace(order.OrderNumber, "GCSS-", "INV-", 1)
@@ -618,7 +621,23 @@ func (s *Store) MarkOrderPaidWith(ctx context.Context, orderID int64, in MarkPai
 		_, _ = tx.ExecContext(ctx, `UPDATE promo_codes SET redeemed_count = redeemed_count + 1 WHERE id = ?;`, pc.Int64)
 	}
 
-	return tx.Commit()
+	if err := tx.Commit(); err != nil {
+		return err
+	}
+
+	// Auto-provision a server record for the paid order. Idempotent — if one
+	// already exists for this order, no-op. The generated API key is thrown
+	// away; the user rotates to get a plaintext one. This mirrors how cloud
+	// consoles treat first-issuance: the server is "provisioning" until the
+	// admin flips its status in /admin/servers.
+	if order.ServerTierID != nil {
+		var maxChargers int
+		_ = s.db.QueryRowContext(ctx, `SELECT max_chargers FROM server_tiers WHERE id = ?;`, *order.ServerTierID).Scan(&maxChargers)
+		_, _, _ = s.EnsureUserServerForOrder(ctx, order.UserID, order.ID, maxChargers)
+	} else {
+		_, _, _ = s.EnsureUserServerForOrder(ctx, order.UserID, order.ID, 0)
+	}
+	return nil
 }
 
 // MarkOrderPaid is the legacy signature kept for call-site compatibility.

@@ -332,6 +332,28 @@ func (s *Store) migrate(ctx context.Context) error {
 		);`,
 		`CREATE INDEX IF NOT EXISTS idx_invoices_user_id ON invoices(user_id);`,
 		`CREATE INDEX IF NOT EXISTS idx_invoices_order_id ON invoices(order_id);`,
+		`CREATE TABLE IF NOT EXISTS user_servers (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			user_id INTEGER NOT NULL,
+			order_id INTEGER,
+			region TEXT NOT NULL DEFAULT 'ap-southeast-1',
+			api_base_url TEXT NOT NULL DEFAULT '',
+			api_key_hash TEXT NOT NULL DEFAULT '',
+			api_key_last4 TEXT NOT NULL DEFAULT '',
+			ocpp_endpoint TEXT NOT NULL DEFAULT '',
+			webhook_url TEXT NOT NULL DEFAULT '',
+			status TEXT NOT NULL DEFAULT 'provisioning',
+			uptime_pct REAL NOT NULL DEFAULT 0,
+			connected_chargers INTEGER NOT NULL DEFAULT 0,
+			max_chargers INTEGER NOT NULL DEFAULT 0,
+			last_backup_at TEXT,
+			notes TEXT NOT NULL DEFAULT '',
+			created_at TEXT NOT NULL,
+			updated_at TEXT NOT NULL,
+			FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+			FOREIGN KEY(order_id) REFERENCES orders(id) ON DELETE SET NULL
+		);`,
+		`CREATE INDEX IF NOT EXISTS idx_user_servers_user_id ON user_servers(user_id);`,
 	}
 	for _, stmt := range stmts {
 		if _, err := s.db.ExecContext(ctx, stmt); err != nil {

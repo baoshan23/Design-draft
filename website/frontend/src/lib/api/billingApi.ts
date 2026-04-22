@@ -235,6 +235,75 @@ export async function apiAdminMarkOrderPaid(token: string, orderId: number): Pro
     });
 }
 
+// ── User server / CPMS instance ────────────────────────────────────────
+
+export type UserServer = {
+    id: number;
+    userId: number;
+    orderId?: number;
+    region: string;
+    apiBaseUrl: string;
+    apiKeyLast4: string;
+    ocppEndpoint: string;
+    webhookUrl: string;
+    status: 'provisioning' | 'active' | 'degraded' | 'suspended';
+    uptimePct: number;
+    connectedChargers: number;
+    maxChargers: number;
+    lastBackupAt?: string;
+    notes: string;
+    createdAt: string;
+    updatedAt: string;
+};
+
+export async function apiListUserServers(token: string): Promise<UserServer[]> {
+    const res = await fetchJson<{ servers: UserServer[] }>(`${getApiBase()}/user/server`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.servers || [];
+}
+
+export async function apiRotateUserServerKey(token: string, serverId?: number): Promise<{
+    apiKey: string;
+    server: UserServer;
+    message: string;
+}> {
+    return await fetchJson(`${getApiBase()}/user/server/rotate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ serverId: serverId || 0 }),
+    });
+}
+
+export async function apiAdminListServers(token: string): Promise<UserServer[]> {
+    const res = await fetchJson<{ servers: UserServer[] }>(`${getApiBase()}/admin/servers`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.servers || [];
+}
+
+export async function apiAdminUpdateServer(token: string, id: number, update: Partial<UserServer>): Promise<UserServer> {
+    const res = await fetchJson<{ server: UserServer }>(`${getApiBase()}/admin/servers/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify(update),
+    });
+    return res.server;
+}
+
+export async function apiAdminRegenerateServerKey(token: string, id: number): Promise<{
+    apiKey: string;
+    server: UserServer;
+    message: string;
+}> {
+    return await fetchJson(`${getApiBase()}/admin/servers/${id}/regenerate-key`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+    });
+}
+
 // ── Admin catalog ──────────────────────────────────────────────────────
 
 export async function apiAdminListBillingCycles(token: string): Promise<BillingCycle[]> {

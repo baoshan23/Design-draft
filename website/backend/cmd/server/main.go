@@ -207,6 +207,12 @@ func main() {
 	mux.HandleFunc("/api/user/orders/", s.withCORS(s.handleOrderByNumber))
 	mux.HandleFunc("/api/admin/orders", s.withCORS(s.handleAdminOrders))
 	mux.HandleFunc("/api/admin/orders/", s.withCORS(s.handleAdminOrderItem))
+	// User server info
+	mux.HandleFunc("/api/user/server", s.withCORS(s.handleUserServer))
+	mux.HandleFunc("/api/user/server/rotate", s.withCORS(s.handleUserServerRotate))
+	// Admin server mgmt
+	mux.HandleFunc("/api/admin/servers", s.withCORS(s.handleAdminServers))
+	mux.HandleFunc("/api/admin/servers/", s.withCORS(s.handleAdminServerItem))
 	// Blog
 	mux.HandleFunc("/api/blog/posts", s.withCORS(s.handleBlogPosts))
 	mux.HandleFunc("/api/blog/posts/", s.withCORS(s.handleBlogPost))

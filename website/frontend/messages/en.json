@@ -1655,13 +1655,36 @@
     "serverInfo": {
       "title": "Server Info",
       "description": "Credentials and status for your GCSS CPMS deployment.",
+      "browseProducts": "Browse products",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "rotate": "Rotate key",
+      "rotateConfirm": "Generate a new API key? Any system using the old key will stop working immediately.",
+      "newKeyTitle": "New API key (shown once)",
+      "newKeyWarn": "Copy this value now. For security, we will never show it again.",
       "credentials": {
         "title": "API credentials",
-        "desc": "API endpoint, API key, and webhook URLs for integrating your chargers with GCSS."
+        "desc": "Endpoint, API key, and webhook URLs for integrating your chargers with GCSS.",
+        "apiBase": "API base URL",
+        "apiKey": "API key",
+        "ocpp": "OCPP endpoint",
+        "webhook": "Webhook URL"
       },
       "status": {
         "title": "Deployment status",
-        "desc": "Region, uptime, connected chargers, and last backup."
+        "desc": "Region, uptime, connected chargers, and last backup.",
+        "region": "Region",
+        "uptime": "Uptime",
+        "chargers": "Connected chargers",
+        "lastBackup": "Last backup",
+        "created": "Provisioned",
+        "notes": "Notes"
+      },
+      "statuses": {
+        "provisioning": "Provisioning",
+        "active": "Active",
+        "degraded": "Degraded",
+        "suspended": "Suspended"
       },
       "emptyTitle": "No server assigned yet",
       "emptyDesc": "Your GCSS instance will be provisioned after your first purchase."
@@ -2335,7 +2358,8 @@
       "requests": "Audit Requests",
       "settings": "Settings & Keys",
       "products": "Product Catalog",
-      "orders": "Orders"
+      "orders": "Orders",
+      "servers": "Server Instances"
     },
     "backToOverview": "Back to Admin",
     "products": {
@@ -2381,6 +2405,26 @@
         "maxRedemptions": "Max",
         "redeemed": "Redeemed"
       }
+    },
+    "servers": {
+      "title": "Server Instances",
+      "subtitle": "Edit each customer's CPMS server record — region, endpoints, status, uptime, connected chargers, and last-backup timestamp. Regenerate API keys on customer request.",
+      "empty": "No server instances yet. One is auto-created per paid order.",
+      "createdAt": "Created",
+      "region": "Region",
+      "apiBase": "API base URL",
+      "ocpp": "OCPP endpoint",
+      "webhook": "Webhook URL",
+      "status": "Status",
+      "uptime": "Uptime %",
+      "chargers": "Connected chargers",
+      "maxChargers": "Max chargers",
+      "lastBackup": "Last backup",
+      "notes": "Notes",
+      "apiKey": "API key",
+      "regenerateKey": "Regenerate API key",
+      "regenConfirm": "Regenerate this customer's API key? The old key will stop working immediately. Share the new key via a secure channel.",
+      "regenResult": "New key (share with customer through a secure channel — shown once)"
     },
     "orders": {
       "title": "Orders",
