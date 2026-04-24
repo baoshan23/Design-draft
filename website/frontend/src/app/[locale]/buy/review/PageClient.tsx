@@ -501,36 +501,6 @@ export default function BuyReviewClient() {
                     </button>
                 </aside>
             </div>
-
-            {/* Mobile-only sticky bottom CTA — summary is always in view */}
-            <div className="buy-mobile-bar" role="region" aria-label={t('summary.title')}>
-                <div className="buy-mobile-bar-info">
-                    {useDeposit && depositEligible ? (
-                        <>
-                            <span className="buy-mobile-bar-label">{t('summary.payToday')}</span>
-                            <span className="buy-mobile-bar-amount">{formatUSD(chargeAmount)}</span>
-                            <span className="buy-mobile-bar-sub">
-                                {t('summary.wasPrice', { amount: formatUSD(pricing.total) })}
-                            </span>
-                        </>
-                    ) : (
-                        <>
-                            <span className="buy-mobile-bar-label">{t('summary.total')}</span>
-                            <span className="buy-mobile-bar-amount">{formatUSD(pricing.total)}</span>
-                        </>
-                    )}
-                </div>
-                <button
-                    type="button"
-                    className={`btn btn-primary buy-mobile-bar-btn${checkoutBusy ? ' btn-loading' : ''}`}
-                    disabled={checkoutBusy}
-                    onClick={handleCheckout}
-                >
-                    {useDeposit && depositEligible
-                        ? t('summary.checkoutDepositShort', { amount: formatUSD(chargeAmount) })
-                        : t('summary.checkout')}
-                </button>
-            </div>
         </section>
     );
 }

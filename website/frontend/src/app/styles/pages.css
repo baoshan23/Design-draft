@@ -8485,74 +8485,9 @@
   width: 100%;
 }
 
-/* Mobile-only sticky bottom CTA bar — keeps purchase summary always visible.
-   Hidden on desktop (sidebar sticky already covers that). */
-.buy-mobile-bar {
-  display: none;
-}
+/* Condense the hero block on narrow screens — sits inside the floating
+   summary on mobile, so padding is tighter. */
 @media (max-width: 900px) {
-  .buy-mobile-bar {
-    display: flex;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 40;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
-    background: var(--dark-card);
-    border-top: 1px solid var(--border-light);
-    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(10px);
-  }
-  .buy-mobile-bar-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    min-width: 0;
-    flex: 1;
-  }
-  .buy-mobile-bar-label {
-    font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-tertiary);
-    font-weight: 700;
-  }
-  .buy-mobile-bar-amount {
-    font-size: 1.35rem;
-    font-weight: 800;
-    color: var(--primary-text);
-    letter-spacing: -0.02em;
-    font-variant-numeric: tabular-nums;
-    line-height: 1;
-  }
-  .buy-mobile-bar-sub {
-    font-size: 0.72rem;
-    color: var(--text-tertiary);
-  }
-  .buy-mobile-bar-sub::before {
-    content: '';
-    display: inline-block;
-    width: 10px;
-    height: 1px;
-    background: rgba(239, 68, 68, 0.7);
-    vertical-align: middle;
-    margin: 0 4px 3px 0;
-  }
-  .buy-mobile-bar-btn {
-    flex-shrink: 0;
-    padding: 10px 18px;
-    font-size: 0.88rem;
-    white-space: nowrap;
-  }
-  /* Reserve space at the bottom so the fixed bar doesn't cover content */
-  .buy-layout {
-    padding-bottom: 96px;
-  }
-  /* Condense the hero block on narrow screens */
   .buy-summary-hero {
     padding: 12px 14px;
   }
@@ -8561,8 +8496,9 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .buy-mobile-bar {
+  .buy-summary {
     backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
 
@@ -8723,8 +8659,42 @@
   .buy-layout {
     grid-template-columns: 1fr;
   }
+  /* Always-floating purchase summary on mobile — pinned to the bottom
+     of the viewport so users never lose sight of what they're paying. */
   .buy-summary {
-    position: static;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    margin: 0;
+    border-radius: 18px 18px 0 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    max-height: 58vh;
+    overflow-y: auto;
+    padding: 14px 20px;
+    padding-bottom: calc(18px + env(safe-area-inset-bottom));
+    box-shadow: 0 -14px 40px rgba(0, 0, 0, 0.4);
+    background: color-mix(in srgb, var(--dark-card) 94%, transparent);
+    backdrop-filter: saturate(1.2) blur(12px);
+    -webkit-backdrop-filter: saturate(1.2) blur(12px);
+  }
+  /* Grabber affordance at the top of the floating summary */
+  .buy-summary::before {
+    content: '';
+    display: block;
+    width: 44px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border-light);
+    margin: 0 auto 10px;
+  }
+  /* Reserve space below the form so the floating summary never hides
+     the last input or the terms / CTA area */
+  .buy-main {
+    padding-bottom: 62vh;
   }
   .buy-billing-grid {
     grid-template-columns: 1fr;

@@ -225,35 +225,6 @@ export default function BuyClient() {
                     </button>
                 </aside>
             </div>
-
-            {/* Mobile-only sticky bottom CTA — summary is always in view */}
-            {plan && total >= 50 && (
-                <div className="buy-mobile-bar" role="region" aria-label={t('summary.title')}>
-                    <div className="buy-mobile-bar-info">
-                        {PLATFORM_PLANS.has(plan.key) && total > DEPOSIT_CENTS ? (
-                            <>
-                                <span className="buy-mobile-bar-label">{t('summary.payToday')}</span>
-                                <span className="buy-mobile-bar-amount">{formatUSD(DEPOSIT_CENTS)}</span>
-                                <span className="buy-mobile-bar-sub">
-                                    {t('summary.wasPrice', { amount: formatUSD(total) })}
-                                </span>
-                            </>
-                        ) : (
-                            <>
-                                <span className="buy-mobile-bar-label">{t('summary.total')}</span>
-                                <span className="buy-mobile-bar-amount">{formatUSD(total)}</span>
-                            </>
-                        )}
-                    </div>
-                    <button
-                        type="button"
-                        className="btn btn-primary buy-mobile-bar-btn"
-                        onClick={handleCheckout}
-                    >
-                        {t('summary.continueShort')}
-                    </button>
-                </div>
-            )}
         </section>
     );
 }
