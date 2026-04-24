@@ -982,26 +982,27 @@ main :not(pre) > code {
 .orb-ball--d {
   background: radial-gradient(circle, rgba(245, 158, 11, 1) 0%, rgba(217, 119, 6, 1) 100%);
 }
-/* Light-mode orbs: much fainter so the ambient reads as a pale warm
-   wash, never as visible gold blotches. We also swap the per-variant
-   gradients to pastel/cream tones — the saturated amber/orange used
-   in dark mode was showing through the glass as yellow smears in
-   light mode. */
+/* Light-mode orbs: background is pure white (body's --black token
+   resolves to #ffffff in light theme) and the balls themselves are
+   the visible accent. No frosted-glass wash on top — that's a dark-
+   mode affordance. Balls use warm, saturated gold gradients and stay
+   soft-edged via a heavy blur, so they read as painterly gold blobs
+   drifting across a clean white canvas. */
 [data-theme='light'] .orb-ball {
-  opacity: 0.11;
-  filter: blur(120px);
+  opacity: 0.38;
+  filter: blur(80px);
 }
 [data-theme='light'] .orb-ball--a {
-  background: radial-gradient(circle, rgba(255, 228, 150, 1) 0%, rgba(255, 215, 120, 1) 100%);
+  background: radial-gradient(circle, rgba(255, 204, 102, 1) 0%, rgba(255, 178, 51, 1) 100%);
 }
 [data-theme='light'] .orb-ball--b {
-  background: radial-gradient(circle, rgba(255, 235, 170, 1) 0%, rgba(255, 220, 130, 1) 100%);
+  background: radial-gradient(circle, rgba(255, 215, 128, 1) 0%, rgba(254, 191, 29, 1) 100%);
 }
 [data-theme='light'] .orb-ball--c {
-  background: radial-gradient(circle, rgba(255, 240, 190, 1) 0%, rgba(255, 225, 140, 1) 100%);
+  background: radial-gradient(circle, rgba(255, 224, 156, 1) 0%, rgba(255, 196, 82, 1) 100%);
 }
 [data-theme='light'] .orb-ball--d {
-  background: radial-gradient(circle, rgba(255, 232, 168, 1) 0%, rgba(255, 218, 128, 1) 100%);
+  background: radial-gradient(circle, rgba(255, 195, 89, 1) 0%, rgba(245, 158, 11, 1) 100%);
 }
 
 .orbs-glass-layer {
@@ -1017,18 +1018,12 @@ main :not(pre) > code {
   );
   pointer-events: none;
 }
-/* Light-mode glass: much more opaque + slightly stronger blur so the
-   orbs read as a subtle warmth rather than visible shapes. Text on
-   white cards stays legible. */
+/* Light mode skips the frosted-glass sheet entirely — clean white
+   background with the balls themselves as the accent. */
 [data-theme='light'] .orbs-glass-layer {
-  backdrop-filter: blur(64px) saturate(1.05);
-  -webkit-backdrop-filter: blur(64px) saturate(1.05);
-  background: linear-gradient(
-    180deg,
-    rgba(252, 250, 246, 0.88) 0%,
-    rgba(252, 250, 246, 0.92) 55%,
-    rgba(252, 250, 246, 0.95) 100%
-  );
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: transparent;
 }
 
 /* Lift page content above the orbs layer. Direct body children get
