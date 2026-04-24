@@ -1003,6 +1003,47 @@ main :not(pre) > code {
   display: none;
 }
 
+/* ──────────────────────────────────────────────────────────────────
+   Light-mode ambient cleanup — suppress site-wide decorative gold
+   gradients that were tuned for the dark-theme atmosphere and read
+   as yellow haze on a white page. Each rule below targets a single
+   ::before / ::after / background that the user flagged as "not
+   clean" in light mode. Dark mode is untouched.
+   ────────────────────────────────────────────────────────────────── */
+[data-theme='light'] .hero {
+  background: none;
+}
+[data-theme='light'] .hero::before {
+  background: none;
+}
+[data-theme='light'] .particles-bg::after,
+[data-theme='light'] .mesh-bg::before,
+[data-theme='light'] .hero-image-placeholder::after,
+[data-theme='light'] .auth-visual::before,
+[data-theme='light'] .product-hero::before,
+[data-theme='light'] .feature-image-placeholder::after,
+[data-theme='light'] .feature-row::before,
+[data-theme='light'] .feature-row ~ .feature-row::before,
+[data-theme='light'] .glass-card.tilt-card::before,
+[data-theme='light'] #gallery::before,
+[data-theme='light'] #gallery::after,
+[data-theme='light'] .language-cloud::before {
+  display: none !important;
+}
+[data-theme='light'] .section-alt::after {
+  opacity: 0 !important;
+}
+[data-theme='light'] .cta-section::before {
+  background: none;
+}
+[data-theme='light'] .card::before,
+[data-theme='light'] .model-card::before {
+  display: none !important;
+}
+[data-theme='light'] .admin-bg {
+  background: none !important;
+}
+
 /* Lift page content above the orbs layer. Direct body children get
    a relative position + z-index: 1 so they stack above .orbs-root.
    The header / skip-link / scroll widgets already have their own
