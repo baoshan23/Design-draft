@@ -251,6 +251,9 @@ export default function Header() {
           {/* -- Mobile-only footer with CTA + settings -- */}
           <div className="mobile-nav-footer">
             <div className="mobile-nav-cta">
+              <Link href="/buy" className="btn-buy" onClick={closeMenu}>
+                <span>{t('buyNow')}</span>
+              </Link>
               <Link href="/demo" className="btn-demo" onClick={closeMenu}>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 3.5v9l6-4.5-6-4.5z" /></svg>
                 <span>{t('demo')}</span>
@@ -258,7 +261,10 @@ export default function Header() {
               {user ? (
                 <button type="button" className="btn-login" onClick={() => { closeMenu(); handleLogout(); }}>{t('logout')}</button>
               ) : (
-                <Link href="/login" className="btn-login" onClick={closeMenu}>{t('login')}</Link>
+                <>
+                  <Link href="/login" className="btn-login" onClick={closeMenu}>{t('login')}</Link>
+                  <Link href="/register" className="btn-signup" onClick={closeMenu}>{t('signup')}</Link>
+                </>
               )}
             </div>
             <div className="mobile-nav-settings">
@@ -306,6 +312,10 @@ export default function Header() {
             <span>{t('demo')}</span>
           </Link>
 
+          <Link href="/buy" className="btn-buy">
+            <span>{t('buyNow')}</span>
+          </Link>
+
           {user ? (
             <div className="user-menu-wrapper" ref={userMenuRef}>
               <button
@@ -346,7 +356,10 @@ export default function Header() {
               )}
             </div>
           ) : (
-            <Link href="/login" className="btn-login">{t('login')}</Link>
+            <div className="auth-links">
+              <Link href="/login" className="btn-login">{t('login')}</Link>
+              <Link href="/register" className="btn-signup">{t('signup')}</Link>
+            </div>
           )}
         </div>
 

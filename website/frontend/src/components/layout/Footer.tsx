@@ -27,6 +27,7 @@ export default function Footer() {
             <h4>{t('product')}</h4>
             <Link href="/b2c">{t('features')}</Link>
             <Link href="/pricing">{t('pricing')}</Link>
+            <Link href="/buy">{t('buynow')}</Link>
             <Link href="/demo">{t('livedemo')}</Link>
             <Link href="/docs">{t('documentation')}</Link>
           </div>
@@ -34,7 +35,7 @@ export default function Footer() {
           <div className="footer-col">
             <h4>{t('community')}</h4>
             <Link href="/forum">{t('forum')}</Link>
-            <Link href="/docs">{t('helpcenter')}</Link>
+            <Link href="/faq">{t('helpcenter')}</Link>
             <Link href="/contact">{t('contactsales')}</Link>
             <a href="https://wa.me/85200000000" target="_blank" rel="noopener noreferrer">{t('whatsapp')}</a>
           </div>
@@ -45,6 +46,14 @@ export default function Footer() {
             <Link href="/careers">{t('careers')}</Link>
             <Link href="/partners">{t('partners')}</Link>
             <Link href="/blog">{t('blog')}</Link>
+          </div>
+
+          <div className="footer-col">
+            <h4>{t('account')}</h4>
+            <Link href="/login">{t('login')}</Link>
+            <Link href="/register">{t('signup')}</Link>
+            <Link href="/dashboard">{t('dashboard')}</Link>
+            <Link href="/invoices">{t('invoices')}</Link>
           </div>
         </div>
 

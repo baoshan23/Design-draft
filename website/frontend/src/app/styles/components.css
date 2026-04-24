@@ -334,39 +334,89 @@
   gap: 12px;
 }
 
-.header-actions .btn-demo {
+/* Primary commercial CTA — Buy Now */
+.header-actions .btn-buy,
+.mobile-nav-cta .btn-buy {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   background: var(--primary);
   color: var(--black);
-  font-weight: 600;
+  font-weight: 700;
   border-radius: var(--radius);
-  padding: 8px 16px;
+  padding: 8px 18px;
   font-size: 0.875rem;
   transition: all var(--transition);
   border: none;
+  box-shadow: 0 0 0 1px rgba(254, 191, 29, 0.25);
+}
+
+.header-actions .btn-buy:hover,
+.mobile-nav-cta .btn-buy:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 0 20px rgba(230, 168, 23, 0.35), 0 0 0 1px rgba(254, 191, 29, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Secondary CTA — Demo (was solid gold, now outlined so Buy leads) */
+.header-actions .btn-demo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--text-primary);
+  font-weight: 600;
+  border-radius: var(--radius);
+  padding: 8px 14px;
+  font-size: 0.875rem;
+  transition: all var(--transition);
+  border: 1px solid var(--border-light);
 }
 
 .header-actions .btn-demo:hover {
-  background: var(--primary-hover);
-  box-shadow: 0 0 20px rgba(230,168,23,0.3);
+  color: var(--primary-text);
+  border-color: rgba(254, 191, 29, 0.4);
+  background: var(--primary-dim);
+}
+
+/* Auth pair — shown side by side when not logged in */
+.header-actions .auth-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .header-actions .btn-login {
-  padding: 8px 16px;
+  padding: 8px 14px;
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--text-secondary);
-  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  transition: all var(--transition);
+  background: transparent;
+  border: none;
+}
+
+.header-actions .btn-login:hover {
+  color: var(--text-primary);
+}
+
+.header-actions .btn-signup,
+.mobile-nav-cta .btn-signup {
+  padding: 8px 14px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary-text);
+  border: 1px solid rgba(254, 191, 29, 0.35);
   border-radius: var(--radius);
   transition: all var(--transition);
   background: transparent;
 }
 
-.header-actions .btn-login:hover {
-  color: var(--text-primary);
-  border-color: var(--border-medium);
+.header-actions .btn-signup:hover,
+.mobile-nav-cta .btn-signup:hover {
+  border-color: var(--primary);
+  background: var(--primary-dim);
 }
 
 /* Mobile menu */
