@@ -239,6 +239,25 @@
     "dashboard": "控制台",
     "adminPanel": "管理面板"
   },
+  "related": {
+    "eyebrow": "继续探索",
+    "title": "继续了解 GCSS",
+    "subtitle": "您可能感兴趣的其他页面。",
+    "home": { "title": "首页", "desc": "从这里开始——平台概览与最新资讯。" },
+    "b2b": { "title": "B2B 平台", "desc": "面向 CPO 与企业的多租户网络。" },
+    "b2c": { "title": "B2C 产品", "desc": "单站管理与驾驶员使用体验。" },
+    "pricing": { "title": "价格方案", "desc": "五档方案，从 $84/年/桩 到完整白标方案。" },
+    "buy": { "title": "立即购买", "desc": "仅需 $200 订金即可启动项目。" },
+    "demo": { "title": "在线演示", "desc": "使用真实示例数据体验后台。" },
+    "contact": { "title": "联系销售", "desc": "与团队沟通您的部署需求。" },
+    "docs": { "title": "帮助文档", "desc": "接入指南、OCPP 配置与 API 参考。" },
+    "faq": { "title": "常见问题", "desc": "关于方案、支持与部署的常见问答。" },
+    "forum": { "title": "社区论坛", "desc": "运营商与开发者的讨论空间。" },
+    "blog": { "title": "博客", "desc": "产品动态、案例分析与最佳实践。" },
+    "about": { "title": "关于 GCSS", "desc": "我们的使命、发展历程与团队。" },
+    "careers": { "title": "加入我们", "desc": "加入构建 EV 充电基础设施的团队。" },
+    "partners": { "title": "合作伙伴", "desc": "与我们合作的充电桩厂商与集成伙伴。" }
+  },
   "hero": {
     "badge": "单租户 & 多租户架构",
     "tagline": "免费部署  ·  灵活升级  ·  全功能可定制",

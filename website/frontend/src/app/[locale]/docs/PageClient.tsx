@@ -4,6 +4,7 @@ import { useState, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
+import RelatedPages from '@/components/sections/RelatedPages';
 
 export default function DocsPage() {
   const t = useTranslations();
@@ -414,6 +415,8 @@ systemctl status gcss`}</code></pre>
       >
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="18" x2="21" y2="18" /></svg>
       </button>
+
+      <RelatedPages items={['forum', 'faq', 'blog', 'contact']} />
     </>
   );
 }

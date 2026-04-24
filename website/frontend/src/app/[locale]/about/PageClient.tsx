@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import { Link } from '@/i18n/navigation';
+import RelatedPages from '@/components/sections/RelatedPages';
 
 export default function AboutPageClient() {
     const t = useTranslations('aboutPage');
@@ -75,6 +76,8 @@ export default function AboutPageClient() {
                     </ScrollAnimation>
                 </div>
             </section>
+
+            <RelatedPages items={['careers', 'partners', 'blog', 'contact']} />
         </>
     );
 }

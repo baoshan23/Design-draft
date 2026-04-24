@@ -10,6 +10,7 @@ import { DiagramModalProvider } from '@/components/sections/home/DiagramModal';
 import GlobeVisualization from '@/components/sections/home/GlobeVisualization';
 import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
 import { PAYMENT_ICONS, PAYMENT_METHODS_FLAT } from '@/components/sections/home/paymentIcons';
+import RelatedPages from '@/components/sections/RelatedPages';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -539,6 +540,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <div className="testimonial-stars">
                   <StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon />
                 </div>
+                
                 <p className="testimonial-text">{t('testimonials.t3.text')}</p>
                 <div className="testimonial-author">
                   <div className="testimonial-avatar">AK</div>
@@ -602,6 +604,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </ScrollAnimation>
         </div>
       </section>
+
+      <RelatedPages items={['b2c', 'b2b', 'pricing', 'buy', 'demo', 'blog']} />
 
     </DiagramModalProvider>
   );

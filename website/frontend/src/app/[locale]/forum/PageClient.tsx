@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import { Link } from '@/i18n/navigation';
+import RelatedPages from '@/components/sections/RelatedPages';
 import {
   apiListForumCategories,
   apiListForumTopics,
@@ -287,6 +288,8 @@ export default function ForumPage() {
         </div>
 
       </div>
+
+      <RelatedPages items={['docs', 'faq', 'blog', 'contact']} />
     </>
   );
 }

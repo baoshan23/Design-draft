@@ -8,6 +8,7 @@ import SubNav from './SubNav';
 import DemoTabs from './DemoTabs';
 import LanguageRequestForm from './LanguageRequestForm';
 import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
+import RelatedPages from '@/components/sections/RelatedPages';
 
 export const metadata = {
   title: 'B2C Model - GCSS | Direct Operator EV Charging Platform',
@@ -708,6 +709,8 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
           </ScrollAnimation>
         </div>
       </section>
+
+      <RelatedPages items={['b2b', 'pricing', 'buy', 'contact']} />
     </>
   );
 }

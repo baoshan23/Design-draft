@@ -239,6 +239,25 @@
     "dashboard": "Dashboard",
     "adminPanel": "Admin Panel"
   },
+  "related": {
+    "eyebrow": "Explore more",
+    "title": "Keep exploring GCSS",
+    "subtitle": "Other pages you might find useful.",
+    "home": { "title": "Home", "desc": "Start here — platform overview and latest news." },
+    "b2b": { "title": "B2B platform", "desc": "Multi-tenant network for CPOs and enterprises." },
+    "b2c": { "title": "B2C product", "desc": "Single-station management and driver experience." },
+    "pricing": { "title": "Pricing", "desc": "Five tiers from $84/year/charger to full white-label." },
+    "buy": { "title": "Buy now", "desc": "Kick off your project with just a $200 deposit." },
+    "demo": { "title": "Live demo", "desc": "Explore the dashboard with real sample data." },
+    "contact": { "title": "Contact sales", "desc": "Talk to our team about your deployment." },
+    "docs": { "title": "Documentation", "desc": "Integration guides, OCPP setup, and API reference." },
+    "faq": { "title": "FAQ", "desc": "Common questions about plans, support, and deployment." },
+    "forum": { "title": "Community forum", "desc": "Discussions with operators and developers." },
+    "blog": { "title": "Blog", "desc": "Product updates, case studies, and best practices." },
+    "about": { "title": "About GCSS", "desc": "Our mission, history, and the people behind the platform." },
+    "careers": { "title": "Careers", "desc": "Join the team building the EV charging backbone." },
+    "partners": { "title": "Partners", "desc": "Charger OEMs and integration partners we work with." }
+  },
   "hero": {
     "badge": "Single-Tenant & Multi-Tenant Architecture",
     "tagline": "Free Deploy  ·  Flexible Upgrade  ·  Fully Customizable",
