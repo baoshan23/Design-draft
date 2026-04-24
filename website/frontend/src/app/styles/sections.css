@@ -210,7 +210,7 @@
   animation: heroFooterSlideUp 0.8s ease-out, heroFooterGlow 4s ease-in-out infinite;
 }
 
-[data-theme="light"] .hero-footer-bar {
+html:not([data-theme="dark"]) .hero-footer-bar {
   background: rgba(255, 255, 255, 0.15);
   border-top: 1px solid rgba(255, 255, 255, 0.25);
 }
@@ -287,7 +287,7 @@
   transition: color 0.3s ease;
 }
 
-[data-theme="light"] .hero .hero-footer-value {
+html:not([data-theme="dark"]) .hero .hero-footer-value {
   color: #000;
 }
 
@@ -302,7 +302,7 @@
   flex-shrink: 0;
 }
 
-[data-theme="light"] .hero-footer-divider {
+html:not([data-theme="dark"]) .hero-footer-divider {
   background: rgba(255, 255, 255, 0.2);
 }
 

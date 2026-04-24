@@ -999,7 +999,7 @@ main :not(pre) > code {
    background layer is hidden so it costs nothing to render, and the
    raf loop in GoldenOrbsBackground.tsx still runs but has nothing
    visible to move (negligible cost; it auto-pauses on hidden tabs). */
-[data-theme='light'] .orbs-root {
+html:not([data-theme='dark']) .orbs-root {
   display: none;
 }
 
@@ -1010,37 +1010,37 @@ main :not(pre) > code {
    ::before / ::after / background that the user flagged as "not
    clean" in light mode. Dark mode is untouched.
    ────────────────────────────────────────────────────────────────── */
-[data-theme='light'] .hero {
+html:not([data-theme='dark']) .hero {
   background: none;
 }
-[data-theme='light'] .hero::before {
+html:not([data-theme='dark']) .hero::before {
   background: none;
 }
-[data-theme='light'] .particles-bg::after,
-[data-theme='light'] .mesh-bg::before,
-[data-theme='light'] .hero-image-placeholder::after,
-[data-theme='light'] .auth-visual::before,
-[data-theme='light'] .product-hero::before,
-[data-theme='light'] .feature-image-placeholder::after,
-[data-theme='light'] .feature-row::before,
-[data-theme='light'] .feature-row ~ .feature-row::before,
-[data-theme='light'] .glass-card.tilt-card::before,
-[data-theme='light'] #gallery::before,
-[data-theme='light'] #gallery::after,
-[data-theme='light'] .language-cloud::before {
+html:not([data-theme='dark']) .particles-bg::after,
+html:not([data-theme='dark']) .mesh-bg::before,
+html:not([data-theme='dark']) .hero-image-placeholder::after,
+html:not([data-theme='dark']) .auth-visual::before,
+html:not([data-theme='dark']) .product-hero::before,
+html:not([data-theme='dark']) .feature-image-placeholder::after,
+html:not([data-theme='dark']) .feature-row::before,
+html:not([data-theme='dark']) .feature-row ~ .feature-row::before,
+html:not([data-theme='dark']) .glass-card.tilt-card::before,
+html:not([data-theme='dark']) #gallery::before,
+html:not([data-theme='dark']) #gallery::after,
+html:not([data-theme='dark']) .language-cloud::before {
   display: none !important;
 }
-[data-theme='light'] .section-alt::after {
+html:not([data-theme='dark']) .section-alt::after {
   opacity: 0 !important;
 }
-[data-theme='light'] .cta-section::before {
+html:not([data-theme='dark']) .cta-section::before {
   background: none;
 }
-[data-theme='light'] .card::before,
-[data-theme='light'] .model-card::before {
+html:not([data-theme='dark']) .card::before,
+html:not([data-theme='dark']) .model-card::before {
   display: none !important;
 }
-[data-theme='light'] .admin-bg {
+html:not([data-theme='dark']) .admin-bg {
   background: none !important;
 }
 
