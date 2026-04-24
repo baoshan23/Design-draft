@@ -86,7 +86,7 @@ export default function AdminProductsClient() {
                     <h1 className="admin-title">{t('title')}</h1>
                     <p className="admin-subtitle">{t('subtitle')}</p>
                     <nav className="admin-nav-grid" style={{ marginTop: 16 }}>
-                        <Link href="/admin" className="admin-quicklink">← {tCommon('backToOverview')}</Link>
+                        <Link href="/admin" className="admin-quicklink">{tCommon('backToOverview')}</Link>
                     </nav>
                 </header>
 
