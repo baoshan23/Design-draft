@@ -165,6 +165,14 @@ export default function AdminPageClient() {
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="20" height="8" x="2" y="2" rx="2" /><rect width="20" height="8" x="2" y="14" rx="2" /><line x1="6" x2="6.01" y1="6" y2="6" /><line x1="6" x2="6.01" y1="18" y2="18" /></svg>
                                 <span>{t('admin.nav.servers')}</span>
                             </Link>
+                            <Link href="/admin/bank-accounts" className="dashboard-quicklink">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 21h18" /><path d="M3 10h18" /><path d="M5 6l7-4 7 4" /><path d="M4 10v11" /><path d="M20 10v11" /><path d="M8 14v4" /><path d="M12 14v4" /><path d="M16 14v4" /></svg>
+                                <span>{t('admin.nav.bankAccounts')}</span>
+                            </Link>
+                            <Link href="/admin/bank-slips" className="dashboard-quicklink">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><path d="M9 13l2 2 4-4" /></svg>
+                                <span>{t('admin.nav.bankSlips')}</span>
+                            </Link>
                         </div>
                     </>
                 )}

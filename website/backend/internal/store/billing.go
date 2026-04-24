@@ -70,6 +70,11 @@ type Order struct {
 	SubtotalCents      int64     `json:"subtotalCents"`
 	DiscountCents      int64     `json:"discountCents"`
 	TotalCents         int64     `json:"totalCents"`
+	// DepositCents > 0 means this order was paid as a deposit via an
+	// online gateway; the remaining BalanceCents is settled via bank
+	// transfer after development completes.
+	DepositCents       int64     `json:"depositCents"`
+	BalanceCents       int64     `json:"balanceCents"`
 	Currency           string    `json:"currency"`
 	BillingAddressJSON string    `json:"billingAddress"`
 	Provider           string    `json:"provider"`
@@ -488,9 +493,12 @@ type NewOrderInput struct {
 	SubtotalCents      int64
 	DiscountCents      int64
 	TotalCents         int64
+	DepositCents       int64
+	BalanceCents       int64
 	Currency           string
 	BillingAddressJSON string
 	Provider           string
+	Status             string // defaults to "pending" when empty
 }
 
 func (s *Store) CreateOrder(ctx context.Context, in NewOrderInput) (*Order, error) {
@@ -500,12 +508,16 @@ func (s *Store) CreateOrder(ctx context.Context, in NewOrderInput) (*Order, erro
 	if in.Currency == "" {
 		in.Currency = "USD"
 	}
+	status := in.Status
+	if status == "" {
+		status = "pending"
+	}
 	now := time.Now().UTC().Format(time.RFC3339)
 	orderNum := generateOrderNumber()
 	res, err := s.db.ExecContext(ctx, `
-		INSERT INTO orders (user_id, order_number, billing_cycle_id, support_tier_id, server_tier_id, promo_code_id, product_label, subtotal_cents, discount_cents, total_cents, currency, billing_address_json, provider, status, order_stage, server_stage, created_at, updated_at)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', 'received', 'not_started', ?, ?);
-	`, in.UserID, orderNum, in.BillingCycleID, in.SupportTierID, in.ServerTierID, in.PromoCodeID, in.ProductLabel, in.SubtotalCents, in.DiscountCents, in.TotalCents, in.Currency, in.BillingAddressJSON, in.Provider, now, now)
+		INSERT INTO orders (user_id, order_number, billing_cycle_id, support_tier_id, server_tier_id, promo_code_id, product_label, subtotal_cents, discount_cents, total_cents, deposit_cents, balance_cents, currency, billing_address_json, provider, status, order_stage, server_stage, created_at, updated_at)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'received', 'not_started', ?, ?);
+	`, in.UserID, orderNum, in.BillingCycleID, in.SupportTierID, in.ServerTierID, in.PromoCodeID, in.ProductLabel, in.SubtotalCents, in.DiscountCents, in.TotalCents, in.DepositCents, in.BalanceCents, in.Currency, in.BillingAddressJSON, in.Provider, status, now, now)
 	if err != nil {
 		return nil, err
 	}
@@ -515,7 +527,7 @@ func (s *Store) CreateOrder(ctx context.Context, in NewOrderInput) (*Order, erro
 
 func (s *Store) GetOrder(ctx context.Context, id int64) (*Order, error) {
 	row := s.db.QueryRowContext(ctx, `
-		SELECT id, user_id, order_number, billing_cycle_id, support_tier_id, server_tier_id, promo_code_id, product_label, subtotal_cents, discount_cents, total_cents, currency, billing_address_json, provider, COALESCE(provider_session_id, ''), COALESCE(provider_payment_id, ''), status, order_stage, server_stage, paid_at, created_at, updated_at
+		SELECT id, user_id, order_number, billing_cycle_id, support_tier_id, server_tier_id, promo_code_id, product_label, subtotal_cents, discount_cents, total_cents, deposit_cents, balance_cents, currency, billing_address_json, provider, COALESCE(provider_session_id, ''), COALESCE(provider_payment_id, ''), status, order_stage, server_stage, paid_at, created_at, updated_at
 		FROM orders WHERE id = ?;
 	`, id)
 	return scanOrder(row)
@@ -523,7 +535,7 @@ func (s *Store) GetOrder(ctx context.Context, id int64) (*Order, error) {
 
 func (s *Store) GetOrderBySession(ctx context.Context, sessionID string) (*Order, error) {
 	row := s.db.QueryRowContext(ctx, `
-		SELECT id, user_id, order_number, billing_cycle_id, support_tier_id, server_tier_id, promo_code_id, product_label, subtotal_cents, discount_cents, total_cents, currency, billing_address_json, provider, COALESCE(provider_session_id, ''), COALESCE(provider_payment_id, ''), status, order_stage, server_stage, paid_at, created_at, updated_at
+		SELECT id, user_id, order_number, billing_cycle_id, support_tier_id, server_tier_id, promo_code_id, product_label, subtotal_cents, discount_cents, total_cents, deposit_cents, balance_cents, currency, billing_address_json, provider, COALESCE(provider_session_id, ''), COALESCE(provider_payment_id, ''), status, order_stage, server_stage, paid_at, created_at, updated_at
 		FROM orders WHERE provider_session_id = ? LIMIT 1;
 	`, sessionID)
 	return scanOrder(row)
@@ -534,7 +546,7 @@ func scanOrder(row interface{ Scan(...interface{}) error }) (*Order, error) {
 	var bc, st, srv, pc sql.NullInt64
 	var paidAt sql.NullString
 	var createdAt, updatedAt string
-	if err := row.Scan(&o.ID, &o.UserID, &o.OrderNumber, &bc, &st, &srv, &pc, &o.ProductLabel, &o.SubtotalCents, &o.DiscountCents, &o.TotalCents, &o.Currency, &o.BillingAddressJSON, &o.Provider, &o.ProviderSessionID, &o.ProviderPaymentID, &o.Status, &o.OrderStage, &o.ServerStage, &paidAt, &createdAt, &updatedAt); err != nil {
+	if err := row.Scan(&o.ID, &o.UserID, &o.OrderNumber, &bc, &st, &srv, &pc, &o.ProductLabel, &o.SubtotalCents, &o.DiscountCents, &o.TotalCents, &o.DepositCents, &o.BalanceCents, &o.Currency, &o.BillingAddressJSON, &o.Provider, &o.ProviderSessionID, &o.ProviderPaymentID, &o.Status, &o.OrderStage, &o.ServerStage, &paidAt, &createdAt, &updatedAt); err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return nil, nil
 		}
@@ -600,8 +612,8 @@ func (s *Store) MarkOrderPaidWith(ctx context.Context, orderID int64, in MarkPai
 	var bc, st, srv, pc sql.NullInt64
 	var paidAt sql.NullString
 	var createdAt, updatedAt string
-	if err := tx.QueryRowContext(ctx, `SELECT id, user_id, order_number, billing_cycle_id, support_tier_id, server_tier_id, promo_code_id, product_label, subtotal_cents, discount_cents, total_cents, currency, billing_address_json, provider, COALESCE(provider_session_id, ''), COALESCE(provider_payment_id, ''), status, order_stage, server_stage, paid_at, created_at, updated_at FROM orders WHERE id = ?;`, orderID).Scan(
-		&order.ID, &order.UserID, &order.OrderNumber, &bc, &st, &srv, &pc, &order.ProductLabel, &order.SubtotalCents, &order.DiscountCents, &order.TotalCents, &order.Currency, &order.BillingAddressJSON, &order.Provider, &order.ProviderSessionID, &order.ProviderPaymentID, &order.Status, &order.OrderStage, &order.ServerStage, &paidAt, &createdAt, &updatedAt,
+	if err := tx.QueryRowContext(ctx, `SELECT id, user_id, order_number, billing_cycle_id, support_tier_id, server_tier_id, promo_code_id, product_label, subtotal_cents, discount_cents, total_cents, deposit_cents, balance_cents, currency, billing_address_json, provider, COALESCE(provider_session_id, ''), COALESCE(provider_payment_id, ''), status, order_stage, server_stage, paid_at, created_at, updated_at FROM orders WHERE id = ?;`, orderID).Scan(
+		&order.ID, &order.UserID, &order.OrderNumber, &bc, &st, &srv, &pc, &order.ProductLabel, &order.SubtotalCents, &order.DiscountCents, &order.TotalCents, &order.DepositCents, &order.BalanceCents, &order.Currency, &order.BillingAddressJSON, &order.Provider, &order.ProviderSessionID, &order.ProviderPaymentID, &order.Status, &order.OrderStage, &order.ServerStage, &paidAt, &createdAt, &updatedAt,
 	); err != nil {
 		return err
 	}
@@ -652,7 +664,7 @@ func (s *Store) MarkOrderPaid(ctx context.Context, orderID int64, providerPaymen
 // the requesting user. Preferred over scanning ListOrdersForUser.
 func (s *Store) GetOrderByNumberForUser(ctx context.Context, userID int64, orderNumber string) (*Order, error) {
 	row := s.db.QueryRowContext(ctx, `
-		SELECT id, user_id, order_number, billing_cycle_id, support_tier_id, server_tier_id, promo_code_id, product_label, subtotal_cents, discount_cents, total_cents, currency, billing_address_json, provider, COALESCE(provider_session_id, ''), COALESCE(provider_payment_id, ''), status, order_stage, server_stage, paid_at, created_at, updated_at
+		SELECT id, user_id, order_number, billing_cycle_id, support_tier_id, server_tier_id, promo_code_id, product_label, subtotal_cents, discount_cents, total_cents, deposit_cents, balance_cents, currency, billing_address_json, provider, COALESCE(provider_session_id, ''), COALESCE(provider_payment_id, ''), status, order_stage, server_stage, paid_at, created_at, updated_at
 		FROM orders WHERE order_number = ? AND user_id = ? LIMIT 1;
 	`, orderNumber, userID)
 	return scanOrder(row)
@@ -712,7 +724,7 @@ func (s *Store) ListAllOrders(ctx context.Context, limit int) ([]Order, error) {
 		limit = 100
 	}
 	rows, err := s.db.QueryContext(ctx, `
-		SELECT id, user_id, order_number, billing_cycle_id, support_tier_id, server_tier_id, promo_code_id, product_label, subtotal_cents, discount_cents, total_cents, currency, billing_address_json, provider, COALESCE(provider_session_id, ''), COALESCE(provider_payment_id, ''), status, order_stage, server_stage, paid_at, created_at, updated_at
+		SELECT id, user_id, order_number, billing_cycle_id, support_tier_id, server_tier_id, promo_code_id, product_label, subtotal_cents, discount_cents, total_cents, deposit_cents, balance_cents, currency, billing_address_json, provider, COALESCE(provider_session_id, ''), COALESCE(provider_payment_id, ''), status, order_stage, server_stage, paid_at, created_at, updated_at
 		FROM orders ORDER BY created_at DESC LIMIT ?;
 	`, limit)
 	if err != nil {
@@ -761,7 +773,7 @@ func (s *Store) GetInvoiceByNumberForUser(ctx context.Context, userID int64, inv
 
 func (s *Store) ListOrdersForUser(ctx context.Context, userID int64) ([]Order, error) {
 	rows, err := s.db.QueryContext(ctx, `
-		SELECT id, user_id, order_number, billing_cycle_id, support_tier_id, server_tier_id, promo_code_id, product_label, subtotal_cents, discount_cents, total_cents, currency, billing_address_json, provider, COALESCE(provider_session_id, ''), COALESCE(provider_payment_id, ''), status, order_stage, server_stage, paid_at, created_at, updated_at
+		SELECT id, user_id, order_number, billing_cycle_id, support_tier_id, server_tier_id, promo_code_id, product_label, subtotal_cents, discount_cents, total_cents, deposit_cents, balance_cents, currency, billing_address_json, provider, COALESCE(provider_session_id, ''), COALESCE(provider_payment_id, ''), status, order_stage, server_stage, paid_at, created_at, updated_at
 		FROM orders WHERE user_id = ? ORDER BY created_at DESC;
 	`, userID)
 	if err != nil {

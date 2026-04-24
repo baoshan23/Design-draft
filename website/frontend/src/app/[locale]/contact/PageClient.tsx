@@ -1,10 +1,48 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
+
+// Country + ITU-T E.164 calling code. When the customer picks a country,
+// the phone-code prefix auto-fills to the matching code — but they can
+// still override it (e.g. HK resident registering with a US-issued line).
+const COUNTRIES: { name: string; code: string }[] = [
+    { name: 'Hong Kong', code: '+852' },
+    { name: 'China', code: '+86' },
+    { name: 'United States', code: '+1' },
+    { name: 'Canada', code: '+1' },
+    { name: 'United Kingdom', code: '+44' },
+    { name: 'Germany', code: '+49' },
+    { name: 'France', code: '+33' },
+    { name: 'Spain', code: '+34' },
+    { name: 'Italy', code: '+39' },
+    { name: 'Netherlands', code: '+31' },
+    { name: 'Japan', code: '+81' },
+    { name: 'South Korea', code: '+82' },
+    { name: 'Taiwan', code: '+886' },
+    { name: 'Australia', code: '+61' },
+    { name: 'New Zealand', code: '+64' },
+    { name: 'Singapore', code: '+65' },
+    { name: 'Thailand', code: '+66' },
+    { name: 'Vietnam', code: '+84' },
+    { name: 'Indonesia', code: '+62' },
+    { name: 'Malaysia', code: '+60' },
+    { name: 'Philippines', code: '+63' },
+    { name: 'India', code: '+91' },
+    { name: 'UAE', code: '+971' },
+    { name: 'Saudi Arabia', code: '+966' },
+    { name: 'Brazil', code: '+55' },
+    { name: 'Mexico', code: '+52' },
+    { name: 'Other', code: '' },
+];
+
+// Unique, sorted list of codes for the standalone code selector.
+const PHONE_CODES: string[] = Array.from(
+    new Set(COUNTRIES.map((c) => c.code).filter(Boolean)),
+).sort((a, b) => parseInt(a.slice(1), 10) - parseInt(b.slice(1), 10));
 
 export default function ContactPage() {
   const t = useTranslations();
@@ -24,6 +62,17 @@ export default function ContactPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  // Auto-sync phoneCode whenever the country changes. The user can still
+  // override the code afterwards — we only push a new prefix on country
+  // change, not on every render.
+  useEffect(() => {
+    const match = COUNTRIES.find((c) => c.name === formData.country);
+    if (match && match.code) {
+      setFormData((prev) => (prev.phoneCode === match.code ? prev : { ...prev, phoneCode: match.code }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formData.country]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -250,33 +299,31 @@ export default function ContactPage() {
                     <input id="contact-email" type="email" name="email" placeholder="john@company.com" required value={formData.email} onChange={handleChange} />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="contact-phone"><span>{t('contact.form.phonenum')}</span><span className="required-asterisk">*</span></label>
-                    <div className="phone-field">
-                      <div className="code" aria-hidden="true">{formData.phoneCode}</div>
-                      <input id="contact-phone" type="tel" name="phone" placeholder="1234 5678" required value={formData.phone} onChange={handleChange} />
-                    </div>
-                  </div>
-                  <div className="form-group">
                     <label htmlFor="contact-country"><span>{t('contact.form.country.label')}</span><span className="required-asterisk">*</span></label>
                     <select id="contact-country" name="country" required value={formData.country} onChange={handleChange}>
                       <option value="">{t('contact.form.country.select')}</option>
-                      <option>Hong Kong</option>
-                      <option>China</option>
-                      <option>United States</option>
-                      <option>United Kingdom</option>
-                      <option>Germany</option>
-                      <option>France</option>
-                      <option>Japan</option>
-                      <option>South Korea</option>
-                      <option>Australia</option>
-                      <option>Singapore</option>
-                      <option>Thailand</option>
-                      <option>Vietnam</option>
-                      <option>Indonesia</option>
-                      <option>Malaysia</option>
-                      <option>India</option>
-                      <option>Other</option>
+                      {COUNTRIES.map((c) => (
+                        <option key={c.name} value={c.name}>{c.name}</option>
+                      ))}
                     </select>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="contact-phone"><span>{t('contact.form.phonenum')}</span><span className="required-asterisk">*</span></label>
+                    <div className="phone-field">
+                      <label htmlFor="contact-phone-code" className="visually-hidden">{t('contact.form.phoneCodeLabel')}</label>
+                      <select
+                        id="contact-phone-code"
+                        name="phoneCode"
+                        className="code code-select"
+                        value={formData.phoneCode}
+                        onChange={handleChange}
+                      >
+                        {PHONE_CODES.map((c) => (
+                          <option key={c} value={c}>{c}</option>
+                        ))}
+                      </select>
+                      <input id="contact-phone" type="tel" name="phone" placeholder="1234 5678" required value={formData.phone} onChange={handleChange} />
+                    </div>
                   </div>
                   <div className="form-group">
                     <label htmlFor="contact-message">{t('contact.form.help.label')}</label>

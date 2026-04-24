@@ -72,6 +72,81 @@ export type Catalog = {
     serverTiers: ServerTier[];
 };
 
+// Plan-based catalog (matches /pricing PDF tiers).
+
+export type Plan = {
+    key: string;
+    labelEn: string;
+    labelZh: string;
+    descriptionEn: string;
+    descriptionZh: string;
+    family: 'hosted' | 'private';
+    basePriceCents: number;
+    recurringCents: number;
+    recurringUnit: '' | 'month' | 'year' | 'year_per_charger';
+    yearlyCents: number;
+    optionalHostingCents: number;
+    hasMonthly: boolean;
+    hasYearly: boolean;
+    unlimitedChargers: boolean;
+    sortOrder: number;
+};
+
+export type Addon = {
+    key: string;
+    labelEn: string;
+    labelZh: string;
+    priceCents: number;
+    priceModel: 'per_unit' | 'per_day';
+    unitNoteEn: string;
+    unitNoteZh: string;
+};
+
+export type PlanCatalog = {
+    plans: Plan[];
+    addons: Addon[];
+};
+
+// Bank-transfer payment types.
+
+export type BankAccount = {
+    id: number;
+    label: string;
+    bankName: string;
+    accountName: string;
+    accountNumber: string;
+    swiftCode: string;
+    iban: string;
+    bankAddress: string;
+    currency: string;
+    notes: string;
+    isActive: boolean;
+    sortOrder: number;
+    createdAt: string;
+    updatedAt: string;
+};
+
+export type BankSlip = {
+    id: number;
+    orderId: number;
+    userId: number;
+    kind: 'deposit' | 'balance' | 'full';
+    amountCents: number;
+    currency: string;
+    bankName: string;
+    referenceNote: string;
+    slipUrl: string;
+    status: 'review' | 'approved' | 'rejected';
+    adminNotes: string;
+    reviewedBy?: number;
+    reviewedAt?: string;
+    createdAt: string;
+    // Decorated by the admin list endpoint:
+    orderNumber?: string;
+    productLabel?: string;
+    userEmail?: string;
+};
+
 export type Invoice = {
     id: number;
     orderId?: number;
@@ -100,6 +175,8 @@ export type Order = {
     subtotalCents: number;
     discountCents: number;
     totalCents: number;
+    depositCents: number;
+    balanceCents: number;
     currency: string;
     billingAddress: string;
     provider: string;
@@ -119,6 +196,10 @@ export async function apiGetCatalog(): Promise<Catalog> {
     return await fetchJson<Catalog>(`${getApiBase()}/products/catalog`, { method: 'GET' });
 }
 
+export async function apiGetPlans(): Promise<PlanCatalog> {
+    return await fetchJson<PlanCatalog>(`${getApiBase()}/products/plans`, { method: 'GET' });
+}
+
 export async function apiApplyPromoCode(code: string): Promise<{
     code: string;
     discountType: 'percent' | 'fixed';
@@ -134,13 +215,24 @@ export async function apiApplyPromoCode(code: string): Promise<{
 // ── Checkout ───────────────────────────────────────────────────────────
 
 export type CheckoutInput = {
-    billingCycleId: number;
-    supportTierId: number;
-    serverTierId: number;
+    // Plan-based cart (matches /pricing PDF tiers).
+    planKey?: string;
+    billingMode?: 'monthly' | 'yearly' | 'one_time';
+    years?: number;
+    chargers?: number;
+    withHosting?: boolean;
+    addons?: { key: string; quantity: number }[];
+    useDeposit?: boolean;
+
+    // Legacy custom-configurator cart.
+    billingCycleId?: number;
+    supportTierId?: number;
+    serverTierId?: number;
     supportDays?: number;
+
     promoCode?: string;
     billingAddress: Record<string, string>;
-    provider: 'stripe' | 'pingxx' | 'paypal';
+    provider: 'stripe' | 'pingxx' | 'paypal' | 'bank_transfer';
     successUrl: string;
     cancelUrl: string;
 };
@@ -403,5 +495,85 @@ export async function apiAdminDeletePromoCode(token: string, id: number): Promis
     await fetchJson(`${getApiBase()}/admin/promo-codes/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
+    });
+}
+
+// ── Bank accounts + slips ──────────────────────────────────────────────
+
+export async function apiListBankAccounts(): Promise<BankAccount[]> {
+    const res = await fetchJson<{ accounts: BankAccount[] }>(`${getApiBase()}/bank-accounts`, { method: 'GET' });
+    return res.accounts || [];
+}
+
+export async function apiAdminListBankAccounts(token: string): Promise<BankAccount[]> {
+    const res = await fetchJson<{ accounts: BankAccount[] }>(`${getApiBase()}/admin/bank-accounts`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.accounts || [];
+}
+
+export async function apiAdminSaveBankAccount(token: string, b: Partial<BankAccount>): Promise<BankAccount> {
+    const url = b.id ? `${getApiBase()}/admin/bank-accounts/${b.id}` : `${getApiBase()}/admin/bank-accounts`;
+    const res = await fetchJson<{ account: BankAccount }>(url, {
+        method: b.id ? 'PUT' : 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify(b),
+    });
+    return res.account;
+}
+
+export async function apiAdminDeleteBankAccount(token: string, id: number): Promise<void> {
+    await fetchJson(`${getApiBase()}/admin/bank-accounts/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+    });
+}
+
+export async function apiUploadBankSlip(
+    token: string,
+    input: {
+        orderNumber: string;
+        kind: 'deposit' | 'balance' | 'full';
+        amountCents: number;
+        bankName: string;
+        referenceNote: string;
+        slipUrl: string;
+    },
+): Promise<{ slip: BankSlip }> {
+    return await fetchJson(`${getApiBase()}/billing/bank-slip`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify(input),
+    });
+}
+
+export async function apiListOrderSlips(token: string, orderNumber: string): Promise<BankSlip[]> {
+    const res = await fetchJson<{ slips: BankSlip[] }>(`${getApiBase()}/user/orders/${encodeURIComponent(orderNumber)}/slips`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.slips || [];
+}
+
+export async function apiAdminListBankSlips(token: string, status?: string): Promise<BankSlip[]> {
+    const q = status ? `?status=${encodeURIComponent(status)}` : '';
+    const res = await fetchJson<{ slips: BankSlip[] }>(`${getApiBase()}/admin/bank-slips${q}`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.slips || [];
+}
+
+export async function apiAdminReviewBankSlip(
+    token: string,
+    id: number,
+    action: 'approve' | 'reject',
+    notes: string,
+): Promise<{ slip: BankSlip }> {
+    return await fetchJson(`${getApiBase()}/admin/bank-slips/${id}/${action}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ notes }),
     });
 }

@@ -7,12 +7,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     setRequestLocale(locale);
     const t = await getTranslations();
     return {
-        title: `${t('buy.meta.title')} - GCSS`,
-        description: t('buy.meta.description'),
+        title: `${t('bankTransfer.title')} - GCSS`,
+        description: t('bankTransfer.description'),
     };
 }
 
-export default async function BuyPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function BankTransferPage({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;
     setRequestLocale(locale);
     return (

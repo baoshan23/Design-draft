@@ -72,7 +72,8 @@
 
 .hero-split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 780px);
+  justify-content: center;
   align-items: center;
   text-align: left;
   gap: 60px;
@@ -1322,6 +1323,30 @@ html {
   color: var(--primary);
   font-weight: 700;
   font-size: 0.9rem;
+  text-align: left;
+  letter-spacing: 0.02em;
+}
+
+.comparison-table {
+  min-width: 980px;
+  table-layout: fixed;
+}
+
+.comparison-table th:first-child,
+.comparison-table td:first-child {
+  width: 24%;
+}
+
+.comparison-table th:not(:first-child),
+.comparison-table td:not(:first-child) {
+  width: 12.66%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.comparison-table tbody tr:hover td:not(.category-row td) {
+  background: rgba(255, 196, 79, 0.04);
 }
 
 /* --- Sub Navigation (Product page) --- */

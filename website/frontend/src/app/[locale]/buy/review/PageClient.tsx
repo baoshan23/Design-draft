@@ -6,23 +6,21 @@ import { Link, useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import { getAuthToken } from '@/lib/api/authApi';
 import {
-    apiGetCatalog,
+    apiGetPlans,
     apiApplyPromoCode,
     apiCheckout,
-    type Catalog,
-    type BillingCycle,
-    type SupportTier,
-    type ServerTier,
+    type PlanCatalog,
 } from '@/lib/api/billingApi';
+import {
+    buildLineItems,
+    buildMetaRows,
+    computePrice,
+    formatUSD,
+    pickLabel,
+    type Cart,
+} from '@/lib/buy/pricing';
 
 const CART_KEY = 'gcss_buy_cart';
-
-type Cart = {
-    billingCycleId: number;
-    supportTierId: number;
-    serverTierId: number;
-    supportDays: number;
-};
 
 type PromoInfo = {
     code: string;
@@ -30,15 +28,13 @@ type PromoInfo = {
     discountValue: number;
 } | null;
 
-type Provider = 'stripe' | 'paypal' | 'pingxx';
+type Provider = 'stripe' | 'paypal' | 'pingxx' | 'bank_transfer';
 
-function formatUSD(cents: number) {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cents / 100);
-}
-
-function labelFor(locale: string, en: string, zh: string) {
-    return locale === 'zh' && zh ? zh : en;
-}
+// Mirror of backend/cmd/server/billing.go — any change there must be
+// mirrored here so the UI gates match the server's rules.
+const DEPOSIT_CENTS = 100_000; // $1,000
+const BANK_TRANSFER_THRESHOLD_CENTS = 150_000; // $1,500
+const PLATFORM_PLANS = new Set(['appent', 'webplat', 'appplat']);
 
 export default function BuyReviewClient() {
     const t = useTranslations('buy');
@@ -46,7 +42,7 @@ export default function BuyReviewClient() {
     const router = useRouter();
     const { user, loading } = useAuth();
 
-    const [catalog, setCatalog] = useState<Catalog | null>(null);
+    const [catalog, setCatalog] = useState<PlanCatalog | null>(null);
     const [cart, setCart] = useState<Cart | null>(null);
 
     const [billingAddress, setBillingAddress] = useState({
@@ -69,13 +65,14 @@ export default function BuyReviewClient() {
     const [promoMsg, setPromoMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
     const [provider, setProvider] = useState<Provider>('stripe');
+    const [useDeposit, setUseDeposit] = useState(false);
     const [invalidFields, setInvalidFields] = useState<string[]>([]);
     const isInvalid = (f: string) => invalidFields.includes(f);
 
-    // Default provider based on locale — zh users get Ping++ preselected, others Stripe.
     useEffect(() => {
         if (locale === 'zh') setProvider('pingxx');
     }, [locale]);
+
     const [checkoutBusy, setCheckoutBusy] = useState(false);
     const [error, setError] = useState('');
 
@@ -98,7 +95,7 @@ export default function BuyReviewClient() {
     }, [router]);
 
     useEffect(() => {
-        apiGetCatalog().then(setCatalog).catch(() => {});
+        apiGetPlans().then(setCatalog).catch(() => {});
     }, []);
 
     useEffect(() => {
@@ -114,31 +111,14 @@ export default function BuyReviewClient() {
         }
     }, [user]);
 
-    const billingCycle = useMemo<BillingCycle | undefined>(
-        () => catalog?.billingCycles.find((b) => b.id === cart?.billingCycleId),
-        [catalog, cart]
-    );
-    const supportTier = useMemo<SupportTier | undefined>(
-        () => catalog?.supportTiers.find((s) => s.id === cart?.supportTierId),
-        [catalog, cart]
-    );
-    const serverTier = useMemo<ServerTier | undefined>(
-        () => catalog?.serverTiers.find((s) => s.id === cart?.serverTierId),
+    const plan = useMemo(
+        () => catalog?.plans.find((p) => p.key === cart?.planKey) || null,
         [catalog, cart]
     );
 
     const pricing = useMemo(() => {
-        if (!billingCycle || !serverTier || !cart) return { subtotal: 0, discount: 0, total: 0 };
-        let base = serverTier.priceCents;
-        if (supportTier) {
-            if (supportTier.pricingType === 'per_day') {
-                const days = cart.supportDays > 0 ? cart.supportDays : billingCycle.years * 365;
-                base += supportTier.priceCents * days;
-            } else {
-                base += supportTier.priceCents;
-            }
-        }
-        const subtotal = Math.round(base * billingCycle.years * billingCycle.multiplier);
+        if (!catalog || !plan || !cart) return { subtotal: 0, discount: 0, total: 0 };
+        const subtotal = computePrice(plan, cart, catalog.addons);
         let discount = 0;
         if (promo) {
             if (promo.discountType === 'percent') discount = Math.floor((subtotal * promo.discountValue) / 100);
@@ -146,7 +126,34 @@ export default function BuyReviewClient() {
             if (discount > subtotal) discount = subtotal;
         }
         return { subtotal, discount, total: subtotal - discount };
-    }, [billingCycle, supportTier, serverTier, cart, promo]);
+    }, [catalog, plan, cart, promo]);
+
+    // Payment-method eligibility. These rules mirror the backend's enforcement
+    // in handlePlanCheckout so the UI reflects what will actually work.
+    const isPlatformPlan = plan ? PLATFORM_PLANS.has(plan.key) : false;
+    const depositEligible = isPlatformPlan && pricing.total > DEPOSIT_CENTS;
+    const chargeAmount = useDeposit && depositEligible ? DEPOSIT_CENTS : pricing.total;
+    const balanceAmount = useDeposit && depositEligible ? pricing.total - DEPOSIT_CENTS : 0;
+    // Bank transfer is mandatory when the charge amount exceeds the threshold.
+    // If the user is paying the full amount and it exceeds the threshold,
+    // we hide online gateways — bank transfer is the only option.
+    const mustUseBankTransfer = chargeAmount > BANK_TRANSFER_THRESHOLD_CENTS;
+
+    // Auto-switch the provider when the policy forces bank_transfer.
+    useEffect(() => {
+        if (mustUseBankTransfer && provider !== 'bank_transfer') {
+            setProvider('bank_transfer');
+        }
+    }, [mustUseBankTransfer, provider]);
+
+    // When the user turns off the deposit toggle and the total still requires
+    // bank transfer, keep them on bank_transfer. When they turn it on and the
+    // charge amount drops below the threshold, restore a sensible default.
+    useEffect(() => {
+        if (!mustUseBankTransfer && provider === 'bank_transfer') {
+            setProvider(locale === 'zh' ? 'pingxx' : 'stripe');
+        }
+    }, [mustUseBankTransfer, provider, locale]);
 
     const handleApplyPromo = async () => {
         if (!promoCode.trim()) return;
@@ -165,19 +172,17 @@ export default function BuyReviewClient() {
     };
 
     const handleCheckout = async () => {
-        if (!cart || !billingCycle || !serverTier) return;
+        if (!cart || !plan) return;
         const token = getAuthToken();
         if (!token) {
             router.push('/login');
             return;
         }
-        // Validate required billing fields — collect all invalid, focus first.
         const required: (keyof typeof billingAddress)[] = ['firstName', 'lastName', 'email', 'phone', 'street1', 'city', 'country'];
         const missing = required.filter((f) => !billingAddress[f].trim());
         if (missing.length > 0) {
             setInvalidFields(missing);
             setError(t('review.fillRequired'));
-            // Focus first invalid after the aria-invalid render tick.
             requestAnimationFrame(() => {
                 const el = document.getElementById(`ba-${missing[0]}`);
                 if (el) (el as HTMLInputElement).focus();
@@ -190,18 +195,25 @@ export default function BuyReviewClient() {
         setError('');
         try {
             const origin = typeof window !== 'undefined' ? window.location.origin : '';
+            // Bank transfer orders redirect to a bank-info + slip-upload page
+            // instead of the gateway success page. Online gateway orders with
+            // a deposit still land on /buy/success after the deposit clears
+            // — they'll also get a follow-up email to upload the balance slip.
+            const successPath = provider === 'bank_transfer' ? '/buy/bank-transfer' : '/buy/success';
             const res = await apiCheckout(token, {
-                billingCycleId: cart.billingCycleId,
-                supportTierId: cart.supportTierId,
-                serverTierId: cart.serverTierId,
-                supportDays: cart.supportDays,
+                planKey: cart.planKey,
+                billingMode: cart.billingMode,
+                years: cart.years,
+                chargers: cart.chargers,
+                withHosting: cart.withHosting,
+                addons: cart.addons,
+                useDeposit: useDeposit && depositEligible,
                 promoCode: promo?.code || '',
                 billingAddress,
                 provider,
-                successUrl: `${origin}/${locale}/buy/success`,
+                successUrl: `${origin}/${locale}${successPath}`,
                 cancelUrl: `${origin}/${locale}/buy/review`,
             });
-            // Clear cart + redirect to provider.
             if (typeof window !== 'undefined') window.sessionStorage.removeItem(CART_KEY);
             window.location.href = res.url;
         } catch (err) {
@@ -211,7 +223,7 @@ export default function BuyReviewClient() {
     };
 
     if (loading || !user) return null;
-    if (!catalog || !cart || !billingCycle || !serverTier) {
+    if (!catalog || !cart || !plan) {
         return (
             <section className="section container">
                 <div className="dashboard-loading"><div className="dashboard-loading-spinner" /><p>{t('loading')}</p></div>
@@ -228,21 +240,25 @@ export default function BuyReviewClient() {
 
                     <div className="buy-block">
                         <h2 className="buy-block-title">{t('review.reviewOrder')}</h2>
-                        <div className="buy-review-lines">
-                            <div className="buy-review-line">
-                                <span>{labelFor(locale, serverTier.labelEn, serverTier.labelZh)}</span>
-                                <span>{formatUSD(serverTier.priceCents)}</span>
-                            </div>
-                            {supportTier && supportTier.priceCents > 0 && (
-                                <div className="buy-review-line">
-                                    <span>{labelFor(locale, supportTier.labelEn, supportTier.labelZh)}</span>
-                                    <span>{formatUSD(supportTier.priceCents)}{supportTier.pricingType === 'per_day' ? `/${t('perDay')}` : ''}</span>
+                        <div className="buy-summary-meta">
+                            {buildMetaRows(plan, cart, locale, (k, v) => t(k as never, v as never)).map((row) => (
+                                <div key={row.label} className="buy-summary-meta-row">
+                                    <span className="buy-summary-meta-k">{row.label}</span>
+                                    <span className="buy-summary-meta-v">{row.value}</span>
                                 </div>
-                            )}
-                            <div className="buy-review-line">
-                                <span>{labelFor(locale, billingCycle.labelEn, billingCycle.labelZh)}</span>
-                                <span>{t('review.years', { n: billingCycle.years })}</span>
-                            </div>
+                            ))}
+                        </div>
+                        <div className="buy-summary-divider" />
+                        <div className="buy-summary-lines">
+                            {buildLineItems(plan, cart, catalog.addons, locale, (k, v) => t(k as never, v as never)).map((item, i) => (
+                                <div key={i} className="buy-summary-line buy-summary-line--rich">
+                                    <div className="buy-summary-line-main">
+                                        <span className="buy-summary-line-label">{item.label}</span>
+                                        {item.detail && <span className="buy-summary-line-detail">{item.detail}</span>}
+                                    </div>
+                                    <span className="buy-summary-line-amt">{formatUSD(item.amountCents)}</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
@@ -346,20 +362,53 @@ export default function BuyReviewClient() {
                         </div>
                     </div>
 
+                    {depositEligible && (
+                        <div className="buy-block">
+                            <h2 className="buy-block-title">{t('review.depositTitle')}</h2>
+                            <label className={`buy-deposit-option${useDeposit ? ' buy-deposit-option--active' : ''}`}>
+                                <input
+                                    type="checkbox"
+                                    checked={useDeposit}
+                                    onChange={(e) => setUseDeposit(e.target.checked)}
+                                />
+                                <div className="buy-deposit-body">
+                                    <div className="buy-deposit-head">
+                                        <span className="buy-deposit-title">{t('review.depositLabel', { amount: formatUSD(DEPOSIT_CENTS) })}</span>
+                                        <span className="buy-deposit-chip">{formatUSD(pricing.total - DEPOSIT_CENTS)} {t('review.depositBalance')}</span>
+                                    </div>
+                                    <p className="buy-deposit-help">{t('review.depositHelp')}</p>
+                                </div>
+                            </label>
+                        </div>
+                    )}
+
                     <div className="buy-block">
                         <h2 className="buy-block-title">{t('review.paymentMethod')}</h2>
+                        {mustUseBankTransfer && (
+                            <div className="form-banner form-banner--info" role="status" style={{ marginBottom: 12 }}>
+                                {t('review.bankTransferRequired', { threshold: formatUSD(BANK_TRANSFER_THRESHOLD_CENTS) })}
+                            </div>
+                        )}
                         <div className="buy-provider-grid" role="radiogroup" aria-label={t('review.paymentMethod')}>
-                            <button type="button" role="radio" aria-checked={provider === 'stripe'} className={`buy-provider${provider === 'stripe' ? ' buy-provider--active' : ''}`} onClick={() => setProvider('stripe')}>
-                                <div className="buy-provider-label">{t('review.providerStripe')}</div>
-                                <div className="buy-provider-sub">{t('review.providerStripeDesc')}</div>
-                            </button>
-                            <button type="button" role="radio" aria-checked={provider === 'paypal'} className={`buy-provider${provider === 'paypal' ? ' buy-provider--active' : ''}`} onClick={() => setProvider('paypal')}>
-                                <div className="buy-provider-label">{t('review.providerPaypal')}</div>
-                                <div className="buy-provider-sub">{t('review.providerPaypalDesc')}</div>
-                            </button>
-                            <button type="button" role="radio" aria-checked={provider === 'pingxx'} className={`buy-provider${provider === 'pingxx' ? ' buy-provider--active' : ''}`} onClick={() => setProvider('pingxx')}>
-                                <div className="buy-provider-label">{t('review.providerPingxx')}</div>
-                                <div className="buy-provider-sub">{t('review.providerPingxxDesc')}</div>
+                            {!mustUseBankTransfer && (
+                                <>
+                                    <button type="button" role="radio" aria-checked={provider === 'stripe'} className={`buy-provider${provider === 'stripe' ? ' buy-provider--active' : ''}`} onClick={() => setProvider('stripe')}>
+                                        <div className="buy-provider-label">{t('review.providerStripe')}</div>
+                                        <div className="buy-provider-sub">{t('review.providerStripeDesc')}</div>
+                                    </button>
+                                    <button type="button" role="radio" aria-checked={provider === 'paypal'} className={`buy-provider${provider === 'paypal' ? ' buy-provider--active' : ''}`} onClick={() => setProvider('paypal')}>
+                                        <div className="buy-provider-label">{t('review.providerPaypal')}</div>
+                                        <div className="buy-provider-sub">{t('review.providerPaypalDesc')}</div>
+                                    </button>
+                                    <button type="button" role="radio" aria-checked={provider === 'pingxx'} className={`buy-provider${provider === 'pingxx' ? ' buy-provider--active' : ''}`} onClick={() => setProvider('pingxx')}>
+                                        <div className="buy-provider-label">{t('review.providerPingxx')}</div>
+                                        <div className="buy-provider-sub">{t('review.providerPingxxDesc')}</div>
+                                    </button>
+                                </>
+                            )}
+                            <button type="button" role="radio" aria-checked={provider === 'bank_transfer'} className={`buy-provider${provider === 'bank_transfer' ? ' buy-provider--active' : ''}`} onClick={() => setProvider('bank_transfer')}>
+                                <div className="buy-provider-label">{t('review.providerBank')}</div>
+                                <div className="buy-provider-sub">{t('review.providerBankDesc')}</div>
                             </button>
                         </div>
                     </div>
@@ -367,21 +416,27 @@ export default function BuyReviewClient() {
 
                 <aside className="buy-summary">
                     <h2 className="buy-summary-title">{t('summary.title')}</h2>
-                    <div className="buy-summary-lines">
-                        <div className="buy-summary-line">
-                            <span>{labelFor(locale, serverTier.labelEn, serverTier.labelZh)}</span>
-                            <span>{formatUSD(serverTier.priceCents)}</span>
-                        </div>
-                        {supportTier && supportTier.priceCents > 0 && (
-                            <div className="buy-summary-line">
-                                <span>{labelFor(locale, supportTier.labelEn, supportTier.labelZh)}</span>
-                                <span>{formatUSD(supportTier.priceCents)}</span>
+                    <div className="buy-summary-meta">
+                        {buildMetaRows(plan, cart, locale, (k, v) => t(k as never, v as never)).map((row) => (
+                            <div key={row.label} className="buy-summary-meta-row">
+                                <span className="buy-summary-meta-k">{row.label}</span>
+                                <span className="buy-summary-meta-v">{row.value}</span>
                             </div>
-                        )}
-                        <div className="buy-summary-line">
-                            <span>{labelFor(locale, billingCycle.labelEn, billingCycle.labelZh)}</span>
-                            <span>× {billingCycle.years}</span>
-                        </div>
+                        ))}
+                    </div>
+
+                    <div className="buy-summary-divider" />
+
+                    <div className="buy-summary-lines">
+                        {buildLineItems(plan, cart, catalog.addons, locale, (k, v) => t(k as never, v as never)).map((item, i) => (
+                            <div key={i} className="buy-summary-line buy-summary-line--rich">
+                                <div className="buy-summary-line-main">
+                                    <span className="buy-summary-line-label">{item.label}</span>
+                                    {item.detail && <span className="buy-summary-line-detail">{item.detail}</span>}
+                                </div>
+                                <span className="buy-summary-line-amt">{formatUSD(item.amountCents)}</span>
+                            </div>
+                        ))}
                     </div>
 
                     <div className="buy-summary-divider" />
@@ -405,6 +460,28 @@ export default function BuyReviewClient() {
                         <span>{formatUSD(pricing.total)}</span>
                     </div>
 
+                    {useDeposit && depositEligible && (
+                        <div className="buy-summary-split" aria-live="polite">
+                            <div className="buy-summary-split-row">
+                                <span>{t('summary.dueNow')}</span>
+                                <span className="buy-summary-split-amt">{formatUSD(chargeAmount)}</span>
+                            </div>
+                            <div className="buy-summary-split-row buy-summary-split-row--muted">
+                                <span>{t('summary.dueLater')}</span>
+                                <span>{formatUSD(balanceAmount)}</span>
+                            </div>
+                        </div>
+                    )}
+
+                    {provider === 'bank_transfer' && !useDeposit && (
+                        <div className="buy-summary-split" aria-live="polite">
+                            <div className="buy-summary-split-row">
+                                <span>{t('summary.bankTransferAmount')}</span>
+                                <span className="buy-summary-split-amt">{formatUSD(pricing.total)}</span>
+                            </div>
+                        </div>
+                    )}
+
                     {error && <div className="form-banner form-banner--error" role="alert" aria-live="assertive">{error}</div>}
 
                     <button
@@ -420,3 +497,4 @@ export default function BuyReviewClient() {
         </section>
     );
 }
+

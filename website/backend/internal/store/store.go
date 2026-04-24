@@ -391,6 +391,57 @@ func (s *Store) migrate(ctx context.Context) error {
 	);`)
 	// Backfill updated_at for existing rows
 	_, _ = s.db.ExecContext(ctx, `UPDATE blog_posts SET updated_at = published_at WHERE updated_at = '';`)
+
+	// Deposit / balance tracking on orders — used for platform plans where
+	// the customer pays a $1,000 deposit online and the balance via bank
+	// transfer, and for bank-transfer-only orders > $1,500.
+	_, _ = s.db.ExecContext(ctx, `ALTER TABLE orders ADD COLUMN deposit_cents INTEGER NOT NULL DEFAULT 0;`)
+	_, _ = s.db.ExecContext(ctx, `ALTER TABLE orders ADD COLUMN balance_cents INTEGER NOT NULL DEFAULT 0;`)
+
+	// Bank accounts advertised to customers picking the bank-transfer
+	// payment method. Multiple rows allowed (HSBC, BOC, etc.) — only
+	// is_active=1 rows are shown publicly.
+	_, _ = s.db.ExecContext(ctx, `CREATE TABLE IF NOT EXISTS bank_accounts (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		label TEXT NOT NULL DEFAULT '',
+		bank_name TEXT NOT NULL DEFAULT '',
+		account_name TEXT NOT NULL DEFAULT '',
+		account_number TEXT NOT NULL DEFAULT '',
+		swift_code TEXT NOT NULL DEFAULT '',
+		iban TEXT NOT NULL DEFAULT '',
+		bank_address TEXT NOT NULL DEFAULT '',
+		currency TEXT NOT NULL DEFAULT 'USD',
+		notes TEXT NOT NULL DEFAULT '',
+		is_active INTEGER NOT NULL DEFAULT 1,
+		sort_order INTEGER NOT NULL DEFAULT 0,
+		created_at TEXT NOT NULL,
+		updated_at TEXT NOT NULL
+	);`)
+
+	// Bank transfer slips uploaded by customers as proof of wire. Admin
+	// reviews these and flips the order to paid once verified. One order
+	// can have multiple slips (e.g. deposit slip + balance slip).
+	_, _ = s.db.ExecContext(ctx, `CREATE TABLE IF NOT EXISTS bank_slips (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		order_id INTEGER NOT NULL,
+		user_id INTEGER NOT NULL,
+		kind TEXT NOT NULL DEFAULT 'balance',
+		amount_cents INTEGER NOT NULL DEFAULT 0,
+		currency TEXT NOT NULL DEFAULT 'USD',
+		bank_name TEXT NOT NULL DEFAULT '',
+		reference_note TEXT NOT NULL DEFAULT '',
+		slip_url TEXT NOT NULL DEFAULT '',
+		status TEXT NOT NULL DEFAULT 'review',
+		admin_notes TEXT NOT NULL DEFAULT '',
+		reviewed_by INTEGER,
+		reviewed_at TEXT,
+		created_at TEXT NOT NULL,
+		FOREIGN KEY(order_id) REFERENCES orders(id) ON DELETE CASCADE,
+		FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+	);`)
+	_, _ = s.db.ExecContext(ctx, `CREATE INDEX IF NOT EXISTS idx_bank_slips_order ON bank_slips(order_id);`)
+	_, _ = s.db.ExecContext(ctx, `CREATE INDEX IF NOT EXISTS idx_bank_slips_status ON bank_slips(status);`)
+
 	return nil
 }
 

@@ -13,7 +13,21 @@ import (
 	"gcss-backend/internal/store"
 )
 
-// ── Public catalog ─────────────────────────────────────────────────────
+// ── Public plans (matches /pricing PDF tiers) ──────────────────────────
+
+func (s *server) handlePublicPlans(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
+		return
+	}
+	plans, addons := store.PlanCatalog()
+	writeJSON(w, http.StatusOK, map[string]interface{}{
+		"plans":  plans,
+		"addons": addons,
+	})
+}
+
+// ── Public catalog (legacy: billingCycles + supportTiers + serverTiers) ─
 
 func (s *server) handlePublicCatalog(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
@@ -342,15 +356,42 @@ func (s *server) handlePromoApply(w http.ResponseWriter, r *http.Request) {
 // ── Checkout ───────────────────────────────────────────────────────────
 
 type checkoutRequest struct {
-	BillingCycleID int64                  `json:"billingCycleId"`
-	SupportTierID  int64                  `json:"supportTierId"`
-	ServerTierID   int64                  `json:"serverTierId"`
-	SupportDays    int                    `json:"supportDays"` // for per_day pricing
+	// Plan-based cart (matches /pricing PDF tiers).
+	PlanKey     string             `json:"planKey,omitempty"`
+	BillingMode string             `json:"billingMode,omitempty"` // "monthly" | "yearly" | "one_time"
+	Years       int                `json:"years,omitempty"`
+	Chargers    int                `json:"chargers,omitempty"`
+	WithHosting bool               `json:"withHosting,omitempty"`
+	Addons      []checkoutAddonReq `json:"addons,omitempty"`
+	// UseDeposit is only honored for one-time platform plans (appent /
+	// webplat / appplat). When true, the customer pays a $1,000 deposit
+	// via an online gateway and the remainder via bank transfer.
+	UseDeposit bool `json:"useDeposit,omitempty"`
+
+	// Legacy custom-configurator cart (still accepted for backwards compat).
+	BillingCycleID int64 `json:"billingCycleId"`
+	SupportTierID  int64 `json:"supportTierId"`
+	ServerTierID   int64 `json:"serverTierId"`
+	SupportDays    int   `json:"supportDays"`
+
 	PromoCode      string                 `json:"promoCode"`
 	BillingAddress map[string]interface{} `json:"billingAddress"`
-	Provider       string                 `json:"provider"` // stripe | pingxx | paypal
+	Provider       string                 `json:"provider"` // stripe | pingxx | paypal | bank_transfer
 	SuccessURL     string                 `json:"successUrl"`
 	CancelURL      string                 `json:"cancelUrl"`
+}
+
+// Payment policy constants, in USD cents.
+const (
+	// DepositCents is the fixed deposit amount charged online for platform plans.
+	DepositCents int64 = 100000 // $1,000
+	// BankTransferThresholdCents — above this, only bank transfer is allowed.
+	BankTransferThresholdCents int64 = 150000 // $1,500
+)
+
+type checkoutAddonReq struct {
+	Key      string `json:"key"`
+	Quantity int    `json:"quantity"`
 }
 
 func (s *server) handleCheckout(w http.ResponseWriter, r *http.Request) {
@@ -374,6 +415,12 @@ func (s *server) handleCheckout(w http.ResponseWriter, r *http.Request) {
 	}
 	if req.SuccessURL == "" || req.CancelURL == "" {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "successUrl and cancelUrl are required"})
+		return
+	}
+
+	// Plan-based checkout (matches /pricing PDF tiers).
+	if req.PlanKey != "" {
+		s.handlePlanCheckout(w, r, user, req)
 		return
 	}
 
@@ -520,6 +567,144 @@ func (s *server) handleCheckout(w http.ResponseWriter, r *http.Request) {
 	case "pingxx":
 		s.createPingxxCheckout(w, r, order, productLabel, total, req)
 		return
+	default:
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "unsupported provider"})
+	}
+}
+
+// ── Plan-based checkout (matches /pricing PDF tiers) ──────────────────
+
+func (s *server) handlePlanCheckout(w http.ResponseWriter, r *http.Request, user *store.AuthUser, req checkoutRequest) {
+	ctx := r.Context()
+
+	addons := make([]store.PlanAddonChoice, 0, len(req.Addons))
+	for _, a := range req.Addons {
+		if a.Quantity > 0 {
+			addons = append(addons, store.PlanAddonChoice{Key: a.Key, Quantity: a.Quantity})
+		}
+	}
+
+	subtotal, label, err := store.PriceFor(store.PlanSelection{
+		PlanKey:     req.PlanKey,
+		BillingMode: req.BillingMode,
+		Years:       req.Years,
+		Chargers:    req.Chargers,
+		WithHosting: req.WithHosting,
+		Addons:      addons,
+	})
+	if err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+
+	// Apply promo code.
+	discount := int64(0)
+	var promoCodeID *int64
+	if strings.TrimSpace(req.PromoCode) != "" {
+		p, err := s.store.FindValidPromoCode(ctx, req.PromoCode)
+		if err != nil {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+			return
+		}
+		if p.DiscountType == "percent" {
+			discount = subtotal * p.DiscountValue / 100
+		} else {
+			discount = p.DiscountValue
+		}
+		if discount > subtotal {
+			discount = subtotal
+		}
+		id := p.ID
+		promoCodeID = &id
+	}
+	total := subtotal - discount
+	if total < 50 {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "total amount is below minimum"})
+		return
+	}
+
+	// Deposit flow is only valid for one-time platform plans where the total
+	// exceeds the deposit amount. The customer pays DepositCents online and
+	// the remainder becomes the bank-transfer balance.
+	isPlatformPlan := req.PlanKey == "appent" || req.PlanKey == "webplat" || req.PlanKey == "appplat"
+	useDeposit := req.UseDeposit && isPlatformPlan && total > DepositCents
+
+	// Determine the amount that actually flows through the gateway + the
+	// balance owed via bank transfer.
+	chargeAmount := total
+	var depositCents, balanceCents int64
+	if useDeposit {
+		chargeAmount = DepositCents
+		depositCents = DepositCents
+		balanceCents = total - DepositCents
+	}
+
+	// Policy: any amount over BankTransferThresholdCents (other than the
+	// deposit carve-out above) must be paid by bank transfer. This prevents
+	// the customer from routing a $16k+ charge through Stripe when the
+	// business wants a wire.
+	if req.Provider != "bank_transfer" && chargeAmount > BankTransferThresholdCents {
+		writeJSON(w, http.StatusBadRequest, map[string]string{
+			"error":   "bank_transfer_required",
+			"message": "Orders over $1,500 must be paid by bank transfer. Pick the bank transfer payment method.",
+		})
+		return
+	}
+
+	billingAddr, _ := json.Marshal(req.BillingAddress)
+	if billingAddr == nil {
+		billingAddr = []byte("{}")
+	}
+
+	orderStatus := "pending"
+	if req.Provider == "bank_transfer" {
+		orderStatus = "awaiting_transfer"
+		// For pure bank-transfer orders there is no deposit carve-out —
+		// the full total is the bank-transfer balance.
+		if !useDeposit {
+			balanceCents = total
+		}
+	}
+
+	order, err := s.store.CreateOrder(ctx, store.NewOrderInput{
+		UserID:             user.ID,
+		PromoCodeID:        promoCodeID,
+		ProductLabel:       label,
+		SubtotalCents:      subtotal,
+		DiscountCents:      discount,
+		TotalCents:         total,
+		DepositCents:       depositCents,
+		BalanceCents:       balanceCents,
+		Currency:           "USD",
+		BillingAddressJSON: string(billingAddr),
+		Provider:           req.Provider,
+		Status:             orderStatus,
+	})
+	if err != nil {
+		log.Printf("CreateOrder (plan) error: %v", err)
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "failed to create order"})
+		return
+	}
+
+	// Bank transfer doesn't redirect to a gateway — return a URL pointing
+	// the frontend at its own /buy/bank-transfer landing page with the
+	// order number so the customer can see the bank details + upload slip.
+	if req.Provider == "bank_transfer" {
+		writeJSON(w, http.StatusOK, map[string]interface{}{
+			"url":         req.SuccessURL + "?order=" + order.OrderNumber + "&provider=bank_transfer",
+			"orderNumber": order.OrderNumber,
+			"method":      "bank_transfer",
+		})
+		return
+	}
+
+	switch req.Provider {
+	case "stripe":
+		s.createStripeCheckout(w, r, order, label, chargeAmount, req)
+	case "paypal":
+		s.createPayPalCheckout(w, r, order, label, chargeAmount, req)
+	case "pingxx":
+		s.createPingxxCheckout(w, r, order, label, chargeAmount, req)
 	default:
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "unsupported provider"})
 	}
@@ -1068,6 +1253,11 @@ func (s *server) handleUserOrders(w http.ResponseWriter, r *http.Request) {
 // ── Lookup by order number (for success page after Stripe redirect) ───
 
 func (s *server) handleOrderByNumber(w http.ResponseWriter, r *http.Request) {
+	// Sub-route: /api/user/orders/{number}/slips → bank slips for the order.
+	if strings.HasSuffix(r.URL.Path, "/slips") {
+		s.handleUserOrderSlips(w, r)
+		return
+	}
 	if r.Method != http.MethodGet {
 		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
 		return

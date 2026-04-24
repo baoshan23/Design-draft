@@ -195,6 +195,13 @@ func main() {
 	mux.HandleFunc("/api/admin/promo-codes/", s.withCORS(s.handleAdminPromoCodeItem))
 	// Public catalog + promo apply + checkout + webhook
 	mux.HandleFunc("/api/products/catalog", s.withCORS(s.handlePublicCatalog))
+	mux.HandleFunc("/api/products/plans", s.withCORS(s.handlePublicPlans))
+	mux.HandleFunc("/api/bank-accounts", s.withCORS(s.handlePublicBankAccounts))
+	mux.HandleFunc("/api/admin/bank-accounts", s.withCORS(s.handleAdminBankAccounts))
+	mux.HandleFunc("/api/admin/bank-accounts/", s.withCORS(s.handleAdminBankAccountItem))
+	mux.HandleFunc("/api/billing/bank-slip", s.withCORS(s.handleUploadBankSlip))
+	mux.HandleFunc("/api/admin/bank-slips", s.withCORS(s.handleAdminBankSlips))
+	mux.HandleFunc("/api/admin/bank-slips/", s.withCORS(s.handleAdminBankSlipItem))
 	mux.HandleFunc("/api/promo-codes/apply", s.withCORS(s.handlePromoApply))
 	mux.HandleFunc("/api/billing/checkout", s.withCORS(s.handleCheckout))
 	mux.HandleFunc("/api/billing/paypal/capture", s.withCORS(s.handlePayPalCapture))
