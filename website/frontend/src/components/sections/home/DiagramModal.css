@@ -8,7 +8,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 999;
+    /* Header sits at z-index 100 with backdrop-filter creating its own
+       stacking context; nav dropdown menus at 1000. Sit above both so
+       the close button can't be hidden behind the navbar. */
+    z-index: 10000;
     animation: fadeIn 0.3s ease-in-out;
     -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
