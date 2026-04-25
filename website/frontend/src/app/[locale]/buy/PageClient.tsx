@@ -50,8 +50,12 @@ export default function BuyClient() {
                 setCatalog(c);
                 setCart((prev) => {
                     if (prev.planKey) return prev;
-                    const target = requestedPlan && c.plans.find((p) => p.key === requestedPlan);
-                    const first = target || c.plans[0];
+                    // 'saas' is no longer offered on the website — never seed it.
+                    const requested = requestedPlan && requestedPlan !== 'saas'
+                        ? c.plans.find((p) => p.key === requestedPlan)
+                        : null;
+                    const firstAvailable = c.plans.find((p) => p.key !== 'saas');
+                    const first = requested || firstAvailable;
                     if (!first) return prev;
                     return seedDefaults(prev, first);
                 });
@@ -62,6 +66,14 @@ export default function BuyClient() {
     const plan = useMemo(
         () => catalog?.plans.find((p) => p.key === cart.planKey) || null,
         [catalog, cart.planKey]
+    );
+
+    // Hide retired tiers from the plan picker. Backend still has 'saas' in
+    // the catalog for historical orders; we just don't surface it on the buy
+    // page anymore.
+    const availablePlans = useMemo(
+        () => catalog?.plans.filter((p) => p.key !== 'saas') ?? [],
+        [catalog]
     );
 
     const total = useMemo(() => {
@@ -113,39 +125,12 @@ export default function BuyClient() {
                     <h1 className="buy-title">{t('title')}</h1>
                     <p className="buy-subtitle">{t('subtitle')}</p>
 
-                    {/* 1. Hosting Model */}
-                    <div className="buy-block">
-                        <h2 className="buy-block-title">{t('hostingModelLabel')}</h2>
-                        <div className="buy-plan-grid buy-plan-grid--2" role="radiogroup" aria-label={t('hostingModelLabel')}>
-                            {(['hosted', 'private'] as const).map((fam) => {
-                                const selected = plan?.family === fam;
-                                return (
-                                    <button
-                                        key={fam}
-                                        type="button"
-                                        role="radio"
-                                        aria-checked={selected}
-                                        className={`buy-plan-card${selected ? ' buy-plan-card--active' : ''}`}
-                                        onClick={() => {
-                                            const firstInFamily = catalog.plans.find((x) => x.family === fam);
-                                            if (firstInFamily) setPlan(firstInFamily);
-                                        }}
-                                    >
-                                        <div className="buy-plan-family">{t(fam === 'hosted' ? 'familyHosted' : 'familyPrivate')}</div>
-                                        <div className="buy-plan-name">{t(fam === 'hosted' ? 'hostingModelHostedTitle' : 'hostingModelPrivateTitle')}</div>
-                                        <p className="buy-plan-desc">{t(fam === 'hosted' ? 'hostingModelHostedDesc' : 'hostingModelPrivateDesc')}</p>
-                                    </button>
-                                );
-                            })}
-                        </div>
-                    </div>
-
-                    {/* 2. Plan (filtered by selected hosting model) */}
+                    {/* 1. Plan */}
                     {plan && (
                         <div className="buy-block">
                             <h2 className="buy-block-title">{t('choosePlan')}</h2>
                             <div className="buy-plan-grid" role="radiogroup" aria-label={t('choosePlan')}>
-                                {catalog.plans.filter((p) => p.family === plan.family).map((p) => {
+                                {availablePlans.map((p) => {
                                     const selected = cart.planKey === p.key;
                                     return (
                                         <button

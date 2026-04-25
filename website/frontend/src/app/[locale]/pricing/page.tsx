@@ -5,7 +5,7 @@ import ScrollAnimation from '@/components/effects/ScrollAnimation';
 
 export const metadata = {
     title: 'Pricing - GCSS | EV Charging Management Platform',
-    description: 'Transparent pricing for GCSS EV charging management. Six tiers across two hosting modes. From $84/year/charger SaaS to full enterprise platform.',
+    description: 'Transparent pricing for GCSS EV charging management. Four tiers across B2C and B2B deployments. Custom-branded web/native apps and multi-operator platforms.',
 };
 
 type Plan = {
@@ -19,13 +19,12 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
     setRequestLocale(locale);
     const t = await getTranslations();
 
-    const hostedPlans: Plan[] = [
-        { keyBase: 'pricing.saas', featureCount: 6 },
-    ];
-
-    const selfhostedPlans: Plan[] = [
+    const b2cPlans: Plan[] = [
         { keyBase: 'pricing.customweb', featureCount: 8 },
         { keyBase: 'pricing.appent', featureCount: 8 },
+    ];
+
+    const b2bPlans: Plan[] = [
         { keyBase: 'pricing.webplat', featureCount: 8 },
         { keyBase: 'pricing.appplat', featureCount: 8, featured: true },
     ];
@@ -168,8 +167,10 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
         },
     ].map((section) => ({
         ...section,
-        // Drop the Dedicated Server Rental column (index 1) from every row.
-        rows: section.rows.map((row) => ({ ...row, cells: row.cells.filter((_, i) => i !== 1) })),
+        // Cell layout per section: [SaaS, Dedicated, CustomWeb, APPEnt, WebPlat, APPPlat].
+        // SaaS and Dedicated are no longer offered on the website — keep only
+        // the four current tiers (indices 2..5).
+        rows: section.rows.map((row) => ({ ...row, cells: row.cells.filter((_, i) => i >= 2) })),
     }));
 
     return (
@@ -187,37 +188,37 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                 </div>
             </section>
 
-            {/* Hosted Mode */}
+            {/* B2C — single-operator deployments */}
             <section className="section" style={{ paddingTop: 0 }}>
                 <div className="container">
                     <ScrollAnimation>
                         <div className="section-header" style={{ marginBottom: 24 }}>
-                            <span className="section-label">{t('pricing.hosted.label')}</span>
-                            <h2>{t('pricing.hosted.title')}</h2>
-                            <p>{t('pricing.hosted.desc')}</p>
+                            <span className="section-label">{t('pricing.b2c.label')}</span>
+                            <h2>{t('pricing.b2c.title')}</h2>
+                            <p>{t('pricing.b2c.desc')}</p>
                         </div>
                     </ScrollAnimation>
                     <ScrollAnimation>
-                        <div className="pricing-cards" style={{ maxWidth: 420, margin: '0 auto' }}>
-                            {hostedPlans.map(renderCard)}
+                        <div className="pricing-cards pricing-cards--4col">
+                            {b2cPlans.map(renderCard)}
                         </div>
                     </ScrollAnimation>
                 </div>
             </section>
 
-            {/* Private Deployment */}
+            {/* B2B — multi-operator network platforms */}
             <section className="section" style={{ paddingTop: 0 }}>
                 <div className="container">
                     <ScrollAnimation>
                         <div className="section-header" style={{ marginBottom: 24 }}>
-                            <span className="section-label">{t('pricing.selfhosted.label')}</span>
-                            <h2>{t('pricing.selfhosted.title')}</h2>
-                            <p>{t('pricing.selfhosted.desc')}</p>
+                            <span className="section-label">{t('pricing.b2b.label')}</span>
+                            <h2>{t('pricing.b2b.title')}</h2>
+                            <p>{t('pricing.b2b.desc')}</p>
                         </div>
                     </ScrollAnimation>
                     <ScrollAnimation>
                         <div className="pricing-cards pricing-cards--4col">
-                            {selfhostedPlans.map(renderCard)}
+                            {b2bPlans.map(renderCard)}
                         </div>
                     </ScrollAnimation>
                 </div>
@@ -263,7 +264,6 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                                 <thead>
                                     <tr>
                                         <th>{t('pricing.table.feature')}</th>
-                                        <th>{t('pricing.saas.name')}<br /><small>$84/yr/charger</small></th>
                                         <th>{t('pricing.customweb.name')}<br /><small>$300 + $120/mo</small></th>
                                         <th>{t('pricing.appent.name')}<br /><small>$16,900</small></th>
                                         <th>{t('pricing.webplat.name')}<br /><small>$21,800</small></th>
@@ -273,7 +273,7 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                                 <tbody>
                                     {tableSections.map((section) => (
                                         <Fragment key={section.title}>
-                                            <tr className="category-row"><td colSpan={6}>{section.title}</td></tr>
+                                            <tr className="category-row"><td colSpan={5}>{section.title}</td></tr>
                                             {section.rows.map((row) => (
                                                 <tr key={row.label}>
                                                     <td>{row.label}</td>
