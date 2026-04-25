@@ -89,7 +89,7 @@ func PlanCatalog() ([]Plan, []Addon) {
 			DescriptionEN: "B2B2C multi-operator native app platform with full CPO console. Optional $1,200/year hosting.",
 			DescriptionZH: "B2B2C 多运营商原生 APP 平台版，含完整 CPO 控制台。可选 $1,200/年 服务器托管。",
 			Family:               "private",
-			BasePriceCents:       3420000,
+			BasePriceCents:       6800000,
 			OptionalHostingCents: 120000,
 			UnlimitedChargers:    true,
 			SortOrder:            5,

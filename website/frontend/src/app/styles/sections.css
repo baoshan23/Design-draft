@@ -423,7 +423,9 @@ html:not([data-theme="dark"]) .hero-footer-divider {
 }
 
 html {
-  overflow-x: hidden;
+  /* `clip` instead of `hidden` so position:sticky descendants still work
+     (overflow:hidden turns <html> into a scroll container that breaks sticky). */
+  overflow-x: clip;
 }
 
 .hero-image {

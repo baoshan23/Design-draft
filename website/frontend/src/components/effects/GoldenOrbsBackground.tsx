@@ -13,11 +13,11 @@ type BallSpec = {
 // 5 balls, each starting at a different corner/zone. Sizes and speeds vary
 // so the drift never feels like a synchronised pattern.
 const BALLS: BallSpec[] = [
-    { initialLeft: -40, initialTop: 120, size: 520, variant: 'a', speed: 2.2 },
-    { initialLeft: 420, initialTop: -80, size: 460, variant: 'b', speed: 2.6 },
-    { initialLeft: 980, initialTop: 40, size: 500, variant: 'c', speed: 2.0 },
-    { initialLeft: 220, initialTop: 520, size: 420, variant: 'd', speed: 2.4 },
-    { initialLeft: 820, initialTop: 600, size: 380, variant: 'a', speed: 2.3 },
+    { initialLeft: -40, initialTop: 120, size: 520, variant: 'a', speed: 0.22 },
+    { initialLeft: 420, initialTop: -80, size: 460, variant: 'b', speed: 0.26 },
+    { initialLeft: 980, initialTop: 40, size: 500, variant: 'c', speed: 0.20 },
+    { initialLeft: 220, initialTop: 520, size: 420, variant: 'd', speed: 0.24 },
+    { initialLeft: 820, initialTop: 600, size: 380, variant: 'a', speed: 0.23 },
 ];
 
 export default function GoldenOrbsBackground() {

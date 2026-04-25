@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
@@ -43,6 +43,51 @@ export default function BuyClient() {
     const [catalog, setCatalog] = useState<PlanCatalog | null>(null);
     const [error, setError] = useState('');
     const [cart, setCart] = useState<Cart>(emptyCart());
+    const summaryRef = useRef<HTMLElement>(null);
+
+    // Keep the fixed Purchase Summary from overlapping the footer: as the
+    // footer scrolls into view, push the summary up so its bottom sits at
+    // least 10px above the footer top.
+    useEffect(() => {
+        const summary = summaryRef.current;
+        if (!summary) return;
+        const footer = document.querySelector('footer.footer') as HTMLElement | null;
+        if (!footer) return;
+
+        const headerVar = getComputedStyle(document.documentElement)
+            .getPropertyValue('--header-height')
+            .trim();
+        const headerH = parseInt(headerVar, 10) || 72;
+        const defaultTop = headerH + 16;
+        const gap = 10;
+
+        // Skip the calculation in the mobile bottom-drawer mode (≤900px) where
+        // .buy-summary uses position:fixed bottom:0 from CSS, not top.
+        const mq = window.matchMedia('(max-width: 900px)');
+
+        const update = () => {
+            if (mq.matches) {
+                summary.style.top = '';
+                return;
+            }
+            const footerTop = footer.getBoundingClientRect().top;
+            const summaryH = summary.offsetHeight;
+            const maxTop = footerTop - summaryH - gap;
+            summary.style.top = `${Math.min(defaultTop, maxTop)}px`;
+        };
+
+        update();
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        const ro = new ResizeObserver(update);
+        ro.observe(summary);
+        ro.observe(document.body);
+        return () => {
+            window.removeEventListener('scroll', update);
+            window.removeEventListener('resize', update);
+            ro.disconnect();
+        };
+    }, [catalog, cart]);
 
     useEffect(() => {
         apiGetPlans()
@@ -189,7 +234,7 @@ export default function BuyClient() {
                     </div>
                 </div>
 
-                <aside className="buy-summary">
+                <aside className="buy-summary" ref={summaryRef}>
                     <h2 className="buy-summary-title">{t('summary.title')}</h2>
 
                     {plan ? (
@@ -318,7 +363,7 @@ function planHeadline(plan: Plan, locale: string, _t: ReturnType<typeof useTrans
         case 'webplat':
             return '$21,800';
         case 'appplat':
-            return '$34,200';
+            return '$68,000';
         default:
             return '';
     }

@@ -232,44 +232,6 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                         </div>
                     </ScrollAnimation>
 
-                    <ScrollAnimation>
-                        <div className="audience-picker" role="navigation" aria-label={t('pricing.audiencePick.label')}>
-                            <a href="#b2c" className="audience-card audience-card--b2c">
-                                <span className="audience-card-eyebrow">{t('pricing.b2c.label')}</span>
-                                <div className="audience-card-icon" aria-hidden="true">
-                                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M3 11l9-7 9 7" />
-                                        <path d="M5 10v10h14V10" />
-                                        <path d="M10 20v-6h4v6" />
-                                    </svg>
-                                </div>
-                                <div className="audience-card-title">{t('pricing.audiencePick.b2cTitle')}</div>
-                                <p className="audience-card-teaser">{t('pricing.audiencePick.b2cTeaser')}</p>
-                                <div className="audience-card-meta">
-                                    <span className="audience-card-from">{t('pricing.audiencePick.b2cFrom')}</span>
-                                    <span className="audience-card-arrow" aria-hidden="true">&rarr;</span>
-                                </div>
-                            </a>
-
-                            <a href="#b2b" className="audience-card audience-card--b2b">
-                                <span className="audience-card-eyebrow">{t('pricing.b2b.label')}</span>
-                                <div className="audience-card-icon" aria-hidden="true">
-                                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                                        <circle cx="6" cy="6" r="2.4" />
-                                        <circle cx="18" cy="6" r="2.4" />
-                                        <circle cx="12" cy="18" r="2.4" />
-                                        <path d="M7.6 7.6l3.4 8.5M16.4 7.6L13 16.1M8.4 6h7.2" />
-                                    </svg>
-                                </div>
-                                <div className="audience-card-title">{t('pricing.audiencePick.b2bTitle')}</div>
-                                <p className="audience-card-teaser">{t('pricing.audiencePick.b2bTeaser')}</p>
-                                <div className="audience-card-meta">
-                                    <span className="audience-card-from">{t('pricing.audiencePick.b2bFrom')}</span>
-                                    <span className="audience-card-arrow" aria-hidden="true">&rarr;</span>
-                                </div>
-                            </a>
-                        </div>
-                    </ScrollAnimation>
                 </div>
             </section>
 
@@ -372,7 +334,7 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                                         </th>
                                         <th>
                                             <span className="comparison-plan-name">{t('pricing.appplat.name')}</span>
-                                            <span className="comparison-plan-price">$34,200</span>
+                                            <span className="comparison-plan-price">$68,000</span>
                                         </th>
                                     </tr>
                                 </thead>

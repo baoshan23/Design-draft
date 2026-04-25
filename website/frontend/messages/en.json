@@ -1083,7 +1083,7 @@
     },
     "appplat": {
       "name": "APP Platform",
-      "price": "$34,200",
+      "price": "$68,000",
       "priceUnit": "one-time",
       "priceNote": "$1,200/year hosting optional",
       "f1": "Custom logo",
@@ -1141,7 +1141,7 @@
       "price300once": "$300 one-time",
       "price16900once": "$16,900 one-time",
       "price21800once": "$21,800 one-time",
-      "price34200once": "$34,200 one-time",
+      "price34200once": "$68,000 one-time",
       "price1500": "$1,500",
 
       "baseservice": "Core Service",
@@ -2240,7 +2240,7 @@
       },
       "enhanced": {
         "title": "APP Platform",
-        "price": "$34,200",
+        "price": "$68,000",
         "features": [
           "Includes iOS & Android applications",
           "Individual branding & customization",
@@ -2361,7 +2361,7 @@
       "a1": "GCSS (Global Charger System Service) is a comprehensive EV charging management platform that enables operators to manage charging stations, users, payments, and analytics from a single dashboard. It supports both B2C (individual station) and B2B (multi-tenant network) deployment models.",
       "c1": "general",
       "q2": "What's the entry point to get started?",
-      "a2": "Our entry tier is the Custom Web APP at $300 setup + $120/month — a custom-branded web app on your own domain. APP Enterprise adds a native iOS & Android app for $16,900 one-time. Multi-operator B2B platform plans start at $21,800 (Web APP Platform) and $34,200 (APP Platform), and can kick off for a $200 deposit online with the balance via bank transfer.",
+      "a2": "Our entry tier is the Custom Web APP at $300 setup + $120/month — a custom-branded web app on your own domain. APP Enterprise adds a native iOS & Android app for $16,900 one-time. Multi-operator B2B platform plans start at $21,800 (Web APP Platform) and $68,000 (APP Platform), and can kick off for a $200 deposit online with the balance via bank transfer.",
       "c2": "billing",
       "q3": "What charger protocols are supported?",
       "a3": "GCSS supports OCPP 1.6 and OCPP 2.0.1 protocols, which are compatible with the vast majority of EV chargers on the market. We also support integration with chargers via proprietary APIs on request.",
