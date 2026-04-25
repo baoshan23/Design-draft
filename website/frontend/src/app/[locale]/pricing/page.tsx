@@ -64,7 +64,7 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
     // Add-on icons — 22×22 line style, currentColor stroke. One per add-on key.
     const addonIcons: Record<string, ReactNode> = {
         mobileLang: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <rect x="6" y="2" width="12" height="20" rx="2.5" />
                 <path d="M9 6h6M11 18h2" />
                 <circle cx="12" cy="12" r="3" />
@@ -72,30 +72,30 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
             </svg>
         ),
         adminLang: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <rect x="3" y="4" width="18" height="14" rx="2" />
                 <path d="M3 9h18M7 13h4M16 13l3 0M7 13v2" />
             </svg>
         ),
         gateway: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <rect x="2" y="6" width="20" height="13" rx="2" />
                 <path d="M2 11h20M6 16h3" />
             </svg>
         ),
         pos: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <rect x="4" y="3" width="16" height="14" rx="2" />
                 <path d="M8 21h8M12 17v4M9 8h6M9 12h4" />
             </svg>
         ),
         custom: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M9 8l-5 4 5 4M15 8l5 4-5 4M14 4l-4 16" />
             </svg>
         ),
         store: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M3 6h18M5 6l1 14h12l1-14M9 11l3 3 3-3" />
             </svg>
         ),

@@ -140,7 +140,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                   {['A', 'B', 'N'].map((letter, i) => (
                     <div key={letter} className="b2b-arch-instance" style={{ ['--i' as string]: i }}>
                       <span className="b2b-arch-instance-dot" aria-hidden="true">
-                        <Building2 size={22} strokeWidth={2.2} />
+                        <Building2 size={22} strokeWidth={2} />
                       </span>
                       <span className="b2b-arch-instance-label">{t('b2b.overview.operator')} {letter}</span>
                     </div>
@@ -157,9 +157,9 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               <div className="b2b-arch-center" aria-label={t('b2b.overview.center')}>
                 <div className="b2b-arch-center-ring" aria-hidden="true" />
                 <div className="b2b-arch-center-inner">
-                  <span><Smartphone size={18} strokeWidth={2.2} /> APP</span>
-                  <span><ServerIcon size={18} strokeWidth={2.2} /> CPMS</span>
-                  <span><ShieldCheck size={18} strokeWidth={2.2} /> ADMIN</span>
+                  <span><Smartphone size={18} strokeWidth={2} /> APP</span>
+                  <span><ServerIcon size={18} strokeWidth={2} /> CPMS</span>
+                  <span><ShieldCheck size={18} strokeWidth={2} /> ADMIN</span>
                 </div>
                 <div className="b2b-arch-center-caption">{t('b2b.overview.model')}</div>
               </div>
@@ -173,7 +173,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                   {['A', 'B', 'N'].map((letter, i) => (
                     <div key={letter} className="b2b-arch-instance" style={{ ['--i' as string]: i }}>
                       <span className="b2b-arch-instance-dot" aria-hidden="true">
-                        <User size={22} strokeWidth={2.2} />
+                        <User size={22} strokeWidth={2} />
                       </span>
                       <span className="b2b-arch-instance-label">{t('b2b.overview.user')} {letter}</span>
                     </div>
