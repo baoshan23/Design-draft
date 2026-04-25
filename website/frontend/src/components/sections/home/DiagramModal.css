@@ -8,9 +8,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    /* Push content down past the sticky header (var(--header-height))
+       so the modal top edge isn't behind the navbar. */
+    padding: calc(var(--header-height, 72px) + 16px) 16px 16px;
     /* Header sits at z-index 100 with backdrop-filter creating its own
-       stacking context; nav dropdown menus at 1000. Sit above both so
-       the close button can't be hidden behind the navbar. */
+       stacking context; nav dropdown menus at 1000. Sit above both. */
     z-index: 10000;
     animation: fadeIn 0.3s ease-in-out;
     -webkit-backdrop-filter: blur(6px);
@@ -27,10 +29,9 @@
         0 0 120px rgba(192, 127, 0, 0.12),
         0 20px 60px rgba(0, 0, 0, 0.5),
         inset 0 0 80px rgba(26, 18, 16, 0.5);
-    width: 96vw;
-    height: 95vh;
-    max-width: 96vw;
-    max-height: 95vh;
+    width: 100%;
+    max-width: 1400px;
+    height: 100%;
     overflow: hidden;
     animation: slideUp 0.35s ease-out;
     display: flex;
@@ -71,14 +72,16 @@
 }
 
 .diagram-modal-close {
-    position: absolute;
+    /* Pinned to viewport so it can't be covered by the sticky navbar
+       even when the modal-content top edge sits behind the header. */
+    position: fixed;
     top: 16px;
     right: 16px;
-    background: rgba(76, 61, 61, 0.75);
-    border: 1px solid rgba(255, 217, 90, 0.35);
+    background: rgba(76, 61, 61, 0.85);
+    border: 1px solid rgba(255, 217, 90, 0.45);
     color: #FFD95A;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     font-size: 20px;
     font-weight: 600;
@@ -87,7 +90,7 @@
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
-    z-index: 10;
+    z-index: 10001;
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
 }
