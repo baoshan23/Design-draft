@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, type ReactNode } from 'react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
@@ -12,6 +12,7 @@ type Plan = {
     keyBase: string;
     featureCount: number;
     featured?: boolean;
+    popular?: boolean;
 };
 
 export default async function PricingPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -20,7 +21,7 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
     const t = await getTranslations();
 
     const b2cPlans: Plan[] = [
-        { keyBase: 'pricing.customweb', featureCount: 8 },
+        { keyBase: 'pricing.customweb', featureCount: 8, popular: true },
         { keyBase: 'pricing.appent', featureCount: 8 },
     ];
 
@@ -31,8 +32,13 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
 
     const renderCard = (plan: Plan) => {
         const planKey = plan.keyBase.replace(/^pricing\./, '');
+        const cls = ['pricing-card', 'glass-card'];
+        if (plan.featured) cls.push('featured');
+        if (plan.popular) cls.push('popular');
         return (
-            <div key={plan.keyBase} className={`pricing-card glass-card${plan.featured ? ' featured' : ''}`}>
+            <div key={plan.keyBase} className={cls.join(' ')}>
+                {plan.popular && <span className="pricing-card-ribbon">{t('pricing.popular')}</span>}
+                {plan.featured && <span className="pricing-card-ribbon pricing-card-ribbon--featured">{t('pricing.featured')}</span>}
                 <div className="plan-name">{t(`${plan.keyBase}.name` as any)}</div>
                 <div className="plan-price">
                     <span>{t(`${plan.keyBase}.price` as any)}</span>
@@ -53,6 +59,46 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                 </div>
             </div>
         );
+    };
+
+    // Add-on icons — 22×22 line style, currentColor stroke. One per add-on key.
+    const addonIcons: Record<string, ReactNode> = {
+        mobileLang: (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <rect x="6" y="2" width="12" height="20" rx="2.5" />
+                <path d="M9 6h6M11 18h2" />
+                <circle cx="12" cy="12" r="3" />
+                <path d="M9 12h6M12 9v6" />
+            </svg>
+        ),
+        adminLang: (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="14" rx="2" />
+                <path d="M3 9h18M7 13h4M16 13l3 0M7 13v2" />
+            </svg>
+        ),
+        gateway: (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <rect x="2" y="6" width="20" height="13" rx="2" />
+                <path d="M2 11h20M6 16h3" />
+            </svg>
+        ),
+        pos: (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <rect x="4" y="3" width="16" height="14" rx="2" />
+                <path d="M8 21h8M12 17v4M9 8h6M9 12h4" />
+            </svg>
+        ),
+        custom: (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M9 8l-5 4 5 4M15 8l5 4-5 4M14 4l-4 16" />
+            </svg>
+        ),
+        store: (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M3 6h18M5 6l1 14h12l1-14M9 11l3 3 3-3" />
+            </svg>
+        ),
     };
 
     const addons = [
@@ -175,8 +221,8 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
 
     return (
         <>
-            {/* Hero */}
-            <section className="section mesh-bg" style={{ paddingTop: 140, paddingBottom: 48, textAlign: 'center' }}>
+            {/* Hero + audience picker */}
+            <section className="section mesh-bg pricing-hero" style={{ paddingTop: 140, paddingBottom: 32, textAlign: 'center' }}>
                 <div className="container">
                     <ScrollAnimation>
                         <div className="section-header">
@@ -185,47 +231,92 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                             <p>{t('pricing.desc')}</p>
                         </div>
                     </ScrollAnimation>
+
+                    <ScrollAnimation>
+                        <div className="audience-picker" role="navigation" aria-label={t('pricing.audiencePick.label')}>
+                            <a href="#b2c" className="audience-card audience-card--b2c">
+                                <span className="audience-card-eyebrow">{t('pricing.b2c.label')}</span>
+                                <div className="audience-card-icon" aria-hidden="true">
+                                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M3 11l9-7 9 7" />
+                                        <path d="M5 10v10h14V10" />
+                                        <path d="M10 20v-6h4v6" />
+                                    </svg>
+                                </div>
+                                <div className="audience-card-title">{t('pricing.audiencePick.b2cTitle')}</div>
+                                <p className="audience-card-teaser">{t('pricing.audiencePick.b2cTeaser')}</p>
+                                <div className="audience-card-meta">
+                                    <span className="audience-card-from">{t('pricing.audiencePick.b2cFrom')}</span>
+                                    <span className="audience-card-arrow" aria-hidden="true">&rarr;</span>
+                                </div>
+                            </a>
+
+                            <a href="#b2b" className="audience-card audience-card--b2b">
+                                <span className="audience-card-eyebrow">{t('pricing.b2b.label')}</span>
+                                <div className="audience-card-icon" aria-hidden="true">
+                                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                                        <circle cx="6" cy="6" r="2.4" />
+                                        <circle cx="18" cy="6" r="2.4" />
+                                        <circle cx="12" cy="18" r="2.4" />
+                                        <path d="M7.6 7.6l3.4 8.5M16.4 7.6L13 16.1M8.4 6h7.2" />
+                                    </svg>
+                                </div>
+                                <div className="audience-card-title">{t('pricing.audiencePick.b2bTitle')}</div>
+                                <p className="audience-card-teaser">{t('pricing.audiencePick.b2bTeaser')}</p>
+                                <div className="audience-card-meta">
+                                    <span className="audience-card-from">{t('pricing.audiencePick.b2bFrom')}</span>
+                                    <span className="audience-card-arrow" aria-hidden="true">&rarr;</span>
+                                </div>
+                            </a>
+                        </div>
+                    </ScrollAnimation>
                 </div>
             </section>
 
             {/* B2C — single-operator deployments */}
-            <section className="section" style={{ paddingTop: 0 }}>
+            <section id="b2c" className="section pricing-section pricing-section--b2c" style={{ paddingTop: 56 }}>
                 <div className="container">
                     <ScrollAnimation>
-                        <div className="section-header" style={{ marginBottom: 24 }}>
+                        <div className="section-header" style={{ marginBottom: 32 }}>
                             <span className="section-label">{t('pricing.b2c.label')}</span>
                             <h2>{t('pricing.b2c.title')}</h2>
                             <p>{t('pricing.b2c.desc')}</p>
                         </div>
                     </ScrollAnimation>
                     <ScrollAnimation>
-                        <div className="pricing-cards pricing-cards--4col">
+                        <div className="pricing-cards pricing-cards--2col">
                             {b2cPlans.map(renderCard)}
                         </div>
                     </ScrollAnimation>
+                    <div className="pricing-crosslink">
+                        <a href="#b2b">{t('pricing.jumpToB2b')} <span aria-hidden="true">&rarr;</span></a>
+                    </div>
                 </div>
             </section>
 
-            {/* B2B — multi-operator network platforms */}
-            <section className="section" style={{ paddingTop: 0 }}>
+            {/* B2B — multi-operator network platforms (alt background, distinct mood) */}
+            <section id="b2b" className="section section-alt pricing-section pricing-section--b2b">
                 <div className="container">
                     <ScrollAnimation>
-                        <div className="section-header" style={{ marginBottom: 24 }}>
+                        <div className="section-header" style={{ marginBottom: 32 }}>
                             <span className="section-label">{t('pricing.b2b.label')}</span>
                             <h2>{t('pricing.b2b.title')}</h2>
                             <p>{t('pricing.b2b.desc')}</p>
                         </div>
                     </ScrollAnimation>
                     <ScrollAnimation>
-                        <div className="pricing-cards pricing-cards--4col">
+                        <div className="pricing-cards pricing-cards--2col">
                             {b2bPlans.map(renderCard)}
                         </div>
                     </ScrollAnimation>
+                    <div className="pricing-crosslink">
+                        <a href="#b2c">{t('pricing.jumpToB2c')} <span aria-hidden="true">&rarr;</span></a>
+                    </div>
                 </div>
             </section>
 
             {/* Add-ons */}
-            <section className="section section-alt">
+            <section className="section">
                 <div className="container">
                     <ScrollAnimation>
                         <div className="section-header">
@@ -238,8 +329,11 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                         <div className="addons-grid">
                             {addons.map((a) => (
                                 <div key={a.key} className="addon-card">
-                                    <div className="addon-label">{t(`pricing.addons.${a.key}` as any)}</div>
-                                    <div className="addon-price">{t(`pricing.addons.${a.priceKey}` as any)}</div>
+                                    <div className="addon-card-icon">{addonIcons[a.key]}</div>
+                                    <div className="addon-card-body">
+                                        <div className="addon-label">{t(`pricing.addons.${a.key}` as any)}</div>
+                                        <div className="addon-price">{t(`pricing.addons.${a.priceKey}` as any)}</div>
+                                    </div>
                                 </div>
                             ))}
                         </div>
@@ -259,15 +353,27 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                     </ScrollAnimation>
 
                     <ScrollAnimation>
-                        <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+                        <div className="comparison-table-wrap">
                             <table className="comparison-table">
                                 <thead>
                                     <tr>
                                         <th>{t('pricing.table.feature')}</th>
-                                        <th>{t('pricing.customweb.name')}<br /><small>$300 + $120/mo</small></th>
-                                        <th>{t('pricing.appent.name')}<br /><small>$16,900</small></th>
-                                        <th>{t('pricing.webplat.name')}<br /><small>$21,800</small></th>
-                                        <th>{t('pricing.appplat.name')}<br /><small>$34,200</small></th>
+                                        <th>
+                                            <span className="comparison-plan-name">{t('pricing.customweb.name')}</span>
+                                            <span className="comparison-plan-price">$300 + $120/mo</span>
+                                        </th>
+                                        <th>
+                                            <span className="comparison-plan-name">{t('pricing.appent.name')}</span>
+                                            <span className="comparison-plan-price">$16,900</span>
+                                        </th>
+                                        <th>
+                                            <span className="comparison-plan-name">{t('pricing.webplat.name')}</span>
+                                            <span className="comparison-plan-price">$21,800</span>
+                                        </th>
+                                        <th>
+                                            <span className="comparison-plan-name">{t('pricing.appplat.name')}</span>
+                                            <span className="comparison-plan-price">$34,200</span>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>

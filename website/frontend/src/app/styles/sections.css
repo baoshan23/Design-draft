@@ -1278,6 +1278,313 @@ html {
   font-variant-numeric: tabular-nums;
 }
 
+/* ──────────────────────────────────────────────────────────────────
+   Pricing redesign — audience picker, ribbons, cross-links, add-on
+   icon layout, comparison-table polish. Builds on the existing
+   .pricing-card / .addons-grid / .comparison-table foundation above.
+   ────────────────────────────────────────────────────────────────── */
+
+/* Audience picker — two large anchor cards under the hero */
+.audience-picker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 880px;
+  margin: 40px auto 0;
+}
+
+.audience-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 26px 26px 22px;
+  text-align: left;
+  text-decoration: none;
+  color: inherit;
+  background: var(--glass-bg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 280ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  backdrop-filter: blur(14px) saturate(1.1);
+}
+
+.audience-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(254, 191, 29, 0.14), transparent 55%);
+  pointer-events: none;
+  opacity: 0.65;
+  transition: opacity 280ms;
+}
+
+.audience-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(254, 191, 29, 0.4);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(254, 191, 29, 0.18);
+}
+
+.audience-card:hover::after { opacity: 1; }
+
+.audience-card:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.audience-card-eyebrow {
+  position: relative;
+  z-index: 1;
+  align-self: start;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary-text);
+  background: var(--primary-dim);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.audience-card-icon {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  width: 56px;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(254, 191, 29, 0.16), rgba(254, 191, 29, 0.05));
+  border: 1px solid rgba(254, 191, 29, 0.32);
+  color: var(--primary-text);
+  margin-top: 4px;
+}
+
+.audience-card-title {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display, inherit);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-top: 4px;
+}
+
+.audience-card-teaser {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+.audience-card-meta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.audience-card-from {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.audience-card-arrow {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--primary-dim);
+  color: var(--primary-text);
+  font-size: 1.05rem;
+  transition: transform 220ms, background 220ms, color 220ms;
+}
+
+.audience-card:hover .audience-card-arrow {
+  transform: translateX(4px);
+  background: var(--primary);
+  color: var(--black);
+}
+
+@media (max-width: 720px) {
+  .audience-picker {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .audience-card { padding: 22px 22px 18px; }
+  .audience-card-title { font-size: 1.3rem; }
+}
+
+/* Pricing card ribbons — popular / recommended.
+   Cancel the legacy hardcoded ::before ribbon; JSX now renders an
+   i18n-aware ribbon span instead. */
+.pricing-card.featured::before { content: none; }
+
+.pricing-card.popular,
+.pricing-card.featured {
+  padding-top: 40px;
+}
+
+.pricing-card.popular {
+  border-color: rgba(254, 191, 29, 0.28);
+  box-shadow: 0 0 0 1px rgba(254, 191, 29, 0.14), inset 0 1px 0 rgba(254, 191, 29, 0.06);
+}
+
+.pricing-card.popular:hover {
+  border-color: rgba(254, 191, 29, 0.42);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(254, 191, 29, 0.24);
+}
+
+.pricing-card-ribbon {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary);
+  color: var(--black);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(254, 191, 29, 0.32);
+}
+
+.pricing-card-ribbon--featured {
+  background: linear-gradient(135deg, var(--primary), #d99a14);
+}
+
+/* Inline cross-link between sections */
+.pricing-crosslink {
+  margin-top: 32px;
+  text-align: center;
+}
+
+.pricing-crosslink a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  transition: color 200ms, border-color 200ms, background 200ms, transform 200ms;
+}
+
+.pricing-crosslink a:hover {
+  color: var(--primary-text);
+  border-color: rgba(254, 191, 29, 0.4);
+  background: var(--primary-dim);
+  transform: translateY(-1px);
+}
+
+/* Add-on cards — icon + body row layout (was a flat label/price stack) */
+.addons-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.addon-card {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.addon-card-icon {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  background: var(--primary-dim);
+  color: var(--primary-text);
+  flex-shrink: 0;
+  transition: background 220ms, color 220ms;
+}
+
+.addon-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.addon-card:hover .addon-card-icon {
+  background: var(--primary);
+  color: var(--black);
+}
+
+/* Comparison table — header polish + sticky first column on mobile */
+.comparison-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 60px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.comparison-table-wrap .comparison-table {
+  margin-top: 0;
+  border: none;
+  border-radius: 0;
+}
+
+.comparison-plan-name {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.comparison-plan-price {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary-text);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 720px) {
+  .comparison-table th:first-child,
+  .comparison-table td:first-child {
+    position: sticky;
+    left: 0;
+    background: var(--dark-card);
+    z-index: 2;
+    box-shadow: 1px 0 0 var(--border-subtle);
+  }
+  .comparison-table .category-row td {
+    /* Category banner spans all columns — keep its sticky-edge clean */
+    box-shadow: none;
+  }
+}
+
 /* --- Feature Comparison Table --- */
 .comparison-table {
   width: 100%;

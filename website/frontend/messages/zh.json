@@ -998,6 +998,21 @@
       "title": "多运营商网络平台",
       "desc": "适合搭建 B2B2C 网络的聚合方。支持多 CPO 入驻、收益分成，运行完整的白标充电市场。"
     },
+    "audiencePick": {
+      "label": "选择适合您的方案",
+      "title": "您是哪一类？",
+      "subtitle": "选择最贴合您业务形态的部署方式 — 我们会优先展示对应的方案。",
+      "b2cTitle": "单站运营",
+      "b2cTeaser": "您自己运营充电桩，司机是您的客户。",
+      "b2cFrom": "$300 起",
+      "b2bTitle": "多运营商网络",
+      "b2bTeaser": "您接入其他运营商（CPO）共享平台。",
+      "b2bFrom": "$21,800 起"
+    },
+    "popular": "最受欢迎",
+    "featured": "推荐",
+    "jumpToB2c": "只运营一个站点？查看 B2C 方案",
+    "jumpToB2b": "需要多运营商支持？查看 B2B 方案",
     "getstarted": "立即开始",
     "buynow": "立即购买",
     "contactsales": "联系销售",

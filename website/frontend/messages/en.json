@@ -998,6 +998,21 @@
       "title": "Multi-operator network platforms",
       "desc": "For aggregators running B2B2C networks. Onboard multiple CPOs, share revenue, and run a full white-label charging marketplace."
     },
+    "audiencePick": {
+      "label": "Choose your path",
+      "title": "Where do you fit?",
+      "subtitle": "Pick the deployment shape that matches your business — we'll show the right plans first.",
+      "b2cTitle": "Single station",
+      "b2cTeaser": "You operate the chargers and drivers are your customers.",
+      "b2cFrom": "From $300",
+      "b2bTitle": "Multi-operator network",
+      "b2bTeaser": "You onboard other operators (CPOs) onto your platform.",
+      "b2bFrom": "From $21,800"
+    },
+    "popular": "Most popular",
+    "featured": "Recommended",
+    "jumpToB2c": "Just running one station? See B2C plans",
+    "jumpToB2b": "Need multi-operator? See B2B plans",
     "getstarted": "Get Started",
     "buynow": "Buy Now",
     "contactsales": "Contact Sales",
