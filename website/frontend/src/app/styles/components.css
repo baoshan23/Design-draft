@@ -16,6 +16,17 @@
   line-height: 1.4;
 }
 
+/* Mobile touch target compliance — 44px minimum. */
+@media (max-width: 480px) {
+  .btn {
+    padding: 12px 22px;
+    min-height: 44px;
+  }
+  .btn-lg {
+    min-height: 48px;
+  }
+}
+
 .btn-primary {
   background: var(--primary);
   color: var(--black);

@@ -119,6 +119,60 @@ p {
   padding: 48px 0;
 }
 
+/* Mobile padding compression — reclaim ~50% of vertical space below
+   480px so each section doesn't eat 27% of the viewport. */
+@media (max-width: 480px) {
+  .section {
+    padding: 48px 0;
+  }
+  .section-sm {
+    padding: 28px 0;
+  }
+  .container {
+    padding: 0 16px;
+  }
+  h1 {
+    font-size: clamp(1.65rem, 8vw, 2.4rem);
+  }
+
+  /* Tighten hero — was 120px/100px (220px dead space on phones). */
+  .hero {
+    padding: 56px 0 36px !important;
+    min-height: 0;
+  }
+
+  /* Hero footer stats bar — 4 stats × 32px padding pushed last off-screen. */
+  .hero-footer-stat {
+    padding: 0 12px;
+  }
+
+  /* Card interior padding — was 32px on every side. */
+  .card {
+    padding: 20px;
+  }
+
+  /* Mobile-showcase-stack pulled itself 64px left of container, which
+     meant content overflowed off-screen on a 375px viewport. */
+  .mobile-showcase-stack {
+    margin-left: 0;
+    min-height: auto;
+    padding: 12px 0;
+  }
+
+  /* Tab buttons must clear the 44px touch target. */
+  .tab-btn {
+    padding: 12px 18px;
+    min-height: 44px;
+  }
+
+  /* Pricing card ribbons read smaller on narrow viewports. */
+  .pricing-card-ribbon {
+    top: -10px;
+    padding: 4px 12px;
+    font-size: 0.65rem;
+  }
+}
+
 .section-lg {
   padding: 120px 0;
 }
