@@ -2152,8 +2152,8 @@
       "superAdminDesc": "Unified control panel for global oversight with real-time statistics.",
       "paymentTitle": "Payment Flow",
       "payment1": "Users pay via App or credit card",
-      "payment2": "System automatically deducts platform service fees",
-      "payment3": "Remaining balance auto-settled to merchant accounts"
+      "payment2": "Funds auto-route to your designated bank account or the merchant's account",
+      "payment3": "System auto-calculates your earnings and the merchant's balance"
     },
     "profit": {
       "title": "Diversified Revenue Model",
