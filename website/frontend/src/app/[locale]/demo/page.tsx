@@ -224,10 +224,10 @@ export default async function DemoPage({ params }: { params: Promise<{ locale: s
                   <CopyableField label={t('demo.page.password')} value={DEMO_CREDS.b2bAdmin.pass} />
                 </div>
                 <div className="demo-edition-actions">
-                  <button type="button" className="btn btn-primary">
+                  <a href="https://demo-admin.gcss.cloud" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                     <span>{t('demo.page.launchAdmin')}</span>
                     <ArrowRight />
-                  </button>
+                  </a>
                 </div>
               </div>
             </ScrollAnimation>
@@ -256,10 +256,10 @@ export default async function DemoPage({ params }: { params: Promise<{ locale: s
                   <CopyableField label={t('demo.page.password')} value={DEMO_CREDS.b2bMerchant.pass} />
                 </div>
                 <div className="demo-edition-actions">
-                  <button type="button" className="btn btn-primary">
+                  <a href="https://demo-merchant.gcss.cloud" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                     <span>{t('demo.page.launchMerchant')}</span>
                     <ArrowRight />
-                  </button>
+                  </a>
                 </div>
               </div>
             </ScrollAnimation>
