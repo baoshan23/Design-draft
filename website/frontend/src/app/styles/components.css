@@ -537,6 +537,16 @@
   border-color: rgba(254, 191, 29, 0.4);
 }
 
+/* Show moon in light mode, sun in dark mode — not both */
+.settings-popover-theme .icon-sun,
+.settings-popover-theme .icon-moon {
+  transition: all 0.3s ease;
+}
+.settings-popover-theme .icon-sun { display: none; }
+.settings-popover-theme .icon-moon { display: block; }
+[data-theme="dark"] .settings-popover-theme .icon-sun { display: block; }
+[data-theme="dark"] .settings-popover-theme .icon-moon { display: none; }
+
 .settings-popover-divider {
   height: 1px;
   background: var(--border-subtle);

@@ -244,6 +244,9 @@ export default function Header() {
             <Link href="/docs" className={isActive('/docs') ? 'active' : ''} onClick={closeMenu}>
               {t('docs')}
             </Link>
+            <Link href="/demo" className={isActive('/demo') ? 'active' : ''} onClick={closeMenu}>
+              {t('demo')}
+            </Link>
             <Link href="/contact" className={isActive('/contact') ? 'active' : ''} onClick={closeMenu}>
               {t('contact')}
             </Link>
