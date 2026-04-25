@@ -397,6 +397,13 @@
   cursor: pointer;
   border-radius: var(--radius);
   transition: background 0.2s ease;
+  /* Defensive — keep button on top of any sibling that overlaps the
+     header right edge (settings popover trigger, user menu pill) and
+     ensure clicks aren't swallowed by stacking-context siblings. */
+  position: relative;
+  z-index: 5;
+  background: transparent;
+  border: 0;
 }
 
 .mobile-toggle:hover {
