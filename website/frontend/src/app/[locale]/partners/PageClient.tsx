@@ -3,7 +3,6 @@
 import { useTranslations } from 'next-intl';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import { Link } from '@/i18n/navigation';
-import RelatedPages from '@/components/sections/RelatedPages';
 
 export default function PartnersPageClient() {
     const t = useTranslations('partnersPage');
@@ -65,8 +64,6 @@ export default function PartnersPageClient() {
                     </ScrollAnimation>
                 </div>
             </section>
-
-            <RelatedPages items={['about', 'careers', 'b2b', 'contact']} />
         </>
     );
 }

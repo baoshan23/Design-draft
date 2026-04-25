@@ -5,7 +5,6 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
-import RelatedPages from '@/components/sections/RelatedPages';
 
 // Country + ITU-T E.164 calling code. When the customer picks a country,
 // the phone-code prefix auto-fills to the matching code — but they can
@@ -398,8 +397,6 @@ export default function ContactPage() {
           </div>
         </ScrollAnimation>
       </section>
-
-      <RelatedPages items={['faq', 'docs', 'forum', 'blog']} />
     </>
   );
 }

@@ -5,7 +5,6 @@ import { useLocale, useTranslations } from 'next-intl';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
 import { Link } from '@/i18n/navigation';
-import RelatedPages from '@/components/sections/RelatedPages';
 import { apiListBlogPosts, type ApiBlogPost } from '@/lib/api/contentApi';
 import { listStaticBlogPosts } from '@/lib/content/staticContent';
 
@@ -195,8 +194,6 @@ export default function BlogPage() {
           </ScrollAnimation>
         </div>
       </section>
-
-      <RelatedPages items={['forum', 'faq', 'docs', 'contact']} />
     </>
   );
 }

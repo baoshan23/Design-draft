@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
-import RelatedPages from '@/components/sections/RelatedPages';
 
 const FAQ_IDS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'] as const;
 const CATEGORIES = ['all', 'general', 'technical', 'billing', 'integration'] as const;
@@ -127,8 +126,6 @@ export default function FaqPage() {
           </ScrollAnimation>
         </div>
       </section>
-
-      <RelatedPages items={['docs', 'blog', 'pricing', 'buy']} />
     </>
   );
 }

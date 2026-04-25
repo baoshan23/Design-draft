@@ -2,7 +2,6 @@ import { Fragment } from 'react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
-import RelatedPages from '@/components/sections/RelatedPages';
 
 export const metadata = {
     title: 'Pricing - GCSS | EV Charging Management Platform',
@@ -309,8 +308,6 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                     </div>
                 </ScrollAnimation>
             </section>
-
-            <RelatedPages items={['buy', 'b2c', 'b2b', 'faq']} />
         </>
     );
 }

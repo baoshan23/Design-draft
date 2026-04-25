@@ -3,7 +3,6 @@ import { Link } from '@/i18n/navigation';
 import { Building2, User, Smartphone, Server as ServerIcon, ShieldCheck } from 'lucide-react';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import SubNav from './SubNav';
-import RelatedPages from '@/components/sections/RelatedPages';
 
 export const metadata = {
   title: 'B2B Platform - GCSS | EV Charging SaaS Solution',
@@ -533,8 +532,6 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
           </div>
         </div>
       </section>
-
-      <RelatedPages items={['b2c', 'pricing', 'buy', 'contact']} />
     </>
   );
 }
