@@ -237,7 +237,10 @@
     "getStarted": "立即开始",
     "buyNow": "立即购买",
     "dashboard": "控制台",
-    "adminPanel": "管理面板"
+    "adminPanel": "管理面板",
+    "settings": "设置",
+    "settingsLang": "语言",
+    "settingsTheme": "主题"
   },
   "related": {
     "eyebrow": "继续探索",

@@ -237,7 +237,10 @@
     "getStarted": "Get Started",
     "buyNow": "Buy Now",
     "dashboard": "Dashboard",
-    "adminPanel": "Admin Panel"
+    "adminPanel": "Admin Panel",
+    "settings": "Settings",
+    "settingsLang": "Language",
+    "settingsTheme": "Theme"
   },
   "related": {
     "eyebrow": "Explore more",
