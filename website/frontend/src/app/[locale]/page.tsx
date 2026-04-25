@@ -8,7 +8,6 @@ import { Link } from '@/i18n/navigation';
 import BusinessModelsSection from '@/components/sections/home/BusinessModelsSection';
 import { DiagramModalProvider } from '@/components/sections/home/DiagramModal';
 import GlobeVisualization from '@/components/sections/home/GlobeVisualization';
-import LanguageMap from '@/components/sections/home/LanguageMap';
 import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
 import { PAYMENT_ICONS, PAYMENT_METHODS_FLAT } from '@/components/sections/home/paymentIcons';
 
@@ -42,7 +41,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <DiagramModalProvider>
       {/* Hero Section */}
-      <section className="hero hero-themed-bg">
+      <section className="hero hero-with-shot">
         <div className="container">
           <div className="hero-content hero-split">
             <div className="hero-text">
@@ -77,6 +76,44 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </Link>
               </div>
 
+            </div>
+
+            <div className="hero-shot">
+              <div className="hero-shot-deck" aria-hidden="true">
+                <Image
+                  className="hero-shot-back hero-shot-back--3"
+                  src="/images/dashboard-stations.png"
+                  alt=""
+                  width={1200}
+                  height={760}
+                  sizes="(max-width: 960px) 100vw, 560px"
+                />
+                <Image
+                  className="hero-shot-back hero-shot-back--2"
+                  src="/images/dashboard-merchants.png"
+                  alt=""
+                  width={1200}
+                  height={760}
+                  sizes="(max-width: 960px) 100vw, 560px"
+                />
+                <Image
+                  className="hero-shot-back hero-shot-back--1"
+                  src="/images/smart-ops-dashboard.png"
+                  alt=""
+                  width={1200}
+                  height={760}
+                  sizes="(max-width: 960px) 100vw, 560px"
+                />
+              </div>
+              <Image
+                className="hero-shot-front"
+                src="/images/dashboard-home.png"
+                alt="GCSS dashboard preview"
+                width={1200}
+                height={760}
+                priority
+                sizes="(max-width: 960px) 100vw, 560px"
+              />
             </div>
           </div>
 
@@ -405,11 +442,40 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
           </ScrollAnimation>
           <ScrollAnimation>
-            <LanguageMap />
+            <div className="language-cloud">
+              <span style={{ fontSize: '2.8rem' }}>你好</span>
+              <span style={{ fontSize: '2rem' }}>Hello</span>
+              <span style={{ fontSize: '1.5rem' }}>Xin chào</span>
+              <span style={{ fontSize: '2.2rem' }}>Привет</span>
+              <span style={{ fontSize: '1.5rem' }}>Apa kabar</span>
+              <span style={{ fontSize: '1.8rem' }}>Hai</span>
+              <span style={{ fontSize: '1.7rem' }}>สวัสดี</span>
+              <span style={{ fontSize: '2.4rem' }}>හෙලෝ</span>
+              <span style={{ fontSize: '1.4rem' }}>مرحبا</span>
+              <span style={{ fontSize: '2rem' }}>Bonjour</span>
+              <span style={{ fontSize: '1.6rem' }}>Hola</span>
+              <span style={{ fontSize: '1.5rem' }}>Ciao</span>
+              <span style={{ fontSize: '1.8rem' }}>こんにちは</span>
+              <span style={{ fontSize: '1.6rem' }}>안녕하세요</span>
+              <span style={{ fontSize: '1.4rem' }}>Hallo</span>
+              <span style={{ fontSize: '1.7rem' }}>Olá</span>
+              <span style={{ fontSize: '1.3rem' }}>Merhaba</span>
+              <span style={{ fontSize: '1.5rem' }}>Γεια σας</span>
+              <span style={{ fontSize: '1.6rem' }}>नमस्ते</span>
+              <span style={{ fontSize: '1.4rem' }}>Habari</span>
+              <span style={{ fontSize: '1.8rem' }}>ជំរាបសួរ</span>
+              <span style={{ fontSize: '1.3rem' }}>Kamusta</span>
+              <span style={{ fontSize: '1.5rem' }}>سلام</span>
+              <span style={{ fontSize: '1.6rem' }}>Hej</span>
+              <span style={{ fontSize: '1.4rem' }}>Selamat</span>
+              <span style={{ fontSize: '1.7rem' }}>Сайн уу</span>
+              <span style={{ fontSize: '1.3rem' }}>Saluton</span>
+              <span style={{ fontSize: '1.5rem' }}>Witam</span>
+            </div>
           </ScrollAnimation>
           <ScrollAnimation>
             <div style={{ textAlign: 'center', marginTop: 24 }}>
-              <Link href="/b2c" className="btn btn-secondary">{t('lang.viewMore')}</Link>
+              <Link href={{ pathname: '/b2c', hash: 'multilingual' }} className="btn btn-secondary">{t('lang.viewMore')}</Link>
             </div>
           </ScrollAnimation>
         </div>
