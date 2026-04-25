@@ -1043,12 +1043,11 @@
       "priceNote": "$1,500 first year, $1,200/year after (annual)",
       "f1": "Custom-brand Web APP",
       "f2": "Unlimited chargers",
-      "f3": "Self-hosted or rent GCSS server",
-      "f4": "1 payment gateway customizable",
-      "f5": "Custom logo + app name",
-      "f6": "Full mobile + admin language customization",
-      "f7": "API access included",
-      "f8": "Data owned by customer"
+      "f3": "1 payment gateway customizable",
+      "f4": "Custom logo + app name",
+      "f5": "Full mobile + admin language customization",
+      "f6": "API access included",
+      "f7": "Data owned by customer"
     },
     "appent": {
       "name": "APP Enterprise",
@@ -1059,10 +1058,9 @@
       "f2": "Published to Google Play & App Store",
       "f3": "2 payment gateways customizable",
       "f4": "Unlimited chargers",
-      "f5": "Self-hosted or rent GCSS server",
-      "f6": "Custom logo, domain + backend URL",
-      "f7": "Full OCPP 1.6J integration",
-      "f8": "Data owned by customer"
+      "f5": "Custom logo, domain + backend URL",
+      "f6": "Full OCPP 1.6J integration",
+      "f7": "Data owned by customer"
     },
     "webplat": {
       "name": "Web APP Platform",

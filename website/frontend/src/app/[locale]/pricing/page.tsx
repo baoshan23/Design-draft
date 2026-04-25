@@ -21,8 +21,8 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
     const t = await getTranslations();
 
     const b2cPlans: Plan[] = [
-        { keyBase: 'pricing.customweb', featureCount: 8, popular: true },
-        { keyBase: 'pricing.appent', featureCount: 8 },
+        { keyBase: 'pricing.customweb', featureCount: 7, popular: true },
+        { keyBase: 'pricing.appent', featureCount: 7 },
     ];
 
     const b2bPlans: Plan[] = [
