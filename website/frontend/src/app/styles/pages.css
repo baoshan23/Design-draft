@@ -7737,8 +7737,8 @@
 .buy-toggle-slider {
   position: absolute;
   inset: 0;
-  background: var(--dark-elevated);
-  border: 1px solid var(--border-subtle);
+  background: var(--border-light);
+  border: 1px solid var(--border-medium);
   border-radius: 999px;
   transition: 0.18s;
   cursor: pointer;
@@ -7750,8 +7750,9 @@
   height: 18px;
   left: 3px;
   top: 3px;
-  background: var(--text-secondary);
+  background: #ffffff;
   border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
   transition: 0.18s;
 }
 .buy-toggle input:checked + .buy-toggle-slider {
@@ -7759,7 +7760,7 @@
   border-color: var(--primary);
 }
 .buy-toggle input:checked + .buy-toggle-slider::before {
-  background: var(--dark-bg);
+  background: #ffffff;
   transform: translateX(20px);
 }
 .buy-toggle input:focus-visible + .buy-toggle-slider {
@@ -7814,8 +7815,8 @@
   gap: 6px;
 }
 .buy-qty-btn {
-  width: 30px;
-  height: 30px;
+  width: 44px;
+  height: 44px;
   border-radius: 8px;
   border: 1px solid var(--border-light);
   background: var(--dark-elevated);
@@ -8405,18 +8406,23 @@
   border-color: #EF4444;
 }
 
-/* Summary sidebar */
+/* Summary sidebar — pinned to viewport so it never scrolls off-screen.
+   The .buy-layout grid still reserves a 340px right column, so the form
+   in .buy-main keeps its gutter and nothing slides under the summary. */
 .buy-summary {
-  position: sticky;
+  position: fixed;
   top: calc(var(--header-height) + 16px);
-  align-self: start; /* prevent grid stretch — keep height: fit-content honored */
+  /* Align right edge with the container's inner right edge (24px container padding). */
+  right: max(24px, calc((100vw - var(--max-width)) / 2 + 24px));
+  width: 340px;
   background: var(--dark-card);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   padding: 24px;
-  height: fit-content;
   max-height: calc(100vh - var(--header-height) - 32px);
   overflow-y: auto;
+  overscroll-behavior: contain;
+  z-index: 50;
 }
 /* Thin, unobtrusive scrollbar when the summary overflows */
 .buy-summary::-webkit-scrollbar { width: 6px; }

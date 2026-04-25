@@ -141,14 +141,14 @@ export default function RegisterPage() {
           <p className="auth-subtitle">{t('register.subtitle')}</p>
 
           {submitted && (
-            <div className="form-banner form-banner--success">
+            <div className="form-banner form-banner--success" role="status" aria-live="polite">
               <CheckIcon />
               {t('register.success')}
             </div>
           )}
 
           {error && (
-            <div className="form-banner form-banner--error">
+            <div className="form-banner form-banner--error" role="alert" aria-live="assertive">
               <AlertIcon />
               {error}
             </div>
