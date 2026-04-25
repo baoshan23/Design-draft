@@ -149,6 +149,22 @@ p {
   grid-template-columns: repeat(4, 1fr);
 }
 
+/* Mobile-first collapse for utility grids — was missing, breaking
+   uniform layouts on phones (cards crammed into half-width). */
+@media (max-width: 1024px) {
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .flex {
   display: flex;
   align-items: center;

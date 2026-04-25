@@ -329,7 +329,7 @@ export default function ContactPage() {
                     <label htmlFor="contact-message">{t('contact.form.help.label')}</label>
                     <textarea id="contact-message" name="message" placeholder={t('contact.form.help.placeholder')} value={formData.message} onChange={handleChange} />
                   </div>
-                  <button type="submit" className="submit-btn">
+                  <button type="submit" className={`submit-btn${submitting ? ' btn-loading' : ''}`} disabled={submitting} aria-busy={submitting}>
                     <span>{submitting ? t('contact.form.submitting') : t('contact.form.submit')}</span>
                     <svg className="contact-submit-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
                   </button>

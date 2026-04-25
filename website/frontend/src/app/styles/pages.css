@@ -12,6 +12,12 @@
   top: calc(var(--header-height) + 24px);
   align-self: start;
 }
+@media (max-width: 768px) {
+  .forum-sidebar {
+    position: static;
+    margin-bottom: 24px;
+  }
+}
 
 .sidebar-group h4 {
   font-size: 0.8rem;

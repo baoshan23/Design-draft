@@ -64,6 +64,8 @@ export default function SettingsPopover() {
               <button
                 type="button"
                 className={`lang-btn${locale === 'en' ? ' active' : ''}`}
+                aria-label="Switch to English"
+                aria-pressed={locale === 'en'}
                 onClick={() => switchLocale('en')}
               >
                 EN
@@ -71,6 +73,8 @@ export default function SettingsPopover() {
               <button
                 type="button"
                 className={`lang-btn${locale === 'zh' ? ' active' : ''}`}
+                aria-label="切换到中文"
+                aria-pressed={locale === 'zh'}
                 onClick={() => switchLocale('zh')}
               >
                 中文
