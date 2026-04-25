@@ -358,34 +358,6 @@
   transform: translateY(-1px);
 }
 
-/* Secondary CTA — Demo (was solid gold, now outlined so Buy leads) */
-.header-actions .btn-demo {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: transparent;
-  color: var(--text-primary);
-  font-weight: 600;
-  border-radius: var(--radius);
-  padding: 8px 14px;
-  font-size: 0.875rem;
-  transition: all var(--transition);
-  border: 1px solid var(--border-light);
-}
-
-.header-actions .btn-demo:hover {
-  color: var(--primary-text);
-  border-color: rgba(254, 191, 29, 0.4);
-  background: var(--primary-dim);
-}
-
-/* Auth pair — shown side by side when not logged in */
-.header-actions .auth-links {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
 .header-actions .btn-login {
   padding: 8px 14px;
   font-size: 0.875rem;
@@ -399,24 +371,6 @@
 
 .header-actions .btn-login:hover {
   color: var(--text-primary);
-}
-
-.header-actions .btn-signup,
-.mobile-nav-cta .btn-signup {
-  padding: 8px 14px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--primary-text);
-  border: 1px solid rgba(254, 191, 29, 0.35);
-  border-radius: var(--radius);
-  transition: all var(--transition);
-  background: transparent;
-}
-
-.header-actions .btn-signup:hover,
-.mobile-nav-cta .btn-signup:hover {
-  border-color: var(--primary);
-  background: var(--primary-dim);
 }
 
 /* Mobile menu */
@@ -459,6 +413,134 @@
 
 .mobile-toggle.active span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Settings popover (desktop) */
+.settings-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.settings-trigger {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.settings-trigger:hover,
+.settings-trigger[aria-expanded="true"] {
+  color: var(--primary-text);
+  border-color: rgba(254, 191, 29, 0.4);
+  background: var(--primary-dim);
+}
+
+.settings-trigger:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.settings-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 10px;
+  z-index: 1000;
+  animation: settingsPopoverIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes settingsPopoverIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.settings-popover-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 4px 2px;
+}
+
+.settings-popover-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  padding: 0 4px;
+}
+
+.settings-popover-lang {
+  display: flex;
+  gap: 6px;
+}
+
+.settings-popover-lang .lang-btn {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 0.82rem;
+  border-radius: var(--radius);
+  background: transparent;
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.settings-popover-lang .lang-btn:hover {
+  color: var(--primary-text);
+  background: var(--primary-dim);
+  border-color: rgba(254, 191, 29, 0.4);
+}
+
+.settings-popover-lang .lang-btn.active {
+  color: var(--primary-text);
+  background: var(--primary-dim);
+  border-color: rgba(254, 191, 29, 0.5);
+  font-weight: 600;
+}
+
+.settings-popover-theme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 0.82rem;
+  background: transparent;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.settings-popover-theme:hover {
+  color: var(--primary-text);
+  background: var(--primary-dim);
+  border-color: rgba(254, 191, 29, 0.4);
+}
+
+.settings-popover-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 6px 0;
 }
 
 /* --- Reusable Utility Classes --- */
