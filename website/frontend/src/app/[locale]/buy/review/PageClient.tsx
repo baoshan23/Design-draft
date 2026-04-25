@@ -206,6 +206,7 @@ export default function BuyReviewClient() {
                 planKey: cart.planKey,
                 billingMode: cart.billingMode,
                 years: cart.years,
+                months: cart.months,
                 chargers: cart.chargers,
                 withHosting: cart.withHosting,
                 addons: cart.addons,

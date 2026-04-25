@@ -219,6 +219,7 @@ export type CheckoutInput = {
     planKey?: string;
     billingMode?: 'monthly' | 'yearly' | 'one_time';
     years?: number;
+    months?: number;
     chargers?: number;
     withHosting?: boolean;
     addons?: { key: string; quantity: number }[];

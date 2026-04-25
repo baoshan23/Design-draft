@@ -6,6 +6,7 @@ export type Cart = {
     planKey: string;
     billingMode: 'monthly' | 'yearly' | 'one_time';
     years: number;
+    months: number; // monthly customweb term length, 1..12
     chargers: number;
     withHosting: boolean;
     addons: AddonChoice[];
@@ -24,7 +25,8 @@ export function pickLabel(locale: string, en: string, zh: string): string {
 // Mirror of backend store.PriceFor — kept in sync so the on-page total
 // matches what the server will charge. Server is still authoritative.
 export function computePrice(plan: Plan, cart: Cart, addons: Addon[]): number {
-    const years = Math.min(Math.max(cart.years || 1, 1), 5);
+    const years = Math.min(Math.max(cart.years || 1, 1), 6);
+    const months = Math.min(Math.max(cart.months || 1, 1), 12);
     let subtotal = 0;
     switch (plan.key) {
         case 'saas':
@@ -33,7 +35,7 @@ export function computePrice(plan: Plan, cart: Cart, addons: Addon[]): number {
         case 'customweb':
             subtotal = cart.billingMode === 'yearly'
                 ? plan.basePriceCents + plan.yearlyCents * years
-                : plan.basePriceCents + plan.recurringCents * years * 12;
+                : plan.basePriceCents + plan.recurringCents * months;
             break;
         case 'appent':
         case 'webplat':
@@ -61,7 +63,8 @@ export function buildLineItems(
     t: TranslateFn,
 ): LineItem[] {
     const items: LineItem[] = [];
-    const years = Math.min(Math.max(cart.years || 1, 1), 5);
+    const years = Math.min(Math.max(cart.years || 1, 1), 6);
+    const months = Math.min(Math.max(cart.months || 1, 1), 12);
     const planLabel = pickLabel(locale, plan.labelEn, plan.labelZh);
 
     switch (plan.key) {
@@ -87,7 +90,6 @@ export function buildLineItems(
                     amountCents: plan.yearlyCents * years,
                 });
             } else {
-                const months = years * 12;
                 items.push({
                     label: t('lineHostingMonthly'),
                     detail: `${months} × ${formatUSD(plan.recurringCents)}/${t('perMonthShort')}`,
@@ -145,10 +147,18 @@ export function buildMetaRows(
             label: t('summary.billing'),
             value: cart.billingMode === 'yearly' ? t('billingYearly') : t('billingMonthly'),
         });
-        rows.push({
-            label: t('summary.term'),
-            value: `${cart.years} ${cart.years === 1 ? t('yearOne') : t('yearMany')}`,
-        });
+        if (cart.billingMode === 'monthly') {
+            const m = Math.min(Math.max(cart.months || 1, 1), 12);
+            rows.push({
+                label: t('summary.term'),
+                value: `${m} ${m === 1 ? t('monthOne') : t('monthMany')}`,
+            });
+        } else {
+            rows.push({
+                label: t('summary.term'),
+                value: `${cart.years} ${cart.years === 1 ? t('yearOne') : t('yearMany')}`,
+            });
+        }
     } else {
         rows.push({ label: t('summary.billing'), value: t('oneTime') });
         if (cart.withHosting) {

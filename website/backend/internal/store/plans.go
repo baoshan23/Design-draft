@@ -110,7 +110,8 @@ func PlanCatalog() ([]Plan, []Addon) {
 type PlanSelection struct {
 	PlanKey     string
 	BillingMode string // "monthly" | "yearly" | "one_time"
-	Years       int    // 1..5
+	Years       int    // 1..6 — used by yearly billing and hosting term
+	Months      int    // 1..12 — used by customweb monthly billing (overrides years*12 when > 0)
 	Chargers    int    // SaaS only
 	WithHosting bool   // one-time plans only
 	Addons      []PlanAddonChoice
@@ -141,8 +142,15 @@ func PriceFor(sel PlanSelection) (int64, string, error) {
 	if years < 1 {
 		years = 1
 	}
-	if years > 5 {
-		years = 5
+	if years > 6 {
+		years = 6
+	}
+	months := sel.Months
+	if months < 1 {
+		months = 0 // 0 means "fall back to years*12 for legacy clients"
+	}
+	if months > 12 {
+		months = 12
 	}
 
 	var subtotal int64
@@ -161,8 +169,11 @@ func PriceFor(sel PlanSelection) (int64, string, error) {
 		case "yearly":
 			subtotal = base + plan.YearlyCents*int64(years)
 		default: // monthly
-			months := int64(years * 12)
-			subtotal = base + plan.RecurringCents*months
+			effectiveMonths := months
+			if effectiveMonths == 0 {
+				effectiveMonths = years * 12 // legacy fallback
+			}
+			subtotal = base + plan.RecurringCents*int64(effectiveMonths)
 		}
 	case "appent", "webplat", "appplat":
 		subtotal = plan.BasePriceCents
@@ -200,7 +211,11 @@ func PriceFor(sel PlanSelection) (int64, string, error) {
 		if sel.BillingMode == "yearly" {
 			label = fmt.Sprintf("%s + %dy yearly", plan.LabelEN, years)
 		} else {
-			label = fmt.Sprintf("%s + %d months", plan.LabelEN, years*12)
+			effectiveMonths := months
+			if effectiveMonths == 0 {
+				effectiveMonths = years * 12
+			}
+			label = fmt.Sprintf("%s + %d months", plan.LabelEN, effectiveMonths)
 		}
 	case "appent", "webplat", "appplat":
 		if sel.WithHosting {

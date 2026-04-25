@@ -23,7 +23,7 @@ const DEPOSIT_CENTS = 20_000; // $200
 const PLATFORM_PLANS = new Set(['appent', 'webplat', 'appplat']);
 
 function emptyCart(): Cart {
-    return { planKey: '', billingMode: 'yearly', years: 1, chargers: 10, withHosting: false, addons: [] };
+    return { planKey: '', billingMode: 'yearly', years: 1, months: 1, chargers: 10, withHosting: false, addons: [] };
 }
 
 function planSupportsMonthly(plan: Plan) {
@@ -292,13 +292,16 @@ function seedDefaults(prev: Cart, plan: Plan): Cart {
     if (plan.key === 'saas') {
         next.billingMode = 'yearly';
         next.years = 1;
+        next.months = 1;
         if (!next.chargers || next.chargers < 1) next.chargers = 10;
     } else if (plan.key === 'customweb') {
         next.billingMode = planSupportsMonthly(plan) ? 'monthly' : 'yearly';
         next.years = 1;
+        next.months = 1;
     } else if (planIsOneTime(plan)) {
         next.billingMode = 'one_time';
         next.years = 1;
+        next.months = 1;
         next.withHosting = false;
     }
     return next;
@@ -389,7 +392,19 @@ function TermBillingOptions({ plan, cart, setCart }: { plan: Plan; cart: Cart; s
                 </div>
             </div>
             <p className="buy-option-billing-help" aria-live="polite">{helpText}</p>
-            <YearsPicker years={cart.years} setYears={(y) => setCart((prev) => ({ ...prev, years: y }))} />
+            {cart.billingMode === 'monthly' ? (
+                <TermPicker
+                    unit="months"
+                    value={cart.months}
+                    setValue={(n) => setCart((prev) => ({ ...prev, months: n }))}
+                />
+            ) : (
+                <TermPicker
+                    unit="years"
+                    value={cart.years}
+                    setValue={(n) => setCart((prev) => ({ ...prev, years: n }))}
+                />
+            )}
         </div>
     );
 }
@@ -443,7 +458,12 @@ function PerPlanExtras({ plan, cart, setCart }: { plan: Plan; cart: Cart; setCar
                     </div>
                     <p className="buy-option-help">{t('hostingHelp')}</p>
                     {cart.withHosting && (
-                        <YearsPicker years={cart.years} setYears={(y) => setCart((prev) => ({ ...prev, years: y }))} label={t('hostingYearsLabel')} />
+                        <TermPicker
+                            unit="years"
+                            value={cart.years}
+                            setValue={(n) => setCart((prev) => ({ ...prev, years: n }))}
+                            label={t('hostingYearsLabel')}
+                        />
                     )}
                 </div>
             </div>
@@ -454,23 +474,40 @@ function PerPlanExtras({ plan, cart, setCart }: { plan: Plan; cart: Cart; setCar
     return <>{sections}</>;
 }
 
-function YearsPicker({ years, setYears, label }: { years: number; setYears: (y: number) => void; label?: string }) {
+// Adaptive term picker — buttons 1..max with the unit ('y' for years,
+// 'mo' for months) appended to each label. Used for billing term and
+// hosting term.
+function TermPicker({
+    unit,
+    value,
+    setValue,
+    label,
+    max = 6,
+}: {
+    unit: 'years' | 'months';
+    value: number;
+    setValue: (n: number) => void;
+    label?: string;
+    max?: number;
+}) {
     const t = useTranslations('buy');
-    const opts = [1, 2, 3, 4, 5];
+    const opts = Array.from({ length: max }, (_, i) => i + 1);
+    const headerLabel = label || (unit === 'months' ? t('termMonthsLabel') : t('yearsLabel'));
+    const suffix = unit === 'months' ? t('monthShort') : t('yearShort');
     return (
         <div className="buy-option-row">
-            <span className="buy-option-label-row">{label || t('yearsLabel')}</span>
+            <span className="buy-option-label-row">{headerLabel}</span>
             <div className="buy-option-toggle" role="radiogroup">
-                {opts.map((y) => (
+                {opts.map((n) => (
                     <button
-                        key={y}
+                        key={n}
                         type="button"
                         role="radio"
-                        aria-checked={years === y}
-                        className={`buy-option-toggle-btn${years === y ? ' buy-option-toggle-btn--active' : ''}`}
-                        onClick={() => setYears(y)}
+                        aria-checked={value === n}
+                        className={`buy-option-toggle-btn${value === n ? ' buy-option-toggle-btn--active' : ''}`}
+                        onClick={() => setValue(n)}
                     >
-                        {y}y
+                        {n}{suffix}
                     </button>
                 ))}
             </div>

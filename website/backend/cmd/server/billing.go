@@ -360,6 +360,7 @@ type checkoutRequest struct {
 	PlanKey     string             `json:"planKey,omitempty"`
 	BillingMode string             `json:"billingMode,omitempty"` // "monthly" | "yearly" | "one_time"
 	Years       int                `json:"years,omitempty"`
+	Months      int                `json:"months,omitempty"`
 	Chargers    int                `json:"chargers,omitempty"`
 	WithHosting bool               `json:"withHosting,omitempty"`
 	Addons      []checkoutAddonReq `json:"addons,omitempty"`
@@ -588,6 +589,7 @@ func (s *server) handlePlanCheckout(w http.ResponseWriter, r *http.Request, user
 		PlanKey:     req.PlanKey,
 		BillingMode: req.BillingMode,
 		Years:       req.Years,
+		Months:      req.Months,
 		Chargers:    req.Chargers,
 		WithHosting: req.WithHosting,
 		Addons:      addons,
