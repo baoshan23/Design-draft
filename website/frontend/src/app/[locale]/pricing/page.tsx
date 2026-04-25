@@ -22,12 +22,12 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
 
     const b2cPlans: Plan[] = [
         { keyBase: 'pricing.customweb', featureCount: 7, popular: true },
-        { keyBase: 'pricing.appent', featureCount: 7 },
+        { keyBase: 'pricing.appent', featureCount: 10 },
     ];
 
     const b2bPlans: Plan[] = [
-        { keyBase: 'pricing.webplat', featureCount: 8 },
-        { keyBase: 'pricing.appplat', featureCount: 8, featured: true },
+        { keyBase: 'pricing.webplat', featureCount: 10 },
+        { keyBase: 'pricing.appplat', featureCount: 11, featured: true },
     ];
 
     const renderCard = (plan: Plan) => {
