@@ -338,6 +338,22 @@ function TermBillingOptions({ plan, cart, setCart }: { plan: Plan; cart: Cart; s
         );
     }
 
+    // Per-mode metadata: savings comparison only fires when both modes exist.
+    const savings = (() => {
+        if (!plan.hasMonthly || !plan.hasYearly) return null;
+        const monthlyPerYear = plan.recurringCents * 12;
+        const yearlyCost = plan.yearlyCents;
+        const diff = monthlyPerYear - yearlyCost;
+        if (diff <= 0) return null;
+        return { amount: diff, percent: Math.round((diff / monthlyPerYear) * 100) };
+    })();
+
+    const helpText = cart.billingMode === 'yearly'
+        ? (savings
+            ? t('billingYearlyHelp', { amount: formatUSD(savings.amount), percent: savings.percent })
+            : t('billingYearlyHelpNoSavings'))
+        : t('billingMonthlyHelp');
+
     return (
         <div className="buy-options-stack">
             <div className="buy-option-row">
@@ -351,7 +367,7 @@ function TermBillingOptions({ plan, cart, setCart }: { plan: Plan; cart: Cart; s
                             className={`buy-option-toggle-btn${cart.billingMode === 'monthly' ? ' buy-option-toggle-btn--active' : ''}`}
                             onClick={() => setCart((prev) => ({ ...prev, billingMode: 'monthly' }))}
                         >
-                            {t('billingMonthly')}
+                            <span>{t('billingMonthly')}</span>
                         </button>
                     )}
                     {plan.hasYearly && (
@@ -362,11 +378,17 @@ function TermBillingOptions({ plan, cart, setCart }: { plan: Plan; cart: Cart; s
                             className={`buy-option-toggle-btn${cart.billingMode === 'yearly' ? ' buy-option-toggle-btn--active' : ''}`}
                             onClick={() => setCart((prev) => ({ ...prev, billingMode: 'yearly' }))}
                         >
-                            {t('billingYearly')}
+                            <span>{t('billingYearly')}</span>
+                            {savings && (
+                                <span className="buy-option-toggle-badge">
+                                    {t('billingSaveBadge', { percent: savings.percent })}
+                                </span>
+                            )}
                         </button>
                     )}
                 </div>
             </div>
+            <p className="buy-option-billing-help" aria-live="polite">{helpText}</p>
             <YearsPicker years={cart.years} setYears={(y) => setCart((prev) => ({ ...prev, years: y }))} />
         </div>
     );

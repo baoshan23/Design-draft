@@ -7671,6 +7671,9 @@
   gap: 2px;
 }
 .buy-option-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: transparent;
   border: 0;
   padding: 6px 14px;
@@ -7691,6 +7694,32 @@
 .buy-option-toggle-btn:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px var(--dark-card), 0 0 0 4px var(--primary);
+}
+
+/* Annual savings badge inside the billing-mode toggle button */
+.buy-option-toggle-badge {
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(254, 191, 29, 0.2);
+  color: var(--primary-text);
+  white-space: nowrap;
+  line-height: 1.4;
+}
+.buy-option-toggle-btn--active .buy-option-toggle-badge {
+  background: rgba(0, 0, 0, 0.22);
+  color: var(--black);
+}
+
+/* Contextual helper line below the billing toggle — adapts to selected mode */
+.buy-option-billing-help {
+  margin: 4px 2px 0;
+  font-size: 0.82rem;
+  color: var(--text-tertiary);
+  line-height: 1.5;
 }
 
 /* iOS-style toggle */
@@ -8380,6 +8409,7 @@
 .buy-summary {
   position: sticky;
   top: calc(var(--header-height) + 16px);
+  align-self: start; /* prevent grid stretch — keep height: fit-content honored */
   background: var(--dark-card);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
