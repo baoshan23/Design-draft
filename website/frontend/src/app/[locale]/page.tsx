@@ -6,6 +6,8 @@ import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
 import { Link } from '@/i18n/navigation';
 import BusinessModelsSection from '@/components/sections/home/BusinessModelsSection';
+import HeroShotStack from '@/components/sections/home/HeroShotStack';
+import MobileShowcase from '@/components/sections/home/MobileShowcase';
 import { DiagramModalProvider } from '@/components/sections/home/DiagramModal';
 import GlobeVisualization from '@/components/sections/home/GlobeVisualization';
 import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
@@ -78,43 +80,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
             </div>
 
-            <div className="hero-shot">
-              <div className="hero-shot-deck" aria-hidden="true">
-                <Image
-                  className="hero-shot-back hero-shot-back--3"
-                  src="/images/dashboard-stations.png"
-                  alt=""
-                  width={1200}
-                  height={760}
-                  sizes="(max-width: 960px) 100vw, 560px"
-                />
-                <Image
-                  className="hero-shot-back hero-shot-back--2"
-                  src="/images/dashboard-merchants.png"
-                  alt=""
-                  width={1200}
-                  height={760}
-                  sizes="(max-width: 960px) 100vw, 560px"
-                />
-                <Image
-                  className="hero-shot-back hero-shot-back--1"
-                  src="/images/smart-ops-dashboard.png"
-                  alt=""
-                  width={1200}
-                  height={760}
-                  sizes="(max-width: 960px) 100vw, 560px"
-                />
-              </div>
-              <Image
-                className="hero-shot-front"
-                src="/images/dashboard-home.png"
-                alt="GCSS dashboard preview"
-                width={1200}
-                height={760}
-                priority
-                sizes="(max-width: 960px) 100vw, 560px"
-              />
-            </div>
+            <HeroShotStack />
           </div>
 
         </div>
@@ -168,6 +134,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       {/* Business Models Section */}
       <BusinessModelsSection />
+
+      {/* Mobile App Showcase */}
+      <MobileShowcase />
 
       {/* How It Works Section */}
       <section className="section" id="how-it-works">
