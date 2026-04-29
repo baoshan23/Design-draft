@@ -8,11 +8,9 @@ import { Link } from '@/i18n/navigation';
 type Shot = { src: string; alt: string };
 
 const SCREENS: Shot[] = [
-  { src: '/images/mobileapp/mobile-home.png',     alt: 'GCSS driver app — home' },
-  { src: '/images/mobileapp/mobile-map.png',      alt: 'Charging station map' },
-  { src: '/images/mobileapp/mobile-charger.png',  alt: 'Charger detail' },
-  { src: '/images/mobileapp/mobile-charging.png', alt: 'Live charging session' },
-  { src: '/images/mobileapp/mobile-orders.png',   alt: 'Order history' },
+  { src: '/images/mobileapp/mobile-home.png',    alt: 'GCSS driver app — home' },
+  { src: '/images/mobileapp/mobile-profile.png', alt: 'Account / login' },
+  { src: '/images/mobileapp/mobile-map.png',     alt: 'Charging station map' },
 ];
 
 const SIZES = '(max-width: 960px) 60vw, 280px';

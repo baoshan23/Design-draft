@@ -75,6 +75,7 @@ export type Catalog = {
 // Plan-based catalog (matches /pricing PDF tiers).
 
 export type Plan = {
+    id: number;
     key: string;
     labelEn: string;
     labelZh: string;
@@ -89,10 +90,12 @@ export type Plan = {
     hasMonthly: boolean;
     hasYearly: boolean;
     unlimitedChargers: boolean;
+    isActive: boolean;
     sortOrder: number;
 };
 
 export type Addon = {
+    id: number;
     key: string;
     labelEn: string;
     labelZh: string;
@@ -100,6 +103,8 @@ export type Addon = {
     priceModel: 'per_unit' | 'per_day';
     unitNoteEn: string;
     unitNoteZh: string;
+    isActive: boolean;
+    sortOrder: number;
 };
 
 export type PlanCatalog = {
@@ -469,6 +474,56 @@ export async function apiAdminSaveServerTier(token: string, t: Partial<ServerTie
 
 export async function apiAdminDeleteServerTier(token: string, id: number): Promise<void> {
     await fetchJson(`${getApiBase()}/admin/products/server-tiers/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+    });
+}
+
+export async function apiAdminListPlans(token: string): Promise<Plan[]> {
+    const res = await fetchJson<{ items: Plan[] }>(`${getApiBase()}/admin/products/plans`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.items || [];
+}
+
+export async function apiAdminSavePlan(token: string, p: Partial<Plan>): Promise<Plan> {
+    const url = p.id ? `${getApiBase()}/admin/products/plans/${p.id}` : `${getApiBase()}/admin/products/plans`;
+    const res = await fetchJson<{ item: Plan }>(url, {
+        method: p.id ? 'PUT' : 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify(p),
+    });
+    return res.item;
+}
+
+export async function apiAdminDeletePlan(token: string, id: number): Promise<void> {
+    await fetchJson(`${getApiBase()}/admin/products/plans/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+    });
+}
+
+export async function apiAdminListAddons(token: string): Promise<Addon[]> {
+    const res = await fetchJson<{ items: Addon[] }>(`${getApiBase()}/admin/products/addons`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.items || [];
+}
+
+export async function apiAdminSaveAddon(token: string, a: Partial<Addon>): Promise<Addon> {
+    const url = a.id ? `${getApiBase()}/admin/products/addons/${a.id}` : `${getApiBase()}/admin/products/addons`;
+    const res = await fetchJson<{ item: Addon }>(url, {
+        method: a.id ? 'PUT' : 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify(a),
+    });
+    return res.item;
+}
+
+export async function apiAdminDeleteAddon(token: string, id: number): Promise<void> {
+    await fetchJson(`${getApiBase()}/admin/products/addons/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
     });

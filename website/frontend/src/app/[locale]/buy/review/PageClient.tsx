@@ -16,6 +16,7 @@ import {
     buildMetaRows,
     computePrice,
     formatUSD,
+    getDepositDiscountCents,
     pickLabel,
     type Cart,
 } from '@/lib/buy/pricing';
@@ -119,7 +120,7 @@ export default function BuyReviewClient() {
     );
 
     const pricing = useMemo(() => {
-        if (!catalog || !plan || !cart) return { subtotal: 0, discount: 0, total: 0 };
+        if (!catalog || !plan || !cart) return { subtotal: 0, discount: 0, total: 0, depositDiscount: 0 };
         const subtotal = computePrice(plan, cart, catalog.addons);
         let discount = 0;
         if (promo) {
@@ -127,15 +128,21 @@ export default function BuyReviewClient() {
             else discount = promo.discountValue;
             if (discount > subtotal) discount = subtotal;
         }
-        return { subtotal, discount, total: subtotal - discount };
+        return { subtotal, discount, total: subtotal - discount, depositDiscount: 0 };
     }, [catalog, plan, cart, promo]);
 
     // Payment-method eligibility. These rules mirror the backend's enforcement
     // in handlePlanCheckout so the UI reflects what will actually work.
     const isPlatformPlan = plan ? PLATFORM_PLANS.has(plan.key) : false;
-    const depositEligible = isPlatformPlan && pricing.total > DEPOSIT_CENTS;
-    const chargeAmount = useDeposit && depositEligible ? DEPOSIT_CENTS : pricing.total;
-    const balanceAmount = useDeposit && depositEligible ? pricing.total - DEPOSIT_CENTS : 0;
+    const depositDiscountCents = useMemo(() => {
+        if (!plan || !useDeposit) return 0;
+        const d = getDepositDiscountCents(plan.key);
+        return d > 0 && pricing.total > DEPOSIT_CENTS + d ? d : 0;
+    }, [plan, useDeposit, pricing.total]);
+    const effectiveTotal = pricing.total - depositDiscountCents;
+    const depositEligible = isPlatformPlan && effectiveTotal > DEPOSIT_CENTS;
+    const chargeAmount = useDeposit && depositEligible ? DEPOSIT_CENTS : effectiveTotal;
+    const balanceAmount = useDeposit && depositEligible ? effectiveTotal - DEPOSIT_CENTS : 0;
     // Bank transfer is mandatory when the charge amount exceeds the threshold.
     // If the user is paying the full amount and it exceeds the threshold,
     // we hide online gateways — bank transfer is the only option.
@@ -262,6 +269,15 @@ export default function BuyReviewClient() {
                                     <span className="buy-summary-line-amt">{formatUSD(item.amountCents)}</span>
                                 </div>
                             ))}
+                            {depositDiscountCents > 0 && (
+                                <div className="buy-summary-line buy-summary-line--rich buy-summary-line--discount">
+                                    <div className="buy-summary-line-main">
+                                        <span className="buy-summary-line-label">{t('review.depositDiscountLabel')}</span>
+                                        <span className="buy-summary-line-detail">{t('review.depositDiscountDetail', { amount: formatUSD(DEPOSIT_CENTS) })}</span>
+                                    </div>
+                                    <span className="buy-summary-line-amt">−{formatUSD(depositDiscountCents)}</span>
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -377,7 +393,7 @@ export default function BuyReviewClient() {
                                 <div className="buy-deposit-body">
                                     <div className="buy-deposit-head">
                                         <span className="buy-deposit-title">{t('review.depositLabel', { amount: formatUSD(DEPOSIT_CENTS) })}</span>
-                                        <span className="buy-deposit-chip">{formatUSD(pricing.total - DEPOSIT_CENTS)} {t('review.depositBalance')}</span>
+                                        <span className="buy-deposit-chip">{formatUSD(effectiveTotal - DEPOSIT_CENTS)} {t('review.depositBalance')}</span>
                                     </div>
                                     <p className="buy-deposit-help">{t('review.depositHelp', { amount: formatUSD(DEPOSIT_CENTS) })}</p>
                                 </div>
@@ -440,6 +456,15 @@ export default function BuyReviewClient() {
                                 <span className="buy-summary-line-amt">{formatUSD(item.amountCents)}</span>
                             </div>
                         ))}
+                        {depositDiscountCents > 0 && (
+                            <div className="buy-summary-line buy-summary-line--rich buy-summary-line--discount">
+                                <div className="buy-summary-line-main">
+                                    <span className="buy-summary-line-label">{t('review.depositDiscountLabel')}</span>
+                                    <span className="buy-summary-line-detail">{t('review.depositDiscountDetail', { amount: formatUSD(DEPOSIT_CENTS) })}</span>
+                                </div>
+                                <span className="buy-summary-line-amt">−{formatUSD(depositDiscountCents)}</span>
+                            </div>
+                        )}
                     </div>
 
                     <div className="buy-summary-divider" />
@@ -456,13 +481,20 @@ export default function BuyReviewClient() {
                         </div>
                     )}
 
+                    {depositDiscountCents > 0 && (
+                        <div className="buy-summary-row" style={{ color: '#10B981' }}>
+                            <span>{t('review.depositDiscountLabel')}</span>
+                            <span>−{formatUSD(depositDiscountCents)}</span>
+                        </div>
+                    )}
+
                     <div className="buy-summary-divider" />
 
                     {useDeposit && depositEligible ? (
                         <>
                             <div className="buy-summary-row buy-summary-row--strike" aria-live="polite">
                                 <span>{t('summary.fullPrice')}</span>
-                                <span className="buy-summary-strike">{formatUSD(pricing.total)}</span>
+                                <span className="buy-summary-strike">{formatUSD(effectiveTotal)}</span>
                             </div>
                             <div className="buy-summary-hero" aria-live="polite">
                                 <span className="buy-summary-hero-label">{t('summary.payToday')}</span>
@@ -475,7 +507,7 @@ export default function BuyReviewClient() {
                     ) : (
                         <div className="buy-summary-total">
                             <span>{t('summary.total')}</span>
-                            <span>{formatUSD(pricing.total)}</span>
+                            <span>{formatUSD(effectiveTotal)}</span>
                         </div>
                     )}
 
@@ -483,7 +515,7 @@ export default function BuyReviewClient() {
                         <div className="buy-summary-split" aria-live="polite">
                             <div className="buy-summary-split-row">
                                 <span>{t('summary.bankTransferAmount')}</span>
-                                <span className="buy-summary-split-amt">{formatUSD(pricing.total)}</span>
+                                <span className="buy-summary-split-amt">{formatUSD(effectiveTotal)}</span>
                             </div>
                         </div>
                     )}

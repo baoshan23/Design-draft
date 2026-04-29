@@ -341,49 +341,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Office Locations */}
-      <section className="section section-alt">
-        <div className="container">
-          <ScrollAnimation>
-            <div className="offices-section">
-              <span className="section-label">{t('contact.office.label')}</span>
-              <h2>{t('contact.office.title')}</h2>
-              <p className="contact-office-desc">{t('contact.office.desc')}</p>
-
-              <div className="offices-grid">
-                <div className="office-card">
-                  <div className="office-img">
-                    <ImagePlaceholder variant="office" aspectRatio="16/10" label={t('contact.office.hk.title')} />
-                  </div>
-                  <div className="office-info">
-                    <h4>{t('contact.office.hk.title')}</h4>
-                    <p>{t('contact.office.hk.desc')}</p>
-                  </div>
-                </div>
-                <div className="office-card">
-                  <div className="office-img">
-                    <ImagePlaceholder variant="office" aspectRatio="16/10" label={t('contact.office.cn.title')} />
-                  </div>
-                  <div className="office-info">
-                    <h4>{t('contact.office.cn.title')}</h4>
-                    <p>{t('contact.office.cn.desc')}</p>
-                  </div>
-                </div>
-                <div className="office-card">
-                  <div className="office-img">
-                    <ImagePlaceholder variant="office" aspectRatio="16/10" label={t('contact.office.sea.title')} />
-                  </div>
-                  <div className="office-info">
-                    <h4>{t('contact.office.sea.title')}</h4>
-                    <p>{t('contact.office.sea.desc')}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ScrollAnimation>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="cta-section mesh-bg">
         <ScrollAnimation>

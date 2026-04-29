@@ -17,6 +17,8 @@ const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
+  // Allow HMR WebSocket when loading dev server over LAN IP (Next 16)
+  allowedDevOrigins: ['192.168.0.157', '*.local'],
 };
 
 export default withNextIntl(nextConfig);

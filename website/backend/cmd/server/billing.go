@@ -20,11 +20,151 @@ func (s *server) handlePublicPlans(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
 		return
 	}
-	plans, addons := store.PlanCatalog()
+	plans, addons, err := s.store.PlanCatalog(r.Context())
+	if err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+		return
+	}
 	writeJSON(w, http.StatusOK, map[string]interface{}{
 		"plans":  plans,
 		"addons": addons,
 	})
+}
+
+// ── Admin plan + addon CRUD ────────────────────────────────────────────
+
+func (s *server) handleAdminPlans(w http.ResponseWriter, r *http.Request) {
+	if _, ok := s.requireAdmin(w, r); !ok {
+		return
+	}
+	ctx := r.Context()
+	switch r.Method {
+	case http.MethodGet:
+		items, err := s.store.ListPlans(ctx, false)
+		if err != nil {
+			writeJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+			return
+		}
+		writeJSON(w, http.StatusOK, map[string]interface{}{"items": items})
+	case http.MethodPost:
+		var p store.Plan
+		if err := decodeJSON(r, &p); err != nil {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+			return
+		}
+		saved, err := s.store.UpsertPlan(ctx, p)
+		if err != nil {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+			return
+		}
+		writeJSON(w, http.StatusOK, map[string]interface{}{"item": saved})
+	default:
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
+	}
+}
+
+func (s *server) handleAdminPlanItem(w http.ResponseWriter, r *http.Request) {
+	idStr := strings.TrimPrefix(r.URL.Path, "/api/admin/products/plans/")
+	idStr = strings.Trim(idStr, "/")
+	id, _ := strconv.ParseInt(idStr, 10, 64)
+	if id <= 0 {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "not found"})
+		return
+	}
+	if _, ok := s.requireAdmin(w, r); !ok {
+		return
+	}
+	ctx := r.Context()
+	switch r.Method {
+	case http.MethodPut, http.MethodPost:
+		var p store.Plan
+		if err := decodeJSON(r, &p); err != nil {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+			return
+		}
+		p.ID = id
+		saved, err := s.store.UpsertPlan(ctx, p)
+		if err != nil {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+			return
+		}
+		writeJSON(w, http.StatusOK, map[string]interface{}{"item": saved})
+	case http.MethodDelete:
+		if err := s.store.DeletePlan(ctx, id); err != nil {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+			return
+		}
+		writeJSON(w, http.StatusOK, map[string]string{"status": "deleted"})
+	default:
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
+	}
+}
+
+func (s *server) handleAdminAddons(w http.ResponseWriter, r *http.Request) {
+	if _, ok := s.requireAdmin(w, r); !ok {
+		return
+	}
+	ctx := r.Context()
+	switch r.Method {
+	case http.MethodGet:
+		items, err := s.store.ListAddons(ctx, false)
+		if err != nil {
+			writeJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+			return
+		}
+		writeJSON(w, http.StatusOK, map[string]interface{}{"items": items})
+	case http.MethodPost:
+		var a store.Addon
+		if err := decodeJSON(r, &a); err != nil {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+			return
+		}
+		saved, err := s.store.UpsertAddon(ctx, a)
+		if err != nil {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+			return
+		}
+		writeJSON(w, http.StatusOK, map[string]interface{}{"item": saved})
+	default:
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
+	}
+}
+
+func (s *server) handleAdminAddonItem(w http.ResponseWriter, r *http.Request) {
+	idStr := strings.TrimPrefix(r.URL.Path, "/api/admin/products/addons/")
+	idStr = strings.Trim(idStr, "/")
+	id, _ := strconv.ParseInt(idStr, 10, 64)
+	if id <= 0 {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "not found"})
+		return
+	}
+	if _, ok := s.requireAdmin(w, r); !ok {
+		return
+	}
+	ctx := r.Context()
+	switch r.Method {
+	case http.MethodPut, http.MethodPost:
+		var a store.Addon
+		if err := decodeJSON(r, &a); err != nil {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+			return
+		}
+		a.ID = id
+		saved, err := s.store.UpsertAddon(ctx, a)
+		if err != nil {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+			return
+		}
+		writeJSON(w, http.StatusOK, map[string]interface{}{"item": saved})
+	case http.MethodDelete:
+		if err := s.store.DeleteAddon(ctx, id); err != nil {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+			return
+		}
+		writeJSON(w, http.StatusOK, map[string]string{"status": "deleted"})
+	default:
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
+	}
 }
 
 // ── Public catalog (legacy: billingCycles + supportTiers + serverTiers) ─
@@ -585,6 +725,11 @@ func (s *server) handlePlanCheckout(w http.ResponseWriter, r *http.Request, user
 		}
 	}
 
+	plansList, addonsList, err := s.store.PlanCatalog(ctx)
+	if err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "catalog_unavailable"})
+		return
+	}
 	subtotal, label, err := store.PriceFor(store.PlanSelection{
 		PlanKey:     req.PlanKey,
 		BillingMode: req.BillingMode,
@@ -593,7 +738,7 @@ func (s *server) handlePlanCheckout(w http.ResponseWriter, r *http.Request, user
 		Chargers:    req.Chargers,
 		WithHosting: req.WithHosting,
 		Addons:      addons,
-	})
+	}, plansList, addonsList)
 	if err != nil {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
 		return
@@ -630,6 +775,24 @@ func (s *server) handlePlanCheckout(w http.ResponseWriter, r *http.Request, user
 	// the remainder becomes the bank-transfer balance.
 	isPlatformPlan := req.PlanKey == "appent" || req.PlanKey == "webplat" || req.PlanKey == "appplat"
 	useDeposit := req.UseDeposit && isPlatformPlan && total > DepositCents
+
+	// Deposit-tier discount: paying the $200 deposit upfront unlocks a
+	// per-plan discount. Applied only when useDeposit is true.
+	if useDeposit {
+		var depositDiscount int64
+		switch req.PlanKey {
+		case "appent":
+			depositDiscount = 50000 // $500
+		case "webplat":
+			depositDiscount = 100000 // $1,000
+		case "appplat":
+			depositDiscount = 150000 // $1,500
+		}
+		if depositDiscount > 0 && total > DepositCents+depositDiscount {
+			discount += depositDiscount
+			total = subtotal - discount
+		}
+	}
 
 	// Determine the amount that actually flows through the gateway + the
 	// balance owed via bank transfer.

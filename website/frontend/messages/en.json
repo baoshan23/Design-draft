@@ -68,6 +68,10 @@
     "loadError": "Failed to load product catalog.",
     "title": "Configure your GCSS deployment",
     "subtitle": "Pick the plan that fits your operation, then tune billing and add-ons.",
+    "discount": {
+      "saveLabel": "Save {amount}",
+      "saveAria": "Save {amount} with $200 deposit"
+    },
     "choosePlan": "Choose your plan",
     "familyHosted": "Hosted Mode",
     "familyPrivate": "Private Deployment",
@@ -142,6 +146,8 @@
       "dueLater": "Balance (bank transfer)",
       "bankTransferAmount": "Bank transfer total",
       "fullPrice": "Full price",
+      "depositDiscount": "Deposit discount",
+      "discountedTotal": "Discounted total",
       "payToday": "You pay today",
       "remainingVia": "Remaining {amount} paid via bank transfer after kickoff.",
       "wasPrice": "was {amount}"
@@ -198,7 +204,9 @@
       "depositTitle": "Payment plan",
       "depositLabel": "Get started for just {amount}",
       "depositBalance": "balance",
-      "depositHelp": "Kick off your project today. Pay the {amount} deposit now via card and settle the remaining balance by bank transfer when the system is ready for delivery."
+      "depositHelp": "Kick off your project today. Pay the {amount} deposit now via card and settle the remaining balance by bank transfer when the system is ready for delivery.",
+      "depositDiscountLabel": "Deposit discount applied",
+      "depositDiscountDetail": "Pay {amount} deposit upfront to unlock"
     },
     "success": {
       "paid": "Payment Successful",
@@ -477,7 +485,9 @@
       "submit": "Submit Request",
       "submitting": "Submitting…",
       "submitted": "Request received ✓",
-      "error": "Something went wrong. Please try again."
+      "error": "Something went wrong. Please try again.",
+      "openCta": "Request a payment method",
+      "close": "Close"
     }
   },
   "manufacturers": {
@@ -575,7 +585,45 @@
       "qrH5": "Scan for H5 web app",
       "qrMobile": "Scan for mobile app",
       "viewB2cProduct": "View B2C product page",
-      "viewB2bProduct": "View B2B2C product page"
+      "viewB2bProduct": "View B2B2C product page",
+      "requestDemo": "Request a demo",
+      "viewPlanPricing": "See plan pricing",
+      "edB2cHeading": "Single-operator editions",
+      "edB2cDesc": "Run your own charging network end-to-end. Pick the depth of customization that fits your operation.",
+      "edB2bHeading": "Multi-tenant platform editions",
+      "edB2bDesc": "Run a network of operators on one platform. Real B2B2C demo wired to admin.demo.gcss.hk.",
+      "plans": {
+        "saas": {
+          "tag": "Shared infrastructure · per-charger billing",
+          "b1": "Hosted on GCSS infra — zero ops, instant onboarding",
+          "b2": "Per-charger annual fee, no platform setup cost",
+          "b3": "End users get the shared GCSS branded app"
+        },
+        "customweb": {
+          "tag": "Branded web app · single operator",
+          "b1": "Your logo, your domain, your H5 experience",
+          "b2": "Pick existing payment gateway + 1 custom",
+          "b3": "Hosted by GCSS — launch in days"
+        },
+        "appent": {
+          "tag": "Branded native app · single operator",
+          "b1": "iOS + Android published under your brand",
+          "b2": "Self-host or rent a GCSS server",
+          "b3": "Dedicated account manager + custom integrations"
+        },
+        "webplat": {
+          "tag": "Web platform · multi-tenant CPO",
+          "b1": "Onboard CPOs, configure commissions and revenue split",
+          "b2": "Hosted-mode + tenant management",
+          "b3": "Unified analytics across every operator"
+        },
+        "appplat": {
+          "tag": "App platform · multi-tenant CPO",
+          "b1": "Native iOS + Android multi-tenant deployment",
+          "b2": "CPO onboarding, commissions, payouts",
+          "b3": "Tenant-level branding and analytics"
+        }
+      }
     }
   },
   "changelog": {
@@ -637,7 +685,21 @@
     "invoices": "Invoices & Payments",
     "copyright": "© 2026 GCSS (Global Charger System Service). All rights reserved.",
     "privacy": "Privacy Policy",
-    "terms": "Terms of Service"
+    "terms": "Terms of Service",
+    "followus": "Follow us",
+    "getapp": "Get the App",
+    "webapp": "Web App",
+    "googleplay": "Google Play",
+    "appstore": "App Store",
+    "tagline": "Run a smarter charging network — fully customizable, OCPP-native, deploy in minutes.",
+    "trust1": "OCPP 1.6 Certified",
+    "trust2": "AES-256 Encrypted",
+    "trust3": "99.9% Uptime SLA",
+    "backtotop": "Back to top",
+    "newsletter": "Stay in the loop",
+    "newsletterDesc": "Product updates, pricing changes, and EV charging insights — once a month, no spam.",
+    "newsletterPlaceholder": "you@company.com",
+    "newsletterSubmit": "Subscribe"
   },
   "dropdown": {
     "b2c": {
@@ -869,7 +931,7 @@
       "f4": "White-label everything",
       "f5": "Dedicated account manager",
       "f6": "1-on-1 technical support",
-      "btn": "Contact Sales"
+      "btn": "Pay $200 deposit"
     },
     "changelog": {
       "label": "Changelog",
@@ -961,8 +1023,21 @@
         "title": "APP Experience",
         "desc": "Scan to download the demo app"
       },
+      "cpo": {
+        "title": "CPO",
+        "desc": "Operator-level dashboard for station management, billing, and customer service.",
+        "btn": "Open CPO Panel"
+      },
+      "qrH5": {
+        "title": "H5",
+        "desc": "Scan to open the H5 web app"
+      },
+      "qrApp": {
+        "title": "APP",
+        "desc": "Scan to download the mobile app"
+      },
       "h5": {
-        "title": "H5 Web Experience",
+        "title": "Demo Account",
         "desc": "Scan to open H5 web app",
         "scan": "Scan to open H5 web app",
         "btn": "Open H5 App"
@@ -992,9 +1067,9 @@
       }
     },
     "cta": {
-      "title": "Ready to Get Started?",
-      "desc": "Deploy your EV charging management system in minutes. Free tier available with no credit card required.",
-      "btn1": "Get Started Free",
+      "title": "Ready to deploy?",
+      "desc": "Pay a $200 deposit to start the process and unlock up to $1,500 off your plan. Live in days, not months.",
+      "btn1": "Start with $200 deposit",
       "btn2": "Contact Sales"
     }
   },
@@ -1002,6 +1077,9 @@
     "label": "Pricing",
     "title": "Simple, Transparent Pricing",
     "desc": "Four tiers across B2C and B2B deployments. One platform. All prices in USD.",
+    "saas": {
+      "name": "SaaS Hosted"
+    },
     "perCharger": "per charger",
     "oneTime": "one-time",
     "perMonth": "/month",
@@ -1035,6 +1113,8 @@
     "getstarted": "Get Started",
     "buynow": "Buy Now",
     "contactsales": "Contact Sales",
+    "depositOfferTitle": "Limited-time deposit offer",
+    "depositOfferDesc": "Pay a $200 deposit to start the process and save {amount} on this plan.",
     "dedicated": {
       "name": "Dedicated Server Rental",
       "price": "$200",
@@ -1065,6 +1145,7 @@
       "price": "$16,900",
       "priceUnit": "one-time",
       "priceNote": "$1,200/year hosting optional",
+      "discountAmount": "$500",
       "f1": "Custom logo",
       "f2": "Custom name and domain",
       "f3": "Binary installation package",
@@ -1081,6 +1162,7 @@
       "price": "$21,800",
       "priceUnit": "one-time",
       "priceNote": "$1,200/year hosting optional",
+      "discountAmount": "$1,000",
       "f1": "Custom logo",
       "f2": "Custom name and domain",
       "f3": "Binary installation package",
@@ -1097,6 +1179,7 @@
       "price": "$68,000",
       "priceUnit": "one-time",
       "priceNote": "$1,200/year hosting optional",
+      "discountAmount": "$1,500",
       "f1": "Custom logo",
       "f2": "Custom name and domain",
       "f3": "Binary installation package",
@@ -2060,7 +2143,16 @@
       "title": "Build Your Own EV Charging SaaS Platform",
       "desc": "The ultimate multi-tenant solution, supporting unlimited operator onboarding, automated hierarchical management, all controlled through a unified Super Admin console to effortlessly manage your global charging network.",
       "cta1": "Become a Platform Operator",
-      "cta2": "Contact Sales"
+      "cta2": "Contact Sales",
+      "video": {
+        "label": "GCSS B2B platform overview",
+        "play": "Play video",
+        "pause": "Pause video",
+        "mute": "Mute",
+        "unmute": "Unmute",
+        "fullscreen": "Fullscreen",
+        "exitFullscreen": "Exit fullscreen"
+      }
     },
     "nav": {
       "overview": "Overview",
@@ -2350,8 +2442,8 @@
       "account": "Account",
       "password": "Password",
       "launch": "Launch",
-      "mobileDemo": "Mobile App Demo",
-      "webDemo": "Web App Demo"
+      "mobileDemo": "Mobile App",
+      "webDemo": "Web App"
     }
   },
   "faq": {
@@ -2717,7 +2809,24 @@
       "fieldActive": "Active (show on checkout)",
       "save": "Save",
       "saving": "Saving…",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "unlabeled": "(unlabeled)",
+      "noMatches": "No accounts match this search.",
+      "searchPlaceholder": "Search label, bank, account, currency…",
+      "filterStatus": "Filter by status",
+      "filterAll": "All",
+      "filterActive": "Active",
+      "filterInactive": "Inactive",
+      "sortLabel": "Sort",
+      "sortBySortOrder": "Sort order",
+      "sortByLabel": "Label (A–Z)",
+      "sortByNewest": "Newest",
+      "copy": "Copy",
+      "copied": "Copied",
+      "sectionIdentity": "Identity",
+      "sectionBanking": "Banking details",
+      "sectionNotes": "Customer notes",
+      "notesPlaceholder": "e.g. Reference your order number when wiring."
     },
     "bankSlips": {
       "title": "Bank Transfer Slips",
@@ -2760,13 +2869,39 @@
     "backToOverview": "Back to Admin",
     "products": {
       "title": "Product Catalog",
-      "subtitle": "Manage billing cycles, support tiers, server tiers, and promo codes. Changes apply immediately to the buy page.",
+      "subtitle": "Plans and add-ons displayed on the pricing and buy pages. Edits apply immediately.",
       "confirmDelete": "Delete this item?",
       "common": {
         "active": "Active",
         "sort": "Sort",
         "delete": "Delete",
         "add": "Add"
+      },
+      "plans": {
+        "title": "Plans",
+        "desc": "Tiers exposed on /pricing and /buy. Pricing logic still keys off well-known keys (saas / customweb / appent / webplat / appplat); editing prices is safe but adding a brand-new key requires a code change to define its formula.",
+        "key": "Key",
+        "label": "Label",
+        "family": "Family",
+        "base": "Base price ($)",
+        "recurring": "Recurring ($)",
+        "recurringUnit": "Recurring unit",
+        "yearly": "Yearly ($)",
+        "hosting": "Optional hosting ($)",
+        "modes": "Modes",
+        "unlimited": "Unlimited chargers",
+        "billingMonthly": "Monthly billing",
+        "billingYearly": "Yearly billing",
+        "billingOneTime": "One-time"
+      },
+      "addons": {
+        "title": "Add-ons",
+        "desc": "Optional extras layered onto any plan.",
+        "key": "Key",
+        "label": "Label",
+        "price": "Price ($)",
+        "model": "Model",
+        "unit": "Unit note"
       },
       "billingCycles": {
         "title": "Billing Cycles",

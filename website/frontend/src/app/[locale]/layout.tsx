@@ -33,7 +33,7 @@ export default async function LocaleLayout({
       className="gcss-html"
       suppressHydrationWarning
     >
-      <body>
+      <body suppressHydrationWarning>
         <GoldenOrbsBackground />
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>

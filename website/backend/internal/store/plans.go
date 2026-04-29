@@ -1,14 +1,17 @@
 package store
 
 import (
+	"context"
 	"errors"
 	"fmt"
+	"strings"
 )
 
 // Plan mirrors a purchasable tier from the official price PDF (GCSS软件平台报价单).
 // Pricing is server-authoritative — the frontend describes the selection but
 // PriceFor below is the one source of truth for what gets charged.
 type Plan struct {
+	ID                   int64  `json:"id"`
 	Key                  string `json:"key"`
 	LabelEN              string `json:"labelEn"`
 	LabelZH              string `json:"labelZh"`
@@ -23,11 +26,13 @@ type Plan struct {
 	HasMonthly           bool   `json:"hasMonthly"`
 	HasYearly            bool   `json:"hasYearly"`
 	UnlimitedChargers    bool   `json:"unlimitedChargers"`
+	IsActive             bool   `json:"isActive"`
 	SortOrder            int    `json:"sortOrder"`
 }
 
 // Addon is a separately priced option that can layer onto any plan.
 type Addon struct {
+	ID         int64  `json:"id"`
 	Key        string `json:"key"`
 	LabelEN    string `json:"labelEn"`
 	LabelZH    string `json:"labelZh"`
@@ -35,11 +40,14 @@ type Addon struct {
 	PriceModel string `json:"priceModel"` // "per_unit" | "per_day"
 	UnitNoteEN string `json:"unitNoteEn"`
 	UnitNoteZH string `json:"unitNoteZh"`
+	IsActive   bool   `json:"isActive"`
+	SortOrder  int    `json:"sortOrder"`
 }
 
-// PlanCatalog returns the 6 plan tiers + 5 add-ons matching the official price PDF.
-func PlanCatalog() ([]Plan, []Addon) {
-	plans := []Plan{
+// defaultPlans / defaultAddons are seeded into the DB once on first boot if
+// the tables are empty. After seeding, edits go through the admin panel.
+func defaultPlans() []Plan {
+	return []Plan{
 		{
 			Key: "saas", LabelEN: "SaaS Hosted", LabelZH: "SaaS 托管",
 			DescriptionEN: "Shared SaaS server (Hong Kong). $84 per charger per year, annual billing.",
@@ -48,6 +56,7 @@ func PlanCatalog() ([]Plan, []Addon) {
 			RecurringCents: 8400,
 			RecurringUnit:  "year_per_charger",
 			HasYearly:      true,
+			IsActive:       true,
 			SortOrder:      1,
 		},
 		{
@@ -62,6 +71,7 @@ func PlanCatalog() ([]Plan, []Addon) {
 			HasMonthly:        true,
 			HasYearly:         true,
 			UnlimitedChargers: true,
+			IsActive:          true,
 			SortOrder:         2,
 		},
 		{
@@ -72,6 +82,7 @@ func PlanCatalog() ([]Plan, []Addon) {
 			BasePriceCents:       1690000,
 			OptionalHostingCents: 120000,
 			UnlimitedChargers:    true,
+			IsActive:             true,
 			SortOrder:            3,
 		},
 		{
@@ -82,6 +93,7 @@ func PlanCatalog() ([]Plan, []Addon) {
 			BasePriceCents:       2180000,
 			OptionalHostingCents: 120000,
 			UnlimitedChargers:    true,
+			IsActive:             true,
 			SortOrder:            4,
 		},
 		{
@@ -92,18 +104,189 @@ func PlanCatalog() ([]Plan, []Addon) {
 			BasePriceCents:       6800000,
 			OptionalHostingCents: 120000,
 			UnlimitedChargers:    true,
+			IsActive:             true,
 			SortOrder:            5,
 		},
 	}
+}
 
-	addons := []Addon{
-		{Key: "mobile_lang", LabelEN: "Extra mobile-app language", LabelZH: "移动端额外语言", PriceCents: 10000, PriceModel: "per_unit", UnitNoteEN: "per language", UnitNoteZH: "每种"},
-		{Key: "admin_lang", LabelEN: "Extra admin-panel language", LabelZH: "后台额外语言", PriceCents: 10000, PriceModel: "per_unit", UnitNoteEN: "per language", UnitNoteZH: "每种"},
-		{Key: "gateway", LabelEN: "Extra payment gateway", LabelZH: "额外支付网关", PriceCents: 100000, PriceModel: "per_unit", UnitNoteEN: "per gateway", UnitNoteZH: "每种"},
-		{Key: "pos", LabelEN: "POS integration", LabelZH: "POS 集成", PriceCents: 100000, PriceModel: "per_unit", UnitNoteEN: "per POS type", UnitNoteZH: "每种"},
-		{Key: "customization", LabelEN: "Custom development", LabelZH: "定制开发", PriceCents: 12000, PriceModel: "per_day", UnitNoteEN: "per person-day", UnitNoteZH: "每人日"},
+func defaultAddons() []Addon {
+	return []Addon{
+		{Key: "mobile_lang", LabelEN: "Extra mobile-app language", LabelZH: "移动端额外语言", PriceCents: 10000, PriceModel: "per_unit", UnitNoteEN: "per language", UnitNoteZH: "每种", IsActive: true, SortOrder: 1},
+		{Key: "admin_lang", LabelEN: "Extra admin-panel language", LabelZH: "后台额外语言", PriceCents: 10000, PriceModel: "per_unit", UnitNoteEN: "per language", UnitNoteZH: "每种", IsActive: true, SortOrder: 2},
+		{Key: "gateway", LabelEN: "Extra payment gateway", LabelZH: "额外支付网关", PriceCents: 100000, PriceModel: "per_unit", UnitNoteEN: "per gateway", UnitNoteZH: "每种", IsActive: true, SortOrder: 3},
+		{Key: "pos", LabelEN: "POS integration", LabelZH: "POS 集成", PriceCents: 100000, PriceModel: "per_unit", UnitNoteEN: "per POS type", UnitNoteZH: "每种", IsActive: true, SortOrder: 4},
+		{Key: "customization", LabelEN: "Custom development", LabelZH: "定制开发", PriceCents: 12000, PriceModel: "per_day", UnitNoteEN: "per person-day", UnitNoteZH: "每人日", IsActive: true, SortOrder: 5},
 	}
-	return plans, addons
+}
+
+// SeedPlansIfEmpty inserts the default catalog rows on first boot.
+func (s *Store) SeedPlansIfEmpty(ctx context.Context) error {
+	var planCount, addonCount int
+	if err := s.db.QueryRowContext(ctx, `SELECT COUNT(*) FROM plans`).Scan(&planCount); err != nil {
+		return err
+	}
+	if err := s.db.QueryRowContext(ctx, `SELECT COUNT(*) FROM addons`).Scan(&addonCount); err != nil {
+		return err
+	}
+	if planCount == 0 {
+		for _, p := range defaultPlans() {
+			if _, err := s.UpsertPlan(ctx, p); err != nil {
+				return fmt.Errorf("seed plan %s: %w", p.Key, err)
+			}
+		}
+	}
+	if addonCount == 0 {
+		for _, a := range defaultAddons() {
+			if _, err := s.UpsertAddon(ctx, a); err != nil {
+				return fmt.Errorf("seed addon %s: %w", a.Key, err)
+			}
+		}
+	}
+	return nil
+}
+
+// ── Plan reads/writes ────────────────────────────────────────────────
+
+func (s *Store) ListPlans(ctx context.Context, activeOnly bool) ([]Plan, error) {
+	q := `SELECT id, key, label_en, label_zh, description_en, description_zh, family, base_price_cents, recurring_cents, recurring_unit, yearly_cents, optional_hosting_cents, has_monthly, has_yearly, unlimited_chargers, is_active, sort_order FROM plans`
+	if activeOnly {
+		q += ` WHERE is_active = 1`
+	}
+	q += ` ORDER BY sort_order ASC, id ASC;`
+	rows, err := s.db.QueryContext(ctx, q)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var out []Plan
+	for rows.Next() {
+		var p Plan
+		var hasMonthly, hasYearly, unlimited, active int
+		if err := rows.Scan(&p.ID, &p.Key, &p.LabelEN, &p.LabelZH, &p.DescriptionEN, &p.DescriptionZH, &p.Family, &p.BasePriceCents, &p.RecurringCents, &p.RecurringUnit, &p.YearlyCents, &p.OptionalHostingCents, &hasMonthly, &hasYearly, &unlimited, &active, &p.SortOrder); err != nil {
+			return nil, err
+		}
+		p.HasMonthly = hasMonthly == 1
+		p.HasYearly = hasYearly == 1
+		p.UnlimitedChargers = unlimited == 1
+		p.IsActive = active == 1
+		out = append(out, p)
+	}
+	return out, rows.Err()
+}
+
+func (s *Store) UpsertPlan(ctx context.Context, p Plan) (Plan, error) {
+	p.Key = strings.TrimSpace(p.Key)
+	p.LabelEN = strings.TrimSpace(p.LabelEN)
+	p.LabelZH = strings.TrimSpace(p.LabelZH)
+	if p.Key == "" || p.LabelEN == "" {
+		return p, errors.New("key and labelEn are required")
+	}
+	if p.Family == "" {
+		p.Family = "private"
+	}
+	hm := boolToInt(p.HasMonthly)
+	hy := boolToInt(p.HasYearly)
+	un := boolToInt(p.UnlimitedChargers)
+	ac := boolToInt(p.IsActive)
+	if p.ID > 0 {
+		_, err := s.db.ExecContext(ctx, `UPDATE plans SET key=?, label_en=?, label_zh=?, description_en=?, description_zh=?, family=?, base_price_cents=?, recurring_cents=?, recurring_unit=?, yearly_cents=?, optional_hosting_cents=?, has_monthly=?, has_yearly=?, unlimited_chargers=?, is_active=?, sort_order=? WHERE id=?;`,
+			p.Key, p.LabelEN, p.LabelZH, p.DescriptionEN, p.DescriptionZH, p.Family, p.BasePriceCents, p.RecurringCents, p.RecurringUnit, p.YearlyCents, p.OptionalHostingCents, hm, hy, un, ac, p.SortOrder, p.ID)
+		return p, err
+	}
+	res, err := s.db.ExecContext(ctx, `INSERT INTO plans (key, label_en, label_zh, description_en, description_zh, family, base_price_cents, recurring_cents, recurring_unit, yearly_cents, optional_hosting_cents, has_monthly, has_yearly, unlimited_chargers, is_active, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+		p.Key, p.LabelEN, p.LabelZH, p.DescriptionEN, p.DescriptionZH, p.Family, p.BasePriceCents, p.RecurringCents, p.RecurringUnit, p.YearlyCents, p.OptionalHostingCents, hm, hy, un, ac, p.SortOrder)
+	if err != nil {
+		return p, err
+	}
+	p.ID, _ = res.LastInsertId()
+	return p, nil
+}
+
+func (s *Store) DeletePlan(ctx context.Context, id int64) error {
+	if id <= 0 {
+		return errors.New("invalid id")
+	}
+	_, err := s.db.ExecContext(ctx, `DELETE FROM plans WHERE id = ?;`, id)
+	return err
+}
+
+// ── Addon reads/writes ───────────────────────────────────────────────
+
+func (s *Store) ListAddons(ctx context.Context, activeOnly bool) ([]Addon, error) {
+	q := `SELECT id, key, label_en, label_zh, price_cents, price_model, unit_note_en, unit_note_zh, is_active, sort_order FROM addons`
+	if activeOnly {
+		q += ` WHERE is_active = 1`
+	}
+	q += ` ORDER BY sort_order ASC, id ASC;`
+	rows, err := s.db.QueryContext(ctx, q)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var out []Addon
+	for rows.Next() {
+		var a Addon
+		var active int
+		if err := rows.Scan(&a.ID, &a.Key, &a.LabelEN, &a.LabelZH, &a.PriceCents, &a.PriceModel, &a.UnitNoteEN, &a.UnitNoteZH, &active, &a.SortOrder); err != nil {
+			return nil, err
+		}
+		a.IsActive = active == 1
+		out = append(out, a)
+	}
+	return out, rows.Err()
+}
+
+func (s *Store) UpsertAddon(ctx context.Context, a Addon) (Addon, error) {
+	a.Key = strings.TrimSpace(a.Key)
+	a.LabelEN = strings.TrimSpace(a.LabelEN)
+	if a.Key == "" || a.LabelEN == "" {
+		return a, errors.New("key and labelEn are required")
+	}
+	if a.PriceModel == "" {
+		a.PriceModel = "per_unit"
+	}
+	ac := boolToInt(a.IsActive)
+	if a.ID > 0 {
+		_, err := s.db.ExecContext(ctx, `UPDATE addons SET key=?, label_en=?, label_zh=?, price_cents=?, price_model=?, unit_note_en=?, unit_note_zh=?, is_active=?, sort_order=? WHERE id=?;`,
+			a.Key, a.LabelEN, a.LabelZH, a.PriceCents, a.PriceModel, a.UnitNoteEN, a.UnitNoteZH, ac, a.SortOrder, a.ID)
+		return a, err
+	}
+	res, err := s.db.ExecContext(ctx, `INSERT INTO addons (key, label_en, label_zh, price_cents, price_model, unit_note_en, unit_note_zh, is_active, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+		a.Key, a.LabelEN, a.LabelZH, a.PriceCents, a.PriceModel, a.UnitNoteEN, a.UnitNoteZH, ac, a.SortOrder)
+	if err != nil {
+		return a, err
+	}
+	a.ID, _ = res.LastInsertId()
+	return a, nil
+}
+
+func (s *Store) DeleteAddon(ctx context.Context, id int64) error {
+	if id <= 0 {
+		return errors.New("invalid id")
+	}
+	_, err := s.db.ExecContext(ctx, `DELETE FROM addons WHERE id = ?;`, id)
+	return err
+}
+
+// PlanCatalog loads active plans + addons from the DB.
+func (s *Store) PlanCatalog(ctx context.Context) ([]Plan, []Addon, error) {
+	plans, err := s.ListPlans(ctx, true)
+	if err != nil {
+		return nil, nil, err
+	}
+	addons, err := s.ListAddons(ctx, true)
+	if err != nil {
+		return nil, nil, err
+	}
+	return plans, addons, nil
+}
+
+func boolToInt(b bool) int {
+	if b {
+		return 1
+	}
+	return 0
 }
 
 // PlanSelection is the validated input shape used to compute the price.
@@ -124,9 +307,10 @@ type PlanAddonChoice struct {
 
 // PriceFor returns the authoritative subtotal in USD cents and a human label.
 // Validation is intentionally strict so we never accept an under-charging cart.
-func PriceFor(sel PlanSelection) (int64, string, error) {
-	plans, addons := PlanCatalog()
-
+// Pricing logic still keys off well-known plan keys (saas / customweb /
+// appent / webplat / appplat); admin can edit prices but adding entirely new
+// keys requires a code change to handle their formula.
+func PriceFor(sel PlanSelection, plans []Plan, addons []Addon) (int64, string, error) {
 	var plan *Plan
 	for i := range plans {
 		if plans[i].Key == sel.PlanKey {
@@ -147,7 +331,7 @@ func PriceFor(sel PlanSelection) (int64, string, error) {
 	}
 	months := sel.Months
 	if months < 1 {
-		months = 0 // 0 means "fall back to years*12 for legacy clients"
+		months = 0
 	}
 	if months > 12 {
 		months = 12
@@ -168,10 +352,10 @@ func PriceFor(sel PlanSelection) (int64, string, error) {
 		switch sel.BillingMode {
 		case "yearly":
 			subtotal = base + plan.YearlyCents*int64(years)
-		default: // monthly
+		default:
 			effectiveMonths := months
 			if effectiveMonths == 0 {
-				effectiveMonths = years * 12 // legacy fallback
+				effectiveMonths = years * 12
 			}
 			subtotal = base + plan.RecurringCents*int64(effectiveMonths)
 		}
@@ -224,3 +408,4 @@ func PriceFor(sel PlanSelection) (int64, string, error) {
 	}
 	return subtotal, label, nil
 }
+

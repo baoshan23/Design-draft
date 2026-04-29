@@ -569,7 +569,7 @@
     position: fixed;
     left: 0;
     top: 0;
-    height: 100vh;
+    height: 100svh;
     z-index: 1000;
     transform: translateX(-100%);
     box-shadow: none;
@@ -1162,7 +1162,7 @@
     top: 0;
     left: 0;
     width: 280px;
-    height: 100vh;
+    height: 100svh;
     background: var(--surface, white);
     z-index: 1000;
     transform: translateX(-100%);

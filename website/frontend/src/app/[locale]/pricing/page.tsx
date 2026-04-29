@@ -30,11 +30,15 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
         { keyBase: 'pricing.appplat', featureCount: 11, featured: true },
     ];
 
+    const PLANS_WITH_DEPOSIT_OFFER = new Set(['pricing.appent', 'pricing.webplat', 'pricing.appplat']);
+
     const renderCard = (plan: Plan) => {
         const planKey = plan.keyBase.replace(/^pricing\./, '');
         const cls = ['pricing-card', 'glass-card'];
         if (plan.featured) cls.push('featured');
         if (plan.popular) cls.push('popular');
+        const showDeposit = PLANS_WITH_DEPOSIT_OFFER.has(plan.keyBase);
+        const discountAmount = showDeposit ? t(`${plan.keyBase}.discountAmount` as any) : '';
         return (
             <div key={plan.keyBase} className={cls.join(' ')}>
                 {plan.popular && <span className="pricing-card-ribbon">{t('pricing.popular')}</span>}
@@ -45,6 +49,15 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                     <span className="plan-price-unit">{t(`${plan.keyBase}.priceUnit` as any)}</span>
                 </div>
                 <div className="plan-price-note">{t(`${plan.keyBase}.priceNote` as any)}</div>
+                {showDeposit && (
+                    <div className="plan-deposit-offer">
+                        <span className="plan-deposit-offer-amount">{discountAmount}</span>
+                        <div className="plan-deposit-offer-text">
+                            <strong>{t('pricing.depositOfferTitle')}</strong>
+                            <span>{t('pricing.depositOfferDesc', { amount: discountAmount })}</span>
+                        </div>
+                    </div>
+                )}
                 <ul className="plan-features">
                     {Array.from({ length: plan.featureCount }).map((_, i) => (
                         <li key={i}>

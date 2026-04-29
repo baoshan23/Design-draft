@@ -1,4 +1,5 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import QRCode from 'qrcode';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import CounterAnimation from '@/components/effects/CounterAnimation';
@@ -6,8 +7,18 @@ import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
 import SubNav from './SubNav';
 import DemoTabs from './DemoTabs';
+
+const QR_OPTS = {
+  type: 'svg' as const,
+  margin: 1,
+  width: 144,
+  color: { dark: '#1a1210', light: '#00000000' },
+  errorCorrectionLevel: 'M' as const,
+};
 import LanguageRequestForm from './LanguageRequestForm';
 import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
+import HeroShotStack from '@/components/sections/b2c/HeroShotStack';
+import AppSlideshow from './AppSlideshow';
 
 export const metadata = {
   title: 'B2C Model - GCSS | Direct Operator EV Charging Platform',
@@ -28,13 +39,17 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
   setRequestLocale(locale);
   const t = await getTranslations();
 
+  // QR codes pre-rendered server-side and passed to the (client) DemoTabs.
+  const webAppQr = await QRCode.toString('https://app.gcss.hk/', QR_OPTS);
+  const mobileAppQr = await QRCode.toString('https://app.gcss.hk/', QR_OPTS);
+
   return (
     <>
       {/* ==================== Sub Navigation ==================== */}
       <SubNav />
 
       {/* ==================== Section 1: System Overview (Hero) ==================== */}
-      <section className="hero mesh-bg product-hero" id="overview">
+      <section className="hero mesh-bg product-hero hero-with-shot" id="overview">
         <div className="container">
           <div className="hero-content hero-split">
             <div className="hero-text">
@@ -55,6 +70,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
               </div>
             </div>
 
+            <HeroShotStack />
           </div>
 
           {/* Feature Grid */}
@@ -366,7 +382,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
             <div style={{ marginTop: 80 }}>
               <div className="feature-row">
                 <div className="feature-image-placeholder">
-                  <Image src="/images/App.png" alt={t('product.app.title')} width={1920} height={480} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 14 }} />
+                  <AppSlideshow alt={t('product.app.title')} />
                 </div>
                 <div className="feature-text">
                   <h3>{t('product.app.title')}</h3>
@@ -532,7 +548,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
       </section>
 
       {/* ==================== Section 7: System Demo ==================== */}
-      <section className="section" id="demo">
+      <section className="section b2c-demo-section" id="demo">
         <div className="container">
           <ScrollAnimation>
             <div className="section-header">
@@ -543,26 +559,24 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
           </ScrollAnimation>
 
           <ScrollAnimation>
-            <div style={{ maxWidth: 800, margin: '0 auto' }}>
-              {/* Tabs */}
-              <DemoTabs />
+            <div className="b2c-demo-stage">
+              <DemoTabs webAppQr={webAppQr} mobileAppQr={mobileAppQr} />
 
-              {/* Status Bar */}
-              <div style={{ marginTop: 32, display: 'flex', justifyContent: 'center', gap: 24, flexWrap: 'wrap' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 16px', background: 'var(--gray-50)', border: '1px solid var(--gray-200)', borderRadius: 100, fontSize: '0.8rem' }}>
-                  <span style={{ width: 8, height: 8, background: '#10B981', borderRadius: '50%', display: 'inline-block' }}></span>
-                  <span style={{ fontWeight: 600 }}>{t('product.demo.status.label')}</span>
-                  <span style={{ color: 'var(--gray-500)' }}>{t('product.demo.status.online')}</span>
+              <div className="b2c-demo-status-bar">
+                <div className="b2c-demo-pill" data-tone="success">
+                  <span className="b2c-demo-pill-dot" aria-hidden="true"></span>
+                  <span className="b2c-demo-pill-key">{t('product.demo.status.label')}</span>
+                  <span className="b2c-demo-pill-val">{t('product.demo.status.online')}</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 16px', background: 'var(--gray-50)', border: '1px solid var(--gray-200)', borderRadius: 100, fontSize: '0.8rem' }}>
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#F59E0B" strokeWidth="1.5"><circle cx="7" cy="7" r="5.5" /><path d="M7 4v3l2 1" /></svg>
-                  <span style={{ fontWeight: 600 }}>{t('product.demo.latency')}</span>
-                  <span style={{ color: 'var(--gray-500)' }}>24ms</span>
+                <div className="b2c-demo-pill" data-tone="gold">
+                  <svg className="b2c-demo-pill-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><circle cx="7" cy="7" r="5.5" /><path d="M7 4v3l2 1" /></svg>
+                  <span className="b2c-demo-pill-key">{t('product.demo.latency')}</span>
+                  <span className="b2c-demo-pill-val">24ms</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 16px', background: 'var(--gray-50)', border: '1px solid var(--gray-200)', borderRadius: 100, fontSize: '0.8rem' }}>
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#10B981" strokeWidth="1.5"><path d="M7 1v2M7 11v2M1 7h2M11 7h2" /><circle cx="7" cy="7" r="3" /></svg>
-                  <span style={{ fontWeight: 600 }}>{t('product.demo.connection.label')}</span>
-                  <span style={{ color: 'var(--gray-500)' }}>{t('product.demo.connection.secure')}</span>
+                <div className="b2c-demo-pill" data-tone="teal">
+                  <svg className="b2c-demo-pill-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M7 1v2M7 11v2M1 7h2M11 7h2" /><circle cx="7" cy="7" r="3" /></svg>
+                  <span className="b2c-demo-pill-key">{t('product.demo.connection.label')}</span>
+                  <span className="b2c-demo-pill-val">{t('product.demo.connection.secure')}</span>
                 </div>
               </div>
             </div>
@@ -583,22 +597,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
 
           <ScrollAnimation>
             <div className="pricing-cards">
-              {/* Community Edition */}
-              <div className="pricing-card glass-card tilt-card">
-                <div className="plan-name">{t('product.plan1.name')}</div>
-                <div className="plan-price">{t('product.plan1.price')}</div>
-                <div className="plan-period">{t('product.plan1.period')}</div>
-                <ul className="plan-features">
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan1.f1')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan1.f2')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan1.f3')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan1.f4')}</span></li>
-                  <li><span className="check">&#10003;</span> <span>{t('product.plan1.f5')}</span></li>
-                </ul>
-                <a href="#license" className="btn btn-outline" style={{ width: '100%' }}>{t('product.plan1.btn')}</a>
-              </div>
-
-              {/* Enterprise Standard */}
+              {/* Custom Web APP */}
               <div className="pricing-card featured glass-card tilt-card">
                 <div className="plan-name">{t('product.plan2.name')}</div>
                 <div className="plan-price"><span className="currency">$</span>300</div>
@@ -612,14 +611,21 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                   <li><span className="check">&#10003;</span> <span>{t('product.plan2.f6')}</span></li>
                   <li><span className="check">&#10003;</span> <span>{t('product.plan2.f7')}</span></li>
                 </ul>
-                <a href="#license" className="btn btn-primary" style={{ width: '100%' }}>{t('product.plan2.btn')}</a>
+                <Link href={{ pathname: '/buy', query: { plan: 'customweb' } }} className="btn btn-primary" style={{ width: '100%' }}>{t('product.plan2.btn')}</Link>
               </div>
 
-              {/* Enterprise Plus */}
+              {/* APP Enterprise — deposit-eligible */}
               <div className="pricing-card glass-card tilt-card">
                 <div className="plan-name">{t('product.plan3.name')}</div>
                 <div className="plan-price"><span className="currency">$</span>16,900</div>
                 <div className="plan-period">{t('product.plan3.period')}</div>
+                <div className="plan-deposit-offer" style={{ margin: '12px 0 18px' }}>
+                  <span className="plan-deposit-offer-amount">$500</span>
+                  <div className="plan-deposit-offer-text">
+                    <strong>{t('pricing.depositOfferTitle')}</strong>
+                    <span>{t('pricing.depositOfferDesc', { amount: '$500' })}</span>
+                  </div>
+                </div>
                 <ul className="plan-features">
                   <li><span className="check">&#10003;</span> <span>{t('product.plan3.f1')}</span></li>
                   <li><span className="check">&#10003;</span> <span>{t('product.plan3.f2')}</span></li>
@@ -628,7 +634,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                   <li><span className="check">&#10003;</span> <span>{t('product.plan3.f5')}</span></li>
                   <li><span className="check">&#10003;</span> <span>{t('product.plan3.f6')}</span></li>
                 </ul>
-                <Link href="/contact" className="btn btn-accent" style={{ width: '100%' }}>{t('product.plan3.btn')}</Link>
+                <Link href={{ pathname: '/buy', query: { plan: 'appent' } }} className="btn btn-accent" style={{ width: '100%' }}>{t('product.plan3.btn')}</Link>
               </div>
             </div>
           </ScrollAnimation>

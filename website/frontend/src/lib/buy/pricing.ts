@@ -18,6 +18,18 @@ export function formatUSD(cents: number): string {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(cents / 100);
 }
 
+// Deposit-tier discount applied when the customer pays the $200 deposit
+// upfront on a one-time platform plan. Tiered by plan size.
+// Backend mirrors this in handlePlanCheckout (billing.go).
+export function getDepositDiscountCents(planKey: string): number {
+    switch (planKey) {
+        case 'appent': return 50000;   // $500
+        case 'webplat': return 100000; // $1,000
+        case 'appplat': return 150000; // $1,500
+        default: return 0;
+    }
+}
+
 export function pickLabel(locale: string, en: string, zh: string): string {
     return locale === 'zh' && zh ? zh : en;
 }

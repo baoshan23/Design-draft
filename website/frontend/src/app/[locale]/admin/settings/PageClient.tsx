@@ -147,15 +147,16 @@ export default function AdminSettingsClient() {
         <div className="admin-page">
             <div className="admin-bg" />
             <div className="container">
+                <Link href="/admin" className="admin-quicklink admin-quicklink--back">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6" /></svg>
+                    {tCommon('backToOverview')}
+                </Link>
                 <header className="admin-header">
                     <div className="admin-meta">
                         <span className="admin-chip admin-chip-gold">GCSS Admin</span>
                     </div>
                     <h1 className="admin-title">{t('title')}</h1>
                     <p className="admin-subtitle">{t('subtitle')}</p>
-                    <nav className="admin-nav-grid" style={{ marginTop: 16 }}>
-                        <Link href="/admin" className="admin-quicklink">{tCommon('backToOverview')}</Link>
-                    </nav>
                 </header>
 
                 {error && <div className="admin-alert admin-alert-error" role="alert">{error}</div>}

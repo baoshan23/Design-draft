@@ -6,7 +6,7 @@ import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
 import { Link } from '@/i18n/navigation';
 import BusinessModelsSection from '@/components/sections/home/BusinessModelsSection';
-import HeroShotStack from '@/components/sections/home/HeroShotStack';
+import HeroVideo from '@/components/sections/home/HeroVideo';
 import MobileShowcase from '@/components/sections/home/MobileShowcase';
 import { DiagramModalProvider } from '@/components/sections/home/DiagramModal';
 import GlobeVisualization from '@/components/sections/home/GlobeVisualization';
@@ -43,9 +43,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <DiagramModalProvider>
       {/* Hero Section */}
-      <section className="hero hero-with-shot">
-        <div className="container">
-          <div className="hero-content hero-split">
+      <section className="hero hero-with-video">
+        <HeroVideo src="/video/Hero-back.mp4" />
+        <div className="hero-bg-video-scrim" aria-hidden="true" />
+        <div className="container hero-with-video-grid">
+          <div className="hero-content">
             <div className="hero-text">
               <div className="hero-badge">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="var(--primary)">
@@ -79,10 +81,38 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
 
             </div>
-
-            <HeroShotStack />
           </div>
 
+          <div className="hero-mock" aria-hidden="true">
+            {/* CPO dashboard mockup */}
+            <div className="hero-mock-cpo">
+              <div className="hero-mock-cpo-bar">
+                <span /><span /><span />
+                <em>cpo.gcss.hk</em>
+              </div>
+              <Image
+                src="/images/dashboard-home.png"
+                alt=""
+                width={1600}
+                height={1000}
+                priority
+                sizes="(max-width: 960px) 60vw, 560px"
+              />
+            </div>
+
+            {/* Mobile app mockup */}
+            <div className="hero-mock-phone">
+              <span className="hero-mock-phone-notch" />
+              <Image
+                src="/images/Mobile_home.png"
+                alt=""
+                width={800}
+                height={1700}
+                priority
+                sizes="(max-width: 960px) 40vw, 220px"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Hero Footer Stats Bar — full width */}
@@ -307,7 +337,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <ScrollAnimation>
               <div className="card card-with-img" style={{ height: '100%' }}>
                 <div className="card-img-placeholder card-img-phone">
-                  <Image src="/images/login.jpg" alt={t('index.mobile.card3.title')} width={390} height={844} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <Image src="/images/App_login_iphone.png" alt={t('index.mobile.card3.title')} width={390} height={844} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
                 <h3>{t('index.mobile.card3.title')}</h3>
                 <p>{t('index.mobile.card3.desc')}</p>
@@ -463,9 +493,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <ScrollAnimation>
             <div className="payment-logos">
               {PAYMENT_METHODS_FLAT.map((name) => (
-                <div key={name} className="payment-logo">
+                <div key={name} className="payment-logo" title={name} aria-label={name}>
                   {PAYMENT_ICONS[name]}
-                  <span>{name}</span>
                 </div>
               ))}
             </div>

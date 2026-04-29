@@ -10,6 +10,7 @@ import {
     buildMetaRows,
     computePrice,
     formatUSD,
+    getDepositDiscountCents,
     pickLabel,
     type Cart,
 } from '@/lib/buy/pricing';
@@ -177,15 +178,24 @@ export default function BuyClient() {
                             <div className="buy-plan-grid" role="radiogroup" aria-label={t('choosePlan')}>
                                 {availablePlans.map((p) => {
                                     const selected = cart.planKey === p.key;
+                                    const discountCents = getDepositDiscountCents(p.key);
                                     return (
                                         <button
                                             key={p.key}
                                             type="button"
                                             role="radio"
                                             aria-checked={selected}
-                                            className={`buy-plan-card${selected ? ' buy-plan-card--active' : ''}`}
+                                            className={`buy-plan-card${selected ? ' buy-plan-card--active' : ''}${discountCents > 0 ? ' buy-plan-card--has-discount' : ''}`}
                                             onClick={() => setPlan(p)}
                                         >
+                                            {discountCents > 0 && (
+                                                <span className="buy-plan-discount" aria-label={t('discount.saveAria', { amount: formatUSD(discountCents) })}>
+                                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                                        <path d="M12 2l1.76 5.24L19 9l-5.24 1.76L12 16l-1.76-5.24L5 9l5.24-1.76L12 2z" />
+                                                    </svg>
+                                                    {t('discount.saveLabel', { amount: formatUSD(discountCents) })}
+                                                </span>
+                                            )}
                                             <div className="buy-plan-name">{pickLabel(locale, p.labelEn, p.labelZh)}</div>
                                             <div className="buy-plan-price">{planHeadline(p, locale, t)}</div>
                                             <p className="buy-plan-desc">{pickLabel(locale, p.descriptionEn, p.descriptionZh)}</p>
@@ -271,6 +281,8 @@ function SummaryDetail({ plan, cart, addons, locale, total }: {
     const metaRows = buildMetaRows(plan, cart, locale, (k, v) => t(k as never, v as never));
     const subtotal = items.reduce((s, i) => s + i.amountCents, 0);
     const depositEligible = PLATFORM_PLANS.has(plan.key) && total > DEPOSIT_CENTS;
+    const depositDiscount = depositEligible ? getDepositDiscountCents(plan.key) : 0;
+    const discountedTotal = total - depositDiscount;
 
     return (
         <>
@@ -312,11 +324,23 @@ function SummaryDetail({ plan, cart, addons, locale, total }: {
                         <span>{t('summary.fullPrice')}</span>
                         <span className="buy-summary-strike">{formatUSD(total)}</span>
                     </div>
+                    {depositDiscount > 0 && (
+                        <div className="buy-summary-row buy-summary-row--discount">
+                            <span>{t('summary.depositDiscount')}</span>
+                            <span className="buy-summary-discount-amt">−{formatUSD(depositDiscount)}</span>
+                        </div>
+                    )}
+                    {depositDiscount > 0 && (
+                        <div className="buy-summary-row buy-summary-row--newtotal">
+                            <span>{t('summary.discountedTotal')}</span>
+                            <span>{formatUSD(discountedTotal)}</span>
+                        </div>
+                    )}
                     <div className="buy-summary-hero">
                         <span className="buy-summary-hero-label">{t('summary.payToday')}</span>
                         <span className="buy-summary-hero-amount">{formatUSD(DEPOSIT_CENTS)}</span>
                         <span className="buy-summary-hero-note">
-                            {t('summary.remainingVia', { amount: formatUSD(total - DEPOSIT_CENTS) })}
+                            {t('summary.remainingVia', { amount: formatUSD(discountedTotal - DEPOSIT_CENTS) })}
                         </span>
                     </div>
                 </>

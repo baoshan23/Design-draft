@@ -1,8 +1,25 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { Building2, User, Smartphone, Server as ServerIcon, ShieldCheck } from 'lucide-react';
+import QRCode from 'qrcode';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import SubNav from './SubNav';
+import HeroVideo from './HeroVideo';
+
+const DEMO_QR_URLS = {
+  mobile: 'https://app.gcss.hk/',
+  web: 'https://app.gcss.hk/admin',
+};
+
+async function generateQrSvg(data: string): Promise<string> {
+  return QRCode.toString(data, {
+    type: 'svg',
+    margin: 1,
+    width: 200,
+    color: { dark: '#0F172A', light: '#FFFFFF00' },
+    errorCorrectionLevel: 'M',
+  });
+}
 
 export const metadata = {
   title: 'B2B Platform - GCSS | EV Charging SaaS Solution',
@@ -13,7 +30,6 @@ export const metadata = {
 // Not real secrets — do not add production credentials here.
 const DEMO_CREDS = {
   admin: { account: 'admin', pass: '123456' },
-  merchant: { account: 'test_merchant', pass: '123456' },
 };
 
 function CheckIcon() {
@@ -28,6 +44,11 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations();
+
+  const [mobileQr, webQr] = await Promise.all([
+    generateQrSvg(DEMO_QR_URLS.mobile),
+    generateQrSvg(DEMO_QR_URLS.web),
+  ]);
 
   const rawList = (key: string): string[] => {
     const v = t.raw(key);
@@ -94,6 +115,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               </div>
             </div>
 
+            <HeroVideo />
           </div>
         </div>
       </section>
@@ -406,7 +428,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
       </section>
 
       {/* ==================== Section 12: System Demo ==================== */}
-      <section className="section section-alt" id="demo">
+      <section className="section section-alt b2b-demo-section" id="demo">
         <div className="container">
           <ScrollAnimation>
             <div className="section-header">
@@ -414,41 +436,49 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               <h2>{t('b2b.demo.title')}</h2>
             </div>
           </ScrollAnimation>
-          <div className="grid-2" style={{ gap: 32, alignItems: 'start' }}>
+          <div className="b2b-demo-grid">
             <ScrollAnimation>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                <div className="glass-card" style={{ padding: 28, borderRadius: 'var(--radius-lg)' }}>
-                  <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: 4 }}>{t('b2b.demo.admin.title')}</h3>
-                  <div style={{ color: 'var(--text-tertiary)', fontSize: '0.85rem', marginBottom: 16 }}>{t('b2b.demo.admin.subtitle')}</div>
-                  <div style={{ fontSize: '0.82rem', color: 'var(--text-tertiary)', marginBottom: 10 }}>{t('b2b.demo.demoAccount')}</div>
+              <div className="b2b-demo-cards">
+                <div className="b2b-demo-card glass-card" data-accent="blue">
+                  <div className="b2b-demo-card-head">
+                    <h3>{t('b2b.demo.admin.title')}</h3>
+                    <span className="b2b-demo-card-sub">{t('b2b.demo.admin.subtitle')}</span>
+                  </div>
+                  <div className="b2b-demo-card-creds-label">{t('b2b.demo.demoAccount')}</div>
                   <div className="b2b-demo-field"><span>{t('b2b.demo.account')}:</span><code>{DEMO_CREDS.admin.account}</code></div>
                   <div className="b2b-demo-field"><span>{t('b2b.demo.password')}:</span><code>{DEMO_CREDS.admin.pass}</code></div>
-                  <button type="button" className="btn btn-secondary" style={{ marginTop: 16 }}>{t('b2b.demo.launch')}</button>
-                </div>
-                <div className="glass-card" style={{ padding: 28, borderRadius: 'var(--radius-lg)' }}>
-                  <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: 4 }}>{t('b2b.demo.merchant.title')}</h3>
-                  <div style={{ color: 'var(--text-tertiary)', fontSize: '0.85rem', marginBottom: 16 }}>{t('b2b.demo.merchant.subtitle')}</div>
-                  <div style={{ fontSize: '0.82rem', color: 'var(--text-tertiary)', marginBottom: 10 }}>{t('b2b.demo.demoAccount')}</div>
-                  <div className="b2b-demo-field"><span>{t('b2b.demo.account')}:</span><code>{DEMO_CREDS.merchant.account}</code></div>
-                  <div className="b2b-demo-field"><span>{t('b2b.demo.password')}:</span><code>{DEMO_CREDS.merchant.pass}</code></div>
-                  <button type="button" className="btn btn-secondary" style={{ marginTop: 16 }}>{t('b2b.demo.launch')}</button>
+                  <button type="button" className="btn btn-secondary b2b-demo-launch">{t('b2b.demo.launch')}</button>
                 </div>
               </div>
             </ScrollAnimation>
             <ScrollAnimation style={{ transitionDelay: '0.15s' }}>
-              <div style={{ display: 'flex', gap: 24, justifyContent: 'center', flexWrap: 'wrap' }}>
-                <div style={{ textAlign: 'center' }}>
-                  <div className="glass-card" style={{ width: 'clamp(120px, 20vw, 160px)', height: 'clamp(120px, 20vw, 160px)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 'var(--radius-lg)', marginBottom: 10 }}>
-                    <span style={{ color: 'var(--text-tertiary)', fontSize: '0.85rem' }}>QR Code</span>
-                  </div>
-                  <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{t('b2b.demo.mobileDemo')}</div>
-                </div>
-                <div style={{ textAlign: 'center' }}>
-                  <div className="glass-card" style={{ width: 'clamp(120px, 20vw, 160px)', height: 'clamp(120px, 20vw, 160px)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 'var(--radius-lg)', marginBottom: 10 }}>
-                    <span style={{ color: 'var(--text-tertiary)', fontSize: '0.85rem' }}>QR Code</span>
-                  </div>
-                  <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{t('b2b.demo.webDemo')}</div>
-                </div>
+              <div className="b2b-demo-qrs">
+                <a
+                  className="b2b-demo-qr-block"
+                  href={DEMO_QR_URLS.mobile}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div
+                    className="b2b-demo-qr glass-card"
+                    aria-label={t('b2b.demo.mobileDemo')}
+                    dangerouslySetInnerHTML={{ __html: mobileQr }}
+                  />
+                  <div className="b2b-demo-qr-label">{t('b2b.demo.mobileDemo')}</div>
+                </a>
+                <a
+                  className="b2b-demo-qr-block"
+                  href={DEMO_QR_URLS.web}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div
+                    className="b2b-demo-qr glass-card"
+                    aria-label={t('b2b.demo.webDemo')}
+                    dangerouslySetInnerHTML={{ __html: webQr }}
+                  />
+                  <div className="b2b-demo-qr-label">{t('b2b.demo.webDemo')}</div>
+                </a>
               </div>
             </ScrollAnimation>
           </div>

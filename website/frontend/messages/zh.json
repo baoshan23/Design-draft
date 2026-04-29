@@ -68,6 +68,10 @@
     "loadError": "无法加载产品目录。",
     "title": "配置您的 GCSS 部署",
     "subtitle": "选择适合的方案，然后调整计费方式与附加项。",
+    "discount": {
+      "saveLabel": "立省 {amount}",
+      "saveAria": "支付 $200 定金可立省 {amount}"
+    },
     "choosePlan": "选择方案",
     "familyHosted": "托管模式",
     "familyPrivate": "私有化部署",
@@ -142,6 +146,8 @@
       "dueLater": "余款（银行转账）",
       "bankTransferAmount": "银行转账金额",
       "fullPrice": "原价",
+      "depositDiscount": "定金优惠",
+      "discountedTotal": "优惠后总价",
       "payToday": "今日支付",
       "remainingVia": "余款 {amount} 将在项目启动后通过银行转账支付。",
       "wasPrice": "原价 {amount}"
@@ -198,7 +204,9 @@
       "depositTitle": "付款方式",
       "depositLabel": "仅需 {amount} 即可启动",
       "depositBalance": "余款",
-      "depositHelp": "今天即可启动项目。先在线支付 {amount} 订金，系统交付时再通过银行转账支付余款。"
+      "depositHelp": "今天即可启动项目。先在线支付 {amount} 订金，系统交付时再通过银行转账支付余款。",
+      "depositDiscountLabel": "订金折扣已应用",
+      "depositDiscountDetail": "支付 {amount} 订金启动以解锁"
     },
     "success": {
       "paid": "支付成功",
@@ -477,7 +485,9 @@
       "submit": "提交申请",
       "submitting": "提交中…",
       "submitted": "已提交 ✓",
-      "error": "发生错误，请重试。"
+      "error": "发生错误，请重试。",
+      "openCta": "申请支付方式",
+      "close": "关闭"
     }
   },
   "manufacturers": {
@@ -575,7 +585,45 @@
       "qrH5": "扫码体验 H5 网页版",
       "qrMobile": "扫码下载移动应用",
       "viewB2cProduct": "查看 B2C 产品页面",
-      "viewB2bProduct": "查看 B2B2C 产品页面"
+      "viewB2bProduct": "查看 B2B2C 产品页面",
+      "requestDemo": "申请演示",
+      "viewPlanPricing": "查看方案定价",
+      "edB2cHeading": "单运营商版本",
+      "edB2cDesc": "端到端运营自有充电网络，按所需的定制程度选择方案。",
+      "edB2bHeading": "多租户平台版本",
+      "edB2bDesc": "在一个平台上运营多家充电运营商。真实 B2B2C 演示已接入 admin.demo.gcss.hk。",
+      "plans": {
+        "saas": {
+          "tag": "共享基础架构 · 按桩计费",
+          "b1": "由 GCSS 托管 — 零运维、即开即用",
+          "b2": "按充电桩年费，无平台启动费",
+          "b3": "终端用户使用 GCSS 共享品牌应用"
+        },
+        "customweb": {
+          "tag": "品牌网页 · 单运营商",
+          "b1": "自定义 Logo、域名和 H5 体验",
+          "b2": "任选现有支付网关 + 1 个定制",
+          "b3": "由 GCSS 托管 — 数天即可上线"
+        },
+        "appent": {
+          "tag": "品牌原生 App · 单运营商",
+          "b1": "iOS + Android 上架贵公司品牌",
+          "b2": "可自建或租用 GCSS 服务器",
+          "b3": "专属客户经理 + 定制集成"
+        },
+        "webplat": {
+          "tag": "Web 平台 · 多租户 CPO",
+          "b1": "接入 CPO，配置抽佣和分成",
+          "b2": "托管模式 + 租户管理",
+          "b3": "跨所有运营商的统一分析"
+        },
+        "appplat": {
+          "tag": "App 平台 · 多租户 CPO",
+          "b1": "iOS + Android 原生多租户部署",
+          "b2": "CPO 入驻、抽佣、结算",
+          "b3": "租户级品牌与数据分析"
+        }
+      }
     }
   },
   "changelog": {
@@ -637,7 +685,21 @@
     "invoices": "发票与付款",
     "copyright": "© 2026 GCSS (Global Charger System Service). 保留所有权利。",
     "privacy": "隐私政策",
-    "terms": "服务条款"
+    "terms": "服务条款",
+    "followus": "关注我们",
+    "getapp": "下载应用",
+    "webapp": "网页版",
+    "googleplay": "Google Play",
+    "appstore": "App Store",
+    "tagline": "更聪明的充电网络 — 完全可定制、原生 OCPP、几分钟即可部署。",
+    "trust1": "OCPP 1.6 认证",
+    "trust2": "AES-256 加密",
+    "trust3": "99.9% 在线 SLA",
+    "backtotop": "返回顶部",
+    "newsletter": "订阅更新",
+    "newsletterDesc": "产品更新、价格变动和 EV 充电行业洞察 — 每月一封,绝不打扰。",
+    "newsletterPlaceholder": "you@company.com",
+    "newsletterSubmit": "订阅"
   },
   "dropdown": {
     "b2c": {
@@ -869,7 +931,7 @@
       "f4": "全面白标定制",
       "f5": "专属客户经理",
       "f6": "一对一技术支持",
-      "btn": "联系销售"
+      "btn": "支付 $200 定金"
     },
     "changelog": {
       "label": "更新日志",
@@ -961,8 +1023,21 @@
         "title": "APP 体验",
         "desc": "扫码下载演示应用"
       },
+      "cpo": {
+        "title": "CPO",
+        "desc": "运营商管理后台：站点、计费与客户服务。",
+        "btn": "打开 CPO 后台"
+      },
+      "qrH5": {
+        "title": "H5",
+        "desc": "扫码打开 H5 网页应用"
+      },
+      "qrApp": {
+        "title": "APP",
+        "desc": "扫码下载移动应用"
+      },
       "h5": {
-        "title": "H5 Web端体验",
+        "title": "演示账户",
         "desc": "扫码打开 H5 网页应用",
         "scan": "扫码打开 H5 网页应用",
         "btn": "打开H5应用"
@@ -992,9 +1067,9 @@
       }
     },
     "cta": {
-      "title": "立即开始",
-      "desc": "数分钟内部署您的 EV 充电管理系统。免费版无需信用卡。",
-      "btn1": "免费开始",
+      "title": "准备部署？",
+      "desc": "支付 $200 定金启动流程,即可享受最高 $1,500 方案折扣。数天上线，无需漫长等待。",
+      "btn1": "支付 $200 定金启动",
       "btn2": "联系销售"
     }
   },
@@ -1002,6 +1077,9 @@
     "label": "价格方案",
     "title": "简单透明的价格方案",
     "desc": "B2C 与 B2B 两类部署，共四档方案，一个平台。所有价格均为美元。",
+    "saas": {
+      "name": "SaaS 托管"
+    },
     "perCharger": "每桩",
     "oneTime": "一次性",
     "perMonth": "/月",
@@ -1035,6 +1113,8 @@
     "getstarted": "立即开始",
     "buynow": "立即购买",
     "contactsales": "联系销售",
+    "depositOfferTitle": "限时定金优惠",
+    "depositOfferDesc": "支付 $200 定金启动流程，可在此方案上节省 {amount}。",
     "dedicated": {
       "name": "独立服务器租赁",
       "price": "$200",
@@ -1065,6 +1145,7 @@
       "price": "$16,900",
       "priceUnit": "一次性",
       "priceNote": "可选 $1,200/年 服务器托管",
+      "discountAmount": "$500",
       "f1": "自定义 Logo",
       "f2": "自定义名称和域名",
       "f3": "提供二进制安装包",
@@ -1081,6 +1162,7 @@
       "price": "$21,800",
       "priceUnit": "一次性",
       "priceNote": "可选 $1,200/年 服务器托管",
+      "discountAmount": "$1,000",
       "f1": "自定义 Logo",
       "f2": "自定义名称和域名",
       "f3": "提供二进制安装包",
@@ -1097,6 +1179,7 @@
       "price": "$68,000",
       "priceUnit": "一次性",
       "priceNote": "可选 $1,200/年 服务器托管",
+      "discountAmount": "$1,500",
       "f1": "自定义 Logo",
       "f2": "自定义名称和域名",
       "f3": "提供二进制安装包",
@@ -2060,7 +2143,16 @@
       "title": "打造您的专属 EV 充电 SaaS 平台",
       "desc": "终极多租户解决方案，支持无限量运营商入驻，实现自动化分账管理，通过统一的超级管理控制台（Super Admin），轻松掌控您的全球充电网络。",
       "cta1": "成为平台运营商",
-      "cta2": "联系销售"
+      "cta2": "联系销售",
+      "video": {
+        "label": "GCSS B2B 平台概览",
+        "play": "播放",
+        "pause": "暂停",
+        "mute": "静音",
+        "unmute": "取消静音",
+        "fullscreen": "全屏",
+        "exitFullscreen": "退出全屏"
+      }
     },
     "nav": {
       "overview": "概述",
@@ -2350,8 +2442,8 @@
       "account": "账号",
       "password": "密码",
       "launch": "启动",
-      "mobileDemo": "移动端演示",
-      "webDemo": "网页端演示"
+      "mobileDemo": "移动端",
+      "webDemo": "网页端"
     }
   },
   "faq": {
@@ -2717,7 +2809,24 @@
       "fieldActive": "启用（在结账页显示）",
       "save": "保存",
       "saving": "保存中…",
-      "cancel": "取消"
+      "cancel": "取消",
+      "unlabeled": "（未命名）",
+      "noMatches": "没有匹配的银行账户。",
+      "searchPlaceholder": "搜索名称、银行、账号、币种…",
+      "filterStatus": "按状态筛选",
+      "filterAll": "全部",
+      "filterActive": "启用",
+      "filterInactive": "停用",
+      "sortLabel": "排序",
+      "sortBySortOrder": "排序权重",
+      "sortByLabel": "名称（A–Z）",
+      "sortByNewest": "最新优先",
+      "copy": "复制",
+      "copied": "已复制",
+      "sectionIdentity": "基本信息",
+      "sectionBanking": "银行信息",
+      "sectionNotes": "客户备注",
+      "notesPlaceholder": "例如：电汇时请注明订单编号。"
     },
     "bankSlips": {
       "title": "银行转账凭证",
@@ -2760,13 +2869,39 @@
     "backToOverview": "返回管理面板",
     "products": {
       "title": "产品目录",
-      "subtitle": "管理计费周期、支持等级、服务器等级与优惠码。修改立即生效。",
+      "subtitle": "定价与购买页面展示的方案与附加项。修改立即生效。",
       "confirmDelete": "确认删除该项？",
       "common": {
         "active": "启用",
         "sort": "顺序",
         "delete": "删除",
         "add": "添加"
+      },
+      "plans": {
+        "title": "方案",
+        "desc": "/pricing 与 /buy 页展示的方案。计价逻辑仍依赖固定的 key（saas / customweb / appent / webplat / appplat）；编辑价格安全，但新增全新 key 需先在源代码中定义计价公式。",
+        "key": "标识",
+        "label": "标签",
+        "family": "类型",
+        "base": "基础价格（美元）",
+        "recurring": "周期费用（美元）",
+        "recurringUnit": "周期单位",
+        "yearly": "年费（美元）",
+        "hosting": "可选托管（美元）",
+        "modes": "计费模式",
+        "unlimited": "无限充电桩",
+        "billingMonthly": "按月",
+        "billingYearly": "按年",
+        "billingOneTime": "一次性"
+      },
+      "addons": {
+        "title": "附加项",
+        "desc": "可附加在任意方案上的选项。",
+        "key": "标识",
+        "label": "标签",
+        "price": "价格（美元）",
+        "model": "计价模式",
+        "unit": "单位说明"
       },
       "billingCycles": {
         "title": "计费周期",

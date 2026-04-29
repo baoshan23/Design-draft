@@ -82,7 +82,10 @@ export default function AdminBankSlipsClient() {
             <div className="container">
                 <div className="admin-page-head">
                     <div>
-                        <Link href="/admin" className="admin-back-link">← {t('back')}</Link>
+                        <Link href="/admin" className="admin-back-link">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6" /></svg>
+                            {t('back')}
+                        </Link>
                         <h1>{t('title')}</h1>
                         <p>{t('subtitle')}</p>
                     </div>

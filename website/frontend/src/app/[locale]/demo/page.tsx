@@ -1,22 +1,26 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import QRCode from 'qrcode';
 import { Link } from '@/i18n/navigation';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import StickyEditionNav from './StickyEditionNav';
 import CopyableField from './CopyableField';
 import './demo-page.css';
 
-export const metadata = {
-  title: 'Live Demo - GCSS | Try B2C and B2B2C Editions',
-  description: 'Experience both GCSS editions side by side. Try the B2C single-operator system and the B2B2C multi-tenant platform with admin, merchant, and mobile demo access.',
+// Demo entry points used to generate QR codes. Update when real mobile-app
+// download URL is available; until then both point at the web app.
+const QR_TARGETS = {
+  webApp: 'https://app.gcss.hk/',
+  mobileApp: 'https://app.gcss.hk/',
 };
 
-// Demo-only credentials displayed on the page so visitors can try the sandbox.
-// Not real secrets — do not add production credentials here.
-const DEMO_CREDS = {
-  b2c: { account: 'test_merchant', pass: '123456' },
-  b2bAdmin: { account: 'admin', pass: '123456' },
-  b2bMerchant: { account: 'test_merchant', pass: '123456' },
+export const metadata = {
+  title: 'Live Demo - GCSS | Try Every Plan Edition',
+  description: 'Hands-on sandbox for every GCSS plan tier. SaaS, Custom Web, APP Enterprise, Web APP Platform, APP Platform — try the real B2B2C admin or request a tour for your tier.',
 };
+
+// Real demo wired up. Other tiers route to /contact for a guided demo.
+const ADMIN_DEMO_URL = 'https://admin.demo.gcss.hk/';
+const ADMIN_DEMO_CREDS = { account: 'demo', pass: '123456' };
 
 function ArrowRight() {
   return (
@@ -26,54 +30,132 @@ function ArrowRight() {
   );
 }
 
-function QrFrame({ label }: { label: string }) {
+async function QrFrame({ label, value }: { label: string; value: string }) {
+  const svg = await QRCode.toString(value, {
+    type: 'svg',
+    margin: 1,
+    width: 144,
+    color: { dark: '#1a1210', light: '#00000000' },
+    errorCorrectionLevel: 'M',
+  });
   return (
     <div className="demo-qr">
       <div className="demo-qr-frame">
         <div className="demo-qr-corners">
           <span /><span /><span /><span />
         </div>
-        <div className="demo-qr-placeholder">
-          <svg width="96" height="96" viewBox="0 0 96 96" fill="none">
-            {/* stylized QR placeholder */}
-            {Array.from({ length: 9 }).map((_, r) =>
-              Array.from({ length: 9 }).map((_, c) => {
-                const on = (r * 3 + c * 5 + r * c) % 3 === 0;
-                return on ? (
-                  <rect
-                    key={`${r}-${c}`}
-                    x={r * 10 + 4}
-                    y={c * 10 + 4}
-                    width="8"
-                    height="8"
-                    rx="1.5"
-                    fill="#FFD95A"
-                    opacity={0.85}
-                  />
-                ) : null;
-              })
-            )}
-            <rect x="4" y="4" width="22" height="22" rx="3" stroke="#FFD95A" strokeWidth="2" fill="none" />
-            <rect x="70" y="4" width="22" height="22" rx="3" stroke="#FFD95A" strokeWidth="2" fill="none" />
-            <rect x="4" y="70" width="22" height="22" rx="3" stroke="#FFD95A" strokeWidth="2" fill="none" />
-          </svg>
-        </div>
+        <div className="demo-qr-code" dangerouslySetInnerHTML={{ __html: svg }} />
       </div>
       <span className="demo-qr-label">{label}</span>
+      <a href={value} target="_blank" rel="noopener noreferrer" className="demo-qr-link">{value.replace(/^https?:\/\//, '').replace(/\/$/, '')}</a>
     </div>
   );
 }
+
+// Tiny per-plan icon. One SVG each, line style for visual cohesion.
+function PlanIcon({ plan }: { plan: 'saas' | 'customweb' | 'appent' | 'webplat' | 'appplat' }) {
+  const stroke = { stroke: 'currentColor', strokeWidth: 2 } as const;
+  switch (plan) {
+    case 'saas':
+      return (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" {...stroke}>
+          <path d="M4 17a4 4 0 0 1 1-7.9 6 6 0 0 1 11.7-1A4.5 4.5 0 0 1 19 17H5z" />
+        </svg>
+      );
+    case 'customweb':
+      return (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" {...stroke}>
+          <rect x="3" y="4" width="18" height="14" rx="2" />
+          <line x1="3" y1="9" x2="21" y2="9" />
+          <line x1="8" y1="20" x2="16" y2="20" />
+        </svg>
+      );
+    case 'appent':
+      return (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" {...stroke}>
+          <rect x="6" y="2" width="12" height="20" rx="2" />
+          <line x1="11" y1="18" x2="13" y2="18" />
+        </svg>
+      );
+    case 'webplat':
+      return (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" {...stroke}>
+          <circle cx="12" cy="12" r="9" />
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 3v4M12 17v4M3 12h4M17 12h4" />
+        </svg>
+      );
+    case 'appplat':
+      return (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" {...stroke}>
+          <path d="M3 9l9-6 9 6v11a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2z" />
+        </svg>
+      );
+  }
+}
+
+type PlanKey = 'saas' | 'customweb' | 'appent' | 'webplat' | 'appplat';
+
+type PlanCardProps = {
+  planKey: PlanKey;
+  hasLiveDemo: boolean;
+  iconColor: 'gold' | 'indigo';
+};
 
 export default async function DemoPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations();
 
+  // Localized labels are server-side rendered. Each plan card uses
+  // pricing.<plan>.name as title and demo.page.plans.<plan>.* for tag/bullets.
+  const PlanCard = ({ planKey, hasLiveDemo, iconColor }: PlanCardProps) => (
+    <div className="demo-edition-card glass-card">
+      <div className="demo-edition-card-head">
+        <div className={`demo-edition-card-icon demo-edition-card-icon-${iconColor}`}>
+          <PlanIcon plan={planKey} />
+        </div>
+        <div>
+          <h3 className="demo-edition-card-title">{t(`pricing.${planKey}.name` as never)}</h3>
+          <span className="demo-edition-card-tag">{t(`demo.page.plans.${planKey}.tag` as never)}</span>
+        </div>
+      </div>
+      <ul className="demo-edition-bullets">
+        <li>{t(`demo.page.plans.${planKey}.b1` as never)}</li>
+        <li>{t(`demo.page.plans.${planKey}.b2` as never)}</li>
+        <li>{t(`demo.page.plans.${planKey}.b3` as never)}</li>
+      </ul>
+      {hasLiveDemo && (
+        <div className="demo-cred-block">
+          <div className="demo-cred-header">{t('demo.page.credentials')}</div>
+          <CopyableField label={t('demo.page.account')} value={ADMIN_DEMO_CREDS.account} />
+          <CopyableField label={t('demo.page.password')} value={ADMIN_DEMO_CREDS.pass} />
+        </div>
+      )}
+      <div className="demo-edition-actions">
+        {hasLiveDemo ? (
+          <a href={ADMIN_DEMO_URL} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+            <span>{t('demo.page.launchDemo')}</span>
+            <ArrowRight />
+          </a>
+        ) : (
+          <Link href="/contact" className="btn btn-primary">
+            <span>{t('demo.page.requestDemo')}</span>
+            <ArrowRight />
+          </Link>
+        )}
+        <Link href="/pricing" className="btn btn-outline">
+          <span>{t('demo.page.viewPlanPricing')}</span>
+        </Link>
+      </div>
+    </div>
+  );
+
   return (
     <>
       <StickyEditionNav />
 
-      {/* ==================== Hero ==================== */}
+      {/* Hero */}
       <section className="demo-hero" id="demo-hero">
         <div className="demo-hero-bg" aria-hidden="true">
           <div className="demo-hero-orb demo-hero-orb-1" />
@@ -104,16 +186,12 @@ export default async function DemoPage({ params }: { params: Promise<{ locale: s
               </div>
               <div className="demo-hero-stats">
                 <div>
-                  <span className="demo-hero-stat-num">2</span>
+                  <span className="demo-hero-stat-num">5</span>
                   <span className="demo-hero-stat-label">{t('demo.page.stat1')}</span>
                 </div>
                 <div>
                   <span className="demo-hero-stat-num">&lt;60s</span>
                   <span className="demo-hero-stat-label">{t('demo.page.stat2')}</span>
-                </div>
-                <div>
-                  <span className="demo-hero-stat-num">0$</span>
-                  <span className="demo-hero-stat-label">{t('demo.page.stat3')}</span>
                 </div>
               </div>
             </div>
@@ -121,7 +199,7 @@ export default async function DemoPage({ params }: { params: Promise<{ locale: s
         </div>
       </section>
 
-      {/* ==================== B2C Enterprise Demo ==================== */}
+      {/* Single-operator editions: SaaS / Custom Web / APP Enterprise */}
       <section className="section demo-section" id="demo-b2c">
         <div className="container">
           <ScrollAnimation>
@@ -130,60 +208,30 @@ export default async function DemoPage({ params }: { params: Promise<{ locale: s
                 <span className="demo-section-dot" />
                 {t('demo.page.editionOne')}
               </span>
-              <h2 className="demo-section-title">{t('demo.page.b2cHeading')}</h2>
-              <p className="demo-section-desc">{t('demo.page.b2cDesc')}</p>
+              <h2 className="demo-section-title">{t('demo.page.edB2cHeading')}</h2>
+              <p className="demo-section-desc">{t('demo.page.edB2cDesc')}</p>
             </div>
           </ScrollAnimation>
 
           <div className="demo-edition-grid">
             <ScrollAnimation>
-              <div className="demo-edition-card glass-card">
-                <div className="demo-edition-card-head">
-                  <div className="demo-edition-card-icon demo-edition-card-icon-gold">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="3" y="4" width="18" height="12" rx="2" />
-                      <line x1="8" y1="20" x2="16" y2="20" />
-                      <line x1="12" y1="16" x2="12" y2="20" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="demo-edition-card-title">{t('demo.page.b2cCardTitle')}</h3>
-                    <span className="demo-edition-card-tag">{t('demo.page.b2cCardTag')}</span>
-                  </div>
-                </div>
-                <ul className="demo-edition-bullets">
-                  <li>{t('demo.page.b2cBullet1')}</li>
-                  <li>{t('demo.page.b2cBullet2')}</li>
-                  <li>{t('demo.page.b2cBullet3')}</li>
-                </ul>
-                <div className="demo-cred-block">
-                  <div className="demo-cred-header">{t('demo.page.credentials')}</div>
-                  <CopyableField label={t('demo.page.account')} value={DEMO_CREDS.b2c.account} />
-                  <CopyableField label={t('demo.page.password')} value={DEMO_CREDS.b2c.pass} />
-                </div>
-                <div className="demo-edition-actions">
-                  <a href="https://demo-merchant.gcss.cloud" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                    <span>{t('demo.page.launchDemo')}</span>
-                    <ArrowRight />
-                  </a>
-                  <Link href="/b2c" className="btn btn-outline">
-                    {t('demo.page.viewB2cProduct')}
-                  </Link>
-                </div>
-              </div>
+              <PlanCard planKey="customweb" hasLiveDemo={false} iconColor="gold" />
             </ScrollAnimation>
-
-            <ScrollAnimation style={{ transitionDelay: '0.1s' }}>
-              <div className="demo-edition-aside">
-                <QrFrame label={t('demo.page.qrH5')} />
-                <QrFrame label={t('demo.page.qrMobile')} />
-              </div>
+            <ScrollAnimation style={{ transitionDelay: '0.08s' }}>
+              <PlanCard planKey="appent" hasLiveDemo={false} iconColor="gold" />
             </ScrollAnimation>
           </div>
+
+          <ScrollAnimation style={{ transitionDelay: '0.2s' }}>
+            <div className="demo-edition-aside demo-edition-aside--centered">
+              <QrFrame label={t('demo.page.qrH5')} value={QR_TARGETS.webApp} />
+              <QrFrame label={t('demo.page.qrMobile')} value={QR_TARGETS.mobileApp} />
+            </div>
+          </ScrollAnimation>
         </div>
       </section>
 
-      {/* ==================== B2B2C Platform Demo ==================== */}
+      {/* Multi-tenant platform editions: Web APP Platform / APP Platform */}
       <section className="section section-alt demo-section" id="demo-b2b">
         <div className="container">
           <ScrollAnimation>
@@ -192,83 +240,24 @@ export default async function DemoPage({ params }: { params: Promise<{ locale: s
                 <span className="demo-section-dot" />
                 {t('demo.page.editionTwo')}
               </span>
-              <h2 className="demo-section-title">{t('demo.page.b2bHeading')}</h2>
-              <p className="demo-section-desc">{t('demo.page.b2bDesc')}</p>
+              <h2 className="demo-section-title">{t('demo.page.edB2bHeading')}</h2>
+              <p className="demo-section-desc">{t('demo.page.edB2bDesc')}</p>
             </div>
           </ScrollAnimation>
 
           <div className="demo-edition-grid">
             <ScrollAnimation>
-              <div className="demo-edition-card glass-card">
-                <div className="demo-edition-card-head">
-                  <div className="demo-edition-card-icon demo-edition-card-icon-indigo">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="12" cy="12" r="9" />
-                      <circle cx="12" cy="12" r="4" />
-                      <path d="M12 3v4M12 17v4M3 12h4M17 12h4" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="demo-edition-card-title">{t('b2b.demo.admin.title')}</h3>
-                    <span className="demo-edition-card-tag">{t('b2b.demo.admin.subtitle')}</span>
-                  </div>
-                </div>
-                <ul className="demo-edition-bullets">
-                  <li>{t('demo.page.b2bAdminBullet1')}</li>
-                  <li>{t('demo.page.b2bAdminBullet2')}</li>
-                  <li>{t('demo.page.b2bAdminBullet3')}</li>
-                </ul>
-                <div className="demo-cred-block">
-                  <div className="demo-cred-header">{t('demo.page.credentials')}</div>
-                  <CopyableField label={t('demo.page.account')} value={DEMO_CREDS.b2bAdmin.account} />
-                  <CopyableField label={t('demo.page.password')} value={DEMO_CREDS.b2bAdmin.pass} />
-                </div>
-                <div className="demo-edition-actions">
-                  <a href="https://demo-admin.gcss.cloud" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                    <span>{t('demo.page.launchAdmin')}</span>
-                    <ArrowRight />
-                  </a>
-                </div>
-              </div>
+              <PlanCard planKey="webplat" hasLiveDemo iconColor="indigo" />
             </ScrollAnimation>
-
             <ScrollAnimation style={{ transitionDelay: '0.08s' }}>
-              <div className="demo-edition-card glass-card">
-                <div className="demo-edition-card-head">
-                  <div className="demo-edition-card-icon demo-edition-card-icon-gold">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M3 9l9-6 9 6v11a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="demo-edition-card-title">{t('b2b.demo.merchant.title')}</h3>
-                    <span className="demo-edition-card-tag">{t('b2b.demo.merchant.subtitle')}</span>
-                  </div>
-                </div>
-                <ul className="demo-edition-bullets">
-                  <li>{t('demo.page.b2bMerchantBullet1')}</li>
-                  <li>{t('demo.page.b2bMerchantBullet2')}</li>
-                  <li>{t('demo.page.b2bMerchantBullet3')}</li>
-                </ul>
-                <div className="demo-cred-block">
-                  <div className="demo-cred-header">{t('demo.page.credentials')}</div>
-                  <CopyableField label={t('demo.page.account')} value={DEMO_CREDS.b2bMerchant.account} />
-                  <CopyableField label={t('demo.page.password')} value={DEMO_CREDS.b2bMerchant.pass} />
-                </div>
-                <div className="demo-edition-actions">
-                  <a href="https://demo-merchant.gcss.cloud" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                    <span>{t('demo.page.launchMerchant')}</span>
-                    <ArrowRight />
-                  </a>
-                </div>
-              </div>
+              <PlanCard planKey="appplat" hasLiveDemo iconColor="indigo" />
             </ScrollAnimation>
           </div>
 
           <ScrollAnimation style={{ transitionDelay: '0.15s' }}>
             <div className="demo-b2b-qr-row">
-              <QrFrame label={t('b2b.demo.mobileDemo')} />
-              <QrFrame label={t('b2b.demo.webDemo')} />
+              <QrFrame label={t('b2b.demo.mobileDemo')} value={QR_TARGETS.mobileApp} />
+              <QrFrame label={t('b2b.demo.webDemo')} value={QR_TARGETS.webApp} />
               <div className="demo-b2b-qr-link">
                 <p>{t('demo.page.b2bQrDesc')}</p>
                 <Link href="/b2b" className="btn btn-outline">

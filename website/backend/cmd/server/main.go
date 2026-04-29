@@ -191,6 +191,10 @@ func main() {
 	mux.HandleFunc("/api/admin/products/support-tiers/", s.withCORS(s.handleAdminSupportTierItem))
 	mux.HandleFunc("/api/admin/products/server-tiers", s.withCORS(s.handleAdminServerTiers))
 	mux.HandleFunc("/api/admin/products/server-tiers/", s.withCORS(s.handleAdminServerTierItem))
+	mux.HandleFunc("/api/admin/products/plans", s.withCORS(s.handleAdminPlans))
+	mux.HandleFunc("/api/admin/products/plans/", s.withCORS(s.handleAdminPlanItem))
+	mux.HandleFunc("/api/admin/products/addons", s.withCORS(s.handleAdminAddons))
+	mux.HandleFunc("/api/admin/products/addons/", s.withCORS(s.handleAdminAddonItem))
 	mux.HandleFunc("/api/admin/promo-codes", s.withCORS(s.handleAdminPromoCodes))
 	mux.HandleFunc("/api/admin/promo-codes/", s.withCORS(s.handleAdminPromoCodeItem))
 	// Public catalog + promo apply + checkout + webhook

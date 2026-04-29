@@ -285,6 +285,37 @@ func (s *Store) migrate(ctx context.Context) error {
 			valid_until TEXT,
 			created_at TEXT NOT NULL
 		);`,
+		`CREATE TABLE IF NOT EXISTS plans (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			key TEXT NOT NULL UNIQUE,
+			label_en TEXT NOT NULL,
+			label_zh TEXT NOT NULL DEFAULT '',
+			description_en TEXT NOT NULL DEFAULT '',
+			description_zh TEXT NOT NULL DEFAULT '',
+			family TEXT NOT NULL DEFAULT 'private',
+			base_price_cents INTEGER NOT NULL DEFAULT 0,
+			recurring_cents INTEGER NOT NULL DEFAULT 0,
+			recurring_unit TEXT NOT NULL DEFAULT '',
+			yearly_cents INTEGER NOT NULL DEFAULT 0,
+			optional_hosting_cents INTEGER NOT NULL DEFAULT 0,
+			has_monthly INTEGER NOT NULL DEFAULT 0,
+			has_yearly INTEGER NOT NULL DEFAULT 0,
+			unlimited_chargers INTEGER NOT NULL DEFAULT 0,
+			is_active INTEGER NOT NULL DEFAULT 1,
+			sort_order INTEGER NOT NULL DEFAULT 0
+		);`,
+		`CREATE TABLE IF NOT EXISTS addons (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			key TEXT NOT NULL UNIQUE,
+			label_en TEXT NOT NULL,
+			label_zh TEXT NOT NULL DEFAULT '',
+			price_cents INTEGER NOT NULL DEFAULT 0,
+			price_model TEXT NOT NULL DEFAULT 'per_unit',
+			unit_note_en TEXT NOT NULL DEFAULT '',
+			unit_note_zh TEXT NOT NULL DEFAULT '',
+			is_active INTEGER NOT NULL DEFAULT 1,
+			sort_order INTEGER NOT NULL DEFAULT 0
+		);`,
 		`CREATE TABLE IF NOT EXISTS orders (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
 			user_id INTEGER NOT NULL,
@@ -448,6 +479,10 @@ func (s *Store) migrate(ctx context.Context) error {
 func (s *Store) seedIfEmpty(ctx context.Context) error {
 	// Seed product catalog (idempotent — only seeds if tables are empty)
 	if err := s.seedCatalog(ctx); err != nil {
+		return err
+	}
+	// Seed plans + addons catalog (idempotent — only seeds if tables empty)
+	if err := s.SeedPlansIfEmpty(ctx); err != nil {
 		return err
 	}
 

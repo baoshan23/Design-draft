@@ -14,12 +14,50 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Anchor scroll-margin so headings clear the fixed header on jump */
+:where([id]) {
+  scroll-margin-top: calc(var(--header-height, 72px) + 16px);
+}
+
+/* Touch-friendly interaction defaults */
+button,
+a,
+[role='button'],
+input[type='button'],
+input[type='submit'],
+input[type='reset'] {
+  touch-action: manipulation;
+}
+
+/* iOS auto-zoom prevention: form inputs need ≥16px font on mobile */
+@media (max-width: 720px) {
+  input:not([type='checkbox']):not([type='radio']),
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}
+
+/* Reduced motion globals */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
   font-family: var(--font-body);
   background: var(--black);
   color: var(--text-primary);
   line-height: 1.6;
-  overflow-x: hidden;
+  /* `clip` instead of `hidden` so position:sticky descendants still
+     pin to the viewport (hidden creates a scroll container). */
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
