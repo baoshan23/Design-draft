@@ -28,7 +28,7 @@ export const metadata = {
 /* Reusable check-mark SVG */
 function CheckIcon() {
   return (
-    <svg viewBox="0 0 20 20" fill="currentColor" style={{ width: 18, height: 18, flexShrink: 0 }}>
+    <svg viewBox="0 0 20 20" fill="currentColor" className="check-icon">
       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" />
     </svg>
   );
@@ -75,7 +75,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
 
           {/* Feature Grid */}
           <ScrollAnimation>
-            <div className="grid grid-3" style={{ marginTop: 60 }}>
+            <div className="grid grid-3 mt-60">
               <div className="card glass-card tilt-card">
                 <div className="card-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 16V7a2 2 0 00-2-2H6a2 2 0 00-2 2v9m16 0H4m16 0l1 3H3l1-3" /></svg>
@@ -126,7 +126,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
         <div className="hero-footer-bar">
           <div className="hero-footer-inner container">
             <div className="hero-footer-stat">
-              <span className="hero-footer-icon" style={{ color: 'var(--primary)' }}>
+              <span className="hero-footer-icon hero-footer-icon-primary">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>
               </span>
               <span className="hero-footer-label">{t('product.stat1')}</span>
@@ -134,7 +134,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
             </div>
             <div className="hero-footer-divider" />
             <div className="hero-footer-stat">
-              <span className="hero-footer-icon" style={{ color: 'var(--primary)' }}>
+              <span className="hero-footer-icon hero-footer-icon-primary">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" /></svg>
               </span>
               <span className="hero-footer-label">{t('product.stat2')}</span>
@@ -142,7 +142,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
             </div>
             <div className="hero-footer-divider" />
             <div className="hero-footer-stat">
-              <span className="hero-footer-icon" style={{ color: 'var(--primary)' }}>
+              <span className="hero-footer-icon hero-footer-icon-primary">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
               </span>
               <span className="hero-footer-label">{t('product.stat3')}</span>
@@ -277,17 +277,17 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
 
           {/* Global Payment Matrix */}
           <ScrollAnimation>
-            <div style={{ marginTop: 80 }}>
+            <div className="mt-80">
               <div className="section-header">
                 <span className="section-label">{t('product.pay.label')}</span>
                 <h2>{t('product.pay.title')}</h2>
                 <p>{t('product.pay.desc')}</p>
               </div>
 
-              <div className="grid grid-3" style={{ marginTop: 32, gap: 20 }}>
+              <div className="grid grid-3 mt-32 grid-gap-20">
                 <div className="card" style={{ textAlign: 'center' }}>
-                  <h4 style={{ marginBottom: 12 }}>{t('product.pay.asia')}</h4>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
+                  <h4 className="mb-12">{t('product.pay.asia')}</h4>
+                  <div className="flex-wrap-center">
                     <span className="tag">Alipay</span>
                     <span className="tag">WeChat Pay</span>
                     <span className="tag">GrabPay</span>
@@ -298,9 +298,9 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                     <span className="tag">JCB</span>
                   </div>
                 </div>
-                <div className="card" style={{ textAlign: 'center' }}>
-                  <h4 style={{ marginBottom: 12 }}>{t('product.pay.europe')}</h4>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
+                <div className="card">
+                  <h4 className="mb-12">{t('product.pay.europe')}</h4>
+                  <div className="flex-wrap-center">
                     <span className="tag">Stripe</span>
                     <span className="tag">SEPA</span>
                     <span className="tag">TrustPay</span>
@@ -308,33 +308,33 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                     <span className="tag">Neosurf</span>
                   </div>
                 </div>
-                <div className="card" style={{ textAlign: 'center' }}>
-                  <h4 style={{ marginBottom: 12 }}>{t('product.pay.oceania')}</h4>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
+                <div className="card">
+                  <h4 className="mb-12">{t('product.pay.oceania')}</h4>
+                  <div className="flex-wrap-center">
                     <span className="tag">Visa</span>
                     <span className="tag">Mastercard</span>
                     <span className="tag">Apple Pay</span>
                     <span className="tag">Google Pay</span>
                   </div>
                 </div>
-                <div className="card" style={{ textAlign: 'center' }}>
-                  <h4 style={{ marginBottom: 12 }}>{t('product.pay.africa')}</h4>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
+                <div className="card">
+                  <h4 className="mb-12">{t('product.pay.africa')}</h4>
+                  <div className="flex-wrap-center">
                     <span className="tag">M-PESA</span>
                     <span className="tag">PayPal</span>
                   </div>
                 </div>
-                <div className="card" style={{ textAlign: 'center' }}>
-                  <h4 style={{ marginBottom: 12 }}>{t('product.pay.southamerica')}</h4>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
+                <div className="card">
+                  <h4 className="mb-12">{t('product.pay.southamerica')}</h4>
+                  <div className="flex-wrap-center">
                     <span className="tag">PIX</span>
                     <span className="tag">Visa</span>
                     <span className="tag">Mastercard</span>
                   </div>
                 </div>
-                <div className="card" style={{ textAlign: 'center' }}>
-                  <h4 style={{ marginBottom: 12 }}>{t('product.pay.northamerica')}</h4>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
+                <div className="card">
+                  <h4 className="mb-12">{t('product.pay.northamerica')}</h4>
+                  <div className="flex-wrap-center">
                     <span className="tag">Stripe</span>
                     <span className="tag">Apple Pay</span>
                     <span className="tag">Google Pay</span>
@@ -348,28 +348,28 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
 
           {/* 20+ Global Languages */}
           <ScrollAnimation>
-            <div id="multilingual" style={{ marginTop: 80, scrollMarginTop: 'calc(var(--header-height) + 16px)' }}>
+            <div id="multilingual" className="mt-80 scroll-margin-header">
               <div className="section-header">
                 <span className="section-label">{t('product.lang.label')}</span>
                 <h2>{t('product.lang.title')}</h2>
                 <p>{t('product.lang.desc')}</p>
               </div>
               <div className="language-cloud">
-                <span style={{ fontSize: '2.5rem' }}>English</span>
-                <span style={{ fontSize: '2rem' }}>中文</span>
-                <span style={{ fontSize: '1.8rem' }}>Francais</span>
-                <span style={{ fontSize: '1.6rem' }}>日本語</span>
-                <span style={{ fontSize: '1.7rem' }}>한국어</span>
-                <span style={{ fontSize: '1.5rem' }}>Espanol</span>
-                <span style={{ fontSize: '1.4rem' }}>Deutsch</span>
-                <span style={{ fontSize: '1.9rem' }}>Tieng Viet</span>
-                <span style={{ fontSize: '1.3rem' }}>ภาษาไทย</span>
-                <span style={{ fontSize: '1.6rem' }}>Bahasa</span>
-                <span style={{ fontSize: '1.5rem' }}>Русский</span>
-                <span style={{ fontSize: '1.4rem' }}>العربية</span>
-                <span style={{ fontSize: '1.8rem' }}>Portugues</span>
-                <span style={{ fontSize: '1.3rem' }}>සිංහල</span>
-                <span style={{ fontSize: '1.5rem' }}>ខ្មែរ</span>
+                <span className="fs-25">English</span>
+                <span className="fs-20">中文</span>
+                <span className="fs-18">Francais</span>
+                <span className="fs-16">日本語</span>
+                <span className="fs-17">한국어</span>
+                <span className="fs-15">Espanol</span>
+                <span className="fs-14">Deutsch</span>
+                <span className="fs-19">Tieng Viet</span>
+                <span className="fs-13">ภาษาไทย</span>
+                <span className="fs-16">Bahasa</span>
+                <span className="fs-15">Русский</span>
+                <span className="fs-14">العربية</span>
+                <span className="fs-18">Portugues</span>
+                <span className="fs-13">සිංහල</span>
+                <span className="fs-15">ខ្មែរ</span>
               </div>
 
               {/* Language Request Form */}
