@@ -3437,23 +3437,6 @@ html {
   transition-delay: 0.4s;
 }
 
-/* --- Glass Section Dividers --- */
-.section+.section::before,
-.section+.section-alt::before,
-.section-alt+.section::before {
-  content: '';
-  display: block;
-  height: 1px;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  background: linear-gradient(90deg,
-      transparent,
-      var(--border-light) 20%,
-      var(--primary-dim) 50%,
-      var(--border-light) 80%,
-      transparent);
-}
-
 /* --- Forum --- */
 /* --- Changelog --- */
 .changelog-section {
