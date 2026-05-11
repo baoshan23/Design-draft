@@ -125,6 +125,23 @@ body:has(.hero-with-video) .header:not(.scrolled) {
   border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
+/* White text in the bar when it sits over the dark hero video. Dark
+   nav-link tokens become unreadable once the background drops near zero,
+   so swap to white in the same scope only. */
+body:has(.hero-with-video) .header:not(.scrolled) .logo,
+body:has(.hero-with-video) .header:not(.scrolled) .nav a,
+body:has(.hero-with-video) .header:not(.scrolled) .header-actions .btn-login {
+  color: #ffffff;
+}
+body:has(.hero-with-video) .header:not(.scrolled) .nav a {
+  color: rgba(255, 255, 255, 0.82);
+}
+body:has(.hero-with-video) .header:not(.scrolled) .nav a:hover,
+body:has(.hero-with-video) .header:not(.scrolled) .nav a.active,
+body:has(.hero-with-video) .header:not(.scrolled) .header-actions .btn-login:hover {
+  color: #ffffff;
+}
+
 /* Glass header edge highlight */
 .header::after {
   content: '';
