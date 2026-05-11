@@ -130,16 +130,28 @@ body:has(.hero-with-video) .header:not(.scrolled) {
    so swap to white in the same scope only. */
 body:has(.hero-with-video) .header:not(.scrolled) .logo,
 body:has(.hero-with-video) .header:not(.scrolled) .nav a,
-body:has(.hero-with-video) .header:not(.scrolled) .header-actions .btn-login {
+body:has(.hero-with-video) .header:not(.scrolled) .nav-dropdown-trigger,
+body:has(.hero-with-video) .header:not(.scrolled) .header-actions .btn-login,
+body:has(.hero-with-video) .header:not(.scrolled) .settings-trigger {
   color: #ffffff;
 }
-body:has(.hero-with-video) .header:not(.scrolled) .nav a {
+body:has(.hero-with-video) .header:not(.scrolled) .nav a,
+body:has(.hero-with-video) .header:not(.scrolled) .nav-dropdown-trigger {
   color: rgba(255, 255, 255, 0.82);
 }
 body:has(.hero-with-video) .header:not(.scrolled) .nav a:hover,
 body:has(.hero-with-video) .header:not(.scrolled) .nav a.active,
-body:has(.hero-with-video) .header:not(.scrolled) .header-actions .btn-login:hover {
+body:has(.hero-with-video) .header:not(.scrolled) .nav-dropdown-trigger:hover,
+body:has(.hero-with-video) .header:not(.scrolled) .nav-dropdown-trigger.active,
+body:has(.hero-with-video) .header:not(.scrolled) .header-actions .btn-login:hover,
+body:has(.hero-with-video) .header:not(.scrolled) .settings-trigger:hover,
+body:has(.hero-with-video) .header:not(.scrolled) .settings-trigger[aria-expanded="true"] {
   color: #ffffff;
+}
+/* Soften the settings-trigger border so the white icon sits on a subtle
+   glass chip instead of a hard dark outline. */
+body:has(.hero-with-video) .header:not(.scrolled) .settings-trigger {
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
 /* Glass header edge highlight */
