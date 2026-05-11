@@ -889,8 +889,8 @@
 }
 
 /* --- Footer ---
-   Palette (UI/UX Pro Max calibrated for WCAG AA on #547792):
-   --footer-bg:           #547792   (base — steel blue, L≈45%)
+   Palette (UI/UX Pro Max calibrated for WCAG AA on #3a3a3a):
+   --footer-bg:           #3a3a3a   (base — charcoal, L≈23%)
    --footer-bg-elevated:  rgba(255,255,255,0.09)  (surfaces — social, badges, button)
    --footer-bg-hover:     rgba(255,255,255,0.18)  (hover)
    --footer-border:       rgba(255,255,255,0.16)
@@ -901,7 +901,7 @@
 */
 .footer {
   position: relative;
-  background: #547792;
+  background: #3a3a3a;
   border-top: 1px solid rgba(255, 255, 255, 0.16);
   padding: 72px 0 36px;
   color: #FFFFFF;
