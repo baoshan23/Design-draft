@@ -84,23 +84,22 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
 
           <div className="hero-mock" aria-hidden="true">
-            {/* CPO dashboard mockup */}
-            <div className="hero-mock-cpo">
-              <div className="hero-mock-cpo-bar">
-                <span /><span /><span />
-                <em>cpo.gcss.hk</em>
+            {/* Laptop mockup (replaces the CPO browser-chrome card) */}
+            <div className="hero-mock-laptop">
+              <div className="hero-mock-laptop-screen">
+                <Image
+                  src="/images/dashboard-home.png"
+                  alt=""
+                  width={1600}
+                  height={1000}
+                  priority
+                  sizes="(max-width: 960px) 60vw, 560px"
+                />
               </div>
-              <Image
-                src="/images/dashboard-home.png"
-                alt=""
-                width={1600}
-                height={1000}
-                priority
-                sizes="(max-width: 960px) 60vw, 560px"
-              />
+              <div className="hero-mock-laptop-base" aria-hidden="true" />
             </div>
 
-            {/* Mobile app mockup */}
+            {/* Mobile app mockup — overlaps lower-right of the laptop */}
             <div className="hero-mock-phone">
               <span className="hero-mock-phone-notch" />
               <Image

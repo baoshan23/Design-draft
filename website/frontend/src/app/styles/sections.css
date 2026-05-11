@@ -200,67 +200,77 @@
 }
 
 
-/* ── Hero mockup: CPO dashboard + Mobile phone (clean + neutral shadow).
-   Lives inside the hero grid as the right column. Width = CPO width;
-   phone is absolutely positioned over its left edge. No viewport math. */
+/* ── Hero mockup: Laptop (screen + base wedge) with a phone overlapping
+   the laptop's lower-right corner. Replaces the previous browser-chrome
+   "CPO dashboard" card. The mock column anchors right; phone is
+   absolutely positioned relative to the mock. */
 .hero-mock {
   position: relative;
-  width: clamp(260px, 34vw, 500px);
+  width: clamp(280px, 36vw, 540px);
   pointer-events: none;
   overflow: visible;
   justify-self: end;
 }
 
-/* CPO dashboard — fills the mock column. */
-.hero-mock-cpo {
+/* Laptop wrapper — stacks screen on top of base wedge. */
+.hero-mock-laptop {
   position: relative;
   width: 100%;
-  border-radius: 14px;
-  overflow: hidden;
-  background: #0d0b06;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 28px 72px rgba(0, 0, 0, 0.5), 0 10px 22px rgba(0, 0, 0, 0.38);
   z-index: 1;
 }
-.hero-mock-cpo-bar {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 9px 14px;
-  background: #15120c;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+/* Laptop screen — thin black bezel hugging the dashboard image. */
+.hero-mock-laptop-screen {
+  position: relative;
+  background: #0a0907;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 12px 12px 4px 4px;
+  padding: 10px 10px 12px 10px;
+  box-shadow:
+    0 28px 72px rgba(0, 0, 0, 0.5),
+    0 10px 22px rgba(0, 0, 0, 0.38);
 }
-.hero-mock-cpo-bar span {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
-}
-.hero-mock-cpo-bar span:nth-child(1) { background: #ff5f56; }
-.hero-mock-cpo-bar span:nth-child(2) { background: #ffbd2e; }
-.hero-mock-cpo-bar span:nth-child(3) { background: #27c93f; }
-.hero-mock-cpo-bar em {
-  margin-left: auto;
-  font-style: normal;
-  font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.55);
-  letter-spacing: 0.04em;
-}
-.hero-mock-cpo img {
+.hero-mock-laptop-screen img {
   display: block;
   width: 100%;
   height: auto;
+  border-radius: 4px;
   object-fit: cover;
 }
 
-/* Phone — overlaps left edge of CPO, anchored to mock (parent) so it
-   tracks the CPO size at any viewport. */
+/* Laptop base wedge — wider than the screen, with a small hinge notch
+   centered on top. Reads as the keyboard/lid base of a laptop without
+   modeling individual keys. */
+.hero-mock-laptop-base {
+  position: relative;
+  width: 112%;
+  margin: 0 -6%;
+  height: 14px;
+  background: linear-gradient(180deg, #34302c 0%, #1c1916 60%, #100e0c 100%);
+  border-radius: 0 0 10px 10px;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+.hero-mock-laptop-base::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16%;
+  height: 5px;
+  background: #0a0907;
+  border-radius: 0 0 6px 6px;
+}
+
+/* Phone — overlaps lower-right of the laptop. */
 .hero-mock-phone {
   position: absolute;
-  top: 16%;
-  left: -10%;
-  width: 36%;
+  top: 36%;
+  right: -10%;
+  left: auto;
+  width: 30%;
   aspect-ratio: 9 / 19;
   border-radius: 30px;
   background: #0a0907;
