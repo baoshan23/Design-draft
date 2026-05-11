@@ -56,7 +56,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <span>{t('hero.badge')}</span>
               </div>
 
-              <h1 className="hero-title" style={{ marginBottom: 16 }}>
+              <h1 className="hero-title mb-16">
                 <span>{t('hero.title1')}</span><br />
                 <TypingText words={['CSMS Platform', '管理系统', 'Charge Hub', '充电平台']} />
               </h1>
@@ -119,7 +119,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div className="hero-footer-bar">
           <div className="hero-footer-inner container">
             <div className="hero-footer-stat">
-              <span className="hero-footer-icon" style={{ color: 'var(--primary)' }}>
+              <span className="hero-footer-icon text-primary-color">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4m4-5l5 5 5-5m-5 5V3" /></svg>
               </span>
               <span className="hero-footer-label">{t('hero.stat1')}</span>
@@ -127,7 +127,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
             <div className="hero-footer-divider" />
             <div className="hero-footer-stat">
-              <span className="hero-footer-icon" style={{ color: 'var(--primary)' }}>
+              <span className="hero-footer-icon text-primary-color">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
               </span>
               <span className="hero-footer-label">{t('hero.stat2')}</span>
@@ -135,7 +135,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
             <div className="hero-footer-divider" />
             <div className="hero-footer-stat">
-              <span className="hero-footer-icon" style={{ color: 'var(--primary)' }}>
+              <span className="hero-footer-icon text-primary-color">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" /></svg>
               </span>
               <span className="hero-footer-label">{t('hero.stat3')}</span>
@@ -241,7 +241,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
           <div className="grid grid-3">
             <ScrollAnimation>
-              <div className="card card-with-img" style={{ height: '100%' }}>
+              <div className="card card-with-img h-full">
                 <div className="card-img-placeholder">
                   <ImagePlaceholder variant="dashboard" fill hideLabel label={t('features.f1.title')} />
                 </div>
@@ -259,7 +259,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="card card-with-img" style={{ height: '100%' }}>
+              <div className="card card-with-img h-full">
                 <div className="card-img-placeholder">
                   <ImagePlaceholder variant="api" fill hideLabel label={t('features.f3.title')} />
                 </div>
@@ -268,7 +268,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="card card-with-img" style={{ height: '100%' }}>
+              <div className="card card-with-img h-full">
                 <div className="card-img-placeholder">
                   <ImagePlaceholder variant="team" fill hideLabel label={t('features.f4.title')} />
                 </div>
@@ -277,7 +277,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="card card-with-img" style={{ height: '100%' }}>
+              <div className="card card-with-img h-full">
                 <div className="card-img-placeholder">
                   <ImagePlaceholder variant="ev-station" fill hideLabel label={t('features.f5.title')} />
                 </div>
@@ -286,7 +286,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="card card-with-img" style={{ height: '100%' }}>
+              <div className="card card-with-img h-full">
                 <div className="card-img-placeholder">
                   <Image
                     src="/images/dashboard-home.png"
@@ -317,7 +317,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </ScrollAnimation>
           <div className="grid grid-4">
             <ScrollAnimation>
-              <div className="card card-with-img" style={{ height: '100%' }}>
+              <div className="card card-with-img h-full">
                 <div className="card-img-placeholder card-img-phone">
                   <ImagePlaceholder variant="phone" fill hideLabel label={t('index.mobile.card1.title')} />
                 </div>
@@ -326,7 +326,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="card card-with-img" style={{ height: '100%' }}>
+              <div className="card card-with-img h-full">
                 <div className="card-img-placeholder card-img-phone">
                   <Image src="/images/Mobile-Map.png" alt={t('index.mobile.card2.title')} width={390} height={844} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
@@ -335,7 +335,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="card card-with-img" style={{ height: '100%' }}>
+              <div className="card card-with-img h-full">
                 <div className="card-img-placeholder card-img-phone">
                   <Image src="/images/App_login_iphone.png" alt={t('index.mobile.card3.title')} width={390} height={844} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
@@ -344,7 +344,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="card card-with-img" style={{ height: '100%' }}>
+              <div className="card card-with-img h-full">
                 <div className="card-img-placeholder card-img-phone">
                   <Image src="/images/mobile_ charge.png" alt={t('index.mobile.card4.title')} width={390} height={844} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
@@ -368,7 +368,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </ScrollAnimation>
           <div className="matrix-section">
             <ScrollAnimation>
-              <div className="matrix-column" style={{ border: '1px solid var(--border-light)' }}>
+              <div className="matrix-column border-light">
                 <div className="matrix-header">{t('matrix.app.title')}</div>
                 <div className="matrix-body">
                   <ul>
@@ -377,13 +377,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     <li>{t('matrix.app.li3')}</li>
                     <li>{t('matrix.app.li4')}</li>
                     <li>{t('matrix.app.li5')}</li>
-                    <li style={{ color: 'var(--primary)', fontWeight: 600, cursor: 'pointer' }}>{t('matrix.more')}</li>
+                    <li className="matrix-item-highlight">{t('matrix.more')}</li>
                   </ul>
                 </div>
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="matrix-column" style={{ border: '1px solid var(--border-light)' }}>
+              <div className="matrix-column border-light">
                 <div className="matrix-header">{t('matrix.cpms.title')}</div>
                 <div className="matrix-body">
                   <ul>
@@ -392,14 +392,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     <li>{t('matrix.cpms.li3')}</li>
                     <li>{t('matrix.cpms.li4')}</li>
                     <li>{t('matrix.cpms.li5')}</li>
-                    <li style={{ color: 'var(--primary)', fontWeight: 600, cursor: 'pointer' }}>{t('matrix.more')}</li>
+                    <li className="matrix-item-highlight">{t('matrix.more')}</li>
                   </ul>
                 </div>
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="matrix-column" style={{ border: '1px solid var(--border-light)' }}>
-                <div className="matrix-header" style={{ background: 'linear-gradient(135deg,#EB5A3C,#D4452A)' }}>{t('matrix.platform.title')}</div>
+              <div className="matrix-column border-light">
+                <div className="matrix-header matrix-platform-bg">{t('matrix.platform.title')}</div>
                 <div className="matrix-body">
                   <ul>
                     <li>{t('matrix.platform.li1')}</li>
@@ -407,7 +407,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     <li>{t('matrix.platform.li3')}</li>
                     <li>{t('matrix.platform.li4')}</li>
                     <li>{t('matrix.platform.li5')}</li>
-                    <li style={{ color: 'var(--primary)', fontWeight: 600, cursor: 'pointer' }}>{t('matrix.more')}</li>
+                    <li className="matrix-item-highlight">{t('matrix.more')}</li>
                   </ul>
                 </div>
               </div>
@@ -442,38 +442,38 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </ScrollAnimation>
           <ScrollAnimation>
             <div className="language-cloud">
-              <span style={{ fontSize: '2.8rem' }}>你好</span>
-              <span style={{ fontSize: '2rem' }}>Hello</span>
-              <span style={{ fontSize: '1.5rem' }}>Xin chào</span>
-              <span style={{ fontSize: '2.2rem' }}>Привет</span>
-              <span style={{ fontSize: '1.5rem' }}>Apa kabar</span>
-              <span style={{ fontSize: '1.8rem' }}>Hai</span>
-              <span style={{ fontSize: '1.7rem' }}>สวัสดี</span>
-              <span style={{ fontSize: '2.4rem' }}>හෙලෝ</span>
-              <span style={{ fontSize: '1.4rem' }}>مرحبا</span>
-              <span style={{ fontSize: '2rem' }}>Bonjour</span>
-              <span style={{ fontSize: '1.6rem' }}>Hola</span>
-              <span style={{ fontSize: '1.5rem' }}>Ciao</span>
-              <span style={{ fontSize: '1.8rem' }}>こんにちは</span>
-              <span style={{ fontSize: '1.6rem' }}>안녕하세요</span>
-              <span style={{ fontSize: '1.4rem' }}>Hallo</span>
-              <span style={{ fontSize: '1.7rem' }}>Olá</span>
-              <span style={{ fontSize: '1.3rem' }}>Merhaba</span>
-              <span style={{ fontSize: '1.5rem' }}>Γεια σας</span>
-              <span style={{ fontSize: '1.6rem' }}>नमस्ते</span>
-              <span style={{ fontSize: '1.4rem' }}>Habari</span>
-              <span style={{ fontSize: '1.8rem' }}>ជំរាបសួរ</span>
-              <span style={{ fontSize: '1.3rem' }}>Kamusta</span>
-              <span style={{ fontSize: '1.5rem' }}>سلام</span>
-              <span style={{ fontSize: '1.6rem' }}>Hej</span>
-              <span style={{ fontSize: '1.4rem' }}>Selamat</span>
-              <span style={{ fontSize: '1.7rem' }}>Сайн уу</span>
-              <span style={{ fontSize: '1.3rem' }}>Saluton</span>
-              <span style={{ fontSize: '1.5rem' }}>Witam</span>
+              <span className="text-xl-lang">你好</span>
+              <span className="text-2xl-lang">Hello</span>
+              <span className="text-xs-lang">Xin chào</span>
+              <span className="text-lg-lang">Привет</span>
+              <span className="text-xs-lang">Apa kabar</span>
+              <span className="text-base-lang">Hai</span>
+              <span className="text-md-lang">สวัสดี</span>
+              <span className="text-2xl-lang">හෙලෝ</span>
+              <span className="text-2xs-lang">مرحبا</span>
+              <span className="text-2xl-lang">Bonjour</span>
+              <span className="text-sm-lang">Hola</span>
+              <span className="text-xs-lang">Ciao</span>
+              <span className="text-base-lang">こんにちは</span>
+              <span className="text-sm-lang">안녕하세요</span>
+              <span className="text-2xs-lang">Hallo</span>
+              <span className="text-md-lang">Olá</span>
+              <span className="text-3xs-lang">Merhaba</span>
+              <span className="text-xs-lang">Γεια σας</span>
+              <span className="text-sm-lang">नमस्ते</span>
+              <span className="text-2xs-lang">Habari</span>
+              <span className="text-base-lang">ជំរាបសួរ</span>
+              <span className="text-3xs-lang">Kamusta</span>
+              <span className="text-xs-lang">سلام</span>
+              <span className="text-sm-lang">Hej</span>
+              <span className="text-2xs-lang">Selamat</span>
+              <span className="text-md-lang">Сайн уу</span>
+              <span className="text-3xs-lang">Saluton</span>
+              <span className="text-xs-lang">Witam</span>
             </div>
           </ScrollAnimation>
           <ScrollAnimation>
-            <div style={{ textAlign: 'center', marginTop: 24 }}>
+            <div className="text-center mt-24">
               <Link href={{ pathname: '/b2c', hash: 'multilingual' }} className="btn btn-secondary">{t('lang.viewMore')}</Link>
             </div>
           </ScrollAnimation>
@@ -575,7 +575,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <div className="testimonial-stars">
                   <StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon />
                 </div>
-                
+
                 <p className="testimonial-text">{t('testimonials.t3.text')}</p>
                 <div className="testimonial-author">
                   <div className="testimonial-avatar">AK</div>
@@ -591,14 +591,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* CTA Section */}
-      <section className="cta-section" style={{ background: 'var(--dark)' }}>
+      <section className="cta-section bg-dark">
         <div className="container">
           <ScrollAnimation>
-            <div className="hero-badge" style={{ marginBottom: 16 }}>
+            <div className="hero-badge mb-16">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="var(--primary)">
                 <path d="M7 0l1.76 5.24L14 7l-5.24 1.76L7 14l-1.76-5.24L0 7l5.24-1.76L7 0z" />
               </svg>
-              <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>{t('cta.badge')}</span>
+              <span className="text-sm-badge font-semibold">{t('cta.badge')}</span>
             </div>
             <h2>{t('cta.title')}</h2>
             <p>{t('cta.desc')}</p>

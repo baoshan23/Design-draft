@@ -1,0 +1,95 @@
+/* ── Utility classes for spacing, sizing, and inline style conversions ────── */
+
+/* Margin utilities */
+.mb-16 {
+    margin-bottom: 16px;
+}
+
+/* Height utilities */
+.h-full {
+    height: 100%;
+}
+
+/* Border utilities */
+.border-light {
+    border: 1px solid var(--border-light);
+}
+
+/* Text color utilities */
+.text-primary-color {
+    color: var(--primary);
+}
+
+/* Font size utilities for language cloud */
+.text-xl-lang {
+    font-size: 2.8rem;
+}
+
+.text-2xl-lang {
+    font-size: 2rem;
+}
+
+.text-lg-lang {
+    font-size: 2.2rem;
+}
+
+.text-base-lang {
+    font-size: 1.8rem;
+}
+
+.text-md-lang {
+    font-size: 1.7rem;
+}
+
+.text-sm-lang {
+    font-size: 1.6rem;
+}
+
+.text-xs-lang {
+    font-size: 1.5rem;
+}
+
+.text-2xs-lang {
+    font-size: 1.4rem;
+}
+
+.text-3xs-lang {
+    font-size: 1.3rem;
+}
+
+/* Matrix list item highlight */
+.matrix-item-highlight {
+    color: var(--primary);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Matrix platform header gradient */
+.matrix-platform-bg {
+    background: linear-gradient(135deg, #EB5A3C, #D4452A);
+}
+
+/* Margin utilities */
+.mt-24 {
+    margin-top: 24px;
+}
+
+/* Text alignment utilities */
+.text-center {
+    text-align: center;
+}
+
+/* Background utilities */
+.bg-dark {
+    background: var(--dark);
+}
+
+/* Font weight utilities */
+.font-semibold {
+    font-weight: 600;
+}
+
+/* Font size utilities */
+.text-sm-badge {
+    font-size: 0.85rem;
+}

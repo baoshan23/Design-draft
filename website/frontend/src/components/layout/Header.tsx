@@ -140,14 +140,14 @@ export default function Header() {
                 className={`${dropdownTriggerClass}${isActive('/b2c') || isActive('/b2b') ? ' active' : ''}`}
                 onClick={() => toggleDropdown('product')}
                 aria-haspopup="true"
-                aria-expanded={openDropdown === 'product'}
+                aria-expanded={openDropdown === 'product' ? 'true' : 'false'}
                 aria-controls="product-dropdown-menu"
               >
                 {t('product')}
                 <ChevronDown className="dropdown-chevron" />
               </button>
               <div id="product-dropdown-menu" className="nav-dropdown-menu" role="menu">
-                <Link href={{ pathname: '/b2c', hash: 'overview' }} onClick={closeMenu}>
+                <Link href={{ pathname: '/b2c', hash: 'overview' }} onClick={closeMenu} role="menuitem">
                   <div className="dropdown-icon icon-gradient--gold">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                       <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -160,7 +160,7 @@ export default function Header() {
                     <span>{tDropdown('b2c.desc')}</span>
                   </div>
                 </Link>
-                <Link href="/b2b" onClick={closeMenu}>
+                <Link href="/b2b" onClick={closeMenu} role="menuitem">
                   <div className="dropdown-icon icon-gradient--dark">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                       <circle cx="12" cy="12" r="10" />
@@ -195,14 +195,14 @@ export default function Header() {
                 className={`${dropdownTriggerClass}${isActive('/blog') || isActive('/forum') || isActive('/faq') ? ' active' : ''}`}
                 onClick={() => toggleDropdown('community')}
                 aria-haspopup="true"
-                aria-expanded={openDropdown === 'community'}
+                aria-expanded={openDropdown === 'community' ? 'true' : 'false'}
                 aria-controls="community-dropdown-menu"
               >
                 {t('community')}
                 <ChevronDown className="dropdown-chevron" />
               </button>
               <div id="community-dropdown-menu" className="nav-dropdown-menu" role="menu">
-                <Link href="/blog" onClick={closeMenu}>
+                <Link href="/blog" onClick={closeMenu} role="menuitem">
                   <div className="dropdown-icon icon-gradient--blue">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                       <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
@@ -214,7 +214,7 @@ export default function Header() {
                     <span>{tDropdown('blog.desc')}</span>
                   </div>
                 </Link>
-                <Link href="/forum" onClick={closeMenu}>
+                <Link href="/forum" onClick={closeMenu} role="menuitem">
                   <div className="dropdown-icon icon-gradient--purple">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
@@ -225,7 +225,7 @@ export default function Header() {
                     <span>{tDropdown('forum.desc')}</span>
                   </div>
                 </Link>
-                <Link href="/faq" onClick={closeMenu}>
+                <Link href="/faq" onClick={closeMenu} role="menuitem">
                   <div className="dropdown-icon icon-gradient--green">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                       <circle cx="12" cy="12" r="10" />
@@ -275,8 +275,8 @@ export default function Header() {
             </div>
             <div className="mobile-nav-settings">
               <div className="lang-switcher">
-                <button className={`lang-btn${locale === 'en' ? ' active' : ''}`} aria-label="Switch to English" aria-pressed={locale === 'en'} onClick={() => switchLocale('en')}>EN</button>
-                <button className={`lang-btn${locale === 'zh' ? ' active' : ''}`} aria-label="切换到中文" aria-pressed={locale === 'zh'} onClick={() => switchLocale('zh')}>中文</button>
+                <button className={`lang-btn${locale === 'en' ? ' active' : ''}`} aria-label="Switch to English" aria-pressed={locale === 'en' ? 'true' : 'false'} onClick={() => switchLocale('en')}>EN</button>
+                <button className={`lang-btn${locale === 'zh' ? ' active' : ''}`} aria-label="切换到中文" aria-pressed={locale === 'zh' ? 'true' : 'false'} onClick={() => switchLocale('zh')}>中文</button>
               </div>
               <button className="theme-toggle" aria-label="Toggle dark mode" onClick={toggleTheme}>
                 <svg className="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -304,7 +304,7 @@ export default function Header() {
               <button
                 className="user-menu-trigger"
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
-                aria-expanded={userMenuOpen}
+                aria-expanded={userMenuOpen ? 'true' : 'false'}
                 aria-haspopup="true"
               >
                 <span className="user-menu-avatar">
@@ -348,7 +348,7 @@ export default function Header() {
         <button
           className={`mobile-toggle${mobileOpen ? ' active' : ''}`}
           aria-label="Menu"
-          aria-expanded={mobileOpen}
+          aria-expanded={mobileOpen ? 'true' : 'false'}
           aria-controls="primary-navigation"
           onClick={() => setMobileOpen((prev) => !prev)}
         >

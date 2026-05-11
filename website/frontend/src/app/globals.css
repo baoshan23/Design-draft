@@ -9,6 +9,7 @@
 @import './styles/sections.css';
 @import './styles/pages.css';
 @import './styles/pages-extracted.css';
+@import './styles/utilities.css';
 /* ui-ux-pro-max beautification layer — imported last so it wins the cascade. */
 @import './styles/polish.css';
 
