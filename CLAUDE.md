@@ -22,7 +22,11 @@ Production server **47.242.75.250** (staging domain `v3.gcss.hk`; final will be 
 Manual deploy (GitHub Actions secrets unset): from `website/frontend/` run
 `SFTP_PASSWORD='Gcss123.' npm run deploy`.
 Backend: `node deploy/deploy-backend.js` cross-compiles Go + SFTP + systemd restart.
-**Always deploy after any edit.**
+
+**Current workflow (overrides prior "always deploy" rule):**
+- **Do NOT deploy to the production server.** Skip `npm run deploy` and `deploy-backend.js`.
+- **After every code change, push to fork:** `https://github.com/baoshan23/Design-draft` on `main`.
+- **Log the change** by updating the "Last session" bullet at the bottom of this file.
 
 ## Current state (as of 2026-04-24)
 
