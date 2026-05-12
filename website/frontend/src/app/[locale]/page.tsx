@@ -147,60 +147,67 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* How It Works Section */}
       <section className="section section-alt" id="how-it-works">
         <div className="container">
-          <ScrollAnimation>
-            <div className="section-header">
-              <span className="section-label">{t('steps.label')}</span>
-              <h2>{t('steps.title')}</h2>
-              <p>{t('steps.desc')}</p>
-            </div>
-          </ScrollAnimation>
-          <ScrollAnimation>
-            <div className="steps-timeline">
-              <div className="step-card">
-                <div className="step-number">{t('steps.stepLabel', { n: 1 })}</div>
-                <div className="step-icon">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" y1="15" x2="12" y2="3" />
-                  </svg>
+          <div className="hiw-grid">
+            <ScrollAnimation>
+              <div className="section-header hiw-intro">
+                <span className="section-label">{t('steps.label')}</span>
+                <h2>{t('steps.title')}</h2>
+                <p>{t('steps.desc')}</p>
+              </div>
+            </ScrollAnimation>
+            <ScrollAnimation>
+              <div className="hiw-cards">
+                <div className="hiw-card">
+                  <span className="hiw-card-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#181818" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                      <polyline points="7 10 12 15 17 10" />
+                      <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                  </span>
+                  <span className="hiw-card-arrow" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7" />
+                      <path d="M7 7h10v10" />
+                    </svg>
+                  </span>
+                  <h3>{t('steps.s1.title')}</h3>
+                  <p>{t('steps.s1.desc')}</p>
                 </div>
-                <h3>{t('steps.s1.title')}</h3>
-                <p>{t('steps.s1.desc')}</p>
-              </div>
-              <div className="step-connector">
-                <svg width="40" height="2" viewBox="0 0 40 2">
-                  <line x1="0" y1="1" x2="40" y2="1" stroke="var(--primary)" strokeWidth="2" strokeDasharray="6 4" />
-                </svg>
-              </div>
-              <div className="step-card">
-                <div className="step-number">{t('steps.stepLabel', { n: 2 })}</div>
-                <div className="step-icon">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  </svg>
+                <div className="hiw-card">
+                  <span className="hiw-card-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#181818" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                  </span>
+                  <span className="hiw-card-arrow" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7" />
+                      <path d="M7 7h10v10" />
+                    </svg>
+                  </span>
+                  <h3>{t('steps.s2.title')}</h3>
+                  <p>{t('steps.s2.desc')}</p>
                 </div>
-                <h3>{t('steps.s2.title')}</h3>
-                <p>{t('steps.s2.desc')}</p>
-              </div>
-              <div className="step-connector">
-                <svg width="40" height="2" viewBox="0 0 40 2">
-                  <line x1="0" y1="1" x2="40" y2="1" stroke="var(--primary)" strokeWidth="2" strokeDasharray="6 4" />
-                </svg>
-              </div>
-              <div className="step-card">
-                <div className="step-number">{t('steps.stepLabel', { n: 3 })}</div>
-                <div className="step-icon">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
-                    <polyline points="22 4 12 14.01 9 11.01" />
-                  </svg>
+                <div className="hiw-card">
+                  <span className="hiw-card-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#181818" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                      <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                  </span>
+                  <span className="hiw-card-arrow" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7" />
+                      <path d="M7 7h10v10" />
+                    </svg>
+                  </span>
+                  <h3>{t('steps.s3.title')}</h3>
+                  <p>{t('steps.s3.desc')}</p>
                 </div>
-                <h3>{t('steps.s3.title')}</h3>
-                <p>{t('steps.s3.desc')}</p>
               </div>
-            </div>
-          </ScrollAnimation>
+            </ScrollAnimation>
+          </div>
         </div>
       </section>
 
