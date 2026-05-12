@@ -2819,31 +2819,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: rgba(254, 191, 29, 0.18);
-  margin-bottom: 18px;
-}
-
-.hiw-card-arrow {
-  position: absolute;
-  top: 24px;
-  right: 28px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: 28px;
   height: 28px;
-  color: #181818;
-  opacity: 0.45;
-  transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
-}
-
-.hiw-card:hover .hiw-card-arrow {
-  opacity: 1;
-  transform: translate(2px, -2px);
-  color: var(--primary);
+  margin-bottom: 18px;
 }
 
 .hiw-card h3 {

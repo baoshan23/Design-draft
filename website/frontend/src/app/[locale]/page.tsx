@@ -159,16 +159,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <div className="hiw-cards">
                 <div className="hiw-card">
                   <span className="hiw-card-icon" aria-hidden="true">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#181818" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-                      <polyline points="7 10 12 15 17 10" />
-                      <line x1="12" y1="15" x2="12" y2="3" />
-                    </svg>
-                  </span>
-                  <span className="hiw-card-arrow" aria-hidden="true">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M7 17L17 7" />
-                      <path d="M7 7h10v10" />
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="#FEBF1D" />
+                      <polyline points="7 10 12 15 17 10" stroke="#181818" />
+                      <line x1="12" y1="15" x2="12" y2="3" stroke="#181818" />
                     </svg>
                   </span>
                   <h3>{t('steps.s1.title')}</h3>
@@ -176,14 +170,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </div>
                 <div className="hiw-card">
                   <span className="hiw-card-icon" aria-hidden="true">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#181818" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    </svg>
-                  </span>
-                  <span className="hiw-card-arrow" aria-hidden="true">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M7 17L17 7" />
-                      <path d="M7 7h10v10" />
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#181818" />
+                      <polyline points="8.5 12 11 14.5 15.5 10" stroke="#FEBF1D" />
                     </svg>
                   </span>
                   <h3>{t('steps.s2.title')}</h3>
@@ -191,15 +180,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </div>
                 <div className="hiw-card">
                   <span className="hiw-card-icon" aria-hidden="true">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#181818" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
-                      <polyline points="22 4 12 14.01 9 11.01" />
-                    </svg>
-                  </span>
-                  <span className="hiw-card-arrow" aria-hidden="true">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M7 17L17 7" />
-                      <path d="M7 7h10v10" />
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="#FEBF1D" />
+                      <polyline points="22 4 12 14.01 9 11.01" stroke="#181818" />
                     </svg>
                   </span>
                   <h3>{t('steps.s3.title')}</h3>
