@@ -116,17 +116,15 @@
   border-bottom-color: rgba(255, 255, 255, 0.10);
 }
 
-/* Homepage (has the video hero) — keep the bar as a dark frosted glass in
-   BOTH unscrolled and scrolled states. The hero is ~100svh tall, so even
-   when .scrolled fires (scrollY > 20) the bar still sits over the dark
-   hero video for most of the user's scroll, and after that a dark glass
-   over white content still reads cleanly. White text needs a dark backing
-   to stay readable in either state. */
-body:has(.hero-with-video) .header {
-  background: rgba(0, 0, 0, 0.08);
-  -webkit-backdrop-filter: blur(44px) saturate(180%);
-  backdrop-filter: blur(44px) saturate(180%);
-  border-bottom-color: rgba(255, 255, 255, 0.08);
+/* Homepage (has the charger bg image) — unscrolled state shows a solid
+   white bar with dark text (per user request); scrolled state keeps the
+   dark frosted glass + white text variant for visual continuity once
+   the user starts scrolling and the bar travels over varied content. */
+body:has(.hero-with-video) .header:not(.scrolled) {
+  background: #ffffff;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-bottom-color: rgba(0, 0, 0, 0.08);
 }
 body:has(.hero-with-video) .header.scrolled {
   background: rgba(0, 0, 0, 0.32);
@@ -136,30 +134,32 @@ body:has(.hero-with-video) .header.scrolled {
   border-bottom-color: rgba(255, 255, 255, 0.10);
 }
 
-/* White text + icons across both header states on the homepage. */
-body:has(.hero-with-video) .header .logo,
-body:has(.hero-with-video) .header .nav a,
-body:has(.hero-with-video) .header .nav-dropdown-trigger,
-body:has(.hero-with-video) .header .header-actions .btn-login,
-body:has(.hero-with-video) .header .settings-trigger {
+/* White text + icons only in the SCROLLED state on the homepage. The
+   unscrolled state is now a solid white bar, so it inherits the default
+   dark nav tokens (`var(--text-secondary)` / `var(--text-primary)`). */
+body:has(.hero-with-video) .header.scrolled .logo,
+body:has(.hero-with-video) .header.scrolled .nav a,
+body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger,
+body:has(.hero-with-video) .header.scrolled .header-actions .btn-login,
+body:has(.hero-with-video) .header.scrolled .settings-trigger {
   color: #ffffff;
 }
-body:has(.hero-with-video) .header .nav a,
-body:has(.hero-with-video) .header .nav-dropdown-trigger {
+body:has(.hero-with-video) .header.scrolled .nav a,
+body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger {
   color: rgba(255, 255, 255, 0.82);
 }
-body:has(.hero-with-video) .header .nav a:hover,
-body:has(.hero-with-video) .header .nav a.active,
-body:has(.hero-with-video) .header .nav-dropdown-trigger:hover,
-body:has(.hero-with-video) .header .nav-dropdown-trigger.active,
-body:has(.hero-with-video) .header .header-actions .btn-login:hover,
-body:has(.hero-with-video) .header .settings-trigger:hover,
-body:has(.hero-with-video) .header .settings-trigger[aria-expanded="true"] {
+body:has(.hero-with-video) .header.scrolled .nav a:hover,
+body:has(.hero-with-video) .header.scrolled .nav a.active,
+body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger:hover,
+body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active,
+body:has(.hero-with-video) .header.scrolled .header-actions .btn-login:hover,
+body:has(.hero-with-video) .header.scrolled .settings-trigger:hover,
+body:has(.hero-with-video) .header.scrolled .settings-trigger[aria-expanded="true"] {
   color: #ffffff;
 }
-/* Soften the settings-trigger border so the white icon sits on a subtle
-   glass chip instead of a hard dark outline. */
-body:has(.hero-with-video) .header .settings-trigger {
+/* Soften the settings-trigger border on the scrolled dark-glass bar so
+   the white icon sits on a subtle glass chip instead of a hard outline. */
+body:has(.hero-with-video) .header.scrolled .settings-trigger {
   border-color: rgba(255, 255, 255, 0.18);
 }
 
