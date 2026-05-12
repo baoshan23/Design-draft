@@ -149,13 +149,17 @@ body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger {
   color: rgba(255, 255, 255, 0.82);
 }
 body:has(.hero-with-video) .header.scrolled .nav a:hover,
-body:has(.hero-with-video) .header.scrolled .nav a.active,
 body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger:hover,
-body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active,
 body:has(.hero-with-video) .header.scrolled .header-actions .btn-login:hover,
 body:has(.hero-with-video) .header.scrolled .settings-trigger:hover,
 body:has(.hero-with-video) .header.scrolled .settings-trigger[aria-expanded="true"] {
   color: #ffffff;
+}
+/* Active link on the scrolled dark-glass bar — keep gold (don't let
+   the white-text override above overwrite the global active rule). */
+body:has(.hero-with-video) .header.scrolled .nav a.active,
+body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
+  color: var(--primary);
 }
 /* Soften the settings-trigger border on the scrolled dark-glass bar so
    the white icon sits on a subtle glass chip instead of a hard outline. */
@@ -214,9 +218,13 @@ body:has(.hero-with-video) .header.scrolled .settings-trigger {
   border-radius: var(--radius);
 }
 
-.nav a:hover,
-.nav a.active {
+.nav a:hover {
   color: var(--text-primary);
+}
+
+.nav a.active {
+  color: var(--primary);
+  font-weight: 700;
 }
 
 .nav a.active::after {
@@ -228,10 +236,6 @@ body:has(.hero-with-video) .header.scrolled .settings-trigger {
   height: 1.5px;
   background: var(--primary);
   border-radius: 1px;
-}
-
-.nav a.active {
-  font-weight: 600;
 }
 
 /* Nav Dropdown */
@@ -278,9 +282,13 @@ body:has(.hero-with-video) .header.scrolled .settings-trigger {
   border-radius: var(--radius);
 }
 
-.nav-dropdown-trigger:hover,
-.nav-dropdown-trigger.active {
+.nav-dropdown-trigger:hover {
   color: var(--text-primary);
+}
+
+.nav-dropdown-trigger.active {
+  color: var(--primary);
+  font-weight: 700;
 }
 
 .nav-dropdown-trigger.active::after {
@@ -292,10 +300,6 @@ body:has(.hero-with-video) .header.scrolled .settings-trigger {
   height: 1.5px;
   background: var(--primary);
   border-radius: 1px;
-}
-
-.nav-dropdown-trigger.active {
-  font-weight: 600;
 }
 
 .dropdown-chevron {
