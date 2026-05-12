@@ -39,7 +39,7 @@ export default function BusinessModelsSection() {
                         </div>
                     </ScrollAnimation>
                     <ScrollAnimation>
-                        <div className="model-card" style={{ height: '100%' }}>
+                        <div className="model-card model-card-b2b2c" style={{ height: '100%' }}>
                             <div className="model-icon">
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
                                     <circle cx="16" cy="16" r="10" stroke="white" strokeWidth="2" />

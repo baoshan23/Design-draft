@@ -2221,6 +2221,13 @@ html {
   background-repeat: no-repeat;
 }
 
+#models .model-card.model-card-b2b2c {
+  background-image: url('/images/business-models/b2b2c-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .model-card:hover {
   border-color: var(--border-subtle);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
