@@ -2826,10 +2826,10 @@
 
 .hiw-card-num {
   position: absolute;
-  top: 16px;
-  right: 24px;
+  top: 4px;
+  right: 10px;
   width: auto;
-  height: 64px;
+  height: 104px;
   pointer-events: none;
   user-select: none;
   opacity: 0.95;
