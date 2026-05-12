@@ -2222,7 +2222,7 @@ html {
   padding: 14px 24px;
   border-radius: var(--radius);
   background: rgba(254, 191, 29, 0.1);
-  color: var(--black);
+  color: #1f1f1f;
   box-shadow: none;
   font-weight: 700;
   font-size: 0.95rem;
