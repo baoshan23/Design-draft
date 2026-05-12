@@ -1655,14 +1655,6 @@ html:not([data-theme="dark"]) .hero-footer-bar {
   background: rgba(255, 255, 255, 0.5);
   border-top: 1px solid rgba(255, 255, 255, 0.45);
 }
-html:not([data-theme="dark"]) .hero .hero-footer-label {
-  color: var(--text-secondary) !important;
-  text-shadow: none;
-}
-html:not([data-theme="dark"]) .hero .hero-footer-value {
-  color: var(--text-primary) !important;
-  text-shadow: none;
-}
 html:not([data-theme="dark"]) .hero .hero-footer-icon {
   color: var(--text-primary) !important;
   filter: none;
@@ -1748,13 +1740,9 @@ html:not([data-theme="dark"]) .hero .hero-footer-divider {
   transition: color 0.3s ease;
 }
 
-.hero .hero-footer-label {
-  color: rgba(255, 255, 255, 0.85) !important;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
-}
-
 [data-theme="dark"] .hero .hero-footer-label {
   color: rgba(255, 255, 255, 0.85) !important;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
 }
 
 .hero-footer-value {
@@ -1766,10 +1754,14 @@ html:not([data-theme="dark"]) .hero .hero-footer-divider {
   transition: color 0.3s ease;
 }
 
-html:not([data-theme="dark"]) .hero .hero-footer-value,
 [data-theme="dark"] .hero .hero-footer-value {
   color: #ffffff !important;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+}
+html:not([data-theme="dark"]) .hero .hero-footer-value {
+  color: var(--text-primary) !important;
+  font-weight: 900 !important;
+  text-shadow: none;
 }
 
 .hero-footer-divider {
