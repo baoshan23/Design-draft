@@ -1055,10 +1055,10 @@ footer {
      atmosphere for reduced-motion users. */
 }
 
-/* ---------- Global custom cursor: yellow lightning bolt ---------- */
+/* ---------- Global custom cursor: yellow dot ---------- */
 html {
-  cursor: url('/assets/cursor/lightning.svg') 19 2, auto;
+  cursor: url('/assets/cursor/lightning.svg') 15 15, auto;
 }
 .btn, button, a, [role="button"], summary, label[for], select {
-  cursor: url('/assets/cursor/lightning.svg') 19 2, pointer;
+  cursor: url('/assets/cursor/lightning.svg') 15 15, pointer;
 }
