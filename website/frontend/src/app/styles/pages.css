@@ -2693,7 +2693,7 @@
   font-size: 20px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--text-tertiary);
+  color: #181818;
   margin-bottom: 28px;
   font-weight: 500;
   line-height: 1.2;
@@ -2755,8 +2755,10 @@
   line-height: 1;
 }
 
-.marquee-item:hover {
+.marquee-item:hover,
+.marquee-item:active {
   opacity: 1;
+  color: #181818;
 }
 
 @keyframes marqueeScroll {
