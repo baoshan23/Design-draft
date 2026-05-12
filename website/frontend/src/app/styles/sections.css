@@ -145,8 +145,10 @@
           backdrop-filter: none;
 }
 .hero-with-video .btn-secondary:hover {
-  background: #f5f3ee;
-  border-color: rgba(0, 0, 0, 0.16);
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.10);
+  color: var(--text-primary);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14), 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 @media (max-width: 720px) {
   .hero-with-video .hero-content {
