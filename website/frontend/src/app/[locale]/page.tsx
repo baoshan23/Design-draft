@@ -145,7 +145,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <MobileShowcase />
 
       {/* How It Works Section */}
-      <section className="section" id="how-it-works">
+      <section className="section section-alt" id="how-it-works">
         <div className="container">
           <ScrollAnimation>
             <div className="section-header">
