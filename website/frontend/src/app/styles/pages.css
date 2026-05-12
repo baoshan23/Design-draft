@@ -3524,141 +3524,49 @@
   }
 
   /* =============================================
-     MOBILE NAV UTILITIES — quick actions + settings
+     MOBILE NAV AUTH ROW — login + signup at top
      ============================================= */
 
-  .nav.mobile-open .mobile-nav-utilities {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin: 4px 16px 16px;
-    padding: 16px;
-    border: 1px solid var(--border-subtle);
-    border-radius: calc(var(--radius) + 4px);
-    background: rgba(0, 0, 0, 0.2);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
-  }
-
-  /* CTA stack — Buy (primary) / Demo (outlined) / Login+Signup pair */
-  .mobile-nav-cta {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  /* All top-level CTA buttons are full-width with a 48px touch target */
-  .mobile-nav-cta>.btn-buy,
-  .mobile-nav-cta>.btn-demo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    width: 100%;
-    padding: 11px 16px;
-    min-height: 46px;
-    font-size: 0.88rem;
-    font-weight: 600;
-    border-radius: var(--radius);
-    transition: all var(--transition);
-  }
-
-  /* Buy Now — solid gold (primary) */
-  .mobile-nav-cta>.btn-buy {
-    background: var(--primary);
-    color: var(--black);
-    font-weight: 700;
-    border: none;
-    box-shadow: 0 0 0 1px rgba(254, 191, 29, 0.25);
-  }
-
-  .mobile-nav-cta>.btn-buy:hover {
-    background: var(--primary-hover);
-    box-shadow:
-      0 0 20px rgba(230, 168, 23, 0.35),
-      0 0 0 1px rgba(254, 191, 29, 0.4);
-  }
-
-  /* Demo — outlined secondary */
-  .mobile-nav-cta>.btn-demo {
-    background: transparent;
-    color: var(--text-primary);
-    border: 1px solid var(--border-light);
-  }
-
-  .mobile-nav-cta>.btn-demo:hover {
-    color: var(--primary-text);
-    background: var(--primary-dim);
-    border-color: rgba(254, 191, 29, 0.4);
-  }
-
-  /* Auth sub-row — Login | Sign up (50/50), collapses to 1 col on logout */
-  .mobile-nav-cta-auth {
+  .nav.mobile-open .mobile-auth-row {
     display: flex;
     gap: 8px;
+    margin: 0 0 6px;
   }
 
-  .mobile-nav-cta-auth>* {
+  .nav.mobile-open .mobile-auth-link {
     flex: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 11px 14px;
-    min-height: 46px;
-    font-size: 0.88rem;
+    padding: 10px 14px;
+    min-height: 42px;
+    font-size: 0.84rem;
     font-weight: 600;
     border-radius: var(--radius);
     transition: all var(--transition);
   }
 
-  .mobile-nav-cta-auth .btn-login {
+  .nav.mobile-open .mobile-auth-link--login {
     color: var(--text-secondary);
     border: 1px solid var(--border-light);
     background: transparent;
   }
 
-  .mobile-nav-cta-auth .btn-login:hover {
+  .nav.mobile-open .mobile-auth-link--login:hover {
     color: var(--text-primary);
     border-color: var(--border-medium);
   }
 
-  .mobile-nav-cta-auth .btn-signup {
+  .nav.mobile-open .mobile-auth-link--signup {
     color: var(--primary-text);
     border: 1px solid rgba(254, 191, 29, 0.35);
     background: transparent;
   }
 
-  .mobile-nav-cta-auth .btn-signup:hover {
+  .nav.mobile-open .mobile-auth-link--signup:hover {
     border-color: var(--primary);
     background: var(--primary-dim);
-  }
-
-  /* Settings row — lang + theme toggle */
-  .mobile-nav-settings {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .mobile-nav-settings .lang-switcher {
-    display: flex;
-    gap: 4px;
-    flex: 1 1 auto;
-  }
-
-  .mobile-nav-settings .lang-btn {
-    min-height: 38px;
-    min-width: 44px;
-    padding: 7px 11px;
-    font-size: 0.8rem;
-  }
-
-  .mobile-nav-settings .theme-toggle {
-    width: 42px;
-    height: 42px;
-    flex: 0 0 auto;
   }
 }
 
