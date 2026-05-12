@@ -100,28 +100,25 @@
     gap: 48px;
   }
 }
-/* Badge: glassy gold pill, readable on video */
+/* Badge: glassy gold pill */
 .hero-with-video .hero-badge {
   background: rgba(254, 191, 29, 0.14);
   border: 1px solid rgba(254, 191, 29, 0.4);
   color: #FEBF1D;
   -webkit-backdrop-filter: blur(12px);
           backdrop-filter: blur(12px);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
 }
 .hero-with-video .hero-badge svg {
   filter: drop-shadow(0 0 6px rgba(254, 191, 29, 0.6));
 }
-/* Title: pure white with deep shadow for legibility over moving video */
+/* Title — pure white, no drop shadow (per user request). */
 .hero-with-video .hero-title,
 .hero-with-video .hero-title > span {
   color: #ffffff;
-  text-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.55),
-    0 4px 24px rgba(0, 0, 0, 0.5);
   letter-spacing: -0.01em;
 }
-/* TypingText accent — gold gradient pop */
+/* TypingText accent — gold gradient pop (gold glow kept; user only
+   asked to remove BLACK shadows). */
 .hero-with-video .hero-title .typing-text,
 .hero-with-video .hero-title .text-gradient {
   background: linear-gradient(120deg, #FEBF1D 0%, #FFD56B 45%, #FEBF1D 100%);
@@ -131,10 +128,9 @@
   color: transparent;
   text-shadow: 0 2px 18px rgba(254, 191, 29, 0.35);
 }
-/* Description: near-white, soft shadow */
+/* Description — near-white, no drop shadow. */
 .hero-with-video .hero-desc {
   color: rgba(255, 255, 255, 0.94);
-  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.55);
 }
 .hero-with-video .hero-buttons {
   justify-content: flex-start;
