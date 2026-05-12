@@ -52,7 +52,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           className="hero-bg-video"
           style={{ objectFit: 'cover', objectPosition: 'center' }}
         />
-        <div className="hero-bg-video-scrim" aria-hidden="true" />
         <div className="container hero-with-video-grid">
           <div className="hero-content">
             <div className="hero-text">
@@ -90,35 +89,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
           </div>
 
-          <div className="hero-mock" aria-hidden="true">
-            {/* Laptop mockup (replaces the CPO browser-chrome card) */}
-            <div className="hero-mock-laptop">
-              <div className="hero-mock-laptop-screen">
-                <Image
-                  src="/images/dashboard-home.png"
-                  alt=""
-                  width={1600}
-                  height={1000}
-                  priority
-                  sizes="(max-width: 960px) 60vw, 560px"
-                />
-              </div>
-              <div className="hero-mock-laptop-base" aria-hidden="true" />
-            </div>
-
-            {/* Mobile app mockup — overlaps lower-right of the laptop */}
-            <div className="hero-mock-phone">
-              <span className="hero-mock-phone-notch" />
-              <Image
-                src="/images/Mobile_home.png"
-                alt=""
-                width={800}
-                height={1700}
-                priority
-                sizes="(max-width: 960px) 40vw, 220px"
-              />
-            </div>
-          </div>
         </div>
 
         {/* Hero Footer Stats Bar — full width */}
