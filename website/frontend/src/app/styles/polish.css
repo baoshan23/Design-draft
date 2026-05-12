@@ -245,18 +245,7 @@ main a:not(.btn):not(.nav-link):not(.logo):not(.footer-col a):not(.dropdown-text
 /* ---------- Section header upgrades ---------- */
 
 .section-header h2 {
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-dark, #E6A817) 140%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
   letter-spacing: -0.022em;
-}
-
-[data-theme="dark"] .section-header h2 {
-  background: linear-gradient(135deg, #ffffff 0%, var(--primary, #FEBF1D) 140%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .section-label {
