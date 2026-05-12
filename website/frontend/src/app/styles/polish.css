@@ -1057,8 +1057,8 @@ footer {
 
 /* ---------- Global custom cursor: yellow lightning bolt ---------- */
 html {
-  cursor: url('/assets/cursor/lightning.svg') 19 3, auto;
+  cursor: url('/assets/cursor/lightning.svg') 19 2, auto;
 }
 .btn, button, a, [role="button"], summary, label[for], select {
-  cursor: url('/assets/cursor/lightning.svg') 19 3, pointer;
+  cursor: url('/assets/cursor/lightning.svg') 19 2, pointer;
 }
