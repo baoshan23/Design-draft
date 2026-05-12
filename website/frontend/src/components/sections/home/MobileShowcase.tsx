@@ -34,7 +34,7 @@ export default function MobileShowcase() {
   const front = SCREENS[frontIndex];
 
   return (
-    <section className="section mobile-showcase">
+    <section className="section section-alt mobile-showcase">
       <div className="container mobile-showcase-grid">
         <div className="mobile-showcase-stack">
           <div className="mobile-stack">
