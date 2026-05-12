@@ -1055,7 +1055,3 @@ footer {
      atmosphere for reduced-motion users. */
 }
 
-/* ---------- Yellow-dot cursor for interactive elements only ---------- */
-.btn, button, a, [role="button"], summary, label[for], select {
-  cursor: url('/assets/cursor/lightning.svg') 15 15, pointer;
-}
