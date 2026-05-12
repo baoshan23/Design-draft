@@ -135,17 +135,18 @@
 .hero-with-video .hero-buttons {
   justify-content: flex-start;
 }
-/* Secondary button: glassy on video */
+/* Secondary button — solid white pill with dark text/icon, paired
+   against the light charger bg. */
 .hero-with-video .btn-secondary {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.32);
-  color: #ffffff;
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  color: var(--text-primary);
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
 }
 .hero-with-video .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.16);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: #f5f3ee;
+  border-color: rgba(0, 0, 0, 0.16);
 }
 @media (max-width: 720px) {
   .hero-with-video .hero-content {
