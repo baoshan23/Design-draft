@@ -326,17 +326,8 @@
 }
 
 /* --- Model Cards Enhancement --- */
-.model-card .model-icon {
-  background: var(--primary);
-  color: var(--black);
-  box-shadow: 0 8px 24px rgba(230, 168, 23, 0.15);
-}
-
-.model-card:nth-child(2) .model-icon {
-  background: var(--dark-elevated);
-  color: var(--text-primary);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-}
+/* Icon tile background intentionally removed — model-icons now render as
+   line glyphs styled inline in BusinessModelsSection.tsx (gold + black). */
 
 /* --- Matrix Enhancement --- */
 .matrix-header {
