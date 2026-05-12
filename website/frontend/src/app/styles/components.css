@@ -124,7 +124,11 @@ body:has(.hero-with-video) .header:not(.scrolled) {
   background: #ffffff;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
-  border-bottom-color: rgba(0, 0, 0, 0.08);
+  border-bottom-color: transparent;
+  box-shadow: none;
+}
+body:has(.hero-with-video) .header:not(.scrolled)::after {
+  display: none;
 }
 body:has(.hero-with-video) .header.scrolled {
   background: rgba(255, 255, 255, 0.32);
