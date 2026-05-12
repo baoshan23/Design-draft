@@ -35,13 +35,15 @@ export default function MobileShowcase() {
           {features.map((f) => (
             <div className="mobile-feature-card" key={f.src}>
               <div className="mobile-feature-img">
-                <Image
-                  src={f.src}
-                  alt={f.title}
-                  width={500}
-                  height={1083}
-                  sizes="(max-width: 720px) 80vw, 240px"
-                />
+                <div className="phone-frame">
+                  <Image
+                    src={f.src}
+                    alt={f.title}
+                    width={500}
+                    height={1083}
+                    sizes="(max-width: 720px) 80vw, 240px"
+                  />
+                </div>
               </div>
               <div className="mobile-feature-text">
                 <h3>{f.title}</h3>
