@@ -158,6 +158,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <ScrollAnimation>
               <div className="hiw-cards">
                 <div className="hiw-card">
+                  <Image className="hiw-card-num" src="/assets/icons/hiw-numbers/01.png" alt="" width={82} height={160} aria-hidden="true" />
                   <span className="hiw-card-icon" aria-hidden="true">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="#FEBF1D" />
@@ -169,6 +170,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   <p>{t('steps.s1.desc')}</p>
                 </div>
                 <div className="hiw-card">
+                  <Image className="hiw-card-num" src="/assets/icons/hiw-numbers/02.png" alt="" width={109} height={160} aria-hidden="true" />
                   <span className="hiw-card-icon" aria-hidden="true">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#181818" />
@@ -179,6 +181,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   <p>{t('steps.s2.desc')}</p>
                 </div>
                 <div className="hiw-card">
+                  <Image className="hiw-card-num" src="/assets/icons/hiw-numbers/03.png" alt="" width={108} height={160} aria-hidden="true" />
                   <span className="hiw-card-icon" aria-hidden="true">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="#FEBF1D" />

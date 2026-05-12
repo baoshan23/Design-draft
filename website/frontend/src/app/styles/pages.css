@@ -2824,6 +2824,17 @@
   margin-bottom: 18px;
 }
 
+.hiw-card-num {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  width: auto;
+  height: 64px;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.95;
+}
+
 .hiw-card h3 {
   font-size: 1.05rem;
   margin: 0 0 8px;
