@@ -262,9 +262,13 @@
     "label": "Driver app",
     "title": "Native iOS & Android app for drivers",
     "desc": "Scan-to-charge, live session monitoring, station discovery, and one-tap top-ups — fully white-labelled with your brand.",
+    "b1Title": "Scan to charge",
     "b1": "QR code scan + tap-to-pay starts a session in seconds",
+    "b2Title": "Find stations",
     "b2": "Live map of nearby stations with real-time availability",
+    "b3Title": "Live monitoring",
     "b3": "In-app charging progress with kW, current, voltage telemetry",
+    "b4Title": "Account & orders",
     "b4": "Order history, RFID cards, balance top-up, vehicle profiles",
     "cta": "See B2C details",
     "hint": "Click any screen to bring it to the front"
