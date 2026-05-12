@@ -134,37 +134,25 @@ body:has(.hero-with-video) .header.scrolled {
   border-bottom-color: rgba(255, 255, 255, 0.10);
 }
 
-/* White text + icons only in the SCROLLED state on the homepage. The
-   unscrolled state is now a solid white bar, so it inherits the default
-   dark nav tokens (`var(--text-secondary)` / `var(--text-primary)`). */
 body:has(.hero-with-video) .header.scrolled .logo,
-body:has(.hero-with-video) .header.scrolled .nav a,
-body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger,
 body:has(.hero-with-video) .header.scrolled .header-actions .btn-login,
 body:has(.hero-with-video) .header.scrolled .settings-trigger {
-  color: #ffffff;
+  color: var(--text-primary);
 }
 body:has(.hero-with-video) .header.scrolled .nav a,
 body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger {
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--text-secondary);
 }
 body:has(.hero-with-video) .header.scrolled .nav a:hover,
 body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger:hover,
 body:has(.hero-with-video) .header.scrolled .header-actions .btn-login:hover,
 body:has(.hero-with-video) .header.scrolled .settings-trigger:hover,
 body:has(.hero-with-video) .header.scrolled .settings-trigger[aria-expanded="true"] {
-  color: #ffffff;
+  color: var(--text-primary);
 }
-/* Active link on the scrolled dark-glass bar — keep gold (don't let
-   the white-text override above overwrite the global active rule). */
 body:has(.hero-with-video) .header.scrolled .nav a.active,
 body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
   color: var(--primary);
-}
-/* Soften the settings-trigger border on the scrolled dark-glass bar so
-   the white icon sits on a subtle glass chip instead of a hard outline. */
-body:has(.hero-with-video) .header.scrolled .settings-trigger {
-  border-color: rgba(255, 255, 255, 0.18);
 }
 
 /* Glass header edge highlight */
