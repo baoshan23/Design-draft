@@ -3651,8 +3651,8 @@ html {
 .mobile-showcase-bullets li {
   position: relative;
   padding-left: 28px;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
+  font-size: 14px;
+  color: #181818;
   line-height: 1.55;
 }
 
