@@ -2677,9 +2677,15 @@
 
 /* --- Trusted By Bar --- */
 .trusted-bar {
-  padding: 40px 0;
+  min-height: 221px;
+  display: flex;
+  align-items: center;
   border-bottom: 1px solid var(--border-subtle);
   background: var(--black);
+}
+
+.trusted-bar > .container {
+  width: 100%;
 }
 
 .trusted-label {
