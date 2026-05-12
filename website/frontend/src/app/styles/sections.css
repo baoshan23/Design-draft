@@ -111,10 +111,10 @@
 .hero-with-video .hero-badge svg {
   filter: drop-shadow(0 0 6px rgba(254, 191, 29, 0.6));
 }
-/* Title — pure white, no drop shadow (per user request). */
+/* Title — dark for readability against the light charger bg. */
 .hero-with-video .hero-title,
 .hero-with-video .hero-title > span {
-  color: #ffffff;
+  color: var(--text-primary);
   letter-spacing: -0.01em;
 }
 /* TypingText accent — gold gradient pop (gold glow kept; user only
@@ -128,9 +128,9 @@
   color: transparent;
   text-shadow: 0 2px 18px rgba(254, 191, 29, 0.35);
 }
-/* Description — near-white, no drop shadow. */
+/* Description — dark for readability against the light charger bg. */
 .hero-with-video .hero-desc {
-  color: rgba(255, 255, 255, 0.94);
+  color: var(--text-secondary);
 }
 .hero-with-video .hero-buttons {
   justify-content: flex-start;
