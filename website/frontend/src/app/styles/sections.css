@@ -130,7 +130,7 @@
 }
 /* Description — dark for readability against the light charger bg. */
 .hero-with-video .hero-desc {
-  color: var(--text-secondary);
+  color: #6C717A;
 }
 .hero-with-video .hero-buttons {
   justify-content: flex-start;
@@ -1534,8 +1534,8 @@
 }
 
 .hero-desc {
-  font-size: 1.1rem;
-  color: var(--text-secondary);
+  font-size: 16px;
+  color: #6C717A;
   margin-bottom: 32px;
   max-width: 700px;
   line-height: 1.7;
@@ -1995,8 +1995,8 @@ html {
 }
 
 .section-header p {
-  color: var(--text-secondary);
-  font-size: 1.05rem;
+  color: #6C717A;
+  font-size: 16px;
   line-height: 1.7;
 }
 
@@ -3639,8 +3639,8 @@ html {
 }
 
 .mobile-showcase-text > p {
-  font-size: 1.05rem;
-  color: var(--text-secondary);
+  font-size: 16px;
+  color: #6C717A;
   line-height: 1.7;
   margin: 0 0 24px;
   max-width: 560px;
