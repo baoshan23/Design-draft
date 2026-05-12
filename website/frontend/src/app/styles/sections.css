@@ -2215,7 +2215,7 @@ html {
 }
 
 .model-card:hover {
-  border-color: rgba(254, 191, 29, 0.3);
+  border-color: var(--border-subtle);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   transform: translateY(-4px);
 }

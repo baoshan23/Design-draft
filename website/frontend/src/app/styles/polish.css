@@ -141,7 +141,6 @@ html {
 
 .card:hover,
 .glass-card:hover,
-.model-card:hover,
 .feature-card:hover {
   transform: translateY(-5px);
   box-shadow:
