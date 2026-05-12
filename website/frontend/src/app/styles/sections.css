@@ -133,25 +133,23 @@
   color: #6C717A;
 }
 
-/* Primary CTA on the hero — glass: translucent gold + backdrop blur,
-   dark text/icon, hover deepens the tint and lifts slightly. */
+/* Primary CTA on the hero — solid 100% gold, white text + icon. */
 .hero-with-video .btn-primary {
-  background: rgba(254, 191, 29, 0.2);
-  backdrop-filter: blur(12px) saturate(1.4);
-  -webkit-backdrop-filter: blur(12px) saturate(1.4);
-  color: #1f1f1f;
-  border: 1px solid rgba(254, 191, 29, 0.4);
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
   box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 .hero-with-video .btn-primary::before {
   display: none;
 }
 .hero-with-video .btn-primary:hover {
-  background: rgba(254, 191, 29, 0.35);
-  backdrop-filter: blur(16px) saturate(1.6);
-  -webkit-backdrop-filter: blur(16px) saturate(1.6);
+  background: var(--primary);
+  color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(254, 191, 29, 0.18);
+  box-shadow: 0 8px 24px rgba(254, 191, 29, 0.25);
   filter: none;
 }
 .hero-with-video .hero-buttons {
