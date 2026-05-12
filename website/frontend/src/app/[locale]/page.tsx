@@ -87,38 +87,33 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </Link>
               </div>
 
+              <div className="hero-stats">
+                <div className="hero-stat">
+                  <div className="hero-stat-value"><CounterAnimation target={9999} suffix="" /></div>
+                  <div className="hero-stat-meta">
+                    <Image src="/assets/icons/hero-stats/downloads.svg" alt="" width={16} height={16} className="hero-stat-icon" />
+                    <span className="hero-stat-label">{t('hero.stat1')}</span>
+                  </div>
+                </div>
+                <div className="hero-stat">
+                  <div className="hero-stat-value"><CounterAnimation target={1069} suffix="+" /></div>
+                  <div className="hero-stat-meta">
+                    <Image src="/assets/icons/hero-stats/chargers.svg" alt="" width={16} height={16} className="hero-stat-icon" />
+                    <span className="hero-stat-label">{t('hero.stat2')}</span>
+                  </div>
+                </div>
+                <div className="hero-stat">
+                  <div className="hero-stat-value"><CounterAnimation target={100} suffix="+" /></div>
+                  <div className="hero-stat-meta">
+                    <Image src="/assets/icons/hero-stats/countries.svg" alt="" width={16} height={16} className="hero-stat-icon" />
+                    <span className="hero-stat-label">{t('hero.stat3')}</span>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
 
-        </div>
-
-        {/* Hero Footer Stats Bar — full width */}
-        <div className="hero-footer-bar">
-          <div className="hero-footer-inner container">
-            <div className="hero-footer-stat">
-              <span className="hero-footer-icon">
-                <Image src="/assets/icons/hero-stats/downloads.svg" alt="" width={20} height={20} />
-              </span>
-              <span className="hero-footer-label">{t('hero.stat1')}</span>
-              <span className="hero-footer-value"><CounterAnimation target={9999} suffix="" /></span>
-            </div>
-            <div className="hero-footer-divider" />
-            <div className="hero-footer-stat">
-              <span className="hero-footer-icon">
-                <Image src="/assets/icons/hero-stats/chargers.svg" alt="" width={20} height={20} />
-              </span>
-              <span className="hero-footer-label">{t('hero.stat2')}</span>
-              <span className="hero-footer-value"><CounterAnimation target={1069} suffix="+" /></span>
-            </div>
-            <div className="hero-footer-divider" />
-            <div className="hero-footer-stat">
-              <span className="hero-footer-icon">
-                <Image src="/assets/icons/hero-stats/countries.svg" alt="" width={20} height={20} />
-              </span>
-              <span className="hero-footer-label">{t('hero.stat3')}</span>
-              <span className="hero-footer-value"><CounterAnimation target={100} suffix="+" /></span>
-            </div>
-          </div>
         </div>
       </section>
 
