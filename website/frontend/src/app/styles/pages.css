@@ -3355,6 +3355,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    height: calc(100vh - var(--header-height));
     background: var(--black);
     -webkit-backdrop-filter: blur(24px);
     backdrop-filter: blur(24px);
@@ -11170,3 +11171,5 @@ details.admin-legacy-group>.admin-settings-group:last-child {
     gap: 4px;
   }
 }
+
+
