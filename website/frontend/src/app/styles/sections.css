@@ -66,8 +66,8 @@
    uses a still image (charger render) instead of the prior dark video. */
 .hero-with-video {
   background-color: #f3eee5;
-  min-height: calc(100vh - var(--header-height, 72px));
-  min-height: calc(100svh - var(--header-height, 72px));
+  min-height: calc(80vh - var(--header-height, 72px));
+  min-height: calc(80svh - var(--header-height, 72px));
   padding: clamp(96px, 14vh, 180px) 0 clamp(80px, 12vh, 140px);
   isolation: isolate;
 }
