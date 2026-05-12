@@ -1054,3 +1054,11 @@ footer {
      ambient gold light — skipping the scene entirely would kill the
      atmosphere for reduced-motion users. */
 }
+
+/* ---------- Global custom cursor: yellow lightning bolt ---------- */
+html {
+  cursor: url('/assets/cursor/lightning.svg') 19 3, auto;
+}
+.btn, button, a, [role="button"], summary, label[for], select {
+  cursor: url('/assets/cursor/lightning.svg') 19 3, pointer;
+}
