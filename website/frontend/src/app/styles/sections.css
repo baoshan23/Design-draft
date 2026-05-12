@@ -1655,13 +1655,6 @@ html:not([data-theme="dark"]) .hero-footer-bar {
   background: rgba(255, 255, 255, 0.5);
   border-top: 1px solid rgba(255, 255, 255, 0.45);
 }
-html:not([data-theme="dark"]) .hero .hero-footer-icon {
-  color: var(--text-primary) !important;
-  filter: none;
-}
-html:not([data-theme="dark"]) .hero .hero-footer-stat:hover .hero-footer-icon {
-  filter: none;
-}
 html:not([data-theme="dark"]) .hero .hero-footer-divider {
   background: rgba(0, 0, 0, 0.12);
 }
@@ -1724,13 +1717,6 @@ html:not([data-theme="dark"]) .hero .hero-footer-divider {
 .hero-footer-icon {
   display: flex;
   align-items: center;
-  color: var(--primary) !important;
-  filter: drop-shadow(0 0 4px rgba(254, 191, 29, 0.4));
-  transition: filter 0.3s ease;
-}
-
-.hero-footer-stat:hover .hero-footer-icon {
-  filter: drop-shadow(0 0 8px rgba(254, 191, 29, 0.6));
 }
 
 .hero-footer-label {

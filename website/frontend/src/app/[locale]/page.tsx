@@ -95,24 +95,24 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div className="hero-footer-bar">
           <div className="hero-footer-inner container">
             <div className="hero-footer-stat">
-              <span className="hero-footer-icon" style={{ color: 'var(--primary)' }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4m4-5l5 5 5-5m-5 5V3" /></svg>
+              <span className="hero-footer-icon">
+                <Image src="/assets/icons/hero-stats/downloads.svg" alt="" width={16} height={16} />
               </span>
               <span className="hero-footer-label">{t('hero.stat1')}</span>
               <span className="hero-footer-value"><CounterAnimation target={9999} suffix="" /></span>
             </div>
             <div className="hero-footer-divider" />
             <div className="hero-footer-stat">
-              <span className="hero-footer-icon" style={{ color: 'var(--primary)' }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
+              <span className="hero-footer-icon">
+                <Image src="/assets/icons/hero-stats/chargers.svg" alt="" width={16} height={16} />
               </span>
               <span className="hero-footer-label">{t('hero.stat2')}</span>
               <span className="hero-footer-value"><CounterAnimation target={1069} suffix="+" /></span>
             </div>
             <div className="hero-footer-divider" />
             <div className="hero-footer-stat">
-              <span className="hero-footer-icon" style={{ color: 'var(--primary)' }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" /></svg>
+              <span className="hero-footer-icon">
+                <Image src="/assets/icons/hero-stats/countries.svg" alt="" width={16} height={16} />
               </span>
               <span className="hero-footer-label">{t('hero.stat3')}</span>
               <span className="hero-footer-value"><CounterAnimation target={100} suffix="+" /></span>
