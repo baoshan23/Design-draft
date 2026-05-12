@@ -2221,7 +2221,7 @@ html {
   width: 100%;
   padding: 14px 24px;
   border-radius: var(--radius);
-  background: rgba(254, 191, 29, 0.1);
+  background: rgba(254, 191, 29, 0.2);
   color: #1f1f1f;
   box-shadow: none;
   font-weight: 700;
@@ -2229,12 +2229,17 @@ html {
   justify-content: space-between;
 }
 
+.model-card .btn-accent::before {
+  display: none;
+}
+
 .model-card .btn-accent:hover,
 .model-card .btn-accent:active {
   transform: none;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark, #E6A817) 100%);
+  background: var(--primary);
+  color: #ffffff;
   box-shadow: 0 6px 20px rgba(254, 191, 29, 0.25);
-  filter: brightness(1.05);
+  filter: none;
 }
 
 #models .model-card.model-card-b2c {
