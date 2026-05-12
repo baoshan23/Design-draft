@@ -85,7 +85,6 @@ export default function MobileShowcase() {
           </ul>
           <div className="mobile-showcase-cta">
             <Link href="/b2c" className="btn btn-primary btn-lg">{t('cta')}</Link>
-            <span className="mobile-showcase-hint">{t('hint')}</span>
           </div>
         </div>
       </div>
