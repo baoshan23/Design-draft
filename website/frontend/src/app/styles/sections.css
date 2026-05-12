@@ -2284,16 +2284,12 @@ html {
 }
 
 .model-card .model-icon {
-  width: 56px;
-  height: 56px;
-  background: var(--primary);
-  border-radius: 50%;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.75rem;
   margin: 0 0 20px;
-  color: var(--black);
 }
 
 .model-card h3 {
