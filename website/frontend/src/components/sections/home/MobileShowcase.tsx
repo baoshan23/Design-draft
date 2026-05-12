@@ -78,10 +78,44 @@ export default function MobileShowcase() {
           <h2>{t('title')}</h2>
           <p>{t('desc')}</p>
           <ul className="mobile-showcase-bullets">
-            <li>{t('b1')}</li>
-            <li>{t('b2')}</li>
-            <li>{t('b3')}</li>
-            <li>{t('b4')}</li>
+            <li>
+              <span className="bullet-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M3 7V5a2 2 0 0 1 2-2h2" />
+                  <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+                  <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+                  <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+                  <rect x="7" y="7" width="10" height="10" rx="1" />
+                </svg>
+              </span>
+              <span>{t('b1')}</span>
+            </li>
+            <li>
+              <span className="bullet-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </span>
+              <span>{t('b2')}</span>
+            </li>
+            <li>
+              <span className="bullet-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                </svg>
+              </span>
+              <span>{t('b3')}</span>
+            </li>
+            <li>
+              <span className="bullet-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="5" width="20" height="14" rx="2" />
+                  <line x1="2" y1="10" x2="22" y2="10" />
+                </svg>
+              </span>
+              <span>{t('b4')}</span>
+            </li>
           </ul>
           <div className="mobile-showcase-cta">
             <Link href="/b2c" className="btn btn-primary btn-lg">{t('cta')}</Link>
