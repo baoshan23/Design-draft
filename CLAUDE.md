@@ -50,4 +50,4 @@ Backend: `node deploy/deploy-backend.js` cross-compiles Go + SFTP + systemd rest
 
 ## Last session
 
-- 2026-05-12 (mobile menu simplification + alignment polish): Removed the separate mobile footer/utility block and moved only **Log In** / **Sign Up** to the top of the mobile nav above Home. **Header.tsx** now renders a compact auth row at the start of the menu; **pages.css** now stretches the mobile menu layout so the auth links match the full-width nav rows instead of looking like standalone pills. Verified in the browser and with `npm run build` (100 static pages generated). Commit `50b8f5a` was the base refactor; this polish is being finalized on top. No production deploy per policy.
+- 2026-05-12 (footer v3 demo portal links): Added a dedicated **Demo Access** footer column with public links for the v3 home, admin backend, and user portal. **Footer.tsx** now exposes the production-safe demo endpoints; **en.json** and **zh.json** received matching translations for EN/ZH parity. Verified with lint/error checks and ready for build validation. No credentials were added to the site; no production deploy per policy.
