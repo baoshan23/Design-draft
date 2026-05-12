@@ -1743,10 +1743,17 @@ html:not([data-theme="dark"]) .hero .hero-footer-divider {
 /* Inline hero stats below the CTA buttons (replaces the old hero-footer-bar strip). */
 .hero-stats {
   display: flex;
+  align-self: flex-start;
   align-items: flex-start;
+  justify-content: flex-start;
   gap: clamp(36px, 5vw, 64px);
-  margin-top: clamp(28px, 4vh, 44px);
+  margin: clamp(28px, 4vh, 44px) 0 0 0;
+  padding: 0;
   flex-wrap: wrap;
+}
+
+.hero-with-video .hero-stats {
+  align-self: flex-start;
 }
 
 .hero-stat {
