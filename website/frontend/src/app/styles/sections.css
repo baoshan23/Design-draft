@@ -2258,7 +2258,7 @@ html {
 .model-card .btn-accent:active {
   transform: none;
   background: var(--primary);
-  color: #ffffff;
+  color: #1f1f1f;
   box-shadow: 0 6px 20px rgba(254, 191, 29, 0.25);
   filter: none;
 }
