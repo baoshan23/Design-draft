@@ -3714,7 +3714,19 @@ html {
   justify-content: center;
   gap: 18px;
   flex-wrap: wrap;
-  margin-top: 32px;
+  margin: -24px 0 40px;
+}
+
+.mobile-showcase-cta .btn-primary,
+.mobile-showcase-cta .btn-primary:hover,
+.mobile-showcase-cta .btn-primary:active,
+.mobile-showcase-cta .btn-primary:focus {
+  background: var(--primary);
+  background-image: none;
+}
+
+.mobile-showcase-cta .btn-primary::before {
+  display: none;
 }
 
 /* Horizontal 1x4 feature card grid spanning the container width */

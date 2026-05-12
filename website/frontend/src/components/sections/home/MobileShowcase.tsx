@@ -65,6 +65,9 @@ export default function MobileShowcase() {
             <p>{t('desc')}</p>
           </div>
         </ScrollAnimation>
+        <div className="mobile-showcase-cta">
+          <Link href="/b2c" className="btn btn-primary btn-lg">{t('cta')}</Link>
+        </div>
         <div className="mobile-feature-grid">
           {features.map((f) => (
             <div className="mobile-feature-card" key={f.src}>
@@ -88,9 +91,6 @@ export default function MobileShowcase() {
               </div>
             </div>
           ))}
-        </div>
-        <div className="mobile-showcase-cta">
-          <Link href="/b2c" className="btn btn-primary btn-lg">{t('cta')}</Link>
         </div>
       </div>
     </section>
