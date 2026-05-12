@@ -3747,20 +3747,19 @@ html {
 .mobile-feature-img {
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 10px;
-  min-height: 240px;
+  align-items: flex-start;
+  height: 320px;
+  overflow: hidden;
+  position: relative;
 }
 
 .mobile-feature-img img {
   width: auto;
-  height: auto;
-  max-height: 220px;
+  height: 100%;
   max-width: 100%;
   object-fit: contain;
-  border-radius: 6px;
+  mask-image: linear-gradient(to bottom, #000 55%, rgba(0, 0, 0, 0.4) 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, rgba(0, 0, 0, 0.4) 85%, transparent 100%);
 }
 
 .mobile-feature-text h3 {
