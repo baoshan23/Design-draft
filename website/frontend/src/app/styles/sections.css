@@ -106,10 +106,22 @@
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.08));
 }
 
-.hero-orbit-1 { top: 14%; right: 6%;  animation: hero-orbit-float-a 6.5s ease-in-out infinite; }
-.hero-orbit-2 { top: 30%; right: 38%; animation: hero-orbit-float-b 7.2s ease-in-out infinite; animation-delay: -1.4s; }
-.hero-orbit-3 { top: 54%; right: 4%;  animation: hero-orbit-float-b 6.0s ease-in-out infinite; animation-delay: -3.0s; }
-.hero-orbit-4 { top: 62%; right: 30%; animation: hero-orbit-float-a 7.8s ease-in-out infinite; animation-delay: -2.2s; }
+/* Orbit ring centered on the charger pillar (right ~22%, vertically centered). */
+.hero-orbit-ring {
+  position: absolute;
+  top: 50%;
+  right: 22%;
+  transform: translate(50%, -50%);
+  width: clamp(380px, 40vw, 560px);
+  height: clamp(380px, 40vw, 560px);
+  animation: hero-orbit-spin 60s linear infinite;
+}
+
+/* Icons cluster around the charger pillar at ~quarter-turn intervals. */
+.hero-orbit-1 { top: 16%; right: 22%; animation: hero-orbit-float-a 6.5s ease-in-out infinite; }
+.hero-orbit-2 { top: 36%; right: 38%; animation: hero-orbit-float-b 7.2s ease-in-out infinite; animation-delay: -1.4s; }
+.hero-orbit-3 { top: 48%; right: 8%;  animation: hero-orbit-float-b 6.0s ease-in-out infinite; animation-delay: -3.0s; }
+.hero-orbit-4 { top: 66%; right: 32%; animation: hero-orbit-float-a 7.8s ease-in-out infinite; animation-delay: -2.2s; }
 
 @keyframes hero-orbit-float-a {
   0%, 100% { transform: translateY(0) rotate(-2deg); }
@@ -121,8 +133,14 @@
   50%      { transform: translateY(8px) rotate(-2deg); }
 }
 
+@keyframes hero-orbit-spin {
+  from { transform: translate(50%, -50%) rotate(0deg); }
+  to   { transform: translate(50%, -50%) rotate(360deg); }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .hero-orbit-icon { animation: none; }
+  .hero-orbit-icon,
+  .hero-orbit-ring { animation: none; }
 }
 
 @media (max-width: 960px) {

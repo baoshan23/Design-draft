@@ -55,6 +55,23 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
         {/* Floating frosted-glass EV icons orbiting the charger */}
         <div className="hero-orbit" aria-hidden="true">
+          <svg className="hero-orbit-ring" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="orbit-ring-grad-1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
+                <stop offset="30%" stopColor="#ffffff" stopOpacity="0.35" />
+                <stop offset="70%" stopColor="#ffffff" stopOpacity="0.35" />
+                <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+              </linearGradient>
+              <linearGradient id="orbit-ring-grad-2" x1="1" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
+                <stop offset="50%" stopColor="#ffffff" stopOpacity="0.22" />
+                <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <circle cx="200" cy="200" r="185" fill="none" stroke="url(#orbit-ring-grad-1)" strokeWidth="1.2" />
+            <circle cx="200" cy="200" r="150" fill="none" stroke="url(#orbit-ring-grad-2)" strokeWidth="1" strokeDasharray="2 6" />
+          </svg>
           <span className="hero-orbit-icon hero-orbit-1">
             <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="#FEBF1D" stroke="#FEBF1D" />
