@@ -52,6 +52,34 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           className="hero-bg-video"
           style={{ objectFit: 'cover', objectPosition: 'center' }}
         />
+
+        {/* Floating frosted-glass EV icons orbiting the charger */}
+        <div className="hero-orbit" aria-hidden="true">
+          <span className="hero-orbit-icon hero-orbit-1">
+            <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="#FEBF1D" stroke="#FEBF1D" />
+            </svg>
+          </span>
+          <span className="hero-orbit-icon hero-orbit-2">
+            <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="7" width="16" height="10" rx="2" stroke="#181818" />
+              <line x1="22" y1="11" x2="22" y2="13" stroke="#181818" />
+              <rect x="5" y="10" width="9" height="4" fill="#FEBF1D" stroke="none" />
+            </svg>
+          </span>
+          <span className="hero-orbit-icon hero-orbit-3">
+            <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z" stroke="#181818" fill="#FEBF1D" fillOpacity="0.25" />
+              <circle cx="12" cy="10" r="3" fill="#FEBF1D" stroke="#181818" />
+            </svg>
+          </span>
+          <span className="hero-orbit-icon hero-orbit-4">
+            <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M17.5 19a4.5 4.5 0 1 0-.9-8.9A6 6 0 0 0 4.6 12 4 4 0 0 0 6 19.9z" fill="#FEBF1D" fillOpacity="0.18" stroke="#181818" />
+            </svg>
+          </span>
+        </div>
+
         <div className="container hero-with-video-grid">
           <div className="hero-content">
             <div className="hero-text">
