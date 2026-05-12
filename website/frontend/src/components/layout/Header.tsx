@@ -252,8 +252,8 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* -- Mobile-only footer with CTA + settings -- */}
-          <div className="mobile-nav-footer">
+          {/* -- Mobile quick actions embedded in the menu -- */}
+          <div className="mobile-nav-utilities">
             <div className="mobile-nav-cta">
               <Link href="/buy" className="btn-buy" onClick={closeMenu}>
                 <span>{t('buyNow')}</span>

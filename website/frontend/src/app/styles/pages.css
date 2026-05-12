@@ -3524,23 +3524,26 @@
   }
 
   /* =============================================
-     MOBILE NAV FOOTER — CTA buttons + settings
+     MOBILE NAV UTILITIES — quick actions + settings
      ============================================= */
 
-  .nav.mobile-open .mobile-nav-footer {
+  .nav.mobile-open .mobile-nav-utilities {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding: 16px 20px 24px;
-    border-top: 1px solid var(--border-subtle);
+    gap: 14px;
+    margin: 4px 16px 16px;
+    padding: 16px;
+    border: 1px solid var(--border-subtle);
+    border-radius: calc(var(--radius) + 4px);
     background: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
   }
 
   /* CTA stack — Buy (primary) / Demo (outlined) / Login+Signup pair */
   .mobile-nav-cta {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
   }
 
   /* All top-level CTA buttons are full-width with a 48px touch target */
@@ -3551,9 +3554,9 @@
     justify-content: center;
     gap: 6px;
     width: 100%;
-    padding: 12px 16px;
-    min-height: 48px;
-    font-size: 0.9rem;
+    padding: 11px 16px;
+    min-height: 46px;
+    font-size: 0.88rem;
     font-weight: 600;
     border-radius: var(--radius);
     transition: all var(--transition);
@@ -3591,7 +3594,7 @@
   /* Auth sub-row — Login | Sign up (50/50), collapses to 1 col on logout */
   .mobile-nav-cta-auth {
     display: flex;
-    gap: 10px;
+    gap: 8px;
   }
 
   .mobile-nav-cta-auth>* {
@@ -3600,9 +3603,9 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 12px 16px;
-    min-height: 48px;
-    font-size: 0.9rem;
+    padding: 11px 14px;
+    min-height: 46px;
+    font-size: 0.88rem;
     font-weight: 600;
     border-radius: var(--radius);
     transition: all var(--transition);
@@ -3635,23 +3638,27 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
   }
 
   .mobile-nav-settings .lang-switcher {
     display: flex;
     gap: 4px;
+    flex: 1 1 auto;
   }
 
   .mobile-nav-settings .lang-btn {
-    min-height: 40px;
+    min-height: 38px;
     min-width: 44px;
-    padding: 8px 12px;
-    font-size: 0.82rem;
+    padding: 7px 11px;
+    font-size: 0.8rem;
   }
 
   .mobile-nav-settings .theme-toggle {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 auto;
   }
 }
 
@@ -11171,5 +11178,3 @@ details.admin-legacy-group>.admin-settings-group:last-child {
     gap: 4px;
   }
 }
-
-
