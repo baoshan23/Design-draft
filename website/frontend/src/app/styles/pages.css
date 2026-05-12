@@ -2806,13 +2806,15 @@
   background: var(--dark-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
 }
 
-.hiw-card:hover {
+.hiw-card:hover,
+.hiw-card:active {
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
-  border-color: rgba(254, 191, 29, 0.4);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  background-color: var(--primary);
+  border-color: var(--primary);
 }
 
 .hiw-card-icon {
@@ -2824,6 +2826,15 @@
   margin-bottom: 18px;
 }
 
+.hiw-card:hover .hiw-card-icon svg path,
+.hiw-card:hover .hiw-card-icon svg polyline,
+.hiw-card:hover .hiw-card-icon svg line,
+.hiw-card:active .hiw-card-icon svg path,
+.hiw-card:active .hiw-card-icon svg polyline,
+.hiw-card:active .hiw-card-icon svg line {
+  stroke: #ffffff;
+}
+
 .hiw-card-num {
   position: absolute;
   top: 4px;
@@ -2833,6 +2844,12 @@
   pointer-events: none;
   user-select: none;
   opacity: 0.95;
+  transition: filter 0.25s ease;
+}
+
+.hiw-card:hover .hiw-card-num,
+.hiw-card:active .hiw-card-num {
+  filter: brightness(0) invert(1);
 }
 
 .hiw-card h3 {
