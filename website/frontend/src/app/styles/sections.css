@@ -62,9 +62,10 @@
   z-index: 2;
 }
 
-/* Hero video background — fills the section, sits below content/scrim */
+/* Hero background — fills the section, sits below content/scrim. Now
+   uses a still image (charger render) instead of the prior dark video. */
 .hero-with-video {
-  background-color: #000;
+  background-color: #f3eee5;
   min-height: calc(100vh - var(--header-height, 72px));
   min-height: calc(100svh - var(--header-height, 72px));
   padding: clamp(96px, 14vh, 180px) 0 clamp(80px, 12vh, 140px);
@@ -166,10 +167,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   z-index: 0;
   pointer-events: none;
   opacity: 1;
-  background: #000;
+  background: #f3eee5;
 }
 .hero-bg-video-scrim {
   position: absolute;
@@ -191,11 +193,6 @@
   .hero-bg-video-scrim {
     background:
       linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.35) 35%, rgba(0,0,0,0.7) 100%);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-bg-video {
-    display: none;
   }
 }
 

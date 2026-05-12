@@ -6,7 +6,6 @@ import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
 import { Link } from '@/i18n/navigation';
 import BusinessModelsSection from '@/components/sections/home/BusinessModelsSection';
-import HeroVideo from '@/components/sections/home/HeroVideo';
 import MobileShowcase from '@/components/sections/home/MobileShowcase';
 import { DiagramModalProvider } from '@/components/sections/home/DiagramModal';
 import GlobeVisualization from '@/components/sections/home/GlobeVisualization';
@@ -44,7 +43,15 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <DiagramModalProvider>
       {/* Hero Section */}
       <section className="hero hero-with-video">
-        <HeroVideo src="/video/Hero-back.mp4" />
+        <Image
+          src="/images/hero-bg-charger.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="hero-bg-video"
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
+        />
         <div className="hero-bg-video-scrim" aria-hidden="true" />
         <div className="container hero-with-video-grid">
           <div className="hero-content">
