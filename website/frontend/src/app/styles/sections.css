@@ -2212,6 +2212,27 @@ html {
   position: relative;
   box-shadow: none;
   transition: all var(--transition);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.model-card .btn-accent {
+  margin: auto -40px -40px -40px;
+  width: calc(100% + 80px);
+  padding: 18px 24px;
+  border-radius: 0;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark, #E6A817) 100%);
+  color: var(--black);
+  box-shadow: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.model-card .btn-accent:hover {
+  transform: none;
+  box-shadow: none;
+  filter: brightness(1.05);
 }
 
 #models .model-card.model-card-b2c {
