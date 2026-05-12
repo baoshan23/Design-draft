@@ -3717,13 +3717,12 @@ html {
   margin-top: 32px;
 }
 
-/* New 2x2 feature card grid (replaces side-by-side phone-stack layout) */
+/* Horizontal 1x4 feature card grid spanning the container width */
 .mobile-feature-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
-  max-width: 720px;
-  margin: 40px auto 0;
+  margin: 40px 0 0;
 }
 
 .mobile-feature-card {
@@ -3748,7 +3747,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 320px;
+  height: 420px;
   overflow: hidden;
   position: relative;
 }
@@ -3777,10 +3776,18 @@ html {
   margin: 0;
 }
 
+@media (max-width: 960px) {
+  .mobile-feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 720px) {
   .mobile-feature-grid {
     grid-template-columns: 1fr;
     max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
