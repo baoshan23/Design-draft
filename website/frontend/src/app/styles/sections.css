@@ -3810,6 +3810,7 @@ html {
   color: #6C717A;
   line-height: 1.5;
   margin: 0;
+  padding-left: 28px;
 }
 
 @media (max-width: 960px) {
