@@ -2831,8 +2831,8 @@
 }
 
 .step-card p {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+  font-size: 14px;
+  color: #181818;
   line-height: 1.6;
 }
 

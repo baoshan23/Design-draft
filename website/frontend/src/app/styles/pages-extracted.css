@@ -2055,8 +2055,8 @@
 }
 
 .flow-item p {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
+  font-size: 14px;
+  color: #181818;
   line-height: 1.5;
 }
 
