@@ -97,7 +97,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div className="hero-footer-inner container">
             <div className="hero-footer-stat">
               <span className="hero-footer-icon">
-                <Image src="/assets/icons/hero-stats/downloads.svg" alt="" width={16} height={16} />
+                <Image src="/assets/icons/hero-stats/downloads.svg" alt="" width={20} height={20} />
               </span>
               <span className="hero-footer-label">{t('hero.stat1')}</span>
               <span className="hero-footer-value"><CounterAnimation target={9999} suffix="" /></span>
@@ -105,7 +105,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <div className="hero-footer-divider" />
             <div className="hero-footer-stat">
               <span className="hero-footer-icon">
-                <Image src="/assets/icons/hero-stats/chargers.svg" alt="" width={16} height={16} />
+                <Image src="/assets/icons/hero-stats/chargers.svg" alt="" width={20} height={20} />
               </span>
               <span className="hero-footer-label">{t('hero.stat2')}</span>
               <span className="hero-footer-value"><CounterAnimation target={1069} suffix="+" /></span>
@@ -113,7 +113,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <div className="hero-footer-divider" />
             <div className="hero-footer-stat">
               <span className="hero-footer-icon">
-                <Image src="/assets/icons/hero-stats/countries.svg" alt="" width={16} height={16} />
+                <Image src="/assets/icons/hero-stats/countries.svg" alt="" width={20} height={20} />
               </span>
               <span className="hero-footer-label">{t('hero.stat3')}</span>
               <span className="hero-footer-value"><CounterAnimation target={100} suffix="+" /></span>
