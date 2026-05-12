@@ -3787,11 +3787,22 @@ html {
 }
 
 .mobile-feature-text h3 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 800;
   color: #181818;
   margin: 0 0 6px;
   letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mobile-feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  flex-shrink: 0;
 }
 
 .mobile-feature-text p {
