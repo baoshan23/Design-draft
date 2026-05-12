@@ -2203,6 +2203,12 @@ html {
 }
 
 /* --- Business Models Section --- */
+#models .section-header h2 {
+  background: none;
+  -webkit-text-fill-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
 .model-card {
   background: var(--dark-card);
   border: 1px solid var(--border-subtle);
