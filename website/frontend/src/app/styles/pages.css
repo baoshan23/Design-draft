@@ -2797,7 +2797,7 @@
 }
 
 .mobile-hero-cta {
-  background: linear-gradient(45deg, #FEBF1D 0%, #FFD24D 100%);
+  background: #F1F2F4;
   border-radius: var(--radius-xl);
   padding: 56px 32px;
   display: flex;
@@ -2906,28 +2906,30 @@
 
 .mobile-hero-card {
   position: relative;
-  background: var(--dark-card);
-  border: 1px solid var(--border-subtle);
+  background: transparent;
+  border: none;
   border-radius: var(--radius-lg);
-  padding: 22px 26px;
+  padding: 28px 28px;
   width: 100%;
   font: inherit;
   color: inherit;
   text-align: left;
   cursor: pointer;
-  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-}
-
-.mobile-hero-card:hover {
-  border-color: rgba(254, 191, 29, 0.4);
+  transition: background 0.25s ease, box-shadow 0.25s ease;
 }
 
 .mobile-hero-card.is-active {
-  background: rgba(254, 191, 29, 0.08);
-  border-color: var(--primary);
-  box-shadow:
-    0 0 0 1px var(--primary),
-    0 8px 20px rgba(254, 191, 29, 0.15);
+  background: linear-gradient(45deg, #FEBF1D 0%, #FFD24D 100%);
+  box-shadow: 0 10px 24px rgba(254, 191, 29, 0.22);
+}
+
+.mobile-hero-card.is-active .mobile-hero-card-toggle {
+  color: #181818;
+  opacity: 0.85;
+}
+
+.mobile-hero-card.is-active .mobile-hero-card-desc {
+  opacity: 0.85;
 }
 
 .mobile-hero-card-row {
