@@ -3833,7 +3833,7 @@ html {
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: var(--radius-xl);
-  padding: 40px 20px 20px;
+  padding: 40px 20px 120px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -3851,7 +3851,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 400px;
+  height: 300px;
   overflow: hidden;
   position: relative;
 }
@@ -3866,8 +3866,8 @@ html {
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.06),
     0 10px 24px rgba(0, 0, 0, 0.12);
-  mask-image: linear-gradient(to bottom, #000 25%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, #000 25%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 20%, transparent 70%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 20%, transparent 70%);
 }
 
 .mobile-feature-img .phone-frame::before {
