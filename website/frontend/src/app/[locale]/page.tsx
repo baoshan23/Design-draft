@@ -319,19 +319,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Mobile Feature Cards */}
       <section className="section">
         <div className="container">
-          <ScrollAnimation>
-            <div className="section-header">
-              <span className="section-label">{t('index.mobile.label')}</span>
-              <h2>{t('index.mobile.title')}</h2>
-              <p>{t('index.mobile.desc')}</p>
-            </div>
-          </ScrollAnimation>
           <div className="mobile-hero-grid">
             <ScrollAnimation>
               <div className="mobile-hero-cta">
                 <div className="mobile-hero-cta-text">
-                  <h3>{t('index.mobile.cta.title')}</h3>
-                  <p>{t('index.mobile.cta.subtitle')}</p>
+                  <h3>{t('index.mobile.title')}</h3>
+                  <p>{t('index.mobile.desc')}</p>
                 </div>
               </div>
             </ScrollAnimation>
