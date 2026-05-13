@@ -27,7 +27,7 @@ const MinusIcon = (
 
 export default function MobileHeroTabs() {
   const t = useTranslations('index.mobile');
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState<number | null>(null);
 
   const cards: TabCard[] = [
     {
@@ -98,7 +98,7 @@ export default function MobileHeroTabs() {
                 {cards.map((c, i) => (
                   <div
                     key={c.image}
-                    className={`mobile-hero-phone-screen ${i === active ? 'is-active' : ''}`}
+                    className={`mobile-hero-phone-screen ${i === (active ?? 0) ? 'is-active' : ''}`}
                   >
                     <Image
                       src={c.image}
