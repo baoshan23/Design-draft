@@ -3830,15 +3830,18 @@ html {
   line-height: 1.5;
 }
 
-.mobile-showcase-cta-btn,
-.mobile-showcase-cta-btn:hover,
-.mobile-showcase-cta-btn:active,
-.mobile-showcase-cta-btn:focus {
+.btn-primary.mobile-showcase-cta-btn,
+.btn-primary.mobile-showcase-cta-btn:hover,
+.btn-primary.mobile-showcase-cta-btn:active,
+.btn-primary.mobile-showcase-cta-btn:focus {
   align-self: flex-start;
   background: var(--primary);
+  background-image: none;
+  box-shadow: none;
+  filter: none;
 }
 
-.mobile-showcase-cta-btn::before {
+.btn-primary.mobile-showcase-cta-btn::before {
   display: none;
 }
 
