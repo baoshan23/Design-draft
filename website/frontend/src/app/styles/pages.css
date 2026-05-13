@@ -3015,6 +3015,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 40px;
   padding: 44px 120px;
   background: transparent;
@@ -3055,7 +3056,7 @@
 }
 
 .hiw-card-text {
-  flex: 1 1 auto;
+  flex: 0 1 560px;
   display: flex;
   flex-direction: column;
   gap: 6px;
