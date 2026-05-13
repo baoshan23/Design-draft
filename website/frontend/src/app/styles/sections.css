@@ -2418,7 +2418,7 @@ html {
 
 .section-label {
   display: inline-flex;
-  padding: 8px 16px;
+  padding: 10px 18px;
   background: var(--primary-dim);
   color: var(--primary);
   font-size: 0.75rem;
@@ -2427,7 +2427,7 @@ html {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   border: 1px solid rgba(230, 168, 23, 0.2);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .section-header h2 {
