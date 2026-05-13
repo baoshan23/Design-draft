@@ -333,13 +333,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   <h3>{t('index.mobile.cta.title')}</h3>
                   <p>{t('index.mobile.cta.subtitle')}</p>
                 </div>
-                <Link href="/b2c" className="mobile-hero-cta-button">
-                  <span>{t('index.mobile.cta.button')}</span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M7 17L17 7" />
-                    <path d="M7 7h10v10" />
-                  </svg>
-                </Link>
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
