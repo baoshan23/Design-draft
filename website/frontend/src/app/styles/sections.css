@@ -2351,7 +2351,9 @@ html {
 }
 
 .model-card .btn-accent:hover,
-.model-card .btn-accent:active {
+.model-card .btn-accent:active,
+.model-card:hover .btn-accent,
+.model-card:focus-within .btn-accent {
   transform: none;
   background: var(--primary);
   color: #1f1f1f;
