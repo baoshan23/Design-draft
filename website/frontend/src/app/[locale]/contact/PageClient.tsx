@@ -161,12 +161,18 @@ export default function ContactPage() {
                 <p>{t('contact.business.desc')}</p>
                 <div className="qr-row">
                   <div className="qr-item">
-                    <div className="qr-box"><QrPlaceholder /></div>
+                    <div className="qr-box">
+                      <img src="/images/contact/wecom.png" alt={t('contact.business.wecom')} onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                      <QrPlaceholder />
+                    </div>
                     <span>{t('contact.business.wecom')}</span>
                     <small className="qr-caption">{t('contact.business.wecomInfo')}</small>
                   </div>
                   <div className="qr-item">
-                    <div className="qr-box"><QrPlaceholder /></div>
+                    <div className="qr-box">
+                      <img src="/images/contact/whatsapp.png" alt={t('contact.business.whatsapp')} onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                      <QrPlaceholder />
+                    </div>
                     <span>{t('contact.business.whatsapp')}</span>
                     <small className="qr-caption">{t('contact.business.whatsappInfo')}</small>
                   </div>
@@ -186,12 +192,18 @@ export default function ContactPage() {
                 <p>{t('contact.tech.desc')}</p>
                 <div className="qr-row">
                   <div className="qr-item">
-                    <div className="qr-box"><QrPlaceholder /></div>
+                    <div className="qr-box">
+                      <img src="/images/contact/wecom-tech.png" alt={t('contact.tech.wecom')} onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                      <QrPlaceholder />
+                    </div>
                     <span>{t('contact.tech.wecom')}</span>
                     <small className="qr-caption">{t('contact.tech.wecomInfo')}</small>
                   </div>
                   <div className="qr-item">
-                    <div className="qr-box"><QrPlaceholder /></div>
+                    <div className="qr-box">
+                      <img src="/images/contact/whatsapp-tech.png" alt={t('contact.tech.whatsapp')} onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                      <QrPlaceholder />
+                    </div>
                     <span>{t('contact.tech.whatsapp')}</span>
                     <small className="qr-caption">{t('contact.tech.whatsappInfo')}</small>
                   </div>
@@ -333,7 +345,7 @@ export default function ContactPage() {
                     <label htmlFor="contact-message">{t('contact.form.help.label')}</label>
                     <textarea id="contact-message" name="message" placeholder={t('contact.form.help.placeholder')} value={formData.message} onChange={handleChange} />
                   </div>
-                  <button type="submit" className={`submit-btn${submitting ? ' btn-loading' : ''}`} disabled={submitting} aria-busy={submitting}>
+                  <button type="submit" className={`submit-btn${submitting ? ' btn-loading' : ''}`} disabled={submitting} aria-busy={submitting ? 'true' : 'false'}>
                     <span>{submitting ? t('contact.form.submitting') : t('contact.form.submit')}</span>
                     <svg className="contact-submit-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
                   </button>
