@@ -3007,12 +3007,16 @@
   margin: 32px auto 0;
 }
 
+#how-it-works.section-alt {
+  background: #ffffff;
+}
+
 .hiw-card {
   position: relative;
   display: flex;
   align-items: center;
   gap: 28px;
-  padding: 28px 4px;
+  padding: 44px 4px;
   background: transparent;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
