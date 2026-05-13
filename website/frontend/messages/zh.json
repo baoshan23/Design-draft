@@ -1400,11 +1400,20 @@
     "desc": "对我们的平台有疑问？准备启动项目？我们的团队全程为您服务。",
     "business": {
       "title": "商务沟通",
-      "desc": "销售咨询、合作机会与业务拓展。"
+      "desc": "销售咨询、合作机会与业务拓展。",
+      "wecom": "企业微信",
+      "wecomInfo": "扫描此二维码添加我们的企业微信（企业帐号）。",
+      "whatsapp": "WhatsApp",
+      "whatsappInfo": "使用 WhatsApp 扫描此二维码以添加我们的联系方式。",
+      "telegram": "Telegram"
     },
     "tech": {
       "title": "技术支持",
-      "desc": "安装帮助、Bug 反馈与技术故障排查。"
+      "desc": "安装帮助、Bug 反馈与技术故障排查。",
+      "wecom": "企业微信",
+      "wecomInfo": "扫描此二维码添加我们的技术支持企业微信帐号。",
+      "whatsapp": "WhatsApp",
+      "whatsappInfo": "通过 WhatsApp 联系我们获取技术支持。"
     },
     "quick": {
       "title": "快速联系",

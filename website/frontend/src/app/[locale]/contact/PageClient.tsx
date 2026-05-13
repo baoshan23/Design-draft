@@ -10,38 +10,38 @@ import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
 // the phone-code prefix auto-fills to the matching code — but they can
 // still override it (e.g. HK resident registering with a US-issued line).
 const COUNTRIES: { name: string; code: string }[] = [
-    { name: 'Hong Kong', code: '+852' },
-    { name: 'China', code: '+86' },
-    { name: 'United States', code: '+1' },
-    { name: 'Canada', code: '+1' },
-    { name: 'United Kingdom', code: '+44' },
-    { name: 'Germany', code: '+49' },
-    { name: 'France', code: '+33' },
-    { name: 'Spain', code: '+34' },
-    { name: 'Italy', code: '+39' },
-    { name: 'Netherlands', code: '+31' },
-    { name: 'Japan', code: '+81' },
-    { name: 'South Korea', code: '+82' },
-    { name: 'Taiwan', code: '+886' },
-    { name: 'Australia', code: '+61' },
-    { name: 'New Zealand', code: '+64' },
-    { name: 'Singapore', code: '+65' },
-    { name: 'Thailand', code: '+66' },
-    { name: 'Vietnam', code: '+84' },
-    { name: 'Indonesia', code: '+62' },
-    { name: 'Malaysia', code: '+60' },
-    { name: 'Philippines', code: '+63' },
-    { name: 'India', code: '+91' },
-    { name: 'UAE', code: '+971' },
-    { name: 'Saudi Arabia', code: '+966' },
-    { name: 'Brazil', code: '+55' },
-    { name: 'Mexico', code: '+52' },
-    { name: 'Other', code: '' },
+  { name: 'Hong Kong', code: '+852' },
+  { name: 'China', code: '+86' },
+  { name: 'United States', code: '+1' },
+  { name: 'Canada', code: '+1' },
+  { name: 'United Kingdom', code: '+44' },
+  { name: 'Germany', code: '+49' },
+  { name: 'France', code: '+33' },
+  { name: 'Spain', code: '+34' },
+  { name: 'Italy', code: '+39' },
+  { name: 'Netherlands', code: '+31' },
+  { name: 'Japan', code: '+81' },
+  { name: 'South Korea', code: '+82' },
+  { name: 'Taiwan', code: '+886' },
+  { name: 'Australia', code: '+61' },
+  { name: 'New Zealand', code: '+64' },
+  { name: 'Singapore', code: '+65' },
+  { name: 'Thailand', code: '+66' },
+  { name: 'Vietnam', code: '+84' },
+  { name: 'Indonesia', code: '+62' },
+  { name: 'Malaysia', code: '+60' },
+  { name: 'Philippines', code: '+63' },
+  { name: 'India', code: '+91' },
+  { name: 'UAE', code: '+971' },
+  { name: 'Saudi Arabia', code: '+966' },
+  { name: 'Brazil', code: '+55' },
+  { name: 'Mexico', code: '+52' },
+  { name: 'Other', code: '' },
 ];
 
 // Unique, sorted list of codes for the standalone code selector.
 const PHONE_CODES: string[] = Array.from(
-    new Set(COUNTRIES.map((c) => c.code).filter(Boolean)),
+  new Set(COUNTRIES.map((c) => c.code).filter(Boolean)),
 ).sort((a, b) => parseInt(a.slice(1), 10) - parseInt(b.slice(1), 10));
 
 export default function ContactPage() {
@@ -162,15 +162,17 @@ export default function ContactPage() {
                 <div className="qr-row">
                   <div className="qr-item">
                     <div className="qr-box"><QrPlaceholder /></div>
-                    <span>WeChat</span>
+                    <span>{t('contact.business.wecom')}</span>
+                    <small className="qr-caption">{t('contact.business.wecomInfo')}</small>
                   </div>
                   <div className="qr-item">
                     <div className="qr-box"><QrPlaceholder /></div>
-                    <span>WhatsApp</span>
+                    <span>{t('contact.business.whatsapp')}</span>
+                    <small className="qr-caption">{t('contact.business.whatsappInfo')}</small>
                   </div>
                   <div className="qr-item">
                     <div className="qr-box"><QrPlaceholder /></div>
-                    <span>Telegram</span>
+                    <span>{t('contact.business.telegram')}</span>
                   </div>
                 </div>
               </div>
@@ -185,11 +187,13 @@ export default function ContactPage() {
                 <div className="qr-row">
                   <div className="qr-item">
                     <div className="qr-box"><QrPlaceholder /></div>
-                    <span>WeChat</span>
+                    <span>{t('contact.tech.wecom')}</span>
+                    <small className="qr-caption">{t('contact.tech.wecomInfo')}</small>
                   </div>
                   <div className="qr-item">
                     <div className="qr-box"><QrPlaceholder /></div>
-                    <span>WhatsApp</span>
+                    <span>{t('contact.tech.whatsapp')}</span>
+                    <small className="qr-caption">{t('contact.tech.whatsappInfo')}</small>
                   </div>
                 </div>
               </div>

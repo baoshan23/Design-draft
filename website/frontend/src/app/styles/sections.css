@@ -2431,6 +2431,10 @@ html {
   margin-top: 80px;
 }
 
+.section-label--payments {
+  margin-top: 80px;
+}
+
 .section-label {
   display: inline-flex;
   padding: 12px 20px;

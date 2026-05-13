@@ -1400,11 +1400,20 @@
     "desc": "Have questions about our platform? Ready to start your project? Our team is here to help you every step of the way.",
     "business": {
       "title": "Business Communication",
-      "desc": "Sales inquiries, partnership opportunities, and business development."
+      "desc": "Sales inquiries, partnership opportunities, and business development.",
+      "wecom": "WeCom (Enterprise WeChat)",
+      "wecomInfo": "Scan this QR to add our Enterprise WeChat (WeCom).",
+      "whatsapp": "WhatsApp",
+      "whatsappInfo": "Scan with WhatsApp to add our contact.",
+      "telegram": "Telegram"
     },
     "tech": {
       "title": "Technical Support",
-      "desc": "Installation help, bug reports, and technical troubleshooting."
+      "desc": "Installation help, bug reports, and technical troubleshooting.",
+      "wecom": "WeCom (Enterprise WeChat)",
+      "wecomInfo": "Scan this QR to add our technical support WeCom account.",
+      "whatsapp": "WhatsApp",
+      "whatsappInfo": "Message us on WhatsApp for technical support."
     },
     "quick": {
       "title": "Quick Connect",
