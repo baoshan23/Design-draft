@@ -1,6 +1,6 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
@@ -47,6 +47,7 @@ const IconFile = (
 
 export default function MobileShowcase() {
   const t = useTranslations('mobileShowcase');
+  const [active, setActive] = useState(0);
 
   const features: Feature[] = [
     { src: '/images/mobile-features/feature-home.webp',     title: t('b1Title'), desc: t('b1'), icon: IconScan },
@@ -64,31 +65,51 @@ export default function MobileShowcase() {
               <span className="section-label">{t('label')}</span>
               <h2>{t('title')}</h2>
               <p>{t('desc')}</p>
-              <ul className="mobile-showcase-list">
-                {features.map((f) => (
-                  <li key={f.src} className="mobile-showcase-list-item">
-                    <span className="mobile-showcase-list-icon" aria-hidden="true">{f.icon}</span>
-                    <div className="mobile-showcase-list-text">
-                      <strong>{f.title}</strong>
-                      <span>{f.desc}</span>
-                    </div>
-                  </li>
-                ))}
+              <ul className="mobile-showcase-list" role="tablist">
+                {features.map((f, i) => {
+                  const isActive = i === active;
+                  return (
+                    <li key={f.src}>
+                      <button
+                        type="button"
+                        role="tab"
+                        aria-selected={isActive}
+                        className={`mobile-showcase-list-item ${isActive ? 'is-active' : ''}`}
+                        onClick={() => setActive(i)}
+                        onMouseEnter={() => setActive(i)}
+                      >
+                        <span className="mobile-showcase-list-icon" aria-hidden="true">{f.icon}</span>
+                        <div className="mobile-showcase-list-text">
+                          <strong>{f.title}</strong>
+                          <span>{f.desc}</span>
+                        </div>
+                      </button>
+                    </li>
+                  );
+                })}
               </ul>
               <Link href="/b2c" className="btn btn-primary mobile-showcase-cta-btn">{t('cta')}</Link>
             </div>
           </ScrollAnimation>
           <ScrollAnimation>
             <div className="mobile-showcase-phone-wrap">
-              <div className="mobile-showcase-phone">
+              <div className="mobile-showcase-phone" aria-hidden="true">
                 <div className="mobile-showcase-phone-notch" />
-                <Image
-                  src={features[0].src}
-                  alt={features[0].title}
-                  width={500}
-                  height={1083}
-                  sizes="(max-width: 960px) 80vw, 320px"
-                />
+                {features.map((f, i) => (
+                  <div
+                    key={f.src}
+                    className={`mobile-showcase-phone-screen ${i === active ? 'is-active' : ''}`}
+                  >
+                    <Image
+                      src={f.src}
+                      alt={f.title}
+                      width={500}
+                      height={1083}
+                      sizes="(max-width: 960px) 80vw, 320px"
+                      priority={i === 0}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </ScrollAnimation>
