@@ -2388,6 +2388,7 @@ html {
 }
 
 .model-card h3 {
+  font-size: 24px;
   margin-bottom: 8px;
   color: var(--text-primary);
 }
