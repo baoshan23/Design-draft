@@ -1227,9 +1227,26 @@
 
 /* --- Feature Support Matrix --- */
 .matrix-section {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 24px;
+}
+
+.matrix-row {
+  display: grid;
+  gap: 24px;
+}
+
+.matrix-row-top {
+  grid-template-columns: 1fr 1fr;
+}
+
+.matrix-row-bottom {
+  grid-template-columns: 1.6fr 1fr;
+}
+
+.matrix-illustration {
+  min-height: 100%;
 }
 
 .matrix-column {
@@ -4007,7 +4024,8 @@
     font-size: 1.4rem;
   }
 
-  .matrix-section {
+  .matrix-row-top,
+  .matrix-row-bottom {
     grid-template-columns: 1fr;
   }
 
