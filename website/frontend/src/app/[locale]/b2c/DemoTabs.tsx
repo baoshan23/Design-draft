@@ -53,6 +53,16 @@ export default function DemoTabs({
         </div>
         <h4 className="b2c-demo-card-title">{t('demo.page.h5.title')}</h4>
         <p className="b2c-demo-card-desc">{t('demo.page.h5.desc')}</p>
+        <div className="b2c-demo-creds">
+          <div className="b2c-demo-cred-row">
+            <span className="b2c-demo-cred-key">{t('demo.page.username')}</span>
+            <code>{adminAccount}</code>
+          </div>
+          <div className="b2c-demo-cred-row">
+            <span className="b2c-demo-cred-key">{t('demo.page.password')}</span>
+            <code>{adminPassword}</code>
+          </div>
+        </div>
       </div>
 
       {/* Bottom row: QR codes */}
