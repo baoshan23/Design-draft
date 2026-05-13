@@ -81,21 +81,6 @@ const APPS = [
   },
 ];
 
-const DEMO_PORTALS = [
-  {
-    nameKey: 'v3demo' as const,
-    href: 'https://www.v3g.gcss.hk/',
-  },
-  {
-    nameKey: 'v3admin' as const,
-    href: 'https://www.v3g.gcss.hk/admin/',
-  },
-  {
-    nameKey: 'v3user' as const,
-    href: 'https://www.v3g.gcss.hk/user/',
-  },
-];
-
 export default function Footer() {
   const t = useTranslations('footer');
 
@@ -194,14 +179,6 @@ export default function Footer() {
             <Link href="/invoices">{t('invoices')}</Link>
           </div>
 
-          <div className="footer-col">
-            <h4>{t('demoAccess')}</h4>
-            {DEMO_PORTALS.map((portal) => (
-              <a key={portal.nameKey} href={portal.href} target="_blank" rel="noopener noreferrer">
-                {t(portal.nameKey)}
-              </a>
-            ))}
-          </div>
         </div>
 
         <div className="footer-bottom">

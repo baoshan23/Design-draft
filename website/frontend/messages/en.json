@@ -584,6 +584,21 @@
       "launchMerchant": "Open Merchant Panel",
       "qrH5": "Scan for H5 web app",
       "qrMobile": "Scan for mobile app",
+      "username": "Username",
+      "password": "Password",
+      "cpo": {
+        "title": "CPO",
+        "desc": "Operator-level dashboard for station management, billing, and customer service.",
+        "btn": "Open CPO Panel"
+      },
+      "h5": {
+        "title": "Demo Account",
+        "desc": "Scan to open H5 web app"
+      },
+      "qrUser": {
+        "title": "User Portal",
+        "desc": "Scan to open the v3 user portal"
+      },
       "viewB2cProduct": "View B2C product page",
       "viewB2bProduct": "View B2B2C product page",
       "requestDemo": "Request a demo",
@@ -683,10 +698,6 @@
     "signup": "Sign Up",
     "dashboard": "Dashboard",
     "invoices": "Invoices & Payments",
-    "demoAccess": "Demo Access",
-    "v3demo": "v3 Demo Home",
-    "v3admin": "Admin Backend",
-    "v3user": "User Portal",
     "copyright": "© 2026 GCSS (Global Charger System Service). All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
@@ -1027,33 +1038,12 @@
         "title": "APP Experience",
         "desc": "Scan to download the demo app"
       },
-      "cpo": {
-        "title": "CPO",
-        "desc": "Operator-level dashboard for station management, billing, and customer service.",
-        "btn": "Open CPO Panel"
-      },
-      "qrH5": {
-        "title": "H5",
-        "desc": "Scan to open the H5 web app"
-      },
       "qrApp": {
         "title": "APP",
         "desc": "Scan to download the mobile app"
       },
-      "h5": {
-        "title": "Demo Account",
-        "desc": "Scan to open H5 web app",
-        "scan": "Scan to open H5 web app",
-        "btn": "Open H5 App"
-      },
-      "app": {
-        "title": "APP Experience",
-        "desc": "Scan to download the demo app"
-      },
       "links": "Demo Access Links",
       "visit": "Visit",
-      "username": "Username",
-      "password": "Password",
       "cred": {
         "admin": "Global Admin Panel",
         "merchant": "Merchant Panel",
@@ -1220,7 +1210,6 @@
     },
     "table": {
       "feature": "Feature",
-
       "fees": "Pricing",
       "hostingfee": "Hosting (server rental) fee",
       "chargercount": "Charger count",
@@ -1241,7 +1230,6 @@
       "price21800once": "$21,800 one-time",
       "price34200once": "$68,000 one-time",
       "price1500": "$1,500",
-
       "baseservice": "Core Service",
       "driverapp": "Driver / user app",
       "ocpp": "OCPP 1.6J",
@@ -1270,7 +1258,6 @@
       "leaseGcss": "Lease GCSS / Bring your own",
       "ownGcss": "GCSS",
       "ownClient": "Customer",
-
       "cpms": "CPMS / Admin / CPO Management",
       "dashboard": "Dashboard",
       "langswitch": "Language switching",
@@ -1289,13 +1276,11 @@
       "fmt2": "2 formats",
       "fmt3": "3 formats",
       "emails1k": "1,000 emails ($6 per extra 1,000)",
-
       "drivermgmt": "Driver / User Management",
       "balanceview": "View user balance",
       "balanceadjust": "Adjust user balance",
       "userexport": "User info export",
       "wallethist": "Wallet top-up records & export",
-
       "b2b": "B2B Features",
       "cpomgmt": "Operator (CPO) creation & management",
       "gatewayconfig": "Payment-gateway configuration",
@@ -1304,7 +1289,6 @@
       "cpoperms": "CPO permission configuration",
       "cpoorders": "CPO order/transaction management",
       "cporevenue": "Commission / hosted-mode revenue analytics",
-
       "driverappFn": "Driver-side APP / Web APP",
       "qrcharge": "QR-code charging",
       "tapcharge": "Tap-to-charge",
@@ -1316,7 +1300,6 @@
       "langselect": "Language selection",
       "loginmethods": "Sign-up / Sign-in",
       "loginsList": "Facebook / Email / Google / Apple",
-
       "remote": "Remote Maintenance",
       "firmware": "Firmware upgrade",
       "logdownload": "Remote charger log download",
@@ -1326,7 +1309,6 @@
       "syscfg": "Charger base-system configuration",
       "remoteenable": "Remote enable / disable gun",
       "ocpp90d": "90 days",
-
       "aria": {
         "included": "Included",
         "notIncluded": "Not included"

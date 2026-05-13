@@ -386,6 +386,16 @@
   line-height: 1.55;
 }
 
+.b2c-demo-card-icon--cpo {
+  margin: 0 auto 16px;
+  background: #e0e7ff;
+  color: #4338ca;
+}
+
+.b2c-demo-card-link {
+  margin-top: 18px;
+}
+
 .b2c-demo-card-foot {
   margin: 12px 0 0;
   font-size: 0.78rem;

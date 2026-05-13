@@ -7,6 +7,10 @@ import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
 import SubNav from './SubNav';
 import DemoTabs from './DemoTabs';
+import LanguageRequestForm from './LanguageRequestForm';
+import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
+import HeroShotStack from '@/components/sections/b2c/HeroShotStack';
+import AppSlideshow from './AppSlideshow';
 
 const QR_OPTS = {
   type: 'svg' as const,
@@ -15,10 +19,12 @@ const QR_OPTS = {
   color: { dark: '#1a1210', light: '#00000000' },
   errorCorrectionLevel: 'M' as const,
 };
-import LanguageRequestForm from './LanguageRequestForm';
-import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
-import HeroShotStack from '@/components/sections/b2c/HeroShotStack';
-import AppSlideshow from './AppSlideshow';
+
+const CPO_PANEL_URL = 'https://www.v3g.gcss.hk/admin/';
+const CPO_PANEL_CREDS = {
+  account: 'root',
+  password: 'gcss123456',
+} as const;
 
 export const metadata = {
   title: 'B2C Model - GCSS | Direct Operator EV Charging Platform',
@@ -41,7 +47,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
 
   // QR codes pre-rendered server-side and passed to the (client) DemoTabs.
   const webAppQr = await QRCode.toString('https://app.gcss.hk/', QR_OPTS);
-  const mobileAppQr = await QRCode.toString('https://app.gcss.hk/', QR_OPTS);
+  const userPortalQr = await QRCode.toString('https://www.v3g.gcss.hk/user/', QR_OPTS);
 
   return (
     <>
@@ -560,7 +566,13 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
 
           <ScrollAnimation>
             <div className="b2c-demo-stage">
-              <DemoTabs webAppQr={webAppQr} mobileAppQr={mobileAppQr} />
+              <DemoTabs
+                webAppQr={webAppQr}
+                userPortalQr={userPortalQr}
+                adminUrl={CPO_PANEL_URL}
+                adminAccount={CPO_PANEL_CREDS.account}
+                adminPassword={CPO_PANEL_CREDS.password}
+              />
 
               <div className="b2c-demo-status-bar">
                 <div className="b2c-demo-pill" data-tone="success">

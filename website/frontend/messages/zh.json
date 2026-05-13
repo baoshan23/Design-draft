@@ -584,6 +584,21 @@
       "launchMerchant": "打开商户后台",
       "qrH5": "扫码体验 H5 网页版",
       "qrMobile": "扫码下载移动应用",
+      "username": "用户名",
+      "password": "密码",
+      "cpo": {
+        "title": "CPO",
+        "desc": "运营商管理后台：站点、计费与客户服务。",
+        "btn": "打开 CPO 后台"
+      },
+      "h5": {
+        "title": "演示账户",
+        "desc": "扫码打开 H5 网页应用"
+      },
+      "qrUser": {
+        "title": "用户端",
+        "desc": "扫码打开 v3 用户端"
+      },
       "viewB2cProduct": "查看 B2C 产品页面",
       "viewB2bProduct": "查看 B2B2C 产品页面",
       "requestDemo": "申请演示",
@@ -683,10 +698,6 @@
     "signup": "注册",
     "dashboard": "控制台",
     "invoices": "发票与付款",
-    "demoAccess": "演示入口",
-    "v3demo": "v3 演示首页",
-    "v3admin": "后台管理",
-    "v3user": "用户端",
     "copyright": "© 2026 GCSS (Global Charger System Service). 保留所有权利。",
     "privacy": "隐私政策",
     "terms": "服务条款",
@@ -1027,33 +1038,12 @@
         "title": "APP 体验",
         "desc": "扫码下载演示应用"
       },
-      "cpo": {
-        "title": "CPO",
-        "desc": "运营商管理后台：站点、计费与客户服务。",
-        "btn": "打开 CPO 后台"
-      },
-      "qrH5": {
-        "title": "H5",
-        "desc": "扫码打开 H5 网页应用"
-      },
       "qrApp": {
         "title": "APP",
         "desc": "扫码下载移动应用"
       },
-      "h5": {
-        "title": "演示账户",
-        "desc": "扫码打开 H5 网页应用",
-        "scan": "扫码打开 H5 网页应用",
-        "btn": "打开H5应用"
-      },
-      "app": {
-        "title": "APP 体验",
-        "desc": "扫码下载演示应用"
-      },
       "links": "演示访问链接",
       "visit": "访问",
-      "username": "用户名",
-      "password": "密码",
       "cred": {
         "admin": "全局管理面板",
         "merchant": "商户面板",
@@ -1220,7 +1210,6 @@
     },
     "table": {
       "feature": "功能",
-
       "fees": "费用",
       "hostingfee": "托管费（服务器租赁费）",
       "chargercount": "充电桩数量",
@@ -1241,7 +1230,6 @@
       "price21800once": "$21,800（一次性）",
       "price34200once": "$68,000（一次性）",
       "price1500": "$1,500",
-
       "baseservice": "基础服务",
       "driverapp": "司机 / 用户应用",
       "ocpp": "OCPP 1.6J",
@@ -1270,7 +1258,6 @@
       "leaseGcss": "租赁 GCSS / 自行提供",
       "ownGcss": "GCSS",
       "ownClient": "归属于客户",
-
       "cpms": "CPMS / 后台管理 / CPO 管理",
       "dashboard": "仪表盘",
       "langswitch": "语言切换",
@@ -1289,13 +1276,11 @@
       "fmt2": "2 种格式",
       "fmt3": "3 种格式",
       "emails1k": "1,000 次（每增 $6/1,000 封）",
-
       "drivermgmt": "司机 / 用户管理",
       "balanceview": "用户余额查看",
       "balanceadjust": "用户余额增减",
       "userexport": "用户信息导出",
       "wallethist": "钱包充值记录管理与导出",
-
       "b2b": "B2B 功能",
       "cpomgmt": "运营商新建和管理（CPO）",
       "gatewayconfig": "支付网关配置和管理",
@@ -1304,7 +1289,6 @@
       "cpoperms": "CPO 权限配置",
       "cpoorders": "CPO 订单流水管理",
       "cporevenue": "抽佣 / 托管模式收益统计与分析",
-
       "driverappFn": "司机端 APP / Web APP 功能",
       "qrcharge": "扫码充电",
       "tapcharge": "碰一碰充电",
@@ -1316,7 +1300,6 @@
       "langselect": "语言选择",
       "loginmethods": "注册 / 登录",
       "loginsList": "Facebook / 邮箱 / Google / Apple",
-
       "remote": "远程维护操作",
       "firmware": "固件升级",
       "logdownload": "远程下载充电桩日志",
@@ -1326,7 +1309,6 @@
       "syscfg": "充电桩基础系统功能配置",
       "remoteenable": "远程禁用 / 启用充电枪",
       "ocpp90d": "90 天",
-
       "aria": {
         "included": "包含",
         "notIncluded": "不包含"
