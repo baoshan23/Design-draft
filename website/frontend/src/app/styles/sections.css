@@ -3721,9 +3721,145 @@ html {
 
 .mobile-showcase-grid {
   display: grid;
-  grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
-  gap: 64px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
+  gap: 80px;
   align-items: center;
+}
+
+.mobile-showcase-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.mobile-showcase-info .section-label {
+  margin-bottom: 16px;
+}
+
+.mobile-showcase-info h2 {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #181818;
+  margin: 0 0 16px;
+  text-align: left;
+}
+
+.mobile-showcase-info > p {
+  font-size: 16px;
+  color: #6C717A;
+  line-height: 1.6;
+  margin: 0 0 32px;
+}
+
+.mobile-showcase-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-showcase-list-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 4px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.mobile-showcase-list-item:last-child {
+  border-bottom: none;
+}
+
+.mobile-showcase-list-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(254, 191, 29, 0.14);
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.mobile-showcase-list-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.mobile-showcase-list-text strong {
+  font-size: 15px;
+  font-weight: 700;
+  color: #181818;
+  letter-spacing: -0.01em;
+}
+
+.mobile-showcase-list-text span {
+  font-size: 13px;
+  color: #6C717A;
+  line-height: 1.5;
+}
+
+.mobile-showcase-cta-btn {
+  align-self: flex-start;
+}
+
+.mobile-showcase-phone-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobile-showcase-phone {
+  position: relative;
+  width: 320px;
+  aspect-ratio: 9 / 19;
+  background: linear-gradient(180deg, #2b2b2b 0%, #161616 100%);
+  border-radius: 46px;
+  padding: 8px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 30px 60px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+
+.mobile-showcase-phone-notch {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 18px;
+  background: #000;
+  border-radius: 12px;
+  z-index: 2;
+}
+
+.mobile-showcase-phone img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 38px;
+}
+
+@media (max-width: 960px) {
+  .mobile-showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .mobile-showcase-phone-wrap {
+    order: -1;
+  }
+  .mobile-showcase-phone {
+    width: 280px;
+  }
 }
 
 .mobile-showcase-stack {

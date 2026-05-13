@@ -14,7 +14,7 @@ type Feature = {
 };
 
 const IconScan = (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M3 7V5a2 2 0 0 1 2-2h2" />
     <path d="M17 3h2a2 2 0 0 1 2 2v2" />
     <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
@@ -24,20 +24,20 @@ const IconScan = (
 );
 
 const IconMap = (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
     <circle cx="12" cy="10" r="3" />
   </svg>
 );
 
 const IconActivity = (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
   </svg>
 );
 
 const IconFile = (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
     <polyline points="14 2 14 8 20 8" />
     <line x1="16" y1="13" x2="8" y2="13" />
@@ -58,39 +58,40 @@ export default function MobileShowcase() {
   return (
     <section className="section section-alt mobile-showcase">
       <div className="container">
-        <ScrollAnimation>
-          <div className="section-header">
-            <span className="section-label">{t('label')}</span>
-            <h2>{t('title')}</h2>
-            <p>{t('desc')}</p>
-          </div>
-        </ScrollAnimation>
-        <div className="mobile-showcase-cta">
-          <Link href="/b2c" className="btn btn-primary btn-lg">{t('cta')}</Link>
-        </div>
-        <div className="mobile-feature-grid">
-          {features.map((f) => (
-            <div className="mobile-feature-card" key={f.src}>
-              <div className="mobile-feature-img">
-                <div className="phone-frame">
-                  <Image
-                    src={f.src}
-                    alt={f.title}
-                    width={500}
-                    height={1083}
-                    sizes="(max-width: 720px) 80vw, 240px"
-                  />
-                </div>
-              </div>
-              <div className="mobile-feature-text">
-                <h3>
-                  <span className="mobile-feature-icon" aria-hidden="true">{f.icon}</span>
-                  <span>{f.title}</span>
-                </h3>
-                <p>{f.desc}</p>
+        <div className="mobile-showcase-grid">
+          <ScrollAnimation>
+            <div className="mobile-showcase-info">
+              <span className="section-label">{t('label')}</span>
+              <h2>{t('title')}</h2>
+              <p>{t('desc')}</p>
+              <ul className="mobile-showcase-list">
+                {features.map((f) => (
+                  <li key={f.src} className="mobile-showcase-list-item">
+                    <span className="mobile-showcase-list-icon" aria-hidden="true">{f.icon}</span>
+                    <div className="mobile-showcase-list-text">
+                      <strong>{f.title}</strong>
+                      <span>{f.desc}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <Link href="/b2c" className="btn btn-primary mobile-showcase-cta-btn">{t('cta')}</Link>
+            </div>
+          </ScrollAnimation>
+          <ScrollAnimation>
+            <div className="mobile-showcase-phone-wrap">
+              <div className="mobile-showcase-phone">
+                <div className="mobile-showcase-phone-notch" />
+                <Image
+                  src={features[0].src}
+                  alt={features[0].title}
+                  width={500}
+                  height={1083}
+                  sizes="(max-width: 960px) 80vw, 320px"
+                />
               </div>
             </div>
-          ))}
+          </ScrollAnimation>
         </div>
       </div>
     </section>
