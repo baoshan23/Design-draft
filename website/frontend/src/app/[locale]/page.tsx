@@ -224,7 +224,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="card card-with-img">
+              <div className="card card-with-img" style={{ height: '100%' }}>
                 <div className="card-img-placeholder">
                   <Image src="/images/features/f2.jpg" alt={t('features.f2.title')} width={900} height={468} className="card-image" sizes="(max-width: 768px) 100vw, 400px" />
                 </div>
