@@ -46,6 +46,24 @@ const PHONE_CODES: string[] = Array.from(
 
 export default function ContactPage() {
   const t = useTranslations();
+  // Local component to show either a loaded QR image or the SVG placeholder.
+  function QrImage({ src, alt }: { src: string; alt: string }) {
+    const [loaded, setLoaded] = useState(false);
+    const [failed, setFailed] = useState(false);
+    return (
+      <div className="qr-box">
+        {!loaded && !failed && <QrPlaceholder />}
+        {/* hide the img element visually on error so the alt text doesn't show as broken image */}
+        <img
+          src={src}
+          alt={alt}
+          className={`qr-img ${loaded && !failed ? 'is-loaded' : ''} ${failed ? 'is-failed' : ''}`}
+          onLoad={() => setLoaded(true)}
+          onError={() => { setFailed(true); }}
+        />
+      </div>
+    );
+  }
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -161,18 +179,14 @@ export default function ContactPage() {
                 <p>{t('contact.business.desc')}</p>
                 <div className="qr-row">
                   <div className="qr-item">
-                    <div className="qr-box">
-                      <img src="/images/contact/wecom.png" alt={t('contact.business.wecom')} onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-                      <QrPlaceholder />
-                    </div>
+                    {/* fallback to existing site asset until real QR images are added */}
+                    <QrImage src="/images/B2B.png" alt={t('contact.business.wecom')} />
                     <span>{t('contact.business.wecom')}</span>
                     <small className="qr-caption">{t('contact.business.wecomInfo')}</small>
                   </div>
                   <div className="qr-item">
-                    <div className="qr-box">
-                      <img src="/images/contact/whatsapp.png" alt={t('contact.business.whatsapp')} onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-                      <QrPlaceholder />
-                    </div>
+                    {/* fallback to existing site asset until real QR images are added */}
+                    <QrImage src="/images/B2C.png" alt={t('contact.business.whatsapp')} />
                     <span>{t('contact.business.whatsapp')}</span>
                     <small className="qr-caption">{t('contact.business.whatsappInfo')}</small>
                   </div>
