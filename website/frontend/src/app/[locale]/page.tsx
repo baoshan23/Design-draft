@@ -290,8 +290,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div className="matrix-section">
             <div className="matrix-row matrix-row-top">
               <ScrollAnimation>
-                <div className="matrix-column" style={{ border: '1px solid var(--border-light)' }}>
-                  <div className="matrix-header">{t('matrix.app.title')}</div>
+                <div className="matrix-column">
+                  <h3 className="matrix-header">{t('matrix.app.title')}</h3>
                   <div className="matrix-body">
                     <ul>
                       <li>{t('matrix.app.li1')}</li>
@@ -299,14 +299,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                       <li>{t('matrix.app.li3')}</li>
                       <li>{t('matrix.app.li4')}</li>
                       <li>{t('matrix.app.li5')}</li>
-                      <li style={{ color: 'var(--primary)', fontWeight: 600, cursor: 'pointer' }}>{t('matrix.more')}</li>
+                      <li className="matrix-more">{t('matrix.more')}</li>
                     </ul>
                   </div>
                 </div>
               </ScrollAnimation>
               <ScrollAnimation>
-                <div className="matrix-column" style={{ border: '1px solid var(--border-light)' }}>
-                  <div className="matrix-header">{t('matrix.cpms.title')}</div>
+                <div className="matrix-column">
+                  <h3 className="matrix-header">{t('matrix.cpms.title')}</h3>
                   <div className="matrix-body">
                     <ul>
                       <li>{t('matrix.cpms.li1')}</li>
@@ -314,7 +314,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                       <li>{t('matrix.cpms.li3')}</li>
                       <li>{t('matrix.cpms.li4')}</li>
                       <li>{t('matrix.cpms.li5')}</li>
-                      <li style={{ color: 'var(--primary)', fontWeight: 600, cursor: 'pointer' }}>{t('matrix.more')}</li>
+                      <li className="matrix-more">{t('matrix.more')}</li>
                     </ul>
                   </div>
                 </div>
@@ -322,8 +322,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
             <div className="matrix-row matrix-row-bottom">
               <ScrollAnimation>
-                <div className="matrix-column" style={{ border: '1px solid var(--border-light)' }}>
-                  <div className="matrix-header" style={{ background: 'linear-gradient(135deg,#EB5A3C,#D4452A)' }}>{t('matrix.platform.title')}</div>
+                <div className="matrix-column">
+                  <h3 className="matrix-header">{t('matrix.platform.title')}</h3>
                   <div className="matrix-body">
                     <ul>
                       <li>{t('matrix.platform.li1')}</li>
@@ -331,7 +331,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                       <li>{t('matrix.platform.li3')}</li>
                       <li>{t('matrix.platform.li4')}</li>
                       <li>{t('matrix.platform.li5')}</li>
-                      <li style={{ color: 'var(--primary)', fontWeight: 600, cursor: 'pointer' }}>{t('matrix.more')}</li>
+                      <li className="matrix-more">{t('matrix.more')}</li>
                     </ul>
                   </div>
                 </div>
