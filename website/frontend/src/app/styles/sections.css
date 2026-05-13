@@ -2154,15 +2154,17 @@ html {
    hidden) and h3/p re-add their own horizontal+vertical padding. */
 .card.card-with-img {
   padding: 0;
+  border-color: #F1F2F4;
+  box-shadow: none;
 }
 
 /* Strip the gold-ring + gold-border treatment from polish.css for these
-   image-led feature cards specifically. Lift + neutral shadow only.
+   image-led feature cards specifically. No shadow, no border tint.
    Specificity (.card.card-with-img:hover = 0,3,0) beats polish.css's
    .card:hover (0,2,0) which loads later. */
 .card.card-with-img:hover {
-  border-color: var(--border-subtle);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  border-color: #F1F2F4;
+  box-shadow: none;
 }
 
 .card-with-img .card-img-placeholder {
