@@ -3030,8 +3030,8 @@
 
 .hiw-card-index {
   flex: 0 0 auto;
-  min-width: 28px;
-  font-size: 14px;
+  min-width: 36px;
+  font-size: 20px;
   font-weight: 500;
   color: rgba(24, 24, 24, 0.45);
   letter-spacing: 0.04em;
