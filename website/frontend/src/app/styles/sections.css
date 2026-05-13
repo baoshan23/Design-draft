@@ -2149,11 +2149,19 @@ html {
   overflow: hidden;
 }
 
+/* Strip the gold-ring + gold-border treatment from polish.css for these
+   image-led feature cards specifically. Lift + neutral shadow only.
+   Specificity (.card.card-with-img:hover = 0,3,0) beats polish.css's
+   .card:hover (0,2,0) which loads later. */
+.card.card-with-img:hover {
+  border-color: var(--border-subtle);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
 .card-img-placeholder {
-  width: 100%;
   height: 180px;
-  margin: -24px -24px 16px -24px;
-  width: calc(100% + 48px);
+  margin: -32px -32px 16px -32px;
+  width: calc(100% + 64px);
   background: var(--bg-secondary, #f8fafc);
   border-bottom: 1px solid var(--border-subtle, rgba(0, 0, 0, 0.06));
   padding: 0;
