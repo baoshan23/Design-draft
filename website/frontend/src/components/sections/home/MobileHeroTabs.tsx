@@ -127,7 +127,6 @@ export default function MobileHeroTabs() {
                   aria-expanded={isActive}
                   className={`mobile-hero-card ${isActive ? 'is-active' : ''}`}
                   onClick={() => setActive(i)}
-                  onMouseEnter={() => setActive(i)}
                 >
                   <div className="mobile-hero-card-row">
                     <span className="mobile-hero-card-icon" aria-hidden="true">{c.icon}</span>
