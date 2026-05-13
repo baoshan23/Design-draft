@@ -2799,13 +2799,72 @@
 .mobile-hero-cta {
   background: linear-gradient(45deg, #FEBF1D 0%, #FFD24D 100%);
   border-radius: var(--radius-xl);
-  padding: 40px;
+  padding: 40px 32px 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 380px;
+  align-items: center;
+  min-height: 560px;
   position: relative;
   overflow: hidden;
+}
+
+.mobile-hero-cta-text {
+  width: 100%;
+  margin-bottom: 28px;
+}
+
+.mobile-hero-phone-wrap {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.mobile-hero-phone-frame {
+  position: relative;
+  width: 220px;
+  aspect-ratio: 9 / 19;
+  background: linear-gradient(180deg, #2b2b2b 0%, #161616 100%);
+  border-radius: 36px 36px 0 0;
+  padding: 6px 6px 0;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 18px 32px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+
+.mobile-hero-phone-notch {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 14px;
+  background: #000;
+  border-radius: 10px;
+  z-index: 2;
+}
+
+.mobile-hero-phone-screen {
+  position: absolute;
+  inset: 6px 6px 0;
+  border-radius: 30px 30px 0 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.mobile-hero-phone-screen.is-active {
+  opacity: 1;
+}
+
+.mobile-hero-phone-screen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .mobile-hero-cta-text h3 {
@@ -2857,13 +2916,30 @@
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   padding: 24px 28px 26px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
 }
 
 .mobile-hero-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
   border-color: rgba(254, 191, 29, 0.4);
+}
+
+.mobile-hero-card.is-active {
+  border-color: var(--primary);
+  box-shadow:
+    0 0 0 1px var(--primary),
+    0 12px 28px rgba(254, 191, 29, 0.18);
+}
+
+.mobile-hero-card.is-active .mobile-hero-card-arrow {
+  opacity: 1;
+  color: var(--primary);
 }
 
 .mobile-hero-card-icon {
