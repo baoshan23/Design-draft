@@ -258,6 +258,7 @@
 }
 
 /* Desktop: hide the mobile nav footer + backdrop */
+.mobile-auth-row,
 .mobile-nav-footer,
 .mobile-nav-backdrop {
   display: none;
