@@ -582,8 +582,8 @@
       "launchDemo": "Launch live demo",
       "launchAdmin": "Open Admin Panel",
       "launchMerchant": "Open Merchant Panel",
-      "qrH5": "Scan for H5 web app",
-      "qrMobile": "Scan for mobile app",
+      "qrH5": "Scan for Mobile App",
+      "qrMobile": "Scan to Install Mobile app",
       "username": "Username",
       "password": "Password",
       "cpo": {
@@ -596,7 +596,7 @@
         "desc": "Scan to open H5 web app"
       },
       "qrUser": {
-        "title": "User Portal",
+        "title": "Scan for H5 web app",
         "desc": "Scan to open the v3 user portal"
       },
       "viewB2cProduct": "View B2C product page",

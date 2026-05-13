@@ -582,8 +582,8 @@
       "launchDemo": "启动在线演示",
       "launchAdmin": "打开管理后台",
       "launchMerchant": "打开商户后台",
-      "qrH5": "扫码体验 H5 网页版",
-      "qrMobile": "扫码下载移动应用",
+      "qrH5": "扫码体验移动应用",
+      "qrMobile": "扫码安装移动应用",
       "username": "用户名",
       "password": "密码",
       "cpo": {
@@ -596,7 +596,7 @@
         "desc": "扫码打开 H5 网页应用"
       },
       "qrUser": {
-        "title": "用户端",
+        "title": "扫码体验 H5 网页版",
         "desc": "扫码打开 v3 用户端"
       },
       "viewB2cProduct": "查看 B2C 产品页面",

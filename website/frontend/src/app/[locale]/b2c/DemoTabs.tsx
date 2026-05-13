@@ -59,13 +59,13 @@ export default function DemoTabs({
       <div className="b2c-demo-card">
         <h4 className="b2c-demo-card-title">{t('demo.page.qrH5')}</h4>
         <div className="b2c-qr" dangerouslySetInnerHTML={{ __html: webAppQr }} />
-        <p className="b2c-demo-card-foot">{t('demo.page.h5.desc')}</p>
+        <p className="b2c-demo-card-foot">{t('demo.page.qrMobile')}</p>
       </div>
 
       <div className="b2c-demo-card">
         <h4 className="b2c-demo-card-title">{t('demo.page.qrUser.title')}</h4>
         <div className="b2c-qr" dangerouslySetInnerHTML={{ __html: userPortalQr }} />
-        <p className="b2c-demo-card-foot">{t('demo.page.qrUser.desc')}</p>
+        <p className="b2c-demo-card-foot">{t('demo.page.h5.desc')}</p>
       </div>
 
     </div>
