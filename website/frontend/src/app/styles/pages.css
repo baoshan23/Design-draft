@@ -3018,6 +3018,7 @@
   justify-content: center;
   gap: 40px;
   padding: 44px 120px;
+  min-height: 300px;
   background: transparent;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
@@ -3040,9 +3041,10 @@
 
 .hiw-card-divider {
   flex: 0 0 auto;
-  width: 1px;
-  height: 36px;
-  background: rgba(0, 0, 0, 0.18);
+  width: 4px;
+  height: 140px;
+  background: var(--primary);
+  border-radius: 2px;
 }
 
 .hiw-card-icon {
