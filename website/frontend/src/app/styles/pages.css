@@ -2923,6 +2923,10 @@
   box-shadow: 0 10px 24px rgba(254, 191, 29, 0.22);
 }
 
+.mobile-hero-card.is-active .mobile-hero-card-icon {
+  filter: brightness(0) invert(1);
+}
+
 .mobile-hero-card.is-active .mobile-hero-card-toggle {
   color: #181818;
   opacity: 0.85;
