@@ -755,6 +755,11 @@
       "card4": {
         "title": "Real-Time Status",
         "desc": "Live charging progress, push notifications on completion, and full session history."
+      },
+      "cta": {
+        "title": "Get Started Today",
+        "subtitle": "Launch your charging network on GCSS",
+        "button": "Try for Free"
       }
     }
   },

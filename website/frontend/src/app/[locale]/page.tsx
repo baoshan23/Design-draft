@@ -3,7 +3,6 @@ import Image from 'next/image';
 import TypingText from '@/components/effects/TypingText';
 import CounterAnimation from '@/components/effects/CounterAnimation';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
-import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
 import { Link } from '@/i18n/navigation';
 import BusinessModelsSection from '@/components/sections/home/BusinessModelsSection';
 import MobileShowcase from '@/components/sections/home/MobileShowcase';
@@ -327,41 +326,92 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <p>{t('index.mobile.desc')}</p>
             </div>
           </ScrollAnimation>
-          <div className="grid grid-4">
+          <div className="mobile-hero-grid">
             <ScrollAnimation>
-              <div className="card card-with-img" style={{ height: '100%' }}>
-                <div className="card-img-placeholder card-img-phone">
-                  <ImagePlaceholder variant="phone" fill hideLabel label={t('index.mobile.card1.title')} />
+              <div className="mobile-hero-cta">
+                <div className="mobile-hero-cta-text">
+                  <h3>{t('index.mobile.cta.title')}</h3>
+                  <p>{t('index.mobile.cta.subtitle')}</p>
                 </div>
-                <h3>{t('index.mobile.card1.title')}</h3>
-                <p>{t('index.mobile.card1.desc')}</p>
+                <Link href="/b2c" className="mobile-hero-cta-button">
+                  <span>{t('index.mobile.cta.button')}</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M7 17L17 7" />
+                    <path d="M7 7h10v10" />
+                  </svg>
+                </Link>
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <div className="card card-with-img" style={{ height: '100%' }}>
-                <div className="card-img-placeholder card-img-phone">
-                  <Image src="/images/Mobile-Map.png" alt={t('index.mobile.card2.title')} width={390} height={844} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <div className="mobile-hero-cards">
+                <div className="mobile-hero-card">
+                  <span className="mobile-hero-card-icon" aria-hidden="true">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="3" width="7" height="7" stroke="#FEBF1D" />
+                      <rect x="14" y="3" width="7" height="7" stroke="#181818" />
+                      <rect x="3" y="14" width="7" height="7" stroke="#181818" />
+                      <rect x="14" y="14" width="3" height="3" stroke="#FEBF1D" />
+                      <rect x="18" y="18" width="3" height="3" stroke="#FEBF1D" />
+                    </svg>
+                  </span>
+                  <span className="mobile-hero-card-arrow" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7" />
+                      <path d="M7 7h10v10" />
+                    </svg>
+                  </span>
+                  <h3>{t('index.mobile.card1.title')}</h3>
+                  <p>{t('index.mobile.card1.desc')}</p>
                 </div>
-                <h3>{t('index.mobile.card2.title')}</h3>
-                <p>{t('index.mobile.card2.desc')}</p>
-              </div>
-            </ScrollAnimation>
-            <ScrollAnimation>
-              <div className="card card-with-img" style={{ height: '100%' }}>
-                <div className="card-img-placeholder card-img-phone">
-                  <Image src="/images/App_login_iphone.png" alt={t('index.mobile.card3.title')} width={390} height={844} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <div className="mobile-hero-card">
+                  <span className="mobile-hero-card-icon" aria-hidden="true">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="#FEBF1D" />
+                      <circle cx="12" cy="10" r="3" stroke="#181818" />
+                    </svg>
+                  </span>
+                  <span className="mobile-hero-card-arrow" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7" />
+                      <path d="M7 7h10v10" />
+                    </svg>
+                  </span>
+                  <h3>{t('index.mobile.card2.title')}</h3>
+                  <p>{t('index.mobile.card2.desc')}</p>
                 </div>
-                <h3>{t('index.mobile.card3.title')}</h3>
-                <p>{t('index.mobile.card3.desc')}</p>
-              </div>
-            </ScrollAnimation>
-            <ScrollAnimation>
-              <div className="card card-with-img" style={{ height: '100%' }}>
-                <div className="card-img-placeholder card-img-phone">
-                  <Image src="/images/mobile_ charge.png" alt={t('index.mobile.card4.title')} width={390} height={844} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <div className="mobile-hero-card">
+                  <span className="mobile-hero-card-icon" aria-hidden="true">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#181818" />
+                      <circle cx="9" cy="7" r="4" stroke="#FEBF1D" />
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="#181818" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="#FEBF1D" />
+                    </svg>
+                  </span>
+                  <span className="mobile-hero-card-arrow" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7" />
+                      <path d="M7 7h10v10" />
+                    </svg>
+                  </span>
+                  <h3>{t('index.mobile.card3.title')}</h3>
+                  <p>{t('index.mobile.card3.desc')}</p>
                 </div>
-                <h3>{t('index.mobile.card4.title')}</h3>
-                <p>{t('index.mobile.card4.desc')}</p>
+                <div className="mobile-hero-card">
+                  <span className="mobile-hero-card-icon" aria-hidden="true">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="#FEBF1D" />
+                    </svg>
+                  </span>
+                  <span className="mobile-hero-card-arrow" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7" />
+                      <path d="M7 7h10v10" />
+                    </svg>
+                  </span>
+                  <h3>{t('index.mobile.card4.title')}</h3>
+                  <p>{t('index.mobile.card4.desc')}</p>
+                </div>
               </div>
             </ScrollAnimation>
           </div>

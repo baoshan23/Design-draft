@@ -2789,6 +2789,141 @@
   }
 }
 
+/* --- Mobile Hero Section: left gradient CTA + right 2x2 feature grid --- */
+.mobile-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.mobile-hero-cta {
+  background: linear-gradient(45deg, #FEBF1D 0%, #FFD24D 100%);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 380px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile-hero-cta-text h3 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 12px;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.mobile-hero-cta-text p {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.mobile-hero-cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #181818;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mobile-hero-cta-button:hover {
+  background: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.mobile-hero-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.mobile-hero-card {
+  position: relative;
+  background: var(--dark-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px 26px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.mobile-hero-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+  border-color: rgba(254, 191, 29, 0.4);
+}
+
+.mobile-hero-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-bottom: 16px;
+}
+
+.mobile-hero-card-arrow {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  color: #181818;
+  opacity: 0.4;
+  transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
+}
+
+.mobile-hero-card:hover .mobile-hero-card-arrow {
+  opacity: 1;
+  transform: translate(2px, -2px);
+  color: var(--primary);
+}
+
+.mobile-hero-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #181818;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.mobile-hero-card p {
+  font-size: 14px;
+  color: #181818;
+  opacity: 0.7;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 960px) {
+  .mobile-hero-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .mobile-hero-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* --- How It Works: left intro + right vertical cards --- */
 .hiw-grid {
   display: grid;
