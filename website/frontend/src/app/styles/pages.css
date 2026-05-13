@@ -2797,13 +2797,7 @@
 }
 
 .mobile-hero-cta {
-  background-color: #FEBF1D;
-  background-image:
-    url('/images/mobile-hero/charger.png'),
-    linear-gradient(45deg, #FEBF1D 0%, #FFD24D 100%);
-  background-position: right center, 0 0;
-  background-size: auto 100%, 100% 100%;
-  background-repeat: no-repeat, no-repeat;
+  background: linear-gradient(45deg, #FEBF1D 0%, #FFD24D 100%);
   border-radius: var(--radius-xl);
   padding: 40px;
   display: flex;
