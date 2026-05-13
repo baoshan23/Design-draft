@@ -2324,6 +2324,7 @@ html {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
   padding: 40px;
+  min-height: 340px;
   text-align: left;
   position: relative;
   box-shadow: none;
