@@ -2154,7 +2154,7 @@ html {
    hidden) and h3/p re-add their own horizontal+vertical padding. */
 .card.card-with-img {
   padding: 0;
-  border-color: #F1F2F4;
+  border-color: #e5e5e5;
   box-shadow: none;
 }
 
@@ -2163,7 +2163,7 @@ html {
    Specificity (.card.card-with-img:hover = 0,3,0) beats polish.css's
    .card:hover (0,2,0) which loads later. */
 .card.card-with-img:hover {
-  border-color: #F1F2F4;
+  border-color: #e5e5e5;
   box-shadow: none;
 }
 
