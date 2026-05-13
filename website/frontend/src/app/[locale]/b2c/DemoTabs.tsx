@@ -57,9 +57,9 @@ export default function DemoTabs({
 
       {/* Bottom row: QR codes */}
       <div className="b2c-demo-card">
-        <h4 className="b2c-demo-card-title">{t('product.demo.qrH5.title')}</h4>
+        <h4 className="b2c-demo-card-title">{t('demo.page.qrH5')}</h4>
         <div className="b2c-qr" dangerouslySetInnerHTML={{ __html: webAppQr }} />
-        <p className="b2c-demo-card-foot">{t('product.demo.qrH5.desc')}</p>
+        <p className="b2c-demo-card-foot">{t('demo.page.h5.desc')}</p>
       </div>
 
       <div className="b2c-demo-card">
