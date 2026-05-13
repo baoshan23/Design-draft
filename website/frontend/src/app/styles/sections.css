@@ -2416,6 +2416,13 @@ html {
   margin: 0 auto 56px;
 }
 
+#features .section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
 .section-label {
   display: inline-flex;
   padding: 12px 20px;
@@ -2427,7 +2434,7 @@ html {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   border: 1px solid rgba(230, 168, 23, 0.2);
-  margin-bottom: 28px;
+  margin-bottom: 0;
   line-height: 1;
 }
 
@@ -2437,7 +2444,7 @@ html {
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--text-primary);
-  margin-bottom: 12px;
+  margin-bottom: 0;
 }
 
 .section-header p {
