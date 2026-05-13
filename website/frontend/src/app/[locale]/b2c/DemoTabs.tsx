@@ -30,16 +30,6 @@ export default function DemoTabs({
         </div>
         <h4 className="b2c-demo-card-title">{t('demo.page.cpo.title')}</h4>
         <p className="b2c-demo-card-desc">{t('demo.page.cpo.desc')}</p>
-        <div className="b2c-demo-creds">
-          <div className="b2c-demo-cred-row">
-            <span className="b2c-demo-cred-key">{t('demo.page.username')}</span>
-            <code>{adminAccount}</code>
-          </div>
-          <div className="b2c-demo-cred-row">
-            <span className="b2c-demo-cred-key">{t('demo.page.password')}</span>
-            <code>{adminPassword}</code>
-          </div>
-        </div>
         <a href={adminUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary b2c-demo-card-link">
           {t('demo.page.cpo.btn')}
         </a>
