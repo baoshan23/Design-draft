@@ -3836,7 +3836,7 @@ html {
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: var(--radius-xl);
-  padding: 40px 20px 28px;
+  padding: 40px 20px 33px;
   min-height: 520px;
   display: flex;
   flex-direction: column;
