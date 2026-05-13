@@ -3007,7 +3007,8 @@
   margin: 32px auto 0;
 }
 
-#how-it-works.section-alt {
+#how-it-works.section-alt,
+#features.section-alt {
   background: #ffffff;
 }
 
