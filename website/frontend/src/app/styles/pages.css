@@ -1242,7 +1242,7 @@
 }
 
 .matrix-row-bottom {
-  grid-template-columns: 1.6fr 1fr;
+  grid-template-columns: minmax(0, 1200px) 1fr;
 }
 
 .matrix-illustration {
@@ -1257,10 +1257,12 @@
   box-shadow: none;
 }
 
-.matrix-header {
+h3.matrix-header,
+.matrix-column .matrix-header {
   margin: 0 0 18px;
   padding: 0;
-  background: transparent;
+  background: none;
+  background-color: transparent;
   color: #181818;
   font-weight: 700;
   text-align: left;
@@ -1294,7 +1296,7 @@
   top: 10px;
   width: 18px;
   height: 18px;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect x='1' y='1' width='22' height='22' rx='5' fill='%23FEBF1D'/><polyline points='7 12 11 16 17 8' fill='none' stroke='%23181818' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='11' fill='%23FEBF1D'/><polyline points='7 12 11 16 17 8' fill='none' stroke='%23181818' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
   background-repeat: no-repeat;
   background-size: contain;
 }
