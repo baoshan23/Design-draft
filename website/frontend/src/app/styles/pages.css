@@ -2799,38 +2799,31 @@
 .mobile-hero-cta {
   background: linear-gradient(45deg, #FEBF1D 0%, #FFD24D 100%);
   border-radius: var(--radius-xl);
-  padding: 40px 32px 0;
+  padding: 56px 32px;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
   min-height: 560px;
   position: relative;
   overflow: hidden;
 }
 
-.mobile-hero-cta-text {
-  width: 100%;
-  margin-bottom: 28px;
-}
-
 .mobile-hero-phone-wrap {
-  flex: 1;
-  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .mobile-hero-phone-frame {
   position: relative;
-  width: 220px;
+  width: 240px;
   aspect-ratio: 9 / 19;
   background: linear-gradient(180deg, #2b2b2b 0%, #161616 100%);
-  border-radius: 36px 36px 0 0;
-  padding: 6px 6px 0;
+  border-radius: 38px;
+  padding: 6px;
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.06),
-    0 18px 32px rgba(0, 0, 0, 0.18);
+    0 22px 40px rgba(0, 0, 0, 0.22);
   overflow: hidden;
 }
 
@@ -2839,7 +2832,7 @@
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 50px;
+  width: 54px;
   height: 14px;
   background: #000;
   border-radius: 10px;
@@ -2848,8 +2841,8 @@
 
 .mobile-hero-phone-screen {
   position: absolute;
-  inset: 6px 6px 0;
-  border-radius: 30px 30px 0 0;
+  inset: 6px;
+  border-radius: 32px;
   overflow: hidden;
   opacity: 0;
   transition: opacity 0.35s ease;
@@ -2905,9 +2898,10 @@
 }
 
 .mobile-hero-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-self: stretch;
 }
 
 .mobile-hero-card {
@@ -2915,86 +2909,86 @@
   background: var(--dark-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  padding: 24px 28px 26px;
+  padding: 22px 26px;
   width: 100%;
   font: inherit;
   color: inherit;
   text-align: left;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .mobile-hero-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
   border-color: rgba(254, 191, 29, 0.4);
 }
 
 .mobile-hero-card.is-active {
+  background: rgba(254, 191, 29, 0.08);
   border-color: var(--primary);
   box-shadow:
     0 0 0 1px var(--primary),
-    0 12px 28px rgba(254, 191, 29, 0.18);
+    0 8px 20px rgba(254, 191, 29, 0.15);
 }
 
-.mobile-hero-card.is-active .mobile-hero-card-arrow {
-  opacity: 1;
-  color: var(--primary);
+.mobile-hero-card-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 .mobile-hero-card-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  margin-bottom: 16px;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
 }
 
-.mobile-hero-card-arrow {
-  position: absolute;
-  top: 24px;
-  right: 28px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
-  color: #181818;
-  opacity: 0.4;
-  transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
-}
-
-.mobile-hero-card:hover .mobile-hero-card-arrow {
-  opacity: 1;
-  transform: translate(2px, -2px);
-  color: var(--primary);
-}
-
-.mobile-hero-card h3 {
+.mobile-hero-card-title {
+  flex: 1;
   font-size: 18px;
   font-weight: 700;
   color: #181818;
-  margin: 0 0 8px;
   letter-spacing: -0.01em;
 }
 
-.mobile-hero-card p {
+.mobile-hero-card-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  color: #181818;
+  opacity: 0.55;
+  transition: color 0.25s ease, opacity 0.25s ease;
+  flex-shrink: 0;
+}
+
+.mobile-hero-card.is-active .mobile-hero-card-toggle {
+  color: var(--primary);
+  opacity: 1;
+}
+
+.mobile-hero-card-desc {
   font-size: 14px;
   color: #181818;
   opacity: 0.7;
   line-height: 1.6;
   margin: 0;
+  padding-left: 38px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, margin-top 0.25s ease;
+}
+
+.mobile-hero-card.is-active .mobile-hero-card-desc {
+  max-height: 180px;
+  margin-top: 10px;
 }
 
 @media (max-width: 960px) {
   .mobile-hero-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 640px) {
-  .mobile-hero-cards {
     grid-template-columns: 1fr;
   }
 }

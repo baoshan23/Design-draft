@@ -12,10 +12,16 @@ type TabCard = {
   image: string;
 };
 
-const ArrowIcon = (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M7 17L17 7" />
-    <path d="M7 7h10v10" />
+const PlusIcon = (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <line x1="12" y1="5" x2="12" y2="19" />
+    <line x1="5" y1="12" x2="19" y2="12" />
+  </svg>
+);
+
+const MinusIcon = (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <line x1="5" y1="12" x2="19" y2="12" />
   </svg>
 );
 
@@ -26,7 +32,7 @@ export default function MobileHeroTabs() {
   const cards: TabCard[] = [
     {
       icon: (
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="3" width="7" height="7" stroke="#FEBF1D" />
           <rect x="14" y="3" width="7" height="7" stroke="#181818" />
           <rect x="3" y="14" width="7" height="7" stroke="#181818" />
@@ -40,7 +46,7 @@ export default function MobileHeroTabs() {
     },
     {
       icon: (
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
           <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="#FEBF1D" />
           <circle cx="12" cy="10" r="3" stroke="#181818" />
         </svg>
@@ -51,7 +57,7 @@ export default function MobileHeroTabs() {
     },
     {
       icon: (
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#181818" />
           <circle cx="9" cy="7" r="4" stroke="#FEBF1D" />
           <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="#181818" />
@@ -64,7 +70,7 @@ export default function MobileHeroTabs() {
     },
     {
       icon: (
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
           <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="#FEBF1D" />
         </svg>
       ),
@@ -75,55 +81,68 @@ export default function MobileHeroTabs() {
   ];
 
   return (
-    <div className="mobile-hero-grid">
+    <>
       <ScrollAnimation>
-        <div className="mobile-hero-cta">
-          <div className="mobile-hero-cta-text">
-            <h3>{t('title')}</h3>
-            <p>{t('desc')}</p>
-          </div>
-          <div className="mobile-hero-phone-wrap">
-            <div className="mobile-hero-phone-frame" aria-hidden="true">
-              <div className="mobile-hero-phone-notch" />
-              {cards.map((c, i) => (
-                <div
-                  key={c.image}
-                  className={`mobile-hero-phone-screen ${i === active ? 'is-active' : ''}`}
-                >
-                  <Image
-                    src={c.image}
-                    alt={c.title}
-                    width={500}
-                    height={1083}
-                    sizes="(max-width: 960px) 60vw, 220px"
-                    priority={i === 0}
-                  />
-                </div>
-              ))}
+        <div className="section-header">
+          <span className="section-label">{t('label')}</span>
+          <h2>{t('title')}</h2>
+          <p>{t('desc')}</p>
+        </div>
+      </ScrollAnimation>
+      <div className="mobile-hero-grid">
+        <ScrollAnimation>
+          <div className="mobile-hero-cta">
+            <div className="mobile-hero-phone-wrap">
+              <div className="mobile-hero-phone-frame" aria-hidden="true">
+                <div className="mobile-hero-phone-notch" />
+                {cards.map((c, i) => (
+                  <div
+                    key={c.image}
+                    className={`mobile-hero-phone-screen ${i === active ? 'is-active' : ''}`}
+                  >
+                    <Image
+                      src={c.image}
+                      alt={c.title}
+                      width={500}
+                      height={1083}
+                      sizes="(max-width: 960px) 60vw, 240px"
+                      priority={i === 0}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </ScrollAnimation>
-      <ScrollAnimation>
-        <div className="mobile-hero-cards" role="tablist">
-          {cards.map((c, i) => (
-            <button
-              key={c.image}
-              type="button"
-              role="tab"
-              aria-selected={i === active}
-              className={`mobile-hero-card ${i === active ? 'is-active' : ''}`}
-              onClick={() => setActive(i)}
-              onMouseEnter={() => setActive(i)}
-            >
-              <span className="mobile-hero-card-icon" aria-hidden="true">{c.icon}</span>
-              <span className="mobile-hero-card-arrow">{ArrowIcon}</span>
-              <h3>{c.title}</h3>
-              <p>{c.desc}</p>
-            </button>
-          ))}
-        </div>
-      </ScrollAnimation>
-    </div>
+        </ScrollAnimation>
+        <ScrollAnimation>
+          <div className="mobile-hero-cards" role="tablist">
+            {cards.map((c, i) => {
+              const isActive = i === active;
+              return (
+                <button
+                  key={c.image}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-expanded={isActive}
+                  className={`mobile-hero-card ${isActive ? 'is-active' : ''}`}
+                  onClick={() => setActive(i)}
+                  onMouseEnter={() => setActive(i)}
+                >
+                  <div className="mobile-hero-card-row">
+                    <span className="mobile-hero-card-icon" aria-hidden="true">{c.icon}</span>
+                    <span className="mobile-hero-card-title">{c.title}</span>
+                    <span className="mobile-hero-card-toggle">
+                      {isActive ? MinusIcon : PlusIcon}
+                    </span>
+                  </div>
+                  <p className="mobile-hero-card-desc">{c.desc}</p>
+                </button>
+              );
+            })}
+          </div>
+        </ScrollAnimation>
+      </div>
+    </>
   );
 }
