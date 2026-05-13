@@ -2179,18 +2179,15 @@ html {
 }
 
 .card-with-img h3 {
-  display: flex;
-  align-items: center;
-  gap: 8px;
   margin: 0;
   padding: 20px 28px 8px;
+  text-align: left;
 }
 
-/* Description left-aligns with the TITLE TEXT (past the 22px icon +
-   8px gap), not with the icon's left edge. */
 .card-with-img p {
   margin: 0;
-  padding: 0 28px 28px 58px;
+  padding: 0 28px 28px;
+  text-align: left;
 }
 
 .card-feature-icon {
