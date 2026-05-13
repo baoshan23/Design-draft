@@ -3830,8 +3830,16 @@ html {
   line-height: 1.5;
 }
 
-.mobile-showcase-cta-btn {
+.mobile-showcase-cta-btn,
+.mobile-showcase-cta-btn:hover,
+.mobile-showcase-cta-btn:active,
+.mobile-showcase-cta-btn:focus {
   align-self: flex-start;
+  background: var(--primary);
+}
+
+.mobile-showcase-cta-btn::before {
+  display: none;
 }
 
 .mobile-showcase-phone-wrap {
