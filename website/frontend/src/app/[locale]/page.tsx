@@ -143,16 +143,15 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* How It Works Section */}
       <section className="section section-alt" id="how-it-works">
         <div className="container">
-          <div className="hiw-grid">
-            <ScrollAnimation>
-              <div className="section-header hiw-intro">
-                <span className="section-label">{t('steps.label')}</span>
-                <h2>{t('steps.title')}</h2>
-                <p>{t('steps.desc')}</p>
-              </div>
-            </ScrollAnimation>
-            <ScrollAnimation>
-              <div className="hiw-cards">
+          <ScrollAnimation>
+            <div className="section-header">
+              <span className="section-label">{t('steps.label')}</span>
+              <h2>{t('steps.title')}</h2>
+              <p>{t('steps.desc')}</p>
+            </div>
+          </ScrollAnimation>
+          <ScrollAnimation>
+            <div className="hiw-cards">
                 <div className="hiw-card">
                   <span className="hiw-card-index" aria-hidden="true">01</span>
                   <span className="hiw-card-divider" aria-hidden="true" />
@@ -198,7 +197,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </div>
               </div>
             </ScrollAnimation>
-          </div>
         </div>
       </section>
 
