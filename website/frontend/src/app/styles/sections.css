@@ -3830,15 +3830,30 @@ html {
   line-height: 1.5;
 }
 
-.btn-primary.mobile-showcase-cta-btn,
-.btn-primary.mobile-showcase-cta-btn:hover,
-.btn-primary.mobile-showcase-cta-btn:active,
-.btn-primary.mobile-showcase-cta-btn:focus {
+.btn-primary.mobile-showcase-cta-btn {
   align-self: flex-start;
   background: var(--primary);
   background-image: none;
   box-shadow: none;
   filter: none;
+}
+
+.btn-primary.mobile-showcase-cta-btn:hover,
+.btn-primary.mobile-showcase-cta-btn:focus,
+.btn-primary.mobile-showcase-cta-btn:active {
+  background: var(--primary);
+  background-image: none;
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 32px rgba(254, 191, 29, 0.38),
+    0 0 0 1px rgba(254, 191, 29, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  filter: brightness(1.04);
+}
+
+.btn-primary.mobile-showcase-cta-btn:active {
+  transform: translateY(0);
+  filter: brightness(0.97);
 }
 
 .btn-primary.mobile-showcase-cta-btn::before {
