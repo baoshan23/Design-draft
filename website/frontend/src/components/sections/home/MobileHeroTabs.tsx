@@ -126,7 +126,7 @@ export default function MobileHeroTabs() {
                   aria-selected={isActive}
                   aria-expanded={isActive}
                   className={`mobile-hero-card ${isActive ? 'is-active' : ''}`}
-                  onClick={() => setActive(i)}
+                  onClick={() => setActive((prev) => (prev === i ? null : i))}
                 >
                   <div className="mobile-hero-card-row">
                     <span className="mobile-hero-card-icon" aria-hidden="true">{c.icon}</span>
