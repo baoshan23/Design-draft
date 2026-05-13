@@ -3787,13 +3787,6 @@ html {
   transition: background 0.2s ease, padding 0.2s ease;
 }
 
-.mobile-showcase-list-item.is-active {
-  background: rgba(254, 191, 29, 0.08);
-  padding-left: 14px;
-  padding-right: 14px;
-  border-radius: var(--radius-md);
-}
-
 .mobile-showcase-list-item.is-active .mobile-showcase-list-icon {
   background: var(--primary);
   color: #ffffff;
