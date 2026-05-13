@@ -3024,64 +3024,62 @@
 .hiw-cards {
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 
 .hiw-card {
   position: relative;
-  padding: 24px 28px 26px;
-  background: var(--dark-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 28px 4px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 0;
 }
 
-.hiw-card:hover,
-.hiw-card:active {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
-  background-color: var(--primary);
-  border-color: var(--primary);
+.hiw-card:last-child {
+  border-bottom: none;
+}
+
+.hiw-card-index {
+  flex: 0 0 auto;
+  min-width: 28px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(24, 24, 24, 0.45);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.hiw-card-divider {
+  flex: 0 0 auto;
+  width: 1px;
+  height: 36px;
+  background: rgba(0, 0, 0, 0.18);
 }
 
 .hiw-card-icon {
+  flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  margin-bottom: 18px;
+  width: 56px;
+  height: 56px;
+  margin: 0;
 }
 
-.hiw-card:hover .hiw-card-icon svg path,
-.hiw-card:hover .hiw-card-icon svg polyline,
-.hiw-card:hover .hiw-card-icon svg line,
-.hiw-card:active .hiw-card-icon svg path,
-.hiw-card:active .hiw-card-icon svg polyline,
-.hiw-card:active .hiw-card-icon svg line {
-  stroke: #ffffff;
-}
-
-.hiw-card-num {
-  position: absolute;
-  top: 4px;
-  right: 10px;
-  width: auto;
-  height: 104px;
-  pointer-events: none;
-  user-select: none;
-  opacity: 0.95;
-  transition: filter 0.25s ease;
-}
-
-.hiw-card:hover .hiw-card-num,
-.hiw-card:active .hiw-card-num {
-  filter: brightness(0) invert(1);
+.hiw-card-text {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
 }
 
 .hiw-card h3 {
   font-size: 18px;
-  margin: 0 0 8px;
+  margin: 0;
   color: #181818;
   font-weight: 700;
 }

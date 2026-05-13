@@ -154,38 +154,47 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <ScrollAnimation>
               <div className="hiw-cards">
                 <div className="hiw-card">
-                  <Image className="hiw-card-num" src="/assets/icons/hiw-numbers/01.png" alt="" width={82} height={160} aria-hidden="true" />
+                  <span className="hiw-card-index" aria-hidden="true">01</span>
+                  <span className="hiw-card-divider" aria-hidden="true" />
                   <span className="hiw-card-icon" aria-hidden="true">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="#FEBF1D" />
                       <polyline points="7 10 12 15 17 10" stroke="#181818" />
                       <line x1="12" y1="15" x2="12" y2="3" stroke="#181818" />
                     </svg>
                   </span>
-                  <h3>{t('steps.s1.title')}</h3>
-                  <p>{t('steps.s1.desc')}</p>
+                  <div className="hiw-card-text">
+                    <h3>{t('steps.s1.title')}</h3>
+                    <p>{t('steps.s1.desc')}</p>
+                  </div>
                 </div>
                 <div className="hiw-card">
-                  <Image className="hiw-card-num" src="/assets/icons/hiw-numbers/02.png" alt="" width={109} height={160} aria-hidden="true" />
+                  <span className="hiw-card-index" aria-hidden="true">02</span>
+                  <span className="hiw-card-divider" aria-hidden="true" />
                   <span className="hiw-card-icon" aria-hidden="true">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#181818" />
                       <polyline points="8.5 12 11 14.5 15.5 10" stroke="#FEBF1D" />
                     </svg>
                   </span>
-                  <h3>{t('steps.s2.title')}</h3>
-                  <p>{t('steps.s2.desc')}</p>
+                  <div className="hiw-card-text">
+                    <h3>{t('steps.s2.title')}</h3>
+                    <p>{t('steps.s2.desc')}</p>
+                  </div>
                 </div>
                 <div className="hiw-card">
-                  <Image className="hiw-card-num" src="/assets/icons/hiw-numbers/03.png" alt="" width={108} height={160} aria-hidden="true" />
+                  <span className="hiw-card-index" aria-hidden="true">03</span>
+                  <span className="hiw-card-divider" aria-hidden="true" />
                   <span className="hiw-card-icon" aria-hidden="true">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="#FEBF1D" />
                       <polyline points="22 4 12 14.01 9 11.01" stroke="#181818" />
                     </svg>
                   </span>
-                  <h3>{t('steps.s3.title')}</h3>
-                  <p>{t('steps.s3.desc')}</p>
+                  <div className="hiw-card-text">
+                    <h3>{t('steps.s3.title')}</h3>
+                    <p>{t('steps.s3.desc')}</p>
+                  </div>
                 </div>
               </div>
             </ScrollAnimation>
