@@ -2166,7 +2166,7 @@ html {
 }
 
 .card-with-img .card-img-placeholder {
-  height: 180px;
+  height: 240px;
   margin: 0;
   width: 100%;
   background: var(--bg-secondary, #f8fafc);
