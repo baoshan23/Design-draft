@@ -210,6 +210,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <div className="card-img-placeholder">
                   <ImagePlaceholder variant="dashboard" fill hideLabel label={t('features.f1.title')} />
                 </div>
+                <span className="card-feature-icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2" stroke="#FEBF1D" />
+                    <polyline points="2 17 12 22 22 17" stroke="#181818" />
+                    <polyline points="2 12 12 17 22 12" stroke="#181818" />
+                  </svg>
+                </span>
                 <h3>{t('features.f1.title')}</h3>
                 <p>{t('features.f1.desc')}</p>
               </div>
@@ -219,6 +226,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <div className="card-img-placeholder">
                   <Image src="/images/ratetemp.png" alt={t('features.f2.title')} width={960} height={540} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12 }} />
                 </div>
+                <span className="card-feature-icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" stroke="#FEBF1D" />
+                    <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" stroke="#181818" />
+                    <path d="M12 18V6" stroke="#181818" />
+                  </svg>
+                </span>
                 <h3>{t('features.f2.title')}</h3>
                 <p>{t('features.f2.desc')}</p>
               </div>
@@ -228,6 +242,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <div className="card-img-placeholder">
                   <ImagePlaceholder variant="api" fill hideLabel label={t('features.f3.title')} />
                 </div>
+                <span className="card-feature-icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="#FEBF1D" />
+                    <line x1="12" y1="9" x2="12" y2="13" stroke="#181818" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" stroke="#181818" />
+                  </svg>
+                </span>
                 <h3>{t('features.f3.title')}</h3>
                 <p>{t('features.f3.desc')}</p>
               </div>
@@ -237,6 +258,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <div className="card-img-placeholder">
                   <ImagePlaceholder variant="team" fill hideLabel label={t('features.f4.title')} />
                 </div>
+                <span className="card-feature-icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="5" width="20" height="14" rx="2" stroke="#FEBF1D" />
+                    <line x1="2" y1="10" x2="22" y2="10" stroke="#181818" />
+                    <line x1="6" y1="15" x2="10" y2="15" stroke="#181818" />
+                  </svg>
+                </span>
                 <h3>{t('features.f4.title')}</h3>
                 <p>{t('features.f4.desc')}</p>
               </div>
@@ -246,6 +274,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <div className="card-img-placeholder">
                   <ImagePlaceholder variant="ev-station" fill hideLabel label={t('features.f5.title')} />
                 </div>
+                <span className="card-feature-icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" stroke="#FEBF1D" />
+                    <path d="M12 12v9" stroke="#181818" />
+                    <path d="m8 17 4 4 4-4" stroke="#181818" />
+                  </svg>
+                </span>
                 <h3>{t('features.f5.title')}</h3>
                 <p>{t('features.f5.desc')}</p>
               </div>
@@ -262,6 +297,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     className="card-image"
                   />
                 </div>
+                <span className="card-feature-icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10" stroke="#FEBF1D" />
+                    <line x1="12" y1="20" x2="12" y2="4" stroke="#181818" />
+                    <line x1="6" y1="20" x2="6" y2="14" stroke="#181818" />
+                  </svg>
+                </span>
                 <h3>{t('features.f6.title')}</h3>
                 <p>{t('features.f6.desc')}</p>
               </div>

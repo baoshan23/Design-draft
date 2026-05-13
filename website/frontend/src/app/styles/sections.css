@@ -2171,6 +2171,15 @@ html {
   overflow: hidden;
 }
 
+.card-feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-bottom: 10px;
+}
+
 /* Taller image box for phone screenshots (9:16 ratio) */
 .card-img-placeholder.card-img-phone {
   height: 380px;
