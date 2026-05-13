@@ -3714,7 +3714,8 @@ html {
    Mobile App Showcase — driver-facing iOS/Android phone stack
    ============================================================ */
 
-.mobile-showcase {
+.mobile-showcase,
+.section-alt.mobile-showcase {
   padding: 80px 0;
   position: relative;
   background: #ffffff;
