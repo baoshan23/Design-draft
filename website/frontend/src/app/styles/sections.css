@@ -2164,7 +2164,7 @@ html {
    .card:hover (0,2,0) which loads later. */
 .card.card-with-img:hover {
   border-color: #e5e5e5;
-  box-shadow: none;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
 }
 
 .card-with-img .card-img-placeholder {
