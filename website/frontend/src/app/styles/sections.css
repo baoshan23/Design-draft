@@ -2580,131 +2580,172 @@ html {
 }
 
 /* --- Payment Partners --- */
-/* Global Payment Matrix — UI/UX Pro Max styling, 3D depth, no borders */
-.payment-logos {
+/* Global Payment Matrix — orbit layout, AstroPay-inspired floating bubbles */
+.payment-orbit {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 20px;
-  padding: 32px;
-  border-radius: 24px;
-  background:
-    radial-gradient(120% 80% at 0% 0%, rgba(254, 191, 29, 0.1) 0%, transparent 60%),
-    radial-gradient(100% 80% at 100% 100%, rgba(83, 92, 145, 0.12) 0%, transparent 55%),
-    rgba(255, 255, 255, 0.02);
+  width: 100%;
+  height: 720px;
+  margin: 0 auto;
   isolation: isolate;
-  perspective: 1400px;
-}
-[data-theme="dark"] .payment-logos {
-  background:
-    radial-gradient(120% 80% at 0% 0%, rgba(254, 191, 29, 0.12) 0%, transparent 60%),
-    radial-gradient(100% 80% at 100% 100%, rgba(146, 144, 195, 0.1) 0%, transparent 55%),
-    rgba(255, 255, 255, 0.02);
 }
 
-.payment-logo {
-  position: relative;
+/* Central phone mockup — focal point of the orbit */
+.payment-orbit-phone {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 260px;
+  z-index: 3;
+  pointer-events: none;
+  filter: drop-shadow(0 24px 48px rgba(140, 95, 0, 0.18))
+          drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08));
+}
+.payment-orbit-phone-img {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+  border-radius: 36px;
+}
+
+/* Floating bubble — circle, soft cream tint matching brand */
+.payment-bubble {
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px 20px;
-  background: transparent;
-  border-radius: 14px;
-  height: 84px;
-  transform-style: preserve-3d;
-  transform: translateZ(0);
+  border-radius: 50%;
+  background: linear-gradient(155deg, #FFFBF0 0%, #F5EBC8 100%);
+  border: 1px solid rgba(192, 127, 0, 0.10);
+  box-shadow:
+    0 6px 16px rgba(140, 95, 0, 0.10),
+    0 2px 4px rgba(140, 95, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transform: translate(-50%, -50%);
   transition:
     transform 380ms cubic-bezier(0.16, 1, 0.3, 1),
-    background 380ms ease,
-    box-shadow 380ms cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: visible;
+    box-shadow 380ms ease;
+  animation-name: paymentBubbleFloatA;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  z-index: 1;
+  cursor: default;
+  will-change: transform;
 }
-.payment-logo::before {
-  display: none;
+.payment-bubble-v2 {
+  animation-name: paymentBubbleFloatB;
 }
-/* Soft floor shadow expands on hover for "lifted" feel */
-.payment-logo::after {
-  content: '';
-  position: absolute;
-  bottom: -14px;
-  left: 14%;
-  right: 14%;
-  height: 18px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(254, 191, 29, 0.4) 0%, transparent 70%);
-  filter: blur(8px);
-  opacity: 0;
-  transform: scaleX(0.6);
-  transition: opacity 380ms ease, transform 380ms cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-  z-index: -1;
+.payment-bubble-v3 {
+  animation-name: paymentBubbleFloatC;
 }
 
-.payment-logo:hover {
-  transform: translateY(-6px) translateZ(20px) rotateX(6deg) scale(1.06);
-}
-.payment-logo:hover::after {
-  opacity: 1;
-  transform: scaleX(1);
-}
-.payment-logo-img {
-  width: auto !important;
-  height: auto !important;
-  max-width: 92% !important;
-  max-height: 52px !important;
-  object-fit: contain;
-  display: block;
-}
-.payment-logo-svg {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 92%;
-  max-height: 52px;
-}
-.payment-logo-svg svg {
-  width: 100%;
-  height: auto;
-  max-height: 48px;
-  display: block;
+[data-theme="dark"] .payment-bubble {
+  background: linear-gradient(155deg, rgba(60, 50, 35, 0.92) 0%, rgba(40, 32, 22, 0.92) 100%);
+  border-color: rgba(255, 217, 90, 0.15);
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 217, 90, 0.06);
 }
 
-/* Ambient float — borrowed from .language-cloud, varied per card */
-.payment-logos .payment-logo {
-  animation: paymentFloat 4.5s ease-in-out infinite;
-}
-@keyframes paymentFloat {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-6px); }
-}
-.payment-logos .payment-logo:nth-child(odd)    { animation-duration: 4s; }
-.payment-logos .payment-logo:nth-child(3n)     { animation-delay: -0.6s; animation-duration: 5s; }
-.payment-logos .payment-logo:nth-child(3n+1)   { animation-delay: -1.2s; animation-duration: 4.4s; }
-.payment-logos .payment-logo:nth-child(3n+2)   { animation-delay: -2s; animation-duration: 4.8s; }
-.payment-logos .payment-logo:nth-child(5n)     { animation-delay: -0.9s; }
-.payment-logos .payment-logo:nth-child(7n)     { animation-delay: -1.6s; animation-duration: 5.4s; }
-
-/* Hover overrides float — pause float so 3D tilt reads cleanly */
-.payment-logos .payment-logo:hover {
+.payment-bubble:hover {
+  transform: translate(-50%, calc(-50% - 4px)) scale(1.08);
+  box-shadow:
+    0 12px 28px rgba(140, 95, 0, 0.18),
+    0 4px 8px rgba(140, 95, 0, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  z-index: 4;
   animation-play-state: paused;
 }
 
+.payment-bubble-inner {
+  width: 62%;
+  height: 62%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.payment-bubble-inner > * {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+.payment-bubble-inner svg,
+.payment-bubble-inner img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain;
+  display: block;
+}
+.payment-bubble-inner .payment-logo-svg svg {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Three float variants for organic, non-uniform motion */
+@keyframes paymentBubbleFloatA {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50%      { transform: translate(-50%, -50%) translateY(-10px); }
+}
+@keyframes paymentBubbleFloatB {
+  0%, 100% { transform: translate(-50%, -50%) translate(0, 0); }
+  33%      { transform: translate(-50%, -50%) translate(4px, -8px); }
+  66%      { transform: translate(-50%, -50%) translate(-3px, -4px); }
+}
+@keyframes paymentBubbleFloatC {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0) rotate(0deg); }
+  50%      { transform: translate(-50%, -50%) translateY(-6px) rotate(2deg); }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .payment-logo,
-  .payment-logos .payment-logo {
-    transition: none;
+  .payment-bubble {
     animation: none;
+    transition: none;
   }
 }
 
-
-.payment-logo:hover {
-  transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+@media (max-width: 900px) {
+  .payment-orbit {
+    height: 560px;
+  }
+  .payment-orbit-phone {
+    width: 180px;
+  }
 }
 
-.payment-logo svg {
-  flex-shrink: 0;
+@media (max-width: 640px) {
+  .payment-orbit {
+    height: 460px;
+  }
+  .payment-orbit-phone {
+    width: 140px;
+  }
+  .payment-bubble {
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+  .payment-bubble:hover {
+    transform: translate(-50%, calc(-50% - 4px)) scale(0.78);
+  }
+  @keyframes paymentBubbleFloatA {
+    0%, 100% { transform: translate(-50%, -50%) translateY(0) scale(0.7); }
+    50%      { transform: translate(-50%, -50%) translateY(-6px) scale(0.7); }
+  }
+  @keyframes paymentBubbleFloatB {
+    0%, 100% { transform: translate(-50%, -50%) translate(0, 0) scale(0.7); }
+    33%      { transform: translate(-50%, -50%) translate(3px, -5px) scale(0.7); }
+    66%      { transform: translate(-50%, -50%) translate(-2px, -3px) scale(0.7); }
+  }
+  @keyframes paymentBubbleFloatC {
+    0%, 100% { transform: translate(-50%, -50%) translateY(0) rotate(0deg) scale(0.7); }
+    50%      { transform: translate(-50%, -50%) translateY(-4px) rotate(2deg) scale(0.7); }
+  }
 }
 
 /* --- CTA Section --- */

@@ -34,6 +34,61 @@ const StarIcon = () => (
   </svg>
 );
 
+// Positions for floating payment-method bubbles around the central phone mockup.
+// All bubbles sit in left band (x: 1-32) or right band (x: 68-97) to avoid overlapping
+// the centered phone (which occupies roughly x:38-62). 46 entries match the count in
+// PAYMENT_METHODS_FLAT — render order maps 1:1 by index.
+const PAYMENT_BUBBLE_POSITIONS: { x: number; y: number; size: number; delay: number; duration: number }[] = [
+  // Left band — 23 bubbles
+  { x: 4,  y: 4,  size: 72, delay: 0,    duration: 6.0 },
+  { x: 18, y: 12, size: 64, delay: -1.4, duration: 6.6 },
+  { x: 2,  y: 22, size: 84, delay: -2.2, duration: 7.0 },
+  { x: 28, y: 22, size: 56, delay: -0.6, duration: 5.6 },
+  { x: 12, y: 32, size: 60, delay: -1.8, duration: 6.2 },
+  { x: 24, y: 38, size: 72, delay: -0.4, duration: 6.8 },
+  { x: 4,  y: 42, size: 56, delay: -2.6, duration: 5.4 },
+  { x: 14, y: 50, size: 80, delay: -1.0, duration: 7.2 },
+  { x: 30, y: 52, size: 60, delay: -2.0, duration: 6.0 },
+  { x: 6,  y: 60, size: 64, delay: -0.8, duration: 5.8 },
+  { x: 22, y: 62, size: 56, delay: -2.4, duration: 6.4 },
+  { x: 30, y: 70, size: 72, delay: -1.2, duration: 7.0 },
+  { x: 14, y: 70, size: 60, delay: -0.2, duration: 5.6 },
+  { x: 2,  y: 78, size: 76, delay: -1.6, duration: 6.8 },
+  { x: 24, y: 82, size: 56, delay: -2.8, duration: 5.4 },
+  { x: 10, y: 88, size: 64, delay: -0.6, duration: 6.2 },
+  { x: 28, y: 92, size: 60, delay: -2.0, duration: 6.6 },
+  { x: 18, y: 4,  size: 56, delay: -1.0, duration: 5.8 },
+  { x: 32, y: 12, size: 60, delay: -2.2, duration: 6.4 },
+  { x: 6,  y: 14, size: 56, delay: -0.4, duration: 5.6 },
+  { x: 20, y: 28, size: 56, delay: -1.6, duration: 6.0 },
+  { x: 32, y: 32, size: 56, delay: -2.6, duration: 6.6 },
+  { x: 32, y: 88, size: 56, delay: -1.4, duration: 5.8 },
+  // Right band — 23 bubbles
+  { x: 96, y: 4,  size: 72, delay: -0.2, duration: 6.0 },
+  { x: 82, y: 10, size: 64, delay: -1.2, duration: 6.6 },
+  { x: 70, y: 14, size: 56, delay: -2.4, duration: 5.6 },
+  { x: 90, y: 20, size: 80, delay: -0.8, duration: 7.2 },
+  { x: 76, y: 24, size: 60, delay: -1.8, duration: 6.0 },
+  { x: 68, y: 32, size: 64, delay: -0.4, duration: 6.4 },
+  { x: 86, y: 36, size: 56, delay: -2.0, duration: 5.8 },
+  { x: 78, y: 42, size: 84, delay: -1.0, duration: 7.0 },
+  { x: 94, y: 42, size: 56, delay: -2.6, duration: 5.4 },
+  { x: 68, y: 50, size: 72, delay: -0.6, duration: 6.8 },
+  { x: 84, y: 54, size: 60, delay: -1.6, duration: 6.2 },
+  { x: 92, y: 60, size: 64, delay: -2.4, duration: 6.6 },
+  { x: 74, y: 60, size: 56, delay: -0.2, duration: 5.6 },
+  { x: 82, y: 68, size: 76, delay: -1.2, duration: 7.0 },
+  { x: 68, y: 72, size: 60, delay: -2.0, duration: 6.0 },
+  { x: 94, y: 76, size: 56, delay: -0.8, duration: 5.8 },
+  { x: 76, y: 80, size: 72, delay: -1.6, duration: 6.4 },
+  { x: 86, y: 88, size: 60, delay: -2.6, duration: 6.6 },
+  { x: 70, y: 92, size: 56, delay: -0.4, duration: 5.6 },
+  { x: 96, y: 92, size: 64, delay: -2.2, duration: 6.2 },
+  { x: 78, y: 56, size: 56, delay: -1.0, duration: 5.4 },
+  { x: 88, y: 76, size: 56, delay: -1.8, duration: 6.0 },
+  { x: 72, y: 84, size: 60, delay: -2.8, duration: 5.8 },
+];
+
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -448,12 +503,40 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
           </ScrollAnimation>
           <ScrollAnimation>
-            <div className="payment-logos">
-              {PAYMENT_METHODS_FLAT.map((name) => (
-                <div key={name} className="payment-logo" title={name} aria-label={name}>
-                  {PAYMENT_ICONS[name]}
-                </div>
-              ))}
+            <div className="payment-orbit" role="list" aria-label="Supported payment methods">
+              <div className="payment-orbit-phone" aria-hidden="true">
+                <Image
+                  src="/images/App_login_iphone.png"
+                  alt=""
+                  width={293}
+                  height={604}
+                  sizes="(max-width: 768px) 160px, 260px"
+                  className="payment-orbit-phone-img"
+                />
+              </div>
+              {PAYMENT_METHODS_FLAT.map((name, i) => {
+                const pos = PAYMENT_BUBBLE_POSITIONS[i % PAYMENT_BUBBLE_POSITIONS.length];
+                const style = {
+                  left: `${pos.x}%`,
+                  top: `${pos.y}%`,
+                  width: `${pos.size}px`,
+                  height: `${pos.size}px`,
+                  animationDelay: `${pos.delay}s`,
+                  animationDuration: `${pos.duration}s`,
+                };
+                return (
+                  <div
+                    key={name}
+                    className={`payment-bubble payment-bubble-v${(i % 3) + 1}`}
+                    role="listitem"
+                    title={name}
+                    aria-label={name}
+                    style={style}
+                  >
+                    <div className="payment-bubble-inner">{PAYMENT_ICONS[name]}</div>
+                  </div>
+                );
+              })}
             </div>
           </ScrollAnimation>
           <ScrollAnimation style={{ transitionDelay: '0.15s' }}>
