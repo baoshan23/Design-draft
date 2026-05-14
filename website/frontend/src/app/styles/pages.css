@@ -1291,6 +1291,20 @@
   display: block;
 }
 
+.matrix-column.matrix-column-platform {
+  background: #FEBF1D;
+  border-color: transparent;
+}
+
+.matrix-column-platform .matrix-header,
+.matrix-column-platform .matrix-body li {
+  color: #ffffff;
+}
+
+.matrix-column-platform .matrix-body li::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='11' fill='%23ffffff'/><polyline points='7 12 11 16 17 8' fill='none' stroke='%23FEBF1D' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+}
+
 h3.matrix-header,
 .matrix-column .matrix-header {
   margin: 0 0 18px;
