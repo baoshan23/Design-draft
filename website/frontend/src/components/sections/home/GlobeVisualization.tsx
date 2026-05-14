@@ -223,16 +223,22 @@ export default function GlobeVisualization() {
         if (mounted) setTooltip(null);
       });
 
+    // Target markers in a clear grey scale; origin (Hong Kong) stays gold.
+    const ORIGIN_RIPPLE = '#FEBF1D';
+    const ORIGIN_DOT = '#FEBF1D';
+    const TARGET_RIPPLE = '#6B7280';
+    const TARGET_DOT = '#374151';
+
     markers.append('circle')
       .attr('class', 'ripple')
       .attr('r', (d: any) => d.isOrigin ? 6 : 3)
-      .attr('fill', (d: any) => d.isOrigin ? '#FEBF1D' : '#9CA3AF')
+      .attr('fill', (d: any) => d.isOrigin ? ORIGIN_RIPPLE : TARGET_RIPPLE)
       .attr('fill-opacity', 0.35);
 
     markers.append('circle')
       .attr('class', 'dot')
       .attr('r', (d: any) => d.isOrigin ? 4 : 2.2)
-      .attr('fill', (d: any) => d.isOrigin ? '#FEBF1D' : '#6B7280')
+      .attr('fill', (d: any) => d.isOrigin ? ORIGIN_DOT : TARGET_DOT)
       .attr('stroke', (d: any) => d.isOrigin ? '#ffffff' : 'none')
       .attr('stroke-width', 1);
 
