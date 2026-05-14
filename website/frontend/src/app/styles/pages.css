@@ -1199,11 +1199,15 @@
   color: #FFFFFF;
 }
 
-/* Scoped overrides: yellow column headers + brand wordmark, bigger logo */
+/* Scoped overrides: yellow brand wordmark + column headers. The wordmark
+   is now text-only (no Image), sized large to match the Moss reference. */
 .footer-logo {
-  font-size: 1.7rem !important;
-  gap: 12px !important;
+  font-size: 64px !important;
+  line-height: 1;
+  gap: 0 !important;
   color: var(--primary) !important;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px !important;
 }
 .footer-logo span {
   color: var(--primary);

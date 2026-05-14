@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 
@@ -98,13 +97,6 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <Link href="/" className="logo footer-logo">
-              <Image
-                src="/assets/logo.png"
-                alt="GCSS"
-                width={96}
-                height={96}
-                style={{ borderRadius: '20px' }}
-              />
               G<span>CSS</span>
             </Link>
             <p className="footer-tagline">{t('tagline')}</p>
