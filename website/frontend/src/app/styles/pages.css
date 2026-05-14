@@ -4276,6 +4276,18 @@ h3.matrix-header,
     font-size: 1rem !important;
   }
 
+  .language-grid {
+    grid-template-columns: repeat(4, 1fr);
+    border-radius: 14px;
+    margin-top: 28px;
+  }
+
+  .language-grid > span {
+    min-height: 64px;
+    font-size: 0.95rem;
+    padding: 10px 8px;
+  }
+
   .testimonial-card {
     padding: 20px;
   }

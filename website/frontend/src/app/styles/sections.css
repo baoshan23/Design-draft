@@ -2579,6 +2579,103 @@ html {
   }
 }
 
+/* --- Language Grid (Alibaba-Cloud-inspired bordered cells with sweeping highlight) --- */
+.language-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  max-width: 1100px;
+  margin: 40px auto 0;
+  background: rgba(192, 127, 0, 0.12);
+  border: 1px solid rgba(192, 127, 0, 0.14);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(140, 95, 0, 0.06);
+  isolation: isolate;
+}
+
+.language-grid > span {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 92px;
+  padding: 14px 18px;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text-secondary);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 251, 240, 0.82) 100%);
+  text-align: center;
+  cursor: default;
+  overflow: hidden;
+  transition: color 320ms ease, background 320ms ease, transform 320ms ease;
+}
+
+.language-grid > span::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(254, 191, 29, 0.22) 0%, rgba(192, 127, 0, 0.08) 100%);
+  opacity: 0;
+  transition: opacity 380ms ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.language-grid > span > * { position: relative; z-index: 1; }
+
+.language-grid > span:hover {
+  color: var(--primary-text);
+  transform: scale(1.03);
+  z-index: 2;
+}
+
+.language-grid > span:hover::before { opacity: 1; }
+
+/* Sweeping highlight that travels diagonally across the grid */
+.language-grid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    transparent 38%,
+    rgba(254, 191, 29, 0.20) 50%,
+    transparent 62%,
+    transparent 100%
+  );
+  background-size: 240% 100%;
+  background-position: 120% 0;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  animation: languageGridSweep 7s ease-in-out infinite;
+  z-index: 3;
+}
+
+@keyframes languageGridSweep {
+  0%   { background-position: 120% 0; }
+  55%  { background-position: -20% 0; }
+  100% { background-position: -20% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .language-grid::after { animation: none; opacity: 0; }
+  .language-grid > span:hover { transform: none; }
+}
+
+[data-theme='dark'] .language-grid {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+
+[data-theme='dark'] .language-grid > span {
+  background: linear-gradient(180deg, rgba(40, 32, 22, 0.85) 0%, rgba(30, 24, 16, 0.78) 100%);
+}
+
 /* --- Payment Partners --- */
 /* Global Payment Matrix — orbit layout, AstroPay-inspired floating bubbles */
 .payment-orbit {
