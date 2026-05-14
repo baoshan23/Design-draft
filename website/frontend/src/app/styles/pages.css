@@ -1302,6 +1302,11 @@
   display: block;
 }
 
+.matrix-column-cpms .matrix-column-figure {
+  flex: 0 1 360px;
+  max-width: 360px;
+}
+
 .matrix-column-platform {
   display: flex;
   align-items: center;
