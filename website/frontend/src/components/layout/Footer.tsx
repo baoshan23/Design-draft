@@ -97,13 +97,13 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <Link href="/" className="logo">
+            <Link href="/" className="logo footer-logo">
               <Image
                 src="/assets/logo.png"
                 alt="GCSS"
-                width={28}
-                height={28}
-                style={{ borderRadius: '6px' }}
+                width={48}
+                height={48}
+                style={{ borderRadius: '10px' }}
               />
               G<span>CSS</span>
             </Link>

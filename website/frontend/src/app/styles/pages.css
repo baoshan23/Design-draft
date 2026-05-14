@@ -1199,6 +1199,20 @@
   color: #FFFFFF;
 }
 
+/* Scoped overrides: yellow column headers + brand wordmark, bigger logo */
+.footer-logo {
+  font-size: 1.7rem !important;
+  gap: 12px !important;
+  color: var(--primary) !important;
+}
+.footer-logo span {
+  color: var(--primary);
+}
+.footer-col h4,
+.footer h4 {
+  color: var(--primary) !important;
+}
+
 /* --- Scroll Animations --- */
 .animate-on-scroll {
   opacity: 0;
