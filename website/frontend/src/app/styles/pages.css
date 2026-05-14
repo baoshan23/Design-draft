@@ -1271,6 +1271,36 @@
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
 }
 
+.matrix-column-app {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  overflow: hidden;
+}
+
+.matrix-column-app .matrix-column-text {
+  flex: 1 1 0;
+  min-width: 0;
+  padding-right: 16px;
+}
+
+.matrix-column-app .matrix-column-figure {
+  flex: 0 1 340px;
+  align-self: stretch;
+  position: relative;
+  margin: -20px -32px -16px 0;
+}
+
+.matrix-column-app .matrix-column-figure img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  display: block;
+}
+
 .matrix-column-platform {
   display: flex;
   align-items: center;
@@ -4110,7 +4140,8 @@ h3.matrix-header,
     grid-template-columns: 1fr;
   }
 
-  .matrix-column-platform {
+  .matrix-column-platform,
+  .matrix-column-app {
     flex-direction: column;
     align-items: stretch;
     gap: 20px;
@@ -4127,6 +4158,23 @@ h3.matrix-header,
     width: 100%;
     max-height: none;
     height: auto;
+  }
+
+  .matrix-column-app .matrix-column-text {
+    padding-right: 0;
+  }
+
+  .matrix-column-app .matrix-column-figure {
+    flex: 1 1 auto;
+    margin: 0;
+    height: 200px;
+  }
+
+  .matrix-column-app .matrix-column-figure img {
+    position: static;
+    width: 100%;
+    height: 100%;
+    object-position: center;
   }
 
 
