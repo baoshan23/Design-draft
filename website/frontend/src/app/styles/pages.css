@@ -2867,8 +2867,7 @@ h3.matrix-header,
 .trusted-label {
   text-align: center;
   font-size: 20px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.2px;
   color: #181818;
   margin-bottom: 28px;
   font-weight: 500;
