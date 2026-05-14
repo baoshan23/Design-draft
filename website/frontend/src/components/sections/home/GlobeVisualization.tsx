@@ -237,21 +237,18 @@ export default function GlobeVisualization() {
 
     markers.append('circle')
       .attr('class', 'dot')
-      .attr('r', (d: any) => d.isOrigin ? 4 : 2.2)
+      .attr('r', (d: any) => d.isOrigin ? 6 : 3)
       .attr('fill', (d: any) => d.isOrigin ? ORIGIN_DOT : TARGET_DOT)
-      .attr('stroke', 'none');
+      .attr('stroke', 'none')
+      .attr('stroke-width', 0);
 
     markers.append('text')
       .attr('text-anchor', 'middle')
-      .attr('dy', (d: any) => d.isOrigin ? -10 : -7)
+      .attr('dy', (d: any) => d.isOrigin ? -12 : -8)
       .attr('font-size', (d: any) => d.isOrigin ? '11px' : '9px')
       .attr('fill', '#000000')
       .attr('font-family', 'sans-serif')
       .attr('font-weight', (d: any) => d.isOrigin ? 700 : 500)
-      .attr('paint-order', 'stroke')
-      .attr('stroke', '#ffffff')
-      .attr('stroke-width', 2.5)
-      .attr('stroke-linejoin', 'round')
       .text((d: any) => d.name);
 
     // Arc draw animation (staggered) — keep the dashed pattern intact
@@ -280,7 +277,6 @@ export default function GlobeVisualization() {
         // Counter-scale marker text/dots so they stay readable
         const k = event.transform.k;
         markersGroup.selectAll('text').attr('font-size', (d: any) => (d.isOrigin ? 11 : 9) / k);
-        markersGroup.selectAll('text').attr('stroke-width', 2 / k);
         root.selectAll<SVGPathElement, unknown>('.country').attr('stroke-width', 0.8 / k);
         arcsGroup.selectAll('.arc').attr('stroke-width', 1 / k);
       });
