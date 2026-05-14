@@ -506,11 +506,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <div className="payment-orbit" role="list" aria-label="Supported payment methods">
               <div className="payment-orbit-phone" aria-hidden="true">
                 <Image
-                  src="/images/App_login_iphone.png"
+                  src="/images/Mobile_home.png"
                   alt=""
-                  width={293}
-                  height={604}
-                  sizes="(max-width: 768px) 160px, 260px"
+                  width={1500}
+                  height={3248}
+                  sizes="(max-width: 768px) 180px, 280px"
                   className="payment-orbit-phone-img"
                 />
               </div>
