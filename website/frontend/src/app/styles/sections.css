@@ -2741,8 +2741,8 @@ html {
 }
 
 .payment-bubble-inner {
-  width: 76%;
-  height: 76%;
+  width: 86%;
+  height: 86%;
   display: flex;
   align-items: center;
   justify-content: center;
