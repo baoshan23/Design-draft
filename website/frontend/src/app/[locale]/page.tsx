@@ -10,6 +10,7 @@ import MobileHeroTabs from '@/components/sections/home/MobileHeroTabs';
 import { DiagramModalProvider } from '@/components/sections/home/DiagramModal';
 import GlobeVisualization from '@/components/sections/home/GlobeVisualization';
 import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
+import ScrollResetOnLoad from '@/components/effects/ScrollResetOnLoad';
 import { PAYMENT_ICONS, PAYMENT_METHODS_FLAT } from '@/components/sections/home/paymentIcons';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -99,6 +100,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <DiagramModalProvider>
+      <ScrollResetOnLoad />
       {/* Hero Section */}
       <section className="hero hero-with-video">
         <Image
