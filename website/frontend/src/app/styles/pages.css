@@ -2925,8 +2925,6 @@ h3.matrix-header,
   color: var(--text-tertiary);
   white-space: nowrap;
   letter-spacing: 0.02em;
-  opacity: 0.6;
-  transition: opacity 0.3s, filter 0.3s;
   line-height: 1;
   display: inline-flex;
   align-items: center;
@@ -2938,12 +2936,6 @@ h3.matrix-header,
   max-width: 180px;
   object-fit: contain;
   display: block;
-}
-
-.marquee-item:hover,
-.marquee-item:active {
-  opacity: 1;
-  color: #181818;
 }
 
 @keyframes marqueeScroll {
