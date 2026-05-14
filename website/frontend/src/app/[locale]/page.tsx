@@ -315,16 +315,27 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </div>
               </ScrollAnimation>
               <ScrollAnimation>
-                <div className="matrix-column">
-                  <h3 className="matrix-header">{t('matrix.cpms.title')}</h3>
-                  <div className="matrix-body">
-                    <ul>
-                      <li>{t('matrix.cpms.li1')}</li>
-                      <li>{t('matrix.cpms.li2')}</li>
-                      <li>{t('matrix.cpms.li3')}</li>
-                      <li>{t('matrix.cpms.li4')}</li>
-                      <li>{t('matrix.cpms.li5')}</li>
-                    </ul>
+                <div className="matrix-column matrix-column-app matrix-column-cpms">
+                  <div className="matrix-column-text">
+                    <h3 className="matrix-header">{t('matrix.cpms.title')}</h3>
+                    <div className="matrix-body">
+                      <ul>
+                        <li>{t('matrix.cpms.li1')}</li>
+                        <li>{t('matrix.cpms.li2')}</li>
+                        <li>{t('matrix.cpms.li3')}</li>
+                        <li>{t('matrix.cpms.li4')}</li>
+                        <li>{t('matrix.cpms.li5')}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="matrix-column-figure" aria-hidden="true">
+                    <Image
+                      src="/images/cpms-dashboard.png"
+                      alt=""
+                      width={1253}
+                      height={651}
+                      sizes="(max-width: 900px) 100vw, 500px"
+                    />
                   </div>
                 </div>
               </ScrollAnimation>
