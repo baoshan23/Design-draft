@@ -1709,7 +1709,6 @@
   width: 140px;
   height: 140px;
   background: linear-gradient(135deg, rgba(230, 168, 23, 0.03), rgba(245, 183, 49, 0.03));
-  border: 2px solid rgba(230, 168, 23, 0.15);
   border-radius: 16px;
   display: flex;
   align-items: center;
