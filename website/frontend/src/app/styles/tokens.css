@@ -51,9 +51,9 @@
   --shadow-xl: 0 16px 48px rgba(0,0,0,0.1);
 
   /* Typography */
-  --font-body: 'Inter', 'PingFang SC', system-ui, -apple-system, sans-serif;
-  --font-main: 'Inter', 'PingFang SC', system-ui, -apple-system, sans-serif;
-  --font-display: 'Manrope', 'PingFang SC', system-ui, sans-serif;
+  --font-body: 'Google Sans Flex', 'PingFang SC', system-ui, -apple-system, sans-serif;
+  --font-main: 'Google Sans Flex', 'PingFang SC', system-ui, -apple-system, sans-serif;
+  --font-display: 'Google Sans Flex', 'PingFang SC', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   /* Status colors */

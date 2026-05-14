@@ -3,6 +3,8 @@
    Main Stylesheet - Fluid Glass Design
    ============================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&display=swap');
+
 @import './styles/tokens.css';
 @import './styles/base.css';
 @import './styles/components.css';
@@ -14,7 +16,7 @@
 
 /* --- System Font Fallback --- */
 html.gcss-html {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: 'Google Sans Flex', 'PingFang SC', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 /* --- Reduced Motion --- */
