@@ -456,6 +456,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <span className="section-label">{t('lang.label')}</span>
               <h2>{t('lang.title')}</h2>
               <p>{t('lang.desc')}</p>
+              <div style={{ marginTop: 20 }}>
+                <Link href={{ pathname: '/b2c', hash: 'multilingual' }} className="btn btn-primary">{t('lang.viewMore')}</Link>
+              </div>
             </div>
           </ScrollAnimation>
           <ScrollAnimation>
@@ -488,11 +491,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <span role="listitem">Сайн уу</span>
               <span role="listitem">Saluton</span>
               <span role="listitem">Witam</span>
-            </div>
-          </ScrollAnimation>
-          <ScrollAnimation>
-            <div style={{ textAlign: 'center', marginTop: 24 }}>
-              <Link href={{ pathname: '/b2c', hash: 'multilingual' }} className="btn btn-secondary">{t('lang.viewMore')}</Link>
             </div>
           </ScrollAnimation>
         </div>
