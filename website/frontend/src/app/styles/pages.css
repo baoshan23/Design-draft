@@ -1307,8 +1307,13 @@
 }
 
 .matrix-column-cpms .matrix-column-figure {
-  flex: 0 1 360px;
-  max-width: 360px;
+  flex: 0 1 500px;
+  max-width: 500px;
+}
+
+.matrix-column-cpms .matrix-column-figure img {
+  object-fit: contain;
+  object-position: right center;
 }
 
 .matrix-column-platform {
