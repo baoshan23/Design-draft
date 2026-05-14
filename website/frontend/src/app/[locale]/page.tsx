@@ -307,9 +307,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     <Image
                       src="/images/app-h5-mockup.png"
                       alt=""
-                      width={463}
-                      height={276}
-                      sizes="(max-width: 900px) 100vw, 340px"
+                      width={1092}
+                      height={651}
+                      sizes="(max-width: 900px) 100vw, 500px"
                     />
                   </div>
                 </div>
