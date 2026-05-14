@@ -2939,7 +2939,6 @@ h3.matrix-header,
   max-width: 180px;
   object-fit: contain;
   display: block;
-  filter: brightness(0);
 }
 
 .marquee-item:hover,
