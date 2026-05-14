@@ -120,22 +120,24 @@ export default function MobileShowcase() {
           </ScrollAnimation>
           <ScrollAnimation>
             <div className="mobile-showcase-phone-wrap">
-              <div className="mobile-showcase-phone" aria-hidden="true">
-                <div className="mobile-showcase-phone-notch" />
+              <div className="mobile-showcase-phone-viewport" aria-hidden="true">
                 <div
-                  className="mobile-showcase-phone-strip"
+                  className="mobile-showcase-phone-track"
                   style={{ transform: `translateX(-${active * 100}%)` }}
                 >
                   {features.map((f, i) => (
-                    <div key={f.src} className="mobile-showcase-phone-screen">
-                      <Image
-                        src={f.src}
-                        alt={f.title}
-                        width={500}
-                        height={1083}
-                        sizes="(max-width: 960px) 80vw, 320px"
-                        priority={i === 0}
-                      />
+                    <div key={f.src} className="mobile-showcase-phone">
+                      <div className="mobile-showcase-phone-notch" />
+                      <div className="mobile-showcase-phone-screen">
+                        <Image
+                          src={f.src}
+                          alt={f.title}
+                          width={500}
+                          height={1083}
+                          sizes="(max-width: 960px) 80vw, 320px"
+                          priority={i === 0}
+                        />
+                      </div>
                     </div>
                   ))}
                 </div>
