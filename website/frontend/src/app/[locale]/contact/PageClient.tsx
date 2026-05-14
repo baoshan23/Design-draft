@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
@@ -50,11 +50,26 @@ export default function ContactPage() {
   function QrImage({ src, alt }: { src: string; alt: string }) {
     const [loaded, setLoaded] = useState(false);
     const [failed, setFailed] = useState(false);
+    const imgRef = useRef<HTMLImageElement>(null);
+
+    useEffect(() => {
+      const img = imgRef.current;
+      if (!img) return;
+
+      // Check if image is already cached and loaded
+      if (img.complete && img.naturalHeight !== 0) {
+        setLoaded(true);
+      } else if (img.complete && img.naturalHeight === 0) {
+        setFailed(true);
+      }
+    }, [src]);
+
     return (
       <div className="qr-box">
         {!loaded && !failed && <QrPlaceholder />}
         {/* hide the img element visually on error so the alt text doesn't show as broken image */}
         <img
+          ref={imgRef}
           src={src}
           alt={alt}
           className={`qr-img ${loaded && !failed ? 'is-loaded' : ''} ${failed ? 'is-failed' : ''}`}
@@ -179,16 +194,12 @@ export default function ContactPage() {
                 <p>{t('contact.business.desc')}</p>
                 <div className="qr-row">
                   <div className="qr-item">
-                    {/* fallback to existing site asset until real QR images are added */}
-                    <QrImage src="/images/B2B.png" alt={t('contact.business.wecom')} />
+                    <QrImage src="/images/QR/Wecom.png" alt={t('contact.business.wecom')} />
                     <span>{t('contact.business.wecom')}</span>
-                    <small className="qr-caption">{t('contact.business.wecomInfo')}</small>
                   </div>
                   <div className="qr-item">
-                    {/* fallback to existing site asset until real QR images are added */}
-                    <QrImage src="/images/B2C.png" alt={t('contact.business.whatsapp')} />
+                    <QrImage src="/images/QR/whatsapp.png" alt={t('contact.business.whatsapp')} />
                     <span>{t('contact.business.whatsapp')}</span>
-                    <small className="qr-caption">{t('contact.business.whatsappInfo')}</small>
                   </div>
                   <div className="qr-item">
                     <div className="qr-box"><QrPlaceholder /></div>
