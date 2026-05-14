@@ -2686,27 +2686,6 @@ html {
   isolation: isolate;
 }
 
-/* Central phone mockup — focal point of the orbit, bottom fades to transparent */
-.payment-orbit-phone {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 280px;
-  z-index: 3;
-  pointer-events: none;
-  filter: drop-shadow(0 24px 48px rgba(140, 95, 0, 0.18))
-          drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08));
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 60%, transparent 95%);
-          mask-image: linear-gradient(to bottom, #000 0%, #000 60%, transparent 95%);
-}
-.payment-orbit-phone-img {
-  width: 100% !important;
-  height: auto !important;
-  display: block;
-  border-radius: 36px;
-}
-
 /* Floating bubble — white frosted glass, AstroPay-style */
 .payment-bubble {
   position: absolute;
@@ -2751,11 +2730,11 @@ html {
 }
 
 .payment-bubble:hover {
-  transform: translate(-50%, calc(-50% - 4px)) scale(1.08);
-  background: rgba(255, 255, 255, 0.75);
+  transform: translate(-50%, calc(-50% - 8px)) scale(1.28);
+  background: rgba(255, 255, 255, 0.92);
   box-shadow:
-    0 14px 32px rgba(140, 95, 0, 0.14),
-    0 4px 10px rgba(0, 0, 0, 0.06),
+    0 20px 40px rgba(140, 95, 0, 0.18),
+    0 6px 14px rgba(0, 0, 0, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 1);
   z-index: 4;
   animation-play-state: paused;
@@ -2818,23 +2797,17 @@ html {
   .payment-orbit {
     height: 560px;
   }
-  .payment-orbit-phone {
-    width: 200px;
-  }
 }
 
 @media (max-width: 640px) {
   .payment-orbit {
     height: 460px;
   }
-  .payment-orbit-phone {
-    width: 160px;
-  }
   .payment-bubble {
     transform: translate(-50%, -50%) scale(0.7);
   }
   .payment-bubble:hover {
-    transform: translate(-50%, calc(-50% - 4px)) scale(0.78);
+    transform: translate(-50%, calc(-50% - 6px)) scale(0.92);
   }
   @keyframes paymentBubbleFloatA {
     0%, 100% { transform: translate(-50%, -50%) translateY(0) scale(0.7); }

@@ -34,59 +34,65 @@ const StarIcon = () => (
   </svg>
 );
 
-// Positions for floating payment-method bubbles around the central phone mockup.
-// All bubbles sit in left band (x: 1-32) or right band (x: 68-97) to avoid overlapping
-// the centered phone (which occupies roughly x:38-62). 46 entries match the count in
-// PAYMENT_METHODS_FLAT — render order maps 1:1 by index.
+// Positions for floating payment-method bubbles. Phone centerpiece removed so
+// bubbles can spread across the full canvas. Perturbed-grid layout with sparse
+// rows for an airy, well-dispersed cloud. 46 entries map 1:1 to PAYMENT_METHODS_FLAT.
 const PAYMENT_BUBBLE_POSITIONS: { x: number; y: number; size: number; delay: number; duration: number }[] = [
-  // Left band — 23 bubbles
-  { x: 4,  y: 4,  size: 72, delay: 0,    duration: 6.0 },
-  { x: 18, y: 12, size: 64, delay: -1.4, duration: 6.6 },
-  { x: 2,  y: 22, size: 84, delay: -2.2, duration: 7.0 },
-  { x: 28, y: 22, size: 56, delay: -0.6, duration: 5.6 },
-  { x: 12, y: 32, size: 60, delay: -1.8, duration: 6.2 },
-  { x: 24, y: 38, size: 72, delay: -0.4, duration: 6.8 },
-  { x: 4,  y: 42, size: 56, delay: -2.6, duration: 5.4 },
-  { x: 14, y: 50, size: 80, delay: -1.0, duration: 7.2 },
-  { x: 30, y: 52, size: 60, delay: -2.0, duration: 6.0 },
-  { x: 6,  y: 60, size: 64, delay: -0.8, duration: 5.8 },
-  { x: 22, y: 62, size: 56, delay: -2.4, duration: 6.4 },
-  { x: 30, y: 70, size: 72, delay: -1.2, duration: 7.0 },
-  { x: 14, y: 70, size: 60, delay: -0.2, duration: 5.6 },
-  { x: 2,  y: 78, size: 76, delay: -1.6, duration: 6.8 },
-  { x: 24, y: 82, size: 56, delay: -2.8, duration: 5.4 },
-  { x: 10, y: 88, size: 64, delay: -0.6, duration: 6.2 },
-  { x: 28, y: 92, size: 60, delay: -2.0, duration: 6.6 },
-  { x: 18, y: 4,  size: 56, delay: -1.0, duration: 5.8 },
-  { x: 32, y: 12, size: 60, delay: -2.2, duration: 6.4 },
-  { x: 6,  y: 14, size: 56, delay: -0.4, duration: 5.6 },
-  { x: 20, y: 28, size: 56, delay: -1.6, duration: 6.0 },
-  { x: 32, y: 32, size: 56, delay: -2.6, duration: 6.6 },
-  { x: 32, y: 88, size: 56, delay: -1.4, duration: 5.8 },
-  // Right band — 23 bubbles
-  { x: 96, y: 4,  size: 72, delay: -0.2, duration: 6.0 },
-  { x: 82, y: 10, size: 64, delay: -1.2, duration: 6.6 },
-  { x: 70, y: 14, size: 56, delay: -2.4, duration: 5.6 },
-  { x: 90, y: 20, size: 80, delay: -0.8, duration: 7.2 },
-  { x: 76, y: 24, size: 60, delay: -1.8, duration: 6.0 },
-  { x: 68, y: 32, size: 64, delay: -0.4, duration: 6.4 },
-  { x: 86, y: 36, size: 56, delay: -2.0, duration: 5.8 },
-  { x: 78, y: 42, size: 84, delay: -1.0, duration: 7.0 },
-  { x: 94, y: 42, size: 56, delay: -2.6, duration: 5.4 },
-  { x: 68, y: 50, size: 72, delay: -0.6, duration: 6.8 },
-  { x: 84, y: 54, size: 60, delay: -1.6, duration: 6.2 },
-  { x: 92, y: 60, size: 64, delay: -2.4, duration: 6.6 },
-  { x: 74, y: 60, size: 56, delay: -0.2, duration: 5.6 },
-  { x: 82, y: 68, size: 76, delay: -1.2, duration: 7.0 },
-  { x: 68, y: 72, size: 60, delay: -2.0, duration: 6.0 },
-  { x: 94, y: 76, size: 56, delay: -0.8, duration: 5.8 },
-  { x: 76, y: 80, size: 72, delay: -1.6, duration: 6.4 },
-  { x: 86, y: 88, size: 60, delay: -2.6, duration: 6.6 },
-  { x: 70, y: 92, size: 56, delay: -0.4, duration: 5.6 },
-  { x: 96, y: 92, size: 64, delay: -2.2, duration: 6.2 },
-  { x: 78, y: 56, size: 56, delay: -1.0, duration: 5.4 },
-  { x: 88, y: 76, size: 56, delay: -1.8, duration: 6.0 },
-  { x: 72, y: 84, size: 60, delay: -2.8, duration: 5.8 },
+  // Row 1 (y ~5)
+  { x: 5,  y: 5,  size: 76, delay: 0,    duration: 6.0 },
+  { x: 22, y: 8,  size: 64, delay: -1.4, duration: 6.6 },
+  { x: 40, y: 4,  size: 72, delay: -2.2, duration: 7.0 },
+  { x: 58, y: 6,  size: 60, delay: -0.6, duration: 5.6 },
+  { x: 76, y: 4,  size: 80, delay: -1.8, duration: 6.2 },
+  { x: 94, y: 8,  size: 64, delay: -0.4, duration: 6.8 },
+  // Row 2 (y ~18)
+  { x: 12, y: 20, size: 60, delay: -2.6, duration: 5.4 },
+  { x: 30, y: 18, size: 76, delay: -1.0, duration: 7.2 },
+  { x: 48, y: 22, size: 64, delay: -2.0, duration: 6.0 },
+  { x: 66, y: 18, size: 72, delay: -0.8, duration: 5.8 },
+  { x: 84, y: 22, size: 60, delay: -2.4, duration: 6.4 },
+  // Row 3 (y ~34)
+  { x: 4,  y: 34, size: 68, delay: -1.2, duration: 7.0 },
+  { x: 22, y: 36, size: 84, delay: -0.2, duration: 5.6 },
+  { x: 40, y: 32, size: 60, delay: -1.6, duration: 6.8 },
+  { x: 58, y: 36, size: 72, delay: -2.8, duration: 5.4 },
+  { x: 76, y: 32, size: 64, delay: -0.6, duration: 6.2 },
+  { x: 94, y: 36, size: 76, delay: -2.0, duration: 6.6 },
+  // Row 4 (y ~50)
+  { x: 13, y: 50, size: 72, delay: -1.0, duration: 5.8 },
+  { x: 31, y: 52, size: 60, delay: -2.2, duration: 6.4 },
+  { x: 49, y: 48, size: 80, delay: -0.4, duration: 5.6 },
+  { x: 67, y: 52, size: 64, delay: -1.6, duration: 6.0 },
+  { x: 85, y: 50, size: 68, delay: -2.6, duration: 6.6 },
+  // Row 5 (y ~66)
+  { x: 4,  y: 66, size: 64, delay: -1.4, duration: 5.8 },
+  { x: 22, y: 68, size: 76, delay: -0.2, duration: 6.0 },
+  { x: 40, y: 64, size: 60, delay: -1.2, duration: 6.6 },
+  { x: 58, y: 68, size: 84, delay: -2.4, duration: 7.0 },
+  { x: 76, y: 66, size: 64, delay: -0.6, duration: 5.6 },
+  { x: 94, y: 68, size: 72, delay: -1.8, duration: 6.2 },
+  // Row 6 (y ~82)
+  { x: 13, y: 82, size: 80, delay: -0.4, duration: 6.8 },
+  { x: 31, y: 84, size: 64, delay: -2.6, duration: 5.4 },
+  { x: 49, y: 80, size: 72, delay: -1.0, duration: 7.2 },
+  { x: 67, y: 84, size: 60, delay: -2.0, duration: 6.0 },
+  { x: 85, y: 82, size: 76, delay: -0.8, duration: 5.8 },
+  // Row 7 (y ~94)
+  { x: 4,  y: 94, size: 60, delay: -2.4, duration: 6.4 },
+  { x: 22, y: 96, size: 72, delay: -1.2, duration: 7.0 },
+  { x: 40, y: 94, size: 64, delay: -0.2, duration: 5.6 },
+  { x: 58, y: 96, size: 76, delay: -1.6, duration: 6.8 },
+  { x: 76, y: 94, size: 60, delay: -2.8, duration: 5.4 },
+  { x: 94, y: 96, size: 68, delay: -0.6, duration: 6.2 },
+  // Filler — break up rows so it doesn't read as a grid
+  { x: 14, y: 12, size: 56, delay: -1.0, duration: 5.6 },
+  { x: 51, y: 14, size: 60, delay: -2.2, duration: 6.4 },
+  { x: 88, y: 14, size: 60, delay: -0.4, duration: 5.8 },
+  { x: 9,  y: 42, size: 56, delay: -1.6, duration: 6.0 },
+  { x: 88, y: 42, size: 56, delay: -2.6, duration: 5.4 },
+  { x: 9,  y: 74, size: 56, delay: -1.4, duration: 6.6 },
+  { x: 88, y: 74, size: 56, delay: -0.8, duration: 6.0 },
+  { x: 50, y: 90, size: 60, delay: -2.0, duration: 5.8 },
 ];
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
@@ -500,20 +506,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <span className="section-label">{t('payment.label')}</span>
               <h2>{t('payment.title')}</h2>
               <p>{t('payment.desc')}</p>
+              <PaymentRequestForm />
             </div>
           </ScrollAnimation>
           <ScrollAnimation>
             <div className="payment-orbit" role="list" aria-label="Supported payment methods">
-              <div className="payment-orbit-phone" aria-hidden="true">
-                <Image
-                  src="/images/Mobile_home.png"
-                  alt=""
-                  width={1500}
-                  height={3248}
-                  sizes="(max-width: 768px) 180px, 280px"
-                  className="payment-orbit-phone-img"
-                />
-              </div>
               {PAYMENT_METHODS_FLAT.map((name, i) => {
                 const pos = PAYMENT_BUBBLE_POSITIONS[i % PAYMENT_BUBBLE_POSITIONS.length];
                 const style = {
@@ -538,9 +535,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 );
               })}
             </div>
-          </ScrollAnimation>
-          <ScrollAnimation style={{ transitionDelay: '0.15s' }}>
-            <PaymentRequestForm />
           </ScrollAnimation>
         </div>
       </section>
