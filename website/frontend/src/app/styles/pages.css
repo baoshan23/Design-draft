@@ -1242,16 +1242,16 @@
 }
 
 .matrix-row-bottom {
-  grid-template-columns: minmax(0, 1200px) 1fr;
+  grid-template-columns: 1fr;
 }
 
 .matrix-illustration {
-  min-height: 100%;
+  display: none;
 }
 
 .matrix-column {
   background: #ffffff;
-  border: none;
+  border: 1px solid #F1F2F4;
   border-radius: 12px;
   padding: 28px 32px 24px;
   box-shadow: none;
@@ -1266,7 +1266,7 @@ h3.matrix-header,
   color: #181818;
   font-weight: 700;
   text-align: left;
-  font-size: 1.25rem;
+  font-size: 22px;
 }
 
 .matrix-body {
