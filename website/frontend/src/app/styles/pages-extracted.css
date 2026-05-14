@@ -1694,7 +1694,7 @@
   display: flex;
   justify-content: center;
   gap: 24px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-top: 36px;
   padding-top: 28px;
   border-top: 1px solid rgba(0, 0, 0, 0.04);

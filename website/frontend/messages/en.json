@@ -1401,7 +1401,7 @@
     "business": {
       "title": "Business Communication",
       "desc": "Sales inquiries, partnership opportunities, and business development.",
-      "wecom": "WeCom (Enterprise WeChat)",
+      "wecom": "WeCom",
       "wecomInfo": "Scan this QR to add our Enterprise WeChat (WeCom).",
       "whatsapp": "WhatsApp",
       "whatsappInfo": "Scan with WhatsApp to add our contact.",
@@ -1410,7 +1410,7 @@
     "tech": {
       "title": "Technical Support",
       "desc": "Installation help, bug reports, and technical troubleshooting.",
-      "wecom": "WeCom (Enterprise WeChat)",
+      "wecom": "WeCom",
       "wecomInfo": "Scan this QR to add our technical support WeCom account.",
       "whatsapp": "WhatsApp",
       "whatsappInfo": "Message us on WhatsApp for technical support."
