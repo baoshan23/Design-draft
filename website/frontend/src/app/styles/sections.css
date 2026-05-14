@@ -112,20 +112,22 @@
 .hero-with-video .hero-badge svg {
   filter: drop-shadow(0 0 6px rgba(254, 191, 29, 0.6));
 }
-/* Title — unified brand yellow on both lines (static + TypingText). */
+/* Title — dark for readability against the light charger bg. */
 .hero-with-video .hero-title,
 .hero-with-video .hero-title > span {
-  color: var(--primary);
+  color: var(--text-primary);
   letter-spacing: -0.01em;
 }
+/* TypingText accent — gold gradient pop (gold glow kept; user only
+   asked to remove BLACK shadows). */
 .hero-with-video .hero-title .typing-text,
 .hero-with-video .hero-title .text-gradient {
-  background: none;
-  -webkit-background-clip: border-box;
-          background-clip: border-box;
-  -webkit-text-fill-color: var(--primary);
-  color: var(--primary);
-  text-shadow: none;
+  background: linear-gradient(120deg, #FEBF1D 0%, #FFD56B 45%, #FEBF1D 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  text-shadow: 0 2px 18px rgba(254, 191, 29, 0.35);
 }
 /* Description — dark for readability against the light charger bg. */
 .hero-with-video .hero-desc {
