@@ -1271,12 +1271,17 @@
 .matrix-column-platform .matrix-column-figure {
   flex: 0 1 640px;
   max-width: 50%;
-  align-self: flex-end;
-  margin-bottom: -16px;
+  align-self: stretch;
+  position: relative;
 }
 
 .matrix-column-platform .matrix-column-figure img {
-  width: 100%;
+  position: absolute;
+  right: 0;
+  bottom: -16px;
+  max-width: 100%;
+  max-height: calc(100% + 16px);
+  width: auto;
   height: auto;
   display: block;
 }
@@ -4091,6 +4096,14 @@ h3.matrix-header,
   .matrix-column-platform .matrix-column-figure {
     flex: 1 1 auto;
     max-width: 100%;
+    position: static;
+  }
+
+  .matrix-column-platform .matrix-column-figure img {
+    position: static;
+    width: 100%;
+    max-height: none;
+    height: auto;
   }
 
   .steps-timeline {
