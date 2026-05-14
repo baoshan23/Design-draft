@@ -176,16 +176,36 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section className="trusted-bar">
         <div className="container">
           <p className="trusted-label">{t('manufacturers.label')}</p>
-          <div className="marquee">
-            <div className="marquee-track marquee-track-reverse">
-              {['TiTans', 'Daoer', 'winline', 'yes', 'jingyi', 'shiyou', 'xundao', 'Fullwatt', 'TOPSTAR', 'UNIT', 'Xupernova', 'wolun', 'Willdigits', 'lingao', 'diangshanjia', 'LV C-CHONG', 'Lifud', 'Delixi', 'Evcity', 'bomern'].map((name) => (
-                <span key={name} className="marquee-item">{name}</span>
-              ))}
-              {['TiTans', 'Daoer', 'winline', 'yes', 'jingyi', 'shiyou', 'xundao', 'Fullwatt', 'TOPSTAR', 'UNIT', 'Xupernova', 'wolun', 'Willdigits', 'lingao', 'diangshanjia', 'LV C-CHONG', 'Lifud', 'Delixi', 'Evcity', 'bomern'].map((name) => (
-                <span key={`${name}-dup`} className="marquee-item">{name}</span>
-              ))}
-            </div>
-          </div>
+          {(() => {
+            const MANUFACTURER_LOGOS = [
+              { name: 'Evcity', src: '/images/manufacturers/evcity.png' },
+              { name: 'Delixi', src: '/images/manufacturers/delixi.png' },
+              { name: 'Lifud', src: '/images/manufacturers/lifud.png' },
+              { name: 'LV C-CHONG', src: '/images/manufacturers/lvcchong.png' },
+              { name: 'Willdigits', src: '/images/manufacturers/willdigits.png' },
+              { name: 'wolun', src: '/images/manufacturers/wolun.png' },
+              { name: 'TOPSTAR', src: '/images/manufacturers/topstar.png' },
+              { name: 'Fullwatt', src: '/images/manufacturers/fullwatt.png' },
+              { name: 'Xupernova', src: '/images/manufacturers/xupernova.png' },
+              { name: 'UNIT', src: '/images/manufacturers/unit.png' },
+            ];
+            return (
+              <div className="marquee">
+                <div className="marquee-track marquee-track-reverse">
+                  {MANUFACTURER_LOGOS.map((logo) => (
+                    <span key={logo.name} className="marquee-item">
+                      <Image src={logo.src} alt={logo.name} width={160} height={48} />
+                    </span>
+                  ))}
+                  {MANUFACTURER_LOGOS.map((logo) => (
+                    <span key={`${logo.name}-dup`} className="marquee-item">
+                      <Image src={logo.src} alt={logo.name} width={160} height={48} />
+                    </span>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </section>
 
