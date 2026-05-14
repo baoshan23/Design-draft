@@ -320,20 +320,30 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
             <div className="matrix-row matrix-row-bottom">
               <ScrollAnimation>
-                <div className="matrix-column">
-                  <h3 className="matrix-header">{t('matrix.platform.title')}</h3>
-                  <div className="matrix-body">
-                    <ul>
-                      <li>{t('matrix.platform.li1')}</li>
-                      <li>{t('matrix.platform.li2')}</li>
-                      <li>{t('matrix.platform.li3')}</li>
-                      <li>{t('matrix.platform.li4')}</li>
-                      <li>{t('matrix.platform.li5')}</li>
-                    </ul>
+                <div className="matrix-column matrix-column-platform">
+                  <div className="matrix-column-text">
+                    <h3 className="matrix-header">{t('matrix.platform.title')}</h3>
+                    <div className="matrix-body">
+                      <ul>
+                        <li>{t('matrix.platform.li1')}</li>
+                        <li>{t('matrix.platform.li2')}</li>
+                        <li>{t('matrix.platform.li3')}</li>
+                        <li>{t('matrix.platform.li4')}</li>
+                        <li>{t('matrix.platform.li5')}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="matrix-column-figure" aria-hidden="true">
+                    <Image
+                      src="/images/platform-dashboard.png"
+                      alt=""
+                      width={2399}
+                      height={1602}
+                      sizes="(max-width: 900px) 100vw, 640px"
+                    />
                   </div>
                 </div>
               </ScrollAnimation>
-              <div className="matrix-illustration" aria-hidden="true" />
             </div>
           </div>
         </div>

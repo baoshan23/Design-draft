@@ -1257,6 +1257,29 @@
   box-shadow: none;
 }
 
+.matrix-column-platform {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.matrix-column-platform .matrix-column-text {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.matrix-column-platform .matrix-column-figure {
+  flex: 0 1 640px;
+  max-width: 50%;
+  align-self: center;
+}
+
+.matrix-column-platform .matrix-column-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 h3.matrix-header,
 .matrix-column .matrix-header {
   margin: 0 0 18px;
@@ -4056,6 +4079,17 @@ h3.matrix-header,
   .matrix-row-top,
   .matrix-row-bottom {
     grid-template-columns: 1fr;
+  }
+
+  .matrix-column-platform {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .matrix-column-platform .matrix-column-figure {
+    flex: 1 1 auto;
+    max-width: 100%;
   }
 
   .steps-timeline {
