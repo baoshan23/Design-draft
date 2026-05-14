@@ -3890,18 +3890,20 @@ html {
   z-index: 2;
 }
 
-.mobile-showcase-phone-screen {
+.mobile-showcase-phone-strip {
   position: absolute;
   inset: 8px;
-  border-radius: 38px;
-  overflow: hidden;
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  pointer-events: none;
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
 }
 
-.mobile-showcase-phone-screen.is-active {
-  opacity: 1;
+.mobile-showcase-phone-screen {
+  flex: 0 0 100%;
+  height: 100%;
+  border-radius: 38px;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 .mobile-showcase-phone-screen img {
@@ -3909,6 +3911,12 @@ html {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-showcase-phone-strip {
+    transition: none;
+  }
 }
 
 @media (max-width: 960px) {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
@@ -48,6 +48,8 @@ const IconFile = (
 export default function MobileShowcase() {
   const t = useTranslations('mobileShowcase');
   const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const directionRef = useRef(1);
 
   const features: Feature[] = [
     { src: '/images/mobile-features/feature-home.webp',     title: t('b1Title'), desc: t('b1'), icon: IconScan },
@@ -55,6 +57,26 @@ export default function MobileShowcase() {
     { src: '/images/mobile-features/feature-charging.webp', title: t('b3Title'), desc: t('b3'), icon: IconActivity },
     { src: '/images/mobile-features/feature-orders.webp',   title: t('b4Title'), desc: t('b4'), icon: IconFile },
   ];
+
+  useEffect(() => {
+    if (paused) return;
+    const id = window.setInterval(() => {
+      setActive((prev) => {
+        const total = features.length;
+        const next = prev + directionRef.current;
+        if (next >= total) {
+          directionRef.current = -1;
+          return prev - 1;
+        }
+        if (next < 0) {
+          directionRef.current = 1;
+          return prev + 1;
+        }
+        return next;
+      });
+    }, 3500);
+    return () => window.clearInterval(id);
+  }, [paused, features.length]);
 
   return (
     <section className="section section-alt mobile-showcase">
@@ -65,7 +87,12 @@ export default function MobileShowcase() {
               <span className="section-label">{t('label')}</span>
               <h2>{t('title')}</h2>
               <p>{t('desc')}</p>
-              <ul className="mobile-showcase-list" role="tablist">
+              <ul
+                className="mobile-showcase-list"
+                role="tablist"
+                onMouseEnter={() => setPaused(true)}
+                onMouseLeave={() => setPaused(false)}
+              >
                 {features.map((f, i) => {
                   const isActive = i === active;
                   return (
@@ -95,21 +122,23 @@ export default function MobileShowcase() {
             <div className="mobile-showcase-phone-wrap">
               <div className="mobile-showcase-phone" aria-hidden="true">
                 <div className="mobile-showcase-phone-notch" />
-                {features.map((f, i) => (
-                  <div
-                    key={f.src}
-                    className={`mobile-showcase-phone-screen ${i === active ? 'is-active' : ''}`}
-                  >
-                    <Image
-                      src={f.src}
-                      alt={f.title}
-                      width={500}
-                      height={1083}
-                      sizes="(max-width: 960px) 80vw, 320px"
-                      priority={i === 0}
-                    />
-                  </div>
-                ))}
+                <div
+                  className="mobile-showcase-phone-strip"
+                  style={{ transform: `translateX(-${active * 100}%)` }}
+                >
+                  {features.map((f, i) => (
+                    <div key={f.src} className="mobile-showcase-phone-screen">
+                      <Image
+                        src={f.src}
+                        alt={f.title}
+                        width={500}
+                        height={1083}
+                        sizes="(max-width: 960px) 80vw, 320px"
+                        priority={i === 0}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </ScrollAnimation>
