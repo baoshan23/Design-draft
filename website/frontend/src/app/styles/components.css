@@ -381,10 +381,11 @@ body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
   padding: 0 32px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 12px;
+  gap: 32px;
 }
 
 .nav-dropdown-menu a {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 14px;
@@ -392,20 +393,27 @@ body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
   border-radius: 12px !important;
   font-size: 0.9rem !important;
   white-space: nowrap;
-  border: 1px solid transparent;
-  transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+/* Thin vertical divider sits in the center of the grid gap between
+   adjacent columns. Hidden when items wrap (no two items share a row). */
+.nav-dropdown-menu .dropdown-items > a + a::before {
+  content: '';
+  position: absolute;
+  left: -16px;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  background: rgba(140, 95, 0, 0.14);
+  pointer-events: none;
+}
+[data-theme="dark"] .nav-dropdown-menu .dropdown-items > a + a::before {
+  background: rgba(255, 255, 255, 0.10);
 }
 
 .nav-dropdown-menu a:hover {
-  background: #ffffff !important;
+  background: transparent !important;
   color: var(--text-primary) !important;
-  border-color: rgba(140, 95, 0, 0.10);
-  box-shadow: 0 6px 18px rgba(140, 95, 0, 0.08);
-}
-[data-theme="dark"] .nav-dropdown-menu a:hover {
-  background: rgba(255, 255, 255, 0.06) !important;
-  border-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
 .nav-dropdown-menu .dropdown-icon {
