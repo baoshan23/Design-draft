@@ -1295,7 +1295,7 @@
 }
 
 .matrix-row-top .matrix-column {
-  padding: 25px 32px 21px;
+  padding: 30px 32px 26px;
 }
 
 .matrix-row-top .matrix-column .matrix-header {
@@ -2904,7 +2904,7 @@ h3.matrix-header,
 }
 
 .trusted-bar .marquee {
-  height: 56px;
+  height: 72px;
   -webkit-mask-image: none;
   mask-image: none;
 }
@@ -2931,9 +2931,9 @@ h3.matrix-header,
 }
 
 .marquee-item img {
-  height: 40px;
+  height: 52px;
   width: auto;
-  max-width: 180px;
+  max-width: 200px;
   object-fit: contain;
   display: block;
 }
