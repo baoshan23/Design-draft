@@ -1277,7 +1277,7 @@
 
 .matrix-column-platform .matrix-column-figure img {
   position: absolute;
-  right: 0;
+  right: 60px;
   bottom: -16px;
   max-width: 100%;
   max-height: calc(100% + 16px);
