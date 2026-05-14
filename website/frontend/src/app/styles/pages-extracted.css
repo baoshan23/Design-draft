@@ -1706,8 +1706,8 @@
 }
 
 .qr-box {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   background: linear-gradient(135deg, rgba(230, 168, 23, 0.03), rgba(245, 183, 49, 0.03));
   border-radius: 16px;
   display: flex;
