@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
@@ -49,7 +49,6 @@ export default function MobileShowcase() {
   const t = useTranslations('mobileShowcase');
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
-  const directionRef = useRef(1);
 
   const features: Feature[] = [
     { src: '/images/mobile-features/feature-home.webp',     title: t('b1Title'), desc: t('b1'), icon: IconScan },
@@ -61,19 +60,7 @@ export default function MobileShowcase() {
   useEffect(() => {
     if (paused) return;
     const id = window.setInterval(() => {
-      setActive((prev) => {
-        const total = features.length;
-        const next = prev + directionRef.current;
-        if (next >= total) {
-          directionRef.current = -1;
-          return prev - 1;
-        }
-        if (next < 0) {
-          directionRef.current = 1;
-          return prev + 1;
-        }
-        return next;
-      });
+      setActive((prev) => (prev + 1) % features.length);
     }, 3500);
     return () => window.clearInterval(id);
   }, [paused, features.length]);
@@ -121,25 +108,22 @@ export default function MobileShowcase() {
           <ScrollAnimation>
             <div className="mobile-showcase-phone-wrap">
               <div className="mobile-showcase-phone-viewport" aria-hidden="true">
-                <div
-                  className="mobile-showcase-phone-track"
-                  style={{ transform: `translateX(-${active * 100}%)` }}
-                >
-                  {features.map((f, i) => (
-                    <div key={f.src} className="mobile-showcase-phone">
-                      <div className="mobile-showcase-phone-notch" />
-                      <div className="mobile-showcase-phone-screen">
-                        <Image
-                          src={f.src}
-                          alt={f.title}
-                          width={500}
-                          height={1083}
-                          sizes="(max-width: 960px) 80vw, 320px"
-                          priority={i === 0}
-                        />
-                      </div>
-                    </div>
-                  ))}
+                <div className="mobile-showcase-phone">
+                  <div className="mobile-showcase-phone-notch" />
+                  <div className="mobile-showcase-phone-screen">
+                    {features.map((f, i) => (
+                      <Image
+                        key={f.src}
+                        src={f.src}
+                        alt={f.title}
+                        width={500}
+                        height={1083}
+                        sizes="(max-width: 960px) 80vw, 320px"
+                        priority={i === 0}
+                        className={`mobile-showcase-phone-screen-img${i === active ? ' is-active' : ''}`}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
