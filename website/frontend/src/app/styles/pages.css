@@ -1312,11 +1312,12 @@
 }
 
 .matrix-column-app .matrix-column-figure {
-  flex: 0 1 400px;
-  max-width: 60%;
+  flex: 0 1 487px;
+  max-width: 76%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin-right: -32px;
 }
 
 .matrix-column-app .matrix-column-figure img {
