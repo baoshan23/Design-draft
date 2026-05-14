@@ -31,6 +31,7 @@ input[type='reset'] {
 
 /* iOS auto-zoom prevention: form inputs need ≥16px font on mobile */
 @media (max-width: 720px) {
+
   input:not([type='checkbox']):not([type='radio']),
   textarea,
   select {
@@ -40,6 +41,7 @@ input[type='reset'] {
 
 /* Reduced motion globals */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -153,9 +155,7 @@ p {
   position: relative;
 }
 
-.section-sm {
-  padding: 48px 0;
-}
+.section-sm {}
 
 /* Mobile padding compression — reclaim ~50% of vertical space below
    480px so each section doesn't eat 27% of the viewport. */
@@ -163,12 +163,15 @@ p {
   .section {
     padding: 48px 0;
   }
+
   .section-sm {
     padding: 28px 0;
   }
+
   .container {
     padding: 0 16px;
   }
+
   h1 {
     font-size: clamp(1.65rem, 8vw, 2.4rem);
   }
@@ -244,12 +247,15 @@ p {
 /* Mobile-first collapse for utility grids — was missing, breaking
    uniform layouts on phones (cards crammed into half-width). */
 @media (max-width: 1024px) {
+
   .grid-3,
   .grid-4 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
 @media (max-width: 640px) {
+
   .grid-2,
   .grid-3,
   .grid-4 {
