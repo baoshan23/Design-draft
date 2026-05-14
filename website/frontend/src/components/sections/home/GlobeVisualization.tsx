@@ -239,8 +239,7 @@ export default function GlobeVisualization() {
       .attr('class', 'dot')
       .attr('r', (d: any) => d.isOrigin ? 4 : 2.2)
       .attr('fill', (d: any) => d.isOrigin ? ORIGIN_DOT : TARGET_DOT)
-      .attr('stroke', (d: any) => d.isOrigin ? '#ffffff' : 'none')
-      .attr('stroke-width', 1);
+      .attr('stroke', 'none');
 
     markers.append('text')
       .attr('text-anchor', 'middle')
