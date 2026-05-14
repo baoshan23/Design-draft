@@ -2931,7 +2931,6 @@ h3.matrix-header,
   line-height: 1;
   display: inline-flex;
   align-items: center;
-  filter: grayscale(100%);
 }
 
 .marquee-item img {
@@ -2940,13 +2939,13 @@ h3.matrix-header,
   max-width: 180px;
   object-fit: contain;
   display: block;
+  filter: brightness(0);
 }
 
 .marquee-item:hover,
 .marquee-item:active {
   opacity: 1;
   color: #181818;
-  filter: grayscale(0%);
 }
 
 @keyframes marqueeScroll {

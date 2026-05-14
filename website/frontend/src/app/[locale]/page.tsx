@@ -191,7 +191,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             ];
             return (
               <div className="marquee">
-                <div className="marquee-track marquee-track-reverse">
+                <div className="marquee-track">
                   {MANUFACTURER_LOGOS.map((logo) => (
                     <span key={logo.name} className="marquee-item">
                       <Image src={logo.src} alt={logo.name} width={160} height={48} />
