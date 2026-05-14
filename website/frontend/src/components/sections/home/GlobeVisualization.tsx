@@ -226,8 +226,8 @@ export default function GlobeVisualization() {
     // Target markers in a clear grey scale; origin (Hong Kong) stays gold.
     const ORIGIN_RIPPLE = '#FEBF1D';
     const ORIGIN_DOT = '#FEBF1D';
-    const TARGET_RIPPLE = '#C07F00';
-    const TARGET_DOT = '#C07F00';
+    const TARGET_RIPPLE = '#9CA3AF';
+    const TARGET_DOT = '#6B7280';
 
     markers.append('circle')
       .attr('class', 'ripple')
