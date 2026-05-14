@@ -1237,6 +1237,15 @@
   gap: 24px;
 }
 
+.matrix-row > .animate-on-scroll {
+  display: flex;
+}
+
+.matrix-row > .animate-on-scroll > .matrix-column {
+  flex: 1 1 auto;
+  width: 100%;
+}
+
 .matrix-row-top {
   grid-template-columns: 1fr 1fr;
 }
