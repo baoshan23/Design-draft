@@ -299,7 +299,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                       <li>{t('matrix.app.li3')}</li>
                       <li>{t('matrix.app.li4')}</li>
                       <li>{t('matrix.app.li5')}</li>
-                      <li className="matrix-more">{t('matrix.more')}</li>
                     </ul>
                   </div>
                 </div>
@@ -314,7 +313,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                       <li>{t('matrix.cpms.li3')}</li>
                       <li>{t('matrix.cpms.li4')}</li>
                       <li>{t('matrix.cpms.li5')}</li>
-                      <li className="matrix-more">{t('matrix.more')}</li>
                     </ul>
                   </div>
                 </div>
@@ -331,7 +329,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                       <li>{t('matrix.platform.li3')}</li>
                       <li>{t('matrix.platform.li4')}</li>
                       <li>{t('matrix.platform.li5')}</li>
-                      <li className="matrix-more">{t('matrix.more')}</li>
                     </ul>
                   </div>
                 </div>
