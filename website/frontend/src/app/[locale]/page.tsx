@@ -414,8 +414,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     <Image
                       src="/images/platform-dashboard.png"
                       alt=""
-                      width={2399}
-                      height={1602}
+                      width={1368}
+                      height={651}
                       sizes="(max-width: 900px) 100vw, 640px"
                     />
                   </div>
@@ -453,35 +453,35 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
           </ScrollAnimation>
           <ScrollAnimation>
-            <div className="language-cloud">
-              <span style={{ fontSize: '2.8rem' }}>你好</span>
-              <span style={{ fontSize: '2rem' }}>Hello</span>
-              <span style={{ fontSize: '1.5rem' }}>Xin chào</span>
-              <span style={{ fontSize: '2.2rem' }}>Привет</span>
-              <span style={{ fontSize: '1.5rem' }}>Apa kabar</span>
-              <span style={{ fontSize: '1.8rem' }}>Hai</span>
-              <span style={{ fontSize: '1.7rem' }}>สวัสดี</span>
-              <span style={{ fontSize: '2.4rem' }}>හෙලෝ</span>
-              <span style={{ fontSize: '1.4rem' }}>مرحبا</span>
-              <span style={{ fontSize: '2rem' }}>Bonjour</span>
-              <span style={{ fontSize: '1.6rem' }}>Hola</span>
-              <span style={{ fontSize: '1.5rem' }}>Ciao</span>
-              <span style={{ fontSize: '1.8rem' }}>こんにちは</span>
-              <span style={{ fontSize: '1.6rem' }}>안녕하세요</span>
-              <span style={{ fontSize: '1.4rem' }}>Hallo</span>
-              <span style={{ fontSize: '1.7rem' }}>Olá</span>
-              <span style={{ fontSize: '1.3rem' }}>Merhaba</span>
-              <span style={{ fontSize: '1.5rem' }}>Γεια σας</span>
-              <span style={{ fontSize: '1.6rem' }}>नमस्ते</span>
-              <span style={{ fontSize: '1.4rem' }}>Habari</span>
-              <span style={{ fontSize: '1.8rem' }}>ជំរាបសួរ</span>
-              <span style={{ fontSize: '1.3rem' }}>Kamusta</span>
-              <span style={{ fontSize: '1.5rem' }}>سلام</span>
-              <span style={{ fontSize: '1.6rem' }}>Hej</span>
-              <span style={{ fontSize: '1.4rem' }}>Selamat</span>
-              <span style={{ fontSize: '1.7rem' }}>Сайн уу</span>
-              <span style={{ fontSize: '1.3rem' }}>Saluton</span>
-              <span style={{ fontSize: '1.5rem' }}>Witam</span>
+            <div className="language-grid" role="list" aria-label="Supported languages">
+              <span role="listitem">你好</span>
+              <span role="listitem">Hello</span>
+              <span role="listitem">Xin chào</span>
+              <span role="listitem">Привет</span>
+              <span role="listitem">Apa kabar</span>
+              <span role="listitem">Hai</span>
+              <span role="listitem">สวัสดี</span>
+              <span role="listitem">හෙලෝ</span>
+              <span role="listitem">مرحبا</span>
+              <span role="listitem">Bonjour</span>
+              <span role="listitem">Hola</span>
+              <span role="listitem">Ciao</span>
+              <span role="listitem">こんにちは</span>
+              <span role="listitem">안녕하세요</span>
+              <span role="listitem">Hallo</span>
+              <span role="listitem">Olá</span>
+              <span role="listitem">Merhaba</span>
+              <span role="listitem">Γεια σας</span>
+              <span role="listitem">नमस्ते</span>
+              <span role="listitem">Habari</span>
+              <span role="listitem">ជំរាបសួរ</span>
+              <span role="listitem">Kamusta</span>
+              <span role="listitem">سلام</span>
+              <span role="listitem">Hej</span>
+              <span role="listitem">Selamat</span>
+              <span role="listitem">Сайн уу</span>
+              <span role="listitem">Saluton</span>
+              <span role="listitem">Witam</span>
             </div>
           </ScrollAnimation>
           <ScrollAnimation>
