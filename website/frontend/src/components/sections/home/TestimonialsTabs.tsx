@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 type Testimonial = {
@@ -74,7 +75,15 @@ export default function TestimonialsTabs() {
           className="testimonial-feature"
         >
           <div className="testimonial-feature-text">
-            <div className="testimonial-quote-mark" aria-hidden="true">&ldquo;</div>
+            <Image
+              src="/images/quote-mark.png"
+              alt=""
+              width={56}
+              height={42}
+              className="testimonial-quote-mark"
+              aria-hidden="true"
+              priority={false}
+            />
             <p className="testimonial-feature-quote">{t(`${current.key}.text`)}</p>
             <div className="testimonial-feature-author">
               <div className="testimonial-feature-avatar">{current.initials}</div>
