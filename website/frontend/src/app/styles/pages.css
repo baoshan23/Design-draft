@@ -387,6 +387,10 @@
   align-items: center;
   gap: 10px;
 }
+/* Solid yellow in resting state — override the global gradient on .btn-primary */
+.btn-primary.payment-request-cta-btn {
+  background: var(--primary);
+}
 
 /* Modal — portal-rendered, escapes any stacking context */
 .payment-request-modal-overlay {
@@ -1285,8 +1289,8 @@
 }
 
 .matrix-column-app .matrix-column-figure {
-  flex: 0 1 440px;
-  max-width: 440px;
+  flex: 0 1 500px;
+  max-width: 500px;
   align-self: stretch;
   position: relative;
   margin: -20px -32px -16px 0;
