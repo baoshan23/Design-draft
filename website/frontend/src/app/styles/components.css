@@ -317,21 +317,24 @@ body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
   gap: 4px;
 }
 
-/* Moss-style mega-menu: soft grey panel, flat items with card-like hover,
-   white CTA promo at the bottom. */
+/* Moss-style mega-menu: full-width panel anchored below the header,
+   content centered in a max-width grid. */
 .nav-dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(12px);
-  min-width: 520px;
+  position: fixed;
+  top: var(--header-height, 72px);
+  left: 0;
+  right: 0;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  transform: translateY(12px);
   background: #F4F3EE;
-  border: 1px solid rgba(140, 95, 0, 0.10);
-  box-shadow:
-    0 24px 56px rgba(15, 15, 15, 0.10),
-    0 4px 12px rgba(15, 15, 15, 0.04);
-  border-radius: 18px;
-  padding: 16px;
+  border: none;
+  border-top: 1px solid rgba(140, 95, 0, 0.08);
+  border-bottom: 1px solid rgba(140, 95, 0, 0.08);
+  box-shadow: 0 24px 56px rgba(15, 15, 15, 0.10);
+  border-radius: 0;
+  padding: 32px 0;
   opacity: 0;
   visibility: hidden;
   transition:
@@ -354,23 +357,28 @@ body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
 .nav-dropdown.open .nav-dropdown-menu {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
 }
 
 /* Small column-header label (e.g. "Products" / "Community") */
 .nav-dropdown-menu .dropdown-section-header {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px 12px;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-tertiary);
-  padding: 4px 10px 8px;
 }
 
 .nav-dropdown-menu .dropdown-items {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
 }
 
 .nav-dropdown-menu a {
