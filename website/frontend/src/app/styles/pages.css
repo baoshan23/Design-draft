@@ -1283,9 +1283,9 @@
 .matrix-column-platform .matrix-column-figure img {
   position: absolute;
   right: 140px;
-  bottom: -16px;
+  top: -20px;
   max-width: 100%;
-  max-height: calc(100% + 16px);
+  max-height: calc(100% + 20px);
   width: auto;
   height: auto;
   display: block;
