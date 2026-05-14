@@ -176,7 +176,7 @@ export default function GlobeVisualization() {
       .attr('class', 'arc')
       .attr('d', path as any)
       .attr('fill', 'none')
-      .attr('stroke', '#CBD5E1')
+      .attr('stroke', '#94A3B8')
       .attr('stroke-width', 1)
       .attr('stroke-linecap', 'round')
       .attr('stroke-opacity', 0)
@@ -226,13 +226,13 @@ export default function GlobeVisualization() {
     markers.append('circle')
       .attr('class', 'ripple')
       .attr('r', (d: any) => d.isOrigin ? 6 : 3)
-      .attr('fill', (d: any) => d.isOrigin ? '#FEBF1D' : '#C07F00')
+      .attr('fill', (d: any) => d.isOrigin ? '#6B7280' : '#9CA3AF')
       .attr('fill-opacity', 0.35);
 
     markers.append('circle')
       .attr('class', 'dot')
       .attr('r', (d: any) => d.isOrigin ? 4 : 2.2)
-      .attr('fill', (d: any) => d.isOrigin ? '#FEBF1D' : '#C07F00')
+      .attr('fill', (d: any) => d.isOrigin ? '#4B5563' : '#6B7280')
       .attr('stroke', (d: any) => d.isOrigin ? '#ffffff' : 'none')
       .attr('stroke-width', 1);
 
