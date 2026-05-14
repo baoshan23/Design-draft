@@ -50,4 +50,4 @@ Backend: `node deploy/deploy-backend.js` cross-compiles Go + SFTP + systemd rest
 
 ## Last session
 
-- 2026-05-14 (demo page B2B sync): Updated `/en/demo` section `id="demo-b2b"` to mirror the `/en/b2b/#demo` content pattern, including the **Global Admin Panel** card, demo account/password display (`admin` / `123456`), and matching Mobile/Web QR blocks linked to the same B2B demo URLs. Verified no compile errors and confirmed the live `/en/demo/#demo-b2b` view renders the synchronized content correctly. No production deploy per policy.
+- 2026-05-14 (demo B2B QR URL update): Updated the `/en/demo` B2B web QR target to `https://www.v3g.gcss.hk/user/` so it matches the v3 user portal, while keeping the mobile QR unchanged. Verified the file compiles cleanly and the live `/en/demo/#demo-b2b` view still renders correctly. No production deploy per policy.
