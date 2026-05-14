@@ -281,7 +281,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4>{t('contact.form.email')}</h4>
-                    <p>support@gcss.hk<br />sales@gcss.hk</p>
+                    <p>support@gcss.hk<br />sales@gcss.hk<br />jason.huang@gcss.hk</p>
                   </div>
                 </div>
 
