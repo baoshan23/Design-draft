@@ -1313,8 +1313,8 @@
 }
 
 .matrix-column-app .matrix-column-figure {
-  flex: 0 1 360px;
-  max-width: 55%;
+  flex: 0 1 440px;
+  max-width: 65%;
   align-self: stretch;
   position: relative;
   margin: -20px -32px -16px 0;
