@@ -8,18 +8,6 @@ import { useLocale, useTranslations } from 'next-intl';
 
 const WORLD_ATLAS_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
 
-// Canonical English property names on the world-atlas GeoJSON — used to
-// match polygons regardless of UI locale (TopoJSON properties are always
-// English). Hong Kong is not a separate feature in Natural Earth
-// countries-110m, so the origin polygon highlight falls on mainland China
-// which contains it.
-const ORIGIN_GEO_NAME = 'China';
-const CANONICAL_TARGET_NAMES = new Set([
-  'French Polynesia', 'Cambodia', 'Singapore', 'Belgium', 'France', 'Italy',
-  'Russia', 'Brazil', 'Malaysia', 'Philippines', 'Vietnam', 'United Arab Emirates',
-  'Saudi Arabia', 'Thailand', 'Sri Lanka', 'India', 'Indonesia', 'Ethiopia',
-]);
-
 export default function GlobeVisualization() {
   const t = useTranslations();
   const locale = useLocale();
@@ -137,18 +125,6 @@ export default function GlobeVisualization() {
 
     const defs = svg.append('defs');
 
-    const oceanGrad = defs.append('linearGradient')
-      .attr('id', 'gcss-ocean-2d')
-      .attr('x1', '0%').attr('y1', '0%').attr('x2', '0%').attr('y2', '100%');
-    oceanGrad.append('stop').attr('offset', '0%').attr('stop-color', '#F1F2F4');
-    oceanGrad.append('stop').attr('offset', '100%').attr('stop-color', '#F1F2F4');
-
-    const countryGrad = defs.append('linearGradient')
-      .attr('id', 'gcss-land-2d')
-      .attr('x1', '0%').attr('y1', '0%').attr('x2', '0%').attr('y2', '100%');
-    countryGrad.append('stop').attr('offset', '0%').attr('stop-color', '#F0E0B0');
-    countryGrad.append('stop').attr('offset', '100%').attr('stop-color', '#E4D08C');
-
     const glow = defs.append('filter').attr('id', 'gcss-glow-2d').attr('x', '-50%').attr('y', '-50%').attr('width', '200%').attr('height', '200%');
     glow.append('feGaussianBlur').attr('stdDeviation', '2.5').attr('result', 'coloredBlur');
     const merge = glow.append('feMerge');
@@ -157,46 +133,49 @@ export default function GlobeVisualization() {
 
     const root = svg.append('g').attr('class', 'root');
 
-    // Ocean background rect (for panning area)
+    // Light background rect (for panning area)
     root.append('rect')
       .attr('width', w)
       .attr('height', h)
-      .attr('fill', 'url(#gcss-ocean-2d)');
+      .attr('fill', '#FFFFFF');
 
-    // Graticule
-    root.append('path')
-      .datum(d3.geoGraticule()())
-      .attr('d', path as any)
-      .attr('fill', 'none')
-      .attr('stroke', '#C07F00')
-      .attr('stroke-width', 0.4)
-      .attr('stroke-opacity', 0.08);
+    // Build dot-matrix world map: rasterize country polygons to an
+    // offscreen canvas, then sample a grid and emit a small dot for any
+    // grid point that lands on land. Cheaper than calling geoContains
+    // for every grid point.
+    const dotSpacing = 7;
+    const dotRadius = 1.1;
+    const dotColor = '#D1D5DB';
 
-    // Countries — match by the canonical English name from the TopoJSON
-    // properties (which is locale-independent), not by the localized
-    // label we render on top.
-    root.selectAll('.country')
-      .data(worldData.features)
-      .enter().append('path')
-      .attr('class', 'country')
-      .attr('d', path as any)
-      .attr('fill', (d: any) => {
-        const n = d.properties?.name;
-        if (n === ORIGIN_GEO_NAME) return '#FEBF1D';
-        if (CANONICAL_TARGET_NAMES.has(n)) return '#D9C078';
-        return 'url(#gcss-land-2d)';
-      })
-      .attr('stroke', '#C07F00')
-      .attr('stroke-width', 0.4)
-      .attr('stroke-opacity', 0.35)
-      .style('opacity', 0.95)
-      .style('cursor', 'pointer')
-      .on('mouseenter', function (event, d: any) {
-        d3.select(this).attr('stroke-opacity', 1).attr('stroke-width', 0.8);
-      })
-      .on('mouseleave', function () {
-        d3.select(this).attr('stroke-opacity', 0.35).attr('stroke-width', 0.4);
-      });
+    const offscreen = document.createElement('canvas');
+    offscreen.width = w;
+    offscreen.height = h;
+    const ctx = offscreen.getContext('2d');
+    if (ctx) {
+      ctx.fillStyle = '#000';
+      ctx.beginPath();
+      const canvasPath = d3.geoPath(projection, ctx as any);
+      canvasPath(worldData as any);
+      ctx.fill();
+      const { data } = ctx.getImageData(0, 0, w, h);
+
+      const dotsGroup = root.append('g').attr('class', 'dots');
+      const positions: Array<[number, number]> = [];
+      for (let y = dotSpacing / 2; y < h; y += dotSpacing) {
+        for (let x = dotSpacing / 2; x < w; x += dotSpacing) {
+          const idx = (Math.floor(y) * w + Math.floor(x)) * 4 + 3;
+          if (data[idx] > 80) positions.push([x, y]);
+        }
+      }
+      dotsGroup.selectAll('circle')
+        .data(positions)
+        .enter().append('circle')
+        .attr('cx', (d) => d[0])
+        .attr('cy', (d) => d[1])
+        .attr('r', dotRadius)
+        .attr('fill', dotColor);
+    }
+
 
     // Arcs — densify each route along the great circle so d3.geoPath
     // automatically splits at the antimeridian. Without this, two-point
@@ -223,17 +202,11 @@ export default function GlobeVisualization() {
       .attr('class', 'arc')
       .attr('d', path as any)
       .attr('fill', 'none')
-      .attr('stroke', '#C07F00')
-      .attr('stroke-width', 1.4)
+      .attr('stroke', '#94A3B8')
+      .attr('stroke-width', 1)
       .attr('stroke-linecap', 'round')
       .attr('stroke-opacity', 0)
-      .style('filter', 'url(#gcss-glow-2d)')
-      .each(function () {
-        const len = (this as SVGPathElement).getTotalLength();
-        d3.select(this)
-          .attr('stroke-dasharray', `${len} ${len}`)
-          .attr('stroke-dashoffset', len);
-      });
+      .attr('stroke-dasharray', '4 4');
 
     // Markers
     const markersGroup = root.append('g').attr('class', 'markers');
@@ -302,13 +275,14 @@ export default function GlobeVisualization() {
       .attr('stroke-linejoin', 'round')
       .text((d: any) => d.name);
 
-    // Arc draw animation (staggered)
+    // Arc draw animation (staggered) — keep the dashed pattern intact
+    // while fading the opacity in, since stroke-dasharray is already
+    // used to define the dashes.
     arcs.transition()
       .delay((_, i) => 400 + i * 120)
       .duration(1400)
       .ease(d3.easeCubicOut)
-      .attr('stroke-dashoffset', 0)
-      .attr('stroke-opacity', 0.85);
+      .attr('stroke-opacity', 0.6);
 
     // Ripple pulse
     const pulseTimer = d3.timer((elapsed) => {
@@ -328,8 +302,7 @@ export default function GlobeVisualization() {
         const k = event.transform.k;
         markersGroup.selectAll('text').attr('font-size', (d: any) => (d.isOrigin ? 11 : 9) / k);
         markersGroup.selectAll('text').attr('stroke-width', 2 / k);
-        root.selectAll<SVGPathElement, unknown>('.country').attr('stroke-width', 0.4 / k);
-        arcsGroup.selectAll('.arc').attr('stroke-width', 1.4 / k);
+        arcsGroup.selectAll('.arc').attr('stroke-width', 1 / k);
       });
 
     zoomBehaviorRef.current = zoomBehavior;
@@ -355,7 +328,7 @@ export default function GlobeVisualization() {
         height: '600px',
         position: 'relative',
         overflow: 'hidden',
-        background: '#F1F2F4',
+        background: '#FFFFFF',
       }}
     >
       {!worldData && isVisible && !loadError && (
