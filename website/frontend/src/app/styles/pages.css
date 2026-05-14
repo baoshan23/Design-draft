@@ -1309,31 +1309,6 @@
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='11' fill='%23ffffff'/><polyline points='7 12 11 16 17 8' fill='none' stroke='%23181818' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
 }
 
-.matrix-column-app {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.matrix-column-app .matrix-column-text {
-  flex: 1 1 0;
-  min-width: 0;
-}
-
-.matrix-column-app .matrix-column-figure {
-  flex: 0 1 400px;
-  max-width: 60%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.matrix-column-app .matrix-column-figure img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 h3.matrix-header,
 .matrix-column .matrix-header {
   margin: 0 0 18px;
@@ -4154,18 +4129,6 @@ h3.matrix-header,
     height: auto;
   }
 
-  .matrix-column-app {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 20px;
-  }
-
-  .matrix-column-app .matrix-column-figure {
-    flex: 1 1 auto;
-    max-width: 100%;
-    margin: 0;
-    border-radius: 8px;
-  }
 
   .steps-timeline {
     flex-direction: column;
