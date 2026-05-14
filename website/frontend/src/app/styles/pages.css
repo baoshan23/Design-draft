@@ -1271,7 +1271,8 @@
 .matrix-column-platform .matrix-column-figure {
   flex: 0 1 640px;
   max-width: 50%;
-  align-self: center;
+  align-self: flex-end;
+  margin-bottom: -16px;
 }
 
 .matrix-column-platform .matrix-column-figure img {
