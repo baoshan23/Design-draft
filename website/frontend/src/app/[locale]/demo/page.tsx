@@ -28,6 +28,16 @@ const CPO_PANEL_CREDS = {
   password: 'gcss123456',
 } as const;
 
+const B2B_DEMO_QR_URLS = {
+  mobile: 'https://app.gcss.hk/',
+  web: 'https://app.gcss.hk/admin',
+};
+
+const B2B_DEMO_CREDS = {
+  account: 'admin',
+  pass: '123456',
+} as const;
+
 export const metadata = {
   title: 'Live Demo - GCSS | Try Every Plan Edition',
   description: 'Hands-on sandbox for every GCSS plan tier. SaaS, Custom Web, APP Enterprise, Web APP Platform, APP Platform — try the real B2B2C admin or request a tour for your tier.',
@@ -121,8 +131,24 @@ export default async function DemoPage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations();
-  const webAppQr = await QRCode.toString(QR_TARGETS.webApp, QR_OPTS);
-  const userPortalQr = await QRCode.toString('https://www.v3g.gcss.hk/user/', QR_OPTS);
+  const [webAppQr, userPortalQr, b2bMobileQr, b2bWebQr] = await Promise.all([
+    QRCode.toString(QR_TARGETS.webApp, QR_OPTS),
+    QRCode.toString('https://www.v3g.gcss.hk/user/', QR_OPTS),
+    QRCode.toString(B2B_DEMO_QR_URLS.mobile, {
+      type: 'svg',
+      margin: 1,
+      width: 200,
+      color: { dark: '#0F172A', light: '#FFFFFF00' },
+      errorCorrectionLevel: 'M',
+    }),
+    QRCode.toString(B2B_DEMO_QR_URLS.web, {
+      type: 'svg',
+      margin: 1,
+      width: 200,
+      color: { dark: '#0F172A', light: '#FFFFFF00' },
+      errorCorrectionLevel: 'M',
+    }),
+  ]);
 
   // Localized labels are server-side rendered. Each plan card uses
   // pricing.<plan>.name as title and demo.page.plans.<plan>.* for tag/bullets.
@@ -276,28 +302,35 @@ export default async function DemoPage({ params }: { params: Promise<{ locale: s
             </div>
           </ScrollAnimation>
 
-          <div className="demo-edition-grid">
+          <div className="b2b-demo-grid">
             <ScrollAnimation>
-              <PlanCard planKey="webplat" hasLiveDemo iconColor="indigo" />
+              <div className="b2b-demo-cards">
+                <div className="b2b-demo-card glass-card" data-accent="blue">
+                  <div className="b2b-demo-card-head">
+                    <h3>{t('b2b.demo.admin.title')}</h3>
+                    <span className="b2b-demo-card-sub">{t('b2b.demo.admin.subtitle')}</span>
+                  </div>
+                  <div className="b2b-demo-card-creds-label">{t('b2b.demo.demoAccount')}</div>
+                  <div className="b2b-demo-field"><span>{t('b2b.demo.account')}:</span><code>{B2B_DEMO_CREDS.account}</code></div>
+                  <div className="b2b-demo-field"><span>{t('b2b.demo.password')}:</span><code>{B2B_DEMO_CREDS.pass}</code></div>
+                  <button type="button" className="btn btn-secondary b2b-demo-launch">{t('b2b.demo.launch')}</button>
+                </div>
+              </div>
             </ScrollAnimation>
-            <ScrollAnimation style={{ transitionDelay: '0.08s' }}>
-              <PlanCard planKey="appplat" hasLiveDemo iconColor="indigo" />
+
+            <ScrollAnimation style={{ transitionDelay: '0.15s' }}>
+              <div className="b2b-demo-qrs">
+                <a className="b2b-demo-qr-block" href={B2B_DEMO_QR_URLS.mobile} target="_blank" rel="noopener noreferrer">
+                  <div className="b2b-demo-qr glass-card" aria-label={t('b2b.demo.mobileDemo')} dangerouslySetInnerHTML={{ __html: b2bMobileQr }} />
+                  <div className="b2b-demo-qr-label">{t('b2b.demo.mobileDemo')}</div>
+                </a>
+                <a className="b2b-demo-qr-block" href={B2B_DEMO_QR_URLS.web} target="_blank" rel="noopener noreferrer">
+                  <div className="b2b-demo-qr glass-card" aria-label={t('b2b.demo.webDemo')} dangerouslySetInnerHTML={{ __html: b2bWebQr }} />
+                  <div className="b2b-demo-qr-label">{t('b2b.demo.webDemo')}</div>
+                </a>
+              </div>
             </ScrollAnimation>
           </div>
-
-          <ScrollAnimation style={{ transitionDelay: '0.15s' }}>
-            <div className="demo-b2b-qr-row">
-              <QrFrame label={t('b2b.demo.mobileDemo')} value={QR_TARGETS.mobileApp} />
-              <QrFrame label={t('b2b.demo.webDemo')} value={QR_TARGETS.webApp} />
-              <div className="demo-b2b-qr-link">
-                <p>{t('demo.page.b2bQrDesc')}</p>
-                <Link href="/b2b" className="btn btn-outline">
-                  <span>{t('demo.page.viewB2bProduct')}</span>
-                  <ArrowRight />
-                </Link>
-              </div>
-            </div>
-          </ScrollAnimation>
         </div>
       </section>
     </>

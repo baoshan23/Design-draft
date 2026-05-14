@@ -50,4 +50,4 @@ Backend: `node deploy/deploy-backend.js` cross-compiles Go + SFTP + systemd rest
 
 ## Last session
 
-- 2026-05-14 (demo page B2C sync): Swapped the `/en/demo` B2C section to render the shared **DemoTabs** component from the B2C page, pulling in the real CPO URL, demo credentials, and QR payloads so the demo content now matches the B2C demo grid. Verified the page compiles cleanly and the live browser view renders the updated B2C block correctly. No production deploy per policy.
+- 2026-05-14 (demo page B2B sync): Updated `/en/demo` section `id="demo-b2b"` to mirror the `/en/b2b/#demo` content pattern, including the **Global Admin Panel** card, demo account/password display (`admin` / `123456`), and matching Mobile/Web QR blocks linked to the same B2B demo URLs. Verified no compile errors and confirmed the live `/en/demo/#demo-b2b` view renders the synchronized content correctly. No production deploy per policy.
