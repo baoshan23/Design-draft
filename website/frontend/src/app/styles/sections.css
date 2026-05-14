@@ -2681,7 +2681,7 @@ html {
 .payment-orbit {
   position: relative;
   width: 100%;
-  height: 720px;
+  height: 1100px;
   margin: 0 auto;
   isolation: isolate;
 }
@@ -2776,13 +2776,13 @@ html {
 
 @media (max-width: 900px) {
   .payment-orbit {
-    height: 560px;
+    height: 860px;
   }
 }
 
 @media (max-width: 640px) {
   .payment-orbit {
-    height: 460px;
+    height: 700px;
   }
   .payment-bubble {
     transform: translate(-50%, -50%) scale(0.7);
