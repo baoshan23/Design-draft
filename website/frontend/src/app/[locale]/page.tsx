@@ -192,16 +192,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             return (
               <div className="marquee">
                 <div className="marquee-track">
-                  {MANUFACTURER_LOGOS.map((logo) => (
-                    <span key={logo.name} className="marquee-item">
-                      <Image src={logo.src} alt={logo.name} width={160} height={48} />
-                    </span>
-                  ))}
-                  {MANUFACTURER_LOGOS.map((logo) => (
-                    <span key={`${logo.name}-dup`} className="marquee-item">
-                      <Image src={logo.src} alt={logo.name} width={160} height={48} />
-                    </span>
-                  ))}
+                  {[0, 1, 2, 3].flatMap((copy) =>
+                    MANUFACTURER_LOGOS.map((logo) => (
+                      <span key={`${logo.name}-${copy}`} className="marquee-item">
+                        <Image src={logo.src} alt={logo.name} width={160} height={48} />
+                      </span>
+                    ))
+                  )}
                 </div>
               </div>
             );
