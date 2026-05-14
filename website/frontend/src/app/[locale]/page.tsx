@@ -457,7 +457,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <h2>{t('lang.title')}</h2>
               <p>{t('lang.desc')}</p>
               <div style={{ marginTop: 20 }}>
-                <Link href={{ pathname: '/b2c', hash: 'multilingual' }} className="btn btn-primary">{t('lang.viewMore')}</Link>
+                <Link href={{ pathname: '/b2c', hash: 'multilingual' }} className="btn btn-primary btn-lg">{t('lang.viewMore')}</Link>
               </div>
             </div>
           </ScrollAnimation>
