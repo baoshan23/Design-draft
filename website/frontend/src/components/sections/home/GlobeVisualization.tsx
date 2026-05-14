@@ -125,6 +125,12 @@ export default function GlobeVisualization() {
 
     const defs = svg.append('defs');
 
+    const dotGrad = defs.append('linearGradient')
+      .attr('id', 'gcss-dots-2d')
+      .attr('x1', '0%').attr('y1', '0%').attr('x2', '0%').attr('y2', '100%');
+    dotGrad.append('stop').attr('offset', '0%').attr('stop-color', '#F3F4F6');
+    dotGrad.append('stop').attr('offset', '100%').attr('stop-color', '#C7CED6');
+
     const glow = defs.append('filter').attr('id', 'gcss-glow-2d').attr('x', '-50%').attr('y', '-50%').attr('width', '200%').attr('height', '200%');
     glow.append('feGaussianBlur').attr('stdDeviation', '2.5').attr('result', 'coloredBlur');
     const merge = glow.append('feMerge');
@@ -145,7 +151,7 @@ export default function GlobeVisualization() {
     // for every grid point.
     const dotSpacing = 7;
     const dotRadius = 1.1;
-    const dotColor = '#D1D5DB';
+    const dotColor = 'url(#gcss-dots-2d)';
 
     const offscreen = document.createElement('canvas');
     offscreen.width = w;
@@ -202,7 +208,7 @@ export default function GlobeVisualization() {
       .attr('class', 'arc')
       .attr('d', path as any)
       .attr('fill', 'none')
-      .attr('stroke', '#94A3B8')
+      .attr('stroke', '#CBD5E1')
       .attr('stroke-width', 1)
       .attr('stroke-linecap', 'round')
       .attr('stroke-opacity', 0)
@@ -266,7 +272,7 @@ export default function GlobeVisualization() {
       .attr('text-anchor', 'middle')
       .attr('dy', (d: any) => d.isOrigin ? -10 : -7)
       .attr('font-size', (d: any) => d.isOrigin ? '11px' : '9px')
-      .attr('fill', '#8C5F00')
+      .attr('fill', '#000000')
       .attr('font-family', 'sans-serif')
       .attr('font-weight', (d: any) => d.isOrigin ? 700 : 500)
       .attr('paint-order', 'stroke')
