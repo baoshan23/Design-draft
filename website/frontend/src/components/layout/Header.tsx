@@ -147,31 +147,48 @@ export default function Header() {
                 <ChevronDown className="dropdown-chevron" />
               </button>
               <div id="product-dropdown-menu" className="nav-dropdown-menu" role="menu">
-                <Link href={{ pathname: '/b2c', hash: 'overview' }} onClick={closeMenu}>
-                  <div className="dropdown-icon icon-gradient--gold">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                      <rect x="2" y="3" width="20" height="14" rx="2" />
-                      <line x1="8" y1="21" x2="16" y2="21" />
-                      <line x1="12" y1="17" x2="12" y2="21" />
+                <div className="dropdown-section-header">{tDropdown('productHeader')}</div>
+                <div className="dropdown-items">
+                  <Link href={{ pathname: '/b2c', hash: 'overview' }} onClick={closeMenu}>
+                    <div className="dropdown-icon icon-gradient--gold">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" />
+                        <line x1="8" y1="21" x2="16" y2="21" />
+                        <line x1="12" y1="17" x2="12" y2="21" />
+                      </svg>
+                    </div>
+                    <div className="dropdown-text">
+                      <span>{tModels('b2c.title')}</span>
+                      <span>{tDropdown('b2c.desc')}</span>
+                    </div>
+                  </Link>
+                  <Link href="/b2b" onClick={closeMenu}>
+                    <div className="dropdown-icon icon-gradient--dark">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+                      </svg>
+                    </div>
+                    <div className="dropdown-text">
+                      <span>{tModels('b2b.title')}</span>
+                      <span>{tDropdown('b2b.desc')}</span>
+                    </div>
+                  </Link>
+                </div>
+                <Link href="/pricing" className="dropdown-cta" onClick={closeMenu}>
+                  <div className="dropdown-cta-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="3" width="7" height="7" rx="1" />
+                      <rect x="14" y="3" width="7" height="7" rx="1" />
+                      <rect x="3" y="14" width="7" height="7" rx="1" />
+                      <rect x="14" y="14" width="7" height="7" rx="1" />
                     </svg>
                   </div>
-                  <div className="dropdown-text">
-                    <span>{tModels('b2c.title')}</span>
-                    <span>{tDropdown('b2c.desc')}</span>
-                  </div>
-                </Link>
-                <Link href="/b2b" onClick={closeMenu}>
-                  <div className="dropdown-icon icon-gradient--dark">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                      <circle cx="12" cy="12" r="10" />
-                      <circle cx="12" cy="12" r="4" />
-                      <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
-                    </svg>
-                  </div>
-                  <div className="dropdown-text">
-                    <span>{tModels('b2b.title')}</span>
-                    <span>{tDropdown('b2b.desc')}</span>
-                  </div>
+                  <span className="dropdown-cta-text">{tDropdown('productCta')}</span>
+                  <svg className="dropdown-cta-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14" /><path d="M13 5l7 7-7 7" />
+                  </svg>
                 </Link>
               </div>
             </div>
@@ -202,41 +219,56 @@ export default function Header() {
                 <ChevronDown className="dropdown-chevron" />
               </button>
               <div id="community-dropdown-menu" className="nav-dropdown-menu" role="menu">
-                <Link href="/blog" onClick={closeMenu}>
-                  <div className="dropdown-icon icon-gradient--blue">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                <div className="dropdown-section-header">{tDropdown('communityHeader')}</div>
+                <div className="dropdown-items">
+                  <Link href="/blog" onClick={closeMenu}>
+                    <div className="dropdown-icon icon-gradient--blue">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                      </svg>
+                    </div>
+                    <div className="dropdown-text">
+                      <span>{t('blog')}</span>
+                      <span>{tDropdown('blog.desc')}</span>
+                    </div>
+                  </Link>
+                  <Link href="/forum" onClick={closeMenu}>
+                    <div className="dropdown-icon icon-gradient--purple">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                      </svg>
+                    </div>
+                    <div className="dropdown-text">
+                      <span>{t('forum')}</span>
+                      <span>{tDropdown('forum.desc')}</span>
+                    </div>
+                  </Link>
+                  <Link href="/faq" onClick={closeMenu}>
+                    <div className="dropdown-icon icon-gradient--green">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                        <line x1="12" y1="17" x2="12.01" y2="17" />
+                      </svg>
+                    </div>
+                    <div className="dropdown-text">
+                      <span>{t('faq')}</span>
+                      <span>{tDropdown('faq.desc')}</span>
+                    </div>
+                  </Link>
+                </div>
+                <Link href="/blog" className="dropdown-cta" onClick={closeMenu}>
+                  <div className="dropdown-cta-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
                     </svg>
                   </div>
-                  <div className="dropdown-text">
-                    <span>{t('blog')}</span>
-                    <span>{tDropdown('blog.desc')}</span>
-                  </div>
-                </Link>
-                <Link href="/forum" onClick={closeMenu}>
-                  <div className="dropdown-icon icon-gradient--purple">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                    </svg>
-                  </div>
-                  <div className="dropdown-text">
-                    <span>{t('forum')}</span>
-                    <span>{tDropdown('forum.desc')}</span>
-                  </div>
-                </Link>
-                <Link href="/faq" onClick={closeMenu}>
-                  <div className="dropdown-icon icon-gradient--green">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                      <line x1="12" y1="17" x2="12.01" y2="17" />
-                    </svg>
-                  </div>
-                  <div className="dropdown-text">
-                    <span>{t('faq')}</span>
-                    <span>{tDropdown('faq.desc')}</span>
-                  </div>
+                  <span className="dropdown-cta-text">{tDropdown('communityCta')}</span>
+                  <svg className="dropdown-cta-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14" /><path d="M13 5l7 7-7 7" />
+                  </svg>
                 </Link>
               </div>
             </div>

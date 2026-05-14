@@ -720,7 +720,11 @@
     },
     "faq": {
       "desc": "Frequently asked questions"
-    }
+    },
+    "productHeader": "Products",
+    "communityHeader": "Community",
+    "productCta": "Compare all plans",
+    "communityCta": "Explore the blog"
   },
   "index": {
     "smartops": {

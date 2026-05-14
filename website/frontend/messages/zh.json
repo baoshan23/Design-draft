@@ -720,7 +720,11 @@
     },
     "faq": {
       "desc": "常见问题解答"
-    }
+    },
+    "productHeader": "产品矩阵",
+    "communityHeader": "社区",
+    "productCta": "对比所有方案",
+    "communityCta": "浏览博客"
   },
   "index": {
     "smartops": {
