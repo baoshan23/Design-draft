@@ -363,6 +363,25 @@ body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
   transform: translateY(0);
 }
 
+/* When any dropdown is open, drop the header's own backdrop-filter so
+   the dropdown menu's frosted-glass actually shows. Nested backdrop-
+   filters don't compound — the inner one would otherwise operate on
+   the parent's already-blurred output (= no visible additional frost).
+   Header keeps an opaque-ish bg so its content stays legible. */
+.header:has(.nav-dropdown:hover),
+.header:has(.nav-dropdown:focus-within),
+.header:has(.nav-dropdown.open) {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+}
+
+[data-theme="dark"] .header:has(.nav-dropdown:hover),
+[data-theme="dark"] .header:has(.nav-dropdown:focus-within),
+[data-theme="dark"] .header:has(.nav-dropdown.open) {
+  background: rgba(20, 18, 16, 0.88) !important;
+}
+
 /* Small column-header label (e.g. "Products" / "Community") */
 .nav-dropdown-menu .dropdown-section-header {
   max-width: 1440px;
