@@ -2404,15 +2404,15 @@ html {
 
 /* --- Global Map Section --- */
 .map-section {
-  background: var(--dark);
-  padding: 100px 0;
+  background: #F1F2F4;
+  padding: 100px 0 0;
   overflow: hidden;
 }
 
 .map-fullbleed {
   width: 100%;
-  max-width: 1920px;
-  margin: 40px auto 0;
+  max-width: none;
+  margin: 40px 0 0;
   padding: 0;
 }
 

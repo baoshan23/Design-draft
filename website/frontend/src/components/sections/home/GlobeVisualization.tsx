@@ -352,13 +352,10 @@ export default function GlobeVisualization() {
       className="globe-wrapper"
       style={{
         width: '100%',
-        height: '500px',
+        height: '600px',
         position: 'relative',
-        borderRadius: '16px',
         overflow: 'hidden',
         background: '#F1F2F4',
-        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.06)',
-        border: '1px solid rgba(0, 0, 0, 0.06)',
       }}
     >
       {!worldData && isVisible && !loadError && (
