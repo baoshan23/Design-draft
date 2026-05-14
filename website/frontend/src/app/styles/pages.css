@@ -1294,6 +1294,19 @@
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
 }
 
+.matrix-row-top .matrix-column {
+  padding: 14px 32px 12px;
+}
+
+.matrix-row-top .matrix-column .matrix-header {
+  margin-bottom: 12px;
+}
+
+.matrix-row-top .matrix-body li {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
 .matrix-column-app {
   display: flex;
   align-items: stretch;
