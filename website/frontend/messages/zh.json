@@ -520,16 +520,19 @@
     "title": "运营商怎么说",
     "desc": "听听那些通过 GCSS 转型升级的充电运营商的心声。",
     "t1": {
+      "tab": "GreenCharge",
       "text": "GCSS 帮助我们在不到一个月的时间内在泰国部署了 200+ 个充电桩。多语言支持和 GrabPay 集成是我们本地市场的关键优势。",
       "name": "Somchai Thongprasert",
       "role": "CEO, GreenCharge Thailand"
     },
     "t2": {
+      "tab": "Nordic EV",
       "text": "B2B2C 平台模式让我们在第一个季度就成功入驻了 15 个子运营商。收入追踪和自动结算为我们节省了无数小时。",
       "name": "Maria Lindström",
       "role": "COO, Nordic EV Networks"
     },
     "t3": {
+      "tab": "ChargeHub",
       "text": "我们从竞品切换到 GCSS，运营成本降低了 40%。仅 OTA 固件更新功能每年就为每个站点节省了 2 次技术人员上门。",
       "name": "Ahmed Khalil",
       "role": "创始人, ChargeHub MENA"

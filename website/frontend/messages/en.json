@@ -520,16 +520,19 @@
     "title": "What Our Operators Say",
     "desc": "Hear from charging operators who transformed their business with GCSS.",
     "t1": {
+      "tab": "GreenCharge",
       "text": "GCSS helped us deploy 200+ chargers across Thailand in under a month. The multi-language support and GrabPay integration were game-changers for our local market.",
       "name": "Somchai Thongprasert",
       "role": "CEO, GreenCharge Thailand"
     },
     "t2": {
+      "tab": "Nordic EV",
       "text": "The B2B2C platform model let us onboard 15 sub-operators within our first quarter. Revenue tracking and automated settlements saved us countless hours.",
       "name": "Maria Lindström",
       "role": "COO, Nordic EV Networks"
     },
     "t3": {
+      "tab": "ChargeHub",
       "text": "We switched from a competitor to GCSS and cut our operational costs by 40%. The OTA firmware updates alone save us 2 technician trips per station per year.",
       "name": "Ahmed Khalil",
       "role": "Founder, ChargeHub MENA"

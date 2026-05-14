@@ -10,6 +10,7 @@ import MobileHeroTabs from '@/components/sections/home/MobileHeroTabs';
 import { DiagramModalProvider } from '@/components/sections/home/DiagramModal';
 import GlobeVisualization from '@/components/sections/home/GlobeVisualization';
 import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
+import TestimonialsTabs from '@/components/sections/home/TestimonialsTabs';
 import ScrollResetOnLoad from '@/components/effects/ScrollResetOnLoad';
 import { PAYMENT_ICONS, PAYMENT_METHODS_FLAT } from '@/components/sections/home/paymentIcons';
 
@@ -26,12 +27,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 const CheckIcon = () => (
   <svg viewBox="0 0 20 20" fill="#10B981">
     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" />
-  </svg>
-);
-
-const StarIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="#E6A817">
-    <path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.3L8 12.5 3.1 15l.9-5.3-4-3.9L5.5 5z" />
   </svg>
 );
 
@@ -537,89 +532,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* Testimonials Section */}
-      <section className="section" id="testimonials">
-        <div className="container">
-          <ScrollAnimation>
-            <div className="section-header">
-              <span className="section-label">{t('testimonials.label')}</span>
-              <h2>{t('testimonials.title')}</h2>
-              <p>{t('testimonials.desc')}</p>
-            </div>
-          </ScrollAnimation>
-          <div className="grid grid-3">
-            <ScrollAnimation>
-              <div className="testimonial-card">
-                <div className="testimonial-video">
-                  <div className="testimonial-video-placeholder">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-                      <circle cx="12" cy="12" r="11" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />
-                      <polygon points="10,8 17,12 10,16" fill="rgba(255,255,255,0.7)" />
-                    </svg>
-                  </div>
-                </div>
-                <div className="testimonial-stars">
-                  <StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon />
-                </div>
-                <p className="testimonial-text">{t('testimonials.t1.text')}</p>
-                <div className="testimonial-author">
-                  <div className="testimonial-avatar">ST</div>
-                  <div>
-                    <div className="testimonial-name">{t('testimonials.t1.name')}</div>
-                    <div className="testimonial-role">{t('testimonials.t1.role')}</div>
-                  </div>
-                </div>
-              </div>
-            </ScrollAnimation>
-            <ScrollAnimation>
-              <div className="testimonial-card">
-                <div className="testimonial-video">
-                  <div className="testimonial-video-placeholder">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-                      <circle cx="12" cy="12" r="11" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />
-                      <polygon points="10,8 17,12 10,16" fill="rgba(255,255,255,0.7)" />
-                    </svg>
-                  </div>
-                </div>
-                <div className="testimonial-stars">
-                  <StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon />
-                </div>
-                <p className="testimonial-text">{t('testimonials.t2.text')}</p>
-                <div className="testimonial-author">
-                  <div className="testimonial-avatar">ML</div>
-                  <div>
-                    <div className="testimonial-name">{t('testimonials.t2.name')}</div>
-                    <div className="testimonial-role">{t('testimonials.t2.role')}</div>
-                  </div>
-                </div>
-              </div>
-            </ScrollAnimation>
-            <ScrollAnimation>
-              <div className="testimonial-card">
-                <div className="testimonial-video">
-                  <div className="testimonial-video-placeholder">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-                      <circle cx="12" cy="12" r="11" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />
-                      <polygon points="10,8 17,12 10,16" fill="rgba(255,255,255,0.7)" />
-                    </svg>
-                  </div>
-                </div>
-                <div className="testimonial-stars">
-                  <StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon />
-                </div>
-                
-                <p className="testimonial-text">{t('testimonials.t3.text')}</p>
-                <div className="testimonial-author">
-                  <div className="testimonial-avatar">AK</div>
-                  <div>
-                    <div className="testimonial-name">{t('testimonials.t3.name')}</div>
-                    <div className="testimonial-role">{t('testimonials.t3.role')}</div>
-                  </div>
-                </div>
-              </div>
-            </ScrollAnimation>
-          </div>
-        </div>
-      </section>
+      <TestimonialsTabs />
 
       {/* CTA Section */}
       <section className="cta-section" style={{ background: 'var(--dark)' }}>
