@@ -3837,31 +3837,9 @@ h3.matrix-header,
   }
 
   /* Mobile accordion: hide the column-header label (trigger already labels
-     the section) and flatten the CTA promo into a normal nav row. */
+     the section). */
   .nav.mobile-open .nav-dropdown-menu .dropdown-section-header {
     display: none;
-  }
-
-  .nav.mobile-open .nav-dropdown-menu .dropdown-cta {
-    margin-top: 4px;
-    background: transparent;
-    border-color: transparent !important;
-    box-shadow: none;
-    padding: 12px 16px !important;
-    min-height: 48px;
-    color: var(--text-secondary) !important;
-  }
-
-  .nav.mobile-open .nav-dropdown-menu .dropdown-cta:hover {
-    background: rgba(255, 255, 255, 0.06) !important;
-    transform: none;
-    box-shadow: none;
-  }
-
-  .nav.mobile-open .nav-dropdown-menu .dropdown-cta-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
   }
 
   .nav.mobile-open .nav-dropdown>a::after {

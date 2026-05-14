@@ -176,20 +176,6 @@ export default function Header() {
                     </div>
                   </Link>
                 </div>
-                <Link href="/pricing" className="dropdown-cta" onClick={closeMenu}>
-                  <div className="dropdown-cta-icon">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="3" y="3" width="7" height="7" rx="1" />
-                      <rect x="14" y="3" width="7" height="7" rx="1" />
-                      <rect x="3" y="14" width="7" height="7" rx="1" />
-                      <rect x="14" y="14" width="7" height="7" rx="1" />
-                    </svg>
-                  </div>
-                  <span className="dropdown-cta-text">{tDropdown('productCta')}</span>
-                  <svg className="dropdown-cta-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14" /><path d="M13 5l7 7-7 7" />
-                  </svg>
-                </Link>
               </div>
             </div>
 
@@ -258,18 +244,6 @@ export default function Header() {
                     </div>
                   </Link>
                 </div>
-                <Link href="/blog" className="dropdown-cta" onClick={closeMenu}>
-                  <div className="dropdown-cta-icon">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-                    </svg>
-                  </div>
-                  <span className="dropdown-cta-text">{tDropdown('communityCta')}</span>
-                  <svg className="dropdown-cta-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14" /><path d="M13 5l7 7-7 7" />
-                  </svg>
-                </Link>
               </div>
             </div>
 
