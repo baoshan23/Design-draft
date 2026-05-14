@@ -101,9 +101,9 @@ export default function Footer() {
               <Image
                 src="/assets/logo.png"
                 alt="GCSS"
-                width={48}
-                height={48}
-                style={{ borderRadius: '10px' }}
+                width={96}
+                height={96}
+                style={{ borderRadius: '20px' }}
               />
               G<span>CSS</span>
             </Link>
