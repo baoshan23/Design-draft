@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import QRCode from 'qrcode';
 import { Link } from '@/i18n/navigation';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
+import DemoTabs from '../b2c/DemoTabs';
 import StickyEditionNav from './StickyEditionNav';
 import CopyableField from './CopyableField';
 import './demo-page.css';
@@ -12,6 +13,20 @@ const QR_TARGETS = {
   webApp: 'https://app.gcss.hk/',
   mobileApp: 'https://app.gcss.hk/',
 };
+
+const QR_OPTS = {
+  type: 'svg' as const,
+  margin: 1,
+  width: 144,
+  color: { dark: '#1a1210', light: '#00000000' },
+  errorCorrectionLevel: 'M' as const,
+};
+
+const CPO_PANEL_URL = 'https://www.v3g.gcss.hk/admin/';
+const CPO_PANEL_CREDS = {
+  account: 'root',
+  password: 'gcss123456',
+} as const;
 
 export const metadata = {
   title: 'Live Demo - GCSS | Try Every Plan Edition',
@@ -106,6 +121,8 @@ export default async function DemoPage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations();
+  const webAppQr = await QRCode.toString(QR_TARGETS.webApp, QR_OPTS);
+  const userPortalQr = await QRCode.toString('https://www.v3g.gcss.hk/user/', QR_OPTS);
 
   // Localized labels are server-side rendered. Each plan card uses
   // pricing.<plan>.name as title and demo.page.plans.<plan>.* for tag/bullets.
@@ -213,19 +230,33 @@ export default async function DemoPage({ params }: { params: Promise<{ locale: s
             </div>
           </ScrollAnimation>
 
-          <div className="demo-edition-grid">
-            <ScrollAnimation>
-              <PlanCard planKey="customweb" hasLiveDemo={false} iconColor="gold" />
-            </ScrollAnimation>
-            <ScrollAnimation style={{ transitionDelay: '0.08s' }}>
-              <PlanCard planKey="appent" hasLiveDemo={false} iconColor="gold" />
-            </ScrollAnimation>
-          </div>
+          <ScrollAnimation>
+            <div className="b2c-demo-stage">
+              <DemoTabs
+                webAppQr={webAppQr}
+                userPortalQr={userPortalQr}
+                adminUrl={CPO_PANEL_URL}
+                adminAccount={CPO_PANEL_CREDS.account}
+                adminPassword={CPO_PANEL_CREDS.password}
+              />
 
-          <ScrollAnimation style={{ transitionDelay: '0.2s' }}>
-            <div className="demo-edition-aside demo-edition-aside--centered">
-              <QrFrame label={t('demo.page.qrH5')} value={QR_TARGETS.webApp} />
-              <QrFrame label={t('demo.page.qrMobile')} value={QR_TARGETS.mobileApp} />
+              <div className="b2c-demo-status-bar">
+                <div className="b2c-demo-pill" data-tone="success">
+                  <span className="b2c-demo-pill-dot" aria-hidden="true"></span>
+                  <span className="b2c-demo-pill-key">{t('product.demo.status.label')}</span>
+                  <span className="b2c-demo-pill-val">{t('product.demo.status.online')}</span>
+                </div>
+                <div className="b2c-demo-pill" data-tone="gold">
+                  <svg className="b2c-demo-pill-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><circle cx="7" cy="7" r="5.5" /><path d="M7 4v3l2 1" /></svg>
+                  <span className="b2c-demo-pill-key">{t('product.demo.latency')}</span>
+                  <span className="b2c-demo-pill-val">24ms</span>
+                </div>
+                <div className="b2c-demo-pill" data-tone="teal">
+                  <svg className="b2c-demo-pill-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M7 1v2M7 11v2M1 7h2M11 7h2" /><circle cx="7" cy="7" r="3" /></svg>
+                  <span className="b2c-demo-pill-key">{t('product.demo.connection.label')}</span>
+                  <span className="b2c-demo-pill-val">{t('product.demo.connection.secure')}</span>
+                </div>
+              </div>
             </div>
           </ScrollAnimation>
         </div>
