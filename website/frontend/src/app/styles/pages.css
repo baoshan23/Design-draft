@@ -1328,17 +1328,17 @@
 .matrix-column-platform .matrix-column-figure img {
   position: absolute;
   right: -32px;
-  bottom: -16px;
-  max-width: 100%;
-  max-height: calc(100% + 16px);
+  top: -20px;
+  height: calc(100% + 36px);
   width: auto;
-  height: auto;
+  max-width: none;
   display: block;
 }
 
 .matrix-column.matrix-column-platform {
   background: #FEBF1D;
   border-color: transparent;
+  overflow: hidden;
 }
 
 .matrix-column-platform .matrix-body li::before {
