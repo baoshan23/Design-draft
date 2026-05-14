@@ -125,12 +125,6 @@ export default function GlobeVisualization() {
 
     const defs = svg.append('defs');
 
-    const landGrad = defs.append('linearGradient')
-      .attr('id', 'gcss-land-2d')
-      .attr('x1', '0%').attr('y1', '0%').attr('x2', '0%').attr('y2', '100%');
-    landGrad.append('stop').attr('offset', '0%').attr('stop-color', '#F3F4F6');
-    landGrad.append('stop').attr('offset', '100%').attr('stop-color', '#C7CED6');
-
     const glow = defs.append('filter').attr('id', 'gcss-glow-2d').attr('x', '-50%').attr('y', '-50%').attr('width', '200%').attr('height', '200%');
     glow.append('feGaussianBlur').attr('stdDeviation', '2.5').attr('result', 'coloredBlur');
     const merge = glow.append('feMerge');
@@ -145,16 +139,15 @@ export default function GlobeVisualization() {
       .attr('height', h)
       .attr('fill', '#FFFFFF');
 
-    // Filled country polygons — single shared white gradient fill,
-    // hairline stroke for shape definition.
+    // Filled country polygons — flat solid fill with a defined edge.
     root.selectAll('.country')
       .data(worldData.features)
       .enter().append('path')
       .attr('class', 'country')
       .attr('d', path as any)
-      .attr('fill', 'url(#gcss-land-2d)')
-      .attr('stroke', '#E5E7EB')
-      .attr('stroke-width', 0.5)
+      .attr('fill', '#F3F4F6')
+      .attr('stroke', '#CBD5E1')
+      .attr('stroke-width', 0.8)
       .attr('stroke-linejoin', 'round');
 
 
@@ -283,7 +276,7 @@ export default function GlobeVisualization() {
         const k = event.transform.k;
         markersGroup.selectAll('text').attr('font-size', (d: any) => (d.isOrigin ? 11 : 9) / k);
         markersGroup.selectAll('text').attr('stroke-width', 2 / k);
-        root.selectAll<SVGPathElement, unknown>('.country').attr('stroke-width', 0.5 / k);
+        root.selectAll<SVGPathElement, unknown>('.country').attr('stroke-width', 0.8 / k);
         arcsGroup.selectAll('.arc').attr('stroke-width', 1 / k);
       });
 
