@@ -1199,41 +1199,6 @@
   color: #FFFFFF;
 }
 
-/* Yellow-everywhere footer — text colors flipped to brand gold,
-   bigger brand logo. Overrides land last so they win over prior rules. */
-.footer-logo {
-  font-size: 1.7rem !important;
-  gap: 12px !important;
-  color: var(--primary) !important;
-}
-.footer-logo span {
-  color: var(--primary);
-}
-.footer-brand p,
-.footer-brand .footer-tagline,
-.footer-social-label,
-.footer-col h4,
-.footer h4,
-.footer-col a,
-.footer a,
-.footer-bottom,
-.footer-bottom-links a,
-.footer-back-top {
-  color: var(--primary) !important;
-}
-.footer-col a:hover,
-.footer a:hover,
-.footer-col a:focus-visible,
-.footer a:focus-visible,
-.footer-bottom-links a:hover,
-.footer-bottom-links a:focus-visible {
-  color: #FFD970 !important;
-}
-.footer-back-top:hover,
-.footer-back-top:focus-visible {
-  color: #FFD970 !important;
-}
-
 /* --- Scroll Animations --- */
 .animate-on-scroll {
   opacity: 0;
