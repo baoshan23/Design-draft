@@ -370,6 +370,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <p>{t('map.desc')}</p>
             </div>
           </ScrollAnimation>
+        </div>
+        <div className="map-fullbleed">
           <GlobeVisualization />
         </div>
       </section>

@@ -140,8 +140,8 @@ export default function GlobeVisualization() {
     const oceanGrad = defs.append('linearGradient')
       .attr('id', 'gcss-ocean-2d')
       .attr('x1', '0%').attr('y1', '0%').attr('x2', '0%').attr('y2', '100%');
-    oceanGrad.append('stop').attr('offset', '0%').attr('stop-color', '#FFFBF0');
-    oceanGrad.append('stop').attr('offset', '100%').attr('stop-color', '#F5EBC8');
+    oceanGrad.append('stop').attr('offset', '0%').attr('stop-color', '#F1F2F4');
+    oceanGrad.append('stop').attr('offset', '100%').attr('stop-color', '#F1F2F4');
 
     const countryGrad = defs.append('linearGradient')
       .attr('id', 'gcss-land-2d')
@@ -356,9 +356,9 @@ export default function GlobeVisualization() {
         position: 'relative',
         borderRadius: '16px',
         overflow: 'hidden',
-        background: 'linear-gradient(180deg, #FFFBF0 0%, #F5EBC8 100%)',
-        boxShadow: '0 0 40px rgba(254, 191, 29, 0.18), 0 8px 24px rgba(140, 95, 0, 0.08)',
-        border: '1px solid rgba(192, 127, 0, 0.18)',
+        background: '#F1F2F4',
+        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.06)',
+        border: '1px solid rgba(0, 0, 0, 0.06)',
       }}
     >
       {!worldData && isVisible && !loadError && (
