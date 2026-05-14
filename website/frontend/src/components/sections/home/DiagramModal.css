@@ -4,7 +4,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: transparent;
+    background: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -16,9 +16,6 @@
 .diagram-modal-content {
     position: relative;
     background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 20px;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12), 0 8px 24px rgba(0, 0, 0, 0.06);
     width: min(1000px, 100%);
     aspect-ratio: 16 / 9;
     max-height: calc(100vh - 48px);
@@ -46,16 +43,16 @@
 }
 
 .diagram-modal-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
     background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.12);
     color: #181818;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
     cursor: pointer;
     display: flex;
@@ -63,7 +60,7 @@
     justify-content: center;
     transition: all 0.2s ease;
     z-index: 10001;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .diagram-modal-close:hover {
