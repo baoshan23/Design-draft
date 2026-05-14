@@ -201,10 +201,6 @@ export default function ContactPage() {
                     <QrImage src="/images/QR/whatsapp.png" alt={t('contact.business.whatsapp')} />
                     <span>{t('contact.business.whatsapp')}</span>
                   </div>
-                  <div className="qr-item">
-                    <div className="qr-box"><QrPlaceholder /></div>
-                    <span>{t('contact.business.telegram')}</span>
-                  </div>
                 </div>
               </div>
 
@@ -217,11 +213,11 @@ export default function ContactPage() {
                 <p>{t('contact.tech.desc')}</p>
                 <div className="qr-row">
                   <div className="qr-item">
-                    <div className="qr-box"><QrPlaceholder /></div>
+                    <QrImage src="/images/QR/Wecom.png" alt={t('contact.tech.wecom')} />
                     <span>{t('contact.tech.wecom')}</span>
                   </div>
                   <div className="qr-item">
-                    <div className="qr-box"><QrPlaceholder /></div>
+                    <QrImage src="/images/QR/whatsapp.png" alt={t('contact.tech.whatsapp')} />
                     <span>{t('contact.tech.whatsapp')}</span>
                   </div>
                 </div>
