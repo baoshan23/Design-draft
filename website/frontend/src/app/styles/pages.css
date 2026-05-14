@@ -3433,9 +3433,9 @@ h3.matrix-header,
 }
 
 .testimonial-tab.active {
-  background: var(--gradient-primary);
+  background: linear-gradient(135deg, #FEBF1D 0%, #E6A817 100%);
   color: #1a1208;
-  box-shadow: 0 4px 12px rgba(254, 191, 29, 0.28);
+  box-shadow: 0 4px 12px rgba(254, 191, 29, 0.34);
 }
 
 .testimonial-tab:focus-visible {
@@ -3501,7 +3501,7 @@ h3.matrix-header,
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: var(--gradient-primary);
+  background: linear-gradient(135deg, #FEBF1D 0%, #E6A817 100%);
   display: flex;
   align-items: center;
   justify-content: center;
