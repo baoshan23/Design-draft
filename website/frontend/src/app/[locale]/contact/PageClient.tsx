@@ -235,7 +235,7 @@ export default function ContactPage() {
                 <h3>{t('contact.quick.title')}</h3>
                 <p>{t('contact.quick.desc')}</p>
                 <div className="contact-quick-actions">
-                  <a href="mailto:support@gcss.hk" className="btn btn-primary btn-sm contact-quick-btn">
+                  <a href="mailto:jason.huang@gcss.hk" className="btn btn-primary btn-sm contact-quick-btn">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
                     <span>{t('contact.quick.email')}</span>
                   </a>
@@ -281,7 +281,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4>{t('contact.form.email')}</h4>
-                    <p>support@gcss.hk<br />sales@gcss.hk<br />jason.huang@gcss.hk</p>
+                    <p>max@gcss.hk</p>
                   </div>
                 </div>
 
