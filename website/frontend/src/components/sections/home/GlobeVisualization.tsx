@@ -125,11 +125,11 @@ export default function GlobeVisualization() {
 
     const defs = svg.append('defs');
 
-    const dotGrad = defs.append('linearGradient')
-      .attr('id', 'gcss-dots-2d')
+    const landGrad = defs.append('linearGradient')
+      .attr('id', 'gcss-land-2d')
       .attr('x1', '0%').attr('y1', '0%').attr('x2', '0%').attr('y2', '100%');
-    dotGrad.append('stop').attr('offset', '0%').attr('stop-color', '#F3F4F6');
-    dotGrad.append('stop').attr('offset', '100%').attr('stop-color', '#C7CED6');
+    landGrad.append('stop').attr('offset', '0%').attr('stop-color', '#F3F4F6');
+    landGrad.append('stop').attr('offset', '100%').attr('stop-color', '#C7CED6');
 
     const glow = defs.append('filter').attr('id', 'gcss-glow-2d').attr('x', '-50%').attr('y', '-50%').attr('width', '200%').attr('height', '200%');
     glow.append('feGaussianBlur').attr('stdDeviation', '2.5').attr('result', 'coloredBlur');
@@ -145,42 +145,17 @@ export default function GlobeVisualization() {
       .attr('height', h)
       .attr('fill', '#FFFFFF');
 
-    // Build dot-matrix world map: rasterize country polygons to an
-    // offscreen canvas, then sample a grid and emit a small dot for any
-    // grid point that lands on land. Cheaper than calling geoContains
-    // for every grid point.
-    const dotSpacing = 7;
-    const dotRadius = 1.1;
-    const dotColor = 'url(#gcss-dots-2d)';
-
-    const offscreen = document.createElement('canvas');
-    offscreen.width = w;
-    offscreen.height = h;
-    const ctx = offscreen.getContext('2d');
-    if (ctx) {
-      ctx.fillStyle = '#000';
-      ctx.beginPath();
-      const canvasPath = d3.geoPath(projection, ctx as any);
-      canvasPath(worldData as any);
-      ctx.fill();
-      const { data } = ctx.getImageData(0, 0, w, h);
-
-      const dotsGroup = root.append('g').attr('class', 'dots');
-      const positions: Array<[number, number]> = [];
-      for (let y = dotSpacing / 2; y < h; y += dotSpacing) {
-        for (let x = dotSpacing / 2; x < w; x += dotSpacing) {
-          const idx = (Math.floor(y) * w + Math.floor(x)) * 4 + 3;
-          if (data[idx] > 80) positions.push([x, y]);
-        }
-      }
-      dotsGroup.selectAll('circle')
-        .data(positions)
-        .enter().append('circle')
-        .attr('cx', (d) => d[0])
-        .attr('cy', (d) => d[1])
-        .attr('r', dotRadius)
-        .attr('fill', dotColor);
-    }
+    // Filled country polygons — single shared white gradient fill,
+    // hairline stroke for shape definition.
+    root.selectAll('.country')
+      .data(worldData.features)
+      .enter().append('path')
+      .attr('class', 'country')
+      .attr('d', path as any)
+      .attr('fill', 'url(#gcss-land-2d)')
+      .attr('stroke', '#E5E7EB')
+      .attr('stroke-width', 0.5)
+      .attr('stroke-linejoin', 'round');
 
 
     // Arcs — densify each route along the great circle so d3.geoPath
@@ -308,6 +283,7 @@ export default function GlobeVisualization() {
         const k = event.transform.k;
         markersGroup.selectAll('text').attr('font-size', (d: any) => (d.isOrigin ? 11 : 9) / k);
         markersGroup.selectAll('text').attr('stroke-width', 2 / k);
+        root.selectAll<SVGPathElement, unknown>('.country').attr('stroke-width', 0.5 / k);
         arcsGroup.selectAll('.arc').attr('stroke-width', 1 / k);
       });
 
