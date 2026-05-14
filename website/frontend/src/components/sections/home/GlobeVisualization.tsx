@@ -226,13 +226,13 @@ export default function GlobeVisualization() {
     markers.append('circle')
       .attr('class', 'ripple')
       .attr('r', (d: any) => d.isOrigin ? 6 : 3)
-      .attr('fill', (d: any) => d.isOrigin ? '#6B7280' : '#9CA3AF')
+      .attr('fill', (d: any) => d.isOrigin ? '#FEBF1D' : '#9CA3AF')
       .attr('fill-opacity', 0.35);
 
     markers.append('circle')
       .attr('class', 'dot')
       .attr('r', (d: any) => d.isOrigin ? 4 : 2.2)
-      .attr('fill', (d: any) => d.isOrigin ? '#4B5563' : '#6B7280')
+      .attr('fill', (d: any) => d.isOrigin ? '#FEBF1D' : '#6B7280')
       .attr('stroke', (d: any) => d.isOrigin ? '#ffffff' : 'none')
       .attr('stroke-width', 1);
 
