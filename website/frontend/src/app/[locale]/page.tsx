@@ -418,7 +418,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   </div>
                   <div className="matrix-column-figure" aria-hidden="true">
                     <Image
-                      src="/images/platform-dashboard.png"
+                      src="/images/platform-admin-list.png"
                       alt=""
                       width={1368}
                       height={651}
