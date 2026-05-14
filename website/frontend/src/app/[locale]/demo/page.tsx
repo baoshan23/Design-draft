@@ -30,7 +30,7 @@ const CPO_PANEL_CREDS = {
 
 const B2B_DEMO_QR_URLS = {
   mobile: 'https://app.gcss.hk/',
-  web: 'https://app.gcss.hk/admin',
+  web: 'https://app.gcss.hk/',
 };
 
 const B2B_DEMO_CREDS = {
