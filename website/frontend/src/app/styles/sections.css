@@ -2591,7 +2591,6 @@ html {
   border: 1px solid rgba(192, 127, 0, 0.14);
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 8px 28px rgba(140, 95, 0, 0.06);
   isolation: isolate;
 }
 
