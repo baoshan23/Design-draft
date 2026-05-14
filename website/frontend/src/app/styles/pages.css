@@ -1295,16 +1295,21 @@
 }
 
 .matrix-row-top .matrix-column {
-  padding: 14px 32px 12px;
+  padding: 12px 28px 10px;
 }
 
 .matrix-row-top .matrix-column .matrix-header {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
+  font-size: 18px;
+  white-space: nowrap;
 }
 
 .matrix-row-top .matrix-body li {
-  padding-top: 6px;
-  padding-bottom: 6px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  white-space: nowrap;
 }
 
 .matrix-column-app {
@@ -1315,7 +1320,7 @@
 }
 
 .matrix-column-app .matrix-column-text {
-  flex: 1 1 0;
+  flex: 1 1 200px;
   min-width: 0;
   padding-right: 16px;
 }
@@ -3491,12 +3496,12 @@ h3.matrix-header,
 }
 
 .testimonial-quote-mark {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 4rem;
-  line-height: 0.8;
-  color: var(--primary-text);
-  opacity: 0.55;
-  margin-bottom: -8px;
+  width: 56px;
+  height: auto;
+  display: block;
+  margin-bottom: 4px;
+  user-select: none;
+  pointer-events: none;
 }
 
 .testimonial-feature-quote {
@@ -4550,7 +4555,7 @@ h3.matrix-header,
   }
 
   .testimonial-quote-mark {
-    font-size: 3rem;
+    width: 42px;
   }
 
   .testimonial-feature-video {
