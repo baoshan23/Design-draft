@@ -267,7 +267,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4>Phone</h4>
-                    <p>+852 XXXX XXXX<br />{t('contact.form.phone.hours')}</p>
+                    <p>+852 9801 3154<br />{t('contact.form.phone.hours')}</p>
                   </div>
                 </div>
 
