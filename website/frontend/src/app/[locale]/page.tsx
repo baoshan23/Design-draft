@@ -290,16 +290,27 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div className="matrix-section">
             <div className="matrix-row matrix-row-top">
               <ScrollAnimation>
-                <div className="matrix-column">
-                  <h3 className="matrix-header">{t('matrix.app.title')}</h3>
-                  <div className="matrix-body">
-                    <ul>
-                      <li>{t('matrix.app.li1')}</li>
-                      <li>{t('matrix.app.li2')}</li>
-                      <li>{t('matrix.app.li3')}</li>
-                      <li>{t('matrix.app.li4')}</li>
-                      <li>{t('matrix.app.li5')}</li>
-                    </ul>
+                <div className="matrix-column matrix-column-app">
+                  <div className="matrix-column-text">
+                    <h3 className="matrix-header">{t('matrix.app.title')}</h3>
+                    <div className="matrix-body">
+                      <ul>
+                        <li>{t('matrix.app.li1')}</li>
+                        <li>{t('matrix.app.li2')}</li>
+                        <li>{t('matrix.app.li3')}</li>
+                        <li>{t('matrix.app.li4')}</li>
+                        <li>{t('matrix.app.li5')}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="matrix-column-figure" aria-hidden="true">
+                    <Image
+                      src="/images/app-h5-mockup.png"
+                      alt=""
+                      width={2736}
+                      height={1302}
+                      sizes="(max-width: 900px) 100vw, 340px"
+                    />
                   </div>
                 </div>
               </ScrollAnimation>
