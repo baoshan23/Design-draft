@@ -445,7 +445,8 @@ body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
   flex-shrink: 0;
   background: #ffffff;
   color: #181818;
-  transition: background 180ms ease;
+  border: 1px solid #e5e5e5;
+  transition: background 180ms ease, border-color 180ms ease;
 }
 
 .nav-dropdown-menu .dropdown-icon svg {
