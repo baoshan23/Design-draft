@@ -65,7 +65,7 @@ export default function ContactPage() {
     }, [src]);
 
     return (
-      <div className="qr-box">
+      <div className="qr-box glass-card">
         {!loaded && !failed && <QrPlaceholder />}
         {/* hide the img element visually on error so the alt text doesn't show as broken image */}
         <img

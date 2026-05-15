@@ -1708,7 +1708,6 @@
 .qr-box {
   width: 100px;
   height: 100px;
-  background: linear-gradient(135deg, rgba(230, 168, 23, 0.03), rgba(245, 183, 49, 0.03));
   border-radius: 16px;
   display: flex;
   align-items: center;
@@ -1716,6 +1715,12 @@
   margin-bottom: 12px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
+}
+
+.qr-box.glass-card {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
 }
 
 .qr-box:hover {

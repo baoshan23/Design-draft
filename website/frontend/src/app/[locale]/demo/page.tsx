@@ -65,7 +65,7 @@ async function QrFrame({ label, value }: { label: string; value: string }) {
   });
   return (
     <div className="demo-qr">
-      <div className="demo-qr-frame">
+      <div className="demo-qr-frame glass-card">
         <div className="demo-qr-corners">
           <span /><span /><span /><span />
         </div>
