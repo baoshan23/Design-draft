@@ -141,6 +141,7 @@ export default function Header() {
                   setOpenDropdown((prev) => (prev === 'product' ? null : prev));
                 }
               }}
+              onMouseLeave={() => setOpenDropdown((prev) => (prev === 'product' ? null : prev))}
             >
               <button
                 type="button"
@@ -199,6 +200,7 @@ export default function Header() {
                   setOpenDropdown((prev) => (prev === 'community' ? null : prev));
                 }
               }}
+              onMouseLeave={() => setOpenDropdown((prev) => (prev === 'community' ? null : prev))}
             >
               <button
                 type="button"
