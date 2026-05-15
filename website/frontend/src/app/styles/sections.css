@@ -3669,13 +3669,20 @@ html {
   top: var(--header-height);
   z-index: 10;
   border-bottom: 1px solid var(--border-subtle);
-  padding-top: 18px;
-  padding-bottom: 18px;
+  padding-top: 28px;
+  padding-bottom: 28px;
+  vertical-align: middle;
+  line-height: 1.3;
 }
 
 .comparison-table thead th:first-child {
   background: #FEBF1D;
   color: #111418;
+}
+
+.comparison-plan-name,
+.comparison-plan-price {
+  line-height: 1.3;
 }
 
 .comparison-table td:first-child,
