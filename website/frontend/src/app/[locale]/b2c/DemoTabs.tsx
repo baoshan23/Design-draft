@@ -5,6 +5,8 @@ import { useTranslations } from 'next-intl';
 type DemoTabsProps = {
   webAppQr: string;
   userPortalQr: string;
+  webAppUrl: string;
+  userPortalUrl: string;
   adminUrl: string;
   adminAccount: string;
   adminPassword: string;
@@ -13,6 +15,8 @@ type DemoTabsProps = {
 export default function DemoTabs({
   webAppQr,
   userPortalQr,
+  webAppUrl,
+  userPortalUrl,
   adminUrl,
   adminAccount,
   adminPassword,
@@ -58,13 +62,17 @@ export default function DemoTabs({
       {/* Bottom row: QR codes */}
       <div className="b2c-demo-card">
         <h4 className="b2c-demo-card-title">{t('demo.page.qrH5')}</h4>
-        <div className="b2b-demo-qr glass-card" dangerouslySetInnerHTML={{ __html: webAppQr }} />
+        <a className="b2b-demo-qr-block" href={webAppUrl} target="_blank" rel="noopener noreferrer" aria-label={t('demo.page.qrMobile')}>
+          <div className="b2b-demo-qr glass-card" dangerouslySetInnerHTML={{ __html: webAppQr }} />
+        </a>
         <p className="b2c-demo-card-foot">{t('demo.page.qrMobile')}</p>
       </div>
 
       <div className="b2c-demo-card">
         <h4 className="b2c-demo-card-title">{t('demo.page.qrUser.title')}</h4>
-        <div className="b2b-demo-qr glass-card" dangerouslySetInnerHTML={{ __html: userPortalQr }} />
+        <a className="b2b-demo-qr-block" href={userPortalUrl} target="_blank" rel="noopener noreferrer" aria-label={t('demo.page.qrUser.title')}>
+          <div className="b2b-demo-qr glass-card" dangerouslySetInnerHTML={{ __html: userPortalQr }} />
+        </a>
         <p className="b2c-demo-card-foot">{t('demo.page.h5.desc')}</p>
       </div>
 

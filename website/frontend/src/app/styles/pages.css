@@ -3263,6 +3263,20 @@
 }
 
 /* --- Responsive --- */
+
+/* Narrow desktop: compress nav item padding so 7 links don't overflow at 1025–1200px */
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .nav a,
+  .nav-dropdown-trigger {
+    padding: 8px 10px;
+    font-size: 0.82rem;
+  }
+
+  .header-actions {
+    gap: 8px;
+  }
+}
+
 @media (max-width: 1024px) {
   .grid-3 {
     grid-template-columns: repeat(2, 1fr);
@@ -3572,6 +3586,16 @@
 
   .nav.mobile-open .mobile-auth-link--signup:hover {
     background: var(--primary-dim);
+  }
+
+  /* Mobile nav footer — sticky Buy Now CTA */
+  .mobile-nav-footer {
+    display: flex;
+    padding: 16px 20px 24px;
+    border-top: 1px solid var(--border-subtle);
+    background: var(--black);
+    position: sticky;
+    bottom: 0;
   }
 }
 
@@ -10594,52 +10618,103 @@ details.admin-legacy-group>.admin-settings-group:last-child {
 }
 
 @media (max-width: 900px) {
+  /* Stack to single column; summary floats above form via order */
   .buy-layout {
     grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
   }
 
-  /* Always-floating purchase summary on mobile — pinned to the bottom
-     of the viewport so users never lose sight of what they're paying. */
+  /* Summary shown first — above the form — so price is always visible */
   .buy-summary {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 40;
-    margin: 0;
-    border-radius: 18px 18px 0 0;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
-    max-height: 58vh;
-    overflow-y: auto;
-    padding: 14px 20px;
-    padding-bottom: calc(18px + env(safe-area-inset-bottom));
-    box-shadow: 0 -14px 40px rgba(0, 0, 0, 0.4);
-    background: color-mix(in srgb, var(--dark-card) 94%, transparent);
-    -webkit-backdrop-filter: saturate(1.2) blur(12px);
-    backdrop-filter: saturate(1.2) blur(12px);
+    order: -1;
+    position: static;
+    width: 100%;
+    max-height: none;
+    overflow-y: visible;
+    border-radius: var(--radius-lg);
+    margin: 0 0 24px;
+    padding: 20px;
+    box-shadow: var(--shadow-md);
+    background: var(--dark-card);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
-  /* Grabber affordance at the top of the floating summary */
+  /* Remove desktop sticky behaviour */
   .buy-summary::before {
-    content: "";
-    display: block;
-    width: 44px;
-    height: 4px;
-    border-radius: 2px;
-    background: var(--border-light);
-    margin: 0 auto 10px;
+    display: none;
   }
 
-  /* Reserve space below the form so the floating summary never hides
-     the last input or the terms / CTA area */
   .buy-main {
-    padding-bottom: 62vh;
+    padding-bottom: 0;
+    order: 0;
   }
 
   .buy-billing-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ── Buy page small-phone fixes (≤640px) ────────────────────────── */
+@media (max-width: 640px) {
+  /* Compress heading typography */
+  .buy-title {
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+  }
+
+  .buy-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+
+  /* Plan cards: force single column — minmax(260px) overflows at 375px */
+  .buy-plan-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Option rows: stack label above control instead of side-by-side */
+  .buy-option-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  /* Billing / term toggle: scrollable pill row so 6 buttons don't clip */
+  .buy-option-toggle {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-radius: var(--radius);
+    justify-content: flex-start;
+  }
+
+  .buy-option-toggle::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Charger input: full width on phones */
+  .buy-option-input {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Tighter summary padding on small phones */
+  .buy-summary {
+    padding: 16px;
+  }
+
+  /* Stack success page actions vertically */
+  .buy-success-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .buy-success-card {
+    margin: 40px auto;
+    padding: 32px 20px;
   }
 }
 

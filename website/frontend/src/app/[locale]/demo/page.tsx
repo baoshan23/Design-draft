@@ -261,6 +261,8 @@ export default async function DemoPage({ params }: { params: Promise<{ locale: s
               <DemoTabs
                 webAppQr={webAppQr}
                 userPortalQr={userPortalQr}
+                webAppUrl={QR_TARGETS.webApp}
+                userPortalUrl="https://www.v3g.gcss.hk/user/"
                 adminUrl={CPO_PANEL_URL}
                 adminAccount={CPO_PANEL_CREDS.account}
                 adminPassword={CPO_PANEL_CREDS.password}
@@ -313,7 +315,7 @@ export default async function DemoPage({ params }: { params: Promise<{ locale: s
                   <div className="b2b-demo-card-creds-label">{t('b2b.demo.demoAccount')}</div>
                   <div className="b2b-demo-field"><span>{t('b2b.demo.account')}:</span><code>{B2B_DEMO_CREDS.account}</code></div>
                   <div className="b2b-demo-field"><span>{t('b2b.demo.password')}:</span><code>{B2B_DEMO_CREDS.pass}</code></div>
-                  <button type="button" className="btn btn-secondary b2b-demo-launch">{t('b2b.demo.launch')}</button>
+                  <a href="https://admin.demo.gcss.hk/" target="_blank" rel="noopener noreferrer" className="btn btn-secondary b2b-demo-launch">{t('b2b.demo.launch')}</a>
                 </div>
               </div>
             </ScrollAnimation>

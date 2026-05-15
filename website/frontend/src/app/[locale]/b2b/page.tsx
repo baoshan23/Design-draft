@@ -451,7 +451,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                   <div className="b2b-demo-card-creds-label">{t('b2b.demo.demoAccount')}</div>
                   <div className="b2b-demo-field"><span>{t('b2b.demo.account')}:</span><code>{DEMO_CREDS.admin.account}</code></div>
                   <div className="b2b-demo-field"><span>{t('b2b.demo.password')}:</span><code>{DEMO_CREDS.admin.pass}</code></div>
-                  <button type="button" className="btn btn-secondary b2b-demo-launch">{t('b2b.demo.launch')}</button>
+                  <a href="https://admin.demo.gcss.hk/" target="_blank" rel="noopener noreferrer" className="btn btn-secondary b2b-demo-launch">{t('b2b.demo.launch')}</a>
                 </div>
               </div>
             </ScrollAnimation>

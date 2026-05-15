@@ -121,14 +121,16 @@ export default function Header() {
           {mobileOpen && <div className="mobile-nav-backdrop" onClick={closeMenu} aria-hidden="true" />}
 
           <div className="nav-links">
-            <div className="mobile-auth-row">
-              <Link href="/login" className="mobile-auth-link mobile-auth-link--login" onClick={closeMenu}>
-                {t('login')}
-              </Link>
-              <Link href="/register" className="mobile-auth-link mobile-auth-link--signup" onClick={closeMenu}>
-                {t('signup')}
-              </Link>
-            </div>
+            {!user && (
+              <div className="mobile-auth-row">
+                <Link href="/login" className="mobile-auth-link mobile-auth-link--login" onClick={closeMenu}>
+                  {t('login')}
+                </Link>
+                <Link href="/register" className="mobile-auth-link mobile-auth-link--signup" onClick={closeMenu}>
+                  {t('signup')}
+                </Link>
+              </div>
+            )}
 
             <Link href="/" className={isActive('/') ? 'active' : ''} onClick={closeMenu}>
               {t('home')}
@@ -260,6 +262,14 @@ export default function Header() {
               {t('contact')}
             </Link>
           </div>
+
+          {mobileOpen && (
+            <div className="mobile-nav-footer">
+              <Link href="/buy" className="btn btn-primary btn-full" onClick={closeMenu}>
+                {t('buyNow')}
+              </Link>
+            </div>
+          )}
         </nav>
 
         <div className="header-actions">
@@ -310,7 +320,9 @@ export default function Header() {
             <Link href="/login" className="btn-login">{t('login')}</Link>
           )}
 
-          <SettingsPopover />
+          <div style={mobileOpen ? { pointerEvents: 'none', opacity: 0.4 } : undefined}>
+            <SettingsPopover />
+          </div>
         </div>
 
         <button
