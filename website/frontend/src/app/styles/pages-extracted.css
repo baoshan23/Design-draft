@@ -2430,7 +2430,7 @@ html[data-theme="dark"] .hero.hero-centered {
    (sidebar + Device Status cards + chart) visible while cropping
    the bottom rows out. */
 .hero-dashboard-mock {
-  width: min(1080px, 92vw);
+  width: min(972px, calc(100% - 32px));
   margin: 0 auto;
   flex: 1 1 auto;
   min-height: 0;
@@ -2474,10 +2474,14 @@ html[data-theme="dark"] .hero.hero-centered {
 @media (max-width: 720px) {
   .hero.hero-centered {
     min-height: auto;
-    padding: 56px 0 40px;
+    padding: 80px 12px 32px;
+  }
+  .hero.hero-centered .hero-centered-inner {
+    padding: 40px 20px 0;
+    border-radius: 14px;
   }
   .hero-dashboard-mock {
-    width: 100%;
+    width: calc(100% - 8px);
     max-height: 320px;
     flex: 0 0 auto;
   }
@@ -2493,16 +2497,17 @@ html[data-theme="dark"] .hero.hero-centered {
    includes the 72px header buffer (the header is `position: fixed`). */
 @media (max-height: 820px) and (min-width: 721px) {
   .hero.hero-centered {
-    padding: calc(72px + 8px) 0 16px;
+    padding: calc(72px + 16px) clamp(16px, 3vw, 32px) 16px;
+  }
+  .hero.hero-centered .hero-centered-inner {
+    padding: clamp(28px, 4vh, 56px) clamp(24px, 3vw, 48px) 0;
+    gap: clamp(10px, 1.4vh, 18px);
   }
   .hero.hero-centered .hero-title {
     font-size: clamp(1.5rem, 3.2vw, 2.25rem);
   }
   .hero.hero-centered .hero-desc {
     margin-bottom: 14px;
-  }
-  .hero.hero-centered .hero-centered-inner {
-    gap: clamp(10px, 1.4vh, 18px);
   }
 }
 
