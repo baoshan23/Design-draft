@@ -145,8 +145,8 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #ffffff;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+  background: #FEBF1D;
+  box-shadow: 0 0 12px rgba(254, 191, 29, 0.7);
   animation: demo-pulse 1.8s ease-in-out infinite;
 }
 
