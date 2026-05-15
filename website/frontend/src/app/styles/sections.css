@@ -3367,10 +3367,12 @@ html {
   background: none !important;
 }
 
-/* Soft white gradient ring around every pricing card — full white at
-   the top, fading to transparent by the lower third. Drawn via a
-   ::before pseudo with a gradient background masked into a 1px ring,
-   so it follows the rounded corners cleanly. */
+/* Soft white top-edge highlight on every pricing card — solid 1px
+   white line along the top edge, fading horizontally toward the
+   sides. Drawn via a ::before pseudo positioned at the top edge
+   only; no full-card ring (the prior masked-ring approach caused
+   visual misalignment against the highlighted card's top-fade
+   background). */
 .pricing-card.glass-card,
 .pricing-card.glass-card.popular,
 .pricing-card.glass-card.featured {
@@ -3382,19 +3384,18 @@ html {
 .pricing-card.glass-card.featured::before {
   content: '' !important;
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 60%);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
   pointer-events: none;
   z-index: 0;
 }
 
-/* Keep the ribbon pill stacked above the gradient ring so the top
-   1px of the ribbon isn't clipped by the white-fade border. */
+/* Keep the ribbon pill stacked above the top-edge highlight. */
 .pricing-card-ribbon,
 .pricing-card-ribbon--featured {
   z-index: 2;
