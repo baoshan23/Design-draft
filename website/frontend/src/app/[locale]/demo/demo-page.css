@@ -384,9 +384,9 @@
 }
 
 .demo-edition-card-icon-gold {
-  background: linear-gradient(135deg, #C07F00 0%, #FFD95A 100%);
+  background: #FEBF1D;
   color: #1a1210;
-  box-shadow: 0 0 20px rgba(255, 217, 90, 0.35);
+  box-shadow: 0 0 20px rgba(254, 191, 29, 0.35);
 }
 
 .demo-edition-card-icon-indigo {
