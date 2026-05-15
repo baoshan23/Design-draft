@@ -36,16 +36,16 @@
 .diagram-modal-title {
     margin: 0;
     font-size: 22px;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--text-primary, #181818);
     letter-spacing: -0.3px;
-    padding-right: 56px;
+    text-align: center;
 }
 
 .diagram-modal-close {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 80px;
+    right: 32px;
     background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.12);
     color: #181818;
