@@ -3366,9 +3366,9 @@ html {
   padding: 5px;
   margin: 0 auto 28px;
   border-radius: 999px;
-  background: rgba(254, 191, 29, 0.10);
-  border: 1px solid var(--border-subtle);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+  background: #F1F2F4;
+  border: 0;
+  box-shadow: none;
 }
 
 .pricing-tabs {
