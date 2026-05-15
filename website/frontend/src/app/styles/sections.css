@@ -3679,9 +3679,11 @@ html {
   line-height: 1.15;
 }
 
-.comparison-table thead th:first-child {
-  background: #FEBF1D;
-  color: #111418;
+.comparison-table thead th:first-child,
+.comparison-table thead tr th:first-child {
+  background: #FEBF1D !important;
+  background-color: #FEBF1D !important;
+  color: #111418 !important;
 }
 
 /* Extra breathing room between the yellow thead and the first data
