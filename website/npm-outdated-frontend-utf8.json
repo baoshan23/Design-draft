@@ -1,0 +1,80 @@
+﻿{
+  "@chenglou/pretext": {
+    "current": "0.0.4",
+    "wanted": "0.0.4",
+    "latest": "0.0.7",
+    "dependent": "frontend",
+    "location": "C:\\Users\\vipar\\OneDrive\\Desktop\\GCSS\\Gcss_website\\website\\frontend\\node_modules\\@chenglou\\pretext"
+  },
+  "@react-three/fiber": {
+    "current": "9.5.0",
+    "wanted": "9.6.1",
+    "latest": "9.6.1",
+    "dependent": "frontend",
+    "location": "C:\\Users\\vipar\\OneDrive\\Desktop\\GCSS\\Gcss_website\\website\\frontend\\node_modules\\@react-three\\fiber"
+  },
+  "@types/node": {
+    "current": "25.5.2",
+    "wanted": "25.8.0",
+    "latest": "25.8.0",
+    "dependent": "frontend",
+    "location": "C:\\Users\\vipar\\OneDrive\\Desktop\\GCSS\\Gcss_website\\website\\frontend\\node_modules\\@types\\node"
+  },
+  "@types/three": {
+    "current": "0.183.1",
+    "wanted": "0.183.1",
+    "latest": "0.184.1",
+    "dependent": "frontend",
+    "location": "C:\\Users\\vipar\\OneDrive\\Desktop\\GCSS\\Gcss_website\\website\\frontend\\node_modules\\@types\\three"
+  },
+  "lucide-react": {
+    "current": "1.8.0",
+    "wanted": "1.16.0",
+    "latest": "1.16.0",
+    "dependent": "frontend",
+    "location": "C:\\Users\\vipar\\OneDrive\\Desktop\\GCSS\\Gcss_website\\website\\frontend\\node_modules\\lucide-react"
+  },
+  "next": {
+    "current": "16.2.3",
+    "wanted": "16.2.6",
+    "latest": "16.2.6",
+    "dependent": "frontend",
+    "location": "C:\\Users\\vipar\\OneDrive\\Desktop\\GCSS\\Gcss_website\\website\\frontend\\node_modules\\next"
+  },
+  "next-intl": {
+    "current": "4.9.0",
+    "wanted": "4.12.0",
+    "latest": "4.12.0",
+    "dependent": "frontend",
+    "location": "C:\\Users\\vipar\\OneDrive\\Desktop\\GCSS\\Gcss_website\\website\\frontend\\node_modules\\next-intl"
+  },
+  "react": {
+    "current": "19.2.5",
+    "wanted": "19.2.6",
+    "latest": "19.2.6",
+    "dependent": "frontend",
+    "location": "C:\\Users\\vipar\\OneDrive\\Desktop\\GCSS\\Gcss_website\\website\\frontend\\node_modules\\react"
+  },
+  "react-dom": {
+    "current": "19.2.5",
+    "wanted": "19.2.6",
+    "latest": "19.2.6",
+    "dependent": "frontend",
+    "location": "C:\\Users\\vipar\\OneDrive\\Desktop\\GCSS\\Gcss_website\\website\\frontend\\node_modules\\react-dom"
+  },
+  "three": {
+    "current": "0.183.2",
+    "wanted": "0.183.2",
+    "latest": "0.184.0",
+    "dependent": "frontend",
+    "location": "C:\\Users\\vipar\\OneDrive\\Desktop\\GCSS\\Gcss_website\\website\\frontend\\node_modules\\three"
+  },
+  "typescript": {
+    "current": "5.9.3",
+    "wanted": "5.9.3",
+    "latest": "6.0.3",
+    "dependent": "frontend",
+    "location": "C:\\Users\\vipar\\OneDrive\\Desktop\\GCSS\\Gcss_website\\website\\frontend\\node_modules\\typescript"
+  }
+}
+
