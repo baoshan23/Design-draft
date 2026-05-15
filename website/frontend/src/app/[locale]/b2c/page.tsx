@@ -18,7 +18,6 @@ const QR_OPTS = {
 };
 import LanguageRequestForm from './LanguageRequestForm';
 import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
-import HeroShotStack from '@/components/sections/b2c/HeroShotStack';
 import AppSlideshow from './AppSlideshow';
 
 export const metadata = {
@@ -72,7 +71,17 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
               </div>
             </div>
 
-            <HeroShotStack />
+            <div className="hero-shot">
+              <Image
+                src="/images/b2c-hero-monitor.png"
+                alt={t('product.title2')}
+                width={1200}
+                height={900}
+                priority
+                sizes="(max-width: 960px) 100vw, 560px"
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+              />
+            </div>
           </div>
 
           {/* Feature Grid */}
