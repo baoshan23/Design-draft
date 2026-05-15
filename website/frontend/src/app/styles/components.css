@@ -142,6 +142,9 @@ body:has(.hero-with-video) .header.scrolled {
        weight bumped 700 → 800 for a stronger "selected" emphasis.
    (b) .btn-buy CTA — gold bg → white bg, text → gold (brand accent
        on the inverted pill). */
+body:has(.hero-with-video) .header .logo span {
+  color: #ffffff;
+}
 body:has(.hero-with-video) .header .nav a.active,
 body:has(.hero-with-video) .header .nav-dropdown-trigger.active {
   color: #ffffff;
