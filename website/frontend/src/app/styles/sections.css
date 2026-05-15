@@ -3547,7 +3547,7 @@ html {
 }
 
 .sub-nav a:hover {
-  color: var(--text-primary);
+  color: var(--primary) !important;
   background-image: none !important;
 }
 
