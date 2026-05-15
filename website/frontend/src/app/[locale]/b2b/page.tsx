@@ -98,7 +98,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                 <span>{t('b2b.label')}</span>
               </div>
               <h1 className="hero-title">
-                {t('b2b.hero.title')}<span className="hero-title-tag gradient-text-animated">(B2B2C)</span>
+                {t('b2b.hero.title')}<span className="hero-title-tag">(B2B2C)</span>
               </h1>
               <p className="hero-desc">{t('b2b.hero.desc')}</p>
               <div className="hero-buttons">
