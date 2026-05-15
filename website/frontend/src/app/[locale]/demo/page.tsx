@@ -244,10 +244,10 @@ export default async function DemoPage({ params }: { params: Promise<{ locale: s
 
           <div className="demo-edition-grid">
             <ScrollAnimation>
-              <PlanCard planKey="webplat" hasLiveDemo iconColor="indigo" />
+              <PlanCard planKey="webplat" hasLiveDemo iconColor="gold" />
             </ScrollAnimation>
             <ScrollAnimation style={{ transitionDelay: '0.08s' }}>
-              <PlanCard planKey="appplat" hasLiveDemo iconColor="indigo" />
+              <PlanCard planKey="appplat" hasLiveDemo iconColor="gold" />
             </ScrollAnimation>
           </div>
 
