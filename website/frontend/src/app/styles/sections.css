@@ -3543,10 +3543,12 @@ html {
   white-space: nowrap;
   border-bottom: 2px solid transparent;
   transition: all var(--transition);
+  background-image: none !important;
 }
 
 .sub-nav a:hover {
   color: var(--text-primary);
+  background-image: none !important;
 }
 
 .sub-nav a.active {
