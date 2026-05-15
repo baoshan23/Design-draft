@@ -3108,13 +3108,24 @@ html {
   font-size: 0.85rem;
   color: var(--text-secondary);
   display: flex;
-  align-items: flex-start;
-  gap: 8px;
+  align-items: center;
+  gap: 10px;
 }
 
+/* Circular yellow check badge — filled brand-primary disc with a
+   dark check mark centered inside. Replaces the plain ✓ glyph. */
 .pricing-card .plan-features li .check {
-  color: var(--primary);
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #1a1a1a;
+  font-size: 0.65rem;
+  font-weight: 900;
+  line-height: 1;
   flex-shrink: 0;
 }
 
@@ -3338,6 +3349,21 @@ html {
   padding-top: 40px;
 }
 
+/* Highlighted card (popular / featured): always-yellow 2px border.
+   Higher specificity than the unified .pricing-card.glass-card rule
+   so it wins without fighting !important. */
+.pricing-card.glass-card.popular,
+.pricing-card.glass-card.featured {
+  border-color: var(--primary) !important;
+  border-width: 2px !important;
+}
+
+.pricing-card.glass-card.popular:hover,
+.pricing-card.glass-card.featured:hover {
+  border-color: var(--primary) !important;
+  border-width: 2px !important;
+}
+
 .pricing-card-ribbon,
 .pricing-card-ribbon--featured {
   position: absolute;
@@ -3489,11 +3515,11 @@ html {
 }
 
 .pricing-cards--2col .pricing-card .plan-features {
-  margin-top: 0;
+  margin-top: auto;
   margin-bottom: 0;
   padding-top: 20px;
   border-top: 1px solid var(--border-subtle);
-  flex-grow: 1;
+  flex-grow: 0;
 }
 
 /* Add-on cards — icon + body row layout (was a flat label/price stack) */
