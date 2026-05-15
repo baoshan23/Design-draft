@@ -2341,11 +2341,11 @@ body:has(.product-hero) .glass-card [class*="icon"] {
 }
 
 .hero.hero-centered {
-  background-color: #f4f1ea;
-  background-image:
-    radial-gradient(ellipse 120% 80% at 50% 0%, rgba(254, 191, 29, 0.10) 0%, rgba(254, 191, 29, 0) 60%),
-    radial-gradient(ellipse 80% 60% at 100% 100%, rgba(150, 200, 180, 0.08) 0%, rgba(150, 200, 180, 0) 70%),
-    linear-gradient(180deg, #f6f2e9 0%, #efece4 60%, #ebe7dd 100%);
+  background-color: #f5f6f8;
+  background-image: url('/images/hero-grid-bg.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
   /* First-fold target: hero + trusted-bar (221px) = 100vh, so the marquee's
      bottom edge lands flush with the viewport bottom. The 72px header is
      `position: fixed` (an overlay — doesn't take layout space), so it
