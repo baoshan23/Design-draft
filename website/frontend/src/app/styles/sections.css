@@ -3301,19 +3301,18 @@ html {
 .pricing-card.popular,
 .pricing-card.featured {
   padding-top: 40px;
-}
-
-.pricing-card.popular {
   border-color: rgba(254, 191, 29, 0.28);
   box-shadow: 0 0 0 1px rgba(254, 191, 29, 0.14), inset 0 1px 0 rgba(254, 191, 29, 0.06);
 }
 
-.pricing-card.popular:hover {
+.pricing-card.popular:hover,
+.pricing-card.featured:hover {
   border-color: rgba(254, 191, 29, 0.42);
   box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(254, 191, 29, 0.24);
 }
 
-.pricing-card-ribbon {
+.pricing-card-ribbon,
+.pricing-card-ribbon--featured {
   position: absolute;
   top: -12px;
   left: 50%;
@@ -3328,10 +3327,6 @@ html {
   border-radius: 999px;
   white-space: nowrap;
   box-shadow: 0 4px 12px rgba(254, 191, 29, 0.32);
-}
-
-.pricing-card-ribbon--featured {
-  background: linear-gradient(135deg, var(--primary), #d99a14);
 }
 
 /* Inline cross-link between sections */
