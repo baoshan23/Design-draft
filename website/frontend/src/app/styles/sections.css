@@ -3673,9 +3673,9 @@ html {
   top: var(--header-height);
   z-index: 10;
   border-bottom: 1px solid var(--border-subtle);
-  padding-top: 10px;
-  padding-bottom: 10px;
-  vertical-align: middle;
+  padding-top: 18px;
+  padding-bottom: 48px;
+  vertical-align: top;
   line-height: 1.15;
 }
 
@@ -3686,11 +3686,9 @@ html {
   color: #111418 !important;
 }
 
-/* Extra breathing room between the yellow thead and the first data
-   row so the 托管费 row doesn't visually crowd the plan-price line. */
-.comparison-table tbody tr:first-child td {
-  padding-top: 48px;
-}
+/* Breathing room is added INSIDE the thead via padding-bottom on th
+   cells so the gap stays yellow rather than showing the table's
+   glass-bg through. */
 
 .comparison-table td:first-child,
 .comparison-table th:first-child {
