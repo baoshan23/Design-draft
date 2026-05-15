@@ -197,7 +197,7 @@ export default async function DemoPage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* Single-operator editions: SaaS / Custom Web / APP Enterprise */}
-      <section className="section demo-section" id="demo-b2c">
+      <section className="section section-alt demo-section" id="demo-b2c">
         <div className="container">
           <ScrollAnimation>
             <div className="demo-section-head">

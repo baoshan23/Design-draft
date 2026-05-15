@@ -149,6 +149,14 @@ body:has(.demo-hero) .header.scrolled {
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
 }
 
+/* Pages with a sub-nav strip: drop the header drop-shadow and use a thin
+   line as the divider between the primary nav and the sub-nav. */
+body:has(.sub-nav) .header,
+body:has(.sub-nav) .header.scrolled {
+  box-shadow: none;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
 body:has(.hero-with-video) .header.scrolled .logo,
 body:has(.hero-with-video) .header.scrolled .header-actions .btn-login,
 body:has(.hero-with-video) .header.scrolled .settings-trigger {
