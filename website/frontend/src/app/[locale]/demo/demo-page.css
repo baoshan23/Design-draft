@@ -161,27 +161,27 @@
 }
 
 .demo-hero-title-script {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-style: italic;
-  font-weight: 400;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 300;
   font-size: 0.6em;
-  color: #6E4A00;
+  color: #000000;
   letter-spacing: -0.01em;
 }
 
 .demo-hero-title-main {
   font-weight: 800;
-  color: #1F1505;
-  background: linear-gradient(180deg, #2A1D05 0%, #5C3F00 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #000000;
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  -webkit-text-fill-color: #000000;
 }
 
 .demo-hero-desc {
   font-size: 1.08rem;
   line-height: 1.7;
-  color: #5C3F00;
+  color: #000000;
   max-width: 640px;
   margin: 0 auto 32px;
 }
