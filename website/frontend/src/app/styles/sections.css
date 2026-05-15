@@ -2187,10 +2187,12 @@ html {
   overflow: hidden;
 }
 
-.card-with-img h3 {
+.card.card-with-img h3 {
   margin: 0;
   padding: 20px 28px 8px;
   text-align: left;
+  font-size: 1.35rem;
+  font-weight: 800;
 }
 
 .card-with-img p {
