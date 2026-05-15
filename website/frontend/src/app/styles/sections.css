@@ -3695,7 +3695,7 @@ html {
 
 .comparison-table .category-row td {
   background: var(--dark-surface);
-  color: var(--primary);
+  color: #111418;
   font-weight: 700;
   font-size: 0.9rem;
   text-align: left;
