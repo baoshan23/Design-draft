@@ -16,21 +16,23 @@
 .diagram-modal-content {
     position: relative;
     background: #ffffff;
-    width: min(1000px, 100%);
+    width: min(1280px, 100%);
     aspect-ratio: 16 / 9;
     max-height: calc(100vh - 48px);
-    overflow: hidden;
+    overflow: visible;
     animation: slideUp 0.35s ease-out;
     display: flex;
     flex-direction: column;
 }
 
 .diagram-modal-header {
-    padding: 4px 28px 12px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    background: #ffffff;
-    position: relative;
-    flex-shrink: 0;
+    position: absolute;
+    top: -56px;
+    left: 0;
+    right: 0;
+    padding: 0 28px;
+    background: transparent;
+    border-bottom: none;
 }
 
 .diagram-modal-title {
@@ -72,7 +74,7 @@
 }
 
 .diagram-modal-body {
-    padding: 12px;
+    padding: 4px;
     flex: 1;
     min-height: 0;
     overflow: hidden;
