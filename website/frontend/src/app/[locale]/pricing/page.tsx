@@ -236,7 +236,18 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
     return (
         <>
             {/* Hero + audience picker */}
-            <section className="section mesh-bg pricing-hero" style={{ paddingTop: 140, paddingBottom: 32, textAlign: 'center' }}>
+            <section
+                className="section pricing-hero"
+                style={{
+                    paddingTop: 140,
+                    paddingBottom: 56,
+                    textAlign: 'center',
+                    backgroundImage: 'url(/images/pricing-hero-bg.png)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                }}
+            >
                 <div className="container">
                     <ScrollAnimation>
                         <div className="section-header">
