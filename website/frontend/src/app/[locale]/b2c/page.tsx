@@ -59,7 +59,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="var(--primary)"><path d="M7 0l1.76 5.24L14 7l-5.24 1.76L7 14l-1.76-5.24L0 7l5.24-1.76L7 0z" /></svg>
                 <span>{t('product.badge')}</span>
               </div>
-              <h1 className="hero-title">OCPP CPMS<br /><span className="text-gradient">{t('product.title2')}</span></h1>
+              <h1 className="hero-title">OCPP CPMS<br /><span className="text-gradient">{t('product.title2')}</span><span className="hero-title-b2c">(B2C)</span></h1>
               <p className="hero-desc">{t('product.desc')}</p>
               <div className="hero-buttons">
                 <a href="#demo" className="btn btn-primary btn-lg">

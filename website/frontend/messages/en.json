@@ -780,7 +780,7 @@
     },
     "badge": "Enterprise Edition",
     "title1": "OCPP CPMS",
-    "title2": "Enterprise Edition (B2C)",
+    "title2": "Independent Operator Mode",
     "desc": "A fully-featured, independently deployable EV charging management platform with global payment support, multi-language capabilities, and complete OCPP protocol coverage.",
     "cta1": "Try Live Demo",
     "cta2": "View Pricing",

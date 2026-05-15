@@ -136,6 +136,32 @@
   -webkit-text-fill-color: #FEBF1D;
   color: #FEBF1D;
 }
+.hero-title-b2c {
+  display: inline-block;
+  margin-left: 0.35em;
+  background: linear-gradient(90deg, #FEBF1D 0%, #FFE99A 50%, #FEBF1D 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: b2cShimmer 2.6s ease-in-out infinite;
+}
+@keyframes b2cShimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: -100% 50%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-title-b2c {
+    animation: none;
+    -webkit-text-fill-color: #FEBF1D;
+    color: #FEBF1D;
+  }
+}
 /* Description — dark for readability against the light charger bg. */
 .hero-with-video .hero-desc {
   color: #6C717A;
@@ -3298,17 +3324,30 @@ html {
    i18n-aware ribbon span instead. */
 .pricing-card.featured::before { content: none; }
 
+/* Unified pricing card frame: flat gray border, no shadow.
+   Hover swaps the border to brand yellow. Applies to all cards in
+   the pricing grid (highlighted and non-highlighted alike). */
+.pricing-card {
+  border-color: #e5e5e5;
+  box-shadow: none;
+}
+
+.pricing-card:hover {
+  border-color: var(--primary);
+  box-shadow: none;
+}
+
 .pricing-card.popular,
 .pricing-card.featured {
   padding-top: 40px;
-  border-color: rgba(254, 191, 29, 0.28);
-  box-shadow: 0 0 0 1px rgba(254, 191, 29, 0.14), inset 0 1px 0 rgba(254, 191, 29, 0.06);
+  border-color: #e5e5e5;
+  box-shadow: none;
 }
 
 .pricing-card.popular:hover,
 .pricing-card.featured:hover {
-  border-color: rgba(254, 191, 29, 0.42);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(254, 191, 29, 0.24);
+  border-color: var(--primary);
+  box-shadow: none;
 }
 
 .pricing-card-ribbon,
