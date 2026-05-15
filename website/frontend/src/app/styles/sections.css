@@ -3612,18 +3612,18 @@ html {
 
 .comparison-plan-name {
   display: block;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--text-tertiary);
-  letter-spacing: 0.04em;
-  margin-bottom: 4px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #111418;
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
 }
 
 .comparison-plan-price {
   display: block;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--primary-text);
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #111418;
   font-variant-numeric: tabular-nums;
 }
 
@@ -3662,13 +3662,20 @@ html {
 }
 
 .comparison-table th {
-  background: var(--dark-elevated);
-  color: var(--text-secondary);
-  font-weight: 700;
+  background: #FEBF1D;
+  color: #111418;
+  font-weight: 800;
   position: sticky;
   top: var(--header-height);
   z-index: 10;
   border-bottom: 1px solid var(--border-subtle);
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.comparison-table thead th:first-child {
+  background: #FEBF1D;
+  color: #111418;
 }
 
 .comparison-table td:first-child,
