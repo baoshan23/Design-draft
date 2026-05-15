@@ -3360,6 +3360,62 @@ html {
   transform: translateY(-1px);
 }
 
+/* Pricing page (2-col) layout — left-aligned header, oversized price,
+   primary CTA stack above feature checklist, divider separating actions
+   from the feature list. Scoped to `.pricing-cards--2col` so the
+   existing centered card layout used elsewhere is unaffected. */
+.pricing-cards--2col .pricing-card {
+  text-align: left;
+  padding: 36px 32px;
+}
+
+.pricing-cards--2col .pricing-card.popular,
+.pricing-cards--2col .pricing-card.featured {
+  padding-top: 44px;
+}
+
+.pricing-cards--2col .pricing-card .plan-name {
+  font-size: 1.35rem;
+  margin-bottom: 10px;
+}
+
+.pricing-cards--2col .pricing-card .plan-price {
+  justify-content: flex-start;
+  align-items: baseline;
+  font-size: 3.25rem;
+  line-height: 1.05;
+  margin-top: 6px;
+  margin-bottom: 4px;
+  flex-wrap: nowrap;
+}
+
+.pricing-cards--2col .pricing-card .plan-price-unit {
+  font-size: 0.95rem;
+}
+
+.pricing-cards--2col .pricing-card .plan-price-note {
+  text-align: left;
+  margin-bottom: 22px;
+}
+
+.pricing-cards--2col .pricing-card .plan-deposit-offer {
+  margin-bottom: 22px;
+}
+
+.pricing-cards--2col .pricing-card .plan-actions {
+  margin-top: 0;
+  margin-bottom: 24px;
+  gap: 10px;
+}
+
+.pricing-cards--2col .pricing-card .plan-features {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+  flex-grow: 1;
+}
+
 /* Add-on cards — icon + body row layout (was a flat label/price stack) */
 .addons-grid {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -3908,6 +3964,11 @@ html {
 
 .mobile-showcase-list-item.is-active .mobile-showcase-list-text strong {
   color: var(--primary-text, #5a3f00);
+}
+
+.mobile-showcase-list-item:hover .mobile-showcase-list-text strong,
+.mobile-showcase-list-item:focus-visible .mobile-showcase-list-text strong {
+  color: var(--primary);
 }
 
 .mobile-showcase-list-icon {
