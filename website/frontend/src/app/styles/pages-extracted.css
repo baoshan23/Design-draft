@@ -2346,9 +2346,16 @@ body:has(.product-hero) .glass-card [class*="icon"] {
     radial-gradient(ellipse 120% 80% at 50% 0%, rgba(254, 191, 29, 0.10) 0%, rgba(254, 191, 29, 0) 60%),
     radial-gradient(ellipse 80% 60% at 100% 100%, rgba(150, 200, 180, 0.08) 0%, rgba(150, 200, 180, 0) 70%),
     linear-gradient(180deg, #f6f2e9 0%, #efece4 60%, #ebe7dd 100%);
-  padding: clamp(80px, 11vh, 140px) 0 clamp(64px, 10vh, 120px);
+  /* First-fold target: header (72px) + hero + trusted-bar (221px) = 100vh.
+     Setting both min and max to the same expression locks the hero to fill
+     the remaining viewport exactly. `svh` variant handles mobile URL bar. */
+  min-height: calc(100vh - 72px - 221px);
+  min-height: calc(100svh - 72px - 221px);
+  padding: clamp(24px, 3.5vh, 48px) 0 clamp(20px, 2.5vh, 36px);
   isolation: isolate;
   overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
 .hero.hero-centered .hero-centered-inner {
@@ -2357,7 +2364,9 @@ body:has(.product-hero) .glass-card [class*="icon"] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(40px, 6vh, 72px);
+  gap: clamp(16px, 2.4vh, 28px);
+  width: 100%;
+  min-height: 0;
 }
 
 .hero.hero-centered .hero-content {
@@ -2376,58 +2385,52 @@ body:has(.product-hero) .glass-card [class*="icon"] {
 
 .hero.hero-centered .hero-title {
   text-align: center;
-  font-size: clamp(2.25rem, 5vw, 3.75rem);
-  line-height: 1.08;
+  font-size: clamp(1.875rem, 4vw, 3rem);
+  line-height: 1.1;
   letter-spacing: -0.02em;
   max-width: 900px;
+  margin-bottom: 12px !important;
 }
 
 .hero.hero-centered .hero-desc {
   text-align: center;
   max-width: 640px;
-  margin: 0 auto 32px;
-  font-size: clamp(1rem, 1.15vw, 1.0625rem);
-  line-height: 1.65;
+  margin: 0 auto 20px;
+  font-size: clamp(0.95rem, 1.05vw, 1.0625rem);
+  line-height: 1.55;
   color: #5e6470;
 }
 
 .hero.hero-centered .hero-buttons {
   justify-content: center;
-}
-
-/* Stats now live below the dashboard, centered. Override the
-   align-self:flex-start from `sections.css` that pulled them left. */
-.hero.hero-centered .hero-stats {
-  align-self: center;
-  justify-content: center;
-  margin: 0;
-  gap: clamp(40px, 5vw, 72px);
-}
-
-.hero.hero-centered .hero-stat {
-  align-items: center;
-  text-align: center;
-}
-
-.hero.hero-centered .hero-stat-value {
-  font-size: clamp(1.75rem, 2.4vw, 2.125rem);
+  margin-bottom: 0;
 }
 
 /* Dashboard mockup frame — rounded card holding the screenshot.
-   Subtle border + soft shadow give it the "floating UI" feel. */
+   Flex-fills the remaining vertical space inside the hero (with a
+   `max-height` cap) so the image always fits the first fold;
+   `object-position: top` keeps the most informative top portion
+   (sidebar + Device Status cards + chart) visible while cropping
+   the bottom rows out. */
 .hero-dashboard-mock {
-  width: min(1120px, 92vw);
+  width: min(1080px, 92vw);
   margin: 0 auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  max-height: clamp(280px, 50vh, 540px);
 }
 
 .hero-dashboard-frame {
   position: relative;
-  border-radius: 18px;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow:
-    0 30px 60px -20px rgba(20, 20, 30, 0.18),
-    0 12px 28px -12px rgba(20, 20, 30, 0.10),
+    0 24px 48px -18px rgba(20, 20, 30, 0.18),
+    0 10px 22px -10px rgba(20, 20, 30, 0.10),
     0 0 0 1px rgba(255, 255, 255, 0.6) inset;
   overflow: hidden;
   transform: translateZ(0);
@@ -2445,24 +2448,55 @@ body:has(.product-hero) .glass-card [class*="icon"] {
 .hero-dashboard-img {
   display: block;
   width: 100%;
-  height: auto;
-  border-radius: 16px;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 14px;
 }
 
 @media (max-width: 720px) {
   .hero.hero-centered {
-    padding: 72px 0 56px;
+    min-height: auto;
+    padding: 56px 0 40px;
   }
   .hero-dashboard-mock {
     width: 100%;
+    max-height: 320px;
+    flex: 0 0 auto;
   }
   .hero-dashboard-frame {
     border-radius: 12px;
+    aspect-ratio: 16 / 11;
+    height: auto;
   }
-  .hero.hero-centered .hero-stats {
-    gap: 28px;
-    row-gap: 20px;
+}
+
+/* Shorter viewports (laptops ~720-800px tall): compress further so
+   the dashboard mock stays inside the first screen. */
+@media (max-height: 820px) and (min-width: 721px) {
+  .hero.hero-centered {
+    padding: 16px 0 16px;
   }
+  .hero.hero-centered .hero-title {
+    font-size: clamp(1.5rem, 3.2vw, 2.25rem);
+  }
+  .hero.hero-centered .hero-desc {
+    margin-bottom: 14px;
+  }
+  .hero.hero-centered .hero-centered-inner {
+    gap: clamp(10px, 1.4vh, 18px);
+  }
+}
+
+/* Trim the trusted-bar's own vertical breathing room so the marquee
+   sits comfortably within the 221px reservation alongside the hero. */
+.trusted-bar {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+.trusted-bar .trusted-label {
+  margin-bottom: 18px;
+  font-size: 15px;
 }
 
 /* Yellow + black line icons on b2c feature cards */
