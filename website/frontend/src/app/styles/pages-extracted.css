@@ -2341,10 +2341,12 @@ body:has(.product-hero) .glass-card [class*="icon"] {
 }
 
 /* `polish.css:1000` has `html:not([data-theme='dark']) .hero { background: none }`
-   at specificity (0,2,1) — that wiped this hero's bg in light mode. Prefix
-   our selector with `html` (also (0,2,1)) so we tie on specificity but win
-   on later source order (pages-extracted.css loads after polish.css). */
-html .hero.hero-centered {
+   at specificity (0,2,1) — that wipes this hero's bg in light mode. Mirror
+   the same `:not([data-theme="dark"])` so we land at (0,3,1) and beat it
+   outright in light mode. Dark theme separately handled by `[data-theme="dark"]`
+   rules elsewhere. */
+html:not([data-theme="dark"]) .hero.hero-centered,
+html[data-theme="dark"] .hero.hero-centered {
   background-color: #f5f6f8;
   background-image: url('/images/hero-grid-bg.png');
   background-size: cover;
