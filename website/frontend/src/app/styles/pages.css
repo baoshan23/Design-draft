@@ -2913,7 +2913,7 @@ h3.matrix-header,
   display: flex;
   align-items: center;
   gap: 64px;
-  animation: marqueeScroll 30s linear infinite;
+  animation: marqueeScroll 50s linear infinite;
   width: max-content;
   height: 100%;
 }
@@ -2953,7 +2953,7 @@ h3.matrix-header,
 }
 
 .marquee-track-reverse {
-  animation: marqueeScrollReverse 35s linear infinite;
+  animation: marqueeScrollReverse 58s linear infinite;
 }
 
 @keyframes marqueeScrollReverse {
