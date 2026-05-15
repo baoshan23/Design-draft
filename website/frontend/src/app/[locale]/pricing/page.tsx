@@ -2,6 +2,7 @@ import { Fragment, type ReactNode } from 'react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
+import PricingTabs from '@/components/sections/pricing/PricingTabs';
 
 export const metadata = {
     title: 'Pricing - GCSS | EV Charging Management Platform',
@@ -58,6 +59,10 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                         </div>
                     </div>
                 )}
+                <div className="plan-actions">
+                    <Link href={{ pathname: '/buy', query: { plan: planKey } }} className="btn btn-primary btn-full">{t('pricing.buynow')}</Link>
+                    <Link href="/contact" className="btn btn-secondary btn-full">{t('pricing.contactsales')}</Link>
+                </div>
                 <ul className="plan-features">
                     {Array.from({ length: plan.featureCount }).map((_, i) => (
                         <li key={i}>
@@ -66,10 +71,6 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                         </li>
                     ))}
                 </ul>
-                <div className="plan-actions">
-                    <Link href={{ pathname: '/buy', query: { plan: planKey } }} className="btn btn-primary btn-full">{t('pricing.buynow')}</Link>
-                    <Link href="/contact" className="btn btn-secondary btn-full">{t('pricing.contactsales')}</Link>
-                </div>
             </div>
         );
     };
@@ -248,45 +249,25 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                 </div>
             </section>
 
-            {/* B2C — single-operator deployments */}
-            <section id="b2c" className="section pricing-section pricing-section--b2c" style={{ paddingTop: 56 }}>
+            {/* Plans — B2C / B2B tabbed switcher */}
+            <section id="plans" className="section pricing-section pricing-section--tabs" style={{ paddingTop: 56 }}>
                 <div className="container">
                     <ScrollAnimation>
-                        <div className="section-header" style={{ marginBottom: 32 }}>
-                            <span className="section-label">{t('pricing.b2c.label')}</span>
-                            <h2>{t('pricing.b2c.title')}</h2>
-                            <p>{t('pricing.b2c.desc')}</p>
-                        </div>
+                        <PricingTabs
+                            b2c={{
+                                label: t('pricing.b2c.label'),
+                                title: t('pricing.b2c.title'),
+                                desc: t('pricing.b2c.desc'),
+                                cards: <>{b2cPlans.map(renderCard)}</>,
+                            }}
+                            b2b={{
+                                label: t('pricing.b2b.label'),
+                                title: t('pricing.b2b.title'),
+                                desc: t('pricing.b2b.desc'),
+                                cards: <>{b2bPlans.map(renderCard)}</>,
+                            }}
+                        />
                     </ScrollAnimation>
-                    <ScrollAnimation>
-                        <div className="pricing-cards pricing-cards--2col">
-                            {b2cPlans.map(renderCard)}
-                        </div>
-                    </ScrollAnimation>
-                    <div className="pricing-crosslink">
-                        <a href="#b2b">{t('pricing.jumpToB2b')} <span aria-hidden="true">&rarr;</span></a>
-                    </div>
-                </div>
-            </section>
-
-            {/* B2B — multi-operator network platforms (alt background, distinct mood) */}
-            <section id="b2b" className="section section-alt pricing-section pricing-section--b2b">
-                <div className="container">
-                    <ScrollAnimation>
-                        <div className="section-header" style={{ marginBottom: 32 }}>
-                            <span className="section-label">{t('pricing.b2b.label')}</span>
-                            <h2>{t('pricing.b2b.title')}</h2>
-                            <p>{t('pricing.b2b.desc')}</p>
-                        </div>
-                    </ScrollAnimation>
-                    <ScrollAnimation>
-                        <div className="pricing-cards pricing-cards--2col">
-                            {b2bPlans.map(renderCard)}
-                        </div>
-                    </ScrollAnimation>
-                    <div className="pricing-crosslink">
-                        <a href="#b2c">{t('pricing.jumpToB2c')} <span aria-hidden="true">&rarr;</span></a>
-                    </div>
                 </div>
             </section>
 
