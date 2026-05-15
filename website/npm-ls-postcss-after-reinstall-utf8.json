@@ -1,0 +1,22 @@
+﻿{
+  "version": "1.0.0",
+  "name": "frontend",
+  "dependencies": {
+    "next": {
+      "version": "16.2.6",
+      "resolved": "https://registry.npmjs.org/next/-/next-16.2.6.tgz",
+      "overridden": false,
+      "dependencies": {
+        "postcss": {
+          "version": "8.5.14"
+        }
+      }
+    },
+    "postcss": {
+      "version": "8.5.14",
+      "resolved": "https://registry.npmjs.org/postcss/-/postcss-8.5.14.tgz",
+      "overridden": true
+    }
+  }
+}
+
