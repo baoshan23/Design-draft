@@ -26,7 +26,7 @@
 }
 
 .diagram-modal-header {
-    padding: 16px 28px;
+    padding: 4px 28px 12px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     background: #ffffff;
     position: relative;
@@ -35,10 +35,10 @@
 
 .diagram-modal-title {
     margin: 0;
-    font-size: 22px;
+    font-size: 30px;
     font-weight: 800;
     color: var(--text-primary, #181818);
-    letter-spacing: -0.3px;
+    letter-spacing: -0.4px;
     text-align: center;
 }
 
