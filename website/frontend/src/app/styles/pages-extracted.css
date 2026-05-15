@@ -2347,14 +2347,18 @@ html:not([data-theme="dark"]) .hero.hero-centered,
 html[data-theme="dark"] .hero.hero-centered {
   background-color: #ffffff;
   background-image: none;
-  /* First-fold target: hero + trusted-bar (221px) = 100vh, so the marquee's
+  /* First-fold target: hero + trusted-bar (180px) = 100vh, so the marquee's
      bottom edge lands flush with the viewport bottom. The 72px header is
      `position: fixed` (an overlay — doesn't take layout space), so it
      should NOT be subtracted from the hero height. Top padding INCLUDES
-     a 72px buffer + extra white space so the panel sits visually lower. */
-  min-height: calc(100vh - 221px);
-  min-height: calc(100svh - 221px);
-  padding: calc(72px + clamp(24px, 4.5vh, 64px)) clamp(16px, 3vw, 32px) clamp(20px, 2.5vh, 36px);
+     a 72px buffer + extra white space so the panel sits visually lower.
+     `max-height` is enforced so content overflow can't push the marquee
+     out of the first fold; the dashboard's flex behaviour + `min-height: 0`
+     handle the compression. */
+  min-height: calc(100vh - 180px);
+  min-height: calc(100svh - 180px);
+  max-height: calc(100svh - 180px);
+  padding: calc(72px + clamp(12px, 2.5vh, 40px)) clamp(16px, 3vw, 32px) clamp(12px, 1.5vh, 24px);
   isolation: isolate;
   overflow: hidden;
   display: flex;
@@ -2371,11 +2375,11 @@ html[data-theme="dark"] .hero.hero-centered {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(16px, 2.4vh, 28px);
+  gap: clamp(10px, 1.6vh, 20px);
   width: 100%;
   max-width: 1440px;
   min-height: 0;
-  padding: clamp(48px, 7vh, 96px) clamp(24px, 3vw, 48px) 0;
+  padding: clamp(28px, 4vh, 60px) clamp(24px, 3vw, 48px) 0;
   background-color: #f5f6f8;
   background-image: url('/images/hero-grid-bg.png');
   background-size: cover;
@@ -2430,8 +2434,8 @@ html[data-theme="dark"] .hero.hero-centered {
   align-self: center;
   align-items: center;
   justify-content: center;
-  gap: clamp(40px, 5vw, 72px);
-  margin: clamp(8px, 1.5vh, 20px) 0 0;
+  gap: clamp(36px, 5vw, 64px);
+  margin: 0;
 }
 
 .hero.hero-centered .hero-stat {
@@ -2452,13 +2456,13 @@ html[data-theme="dark"] .hero.hero-centered {
    so the dashboard blends into the panel rather than ending hard. */
 .hero-dashboard-mock {
   width: min(972px, calc(100% - 32px));
-  margin: clamp(16px, 3vh, 40px) auto 0;
+  margin: clamp(4px, 0.8vh, 14px) auto 0;
   flex: 1 1 auto;
   min-height: 0;
   display: flex;
-  max-height: clamp(280px, 50vh, 540px);
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 65%, transparent 100%);
-          mask-image: linear-gradient(180deg, #000 0%, #000 65%, transparent 100%);
+  max-height: clamp(200px, 36vh, 400px);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%);
 }
 
 .hero-dashboard-frame {
