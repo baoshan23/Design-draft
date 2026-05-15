@@ -87,7 +87,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
       <SubNav />
 
       {/* ==================== Section 1: Hero ==================== */}
-      <section className="hero mesh-bg particles-bg" id="overview">
+      <section className="hero mesh-bg product-hero particles-bg" id="overview">
         <div className="container">
           <div className="hero-content hero-split">
             <div className="hero-text">

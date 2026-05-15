@@ -23,7 +23,11 @@
   max-height: unset;
   padding-top: 60px;
   padding-bottom: 0;
-  background: var(--black);
+  background: #F1F2F4;
+}
+
+body:has(.product-hero) {
+  background: #F1F2F4;
 }
 
 .product-hero::after {
