@@ -58,13 +58,13 @@ export default function DemoTabs({
       {/* Bottom row: QR codes */}
       <div className="b2c-demo-card">
         <h4 className="b2c-demo-card-title">{t('demo.page.qrH5')}</h4>
-        <div className="b2c-qr glass-card" dangerouslySetInnerHTML={{ __html: webAppQr }} />
+        <div className="b2b-demo-qr glass-card" dangerouslySetInnerHTML={{ __html: webAppQr }} />
         <p className="b2c-demo-card-foot">{t('demo.page.qrMobile')}</p>
       </div>
 
       <div className="b2c-demo-card">
         <h4 className="b2c-demo-card-title">{t('demo.page.qrUser.title')}</h4>
-        <div className="b2c-qr glass-card" dangerouslySetInnerHTML={{ __html: userPortalQr }} />
+        <div className="b2b-demo-qr glass-card" dangerouslySetInnerHTML={{ __html: userPortalQr }} />
         <p className="b2c-demo-card-foot">{t('demo.page.h5.desc')}</p>
       </div>
 
