@@ -3351,6 +3351,15 @@ html {
   padding-top: 40px;
 }
 
+/* Kill the gold-glow overlay that enhancements.css paints behind
+   the featured card via ::after — keeps B2B's "推荐" card identical
+   to the popular variant. */
+.pricing-card.glass-card.featured::after,
+.pricing-card.glass-card.popular::after {
+  content: none !important;
+  background: none !important;
+}
+
 .pricing-card-ribbon,
 .pricing-card-ribbon--featured {
   position: absolute;
