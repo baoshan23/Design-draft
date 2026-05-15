@@ -239,8 +239,12 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
             <section
                 className="section pricing-hero"
                 style={{
-                    paddingTop: 140,
-                    paddingBottom: 56,
+                    paddingTop: 180,
+                    paddingBottom: 100,
+                    minHeight: '560px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                     textAlign: 'center',
                     backgroundImage: 'url(/images/pricing-hero-bg.png)',
                     backgroundSize: 'cover',
