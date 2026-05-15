@@ -3023,7 +3023,7 @@ html {
 .addon-price {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--primary-text);
+  color: var(--primary);
   font-variant-numeric: tabular-nums;
 }
 
@@ -3439,7 +3439,7 @@ html {
   justify-content: center;
   border-radius: var(--radius);
   background: var(--primary-dim);
-  color: var(--primary-text);
+  color: var(--primary);
   flex-shrink: 0;
   transition: background 220ms, color 220ms;
 }
