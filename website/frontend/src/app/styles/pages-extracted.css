@@ -2346,12 +2346,14 @@ body:has(.product-hero) .glass-card [class*="icon"] {
     radial-gradient(ellipse 120% 80% at 50% 0%, rgba(254, 191, 29, 0.10) 0%, rgba(254, 191, 29, 0) 60%),
     radial-gradient(ellipse 80% 60% at 100% 100%, rgba(150, 200, 180, 0.08) 0%, rgba(150, 200, 180, 0) 70%),
     linear-gradient(180deg, #f6f2e9 0%, #efece4 60%, #ebe7dd 100%);
-  /* First-fold target: header (72px) + hero + trusted-bar (221px) = 100vh.
-     Setting both min and max to the same expression locks the hero to fill
-     the remaining viewport exactly. `svh` variant handles mobile URL bar. */
-  min-height: calc(100vh - 72px - 221px);
-  min-height: calc(100svh - 72px - 221px);
-  padding: clamp(24px, 3.5vh, 48px) 0 clamp(20px, 2.5vh, 36px);
+  /* First-fold target: hero + trusted-bar (221px) = 100vh, so the marquee's
+     bottom edge lands flush with the viewport bottom. The 72px header is
+     `position: fixed` (an overlay — doesn't take layout space), so it
+     should NOT be subtracted from the hero height. Top padding INCLUDES
+     a 72px buffer so the hero content clears the fixed header. */
+  min-height: calc(100vh - 221px);
+  min-height: calc(100svh - 221px);
+  padding: calc(72px + clamp(8px, 2vh, 24px)) 0 clamp(20px, 2.5vh, 36px);
   isolation: isolate;
   overflow: hidden;
   display: flex;
@@ -2472,10 +2474,11 @@ body:has(.product-hero) .glass-card [class*="icon"] {
 }
 
 /* Shorter viewports (laptops ~720-800px tall): compress further so
-   the dashboard mock stays inside the first screen. */
+   the dashboard mock stays inside the first screen. Top padding still
+   includes the 72px header buffer (the header is `position: fixed`). */
 @media (max-height: 820px) and (min-width: 721px) {
   .hero.hero-centered {
-    padding: 16px 0 16px;
+    padding: calc(72px + 8px) 0 16px;
   }
   .hero.hero-centered .hero-title {
     font-size: clamp(1.5rem, 3.2vw, 2.25rem);
