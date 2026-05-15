@@ -138,11 +138,14 @@ body:has(.hero-with-video) .header.scrolled {
 }
 
 /* Yellow-on-yellow invert overrides:
-   (a) active nav link / dropdown trigger — text + underline → white
-   (b) .btn-buy CTA — gold bg → white bg, keep dark text */
+   (a) active nav link / dropdown trigger — text + underline → white,
+       weight bumped 700 → 800 for a stronger "selected" emphasis.
+   (b) .btn-buy CTA — gold bg → white bg, text → gold (brand accent
+       on the inverted pill). */
 body:has(.hero-with-video) .header .nav a.active,
 body:has(.hero-with-video) .header .nav-dropdown-trigger.active {
   color: #ffffff;
+  font-weight: 800;
 }
 body:has(.hero-with-video) .header .nav a.active::after,
 body:has(.hero-with-video) .header .nav-dropdown-trigger.active::after {
@@ -151,12 +154,13 @@ body:has(.hero-with-video) .header .nav-dropdown-trigger.active::after {
 body:has(.hero-with-video) .header .header-actions .btn-buy,
 body:has(.hero-with-video) .header.scrolled .header-actions .btn-buy {
   background: #ffffff;
-  color: var(--black);
+  color: var(--primary);
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 body:has(.hero-with-video) .header .header-actions .btn-buy:hover,
 body:has(.hero-with-video) .header.scrolled .header-actions .btn-buy:hover {
   background: #ffffff;
+  color: var(--primary-hover);
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.14), 0 6px 16px rgba(0, 0, 0, 0.10);
 }
 
