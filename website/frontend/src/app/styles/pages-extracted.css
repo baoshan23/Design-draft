@@ -2423,19 +2423,42 @@ html[data-theme="dark"] .hero.hero-centered {
   margin-bottom: 0;
 }
 
+/* Inline stats below CTA buttons, centered (the base `.hero-stats`
+   rule in `sections.css:1788` left-aligns; override for the centered
+   hero context). */
+.hero.hero-centered .hero-stats {
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(40px, 5vw, 72px);
+  margin: clamp(8px, 1.5vh, 20px) 0 0;
+}
+
+.hero.hero-centered .hero-stat {
+  align-items: center;
+  text-align: center;
+}
+
+.hero.hero-centered .hero-stat-value {
+  font-size: clamp(1.5rem, 2.4vw, 2.125rem);
+}
+
 /* Dashboard mockup frame — rounded card holding the screenshot.
    Flex-fills the remaining vertical space inside the hero (with a
    `max-height` cap) so the image always fits the first fold;
    `object-position: top` keeps the most informative top portion
    (sidebar + Device Status cards + chart) visible while cropping
-   the bottom rows out. */
+   the bottom rows out. Bottom is faded via a vertical mask gradient
+   so the dashboard blends into the panel rather than ending hard. */
 .hero-dashboard-mock {
   width: min(972px, calc(100% - 32px));
-  margin: 0 auto;
+  margin: clamp(16px, 3vh, 40px) auto 0;
   flex: 1 1 auto;
   min-height: 0;
   display: flex;
   max-height: clamp(280px, 50vh, 540px);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 65%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 0%, #000 65%, transparent 100%);
 }
 
 .hero-dashboard-frame {
