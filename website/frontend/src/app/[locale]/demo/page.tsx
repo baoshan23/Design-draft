@@ -2,7 +2,6 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import QRCode from 'qrcode';
 import { Link } from '@/i18n/navigation';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
-import StickyEditionNav from './StickyEditionNav';
 import CopyableField from './CopyableField';
 import './demo-page.css';
 
@@ -153,8 +152,6 @@ export default async function DemoPage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      <StickyEditionNav />
-
       {/* Hero */}
       <section className="demo-hero" id="demo-hero">
         <div className="demo-hero-bg" aria-hidden="true">
