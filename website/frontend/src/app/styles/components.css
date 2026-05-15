@@ -142,6 +142,13 @@ body:has(.hero-with-video) .header.scrolled {
        weight bumped 700 → 800 for a stronger "selected" emphasis.
    (b) .btn-buy CTA — gold bg → white bg, text → gold (brand accent
        on the inverted pill). */
+/* Scroll progress bar: base color `var(--primary)` (gold) collides with
+   the yellow home header — flip to white + soft white glow on home. */
+body:has(.hero-with-video) .scroll-progress {
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
 /* Swap the logo icon for the globe variant on the yellow home header.
    `.logo-yellow` is hidden by default everywhere else; on home, the
    default logo is hidden and the globe shows. Same 32×32 footprint
