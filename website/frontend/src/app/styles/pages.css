@@ -2931,11 +2931,16 @@ h3.matrix-header,
 }
 
 .marquee-item img {
-  height: 52px;
+  height: 44px;
   width: auto;
   max-width: 200px;
   object-fit: contain;
   display: block;
+}
+
+.marquee-item img[alt="Evcity"] {
+  height: 72px;
+  max-width: 110px;
 }
 
 @keyframes marqueeScroll {
