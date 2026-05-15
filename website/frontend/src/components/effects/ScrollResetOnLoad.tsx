@@ -8,7 +8,8 @@ export default function ScrollResetOnLoad() {
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
-    if (window.location.hash) return;
+    const hash = window.location.hash;
+    if (hash && hash !== '#overview') return;
     window.scrollTo(0, 0);
   }, []);
 

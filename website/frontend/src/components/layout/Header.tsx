@@ -29,6 +29,13 @@ export default function Header() {
     setOpenDropdown(null);
   }, []);
 
+  const goToProductTop = useCallback((target: '/b2c' | '/b2b') => () => {
+    closeMenu();
+    if (typeof window !== 'undefined' && pathname.endsWith(target)) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [closeMenu, pathname]);
+
   // Close mobile menu on route change
   useEffect(() => {
     closeMenu();
@@ -149,7 +156,7 @@ export default function Header() {
               <div id="product-dropdown-menu" className="nav-dropdown-menu" role="menu">
                 <div className="dropdown-section-header">{tDropdown('productHeader')}</div>
                 <div className="dropdown-items">
-                  <Link href={{ pathname: '/b2c', hash: 'overview' }} onClick={closeMenu}>
+                  <Link href="/b2c" onClick={goToProductTop('/b2c')}>
                     <div className="dropdown-icon icon-gradient--gold">
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                         <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -162,7 +169,7 @@ export default function Header() {
                       <span>{tDropdown('b2c.desc')}</span>
                     </div>
                   </Link>
-                  <Link href="/b2b" onClick={closeMenu}>
+                  <Link href="/b2b" onClick={goToProductTop('/b2b')}>
                     <div className="dropdown-icon icon-gradient--dark">
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                         <circle cx="12" cy="12" r="10" />
