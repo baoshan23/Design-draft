@@ -3381,17 +3381,8 @@ html {
 .pricing-card.glass-card::before,
 .pricing-card.glass-card.popular::before,
 .pricing-card.glass-card.featured::before {
-  content: '' !important;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  border-top-left-radius: inherit;
-  border-top-right-radius: inherit;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
-  pointer-events: none;
-  z-index: 0;
+  content: none !important;
+  background: none !important;
 }
 
 /* Keep the ribbon pill stacked above the top-edge highlight. */
