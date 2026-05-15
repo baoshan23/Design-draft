@@ -2349,7 +2349,7 @@ html:not([data-theme="dark"]) .hero.hero-centered,
 html[data-theme="dark"] .hero.hero-centered {
   background-color: #f5f6f8;
   background-image: url('/images/hero-grid-bg.png');
-  background-size: cover;
+  background-size: contain;
   background-position: center top;
   background-repeat: no-repeat;
   /* First-fold target: hero + trusted-bar (221px) = 100vh, so the marquee's
