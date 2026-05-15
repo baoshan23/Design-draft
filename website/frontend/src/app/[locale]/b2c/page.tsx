@@ -171,10 +171,11 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
               <div className="card glass-card tilt-card">
                 <div className="feature-card-icon" aria-hidden="true">
                   <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
-                    <rect x="5" y="5" width="12" height="12" rx="2" stroke="#181818" strokeWidth="2" />
-                    <rect x="31" y="5" width="12" height="12" rx="2" stroke="#181818" strokeWidth="2" />
-                    <rect x="5" y="31" width="12" height="12" rx="2" stroke="#181818" strokeWidth="2" />
-                    <path d="M30 22 L23 32 L29 32 L24 42" stroke="#FEBF1D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M6 16 V8 H14" stroke="#181818" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M34 8 H42 V16" stroke="#181818" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M42 32 V40 H34" stroke="#181818" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M14 40 H6 V32" stroke="#181818" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M27 17 L20 27 L26 27 L22 35" stroke="#FEBF1D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
                 <h3>{t('product.ff1.title')}</h3>
@@ -219,10 +220,10 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
               <div className="card glass-card tilt-card">
                 <div className="feature-card-icon" aria-hidden="true">
                   <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
-                    <rect x="5" y="10" width="38" height="28" rx="3" stroke="#181818" strokeWidth="2" />
-                    <path d="M18 21 L13 25 L18 29" stroke="#181818" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M30 21 L35 25 L30 29" stroke="#181818" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M22 32 H32" stroke="#FEBF1D" strokeWidth="2.5" strokeLinecap="round" />
+                    <rect x="4" y="8" width="40" height="32" rx="4" stroke="#181818" strokeWidth="2" />
+                    <line x1="4" y1="17" x2="44" y2="17" stroke="#181818" strokeWidth="2" />
+                    <path d="M11 25 L15 29 L11 33" stroke="#181818" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M19 33 H32" stroke="#FEBF1D" strokeWidth="2.5" strokeLinecap="round" />
                   </svg>
                 </div>
                 <h3>{t('product.ff5.title')}</h3>
