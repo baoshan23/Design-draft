@@ -2952,30 +2952,15 @@ html {
   border-radius: 100px;
 }
 
-/* Glass pricing tiers */
+/* Glass pricing tiers — shadows owned by unified block further below. */
 .pricing-card {
   backdrop-filter: blur(16px) saturate(1.1);
   -webkit-backdrop-filter: blur(16px) saturate(1.1);
-  box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .pricing-card:hover {
   transform: translateY(-6px);
-  box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.pricing-card.featured {
-  border-color: rgba(254, 191, 29, 0.25);
-  box-shadow:
-    var(--shadow-glow),
-    inset 0 1px 0 rgba(254, 191, 29, 0.1);
-}
-
-.pricing-card.featured:hover {
-  box-shadow:
-    0 0 50px rgba(254, 191, 29, 0.12),
-    inset 0 1px 0 rgba(254, 191, 29, 0.15);
 }
 
 .pricing-card .plan-name {
