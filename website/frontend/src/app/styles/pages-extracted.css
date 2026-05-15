@@ -2340,32 +2340,31 @@ body:has(.product-hero) .glass-card [class*="icon"] {
   content: none !important;
 }
 
-/* `polish.css:1000` has `html:not([data-theme='dark']) .hero { background: none }`
-   at specificity (0,2,1) — that wipes this hero's bg in light mode. Mirror
-   the same `:not([data-theme="dark"])` so we land at (0,3,1) and beat it
-   outright in light mode. Dark theme separately handled by `[data-theme="dark"]`
-   rules elsewhere. */
+/* Outer hero = pure white. The dotted-grid bg + rounded panel now lives
+   on `.hero-centered-inner` (the panel). Keep the `:not()` mirror so we
+   still beat polish.css's `background: none` rule for any future bg work. */
 html:not([data-theme="dark"]) .hero.hero-centered,
 html[data-theme="dark"] .hero.hero-centered {
-  background-color: #f5f6f8;
-  background-image: url('/images/hero-grid-bg.png');
-  background-size: contain;
-  background-position: center top;
-  background-repeat: no-repeat;
+  background-color: #ffffff;
+  background-image: none;
   /* First-fold target: hero + trusted-bar (221px) = 100vh, so the marquee's
      bottom edge lands flush with the viewport bottom. The 72px header is
      `position: fixed` (an overlay — doesn't take layout space), so it
      should NOT be subtracted from the hero height. Top padding INCLUDES
-     a 72px buffer so the hero content clears the fixed header. */
+     a 72px buffer + extra white space so the panel sits visually lower. */
   min-height: calc(100vh - 221px);
   min-height: calc(100svh - 221px);
-  padding: calc(72px + clamp(8px, 2vh, 24px)) 0 clamp(20px, 2.5vh, 36px);
+  padding: calc(72px + clamp(24px, 4.5vh, 64px)) clamp(16px, 3vw, 32px) clamp(20px, 2.5vh, 36px);
   isolation: isolate;
   overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: stretch;
+  justify-content: center;
 }
 
+/* `.hero-centered-inner` doubles as the .container element — but we override
+   its base padding (0 24px) so the rounded panel goes flush to its 1440 cap.
+   Pattern bg lives HERE now, not on `.hero.hero-centered`. */
 .hero.hero-centered .hero-centered-inner {
   position: relative;
   z-index: 2;
@@ -2374,7 +2373,17 @@ html[data-theme="dark"] .hero.hero-centered {
   align-items: center;
   gap: clamp(16px, 2.4vh, 28px);
   width: 100%;
+  max-width: 1440px;
   min-height: 0;
+  padding: clamp(48px, 7vh, 96px) clamp(24px, 3vw, 48px) 0;
+  background-color: #f5f6f8;
+  background-image: url('/images/hero-grid-bg.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  border-radius: clamp(16px, 2vw, 28px);
+  overflow: hidden;
+  flex: 1 1 auto;
 }
 
 .hero.hero-centered .hero-content {
