@@ -3714,10 +3714,13 @@ html {
 }
 
 /* --- Sub Navigation (Product page) --- */
+/* Background + blur mirror the primary header on the same page so the two
+   bars read as a single continuous frosted strip. Per-page overrides live
+   alongside the matching .header rules in components.css. */
 .sub-nav {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
   border-bottom: 1px solid var(--border-subtle);
   position: fixed;
   top: var(--header-height);
@@ -3729,7 +3732,7 @@ html {
 }
 
 [data-theme="dark"] .sub-nav {
-  background: rgba(12, 10, 9, 0.92);
+  background: rgba(12, 10, 9, 0.10);
 }
 
 .sub-nav-inner {
