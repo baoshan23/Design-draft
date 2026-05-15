@@ -122,11 +122,11 @@
    asked to remove BLACK shadows). */
 .hero-with-video .hero-title .typing-text,
 .hero-with-video .hero-title .text-gradient {
-  background: linear-gradient(120deg, #FEBF1D 0%, #FFD56B 45%, #FEBF1D 100%);
-  -webkit-background-clip: text;
-          background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  background: none;
+  -webkit-background-clip: initial;
+          background-clip: initial;
+  -webkit-text-fill-color: #FEBF1D;
+  color: #FEBF1D;
   text-shadow: 0 2px 18px rgba(254, 191, 29, 0.35);
 }
 /* Description — dark for readability against the light charger bg. */
