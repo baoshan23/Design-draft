@@ -3351,9 +3351,16 @@ html {
   padding-top: 40px;
 }
 
+/* Highlighted card top-fade: soft cream-to-white gradient at the
+   top of the card, fading to flat white before the price block.
+   Higher specificity (0,3,0) than the unified white-bg rule. */
+.pricing-card.glass-card.popular,
+.pricing-card.glass-card.featured {
+  background: linear-gradient(180deg, rgba(254, 191, 29, 0.18) 0%, rgba(254, 191, 29, 0.06) 12%, #ffffff 30%) !important;
+}
+
 /* Kill the gold-glow overlay that enhancements.css paints behind
-   the featured card via ::after — keeps B2B's "推荐" card identical
-   to the popular variant. */
+   the featured card via ::after — keeps the gradient clean. */
 .pricing-card.glass-card.featured::after,
 .pricing-card.glass-card.popular::after {
   content: none !important;
