@@ -543,12 +543,19 @@
   width: 180px;
   height: 180px;
   padding: 18px;
-  background: #F1F2F4;
+  background: #FFFFFF;
   border: 1px solid var(--border-subtle);
   border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* B2B section QR frames sit inside a white card — flip their bg to
+   #F1F2F4 so the codes are still readable but tonally separate from
+   the surrounding card. Single-operator section QR frames stay #fff. */
+.demo-b2b-qr-row .demo-qr-frame {
+  background: #F1F2F4;
 }
 
 .demo-qr-corners span {
