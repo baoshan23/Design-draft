@@ -3623,28 +3623,21 @@ html {
 
 .comparison-plan-name {
   display: block;
-  font-size: 0.95rem;
+  font-size: 0.82rem;
   font-weight: 800;
   color: #111418;
   letter-spacing: 0.02em;
-  margin-bottom: 5px;
-  line-height: 1.15;
+  margin-bottom: 2px;
+  line-height: 1.1;
 }
 
-/* Price in comparison thead: rendered as a small dark pill chip so it
-   visually reads as a separate label, not another dollar-amount data
-   value that could be confused with hosting fees in the row below. */
 .comparison-plan-price {
-  display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 700;
+  display: block;
+  font-size: 1rem;
+  font-weight: 900;
   color: #111418;
-  background: rgba(0, 0, 0, 0.08);
-  padding: 3px 8px;
-  border-radius: 999px;
   font-variant-numeric: tabular-nums;
-  line-height: 1.2;
-  white-space: nowrap;
+  line-height: 1.1;
 }
 
 @media (max-width: 720px) {
