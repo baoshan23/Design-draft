@@ -129,6 +129,13 @@
   color: #FEBF1D;
   text-shadow: 0 2px 18px rgba(254, 191, 29, 0.35);
 }
+.product-hero .hero-title .text-gradient {
+  background: none;
+  -webkit-background-clip: initial;
+          background-clip: initial;
+  -webkit-text-fill-color: #FEBF1D;
+  color: #FEBF1D;
+}
 /* Description — dark for readability against the light charger bg. */
 .hero-with-video .hero-desc {
   color: #6C717A;
