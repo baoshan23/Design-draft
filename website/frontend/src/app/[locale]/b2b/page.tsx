@@ -431,9 +431,13 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
       <section className="section section-alt b2b-demo-section" id="demo">
         <div className="container">
           <ScrollAnimation>
-            <div className="section-header">
-              <span className="section-label">{t('b2b.nav.demo')}</span>
-              <h2>{t('b2b.demo.title')}</h2>
+            <div className="demo-section-head">
+              <span className="demo-section-eyebrow">
+                <span className="demo-section-dot" />
+                {t('b2b.label')}
+              </span>
+              <h2 className="demo-section-title">{t('b2b.demo.title')}</h2>
+              <p className="demo-section-desc">{t('b2b.hero.desc')}</p>
             </div>
           </ScrollAnimation>
           <div className="b2b-demo-grid">
