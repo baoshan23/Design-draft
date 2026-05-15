@@ -1,0 +1,35 @@
+﻿{
+  "version": "1.0.0",
+  "name": "frontend",
+  "problems": [
+    "invalid: postcss@8.4.31 C:\\Users\\vipar\\OneDrive\\Desktop\\GCSS\\Gcss_website\\website\\frontend\\node_modules\\next\\node_modules\\postcss"
+  ],
+  "dependencies": {
+    "next": {
+      "version": "16.2.6",
+      "resolved": "https://registry.npmjs.org/next/-/next-16.2.6.tgz",
+      "overridden": false,
+      "dependencies": {
+        "postcss": {
+          "version": "8.4.31",
+          "overridden": false,
+          "invalid": "\"8.5.14\" from node_modules/next",
+          "problems": [
+            "invalid: postcss@8.4.31 C:\\Users\\vipar\\OneDrive\\Desktop\\GCSS\\Gcss_website\\website\\frontend\\node_modules\\next\\node_modules\\postcss"
+          ]
+        }
+      }
+    },
+    "postcss": {
+      "version": "8.5.14",
+      "resolved": "https://registry.npmjs.org/postcss/-/postcss-8.5.14.tgz",
+      "overridden": false
+    }
+  },
+  "error": {
+    "code": "ELSPROBLEMS",
+    "summary": "invalid: postcss@8.4.31 C:\\Users\\vipar\\OneDrive\\Desktop\\GCSS\\Gcss_website\\website\\frontend\\node_modules\\next\\node_modules\\postcss",
+    "detail": ""
+  }
+}
+
