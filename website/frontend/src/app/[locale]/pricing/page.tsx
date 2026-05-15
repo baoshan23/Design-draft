@@ -250,7 +250,7 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
             </section>
 
             {/* Plans — B2C / B2B tabbed switcher */}
-            <section id="plans" className="section pricing-section pricing-section--tabs" style={{ paddingTop: 56 }}>
+            <section id="plans" className="section pricing-section pricing-section--tabs" style={{ paddingTop: 56, background: '#F1F2F4' }}>
                 <div className="container">
                     <ScrollAnimation>
                         <PricingTabs

@@ -3329,39 +3329,26 @@ html {
    i18n-aware ribbon span instead. */
 .pricing-card.featured::before { content: none; }
 
-/* Unified pricing card frame: flat gray border, no shadow.
-   Hover swaps the border to brand yellow. Applies to all cards in
-   the pricing grid (highlighted and non-highlighted alike).
-   Class-chained for high specificity (0,2,0) to beat .glass-card:hover
-   shadow rule that lives in polish.css (loaded after sections.css). */
+/* Unified pricing card frame: borderless white panels, no shadow.
+   Applies to all cards in the pricing grid (highlighted and
+   non-highlighted alike). Class-chained for high specificity (0,2,0)
+   to beat .glass-card rules that live in polish.css (loaded after
+   sections.css). */
 .pricing-card.glass-card {
-  border-color: #e5e5e5 !important;
+  background: #ffffff !important;
+  border: 0 !important;
   box-shadow: none !important;
 }
 
 .pricing-card.glass-card:hover {
-  border-color: var(--primary) !important;
+  background: #ffffff !important;
+  border: 0 !important;
   box-shadow: none !important;
 }
 
 .pricing-card.popular,
 .pricing-card.featured {
   padding-top: 40px;
-}
-
-/* Highlighted card (popular / featured): always-yellow 2px border.
-   Higher specificity than the unified .pricing-card.glass-card rule
-   so it wins without fighting !important. */
-.pricing-card.glass-card.popular,
-.pricing-card.glass-card.featured {
-  border-color: var(--primary) !important;
-  border-width: 2px !important;
-}
-
-.pricing-card.glass-card.popular:hover,
-.pricing-card.glass-card.featured:hover {
-  border-color: var(--primary) !important;
-  border-width: 2px !important;
 }
 
 .pricing-card-ribbon,
