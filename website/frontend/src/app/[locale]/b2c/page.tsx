@@ -557,10 +557,13 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
       <section className="section b2c-demo-section" id="demo">
         <div className="container">
           <ScrollAnimation>
-            <div className="section-header">
-              <span className="section-label">{t('product.demo.label')}</span>
-              <h2>{t('product.demo.title')}</h2>
-              <p>{t('product.demo.desc')}</p>
+            <div className="demo-section-head">
+              <span className="demo-section-eyebrow">
+                <span className="demo-section-dot" />
+                {t('product.badge')}
+              </span>
+              <h2 className="demo-section-title">{t('product.demo.title')}</h2>
+              <p className="demo-section-desc">{t('product.demo.desc')}</p>
             </div>
           </ScrollAnimation>
 
@@ -569,6 +572,8 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
               <DemoTabs
                 webAppQr={webAppQr}
                 userPortalQr={userPortalQr}
+                webAppUrl="https://app.gcss.hk/"
+                userPortalUrl="https://www.v3g.gcss.hk/user/"
                 adminUrl={CPO_PANEL_URL}
                 adminAccount={CPO_PANEL_CREDS.account}
                 adminPassword={CPO_PANEL_CREDS.password}
