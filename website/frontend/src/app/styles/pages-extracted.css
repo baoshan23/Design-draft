@@ -1638,6 +1638,11 @@
   font-size: 1.5rem;
 }
 
+.method-icon.icon-gradient--gold,
+.info-icon.icon-gradient--gold {
+  background: #FEBF1D;
+}
+
 .contact-method-card h3 {
   font-size: 1.15rem;
   margin-bottom: 8px;
