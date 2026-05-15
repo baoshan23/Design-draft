@@ -3963,7 +3963,7 @@ html {
 }
 
 .mobile-showcase-list-item.is-active .mobile-showcase-list-text strong {
-  color: var(--primary-text, #5a3f00);
+  color: var(--primary);
 }
 
 .mobile-showcase-list-item:hover .mobile-showcase-list-text strong,
