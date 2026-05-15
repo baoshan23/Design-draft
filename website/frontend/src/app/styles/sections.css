@@ -3367,6 +3367,32 @@ html {
   background: none !important;
 }
 
+/* Soft white gradient ring around every pricing card — full white at
+   the top, fading to transparent by the lower third. Drawn via a
+   ::before pseudo with a gradient background masked into a 1px ring,
+   so it follows the rounded corners cleanly. */
+.pricing-card.glass-card,
+.pricing-card.glass-card.popular,
+.pricing-card.glass-card.featured {
+  position: relative;
+}
+
+.pricing-card.glass-card::before,
+.pricing-card.glass-card.popular::before,
+.pricing-card.glass-card.featured::before {
+  content: '' !important;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 60%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .pricing-card-ribbon,
 .pricing-card-ribbon--featured {
   position: absolute;
