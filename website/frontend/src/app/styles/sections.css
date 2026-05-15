@@ -3390,7 +3390,14 @@ html {
   -webkit-mask-composite: xor;
           mask-composite: exclude;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
+}
+
+/* Keep the ribbon pill stacked above the gradient ring so the top
+   1px of the ribbon isn't clipped by the white-fade border. */
+.pricing-card-ribbon,
+.pricing-card-ribbon--featured {
+  z-index: 2;
 }
 
 .pricing-card-ribbon,
