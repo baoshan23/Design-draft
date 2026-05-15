@@ -138,28 +138,34 @@
 }
 .hero-title-b2c {
   display: inline-block;
-  margin-left: 0.35em;
-  background: linear-gradient(90deg, #FEBF1D 0%, #FFE99A 50%, #FEBF1D 100%);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-          background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  animation: b2cShimmer 2.6s ease-in-out infinite;
+  color: #FEBF1D;
+  -webkit-text-fill-color: #FEBF1D;
+  text-shadow: 0 2px 18px rgba(254, 191, 29, 0.35);
 }
-@keyframes b2cShimmer {
-  0% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: -100% 50%;
-  }
+.hero-title-b2c::after {
+  content: '|';
+  margin-left: 4px;
+  color: #FEBF1D;
+  -webkit-text-fill-color: #FEBF1D;
+  animation: blink 0.7s step-end infinite;
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-title-b2c {
+  .hero-title-b2c::after {
     animation: none;
-    -webkit-text-fill-color: #FEBF1D;
-    color: #FEBF1D;
+  }
+}
+.hero-title-tag {
+  display: inline-block;
+  margin-left: 0.35em;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-title-tag.gradient-text-animated {
+    animation: none;
+    background: none;
+    -webkit-background-clip: initial;
+            background-clip: initial;
+    -webkit-text-fill-color: #E6A817;
+    color: #E6A817;
   }
 }
 /* Description — dark for readability against the light charger bg. */
