@@ -141,7 +141,9 @@ body:has(.hero-with-video) .header.scrolled {
 /* Demo page (yellow hero) — keep the header readable on the warm bg by
    forcing a near-opaque white frost on top, regardless of scroll. */
 body:has(.demo-hero) .header,
-body:has(.demo-hero) .header.scrolled {
+body:has(.demo-hero) .header.scrolled,
+body:has(.pricing-hero) .header,
+body:has(.pricing-hero) .header.scrolled {
   background: rgba(255, 255, 255, 0.92);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   backdrop-filter: blur(24px) saturate(180%);
