@@ -5,6 +5,7 @@ import QRCode from 'qrcode';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import SubNav from './SubNav';
 import HeroVideo from './HeroVideo';
+import ScrollResetOnLoad from '@/components/effects/ScrollResetOnLoad';
 
 const DEMO_QR_URLS = {
   mobile: 'https://app.gcss.hk/',
@@ -82,6 +83,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
 
   return (
     <>
+      <ScrollResetOnLoad />
       <SubNav />
 
       {/* ==================== Section 1: Hero ==================== */}

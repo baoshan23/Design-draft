@@ -7,6 +7,7 @@ import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
 import SubNav from './SubNav';
 import DemoTabs from './DemoTabs';
+import ScrollResetOnLoad from '@/components/effects/ScrollResetOnLoad';
 
 const QR_OPTS = {
   type: 'svg' as const,
@@ -45,6 +46,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
 
   return (
     <>
+      <ScrollResetOnLoad />
       {/* ==================== Sub Navigation ==================== */}
       <SubNav />
 
