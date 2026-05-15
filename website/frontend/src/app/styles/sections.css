@@ -3687,7 +3687,7 @@ html {
 /* Extra breathing room between the yellow thead and the first data
    row so the 托管费 row doesn't visually crowd the plan-price line. */
 .comparison-table tbody tr:first-child td {
-  padding-top: 24px;
+  padding-top: 48px;
 }
 
 .comparison-table td:first-child,
