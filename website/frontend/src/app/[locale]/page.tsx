@@ -96,19 +96,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <DiagramModalProvider>
       <ScrollResetOnLoad />
-      {/* Hero Section */}
-      <section className="hero hero-with-video">
-        <Image
-          src="/images/hero-bg-charger.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="hero-bg-video"
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
-        />
-
-        <div className="container hero-with-video-grid">
+      {/* Hero Section — centered text + dashboard mock below (Arcadia-style) */}
+      <section className="hero hero-with-video hero-centered">
+        <div className="container hero-centered-inner">
           <div className="hero-content">
             <div className="hero-text">
               <div className="hero-badge">
@@ -141,34 +131,46 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   <span>{t('hero.cta2')}</span>
                 </Link>
               </div>
-
-              <div className="hero-stats">
-                <div className="hero-stat">
-                  <div className="hero-stat-value"><CounterAnimation target={9999} suffix="" /></div>
-                  <div className="hero-stat-meta">
-                    <Image src="/assets/icons/hero-stats/downloads.svg" alt="" width={16} height={16} className="hero-stat-icon" />
-                    <span className="hero-stat-label">{t('hero.stat1')}</span>
-                  </div>
-                </div>
-                <div className="hero-stat">
-                  <div className="hero-stat-value"><CounterAnimation target={1069} suffix="+" /></div>
-                  <div className="hero-stat-meta">
-                    <Image src="/assets/icons/hero-stats/chargers.svg" alt="" width={16} height={16} className="hero-stat-icon" />
-                    <span className="hero-stat-label">{t('hero.stat2')}</span>
-                  </div>
-                </div>
-                <div className="hero-stat">
-                  <div className="hero-stat-value"><CounterAnimation target={100} suffix="+" /></div>
-                  <div className="hero-stat-meta">
-                    <Image src="/assets/icons/hero-stats/countries.svg" alt="" width={16} height={16} className="hero-stat-icon" />
-                    <span className="hero-stat-label">{t('hero.stat3')}</span>
-                  </div>
-                </div>
-              </div>
-
             </div>
           </div>
 
+          <div className="hero-dashboard-mock" aria-hidden="true">
+            <div className="hero-dashboard-frame">
+              <Image
+                src="/images/dashboard-hero.jpg"
+                alt=""
+                width={1920}
+                height={1080}
+                priority
+                sizes="(max-width: 1200px) 92vw, 1120px"
+                className="hero-dashboard-img"
+              />
+            </div>
+          </div>
+
+          <div className="hero-stats">
+            <div className="hero-stat">
+              <div className="hero-stat-value"><CounterAnimation target={9999} suffix="" /></div>
+              <div className="hero-stat-meta">
+                <Image src="/assets/icons/hero-stats/downloads.svg" alt="" width={16} height={16} className="hero-stat-icon" />
+                <span className="hero-stat-label">{t('hero.stat1')}</span>
+              </div>
+            </div>
+            <div className="hero-stat">
+              <div className="hero-stat-value"><CounterAnimation target={1069} suffix="+" /></div>
+              <div className="hero-stat-meta">
+                <Image src="/assets/icons/hero-stats/chargers.svg" alt="" width={16} height={16} className="hero-stat-icon" />
+                <span className="hero-stat-label">{t('hero.stat2')}</span>
+              </div>
+            </div>
+            <div className="hero-stat">
+              <div className="hero-stat-value"><CounterAnimation target={100} suffix="+" /></div>
+              <div className="hero-stat-meta">
+                <Image src="/assets/icons/hero-stats/countries.svg" alt="" width={16} height={16} className="hero-stat-icon" />
+                <span className="hero-stat-label">{t('hero.stat3')}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

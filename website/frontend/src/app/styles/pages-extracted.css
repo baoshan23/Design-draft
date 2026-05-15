@@ -2325,3 +2325,154 @@ body:has(.product-hero) .glass-card [class*="icon"] {
   box-shadow: none;
   filter: none;
 }
+
+/* ────────────────────────────────────────────────────────────────
+   Home hero — centered layout (Arcadia-style)
+   Text + CTAs centered, dashboard mock floats below, stats at bottom.
+   Overrides the prior left/right grid from `hero-with-video`.
+   ──────────────────────────────────────────────────────────────── */
+/* Kill the dark-fade `::after` from the legacy `hero-with-video` rule —
+   it baked in a fade-to-#0a0a0a designed for the old dark hero and would
+   put a black band over our light cream bg. */
+.hero.hero-centered::after {
+  display: none !important;
+  content: none !important;
+}
+
+.hero.hero-centered {
+  background-color: #f4f1ea;
+  background-image:
+    radial-gradient(ellipse 120% 80% at 50% 0%, rgba(254, 191, 29, 0.10) 0%, rgba(254, 191, 29, 0) 60%),
+    radial-gradient(ellipse 80% 60% at 100% 100%, rgba(150, 200, 180, 0.08) 0%, rgba(150, 200, 180, 0) 70%),
+    linear-gradient(180deg, #f6f2e9 0%, #efece4 60%, #ebe7dd 100%);
+  padding: clamp(80px, 11vh, 140px) 0 clamp(64px, 10vh, 120px);
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.hero.hero-centered .hero-centered-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(40px, 6vh, 72px);
+}
+
+.hero.hero-centered .hero-content {
+  align-items: center;
+  text-align: center;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.hero.hero-centered .hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hero.hero-centered .hero-title {
+  text-align: center;
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  max-width: 900px;
+}
+
+.hero.hero-centered .hero-desc {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 32px;
+  font-size: clamp(1rem, 1.15vw, 1.0625rem);
+  line-height: 1.65;
+  color: #5e6470;
+}
+
+.hero.hero-centered .hero-buttons {
+  justify-content: center;
+}
+
+/* Stats now live below the dashboard, centered. Override the
+   align-self:flex-start from `sections.css` that pulled them left. */
+.hero.hero-centered .hero-stats {
+  align-self: center;
+  justify-content: center;
+  margin: 0;
+  gap: clamp(40px, 5vw, 72px);
+}
+
+.hero.hero-centered .hero-stat {
+  align-items: center;
+  text-align: center;
+}
+
+.hero.hero-centered .hero-stat-value {
+  font-size: clamp(1.75rem, 2.4vw, 2.125rem);
+}
+
+/* Dashboard mockup frame — rounded card holding the screenshot.
+   Subtle border + soft shadow give it the "floating UI" feel. */
+.hero-dashboard-mock {
+  width: min(1120px, 92vw);
+  margin: 0 auto;
+}
+
+.hero-dashboard-frame {
+  position: relative;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 30px 60px -20px rgba(20, 20, 30, 0.18),
+    0 12px 28px -12px rgba(20, 20, 30, 0.10),
+    0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.hero-dashboard-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 30%);
+}
+
+.hero-dashboard-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+@media (max-width: 720px) {
+  .hero.hero-centered {
+    padding: 72px 0 56px;
+  }
+  .hero-dashboard-mock {
+    width: 100%;
+  }
+  .hero-dashboard-frame {
+    border-radius: 12px;
+  }
+  .hero.hero-centered .hero-stats {
+    gap: 28px;
+    row-gap: 20px;
+  }
+}
+
+/* Yellow + black line icons on b2c feature cards */
+.feature-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.feature-card-icon svg {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
