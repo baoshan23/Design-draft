@@ -2304,3 +2304,24 @@ body:has(.product-hero) {
   background: rgba(39, 35, 32, 0.8);
   border-color: rgba(255, 255, 255, 0.06);
 }
+
+/* Product pages (b2c/b2b): kill card + nested icon shadows (per user request) */
+body:has(.product-hero) .card,
+body:has(.product-hero) .glass-card,
+body:has(.product-hero) .model-card,
+body:has(.product-hero) .feature-card {
+  box-shadow: none;
+}
+body:has(.product-hero) .card:hover,
+body:has(.product-hero) .glass-card:hover,
+body:has(.product-hero) .model-card:hover,
+body:has(.product-hero) .feature-card:hover {
+  box-shadow: none;
+}
+body:has(.product-hero) .card svg,
+body:has(.product-hero) .glass-card svg,
+body:has(.product-hero) .card [class*="icon"],
+body:has(.product-hero) .glass-card [class*="icon"] {
+  box-shadow: none;
+  filter: none;
+}
