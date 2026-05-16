@@ -17,10 +17,13 @@
   background: rgba(12, 10, 9, 0.10);
 }
 
-/* Product hero: account for header + sub-nav, no dark gradient barrier */
+/* Product hero: occupy exactly the first screen (viewport minus the
+   72px fixed header + 42px fixed sub-nav) so the hero-footer-bar with
+   the 3 stats lands flush at the bottom of the fold and shows in full.
+   svh keeps it stable on mobile URL-bar resize. */
 .product-hero {
   height: auto;
-  min-height: unset;
+  min-height: calc(100svh - var(--header-height) - 42px);
   max-height: unset;
   padding-top: 60px;
   padding-bottom: 0;
@@ -42,7 +45,24 @@ body:has(.product-hero) {
 
 .product-hero>.hero-footer-bar {
   position: relative;
-  margin-top: 40px;
+  margin-top: auto;
+}
+
+/* Compress the in-hero feature grid + cards so the title, monitor
+   shot and 6 cards all fit above the stats bar within the first
+   screen (grid top margin trimmed 60→28 in JSX; was 32px card
+   padding — clipped the stats). */
+.product-hero .grid-3 {
+  row-gap: 16px;
+}
+.product-hero .grid-3 .card {
+  padding: 20px 24px;
+}
+.product-hero .hero-shot img {
+  max-height: 40vh;
+  width: auto;
+  margin-inline: auto;
+  object-fit: contain;
 }
 
 /* Hero stats */
