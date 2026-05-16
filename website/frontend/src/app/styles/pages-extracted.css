@@ -17,13 +17,16 @@
   background: rgba(12, 10, 9, 0.10);
 }
 
-/* Product hero: occupy exactly the first screen (viewport minus the
-   72px fixed header + 42px fixed sub-nav) so the hero-footer-bar with
-   the 3 stats lands flush at the bottom of the fold and shows in full.
-   svh keeps it stable on mobile URL-bar resize. */
+/* Product hero: occupy exactly the first screen so the
+   hero-footer-bar (3 stats) lands flush at the very bottom of the
+   fold. The hero is the first in-flow element after the 42px
+   .sub-nav-spacer (the header + sub-nav are position:fixed and take
+   no flow space), so its top sits at y=42 — height = 100svh - 42px
+   puts its bottom edge exactly at the fold. svh keeps it stable on
+   mobile URL-bar resize. */
 .product-hero {
   height: auto;
-  min-height: calc(100svh - var(--header-height) - 42px);
+  min-height: calc(100svh - 42px);
   max-height: unset;
   padding-top: 60px;
   padding-bottom: 0;
