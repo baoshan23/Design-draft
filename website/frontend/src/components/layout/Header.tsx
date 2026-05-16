@@ -119,15 +119,6 @@ export default function Header() {
             width={32}
             height={32}
             style={{ borderRadius: '8px' }}
-            className="logo-default"
-          />
-          <Image
-            src="/assets/logo-globe.png"
-            alt=""
-            width={32}
-            height={32}
-            className="logo-yellow"
-            aria-hidden="true"
           />
           <span>GCSS</span>
         </Link>
