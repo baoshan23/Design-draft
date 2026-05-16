@@ -1020,6 +1020,26 @@ html:not([data-theme='dark']) .language-cloud::before {
 html:not([data-theme='dark']) .section-alt::after {
   opacity: 0 !important;
 }
+/* b2c/b2b product hero: dot-matrix pattern tiled edge-to-edge across
+   the whole first screen (user request "点阵背景铺满首屏"). Re-enables
+   + restyles the ::before that the light-mode block above hides;
+   .product-hero is sized to exactly the fold, so inset:0 + no edge
+   mask = pattern fills the entire first screen, behind all content
+   (.container is z-index:1, stats bar z-index:3). */
+html:not([data-theme='dark']) .product-hero::before {
+  display: block !important;
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 1;
+  background-image: radial-gradient(circle, rgba(254, 191, 29, 0.20) 1.5px, transparent 1.5px);
+  background-size: 26px 26px;
+  background-position: 0 0;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
 html:not([data-theme='dark']) .cta-section::before {
   background: none;
 }
