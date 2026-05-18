@@ -385,25 +385,9 @@
   margin-left: -50vw;
   margin-right: -50vw;
   margin-top: 8px;
-}
-/* Top & bottom soft gradient bands (full viewport width). */
-.b2c-feature-lined::before,
-.b2c-feature-lined::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 12px;
-  pointer-events: none;
-  z-index: 1;
-}
-.b2c-feature-lined::before {
-  top: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0));
-}
-.b2c-feature-lined::after {
-  bottom: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0));
+  /* Crisp full-bleed hairlines top & bottom (no shadow/gradient). */
+  border-top: 1px solid rgba(0, 0, 0, 0.09);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
 }
 
 .b2c-feature-row {
@@ -457,11 +441,9 @@
   line-height: 1.5;
   color: var(--text-tertiary);
 }
-[data-theme="dark"] .b2c-feature-lined::before {
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
-}
-[data-theme="dark"] .b2c-feature-lined::after {
-  background: linear-gradient(to top, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
+[data-theme="dark"] .b2c-feature-lined {
+  border-top-color: rgba(255, 255, 255, 0.1);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 [data-theme="dark"] .b2c-feature-row + .b2c-feature-row {
   border-top-color: rgba(255, 255, 255, 0.1);
