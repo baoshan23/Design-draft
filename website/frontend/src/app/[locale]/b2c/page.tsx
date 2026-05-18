@@ -352,6 +352,57 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
             </div>
           </ScrollAnimation>
 
+          {/* Smart Operations Center */}
+          <ScrollAnimation>
+            <div style={{ marginTop: 40 }}>
+              <div className="feature-row reverse">
+                <div
+                  className="feature-image-placeholder"
+                  style={{
+                    position: 'relative',
+                    aspectRatio: '16/10',
+                    borderRadius: 'var(--radius-md, 14px)',
+                    overflow: 'hidden',
+                    background: '#1a1210',
+                    boxShadow:
+                      '0 12px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(254, 191, 29, 0.2), 0 0 36px rgba(254, 191, 29, 0.12)',
+                  }}
+                >
+                  <Image
+                    src="/images/smart-ops-dashboard.png"
+                    alt={t('product.ops.title')}
+                    fill
+                    sizes="(max-width: 900px) 100vw, 560px"
+                    style={{ objectFit: 'cover' }}
+                    priority={false}
+                  />
+                </div>
+                <div className="feature-text">
+                  <h3>{t('product.ops.title')}</h3>
+                  <p>{t('product.ops.desc')}</p>
+                  <ul className="feature-list">
+                    <li>
+                      <CheckIcon />
+                      <span>{t('product.ops.li1')}</span>
+                    </li>
+                    <li>
+                      <CheckIcon />
+                      <span>{t('product.ops.li2')}</span>
+                    </li>
+                    <li>
+                      <CheckIcon />
+                      <span>{t('product.ops.li3')}</span>
+                    </li>
+                    <li>
+                      <CheckIcon />
+                      <span>{t('product.ops.li4')}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </ScrollAnimation>
+
           {/* Global Payment Matrix */}
           <ScrollAnimation>
             <div style={{ marginTop: 80 }}>
@@ -451,57 +502,6 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
 
               {/* Language Request Form */}
               <LanguageRequestForm />
-            </div>
-          </ScrollAnimation>
-
-          {/* Smart Operations Center */}
-          <ScrollAnimation>
-            <div style={{ marginTop: 40 }}>
-              <div className="feature-row reverse">
-                <div
-                  className="feature-image-placeholder"
-                  style={{
-                    position: 'relative',
-                    aspectRatio: '16/10',
-                    borderRadius: 'var(--radius-md, 14px)',
-                    overflow: 'hidden',
-                    background: '#1a1210',
-                    boxShadow:
-                      '0 12px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(254, 191, 29, 0.2), 0 0 36px rgba(254, 191, 29, 0.12)',
-                  }}
-                >
-                  <Image
-                    src="/images/smart-ops-dashboard.png"
-                    alt={t('product.ops.title')}
-                    fill
-                    sizes="(max-width: 900px) 100vw, 560px"
-                    style={{ objectFit: 'cover' }}
-                    priority={false}
-                  />
-                </div>
-                <div className="feature-text">
-                  <h3>{t('product.ops.title')}</h3>
-                  <p>{t('product.ops.desc')}</p>
-                  <ul className="feature-list">
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.ops.li1')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.ops.li2')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.ops.li3')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.ops.li4')}</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
             </div>
           </ScrollAnimation>
         </div>
