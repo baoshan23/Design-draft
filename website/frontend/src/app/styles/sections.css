@@ -571,11 +571,24 @@
   outline-offset: 2px;
 }
 
-/* Override default placeholder gradient when slideshow inside */
+/* Override default placeholder gradient when slideshow inside.
+   Keep the SAME 4:3 box as the sibling .feature-image-placeholder above
+   (e.g. the "Your Brand" OEM image) so both feature rows match in size;
+   the portrait phone scales down to fit inside that box. */
 .feature-image-placeholder:has(.app-slideshow) {
   background: transparent;
-  aspect-ratio: auto;
-  min-height: 520px;
+  aspect-ratio: 4 / 3;
+}
+.feature-image-placeholder:has(.app-slideshow) .app-slideshow {
+  container-type: size;
+  padding: 8px 0;
+}
+.feature-image-placeholder:has(.app-slideshow) .app-slideshow-track {
+  width: auto;
+  height: calc(100cqh - 36px);
+}
+.feature-image-placeholder:has(.app-slideshow) .app-slideshow-dots {
+  margin-top: 10px;
 }
 
 @media (prefers-reduced-motion: reduce) {
