@@ -86,7 +86,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
 
           {/* Feature Grid */}
           <ScrollAnimation>
-            <div className="grid grid-3" style={{ marginTop: 28 }}>
+            <div className="grid grid-3 hero-grid-lines" style={{ marginTop: 28 }}>
               <div className="card glass-card tilt-card">
                 <div className="card-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 16V7a2 2 0 00-2-2H6a2 2 0 00-2 2v9m16 0H4m16 0l1 3H3l1-3" /></svg>
