@@ -174,10 +174,10 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
             </div>
           </ScrollAnimation>
 
-          {/* 6 Feature Cards */}
+          {/* 6 Features — lined grid */}
           <ScrollAnimation>
-            <div className="grid grid-3">
-              <div className="card glass-card tilt-card">
+            <div className="b2c-feature-lined-grid">
+              <div className="b2c-feature-cell">
                 <div className="feature-card-icon" aria-hidden="true">
                   <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
                     <path d="M6 16 V8 H14" stroke="#181818" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -190,7 +190,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                 <h3>{t('product.ff1.title')}</h3>
                 <p>{t('product.ff1.desc')}</p>
               </div>
-              <div className="card glass-card tilt-card">
+              <div className="b2c-feature-cell">
                 <div className="feature-card-icon" aria-hidden="true">
                   <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
                     <path d="M24 41 C12 33 6 25 6 17.5 C6 12.3 10.2 8 15.3 8 C18.5 8 21.5 10 24 14 C26.5 10 29.5 8 32.7 8 C37.8 8 42 12.3 42 17.5 C42 25 36 33 24 41 Z" stroke="#181818" strokeWidth="2" strokeLinejoin="round" />
@@ -200,7 +200,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                 <h3>{t('product.ff2.title')}</h3>
                 <p>{t('product.ff2.desc')}</p>
               </div>
-              <div className="card glass-card tilt-card">
+              <div className="b2c-feature-cell">
                 <div className="feature-card-icon" aria-hidden="true">
                   <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
                     <circle cx="19" cy="17" r="7" stroke="#181818" strokeWidth="2" />
@@ -212,7 +212,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                 <h3>{t('product.ff3.title')}</h3>
                 <p>{t('product.ff3.desc')}</p>
               </div>
-              <div className="card glass-card tilt-card">
+              <div className="b2c-feature-cell">
                 <div className="feature-card-icon" aria-hidden="true">
                   <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
                     <path d="M8 8 V40 H42" stroke="#181818" strokeWidth="2" strokeLinecap="round" />
@@ -226,7 +226,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                 <h3>{t('product.ff4.title')}</h3>
                 <p>{t('product.ff4.desc')}</p>
               </div>
-              <div className="card glass-card tilt-card">
+              <div className="b2c-feature-cell">
                 <div className="feature-card-icon" aria-hidden="true">
                   <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
                     <rect x="4" y="8" width="40" height="32" rx="4" stroke="#181818" strokeWidth="2" />
@@ -238,7 +238,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                 <h3>{t('product.ff5.title')}</h3>
                 <p>{t('product.ff5.desc')}</p>
               </div>
-              <div className="card glass-card tilt-card">
+              <div className="b2c-feature-cell">
                 <div className="feature-card-icon" aria-hidden="true">
                   <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
                     <rect x="4" y="10" width="22" height="16" rx="2" stroke="#181818" strokeWidth="2" />

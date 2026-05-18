@@ -372,6 +372,66 @@
   .hero-mock { display: none; }
 }
 
+/* B2C "powerful features" — minimal lined grid (no card boxes/shadows).
+   Single hairlines via container top+left + per-cell right+bottom, so the
+   1px lines never double and survive any column count on resize. */
+.b2c-feature-lined-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid rgba(0, 0, 0, 0.09);
+  border-left: 1px solid rgba(0, 0, 0, 0.09);
+  margin-top: 8px;
+}
+.b2c-feature-cell {
+  padding: 44px 40px;
+  border-right: 1px solid rgba(0, 0, 0, 0.09);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+  background: none;
+  box-shadow: none;
+  transition: background 0.3s ease;
+}
+.b2c-feature-cell:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+.b2c-feature-cell .feature-card-icon {
+  margin-bottom: 18px;
+}
+.b2c-feature-cell h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+.b2c-feature-cell p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+[data-theme="dark"] .b2c-feature-lined-grid {
+  border-top-color: rgba(255, 255, 255, 0.1);
+  border-left-color: rgba(255, 255, 255, 0.1);
+}
+[data-theme="dark"] .b2c-feature-cell {
+  border-right-color: rgba(255, 255, 255, 0.1);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+[data-theme="dark"] .b2c-feature-cell:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+@media (max-width: 900px) {
+  .b2c-feature-lined-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .b2c-feature-lined-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .b2c-feature-cell {
+    padding: 32px 24px;
+  }
+}
+
 /* B2C demo — card shell unified with the /demo page "platform editions"
    style (.demo-edition-card / .demo-cred-block / .demo-b2b-qr-row). Top
    row: CPO console + demo account; below: a full-width QR card. */
