@@ -372,97 +372,235 @@
   .hero-mock { display: none; }
 }
 
-/* B2C demo grid — 2×2 layout (top: CPO + H5 web; bottom: H5 QR + APP QR) */
+/* B2C demo — card shell unified with the /demo page "platform editions"
+   style (.demo-edition-card / .demo-cred-block / .demo-b2b-qr-row). Top
+   row: CPO console + demo account; below: a full-width QR card. */
 .b2c-demo-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  gap: 28px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 @media (max-width: 720px) {
   .b2c-demo-grid {
     grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
   }
 }
 
 .b2c-demo-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  gap: 22px;
+  height: 100%;
   padding: 32px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.92);
+  border-radius: var(--radius-lg);
+  background: #fff;
   border: 1px solid var(--border-subtle);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: none;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.b2c-demo-card:hover,
+.b2c-demo-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+  border-color: var(--border-light);
 }
 [data-theme="dark"] .b2c-demo-card {
   background: rgba(255, 255, 255, 0.04);
   border-color: rgba(255, 255, 255, 0.08);
 }
 
+.b2c-demo-card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.b2c-demo-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #FEBF1D;
+  color: #1a1210;
+  box-shadow: 0 0 20px rgba(254, 191, 29, 0.35);
+}
 .b2c-demo-card-title {
-  margin: 0 0 8px;
-  font-size: 1.05rem;
+  margin: 0 0 4px;
+  font-size: 1.15rem;
   font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.b2c-demo-card-tag {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono, ui-monospace, monospace);
 }
 .b2c-demo-card-desc {
   margin: 0;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
-  line-height: 1.55;
+  line-height: 1.6;
 }
-.b2c-demo-card-foot {
-  margin: 12px 0 0;
-  font-size: 0.78rem;
-  color: var(--text-tertiary);
+.b2c-demo-card-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+.b2c-demo-card-actions .btn {
+  flex: 1;
+  min-width: fit-content;
+  justify-content: center;
 }
 
+/* Credentials block — mirrors .demo-cred-block */
 .b2c-demo-creds {
+  background: #F1F2F4;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 6px;
-  width: 100%;
-  max-width: 280px;
+  gap: 2px;
+}
+[data-theme="dark"] .b2c-demo-creds {
+  background: rgba(255, 255, 255, 0.04);
+}
+.b2c-demo-cred-header {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 10px;
 }
 .b2c-demo-cred-row {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 12px;
-  padding: 10px 14px;
-  background: rgba(0, 0, 0, 0.03);
-  border: 1px solid var(--border-subtle);
-  border-radius: 10px;
-  font-size: 0.85rem;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+.b2c-demo-cred-row:last-child {
+  border-bottom: none;
 }
 [data-theme="dark"] .b2c-demo-cred-row {
-  background: rgba(255, 255, 255, 0.04);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 .b2c-demo-cred-key {
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-size: 0.78rem;
   color: var(--text-tertiary);
-  font-weight: 600;
+  min-width: 72px;
+  flex-shrink: 0;
 }
-.b2c-demo-cred-row code {
-  font-family: var(--font-mono, ui-monospace, monospace);
-  font-weight: 700;
+.b2c-demo-cred-value {
+  flex: 1;
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
   color: var(--text-primary);
+  background: none;
+  padding: 0;
+}
+.b2c-demo-cred-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.12s ease;
+}
+.b2c-demo-cred-copy:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+.b2c-demo-cred-copy:active {
+  transform: scale(0.96);
+}
+[data-theme="dark"] .b2c-demo-cred-copy {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Bottom QR card — mirrors .demo-b2b-qr-row */
+.b2c-demo-qr-row {
+  max-width: 1100px;
+  margin: 28px auto 0;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: 40px;
+  align-items: center;
+  padding: 32px;
+  background: #fff;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+[data-theme="dark"] .b2c-demo-qr-row {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.b2c-demo-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.b2c-demo-qr-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
+}
+.b2c-demo-qr-link {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+}
+.b2c-demo-qr-link p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+}
+@media (max-width: 720px) {
+  .b2c-demo-qr-row {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 24px;
+  }
+  .b2c-demo-qr-link {
+    align-items: center;
+  }
 }
 
 .b2c-qr {
   width: 160px;
   height: 160px;
-  margin: 0 auto;
-  background: #FFFFFF;
-  border-radius: 14px;
-  padding: 10px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  background: #F1F2F4;
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+[data-theme="dark"] .b2c-qr {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 .b2c-qr svg {
   width: 100%;
