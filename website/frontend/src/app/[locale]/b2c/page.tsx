@@ -176,7 +176,8 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
 
           {/* 6 Features — lined grid */}
           <ScrollAnimation>
-            <div className="b2c-feature-lined-grid">
+            <div className="b2c-feature-lined">
+              <div className="b2c-feature-row">
               <div className="b2c-feature-cell">
                 <div className="feature-card-icon" aria-hidden="true">
                   <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
@@ -212,6 +213,8 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                 <h3>{t('product.ff3.title')}</h3>
                 <p>{t('product.ff3.desc')}</p>
               </div>
+              </div>
+              <div className="b2c-feature-row">
               <div className="b2c-feature-cell">
                 <div className="feature-card-icon" aria-hidden="true">
                   <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
@@ -249,6 +252,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                 </div>
                 <h3>{t('product.ff6.title')}</h3>
                 <p>{t('product.ff6.desc')}</p>
+              </div>
               </div>
             </div>
           </ScrollAnimation>

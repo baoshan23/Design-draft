@@ -372,23 +372,61 @@
   .hero-mock { display: none; }
 }
 
-/* B2C "powerful features" — minimal lined grid (no card boxes/shadows).
-   Single hairlines via container top+left + per-cell right+bottom, so the
-   1px lines never double and survive any column count on resize. */
-.b2c-feature-lined-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-top: 1px solid rgba(0, 0, 0, 0.09);
-  border-left: 1px solid rgba(0, 0, 0, 0.09);
+/* B2C "powerful features" — full-bleed lined grid. Horizontal rules span
+   the whole viewport; vertical separators stay inside the content column.
+   Top & bottom edges fade vertically (上下渐变) instead of hard hairlines.
+   Full-bleed escape: 100vw centered out of the .container; the columns are
+   re-aligned to the content box via padding-inline. */
+.b2c-feature-lined {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  margin-right: -50vw;
   margin-top: 8px;
 }
+/* Top & bottom soft gradient bands (full viewport width). */
+.b2c-feature-lined::before,
+.b2c-feature-lined::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 12px;
+  pointer-events: none;
+  z-index: 1;
+}
+.b2c-feature-lined::before {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0));
+}
+.b2c-feature-lined::after {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0));
+}
+
+.b2c-feature-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* Re-align the 3 columns to the .container content box. */
+  padding-inline: max(24px, calc((100vw - var(--max-width)) / 2 + 24px));
+}
+/* Crisp full-bleed hairline between the two rows. */
+.b2c-feature-row + .b2c-feature-row {
+  border-top: 1px solid rgba(0, 0, 0, 0.09);
+}
+
 .b2c-feature-cell {
   padding: 44px 40px;
   border-right: 1px solid rgba(0, 0, 0, 0.09);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
   background: none;
   box-shadow: none;
   transition: background 0.3s ease;
+}
+/* Left edge of the content column (vertical lines stay inside content). */
+.b2c-feature-cell:first-child {
+  border-left: 1px solid rgba(0, 0, 0, 0.09);
 }
 .b2c-feature-cell:hover {
   background: rgba(0, 0, 0, 0.02);
@@ -407,28 +445,47 @@
   line-height: 1.65;
   color: var(--text-secondary);
 }
-[data-theme="dark"] .b2c-feature-lined-grid {
+[data-theme="dark"] .b2c-feature-lined::before {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
+}
+[data-theme="dark"] .b2c-feature-lined::after {
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
+}
+[data-theme="dark"] .b2c-feature-row + .b2c-feature-row {
   border-top-color: rgba(255, 255, 255, 0.1);
-  border-left-color: rgba(255, 255, 255, 0.1);
 }
 [data-theme="dark"] .b2c-feature-cell {
   border-right-color: rgba(255, 255, 255, 0.1);
-  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+[data-theme="dark"] .b2c-feature-cell:first-child {
+  border-left-color: rgba(255, 255, 255, 0.1);
 }
 [data-theme="dark"] .b2c-feature-cell:hover {
   background: rgba(255, 255, 255, 0.03);
 }
 @media (max-width: 900px) {
-  .b2c-feature-lined-grid {
+  .b2c-feature-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (max-width: 600px) {
-  .b2c-feature-lined-grid {
+  .b2c-feature-row {
     grid-template-columns: minmax(0, 1fr);
   }
   .b2c-feature-cell {
     padding: 32px 24px;
+  }
+  /* Single column: keep a hairline between stacked cells too. */
+  .b2c-feature-cell + .b2c-feature-cell {
+    border-top: 1px solid rgba(0, 0, 0, 0.09);
+  }
+  [data-theme="dark"] .b2c-feature-cell + .b2c-feature-cell {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+}
+@media (max-width: 480px) {
+  .b2c-feature-row {
+    padding-inline: 16px;
   }
 }
 
