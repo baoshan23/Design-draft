@@ -1020,26 +1020,10 @@ html:not([data-theme='dark']) .language-cloud::before {
 html:not([data-theme='dark']) .section-alt::after {
   opacity: 0 !important;
 }
-/* b2c/b2b product hero: dot-matrix pattern tiled edge-to-edge across
-   the whole first screen (user request "点阵背景铺满首屏"). Re-enables
-   + restyles the ::before that the light-mode block above hides;
-   .product-hero is sized to exactly the fold, so inset:0 + no edge
-   mask = pattern fills the entire first screen, behind all content
-   (.container is z-index:1, stats bar z-index:3). */
-html:not([data-theme='dark']) .product-hero::before {
-  display: block !important;
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 1;
-  background-image: radial-gradient(circle, rgba(214, 158, 0, 0.55) 2.5px, transparent 2.5px);
-  background-size: 24px 24px;
-  background-position: 0 0;
-  -webkit-mask-image: none;
-  mask-image: none;
-}
+/* b2c/b2b product hero: flat #F1F2F4 (set on `.product-hero` itself in
+   pages-extracted.css). The dot-matrix `::before` overlay was removed per
+   user request — `.product-hero::before` stays hidden via the light-mode
+   block above, leaving the solid #F1F2F4 first screen. */
 html:not([data-theme='dark']) .cta-section::before {
   background: none;
 }
