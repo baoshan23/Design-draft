@@ -368,8 +368,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                     borderRadius: 'var(--radius-md, 14px)',
                     overflow: 'hidden',
                     background: '#1a1210',
-                    boxShadow:
-                      '0 12px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(254, 191, 29, 0.2), 0 0 36px rgba(254, 191, 29, 0.12)',
+                    boxShadow: 'none',
                   }}
                 >
                   <Image
