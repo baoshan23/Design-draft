@@ -1551,8 +1551,8 @@ h3.matrix-header,
 
 /* ----- per-role accent palettes ----- */
 
-/* All three accents come straight from the site's semantic palette:
-   gold (--primary), green (--success), amber (--warning). */
+/* Gold-mono unified with the homepage: all three role boxes share the
+   site's gold --primary accent (was gold / green / amber). */
 .b2b-arch-box[data-role="platform"] {
   --accent: #FEBF1D;
   --accent-dark: #E6A817;
@@ -1563,19 +1563,19 @@ h3.matrix-header,
 }
 
 .b2b-arch-box[data-role="operator"] {
-  --accent: #10B981;
-  --accent-dark: #059669;
-  --accent-soft: rgba(16, 185, 129, 0.1);
-  --accent-strong: rgba(16, 185, 129, 0.28);
+  --accent: #FEBF1D;
+  --accent-dark: #E6A817;
+  --accent-soft: rgba(254, 191, 29, 0.12);
+  --accent-strong: rgba(254, 191, 29, 0.3);
   grid-column: 1 / 2;
   grid-row: 2 / 3;
 }
 
 .b2b-arch-box[data-role="user"] {
-  --accent: #F59E0B;
-  --accent-dark: #D97706;
-  --accent-soft: rgba(245, 158, 11, 0.1);
-  --accent-strong: rgba(245, 158, 11, 0.3);
+  --accent: #FEBF1D;
+  --accent-dark: #E6A817;
+  --accent-soft: rgba(254, 191, 29, 0.12);
+  --accent-strong: rgba(254, 191, 29, 0.3);
   grid-column: 3 / 4;
   grid-row: 2 / 3;
 }
@@ -1824,7 +1824,7 @@ h3.matrix-header,
 }
 
 .b2b-arch-center-inner span:nth-child(1) {
-  color: #10B981;
+  color: #FEBF1D;
 }
 
 .b2b-arch-center-inner span:nth-child(2) {
@@ -1832,7 +1832,7 @@ h3.matrix-header,
 }
 
 .b2b-arch-center-inner span:nth-child(3) {
-  color: #F59E0B;
+  color: #FEBF1D;
 }
 
 .b2b-arch-center-caption {
@@ -2111,7 +2111,7 @@ h3.matrix-header,
   margin-top: 32px;
   padding: 32px 28px 36px;
   border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, rgba(254, 191, 29, 0.06) 0%, rgba(255, 255, 255, 0.9) 45%, rgba(16, 185, 129, 0.05) 100%);
+  background: linear-gradient(135deg, rgba(254, 191, 29, 0.06) 0%, rgba(255, 255, 255, 0.9) 45%, rgba(254, 191, 29, 0.06) 100%);
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-md);
 }
@@ -2395,14 +2395,14 @@ h3.matrix-header,
   opacity: 1;
 }
 
-/* Per-column accent variables — enterprise palette calibrated by
-   UI/UX Pro Max. Cool blue → brand gold → trust teal harmonizes
-   the matrix without the candy clash of the prior rose/gold/green. */
+/* Per-column accent variables — gold-mono unified with the homepage.
+   All three columns share the brand gold --primary (was blue / gold /
+   teal). */
 .support-col[data-accent="rose"] {
-  --accent: #0369A1;
-  --accent-dark: #075985;
-  --accent-soft: rgba(3, 105, 161, 0.09);
-  --accent-strong: rgba(3, 105, 161, 0.28);
+  --accent: #FEBF1D;
+  --accent-dark: #E6A817;
+  --accent-soft: rgba(254, 191, 29, 0.1);
+  --accent-strong: rgba(254, 191, 29, 0.28);
 }
 
 .support-col[data-accent="gold"] {
@@ -2413,10 +2413,10 @@ h3.matrix-header,
 }
 
 .support-col[data-accent="emerald"] {
-  --accent: #0F766E;
-  --accent-dark: #115E59;
-  --accent-soft: rgba(15, 118, 110, 0.09);
-  --accent-strong: rgba(15, 118, 110, 0.28);
+  --accent: #FEBF1D;
+  --accent-dark: #E6A817;
+  --accent-soft: rgba(254, 191, 29, 0.1);
+  --accent-strong: rgba(254, 191, 29, 0.28);
 }
 
 /* ----- Column header ----- */
@@ -2622,7 +2622,7 @@ h3.matrix-header,
     box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.b2b-demo-card[data-accent="blue"] { --accent: #0369A1; }
+.b2b-demo-card[data-accent="blue"] { --accent: #FEBF1D; }
 .b2b-demo-card[data-accent="gold"] { --accent: #FEBF1D; }
 
 .b2b-demo-card::before {
