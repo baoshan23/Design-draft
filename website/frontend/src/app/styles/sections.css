@@ -418,7 +418,7 @@
 }
 
 .b2c-feature-cell {
-  padding: 44px 40px;
+  padding: 52px 40px;
   border-right: 1px solid rgba(0, 0, 0, 0.09);
   background: none;
   box-shadow: none;
@@ -431,19 +431,31 @@
 .b2c-feature-cell:hover {
   background: rgba(0, 0, 0, 0.02);
 }
+/* Stat-band look: no icons, big heading w/ green +, tiny uppercase caption. */
 .b2c-feature-cell .feature-card-icon {
-  margin-bottom: 18px;
+  display: none;
 }
 .b2c-feature-cell h3 {
-  font-size: 1.25rem;
+  font-size: clamp(1.9rem, 2.6vw, 2.5rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0;
+}
+.b2c-feature-cell h3::before {
+  content: "+";
+  margin-right: 6px;
+  color: #3fae59;
   font-weight: 600;
-  margin: 0 0 10px;
 }
 .b2c-feature-cell p {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.65;
-  color: var(--text-secondary);
+  margin: 18px 0 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--text-tertiary);
 }
 [data-theme="dark"] .b2c-feature-lined::before {
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
