@@ -48,22 +48,29 @@ export default function AppSlideshow({ alt }: { alt: string }) {
             aria-label={alt}
         >
             <div className="app-slideshow-track">
-                {SLIDES.map((s, i) => (
+                <div className="app-slideshow-screen">
                     <div
-                        key={s.src}
-                        className={`app-slideshow-slide${i === index ? ' is-active' : ''}`}
-                        aria-hidden={i !== index}
+                        className="app-slideshow-rail"
+                        style={{ transform: `translateX(-${index * 100}%)` }}
                     >
-                        <Image
-                            src={s.src}
-                            alt={s.alt}
-                            width={1080}
-                            height={2340}
-                            sizes="(max-width: 900px) 100vw, 560px"
-                            priority={i === 0}
-                        />
+                        {SLIDES.map((s, i) => (
+                            <div
+                                key={s.src}
+                                className="app-slideshow-slide"
+                                aria-hidden={i !== index}
+                            >
+                                <Image
+                                    src={s.src}
+                                    alt={s.alt}
+                                    width={1080}
+                                    height={2340}
+                                    sizes="(max-width: 900px) 100vw, 560px"
+                                    priority={i === 0}
+                                />
+                            </div>
+                        ))}
                     </div>
-                ))}
+                </div>
             </div>
             <div className="app-slideshow-dots" role="tablist">
                 {SLIDES.map((_, i) => (

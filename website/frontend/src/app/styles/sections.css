@@ -516,21 +516,26 @@
   border-radius: 999px;
   z-index: 3;
 }
-.app-slideshow-slide {
+/* Clipped phone "screen" — the horizontal rail slides inside this */
+.app-slideshow-screen {
   position: absolute;
   inset: 10px;
   border-radius: 40px;
   overflow: hidden;
-  opacity: 0;
-  transform: scale(1.02);
-  transition: opacity 600ms ease, transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-}
-.app-slideshow-slide.is-active {
-  opacity: 1;
-  transform: scale(1);
-  pointer-events: auto;
   z-index: 1;
+}
+.app-slideshow-rail {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.app-slideshow-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 .app-slideshow-slide img {
   width: 100%;
@@ -576,7 +581,7 @@
    (e.g. the "Your Brand" OEM image) so both feature rows match in size;
    the portrait phone scales down to fit inside that box. */
 .feature-image-placeholder:has(.app-slideshow) {
-  background: transparent;
+  background: #F1F2F4;
   aspect-ratio: 4 / 3;
 }
 .feature-image-placeholder:has(.app-slideshow) .app-slideshow {
@@ -592,7 +597,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .app-slideshow-slide {
+  .app-slideshow-rail {
     transition: none;
   }
 }
