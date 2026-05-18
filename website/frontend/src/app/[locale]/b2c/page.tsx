@@ -19,6 +19,7 @@ const QR_OPTS = {
 import LanguageRequestForm from './LanguageRequestForm';
 import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
 import AppSlideshow from './AppSlideshow';
+import StackCards from './StackCards';
 
 export const metadata = {
   title: 'B2C Model - GCSS | Direct Operator EV Charging Platform',
@@ -257,9 +258,10 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
             </div>
           </ScrollAnimation>
 
-          {/* Stunning UI Design */}
-          <ScrollAnimation>
-            <div style={{ marginTop: 80 }}>
+          {/* Feature highlights — sticky stacking cards */}
+          <StackCards>
+            {/* Stunning UI Design */}
+            <article className="b2c-stack-card">
               <div className="feature-row">
                 <div className="feature-image-placeholder">
                   <Image src="/images/ui-design-b2c-2.png" alt={t('product.ui.title')} width={1332} height={1000} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 14 }} />
@@ -287,12 +289,10 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                   </ul>
                 </div>
               </div>
-            </div>
-          </ScrollAnimation>
+            </article>
 
-          {/* Your Brand. Your Rules. */}
-          <ScrollAnimation>
-            <div style={{ marginTop: 40 }}>
+            {/* Your Brand. Your Rules. */}
+            <article className="b2c-stack-card">
               <div className="feature-row reverse">
                 <div className="feature-image-placeholder">
                   <Image src="/images/OEM.png" alt={t('product.brand.title')} width={1920} height={1080} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 14 }} />
@@ -316,12 +316,10 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                   </ul>
                 </div>
               </div>
-            </div>
-          </ScrollAnimation>
+            </article>
 
-          {/* APP / H5 */}
-          <ScrollAnimation>
-            <div style={{ marginTop: 40 }}>
+            {/* APP / H5 */}
+            <article className="b2c-stack-card">
               <div className="feature-row">
                 <div className="feature-image-placeholder">
                   <AppSlideshow alt={t('product.app.title')} />
@@ -353,12 +351,10 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                   </ul>
                 </div>
               </div>
-            </div>
-          </ScrollAnimation>
+            </article>
 
-          {/* Smart Operations Center */}
-          <ScrollAnimation>
-            <div style={{ marginTop: 40 }}>
+            {/* Smart Operations Center */}
+            <article className="b2c-stack-card">
               <div className="feature-row reverse">
                 <div
                   className="feature-image-placeholder"
@@ -404,8 +400,8 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                   </ul>
                 </div>
               </div>
-            </div>
-          </ScrollAnimation>
+            </article>
+          </StackCards>
 
           {/* Global Payment Matrix */}
           <ScrollAnimation>
