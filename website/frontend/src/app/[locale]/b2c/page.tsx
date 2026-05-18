@@ -367,7 +367,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                     aspectRatio: '16/10',
                     borderRadius: 'var(--radius-md, 14px)',
                     overflow: 'hidden',
-                    background: '#1a1210',
+                    background: '#F1F2F4',
                     boxShadow: 'none',
                   }}
                 >
@@ -376,7 +376,14 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                     alt={t('product.ops.title')}
                     fill
                     sizes="(max-width: 900px) 100vw, 560px"
-                    style={{ objectFit: 'cover' }}
+                    style={{
+                      objectFit: 'cover',
+                      objectPosition: 'left top',
+                      width: '125%',
+                      height: '125%',
+                      right: 'auto',
+                      bottom: 'auto',
+                    }}
                     priority={false}
                   />
                 </div>
