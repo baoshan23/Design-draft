@@ -2512,14 +2512,20 @@ html[data-theme="dark"] .hero.hero-centered {
    the bottom rows out. Bottom is faded via a vertical mask gradient
    so the dashboard blends into the panel rather than ending hard. */
 .hero-dashboard-mock {
-  width: min(972px, calc(100% - 32px));
+  width: 100%;
+  max-width: 1440px;
   margin: clamp(4px, 0.8vh, 14px) auto 0;
   flex: 1 1 auto;
   min-height: 0;
   display: flex;
-  max-height: clamp(200px, 36vh, 400px);
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%);
-          mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%);
+  /* No height cap: the mock flex-fills the space left below the hero
+     text up to the panel's fixed bottom (the trusted-logo bar is a
+     separate section after this fixed-height overflow:hidden hero, so
+     it is not affected). The part that exceeds the fold fades out via
+     the bottom mask. */
+  max-height: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 80%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 0%, #000 80%, transparent 100%);
 }
 
 .hero-dashboard-frame {
