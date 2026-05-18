@@ -352,26 +352,6 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
             </div>
           </ScrollAnimation>
 
-          {/* Exclusive UI Customization & Zero-Touch Config */}
-          <ScrollAnimation>
-            <div className="grid grid-2" style={{ marginTop: 60 }}>
-              <div className="card glass-card tilt-card" style={{ textAlign: 'center', padding: 40 }}>
-                <div className="card-icon" style={{ margin: '0 auto 20px', background: '#FCE7F3', color: '#9D174D' }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" /></svg>
-                </div>
-                <h3>{t('product.uicustom.title')}</h3>
-                <p>{t('product.uicustom.desc')}</p>
-              </div>
-              <div className="card glass-card tilt-card" style={{ textAlign: 'center', padding: 40 }}>
-                <div className="card-icon" style={{ margin: '0 auto 20px', background: '#D1FAE5', color: '#065F46' }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
-                </div>
-                <h3>{t('product.zeroconfig.title')}</h3>
-                <p>{t('product.zeroconfig.desc')}</p>
-              </div>
-            </div>
-          </ScrollAnimation>
-
           {/* Global Payment Matrix */}
           <ScrollAnimation>
             <div style={{ marginTop: 80 }}>
