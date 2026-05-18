@@ -61,10 +61,10 @@ body:has(.product-hero) {
 .product-hero .grid-3 .card {
   padding: 20px 24px;
 }
-/* b2c/b2b hero feature-card icons: solid yellow tile + black glyph
+/* b2c/b2b hero feature-card icons: #F1F2F4 tile + black glyph
    (SVGs use stroke="currentColor", so `color` drives the icon). */
 .product-hero .grid-3 .card .card-icon {
-  background: var(--primary);
+  background: #F1F2F4;
   color: #000;
 }
 .product-hero .grid-3 .card .card-icon svg {
