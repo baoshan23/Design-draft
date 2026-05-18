@@ -2514,7 +2514,7 @@ html[data-theme="dark"] .hero.hero-centered {
 .hero-dashboard-mock {
   width: 100%;
   max-width: 1440px;
-  margin: clamp(4px, 0.8vh, 14px) auto 0;
+  margin: clamp(12px, 2vh, 26px) auto 0;
   flex: 1 1 auto;
   min-height: 0;
   display: flex;
