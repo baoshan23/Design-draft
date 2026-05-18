@@ -167,7 +167,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
       <section className="section section-alt" id="features">
         <div className="container">
           <ScrollAnimation>
-            <div className="section-header">
+            <div className="section-header b2c-feature-head">
               <span className="section-label">{t('product.features.label')}</span>
               <h2>{t('product.features.title')}</h2>
               <p>{t('product.features.desc')}</p>
