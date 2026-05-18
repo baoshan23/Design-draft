@@ -328,15 +328,16 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                       position: 'absolute',
                       top: 0,
                       left: 0,
-                      width: '125%',
-                      height: '125%',
+                      width: '80%',
+                      height: '80%',
+                      overflow: 'hidden',
                     }}
                   >
                     <Image
                       src="/images/smart-ops-dashboard.png"
                       alt={t('product.ops.title')}
                       fill
-                      sizes="(max-width: 900px) 100vw, 700px"
+                      sizes="(max-width: 900px) 100vw, 560px"
                       style={{ objectFit: 'cover', objectPosition: 'left top' }}
                       priority={false}
                     />
