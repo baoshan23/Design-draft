@@ -595,6 +595,24 @@
 .feature-image-placeholder:has(.app-slideshow) .app-slideshow-dots {
   margin-top: 10px;
 }
+/* Scale the iPhone frame metrics to the (shrunken) phone size — fixed px
+   bezel/radius/island looked oversized once the phone fits the 4:3 box.
+   cqh = 1% of the .app-slideshow box height (≈ phone height); values tuned
+   to real iPhone proportions so the screenshots sit flush in the screen. */
+.feature-image-placeholder:has(.app-slideshow) .app-slideshow-track {
+  border: 0.3cqh solid #2a2a2a;
+  border-radius: 7.5cqh;
+  padding: 1.3cqh;
+}
+.feature-image-placeholder:has(.app-slideshow) .app-slideshow-screen {
+  inset: 1.3cqh;
+  border-radius: 6.2cqh;
+}
+.feature-image-placeholder:has(.app-slideshow) .app-slideshow-track::after {
+  top: 2.2cqh;
+  width: 13cqh;
+  height: 4cqh;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .app-slideshow-rail {
