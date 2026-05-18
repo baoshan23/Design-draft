@@ -2363,13 +2363,17 @@ body:has(.product-hero) .glass-card [class*="icon"] {
   content: none !important;
 }
 
-/* Outer hero = pure white. The dotted-grid bg + rounded panel now lives
-   on `.hero-centered-inner` (the panel). Keep the `:not()` mirror so we
-   still beat polish.css's `background: none` rule for any future bg work. */
+/* Outer hero carries the bg so it fills the WHOLE first screen edge-to-edge
+   (no white margin / inset panel). The `:not()` mirror beats polish.css's
+   `background: none` rule. `background-attachment: local` keeps the image
+   pinned through the hero's `overflow:hidden` compression. */
 html:not([data-theme="dark"]) .hero.hero-centered,
 html[data-theme="dark"] .hero.hero-centered {
-  background-color: #ffffff;
-  background-image: none;
+  background-color: #f5f6f8;
+  background-image: url('/images/hero-grid-bg.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
   /* First-fold target: hero + trusted-bar (180px) = 100vh, so the marquee's
      bottom edge lands flush with the viewport bottom. The 72px header is
      `position: fixed` (an overlay — doesn't take layout space), so it
@@ -2390,8 +2394,8 @@ html[data-theme="dark"] .hero.hero-centered {
 }
 
 /* `.hero-centered-inner` doubles as the .container element — but we override
-   its base padding (0 24px) so the rounded panel goes flush to its 1440 cap.
-   Pattern bg lives HERE now, not on `.hero.hero-centered`. */
+   its base padding (0 24px). It's now transparent (the bg fills the full
+   first screen via `.hero.hero-centered`); this just caps content width. */
 .hero.hero-centered .hero-centered-inner {
   position: relative;
   z-index: 2;
@@ -2403,12 +2407,7 @@ html[data-theme="dark"] .hero.hero-centered {
   max-width: 1440px;
   min-height: 0;
   padding: clamp(28px, 4vh, 60px) clamp(24px, 3vw, 48px) 0;
-  background-color: #f5f6f8;
-  background-image: url('/images/hero-grid-bg.png');
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  border-radius: clamp(16px, 2vw, 28px);
+  background: transparent;
   overflow: hidden;
   flex: 1 1 auto;
 }
