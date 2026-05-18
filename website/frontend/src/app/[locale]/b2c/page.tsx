@@ -258,7 +258,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
             <div style={{ marginTop: 80 }}>
               <div className="feature-row">
                 <div className="feature-image-placeholder">
-                  <Image src="/images/ui-design-b2c.png" alt={t('product.ui.title')} width={666} height={500} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 14 }} />
+                  <Image src="/images/ui-design-b2c.png" alt={t('product.ui.title')} width={1332} height={1000} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 14 }} />
                 </div>
                 <div className="feature-text">
                   <h3>{t('product.ui.title')}</h3>
