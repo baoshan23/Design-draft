@@ -315,6 +315,43 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
             </div>
           </ScrollAnimation>
 
+          {/* APP / H5 */}
+          <ScrollAnimation>
+            <div style={{ marginTop: 40 }}>
+              <div className="feature-row">
+                <div className="feature-image-placeholder">
+                  <AppSlideshow alt={t('product.app.title')} />
+                </div>
+                <div className="feature-text">
+                  <h3>{t('product.app.title')}</h3>
+                  <p>{t('product.app.desc')}</p>
+                  <ul className="feature-list">
+                    <li>
+                      <CheckIcon />
+                      <span>{t('product.app.li1')}</span>
+                    </li>
+                    <li>
+                      <CheckIcon />
+                      <span>{t('product.app.li2')}</span>
+                    </li>
+                    <li>
+                      <CheckIcon />
+                      <span>{t('product.app.li3')}</span>
+                    </li>
+                    <li>
+                      <CheckIcon />
+                      <span>{t('product.app.li4')}</span>
+                    </li>
+                    <li>
+                      <CheckIcon />
+                      <span>{t('product.app.li5')}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </ScrollAnimation>
+
           {/* Exclusive UI Customization & Zero-Touch Config */}
           <ScrollAnimation>
             <div className="grid grid-2" style={{ marginTop: 60 }}>
@@ -434,43 +471,6 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
 
               {/* Language Request Form */}
               <LanguageRequestForm />
-            </div>
-          </ScrollAnimation>
-
-          {/* APP / H5 */}
-          <ScrollAnimation>
-            <div style={{ marginTop: 80 }}>
-              <div className="feature-row">
-                <div className="feature-image-placeholder">
-                  <AppSlideshow alt={t('product.app.title')} />
-                </div>
-                <div className="feature-text">
-                  <h3>{t('product.app.title')}</h3>
-                  <p>{t('product.app.desc')}</p>
-                  <ul className="feature-list">
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.app.li1')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.app.li2')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.app.li3')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.app.li4')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.app.li5')}</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
             </div>
           </ScrollAnimation>
 
