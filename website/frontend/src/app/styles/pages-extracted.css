@@ -58,42 +58,6 @@ body:has(.product-hero) {
 .product-hero .grid-3 {
   row-gap: 16px;
 }
-
-/* Decorative grid-line frame behind the hero feature cards: 4 vertical
-   + 3 horizontal hairlines, bleeding slightly past the card block and
-   fading out toward all four edges via a radial ellipse mask. */
-.product-hero .hero-grid-lines {
-  position: relative;
-}
-.product-hero .hero-grid-lines > * {
-  position: relative;
-  z-index: 1;
-}
-.product-hero .hero-grid-lines::before {
-  content: "";
-  position: absolute;
-  inset: -48px -7vw;
-  z-index: 0;
-  pointer-events: none;
-  --gl: rgba(20, 20, 20, 0.13);
-  background-image:
-    linear-gradient(var(--gl), var(--gl)),
-    linear-gradient(var(--gl), var(--gl)),
-    linear-gradient(var(--gl), var(--gl)),
-    linear-gradient(var(--gl), var(--gl)),
-    linear-gradient(var(--gl), var(--gl)),
-    linear-gradient(var(--gl), var(--gl)),
-    linear-gradient(var(--gl), var(--gl));
-  background-repeat: no-repeat;
-  background-size:
-    1px 100%, 1px 100%, 1px 100%, 1px 100%,
-    100% 1px, 100% 1px, 100% 1px;
-  background-position:
-    0% 0, 33.333% 0, 66.667% 0, 100% 0,
-    0 0%, 0 50%, 0 100%;
-  -webkit-mask-image: radial-gradient(ellipse 76% 82% at 50% 50%, #000 34%, rgba(0, 0, 0, 0) 80%);
-  mask-image: radial-gradient(ellipse 76% 82% at 50% 50%, #000 34%, rgba(0, 0, 0, 0) 80%);
-}
 .product-hero .grid-3 .card {
   padding: 20px 24px;
 }
