@@ -2992,9 +2992,9 @@ html {
 .b2c-lang-aside {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 14px;
-  padding: 44px 38px;
+  justify-content: flex-start;
+  gap: 16px;
+  padding: 40px 38px;
   background: var(--primary, #febf1d);
   color: #181818;
   text-align: left;
