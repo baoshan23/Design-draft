@@ -411,6 +411,8 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                 <span className="section-label">{t('product.lang.label')}</span>
                 <h2>{t('product.lang.title')}</h2>
                 <p>{t('product.lang.desc')}</p>
+                {/* Language Request Form — now inside the yellow aside */}
+                <LanguageRequestForm />
               </div>
               <div className="b2c-lang-grid" role="list" aria-label="Supported languages">
                 <span role="listitem">English</span>
@@ -441,9 +443,6 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                 <span role="listitem">Ελληνικά</span>
               </div>
               </div>
-
-              {/* Language Request Form */}
-              <LanguageRequestForm />
             </div>
           </ScrollAnimation>
         </div>
