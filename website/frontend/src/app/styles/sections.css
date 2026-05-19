@@ -451,11 +451,19 @@
   min-height: 0;
   border: 0;
   border-radius: 14px;
-  background: rgba(254, 191, 29, 0.14);
+  background: var(--primary, #febf1d);
 }
 .b2c-feature-cell .feature-card-icon svg {
   width: 26px;
   height: 26px;
+}
+/* Monochrome black line icons on the solid yellow tile. CSS `stroke`
+   overrides the inline two-tone stroke attrs (no JSX/i18n change). */
+.b2c-feature-cell .feature-card-icon svg path,
+.b2c-feature-cell .feature-card-icon svg circle,
+.b2c-feature-cell .feature-card-icon svg rect,
+.b2c-feature-cell .feature-card-icon svg line {
+  stroke: #181818;
 }
 /* Card bg (--dark-card) is a theme-aware token; borderless, so no dark
    bg/border overrides are needed here. */
@@ -466,7 +474,7 @@
   color: var(--text-secondary);
 }
 [data-theme="dark"] .b2c-feature-cell .feature-card-icon {
-  background: rgba(254, 191, 29, 0.16);
+  background: var(--primary, #febf1d);
   border: 0;
 }
 /* Moss-style left-aligned section header for the b2c features band. */
