@@ -319,7 +319,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                     aspectRatio: '16/10',
                     borderRadius: 'var(--radius-md, 14px)',
                     overflow: 'hidden',
-                    background: '#F1F2F4',
+                    background: 'linear-gradient(180deg, #F1F2F4 0%, #FFFFFF 100%)',
                     boxShadow: 'none',
                   }}
                 >
