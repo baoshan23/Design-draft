@@ -1918,6 +1918,15 @@ html:not([data-theme="dark"]) .hero-footer-bar {
 html:not([data-theme="dark"]) .hero .hero-footer-divider {
   background: rgba(0, 0, 0, 0.12);
 }
+/* b2c hero stats bar: drop the pulsing gold glow (heroFooterGlow box-shadow)
+   and use a flat #e5e5e5 hairline instead. b2c-only (`.hero-with-shot`);
+   b2b's identical bar (`.particles-bg`) keeps the original treatment.
+   Specificity (0,4,1) beats the `.hero-footer-bar` light rule above. */
+html:not([data-theme="dark"]) .product-hero.hero-with-shot .hero-footer-bar {
+  animation: heroFooterSlideUp 0.8s ease-out;
+  box-shadow: none;
+  border-top: 1px solid #e5e5e5;
+}
 
 [data-theme="dark"] .hero-footer-bar {
   background: rgba(0, 0, 0, 0.2);
