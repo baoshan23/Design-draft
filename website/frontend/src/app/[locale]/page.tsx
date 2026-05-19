@@ -157,20 +157,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
             </div>
           </div>
-
-          <div className="hero-dashboard-mock" aria-hidden="true">
-            <div className="hero-dashboard-frame">
-              <Image
-                src="/images/dashboard-hero.jpg"
-                alt=""
-                width={1920}
-                height={1080}
-                priority
-                sizes="(max-width: 1200px) 92vw, 1120px"
-                className="hero-dashboard-img"
-              />
-            </div>
-          </div>
         </div>
       </section>
 
