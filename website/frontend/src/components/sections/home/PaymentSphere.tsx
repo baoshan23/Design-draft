@@ -79,11 +79,12 @@ export default function PaymentSphere({ items }: { items: Item[] }) {
         const x2 = x1;
 
         const depth = (z2 + 1) / 2; // 0 = far, 1 = near
-        const scale = 0.5 + depth * 0.8;
+        const d2 = depth * depth; // squared → strong centre bias
+        const scale = 0.34 + d2 * 0.98; // big in front, tiny at the rim/back
         const px = cx + x2 * radius;
         const py = cy + y2 * radius;
         el.style.transform = `translate3d(${px}px, ${py}px, 0) translate(-50%, -50%) scale(${scale})`;
-        el.style.opacity = String(0.32 + depth * 0.68);
+        el.style.opacity = String(0.1 + d2 * 0.9);
         el.style.zIndex = String(Math.round(depth * 100));
       }
     };

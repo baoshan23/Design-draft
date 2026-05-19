@@ -3278,11 +3278,11 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 18px;
+  padding: 9px;
   background: var(--dark-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: 22px;
-  box-shadow: 0 12px 30px -18px rgba(28, 40, 80, 0.32);
+  border: 0;
+  border-radius: 20px;
+  box-shadow: 0 8px 22px -16px rgba(28, 40, 80, 0.26);
 }
 
 .payment-sphere-node:hover {
@@ -3330,8 +3330,8 @@ html {
     height: 78px;
   }
   .payment-sphere-tile {
-    padding: 15px;
-    border-radius: 18px;
+    padding: 8px;
+    border-radius: 16px;
   }
 }
 
@@ -3344,8 +3344,8 @@ html {
     height: 64px;
   }
   .payment-sphere-tile {
-    padding: 12px;
-    border-radius: 15px;
+    padding: 7px;
+    border-radius: 14px;
   }
 }
 
