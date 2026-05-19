@@ -2615,6 +2615,116 @@ html {
   margin-top: 2px;
 }
 
+/* ===== b2c #features — switchable full-screen showcase =====
+   Collapses the four product blocks (Stunning UI / Your Brand /
+   APP-H5 / Smart Ops) into a single tabbed area that fills ~one
+   viewport. Tab bar pinned at top, active panel vertically centred
+   in the remaining height. b2c-only selectors. */
+.b2c-showcase {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - var(--header-height) - 48px);
+}
+
+.b2c-showcase-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.b2c-showcase-tab {
+  appearance: none;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: inherit;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.b2c-showcase-tab:hover {
+  color: var(--text-secondary);
+}
+
+.b2c-showcase-tab.is-active {
+  color: var(--text-primary);
+  border-bottom-color: var(--primary);
+}
+
+.b2c-showcase-tab-num {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--primary);
+  opacity: 0.55;
+}
+
+.b2c-showcase-tab.is-active .b2c-showcase-tab-num {
+  opacity: 1;
+}
+
+.b2c-showcase-tab:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.b2c-showcase-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.b2c-showcase-panel {
+  width: 100%;
+  animation: b2cScFade 0.4s ease;
+}
+
+.b2c-showcase-panel[hidden] {
+  display: none;
+}
+
+.b2c-showcase-panel .feature-row {
+  width: 100%;
+  padding: 24px 0;
+}
+
+@keyframes b2cScFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (max-width: 900px) {
+  .b2c-showcase {
+    min-height: 0;
+  }
+  .b2c-showcase-tabs {
+    gap: 0;
+  }
+  .b2c-showcase-tab {
+    flex: 1 1 auto;
+    justify-content: center;
+    padding: 12px 12px;
+    font-size: 0.88rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .b2c-showcase-panel {
+    animation: none;
+  }
+}
+
 /* --- Business Models Section --- */
 .model-card {
   background: var(--dark-card);

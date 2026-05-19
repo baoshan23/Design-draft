@@ -843,6 +843,7 @@
       "desc": "Native iOS & Android apps, H5 web app, and Mini Programs. Reach every user on every device."
     },
     "ui": {
+      "tab": "Stunning UI",
       "title": "Stunning UI Design that Elevates User Experience",
       "desc": "Every pixel is crafted to deliver an intuitive, beautiful experience that keeps users coming back.",
       "li1": "Modern, clean interface with consistent design language",
@@ -851,6 +852,7 @@
       "li4": "Smooth animations and micro-interactions"
     },
     "brand": {
+      "tab": "Your Brand",
       "title": "Your Brand. Your Rules.",
       "desc": "Complete white-labeling solution that makes the platform indistinguishable from your own product.",
       "li1": "Use your own domain with SSL certificate",
@@ -892,6 +894,7 @@
       "error": "Something went wrong. Please try again."
     },
     "app": {
+      "tab": "APP / H5",
       "title": "APP / H5 - Ultimate User Experience",
       "desc": "Native App and lightweight H5 web app deliver seamless charging experiences on any device.",
       "li1": "QR scan charging - start in seconds",
@@ -901,6 +904,7 @@
       "li5": "Real-time charging status tracking"
     },
     "ops": {
+      "tab": "Smart Ops",
       "title": "Smart Operations Center",
       "desc": "Automated operations with data-driven growth. Reduce costs and increase efficiency with intelligent tools.",
       "li1": "Remote troubleshooting and diagnostics",

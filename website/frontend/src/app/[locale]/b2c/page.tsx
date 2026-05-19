@@ -19,6 +19,7 @@ const QR_OPTS = {
 import LanguageRequestForm from './LanguageRequestForm';
 import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
 import AppSlideshow from './AppSlideshow';
+import FeatureShowcase from './FeatureShowcase';
 
 export const metadata = {
   title: 'B2C Model - GCSS | Direct Operator EV Charging Platform',
@@ -209,157 +210,114 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
             </div>
           </ScrollAnimation>
 
-          {/* Stunning UI Design */}
+          {/* Stunning UI / Your Brand / APP-H5 / Smart Ops — switchable full-screen showcase */}
           <ScrollAnimation>
-            <div style={{ marginTop: 80 }}>
-              <div className="feature-row">
-                <div className="feature-image-placeholder">
-                  <Image src="/images/ui-design-b2c-2.png" alt={t('product.ui.title')} width={1332} height={1000} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 14 }} />
-                </div>
-                <div className="feature-text">
-                  <h3>{t('product.ui.title')}</h3>
-                  <p>{t('product.ui.desc')}</p>
-                  <ul className="feature-list">
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.ui.li1')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.ui.li2')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.ui.li3')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.ui.li4')}</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </ScrollAnimation>
-
-          {/* Your Brand. Your Rules. */}
-          <ScrollAnimation>
-            <div style={{ marginTop: 40 }}>
-              <div className="feature-row reverse b2c-feat-shift">
-                <div className="feature-image-placeholder">
-                  <Image src="/images/OEM.png" alt={t('product.brand.title')} width={1920} height={1080} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 14 }} />
-                </div>
-                <div className="feature-text">
-                  <h3>{t('product.brand.title')}</h3>
-                  <p>{t('product.brand.desc')}</p>
-                  <ul className="feature-list">
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.brand.li1')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.brand.li2')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.brand.li3')}</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </ScrollAnimation>
-
-          {/* APP / H5 */}
-          <ScrollAnimation>
-            <div style={{ marginTop: 40 }}>
-              <div className="feature-row">
-                <div className="feature-image-placeholder">
-                  <AppSlideshow alt={t('product.app.title')} />
-                </div>
-                <div className="feature-text">
-                  <h3>{t('product.app.title')}</h3>
-                  <p>{t('product.app.desc')}</p>
-                  <ul className="feature-list">
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.app.li1')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.app.li2')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.app.li3')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.app.li4')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.app.li5')}</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </ScrollAnimation>
-
-          {/* Smart Operations Center */}
-          <ScrollAnimation>
-            <div style={{ marginTop: 40 }}>
-              <div className="feature-row reverse b2c-feat-shift">
-                <div
-                  className="feature-image-placeholder"
-                  style={{
-                    position: 'relative',
-                    width: 666,
-                    height: 500,
-                    maxWidth: '100%',
-                    aspectRatio: '666 / 500',
-                    borderRadius: 16,
-                    overflow: 'hidden',
-                    isolation: 'isolate',
-                    background: 'linear-gradient(180deg, #F1F2F4 0%, #FFFFFF 100%)',
-                    boxShadow: 'none',
-                  }}
-                >
-                  <Image
-                    src="/images/smart-ops-dashboard-4.png"
-                    alt={t('product.ops.title')}
-                    fill
-                    sizes="(max-width: 900px) 100vw, 560px"
-                    style={{ objectFit: 'cover', objectPosition: 'center', borderRadius: 16 }}
-                    priority={false}
-                  />
-                </div>
-                <div className="feature-text">
-                  <h3>{t('product.ops.title')}</h3>
-                  <p>{t('product.ops.desc')}</p>
-                  <ul className="feature-list">
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.ops.li1')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.ops.li2')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.ops.li3')}</span>
-                    </li>
-                    <li>
-                      <CheckIcon />
-                      <span>{t('product.ops.li4')}</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <FeatureShowcase
+              panels={[
+                {
+                  id: 'ui',
+                  label: t('product.ui.tab'),
+                  node: (
+                    <div className="feature-row">
+                      <div className="feature-image-placeholder">
+                        <Image src="/images/ui-design-b2c-2.png" alt={t('product.ui.title')} width={1332} height={1000} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 14 }} />
+                      </div>
+                      <div className="feature-text">
+                        <h3>{t('product.ui.title')}</h3>
+                        <p>{t('product.ui.desc')}</p>
+                        <ul className="feature-list">
+                          <li><CheckIcon /><span>{t('product.ui.li1')}</span></li>
+                          <li><CheckIcon /><span>{t('product.ui.li2')}</span></li>
+                          <li><CheckIcon /><span>{t('product.ui.li3')}</span></li>
+                          <li><CheckIcon /><span>{t('product.ui.li4')}</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                  ),
+                },
+                {
+                  id: 'brand',
+                  label: t('product.brand.tab'),
+                  node: (
+                    <div className="feature-row">
+                      <div className="feature-image-placeholder">
+                        <Image src="/images/OEM.png" alt={t('product.brand.title')} width={1920} height={1080} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 14 }} />
+                      </div>
+                      <div className="feature-text">
+                        <h3>{t('product.brand.title')}</h3>
+                        <p>{t('product.brand.desc')}</p>
+                        <ul className="feature-list">
+                          <li><CheckIcon /><span>{t('product.brand.li1')}</span></li>
+                          <li><CheckIcon /><span>{t('product.brand.li2')}</span></li>
+                          <li><CheckIcon /><span>{t('product.brand.li3')}</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                  ),
+                },
+                {
+                  id: 'app',
+                  label: t('product.app.tab'),
+                  node: (
+                    <div className="feature-row">
+                      <div className="feature-image-placeholder">
+                        <AppSlideshow alt={t('product.app.title')} />
+                      </div>
+                      <div className="feature-text">
+                        <h3>{t('product.app.title')}</h3>
+                        <p>{t('product.app.desc')}</p>
+                        <ul className="feature-list">
+                          <li><CheckIcon /><span>{t('product.app.li1')}</span></li>
+                          <li><CheckIcon /><span>{t('product.app.li2')}</span></li>
+                          <li><CheckIcon /><span>{t('product.app.li3')}</span></li>
+                          <li><CheckIcon /><span>{t('product.app.li4')}</span></li>
+                          <li><CheckIcon /><span>{t('product.app.li5')}</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                  ),
+                },
+                {
+                  id: 'ops',
+                  label: t('product.ops.tab'),
+                  node: (
+                    <div className="feature-row">
+                      <div
+                        className="feature-image-placeholder"
+                        style={{
+                          position: 'relative',
+                          aspectRatio: '666 / 500',
+                          borderRadius: 16,
+                          overflow: 'hidden',
+                          isolation: 'isolate',
+                          background: 'linear-gradient(180deg, #F1F2F4 0%, #FFFFFF 100%)',
+                          boxShadow: 'none',
+                        }}
+                      >
+                        <Image
+                          src="/images/smart-ops-dashboard-4.png"
+                          alt={t('product.ops.title')}
+                          fill
+                          sizes="(max-width: 900px) 100vw, 560px"
+                          style={{ objectFit: 'cover', objectPosition: 'center', borderRadius: 16 }}
+                          priority={false}
+                        />
+                      </div>
+                      <div className="feature-text">
+                        <h3>{t('product.ops.title')}</h3>
+                        <p>{t('product.ops.desc')}</p>
+                        <ul className="feature-list">
+                          <li><CheckIcon /><span>{t('product.ops.li1')}</span></li>
+                          <li><CheckIcon /><span>{t('product.ops.li2')}</span></li>
+                          <li><CheckIcon /><span>{t('product.ops.li3')}</span></li>
+                          <li><CheckIcon /><span>{t('product.ops.li4')}</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                  ),
+                },
+              ]}
+            />
           </ScrollAnimation>
 
           {/* Global Payment Matrix */}
