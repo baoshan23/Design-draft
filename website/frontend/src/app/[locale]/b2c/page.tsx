@@ -457,6 +457,18 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                 <span role="listitem">العربية</span>
                 <span role="listitem">Portugues</span>
                 <span role="listitem">සිංහල</span>
+                <span role="listitem">Italiano</span>
+                <span role="listitem">Nederlands</span>
+                <span role="listitem">Polski</span>
+                <span role="listitem">Türkçe</span>
+                <span role="listitem">हिन्दी</span>
+                <span role="listitem">Українська</span>
+                <span role="listitem">Svenska</span>
+                <span role="listitem">Filipino</span>
+                <span role="listitem">Română</span>
+                <span role="listitem">Čeština</span>
+                <span role="listitem">Magyar</span>
+                <span role="listitem">Ελληνικά</span>
               </div>
 
               {/* Language Request Form */}
