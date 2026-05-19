@@ -377,28 +377,19 @@
    Top & bottom edges fade vertically (上下渐变) instead of hard hairlines.
    Full-bleed escape: 100vw centered out of the .container; the columns are
    re-aligned to the content box via padding-inline. */
+/* Card grid (was a full-bleed lined band). Sits inside .container. */
 .b2c-feature-lined {
   position: relative;
-  left: 50%;
-  right: 50%;
-  width: 100vw;
-  margin-left: -50vw;
-  margin-right: -50vw;
   margin-top: 8px;
-  /* Crisp full-bleed hairlines top & bottom (no shadow/gradient). */
-  border-top: 1px solid rgba(0, 0, 0, 0.09);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .b2c-feature-row {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  /* Re-align the 3 columns to the .container content box. */
-  padding-inline: max(24px, calc((100vw - var(--max-width)) / 2 + 24px));
-}
-/* Crisp full-bleed hairline between the two rows. */
-.b2c-feature-row + .b2c-feature-row {
-  border-top: 1px solid rgba(0, 0, 0, 0.09);
+  gap: 24px;
 }
 
 .b2c-feature-cell {
@@ -408,18 +399,18 @@
   column-gap: 16px;
   row-gap: 10px;
   align-items: start;
-  padding: 48px 40px;
-  border-right: 1px solid rgba(0, 0, 0, 0.09);
-  background: none;
-  box-shadow: none;
-  transition: background 0.3s ease;
-}
-/* Left edge of the content column (vertical lines stay inside content). */
-.b2c-feature-cell:first-child {
-  border-left: 1px solid rgba(0, 0, 0, 0.09);
+  padding: 34px 30px;
+  background: var(--dark-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 .b2c-feature-cell:hover {
-  background: rgba(0, 0, 0, 0.02);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(0, 0, 0, 0.12);
 }
 /* Icon sits to the LEFT of the title (grid col 1); the title and the
    description stack in col 2 so the body text is left-aligned with the
@@ -464,21 +455,10 @@
   width: 32px;
   height: 32px;
 }
-[data-theme="dark"] .b2c-feature-lined {
-  border-top-color: rgba(255, 255, 255, 0.1);
-  border-bottom-color: rgba(255, 255, 255, 0.1);
-}
-[data-theme="dark"] .b2c-feature-row + .b2c-feature-row {
-  border-top-color: rgba(255, 255, 255, 0.1);
-}
-[data-theme="dark"] .b2c-feature-cell {
-  border-right-color: rgba(255, 255, 255, 0.1);
-}
-[data-theme="dark"] .b2c-feature-cell:first-child {
-  border-left-color: rgba(255, 255, 255, 0.1);
-}
+/* Card bg (--dark-card) and border (--border-subtle) are theme-aware
+   tokens, so no dark bg/border overrides are needed here. */
 [data-theme="dark"] .b2c-feature-cell:hover {
-  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.14);
 }
 [data-theme="dark"] .b2c-feature-cell h3 {
   color: #f5f5f5;
@@ -518,19 +498,7 @@
     grid-template-columns: minmax(0, 1fr);
   }
   .b2c-feature-cell {
-    padding: 32px 24px;
-  }
-  /* Single column: keep a hairline between stacked cells too. */
-  .b2c-feature-cell + .b2c-feature-cell {
-    border-top: 1px solid rgba(0, 0, 0, 0.09);
-  }
-  [data-theme="dark"] .b2c-feature-cell + .b2c-feature-cell {
-    border-top-color: rgba(255, 255, 255, 0.1);
-  }
-}
-@media (max-width: 480px) {
-  .b2c-feature-row {
-    padding-inline: 16px;
+    padding: 28px 22px;
   }
 }
 
