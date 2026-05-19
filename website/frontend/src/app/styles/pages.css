@@ -1508,7 +1508,7 @@ h3.matrix-header,
   position: relative;
   z-index: 2;
   background: var(--dark-card);
-  border: 1.5px solid var(--accent-strong);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   padding: 26px 26px 29px;
   box-shadow: var(--shadow-md);
@@ -1526,7 +1526,7 @@ h3.matrix-header,
   inset: -1.5px;
   border-radius: inherit;
   padding: 1.5px;
-  background: linear-gradient(135deg, var(--accent) 0%, transparent 70%);
+  background: none;
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
@@ -1542,7 +1542,7 @@ h3.matrix-header,
 
 .b2b-arch-box:hover {
   transform: translateY(-4px);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px var(--accent-strong);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
 }
 
 .b2b-arch-box:hover::before {
@@ -1624,7 +1624,7 @@ h3.matrix-header,
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, var(--accent) 0%, var(--accent-dark) 100%);
+  background: var(--accent);
   box-shadow:
     0 0 0 4px var(--accent-soft),
     0 5px 14px var(--accent-strong),
@@ -1718,7 +1718,7 @@ h3.matrix-header,
 }
 
 .b2b-arch-pill:hover {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  background: var(--accent);
   color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 6px 16px var(--accent-strong);
@@ -1756,10 +1756,7 @@ h3.matrix-header,
   height: 264px;
   margin: -132px 0 0 -132px;
   border-radius: 50%;
-  background:
-    radial-gradient(circle at 35% 30%, rgba(254, 191, 29, 0.24), transparent 55%),
-    radial-gradient(circle at 70% 75%, rgba(192, 127, 0, 0.2), transparent 55%),
-    linear-gradient(145deg, rgba(254, 191, 29, 0.08) 0%, rgba(192, 127, 0, 0.04) 100%);
+  background: rgba(254, 191, 29, 0.12);
   border: 2px solid rgba(254, 191, 29, 0.45);
   box-shadow:
     0 0 0 10px rgba(254, 191, 29, 0.06),
