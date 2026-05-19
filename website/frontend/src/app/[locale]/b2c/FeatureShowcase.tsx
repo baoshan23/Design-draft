@@ -51,7 +51,6 @@ export default function FeatureShowcase({ panels }: { panels: Panel[] }) {
                 onClick={() => setActive(i)}
                 onKeyDown={onKeyDown}
               >
-                <span className="b2c-showcase-tab-num">{String(i + 1).padStart(2, '0')}</span>
                 <span className="b2c-showcase-tab-label">{p.label}</span>
               </button>
             ))}
