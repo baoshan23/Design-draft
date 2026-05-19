@@ -1618,12 +1618,15 @@
 .hero-with-shot .hero-split {
   grid-template-columns: minmax(0, 1fr) minmax(0, 580px);
   justify-content: stretch;
-  align-items: start;
+  /* Center both columns on the same horizontal band so the illustration
+     lines up with the left copy block (was `start` + a big shot
+     margin-top that pushed the image down out of alignment). */
+  align-items: center;
   gap: 56px;
 }
 
 .hero-with-shot .hero-shot {
-  margin-top: clamp(16px, 8vh, 120px);
+  margin-top: 0;
 }
 
 @media (max-width: 960px) {
