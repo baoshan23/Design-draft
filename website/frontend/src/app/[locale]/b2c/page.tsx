@@ -245,7 +245,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
           {/* Your Brand. Your Rules. */}
           <ScrollAnimation>
             <div style={{ marginTop: 40 }}>
-              <div className="feature-row reverse">
+              <div className="feature-row reverse b2c-feat-shift">
                 <div className="feature-image-placeholder">
                   <Image src="/images/OEM.png" alt={t('product.brand.title')} width={1920} height={1080} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 14 }} />
                 </div>
@@ -311,7 +311,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
           {/* Smart Operations Center */}
           <ScrollAnimation>
             <div style={{ marginTop: 40 }}>
-              <div className="feature-row reverse">
+              <div className="feature-row reverse b2c-feat-shift">
                 <div
                   className="feature-image-placeholder"
                   style={{

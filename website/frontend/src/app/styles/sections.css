@@ -1700,7 +1700,14 @@
    (`.product-hero.particles-bg`); specificity (0,4,0) beats base (0,2,0).
    The left text column (the 1fr) takes the remaining ~46%. */
 .product-hero.particles-bg .hero-split:has(.hero-video-wrap) {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  grid-template-columns: minmax(0, 0.4fr) minmax(0, 1fr);
+}
+/* Keep the ≤900px single-column stack: this scoped rule's (0,4,0)
+   would otherwise out-specify the base `@media` 1-col rule (0,2,0). */
+@media (max-width: 900px) {
+  .product-hero.particles-bg .hero-split:has(.hero-video-wrap) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .hero-video-controls {
@@ -2543,6 +2550,22 @@ html {
     gap: 32px;
     padding: 40px 0;
     direction: ltr;
+  }
+}
+
+/* b2c "您的品牌" + "智能运营中心" reverse rows: the text sits flush at
+   the far-left of its 1fr column, leaving a big dead gap before the
+   card. Nudge it right by the row's own 60px gap so the text has a
+   uniform 60px offset on every side (left = gap to card = vertical
+   padding). The 1fr column width is unchanged, so the gap to the card
+   stays exactly 60px. Single-column mobile resets it. Scoped class —
+   only these two b2c rows are affected. */
+.b2c-feat-shift .feature-text {
+  padding-left: 60px;
+}
+@media (max-width: 900px) {
+  .b2c-feat-shift .feature-text {
+    padding-left: 0;
   }
 }
 
