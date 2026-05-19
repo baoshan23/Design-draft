@@ -1006,7 +1006,7 @@ html:not([data-theme='dark']) .hero {
    b2b hero is `.product-hero.particles-bg` — deliberately not matched. */
 html:not([data-theme='dark']) .product-hero.hero-with-shot {
   background-color: #F4F7FE;
-  background-image: url('/images/b2c-hero-bg.jpg');
+  background-image: url('/images/b2c-hero-bg-2.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
