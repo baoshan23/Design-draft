@@ -48,8 +48,8 @@
    Soft orange gradient art; `cover` keeps the image's aspect ratio
    (no distortion — it crops overflow rather than stretching). */
 .product-hero.particles-bg {
-  background-color: #FCEFE7;
-  background-image: url('/images/b2b-hero-bg.jpg');
+  background-color: #E3EBFB;
+  background-image: url('/images/b2b-hero-bg.png');
   background-size: cover;
   background-position: right center;
   background-repeat: no-repeat;
