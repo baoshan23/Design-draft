@@ -1826,6 +1826,21 @@
   line-height: 1.15;
 }
 
+/* b2b hero: keep the main title "SaaS平台版运营模式" on ONE line. The
+   illustration enlarge (.product-hero.particles-bg media ≈71%) narrowed
+   the text column enough that the base h1 clamp(2rem,5vw,3.5rem) wrapped
+   the CJK phrase. Scoped to the b2b hero only; the (B2B2C) tag drops to
+   its own line so just the title must fit. Specificity (0,3,0) > base. */
+.product-hero.particles-bg .hero-title {
+  font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+  white-space: nowrap;
+}
+.product-hero.particles-bg .hero-title-tag {
+  display: block;
+  margin-left: 0;
+  white-space: nowrap;
+}
+
 .hero-desc {
   font-size: 16px;
   color: #6C717A;
