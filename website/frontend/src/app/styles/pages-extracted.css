@@ -51,6 +51,19 @@ body:has(.product-hero) {
   margin-top: auto;
 }
 
+/* Center the hero content in the space between the SubNav and the
+   fold-pinned stats bar. Without this the .container sits flush at the
+   top (60px pad) and the entire 100svh slack collapses into one big
+   void above the stats — the "太空白" the screenshot shows. Growing +
+   centering the container splits that slack evenly above/below the
+   content while the footer stays exactly at the fold. */
+.product-hero>.container {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 /* Compress the in-hero feature grid + cards so the title, monitor
    shot and 6 cards all fit above the stats bar within the first
    screen (grid top margin trimmed 60→28 in JSX; was 32px card
