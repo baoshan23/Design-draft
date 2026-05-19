@@ -2439,8 +2439,8 @@ body:has(.product-hero) .glass-card [class*="icon"] {
    pinned through the hero's `overflow:hidden` compression. */
 html:not([data-theme="dark"]) .hero.hero-centered,
 html[data-theme="dark"] .hero.hero-centered {
-  background-color: #f5f6f8;
-  background-image: url('/images/hero-grid-bg.png');
+  background-color: #FFF7EC;
+  background-image: url('/images/hero-bg.jpg');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
