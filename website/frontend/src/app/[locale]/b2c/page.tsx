@@ -132,35 +132,21 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
               <div className="b2c-feature-row">
               <div className="b2c-feature-cell">
                 <div className="feature-card-icon" aria-hidden="true">
-                  <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
-                    <path d="M6 16 V8 H14" stroke="#181818" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M34 8 H42 V16" stroke="#181818" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M42 32 V40 H34" stroke="#181818" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M14 40 H6 V32" stroke="#181818" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M27 17 L20 27 L26 27 L22 35" stroke="#FEBF1D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  <Image src="/images/b2c-feat-1.png" alt="" width={26} height={26} style={{ width: 26, height: 26 }} />
                 </div>
                 <h3>{t('product.ff1.title')}</h3>
                 <p>{t('product.ff1.desc')}</p>
               </div>
               <div className="b2c-feature-cell">
                 <div className="feature-card-icon" aria-hidden="true">
-                  <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
-                    <path d="M24 41 C12 33 6 25 6 17.5 C6 12.3 10.2 8 15.3 8 C18.5 8 21.5 10 24 14 C26.5 10 29.5 8 32.7 8 C37.8 8 42 12.3 42 17.5 C42 25 36 33 24 41 Z" stroke="#181818" strokeWidth="2" strokeLinejoin="round" />
-                    <path d="M10 23 L18 23 L21 17 L26 29 L30 23 L38 23" stroke="#FEBF1D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  <Image src="/images/b2c-feat-2.png" alt="" width={26} height={26} style={{ width: 26, height: 26 }} />
                 </div>
                 <h3>{t('product.ff2.title')}</h3>
                 <p>{t('product.ff2.desc')}</p>
               </div>
               <div className="b2c-feature-cell">
                 <div className="feature-card-icon" aria-hidden="true">
-                  <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
-                    <circle cx="19" cy="17" r="7" stroke="#181818" strokeWidth="2" />
-                    <path d="M5 41 C5 33 11 28 19 28 C23 28 26.5 29.2 29.5 31.5" stroke="#181818" strokeWidth="2" strokeLinecap="round" />
-                    <circle cx="36" cy="32" r="4" stroke="#FEBF1D" strokeWidth="2" />
-                    <path d="M33 35 L26 42 M30 38 L32 40" stroke="#FEBF1D" strokeWidth="2" strokeLinecap="round" />
-                  </svg>
+                  <Image src="/images/b2c-feat-3.png" alt="" width={26} height={26} style={{ width: 26, height: 26 }} />
                 </div>
                 <h3>{t('product.ff3.title')}</h3>
                 <p>{t('product.ff3.desc')}</p>
@@ -169,38 +155,21 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
               <div className="b2c-feature-row">
               <div className="b2c-feature-cell">
                 <div className="feature-card-icon" aria-hidden="true">
-                  <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
-                    <path d="M8 8 V40 H42" stroke="#181818" strokeWidth="2" strokeLinecap="round" />
-                    <rect x="13" y="28" width="5" height="9" stroke="#181818" strokeWidth="2" />
-                    <rect x="22" y="22" width="5" height="15" stroke="#181818" strokeWidth="2" />
-                    <rect x="31" y="18" width="5" height="19" stroke="#181818" strokeWidth="2" />
-                    <path d="M14 24 L24 17 L34 11" stroke="#FEBF1D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                    <circle cx="34" cy="11" r="2.5" stroke="#FEBF1D" strokeWidth="2" />
-                  </svg>
+                  <Image src="/images/b2c-feat-4.png" alt="" width={26} height={26} style={{ width: 26, height: 26 }} />
                 </div>
                 <h3>{t('product.ff4.title')}</h3>
                 <p>{t('product.ff4.desc')}</p>
               </div>
               <div className="b2c-feature-cell">
                 <div className="feature-card-icon" aria-hidden="true">
-                  <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
-                    <rect x="4" y="8" width="40" height="32" rx="4" stroke="#181818" strokeWidth="2" />
-                    <line x1="4" y1="17" x2="44" y2="17" stroke="#181818" strokeWidth="2" />
-                    <path d="M11 25 L15 29 L11 33" stroke="#181818" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M19 33 H32" stroke="#FEBF1D" strokeWidth="2.5" strokeLinecap="round" />
-                  </svg>
+                  <Image src="/images/b2c-feat-5.png" alt="" width={26} height={26} style={{ width: 26, height: 26 }} />
                 </div>
                 <h3>{t('product.ff5.title')}</h3>
                 <p>{t('product.ff5.desc')}</p>
               </div>
               <div className="b2c-feature-cell">
                 <div className="feature-card-icon" aria-hidden="true">
-                  <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
-                    <rect x="4" y="10" width="22" height="16" rx="2" stroke="#181818" strokeWidth="2" />
-                    <path d="M2 30 H28" stroke="#181818" strokeWidth="2" strokeLinecap="round" />
-                    <rect x="30" y="18" width="14" height="24" rx="2.5" stroke="#FEBF1D" strokeWidth="2" />
-                    <circle cx="37" cy="38" r="1.4" stroke="#FEBF1D" strokeWidth="2" />
-                  </svg>
+                  <Image src="/images/b2c-feat-6.png" alt="" width={26} height={26} style={{ width: 26, height: 26 }} />
                 </div>
                 <h3>{t('product.ff6.title')}</h3>
                 <p>{t('product.ff6.desc')}</p>
