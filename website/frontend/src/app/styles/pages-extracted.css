@@ -44,6 +44,17 @@
   background-repeat: no-repeat;
 }
 
+/* b2b-only hero backdrop (b2b hero = `.product-hero.particles-bg`).
+   Soft orange gradient art; `cover` keeps the image's aspect ratio
+   (no distortion — it crops overflow rather than stretching). */
+.product-hero.particles-bg {
+  background-color: #FCEFE7;
+  background-image: url('/images/b2b-hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 body:has(.product-hero) {
   background: #F1F2F4;
 }

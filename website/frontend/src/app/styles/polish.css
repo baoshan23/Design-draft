@@ -1011,6 +1011,16 @@ html:not([data-theme='dark']) .product-hero.hero-with-shot {
   background-position: center;
   background-repeat: no-repeat;
 }
+/* b2b hero (`.product-hero.particles-bg`) keeps its orange-gradient art
+   in light mode — same specificity/order reasoning as the b2c rule above.
+   `cover` preserves the image aspect ratio (no distortion). */
+html:not([data-theme='dark']) .product-hero.particles-bg {
+  background-color: #FCEFE7;
+  background-image: url('/images/b2b-hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 html:not([data-theme='dark']) .hero::before {
   background: none;
 }
