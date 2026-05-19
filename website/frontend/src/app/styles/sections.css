@@ -401,16 +401,14 @@
   align-items: start;
   padding: 34px 30px;
   background: var(--dark-card);
-  border: 1px solid var(--border-subtle);
+  border: 0;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  transition: transform 0.25s ease, box-shadow 0.25s ease,
-    border-color 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .b2c-feature-cell:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
-  border-color: rgba(0, 0, 0, 0.12);
 }
 /* Icon sits to the LEFT of the title (grid col 1); the title and the
    description stack in col 2 so the body text is left-aligned with the
@@ -455,11 +453,8 @@
   width: 32px;
   height: 32px;
 }
-/* Card bg (--dark-card) and border (--border-subtle) are theme-aware
-   tokens, so no dark bg/border overrides are needed here. */
-[data-theme="dark"] .b2c-feature-cell:hover {
-  border-color: rgba(255, 255, 255, 0.14);
-}
+/* Card bg (--dark-card) is a theme-aware token; borderless, so no dark
+   bg/border overrides are needed here. */
 [data-theme="dark"] .b2c-feature-cell h3 {
   color: #f5f5f5;
 }
