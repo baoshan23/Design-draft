@@ -75,8 +75,8 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
               <Image
                 src="/images/b2c-hero-monitor.png"
                 alt={t('product.title2')}
-                width={1200}
-                height={900}
+                width={2000}
+                height={2000}
                 priority
                 sizes="(max-width: 960px) 100vw, 560px"
                 style={{ width: '100%', height: 'auto', display: 'block' }}
