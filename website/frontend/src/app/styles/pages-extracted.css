@@ -132,8 +132,12 @@ body:has(.product-hero) {
   color: var(--black);
 }
 .product-hero .hero-shot img {
-  max-height: 54vh;
+  max-height: 60vh;
   width: auto;
+  /* Stay within the fixed 580px right grid track so a bigger image can
+     never overflow toward the left copy or add page scroll — the grid
+     tracks don't change, so the left main-title column is untouched. */
+  max-width: 100%;
   margin-inline: auto;
   object-fit: contain;
 }
