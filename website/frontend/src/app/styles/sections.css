@@ -2630,7 +2630,7 @@ html {
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  min-height: calc(100svh - var(--header-height));
+  min-height: 720px;
   display: flex;
   align-items: center;
   padding: 56px 0;
@@ -2650,20 +2650,17 @@ html {
 
 .b2c-showcase-card {
   display: grid;
-  grid-template-columns: 248px 1fr;
-  background: var(--dark-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xl);
-  box-shadow: 0 24px 60px -28px rgba(28, 50, 110, 0.28);
-  overflow: hidden;
+  grid-template-columns: 216px 1fr;
+  gap: 28px;
+  align-items: stretch;
 }
 
 .b2c-showcase-nav {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 24px 16px;
-  border-right: 1px solid var(--border-subtle);
+  align-self: center;
+  padding: 4px 0;
 }
 
 .b2c-showcase-tab {
@@ -2718,8 +2715,12 @@ html {
 .b2c-showcase-stage {
   display: flex;
   align-items: center;
-  padding: 40px 48px;
   min-width: 0;
+  padding: 44px 52px;
+  background: var(--dark-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 24px 60px -28px rgba(28, 50, 110, 0.28);
 }
 
 .b2c-showcase-panel {
@@ -2748,14 +2749,14 @@ html {
   }
   .b2c-showcase-card {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
   .b2c-showcase-nav {
     flex-direction: row;
     overflow-x: auto;
     gap: 4px;
-    padding: 12px;
-    border-right: 0;
-    border-bottom: 1px solid var(--border-subtle);
+    align-self: stretch;
+    padding: 0 0 4px;
   }
   .b2c-showcase-tab {
     flex: 0 0 auto;
