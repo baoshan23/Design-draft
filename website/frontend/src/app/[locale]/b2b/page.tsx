@@ -497,29 +497,39 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               <p>{t('b2b.pricing.desc')}</p>
             </div>
           </ScrollAnimation>
-          <div className="grid-2" style={{ maxWidth: 900, margin: '0 auto', gap: 32 }}>
+          <div className="pricing-cards pricing-cards--2col">
             <ScrollAnimation>
               <div className="pricing-card glass-card">
-                <h3>{t('b2b.pricing.standard.title')}</h3>
-                <div className="pricing-amount">{t('b2b.pricing.standard.price')}</div>
-                <ul className="pricing-features">
+                <div className="plan-name">{t('b2b.pricing.standard.title')}</div>
+                <div className="plan-price">
+                  <span>{t('b2b.pricing.standard.price')}</span>
+                </div>
+                <div className="plan-price-note">&nbsp;</div>
+                <div className="plan-actions">
+                  <Link href="/contact" className="btn btn-secondary btn-full">{t('b2b.pricing.cta')}</Link>
+                </div>
+                <ul className="plan-features">
                   {rawList('b2b.pricing.standard.features').map((f, i) => (
-                    <li key={i}><CheckIcon /><span>{f}</span></li>
+                    <li key={i}><span className="check">&#10003;</span><span>{f}</span></li>
                   ))}
                 </ul>
-                <Link href="/contact" className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>{t('b2b.pricing.cta')}</Link>
               </div>
             </ScrollAnimation>
             <ScrollAnimation style={{ transitionDelay: '0.1s' }}>
               <div className="pricing-card glass-card featured">
-                <h3>{t('b2b.pricing.enhanced.title')}</h3>
-                <div className="pricing-amount">{t('b2b.pricing.enhanced.price')}</div>
-                <ul className="pricing-features">
+                <div className="plan-name">{t('b2b.pricing.enhanced.title')}</div>
+                <div className="plan-price">
+                  <span>{t('b2b.pricing.enhanced.price')}</span>
+                </div>
+                <div className="plan-price-note">&nbsp;</div>
+                <div className="plan-actions">
+                  <Link href="/contact" className="btn btn-primary btn-full">{t('b2b.pricing.cta')}</Link>
+                </div>
+                <ul className="plan-features">
                   {rawList('b2b.pricing.enhanced.features').map((f, i) => (
-                    <li key={i}><CheckIcon /><span>{f}</span></li>
+                    <li key={i}><span className="check">&#10003;</span><span>{f}</span></li>
                   ))}
                 </ul>
-                <Link href="/contact" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>{t('b2b.pricing.cta')}</Link>
               </div>
             </ScrollAnimation>
           </div>
