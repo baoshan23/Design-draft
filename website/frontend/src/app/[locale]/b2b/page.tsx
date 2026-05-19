@@ -506,7 +506,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                 </div>
                 <div className="plan-price-note">&nbsp;</div>
                 <div className="plan-actions">
-                  <Link href="/contact" className="btn btn-secondary btn-full">{t('b2b.pricing.cta')}</Link>
+                  <Link href="/contact" className="btn btn-primary btn-full">{t('b2b.pricing.cta')}</Link>
                 </div>
                 <ul className="plan-features">
                   {rawList('b2b.pricing.standard.features').map((f, i) => (
