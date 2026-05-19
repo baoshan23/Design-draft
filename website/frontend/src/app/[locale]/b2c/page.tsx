@@ -323,25 +323,14 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                     boxShadow: 'none',
                   }}
                 >
-                  <div
-                    style={{
-                      position: 'absolute',
-                      bottom: 0,
-                      right: 0,
-                      width: '80%',
-                      height: '80%',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <Image
-                      src="/images/smart-ops-dashboard-2.png"
-                      alt={t('product.ops.title')}
-                      fill
-                      sizes="(max-width: 900px) 100vw, 560px"
-                      style={{ objectFit: 'cover', objectPosition: 'right bottom' }}
-                      priority={false}
-                    />
-                  </div>
+                  <Image
+                    src="/images/smart-ops-dashboard-2.png"
+                    alt={t('product.ops.title')}
+                    fill
+                    sizes="(max-width: 900px) 100vw, 560px"
+                    style={{ objectFit: 'cover', objectPosition: 'center' }}
+                    priority={false}
+                  />
                 </div>
                 <div className="feature-text">
                   <h3>{t('product.ops.title')}</h3>
