@@ -2444,7 +2444,7 @@ body:has(.product-hero) .glass-card [class*="icon"] {
 html:not([data-theme="dark"]) .hero.hero-centered,
 html[data-theme="dark"] .hero.hero-centered {
   background-color: #f5f6f8;
-  background-image: url('/images/hero-bg-4.png');
+  background-image: url('/images/hero-bg-5.png');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
