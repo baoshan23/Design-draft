@@ -1700,7 +1700,11 @@
    (`.product-hero.particles-bg`); specificity (0,4,0) beats base (0,2,0).
    The left text column (the 1fr) takes the remaining ~46%. */
 .product-hero.particles-bg .hero-split:has(.hero-video-wrap) {
-  grid-template-columns: minmax(0, 0.4fr) minmax(0, 1fr);
+  /* Text col widened so the ORIGINAL-size h1 title fits on one line
+     (user kept the big font + nowrap). text:media ≈ 1.1:1 ≈ text 52% —
+     the illustration stays ~48% (still large, but not the prior 71%;
+     the full-size one-line title forces this trade). */
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
 }
 /* Keep the ≤900px single-column stack: this scoped rule's (0,4,0)
    would otherwise out-specify the base `@media` 1-col rule (0,2,0). */
@@ -1826,13 +1830,13 @@
   line-height: 1.15;
 }
 
-/* b2b hero: keep the main title "SaaS平台版运营模式" on ONE line. The
-   illustration enlarge (.product-hero.particles-bg media ≈71%) narrowed
-   the text column enough that the base h1 clamp(2rem,5vw,3.5rem) wrapped
-   the CJK phrase. Scoped to the b2b hero only; the (B2B2C) tag drops to
-   its own line so just the title must fit. Specificity (0,3,0) > base. */
+/* b2b hero: keep the main title "SaaS平台版运营模式" on ONE line at the
+   ORIGINAL h1 size (user: 字号不要改). Only `white-space:nowrap` is
+   forced here — NO font-size override (base h1 clamp(2rem,5vw,3.5rem)
+   stays). The text column was widened (see the grid rule ~1707) so the
+   full-size title fits one line. The (B2B2C) tag drops to its own line.
+   Scoped to the b2b hero only; specificity (0,3,0) > base. */
 .product-hero.particles-bg .hero-title {
-  font-size: clamp(1.5rem, 2.5vw, 2.1rem);
   white-space: nowrap;
 }
 .product-hero.particles-bg .hero-title-tag {
