@@ -2659,8 +2659,8 @@ html {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  align-self: start;
-  padding: 0;
+  align-self: center;
+  padding: 4px 0;
 }
 
 .b2c-showcase-tab {
@@ -2674,20 +2674,33 @@ html {
   gap: 12px;
   text-align: left;
   font: inherit;
-  font-size: 18px;
+  font-size: 0.95rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-tertiary);
   cursor: pointer;
   transition: color var(--transition), background var(--transition);
 }
 
 .b2c-showcase-tab:hover {
-  color: var(--primary);
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.03);
 }
 
 .b2c-showcase-tab.is-active {
-  color: #fff;
+  color: var(--text-primary);
   background: var(--primary-dim);
+}
+
+.b2c-showcase-tab-num {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--primary);
+  opacity: 0.55;
+}
+
+.b2c-showcase-tab.is-active .b2c-showcase-tab-num {
+  opacity: 1;
 }
 
 .b2c-showcase-tab-label {
