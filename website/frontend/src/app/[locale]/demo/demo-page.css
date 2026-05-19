@@ -440,8 +440,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #FFD95A 0%, #C07F00 100%);
-  box-shadow: 0 0 8px rgba(255, 217, 90, 0.5);
+  background: #FEBF1D;
 }
 
 /* ---------- Credentials block ---------- */
