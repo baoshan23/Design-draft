@@ -2433,14 +2433,51 @@ body:has(.product-hero) .glass-card [class*="icon"] {
   content: none !important;
 }
 
+/* Ambient yellow center bloom + faint concentric rings (vidyo.ai look,
+   recoloured to the brand gold). Sits above the base colour, below the
+   z-index:2 content. Slowly breathes (scale + opacity); the parent's
+   overflow:hidden clips the oversized soft circle. */
+.hero.hero-centered::before {
+  content: '';
+  position: absolute;
+  inset: -10%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    repeating-radial-gradient(circle at 50% 40%,
+      rgba(214, 168, 23, 0.06) 0 1px,
+      transparent 1px 92px),
+    radial-gradient(circle at 50% 40%,
+      rgba(254, 191, 29, 0.40) 0%,
+      rgba(254, 191, 29, 0.18) 28%,
+      rgba(255, 214, 102, 0.06) 50%,
+      transparent 68%);
+  filter: blur(8px);
+  transform-origin: 50% 40%;
+  animation: heroGlowBreathe 9s ease-in-out infinite alternate;
+}
+
+@keyframes heroGlowBreathe {
+  0%   { transform: scale(1);     opacity: 0.82; }
+  100% { transform: scale(1.13);  opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero.hero-centered::before { animation: none; }
+}
+
 /* Outer hero carries the bg so it fills the WHOLE first screen edge-to-edge
    (no white margin / inset panel). The `:not()` mirror beats polish.css's
    `background: none` rule. `background-attachment: local` keeps the image
    pinned through the hero's `overflow:hidden` compression. */
 html:not([data-theme="dark"]) .hero.hero-centered,
 html[data-theme="dark"] .hero.hero-centered {
-  background-color: #f5f6f8;
-  background-image: url('/images/hero-grid-bg.png');
+  /* vidyo.ai-style ambient backdrop (was the hero-grid-bg.png dot grid):
+     warm-white base; the soft yellow center bloom + faint concentric
+     rings live on the animated ::before so they can breathe. */
+  position: relative;
+  background-color: #fcfbf7;
+  background-image: none;
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
