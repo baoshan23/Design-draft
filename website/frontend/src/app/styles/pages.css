@@ -1460,27 +1460,21 @@ h3.matrix-header,
   background: #ffffff;
 }
 
+/* Tiered "shelf" layout: Platform / Operator / Center / User stacked
+   top-to-bottom as full-width horizontal bands (DOM order already matches). */
 .b2b-arch-diagram {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(288px, 408px) minmax(0, 1fr);
-  grid-template-rows: auto auto;
-  gap: 44px 34px;
-  align-items: stretch;
-  max-width: 1320px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 920px;
   margin: 0 auto;
-  padding: 48px 0;
+  padding: 40px 0;
 }
 
+/* connector lines belonged to the node-graph; not used in the stack */
 .b2b-arch-connectors {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  color: var(--primary);
-  opacity: 0.55;
-  pointer-events: none;
-  z-index: 0;
+  display: none;
 }
 
 .b2b-arch-connector {
@@ -1692,9 +1686,10 @@ h3.matrix-header,
 /* ----- feature pills ----- */
 
 .b2b-arch-pills {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
 
 .b2b-arch-pill {
@@ -1740,34 +1735,32 @@ h3.matrix-header,
 /* ----- central APP·CPMS·ADMIN hub ----- */
 
 .b2b-arch-center {
-  grid-column: 2 / 3;
-  grid-row: 2 / 3;
   position: relative;
   z-index: 2;
-  min-height: 312px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 17px;
+  gap: 12px;
   text-align: center;
+  background: var(--dark-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  box-shadow: var(--shadow-md);
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.b2b-arch-center:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* ring + its orbiting pseudo-elements were the node-graph centerpiece;
+   hidden in the tiered shelf layout */
 .b2b-arch-center-ring {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 264px;
-  height: 264px;
-  margin: -132px 0 0 -132px;
-  border-radius: 50%;
-  background: rgba(254, 191, 29, 0.12);
-  border: 2px solid rgba(254, 191, 29, 0.45);
-  box-shadow:
-    0 0 0 10px rgba(254, 191, 29, 0.06),
-    0 0 60px rgba(254, 191, 29, 0.25),
-    inset 0 2px 0 rgba(255, 247, 212, 0.25);
-  animation: b2b-arch-center-spin 40s linear infinite;
+  display: none;
 }
 
 .b2b-arch-center-ring::before,
@@ -1802,9 +1795,11 @@ h3.matrix-header,
   position: relative;
   z-index: 3;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 14px 36px;
   font-family: 'Google Sans Flex', 'PingFang SC', system-ui, sans-serif;
   font-weight: 800;
   font-size: 1.5rem;
@@ -1852,10 +1847,9 @@ h3.matrix-header,
 
 @media (max-width: 1200px) and (min-width: 901px) {
   .b2b-arch-diagram {
-    grid-template-columns: minmax(0, 1fr) minmax(240px, 340px) minmax(0, 1fr);
-    gap: 36px 28px;
-    max-width: 1100px;
-    padding: 40px 0;
+    gap: 18px;
+    max-width: 880px;
+    padding: 32px 0;
   }
 
   .b2b-arch-box {
@@ -1880,16 +1874,6 @@ h3.matrix-header,
     font-size: 0.78rem;
     padding: 8px 12px;
     min-height: 30px;
-  }
-
-  .b2b-arch-center {
-    min-height: 260px;
-  }
-
-  .b2b-arch-center-ring {
-    width: 220px;
-    height: 220px;
-    margin: -110px 0 0 -110px;
   }
 
   .b2b-arch-center-inner {
@@ -1925,7 +1909,6 @@ h3.matrix-header,
 
   .b2b-arch-center {
     grid-row: 3 / 4;
-    min-height: 220px;
   }
 
   .b2b-arch-box[data-role="user"] {
@@ -2023,16 +2006,6 @@ h3.matrix-header,
     font-size: 0.82rem;
     padding: 12px 14px;
     min-height: 44px;
-  }
-
-  .b2b-arch-center {
-    min-height: 200px;
-  }
-
-  .b2b-arch-center-ring {
-    width: 172px;
-    height: 172px;
-    margin: -86px 0 0 -86px;
   }
 
   .b2b-arch-center-inner {
