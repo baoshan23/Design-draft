@@ -1700,11 +1700,16 @@
    (`.product-hero.particles-bg`); specificity (0,4,0) beats base (0,2,0).
    The left text column (the 1fr) takes the remaining ~46%. */
 .product-hero.particles-bg .hero-split:has(.hero-video-wrap) {
-  /* Text col widened so the ORIGINAL-size h1 title fits on one line
-     (user kept the big font + nowrap). text:media ≈ 1.1:1 ≈ text 52% —
-     the illustration stays ~48% (still large, but not the prior 71%;
-     the full-size one-line title forces this trade). */
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  /* Maximize the illustration while keeping the ORIGINAL-size h1 title
+     on one line: give the text column a TIGHT FIXED width (just enough
+     for the nowrap title at its 3.5rem clamp cap ≈ ~520px + a small
+     safety margin) and let the media column take ALL the rest (1fr).
+     A fixed text track (vs the prior 1.1fr ratio) stops the text side
+     from scaling up on wide screens, so every extra px goes to the
+     image. The title clamp shrinks on narrower screens so 560px stays
+     enough at all ≥901px widths; ≤900px stacks (rule below). */
+  grid-template-columns: minmax(0, 560px) minmax(0, 1fr);
+  gap: 40px;
 }
 /* Keep the ≤900px single-column stack: this scoped rule's (0,4,0)
    would otherwise out-specify the base `@media` 1-col rule (0,2,0). */
