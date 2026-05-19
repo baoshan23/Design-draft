@@ -595,12 +595,15 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
           </ScrollAnimation>
 
           <ScrollAnimation>
-            <div className="pricing-cards">
+            <div className="pricing-cards pricing-cards--2col">
               {/* Custom Web APP */}
               <div className="pricing-card featured glass-card tilt-card">
                 <div className="plan-name">{t('product.plan2.name')}</div>
-                <div className="plan-price"><span className="currency">$</span>300</div>
-                <div className="plan-period">{t('product.plan2.period')}</div>
+                <div className="plan-price"><span>$300</span></div>
+                <div className="plan-price-note">{t('product.plan2.period')}</div>
+                <div className="plan-actions">
+                  <Link href={{ pathname: '/buy', query: { plan: 'customweb' } }} className="btn btn-primary btn-full">{t('product.plan2.btn')}</Link>
+                </div>
                 <ul className="plan-features">
                   <li><span className="check">&#10003;</span> <span>{t('product.plan2.f1')}</span></li>
                   <li><span className="check">&#10003;</span> <span>{t('product.plan2.f2')}</span></li>
@@ -610,20 +613,22 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                   <li><span className="check">&#10003;</span> <span>{t('product.plan2.f6')}</span></li>
                   <li><span className="check">&#10003;</span> <span>{t('product.plan2.f7')}</span></li>
                 </ul>
-                <Link href={{ pathname: '/buy', query: { plan: 'customweb' } }} className="btn btn-primary" style={{ width: '100%' }}>{t('product.plan2.btn')}</Link>
               </div>
 
               {/* APP Enterprise — deposit-eligible */}
               <div className="pricing-card glass-card tilt-card">
                 <div className="plan-name">{t('product.plan3.name')}</div>
-                <div className="plan-price"><span className="currency">$</span>16,900</div>
-                <div className="plan-period">{t('product.plan3.period')}</div>
-                <div className="plan-deposit-offer" style={{ margin: '12px 0 18px' }}>
+                <div className="plan-price"><span>$16,900</span></div>
+                <div className="plan-price-note">{t('product.plan3.period')}</div>
+                <div className="plan-deposit-offer">
                   <span className="plan-deposit-offer-amount">$500</span>
                   <div className="plan-deposit-offer-text">
                     <strong>{t('pricing.depositOfferTitle')}</strong>
                     <span>{t('pricing.depositOfferDesc', { amount: '$500' })}</span>
                   </div>
+                </div>
+                <div className="plan-actions">
+                  <Link href={{ pathname: '/buy', query: { plan: 'appent' } }} className="btn btn-accent btn-full">{t('product.plan3.btn')}</Link>
                 </div>
                 <ul className="plan-features">
                   <li><span className="check">&#10003;</span> <span>{t('product.plan3.f1')}</span></li>
@@ -633,7 +638,6 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                   <li><span className="check">&#10003;</span> <span>{t('product.plan3.f5')}</span></li>
                   <li><span className="check">&#10003;</span> <span>{t('product.plan3.f6')}</span></li>
                 </ul>
-                <Link href={{ pathname: '/buy', query: { plan: 'appent' } }} className="btn btn-accent" style={{ width: '100%' }}>{t('product.plan3.btn')}</Link>
               </div>
             </div>
           </ScrollAnimation>
