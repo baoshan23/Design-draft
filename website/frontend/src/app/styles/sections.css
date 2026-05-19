@@ -3091,6 +3091,105 @@ html {
   flex-wrap: wrap;
 }
 
+/* b2c "准备部署？" CTA → Tandem-style horizontal yellow banner with the
+   dual-phone app mockup overflowing the top-left. Scoped to .cta-banner;
+   the homepage's plain .cta-section keeps its original centered dark look. */
+.cta-section.cta-banner {
+  background: transparent;
+  text-align: left;
+  padding: 120px 0 80px;
+}
+.cta-section.cta-banner::before {
+  display: none;
+}
+.cta-banner-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: 36px;
+  background: linear-gradient(115deg, #FEBF1D 0%, #F2A300 100%);
+  border-radius: 28px;
+  padding: 52px 60px;
+  box-shadow: 0 30px 60px -28px rgba(242, 163, 0, 0.5);
+}
+.cta-banner-media {
+  align-self: end;
+  display: flex;
+  justify-content: center;
+}
+.cta-banner-img {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  margin-top: -120px;
+  filter: drop-shadow(0 26px 44px rgba(0, 0, 0, 0.22));
+}
+.cta-banner-body h2 {
+  color: #1b1500;
+  font-size: clamp(1.9rem, 3vw, 2.7rem);
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.cta-banner-body p {
+  color: rgba(40, 30, 0, 0.78);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 520px;
+  margin: 0 0 28px;
+}
+.cta-banner-body .cta-buttons {
+  justify-content: flex-start;
+}
+/* Dark/light contrasting buttons so they read on the yellow fill. */
+.cta-banner-body .btn-primary,
+.cta-banner-body .btn.btn-primary {
+  background: #1b1b1b;
+  border-color: #1b1b1b;
+  color: #fff;
+}
+.cta-banner-body .btn-primary:hover,
+.cta-banner-body .btn.btn-primary:hover {
+  background: #000;
+  border-color: #000;
+}
+.cta-banner-body .btn-secondary,
+.cta-banner-body .btn.btn-secondary {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: transparent;
+  color: #1b1b1b;
+}
+.cta-banner-body .btn-secondary:hover,
+.cta-banner-body .btn.btn-secondary:hover {
+  background: #fff;
+  color: #000;
+}
+@media (max-width: 860px) {
+  .cta-section.cta-banner {
+    padding: 96px 0 56px;
+  }
+  .cta-banner-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 0 28px 40px;
+    gap: 6px;
+  }
+  .cta-banner-media {
+    order: -1;
+  }
+  .cta-banner-img {
+    max-width: 250px;
+    margin-top: -64px;
+  }
+  .cta-banner-body p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-banner-body .cta-buttons {
+    justify-content: center;
+  }
+}
+
 /* --- Pricing --- */
 .pricing-toggle {
   display: flex;

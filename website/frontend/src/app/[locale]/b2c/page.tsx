@@ -641,14 +641,27 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
       </section>
 
       {/* ==================== CTA Section ==================== */}
-      <section className="cta-section">
+      <section className="cta-section cta-banner">
         <ScrollAnimation>
           <div className="container">
-            <h2>{t('product.cta.title')}</h2>
-            <p>{t('product.cta.desc')}</p>
-            <div className="cta-buttons">
-              <a href="#license" className="btn btn-primary btn-lg">{t('product.cta.btn1')}</a>
-              <Link href="/contact" className="btn btn-secondary btn-lg">{t('product.cta.btn2')}</Link>
+            <div className="cta-banner-inner">
+              <div className="cta-banner-media">
+                <Image
+                  src="/images/b2c-cta-phones.png"
+                  alt=""
+                  width={1141}
+                  height={1301}
+                  className="cta-banner-img"
+                />
+              </div>
+              <div className="cta-banner-body">
+                <h2>{t('product.cta.title')}</h2>
+                <p>{t('product.cta.desc')}</p>
+                <div className="cta-buttons">
+                  <a href="#license" className="btn btn-primary btn-lg">{t('product.cta.btn1')}</a>
+                  <Link href="/contact" className="btn btn-secondary btn-lg">{t('product.cta.btn2')}</Link>
+                </div>
+              </div>
             </div>
           </div>
         </ScrollAnimation>
