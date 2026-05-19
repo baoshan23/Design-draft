@@ -3265,6 +3265,76 @@ h3.matrix-header,
   opacity: 0.7;
 }
 
+/* --- How It Works: staggered scroll-reveal + hover interaction --- */
+.hiw-card {
+  transition:
+    background-color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+/* hidden until the section scrolls into view, then cascade in */
+.animate-on-scroll .hiw-card {
+  opacity: 0;
+  transform: translateY(34px);
+}
+.animate-on-scroll.visible .hiw-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+.animate-on-scroll.visible .hiw-card:nth-child(1) { transition-delay: 0.05s; }
+.animate-on-scroll.visible .hiw-card:nth-child(2) { transition-delay: 0.18s; }
+.animate-on-scroll.visible .hiw-card:nth-child(3) { transition-delay: 0.31s; }
+
+/* the gold rule "draws" downward as each row settles */
+.hiw-card-divider {
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition:
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease;
+}
+.animate-on-scroll.visible .hiw-card .hiw-card-divider { transform: scaleY(1); }
+.animate-on-scroll.visible .hiw-card:nth-child(1) .hiw-card-divider { transition-delay: 0.25s; }
+.animate-on-scroll.visible .hiw-card:nth-child(2) .hiw-card-divider { transition-delay: 0.38s; }
+.animate-on-scroll.visible .hiw-card:nth-child(3) .hiw-card-divider { transition-delay: 0.51s; }
+
+.hiw-card-icon {
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.hiw-card-index {
+  transition:
+    color 0.35s ease,
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* live hover: row lifts toward the reader, gold accents intensify */
+.animate-on-scroll.visible .hiw-card:hover {
+  background-color: rgba(254, 191, 29, 0.05);
+  transform: translateX(10px);
+}
+.hiw-card:hover .hiw-card-divider {
+  box-shadow: 0 0 20px rgba(254, 191, 29, 0.55);
+}
+.hiw-card:hover .hiw-card-icon {
+  transform: scale(1.14) rotate(-4deg);
+}
+.hiw-card:hover .hiw-card-index {
+  color: var(--primary);
+  transform: translateX(-3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hiw-card,
+  .animate-on-scroll .hiw-card,
+  .hiw-card-divider {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 /* --- Legacy steps timeline (no longer rendered, kept for safety) --- */
 .steps-timeline {
   display: flex;
