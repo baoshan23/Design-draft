@@ -94,25 +94,25 @@
   right: 0;
   height: var(--header-height);
   z-index: 100;
-  background: rgba(255, 255, 255, 0.04);
-  -webkit-backdrop-filter: blur(40px) saturate(200%);
-  backdrop-filter: blur(40px) saturate(200%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  /* Unified site-wide nav frost — matches the pricing/demo page header
+     (was rgba(255,255,255,0.04), too transparent — page content bled
+     through). Now near-opaque on every page in both scroll states. */
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .header.scrolled {
-  background: rgba(255, 255, 255, 0.10);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  backdrop-filter: blur(28px) saturate(180%);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
-  border-bottom-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  border-bottom-color: rgba(0, 0, 0, 0.06);
 }
-[data-theme="dark"] .header {
-  background: rgba(12, 10, 9, 0.04);
-  border-bottom-color: rgba(255, 255, 255, 0.06);
-}
+[data-theme="dark"] .header,
 [data-theme="dark"] .header.scrolled {
-  background: rgba(12, 10, 9, 0.10);
+  background: rgba(12, 10, 9, 0.92);
   border-bottom-color: rgba(255, 255, 255, 0.10);
 }
 
@@ -131,11 +131,11 @@ body:has(.hero-with-video) .header:not(.scrolled)::after {
   display: none;
 }
 body:has(.hero-with-video) .header.scrolled {
-  background: rgba(255, 255, 255, 0.32);
-  -webkit-backdrop-filter: blur(32px) saturate(180%);
-  backdrop-filter: blur(32px) saturate(180%);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.09);
-  border-bottom-color: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  border-bottom-color: rgba(0, 0, 0, 0.06);
 }
 
 /* Demo page (yellow hero) — keep the header readable on the warm bg by
@@ -163,10 +163,10 @@ body:has(.sub-nav) .header.scrolled {
    two strips read as one continuous bar. Override matches each header's
    per-page rule above. */
 body:has(.hero-with-video) .sub-nav {
-  background: rgba(255, 255, 255, 0.32);
-  -webkit-backdrop-filter: blur(32px) saturate(180%);
-  backdrop-filter: blur(32px) saturate(180%);
-  border-bottom-color: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  border-bottom-color: rgba(0, 0, 0, 0.06);
 }
 
 body:has(.hero-with-video) .header.scrolled .logo,
