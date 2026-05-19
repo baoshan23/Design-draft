@@ -3828,9 +3828,13 @@ html {
   padding: 36px 32px;
 }
 
+/* The featured card's old +8px top padding was reserving space for the
+   "Popular" badge, but that badge is removed (content:none below), so it
+   only pushed the right card's title/price/CTA 8px lower than the left
+   card. Match the base 36px so both headers line up. */
 .pricing-cards--2col .pricing-card.popular,
 .pricing-cards--2col .pricing-card.featured {
-  padding-top: 44px;
+  padding-top: 36px;
 }
 
 .pricing-cards--2col .pricing-card .plan-name {
