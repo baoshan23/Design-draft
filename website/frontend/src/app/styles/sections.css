@@ -3111,6 +3111,19 @@ html {
   max-width: 860px;
   margin: 0 auto;
 }
+
+/* b2b pricing (only place .pricing-cards--2col is used). Both cards
+   share an identical header (name/price/note/CTA), but the global
+   .plan-actions{margin-top:auto} pushes the CTA down by the card's
+   leftover height — and since the two cards have different feature
+   counts that slack differs, so the CTA and the price↔CTA gap land
+   at different y between the cards. Pin the header: CTA sits right
+   under the price in BOTH cards; the feature list (flex-grow:1)
+   soaks up the height difference at the bottom instead, so the
+   "排版信息" lines up across both cards. */
+.pricing-cards--2col .pricing-card .plan-actions {
+  margin-top: 0;
+}
 .pricing-cards--4col {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
