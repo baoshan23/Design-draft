@@ -1455,6 +1455,11 @@ h3.matrix-header,
    circular instance nodes, central cross-linked hub.
    ==================================================================== */
 
+/* White backdrop for the whole architecture screen (was the pale page bg). */
+#architecture {
+  background: #ffffff;
+}
+
 .b2b-arch-diagram {
   position: relative;
   display: grid;
