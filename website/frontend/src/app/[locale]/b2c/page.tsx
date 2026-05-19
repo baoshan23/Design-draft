@@ -342,64 +342,39 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
 
               <PaymentRequestForm />
 
-              <div className="grid grid-3" style={{ marginTop: 32, gap: 20 }}>
-                <div className="card" style={{ textAlign: 'center' }}>
-                  <h4 style={{ marginBottom: 12 }}>{t('product.pay.asia')}</h4>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
-                    <span className="tag">Alipay</span>
-                    <span className="tag">WeChat Pay</span>
-                    <span className="tag">GrabPay</span>
-                    <span className="tag">GCash</span>
-                    <span className="tag">TrueMoney</span>
-                    <span className="tag">DragonPay</span>
-                    <span className="tag">Boost</span>
-                    <span className="tag">JCB</span>
+              {(() => {
+                const PAY_REGIONS = [
+                  { name: t('product.pay.asia'), methods: ['Alipay', 'WeChat Pay', 'GrabPay', 'GCash', 'TrueMoney', 'DragonPay', 'Boost', 'JCB'] },
+                  { name: t('product.pay.europe'), methods: ['Stripe', 'SEPA', 'TrustPay', 'Skrill', 'Neosurf'] },
+                  { name: t('product.pay.oceania'), methods: ['Visa', 'Mastercard', 'Apple Pay', 'Google Pay'] },
+                  { name: t('product.pay.africa'), methods: ['M-PESA', 'PayPal'] },
+                  { name: t('product.pay.southamerica'), methods: ['PIX', 'Visa', 'Mastercard'] },
+                  { name: t('product.pay.northamerica'), methods: ['Stripe', 'Apple Pay', 'Google Pay', 'PayPal'] },
+                ];
+                return (
+                  <div className="b2c-pay-marquee" style={{ marginTop: 32 }}>
+                    <div className="b2c-pay-track">
+                      {[0, 1].flatMap((copy) =>
+                        PAY_REGIONS.map((r) => (
+                          <div
+                            key={`${r.name}-${copy}`}
+                            className="card b2c-pay-card"
+                            style={{ textAlign: 'center' }}
+                            aria-hidden={copy === 1 ? true : undefined}
+                          >
+                            <h4 style={{ marginBottom: 12 }}>{r.name}</h4>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
+                              {r.methods.map((m) => (
+                                <span key={m} className="tag">{m}</span>
+                              ))}
+                            </div>
+                          </div>
+                        ))
+                      )}
+                    </div>
                   </div>
-                </div>
-                <div className="card" style={{ textAlign: 'center' }}>
-                  <h4 style={{ marginBottom: 12 }}>{t('product.pay.europe')}</h4>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
-                    <span className="tag">Stripe</span>
-                    <span className="tag">SEPA</span>
-                    <span className="tag">TrustPay</span>
-                    <span className="tag">Skrill</span>
-                    <span className="tag">Neosurf</span>
-                  </div>
-                </div>
-                <div className="card" style={{ textAlign: 'center' }}>
-                  <h4 style={{ marginBottom: 12 }}>{t('product.pay.oceania')}</h4>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
-                    <span className="tag">Visa</span>
-                    <span className="tag">Mastercard</span>
-                    <span className="tag">Apple Pay</span>
-                    <span className="tag">Google Pay</span>
-                  </div>
-                </div>
-                <div className="card" style={{ textAlign: 'center' }}>
-                  <h4 style={{ marginBottom: 12 }}>{t('product.pay.africa')}</h4>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
-                    <span className="tag">M-PESA</span>
-                    <span className="tag">PayPal</span>
-                  </div>
-                </div>
-                <div className="card" style={{ textAlign: 'center' }}>
-                  <h4 style={{ marginBottom: 12 }}>{t('product.pay.southamerica')}</h4>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
-                    <span className="tag">PIX</span>
-                    <span className="tag">Visa</span>
-                    <span className="tag">Mastercard</span>
-                  </div>
-                </div>
-                <div className="card" style={{ textAlign: 'center' }}>
-                  <h4 style={{ marginBottom: 12 }}>{t('product.pay.northamerica')}</h4>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
-                    <span className="tag">Stripe</span>
-                    <span className="tag">Apple Pay</span>
-                    <span className="tag">Google Pay</span>
-                    <span className="tag">PayPal</span>
-                  </div>
-                </div>
-              </div>
+                );
+              })()}
             </div>
           </ScrollAnimation>
 

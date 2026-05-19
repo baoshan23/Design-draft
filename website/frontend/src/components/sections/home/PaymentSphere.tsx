@@ -43,7 +43,7 @@ export default function PaymentSphere({ items }: { items: Item[] }) {
       const h = stage.clientHeight;
       cx = w / 2;
       cy = h / 2;
-      radius = Math.min(w, h) * 0.42;
+      radius = Math.min(w, h) * 0.46;
     };
     measure();
     const ro = new ResizeObserver(measure);

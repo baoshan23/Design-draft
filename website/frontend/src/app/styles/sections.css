@@ -2571,6 +2571,43 @@ html {
   }
 }
 
+/* b2c Global Payment Matrix → continuous right-sliding card marquee.
+   The track holds the 6 region cards duplicated (2 identical sets);
+   it starts shifted left by one full set (-50%) and slides to 0, so
+   content moves rightward and loops seamlessly (set B lands exactly
+   where set A was). Pure CSS — works server-rendered. Edge fade +
+   pause-on-hover; reduced-motion stops it. Scoped .b2c-pay-* only. */
+.b2c-pay-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
+.b2c-pay-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  will-change: transform;
+  animation: b2cPaySlide 40s linear infinite;
+}
+.b2c-pay-marquee:hover .b2c-pay-track {
+  animation-play-state: paused;
+}
+.b2c-pay-card {
+  flex: 0 0 300px;
+  width: 300px;
+  margin: 0;
+}
+@keyframes b2cPaySlide {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+@media (max-width: 700px) {
+  .b2c-pay-card { flex-basis: 240px; width: 240px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .b2c-pay-track { animation: none; }
+}
+
 .feature-image-placeholder {
   width: 100%;
   aspect-ratio: 4/3;
