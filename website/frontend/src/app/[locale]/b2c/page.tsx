@@ -400,7 +400,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                 <h2>{t('product.lang.title')}</h2>
                 <p>{t('product.lang.desc')}</p>
               </div>
-              <div className="b2c-lang-plain" role="list" aria-label="Supported languages">
+              <div className="language-grid" role="list" aria-label="Supported languages">
                 <span role="listitem">English</span>
                 <span role="listitem">中文</span>
                 <span role="listitem">Francais</span>
