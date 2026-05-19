@@ -73,7 +73,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
 
             <div className="hero-shot">
               <Image
-                src="/images/b2c-hero-monitor.png"
+                src="/images/b2c-hero-illustration.png"
                 alt={t('product.title2')}
                 width={2000}
                 height={2000}
