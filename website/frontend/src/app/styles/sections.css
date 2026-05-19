@@ -2988,6 +2988,33 @@ html {
 }
 
 /* --- Language Grid (Alibaba-Cloud-inspired bordered cells with sweeping highlight) --- */
+/* b2c "20+ 种全球语言": plain inline list — NO capsule/grid cells,
+   borders or backgrounds (user: 胶囊网格样式去掉). b2c-only class so the
+   shared homepage `.language-grid` is untouched. Centered, wrapping,
+   middot-separated language names. */
+.b2c-lang-plain {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px 0;
+  max-width: 900px;
+  margin: 32px auto 0;
+}
+.b2c-lang-plain > span {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.4;
+  white-space: nowrap;
+  padding: 0 18px;
+}
+.b2c-lang-plain > span:not(:last-child) {
+  border-right: 1px solid var(--border-subtle);
+}
+[data-theme="dark"] .b2c-lang-plain > span {
+  color: var(--text-secondary);
+}
+
 .language-grid {
   position: relative;
   display: grid;
