@@ -452,6 +452,9 @@
   border: 0;
   border-radius: 14px;
   background: var(--primary, #febf1d);
+  /* Soft gold glow — matches the /demo "在线演示" gold icon
+     (.demo-edition-card-icon-gold). */
+  box-shadow: 0 0 20px rgba(254, 191, 29, 0.35);
 }
 .b2c-feature-cell .feature-card-icon svg {
   width: 26px;
