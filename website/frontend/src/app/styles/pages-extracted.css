@@ -33,6 +33,17 @@
   background: #F1F2F4;
 }
 
+/* b2c-only hero backdrop (b2c hero = `.product-hero.hero-with-shot`;
+   b2b uses `.product-hero.particles-bg` and is intentionally untouched).
+   The soft blue gradient art replaces the flat #F1F2F4 first screen. */
+.product-hero.hero-with-shot {
+  background-color: #F4F7FE;
+  background-image: url('/images/b2c-hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 body:has(.product-hero) {
   background: #F1F2F4;
 }
