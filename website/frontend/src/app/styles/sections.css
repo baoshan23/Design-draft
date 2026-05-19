@@ -3860,8 +3860,8 @@ html {
   top: var(--header-height);
   z-index: 10;
   border-bottom: 1px solid var(--border-subtle);
-  padding-top: 24px;
-  padding-bottom: 80px;
+  padding-top: 20px;
+  padding-bottom: 56px;
   vertical-align: top;
   line-height: 1.15;
 }
