@@ -331,7 +331,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                     alt={t('product.ops.title')}
                     fill
                     sizes="(max-width: 900px) 100vw, 560px"
-                    style={{ objectFit: 'contain', objectPosition: 'center' }}
+                    style={{ objectFit: 'cover', objectPosition: 'center' }}
                     priority={false}
                   />
                 </div>
