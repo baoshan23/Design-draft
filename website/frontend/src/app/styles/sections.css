@@ -3419,6 +3419,16 @@ html {
   flex-grow: 1;
 }
 
+/* b2c "购买与授权" (#license) — bottom-align the feature lists across the
+   2 cards: cancel the flex stretch and push the <ul> to the card bottom
+   (just above the CTA) so both lists' bottoms line up despite the right
+   card's extra $500 deposit-offer box / differing item counts. Scoped to
+   #license so the shared /pricing & b2b --2col cards are untouched. */
+#license .pricing-card .plan-features {
+  flex-grow: 0;
+  margin-top: auto;
+}
+
 .pricing-card .plan-features li {
   padding: 6px 0;
   font-size: 0.85rem;
