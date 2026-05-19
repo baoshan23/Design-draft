@@ -1000,6 +1000,17 @@ html:not([data-theme='dark']) .orbs-root {
 html:not([data-theme='dark']) .hero {
   background: none;
 }
+/* b2c hero (`.product-hero.hero-with-shot`) keeps its blue-gradient art
+   in light mode. Must out-specify + out-order the `.hero{background:none}`
+   reset above (which otherwise wins over the pages-extracted.css rule).
+   b2b hero is `.product-hero.particles-bg` — deliberately not matched. */
+html:not([data-theme='dark']) .product-hero.hero-with-shot {
+  background-color: #F4F7FE;
+  background-image: url('/images/b2c-hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 html:not([data-theme='dark']) .hero::before {
   background: none;
 }
