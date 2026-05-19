@@ -1690,12 +1690,14 @@
   overflow: visible;
 }
 
-/* b2b hero: enlarge the bare illustration by widening its grid column
-   (base `.hero-split:has(.hero-video-wrap)` caps it at 600px). Scoped to
-   the b2b hero (`.product-hero.particles-bg`); specificity (0,4,0) beats
-   the base (0,2,0). The left text column (1fr) absorbs the difference. */
+/* b2b hero: enlarge the bare illustration to ~the red-box size the user
+   marked — give the media column the larger share via a ratio (text :
+   media = 1 : 1.15 ≈ media 54% of the row) instead of a fixed cap, so it
+   scales with the viewport. Scoped to the b2b hero
+   (`.product-hero.particles-bg`); specificity (0,4,0) beats base (0,2,0).
+   The left text column (the 1fr) takes the remaining ~46%. */
 .product-hero.particles-bg .hero-split:has(.hero-video-wrap) {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 740px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
 }
 
 .hero-video-controls {
