@@ -328,7 +328,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                   }}
                 >
                   <Image
-                    src="/images/smart-ops-dashboard-3.png"
+                    src="/images/smart-ops-dashboard-4.png"
                     alt={t('product.ops.title')}
                     fill
                     sizes="(max-width: 900px) 100vw, 560px"
