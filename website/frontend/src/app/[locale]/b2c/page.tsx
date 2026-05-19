@@ -441,22 +441,22 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                 <h2>{t('product.lang.title')}</h2>
                 <p>{t('product.lang.desc')}</p>
               </div>
-              <div className="language-cloud">
-                <span style={{ fontSize: '2.5rem' }}>English</span>
-                <span style={{ fontSize: '2rem' }}>中文</span>
-                <span style={{ fontSize: '1.8rem' }}>Francais</span>
-                <span style={{ fontSize: '1.6rem' }}>日本語</span>
-                <span style={{ fontSize: '1.7rem' }}>한국어</span>
-                <span style={{ fontSize: '1.5rem' }}>Espanol</span>
-                <span style={{ fontSize: '1.4rem' }}>Deutsch</span>
-                <span style={{ fontSize: '1.9rem' }}>Tieng Viet</span>
-                <span style={{ fontSize: '1.3rem' }}>ภาษาไทย</span>
-                <span style={{ fontSize: '1.6rem' }}>Bahasa</span>
-                <span style={{ fontSize: '1.5rem' }}>Русский</span>
-                <span style={{ fontSize: '1.4rem' }}>العربية</span>
-                <span style={{ fontSize: '1.8rem' }}>Portugues</span>
-                <span style={{ fontSize: '1.3rem' }}>සිංහල</span>
-                <span style={{ fontSize: '1.5rem' }}>ខ្មែរ</span>
+              <div className="language-grid" role="list" aria-label="Supported languages">
+                <span role="listitem">English</span>
+                <span role="listitem">中文</span>
+                <span role="listitem">Francais</span>
+                <span role="listitem">日本語</span>
+                <span role="listitem">한국어</span>
+                <span role="listitem">Espanol</span>
+                <span role="listitem">Deutsch</span>
+                <span role="listitem">Tieng Viet</span>
+                <span role="listitem">ภาษาไทย</span>
+                <span role="listitem">Bahasa</span>
+                <span role="listitem">Русский</span>
+                <span role="listitem">العربية</span>
+                <span role="listitem">Portugues</span>
+                <span role="listitem">සිංහල</span>
+                <span role="listitem">ខ្មែរ</span>
               </div>
 
               {/* Language Request Form */}
