@@ -13,6 +13,7 @@ import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
 import TestimonialsTabs from '@/components/sections/home/TestimonialsTabs';
 import ScrollResetOnLoad from '@/components/effects/ScrollResetOnLoad';
 import { PAYMENT_ICONS, PAYMENT_METHODS_FLAT } from '@/components/sections/home/paymentIcons';
+import PaymentSphere from '@/components/sections/home/PaymentSphere';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -30,63 +31,6 @@ const CheckIcon = () => (
   </svg>
 );
 
-// Positions for floating payment-method bubbles. Phone centerpiece removed so
-// bubbles can spread across the full canvas. Perturbed-grid layout with sparse
-// rows for an airy, well-dispersed cloud. 48 entries map 1:1 to PAYMENT_METHODS_FLAT.
-const PAYMENT_BUBBLE_POSITIONS: { x: number; y: number; size: number; delay: number; duration: number }[] = [
-  // 6 rows x 8 cols = 48 cells (matches PAYMENT_METHODS_FLAT length). Odd
-  // rows shift +3 in x to break the rigid grid feel; per-bubble y jitter
-  // adds further perturbation. Sizes 96-136 fit ~16% row spacing on a
-  // 760px-tall orbit without overlap.
-  { x:  5, y:  4, size:  96, delay:    0, duration: 5.4 },
-  { x: 18, y:  8, size: 104, delay: -0.4, duration: 5.8 },
-  { x: 31, y:  7, size: 112, delay: -0.8, duration: 6.2 },
-  { x: 44, y:  4, size: 120, delay: -1.2, duration: 6.6 },
-  { x: 57, y:  7, size: 128, delay: -1.6, duration: 7.0 },
-  { x: 70, y:  8, size: 136, delay: -2.0, duration: 5.4 },
-  { x: 83, y:  4, size: 112, delay: -2.4, duration: 5.8 },
-  { x: 96, y:  8, size: 104, delay: -2.8, duration: 6.2 },
-  { x:  8, y: 23, size: 120, delay:    0, duration: 5.6 },
-  { x: 21, y: 24, size: 128, delay: -0.4, duration: 6.0 },
-  { x: 34, y: 20, size: 136, delay: -0.8, duration: 6.4 },
-  { x: 47, y: 24, size: 112, delay: -1.2, duration: 6.8 },
-  { x: 60, y: 23, size: 104, delay: -1.6, duration: 7.2 },
-  { x: 73, y: 20, size:  96, delay: -2.0, duration: 5.6 },
-  { x: 86, y: 23, size: 104, delay: -2.4, duration: 6.0 },
-  { x: 98, y: 24, size: 112, delay: -2.8, duration: 6.4 },
-  { x:  5, y: 39, size:  96, delay:    0, duration: 5.8 },
-  { x: 18, y: 36, size: 104, delay: -0.4, duration: 6.2 },
-  { x: 31, y: 39, size: 112, delay: -0.8, duration: 6.6 },
-  { x: 44, y: 40, size: 120, delay: -1.2, duration: 7.0 },
-  { x: 57, y: 36, size: 128, delay: -1.6, duration: 5.4 },
-  { x: 70, y: 40, size: 136, delay: -2.0, duration: 5.8 },
-  { x: 83, y: 39, size: 112, delay: -2.4, duration: 6.2 },
-  { x: 96, y: 36, size: 104, delay: -2.8, duration: 6.6 },
-  { x:  8, y: 52, size: 120, delay:    0, duration: 6.0 },
-  { x: 21, y: 56, size: 128, delay: -0.4, duration: 6.4 },
-  { x: 34, y: 55, size: 136, delay: -0.8, duration: 6.8 },
-  { x: 47, y: 52, size: 112, delay: -1.2, duration: 7.2 },
-  { x: 60, y: 55, size: 104, delay: -1.6, duration: 5.6 },
-  { x: 73, y: 56, size:  96, delay: -2.0, duration: 6.0 },
-  { x: 86, y: 52, size: 104, delay: -2.4, duration: 6.4 },
-  { x: 98, y: 56, size: 112, delay: -2.8, duration: 6.8 },
-  { x:  5, y: 71, size:  96, delay:    0, duration: 6.2 },
-  { x: 18, y: 72, size: 104, delay: -0.4, duration: 6.6 },
-  { x: 31, y: 68, size: 112, delay: -0.8, duration: 7.0 },
-  { x: 44, y: 72, size: 120, delay: -1.2, duration: 5.4 },
-  { x: 57, y: 71, size: 128, delay: -1.6, duration: 5.8 },
-  { x: 70, y: 68, size: 136, delay: -2.0, duration: 6.2 },
-  { x: 83, y: 71, size: 112, delay: -2.4, duration: 6.6 },
-  { x: 96, y: 72, size: 104, delay: -2.8, duration: 7.0 },
-  { x:  8, y: 89, size: 120, delay:    0, duration: 6.4 },
-  { x: 21, y: 86, size: 128, delay: -0.4, duration: 6.8 },
-  { x: 34, y: 89, size: 136, delay: -0.8, duration: 7.2 },
-  { x: 47, y: 90, size: 112, delay: -1.2, duration: 5.6 },
-  { x: 60, y: 86, size: 104, delay: -1.6, duration: 6.0 },
-  { x: 73, y: 90, size:  96, delay: -2.0, duration: 6.4 },
-  { x: 86, y: 89, size: 104, delay: -2.4, duration: 6.8 },
-  { x: 98, y: 86, size: 112, delay: -2.8, duration: 7.2 },
-];
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -500,31 +444,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
           </ScrollAnimation>
           <ScrollAnimation>
-            <div className="payment-orbit" role="list" aria-label="Supported payment methods">
-              {PAYMENT_METHODS_FLAT.map((name, i) => {
-                const pos = PAYMENT_BUBBLE_POSITIONS[i % PAYMENT_BUBBLE_POSITIONS.length];
-                const style = {
-                  left: `${pos.x}%`,
-                  top: `${pos.y}%`,
-                  width: `${pos.size}px`,
-                  height: `${pos.size}px`,
-                  animationDelay: `${pos.delay}s`,
-                  animationDuration: `${pos.duration}s`,
-                };
-                return (
-                  <div
-                    key={name}
-                    className={`payment-bubble payment-bubble-v${(i % 3) + 1}`}
-                    role="listitem"
-                    title={name}
-                    aria-label={name}
-                    style={style}
-                  >
-                    <div className="payment-bubble-inner">{PAYMENT_ICONS[name]}</div>
-                  </div>
-                );
-              })}
-            </div>
+            <PaymentSphere
+              items={PAYMENT_METHODS_FLAT.map((name) => ({
+                name,
+                icon: PAYMENT_ICONS[name],
+              }))}
+            />
           </ScrollAnimation>
         </div>
       </section>
