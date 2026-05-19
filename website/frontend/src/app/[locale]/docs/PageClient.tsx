@@ -368,7 +368,7 @@ systemctl status gcss`}</code></pre>
 
             <h2 id="dashboard">{t('docs.sidebar.dashboard')}</h2>
             <p>{t('docs.dashboard.desc')}</p>
-            <div style={{ width: '100%', marginTop: 24, borderRadius: 'var(--radius-lg)', overflow: 'hidden', border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-lg)' }}>
+            <div style={{ width: '100%', marginTop: 24, borderRadius: 'var(--radius-lg)', overflow: 'hidden', border: '1px solid #e5e5e5', boxShadow: 'none' }}>
               <Image
                 src="/images/dashboard-home.png"
                 alt="Analytics Dashboard Home Page"
