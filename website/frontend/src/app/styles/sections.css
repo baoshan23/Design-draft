@@ -1677,6 +1677,19 @@
   background: rgba(0, 0, 0, 0.6);
 }
 
+/* b2b hero illustration: strip the .hero-video-wrap frame (container bg,
+   rounded box, dark shadow + gold ring, fixed 16:9) so the WebP shows
+   bare. Keeps the `.hero-video-wrap` class only so the hero grid
+   `.hero-split:has(.hero-video-wrap)` layout still applies. Same-class
+   specificity (0,1,0) — wins by being later in source order. */
+.hero-media-bare {
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  aspect-ratio: auto;
+  overflow: visible;
+}
+
 .hero-video-controls {
   position: absolute;
   bottom: 14px;

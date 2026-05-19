@@ -117,14 +117,15 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               </div>
             </div>
 
-            <div className="hero-video-wrap">
+            <div className="hero-video-wrap hero-media-bare">
               <Image
                 src="/images/b2b-hero-illustration.webp"
                 alt={t('b2b.hero.title')}
-                fill
+                width={1200}
+                height={675}
                 priority
                 sizes="(max-width: 960px) 100vw, 600px"
-                style={{ objectFit: 'cover' }}
+                style={{ width: '100%', height: 'auto', display: 'block' }}
               />
             </div>
           </div>
