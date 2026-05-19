@@ -3,8 +3,8 @@ import { Link } from '@/i18n/navigation';
 import { Building2, User, Smartphone, Server as ServerIcon, ShieldCheck } from 'lucide-react';
 import QRCode from 'qrcode';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
+import Image from 'next/image';
 import SubNav from './SubNav';
-import HeroVideo from './HeroVideo';
 import ScrollResetOnLoad from '@/components/effects/ScrollResetOnLoad';
 
 const DEMO_QR_URLS = {
@@ -117,7 +117,16 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               </div>
             </div>
 
-            <HeroVideo />
+            <div className="hero-video-wrap">
+              <Image
+                src="/images/b2b-hero-illustration.webp"
+                alt={t('b2b.hero.title')}
+                fill
+                priority
+                sizes="(max-width: 960px) 100vw, 600px"
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
           </div>
         </div>
       </section>
