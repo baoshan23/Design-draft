@@ -401,11 +401,13 @@
   align-items: start;
   padding: 30px 32px;
   background: var(--dark-card);
-  border: 0;
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+/* No shadow at rest (border only); shadow appears on hover, matching
+   the other cards across the site. */
 .b2c-feature-cell:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
@@ -416,28 +418,12 @@
 .b2c-feature-cell h3 {
   grid-column: 2;
   grid-row: 1;
-  display: flex;
-  align-items: center;
-  gap: 8px;
   font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: -0.01em;
   line-height: 1.35;
   color: #181818;
   margin: 0;
-}
-/* Link-style arrow glyph after the title (CSS-only, no JSX/i18n). */
-.b2c-feature-cell h3::after {
-  content: "\2197";
-  font-size: 0.95rem;
-  font-weight: 500;
-  line-height: 1;
-  color: #9aa0a8;
-  transition: transform 0.25s ease, color 0.25s ease;
-}
-.b2c-feature-cell:hover h3::after {
-  transform: translate(2px, -2px);
-  color: var(--gcss-gold, #d69e00);
 }
 .b2c-feature-cell p {
   grid-column: 2;
