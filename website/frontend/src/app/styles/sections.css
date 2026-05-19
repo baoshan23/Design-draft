@@ -2976,6 +2976,70 @@ html {
   }
 }
 
+/* Mercury split-panel: a solid yellow aside (label/title/desc) sitting
+   flush against the language grid; the panel owns the rounded frame so
+   the two sides meet with no gap. b2c-only. */
+.b2c-lang-panel {
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) 1fr;
+  max-width: 1100px;
+  margin: 40px auto 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  overflow: hidden;
+  isolation: isolate;
+}
+.b2c-lang-aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding: 44px 38px;
+  background: var(--primary, #febf1d);
+  color: #181818;
+  text-align: left;
+}
+.b2c-lang-aside .section-label {
+  align-self: flex-start;
+  background: rgba(0, 0, 0, 0.1);
+  color: #181818;
+}
+.b2c-lang-aside h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #181818;
+}
+.b2c-lang-aside p {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: rgba(24, 24, 24, 0.72);
+}
+/* Grid sits flush in the panel — the panel owns the frame/rounding;
+   the grid keeps overflow:hidden so its own edge "+" marks are clipped
+   and never bleed onto the yellow aside. */
+.b2c-lang-panel .b2c-lang-grid {
+  max-width: none;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+}
+@media (max-width: 760px) {
+  .b2c-lang-panel {
+    grid-template-columns: 1fr;
+  }
+  .b2c-lang-aside {
+    padding: 32px 26px;
+    text-align: center;
+    align-items: center;
+  }
+  .b2c-lang-aside .section-label {
+    align-self: center;
+  }
+}
+
 .language-grid {
   position: relative;
   display: grid;
