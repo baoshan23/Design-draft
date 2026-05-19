@@ -2616,49 +2616,79 @@ html {
 }
 
 /* ===== b2c #features — switchable full-screen showcase =====
-   Collapses the four product blocks (Stunning UI / Your Brand /
-   APP-H5 / Smart Ops) into a single tabbed area that fills ~one
-   viewport. Tab bar pinned at top, active panel vertically centred
-   in the remaining height. b2c-only selectors. */
+   The four product blocks (Stunning UI / Your Brand / APP-H5 /
+   Smart Ops) as ONE full-bleed soft-gradient band holding a white
+   card: a vertical tab rail on the left, the active panel on the
+   right, sized to ~one viewport. b2c-only selectors. */
 .b2c-showcase {
   margin-top: 80px;
+  /* Full-bleed: break out of the .container content box to span the
+     viewport so the background reads as a whole screen. */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  min-height: calc(100svh - var(--header-height));
   display: flex;
-  flex-direction: column;
-  min-height: calc(100svh - var(--header-height) - 48px);
+  align-items: center;
+  padding: 56px 0;
+  background-color: #eef3fc;
+  background-image: url('/images/b2c-showcase-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.b2c-showcase-tabs {
+.b2c-showcase-inner {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.b2c-showcase-card {
+  display: grid;
+  grid-template-columns: 248px 1fr;
+  background: var(--dark-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 24px 60px -28px rgba(28, 50, 110, 0.28);
+  overflow: hidden;
+}
+
+.b2c-showcase-nav {
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  border-bottom: 1px solid var(--border-subtle);
+  flex-direction: column;
+  gap: 2px;
+  padding: 24px 16px;
+  border-right: 1px solid var(--border-subtle);
 }
 
 .b2c-showcase-tab {
   appearance: none;
   background: none;
   border: 0;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-  padding: 14px 22px;
+  border-radius: var(--radius);
+  padding: 13px 16px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  text-align: left;
   font: inherit;
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-tertiary);
   cursor: pointer;
-  transition: color var(--transition), border-color var(--transition);
+  transition: color var(--transition), background var(--transition);
 }
 
 .b2c-showcase-tab:hover {
   color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.03);
 }
 
 .b2c-showcase-tab.is-active {
   color: var(--text-primary);
-  border-bottom-color: var(--primary);
+  background: var(--primary-dim);
 }
 
 .b2c-showcase-tab-num {
@@ -2673,16 +2703,20 @@ html {
   opacity: 1;
 }
 
+.b2c-showcase-tab-label {
+  flex: 1;
+}
+
 .b2c-showcase-tab:focus-visible {
   outline: 2px solid var(--primary);
-  outline-offset: 2px;
-  border-radius: 6px;
+  outline-offset: -2px;
 }
 
 .b2c-showcase-stage {
-  flex: 1;
   display: flex;
   align-items: center;
+  padding: 40px 48px;
+  min-width: 0;
 }
 
 .b2c-showcase-panel {
@@ -2696,7 +2730,7 @@ html {
 
 .b2c-showcase-panel .feature-row {
   width: 100%;
-  padding: 24px 0;
+  padding: 0;
 }
 
 @keyframes b2cScFade {
@@ -2707,15 +2741,26 @@ html {
 @media (max-width: 900px) {
   .b2c-showcase {
     min-height: 0;
+    padding: 40px 0;
   }
-  .b2c-showcase-tabs {
-    gap: 0;
+  .b2c-showcase-card {
+    grid-template-columns: 1fr;
+  }
+  .b2c-showcase-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 4px;
+    padding: 12px;
+    border-right: 0;
+    border-bottom: 1px solid var(--border-subtle);
   }
   .b2c-showcase-tab {
-    flex: 1 1 auto;
-    justify-content: center;
-    padding: 12px 12px;
+    flex: 0 0 auto;
+    padding: 10px 14px;
     font-size: 0.88rem;
+  }
+  .b2c-showcase-stage {
+    padding: 28px 22px;
   }
 }
 
