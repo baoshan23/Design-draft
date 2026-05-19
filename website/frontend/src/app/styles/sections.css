@@ -2881,6 +2881,101 @@ html {
 }
 
 /* --- Language Grid (Alibaba-Cloud-inspired bordered cells with sweeping highlight) --- */
+/* b2c #multilingual — Mercury-style clean white grid: hairline cells,
+   rounded corners, small "+" intersection marks. b2c-only (a new
+   class on the b2c block); the shared .language-grid below is left
+   untouched so the homepage mirror is unaffected. */
+.b2c-lang-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  max-width: 1100px;
+  margin: 40px auto 0;
+  background: var(--dark-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  overflow: hidden;
+  isolation: isolate;
+}
+.b2c-lang-grid > span {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96px;
+  padding: 16px 18px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text-secondary);
+  background: var(--dark-card);
+  text-align: center;
+  cursor: default;
+  border-right: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background 240ms ease, color 240ms ease;
+}
+.b2c-lang-grid > span:nth-child(6n) {
+  border-right: 0;
+}
+.b2c-lang-grid > span:hover {
+  background: rgba(0, 0, 0, 0.025);
+  color: var(--text-primary);
+}
+/* "+" sits on each cell's top-left corner -> reads as marks at the
+   interior grid intersections; the rounded overflow:hidden container
+   clips the ones on the outer edge. */
+.b2c-lang-grid > span::after {
+  content: '+';
+  position: absolute;
+  top: -9px;
+  left: -8px;
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.16);
+  pointer-events: none;
+  z-index: 2;
+}
+@media (max-width: 900px) {
+  .b2c-lang-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .b2c-lang-grid > span:nth-child(6n) {
+    border-right: 1px solid var(--border-subtle);
+  }
+  .b2c-lang-grid > span:nth-child(4n) {
+    border-right: 0;
+  }
+}
+@media (max-width: 560px) {
+  .b2c-lang-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .b2c-lang-grid > span:nth-child(4n) {
+    border-right: 1px solid var(--border-subtle);
+  }
+  .b2c-lang-grid > span:nth-child(3n) {
+    border-right: 0;
+  }
+  .b2c-lang-grid > span {
+    min-height: 80px;
+    font-size: 1.05rem;
+  }
+}
+[data-theme='dark'] .b2c-lang-grid > span:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+[data-theme='dark'] .b2c-lang-grid > span::after {
+  color: rgba(255, 255, 255, 0.2);
+}
+@media (prefers-reduced-motion: reduce) {
+  .b2c-lang-grid > span {
+    transition: none;
+  }
+}
+
 .language-grid {
   position: relative;
   display: grid;
