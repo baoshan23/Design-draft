@@ -132,7 +132,7 @@ body:has(.product-hero) {
   color: var(--black);
 }
 .product-hero .hero-shot img {
-  max-height: 40vh;
+  max-height: 54vh;
   width: auto;
   margin-inline: auto;
   object-fit: contain;
