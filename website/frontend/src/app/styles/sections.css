@@ -1690,6 +1690,14 @@
   overflow: visible;
 }
 
+/* b2b hero: enlarge the bare illustration by widening its grid column
+   (base `.hero-split:has(.hero-video-wrap)` caps it at 600px). Scoped to
+   the b2b hero (`.product-hero.particles-bg`); specificity (0,4,0) beats
+   the base (0,2,0). The left text column (1fr) absorbs the difference. */
+.product-hero.particles-bg .hero-split:has(.hero-video-wrap) {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 740px);
+}
+
 .hero-video-controls {
   position: absolute;
   bottom: 14px;
