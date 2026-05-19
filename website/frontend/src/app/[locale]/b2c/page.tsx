@@ -351,27 +351,32 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                   { name: t('product.pay.southamerica'), methods: ['PIX', 'Visa', 'Mastercard'] },
                   { name: t('product.pay.northamerica'), methods: ['Stripe', 'Apple Pay', 'Google Pay', 'PayPal'] },
                 ];
+                // Row 2 uses a rotated region order so its cards never
+                // line up with row 1 (交错不对齐).
+                const PAY_ROWS = [PAY_REGIONS, [...PAY_REGIONS.slice(3), ...PAY_REGIONS.slice(0, 3)]];
                 return (
                   <div className="b2c-pay-marquee" style={{ marginTop: 32 }}>
-                    <div className="b2c-pay-track">
-                      {[0, 1].flatMap((copy) =>
-                        PAY_REGIONS.map((r) => (
-                          <div
-                            key={`${r.name}-${copy}`}
-                            className="card b2c-pay-card"
-                            style={{ textAlign: 'center' }}
-                            aria-hidden={copy === 1 ? true : undefined}
-                          >
-                            <h4 style={{ marginBottom: 12 }}>{r.name}</h4>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
-                              {r.methods.map((m) => (
-                                <span key={m} className="tag">{m}</span>
-                              ))}
+                    {PAY_ROWS.map((row, ri) => (
+                      <div className={`b2c-pay-track b2c-pay-track--${ri + 1}`} key={ri}>
+                        {[0, 1].flatMap((copy) =>
+                          row.map((r) => (
+                            <div
+                              key={`${r.name}-${copy}`}
+                              className="card b2c-pay-card"
+                              style={{ textAlign: 'center' }}
+                              aria-hidden={copy === 1 ? true : undefined}
+                            >
+                              <h4 style={{ marginBottom: 12 }}>{r.name}</h4>
+                              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
+                                {r.methods.map((m) => (
+                                  <span key={m} className="tag">{m}</span>
+                                ))}
+                              </div>
                             </div>
-                          </div>
-                        ))
-                      )}
-                    </div>
+                          ))
+                        )}
+                      </div>
+                    ))}
                   </div>
                 );
               })()}
@@ -381,12 +386,14 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
           {/* 20+ Global Languages */}
           <ScrollAnimation>
             <div id="multilingual" style={{ marginTop: 80, scrollMarginTop: 'calc(var(--header-height) + 16px)' }}>
-              <div className="b2c-lang-panel">
-              <div className="b2c-lang-aside">
+              <div className="section-header">
                 <span className="section-label">{t('product.lang.label')}</span>
                 <h2>{t('product.lang.title')}</h2>
                 <p>{t('product.lang.desc')}</p>
-                {/* Language Request Form — now inside the yellow aside */}
+              </div>
+              <div className="b2c-lang-panel">
+              <div className="b2c-lang-aside">
+                {/* Language Request Form — inside the yellow aside */}
                 <LanguageRequestForm />
               </div>
               <div className="b2c-lang-grid" role="list" aria-label="Supported languages">

@@ -2578,6 +2578,9 @@ html {
    where set A was). Pure CSS — works server-rendered. Edge fade +
    pause-on-hover; reduced-motion stops it. Scoped .b2c-pay-* only. */
 .b2c-pay-marquee {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
   mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
@@ -2588,6 +2591,14 @@ html {
   width: max-content;
   will-change: transform;
   animation: b2cPaySlide 40s linear infinite;
+}
+/* Row 2: rotated content + a longer duration and a constant phase
+   offset (negative delay) + half-card left pad, so its cards never
+   vertically align with row 1 — staggered "交错不对齐" wall. */
+.b2c-pay-track--2 {
+  animation-duration: 47s;
+  animation-delay: -19s;
+  padding-left: 160px;
 }
 .b2c-pay-marquee:hover .b2c-pay-track {
   animation-play-state: paused;
@@ -3075,9 +3086,7 @@ html {
   border: 0;
   box-shadow: none;
   padding: 0;
-  margin-top: 8px;
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
-  padding-top: 22px;
+  margin: 0;
 }
 .b2c-lang-aside .lang-request-title {
   margin: 0 0 6px;
