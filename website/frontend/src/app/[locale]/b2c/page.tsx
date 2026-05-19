@@ -316,7 +316,10 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                   className="feature-image-placeholder"
                   style={{
                     position: 'relative',
-                    aspectRatio: '16/10',
+                    width: 666,
+                    height: 500,
+                    maxWidth: '100%',
+                    aspectRatio: '666 / 500',
                     borderRadius: 'var(--radius-md, 14px)',
                     overflow: 'hidden',
                     background: 'linear-gradient(180deg, #F1F2F4 0%, #FFFFFF 100%)',
@@ -328,7 +331,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                     alt={t('product.ops.title')}
                     fill
                     sizes="(max-width: 900px) 100vw, 560px"
-                    style={{ objectFit: 'contain', objectPosition: 'center', transform: 'scale(0.9)' }}
+                    style={{ objectFit: 'contain', objectPosition: 'center' }}
                     priority={false}
                   />
                 </div>
