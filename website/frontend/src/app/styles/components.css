@@ -116,12 +116,14 @@
   border-bottom-color: rgba(255, 255, 255, 0.10);
 }
 
-/* Homepage (has the charger bg image) — unscrolled state shows a solid
-   white bar with dark text (per user request); scrolled state keeps the
-   dark frosted glass + white text variant for visual continuity once
-   the user starts scrolling and the bar travels over varied content. */
+/* Homepage (has the charger bg image) — at the top (static, unscrolled)
+   the nav bar has NO colour fill at all: fully transparent, no frost, no
+   border, no shadow, so it floats over the light hero. The moment the
+   user starts scrolling (`.scrolled`, scrollY > 20) the frosted white
+   background fades in via the rule below (the 0.4s `.header` transition
+   animates the colour appearing). */
 body:has(.hero-with-video) .header:not(.scrolled) {
-  background: #ffffff;
+  background: transparent;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
   border-bottom-color: transparent;
