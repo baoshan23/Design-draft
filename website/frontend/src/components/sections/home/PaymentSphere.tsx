@@ -43,7 +43,7 @@ export default function PaymentSphere({ items }: { items: Item[] }) {
       const h = stage.clientHeight;
       cx = w / 2;
       cy = h / 2;
-      radius = Math.min(w, h) * 0.46;
+      radius = Math.min(w, h) * 0.5;
     };
     measure();
     const ro = new ResizeObserver(measure);
@@ -80,7 +80,7 @@ export default function PaymentSphere({ items }: { items: Item[] }) {
 
         const depth = (z2 + 1) / 2; // 0 = far, 1 = near
         const d2 = depth * depth; // squared → strong centre bias
-        const scale = 0.34 + d2 * 0.98; // big in front, tiny at the rim/back
+        const scale = 0.34 + d2 * 0.86; // big in front, tiny at the rim/back
         const px = cx + x2 * radius;
         const py = cy + y2 * radius;
         el.style.transform = `translate3d(${px}px, ${py}px, 0) translate(-50%, -50%) scale(${scale})`;
