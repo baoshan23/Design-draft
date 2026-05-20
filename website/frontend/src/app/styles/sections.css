@@ -3029,7 +3029,7 @@ html {
    the two sides meet with no gap. b2c-only. */
 .b2c-lang-panel {
   display: grid;
-  grid-template-columns: minmax(320px, 440px) 1fr;
+  grid-template-columns: minmax(380px, 560px) 1fr;
   max-width: 1440px;
   margin: 40px auto 0;
   border: 1px solid var(--border-subtle);
@@ -3087,6 +3087,10 @@ html {
   box-shadow: none;
   padding: 0;
   margin: 0;
+  /* Drop the global .lang-request-card max-width:600px constraint so
+     the form fills the full aside width. */
+  max-width: none;
+  width: 100%;
 }
 .b2c-lang-aside .lang-request-title {
   margin: 0 0 6px;
