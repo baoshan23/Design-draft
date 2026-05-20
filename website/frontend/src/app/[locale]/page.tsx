@@ -13,7 +13,7 @@ import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
 import TestimonialsTabs from '@/components/sections/home/TestimonialsTabs';
 import ScrollResetOnLoad from '@/components/effects/ScrollResetOnLoad';
 import { PAYMENT_ICONS, PAYMENT_METHODS_FLAT } from '@/components/sections/home/paymentIcons';
-import PaymentSphere from '@/components/sections/home/PaymentSphere';
+import PaymentFisheye from '@/components/sections/home/PaymentFisheye';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -444,7 +444,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
           </ScrollAnimation>
           <ScrollAnimation>
-            <PaymentSphere
+            <PaymentFisheye
               items={PAYMENT_METHODS_FLAT.map((name) => ({
                 name,
                 icon: PAYMENT_ICONS[name],

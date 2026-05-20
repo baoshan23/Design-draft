@@ -3254,52 +3254,63 @@ html {
 }
 
 /* --- Payment Partners --- */
-/* Global Payment Matrix — Ramp-style interactive 3D logo sphere.
-   Logos are placed on a Fibonacci sphere and rotated in <PaymentSphere>;
-   per-frame transform/opacity/zIndex are written inline by JS, so the
-   rules here only define the stage, the tile chrome and responsive sizing. */
-.payment-sphere {
+/* Global Payment Matrix — flat tiled grid with a fisheye lens.
+   Each logo lives in a fixed CSS-grid cell so adjacent tiles can never
+   collide; <PaymentFisheye> writes per-tile scale/opacity inline based on
+   a Gaussian falloff from a moving focus point (cursor on hover, drifting
+   back to the grid centre otherwise). MAX_SCALE < 1 keeps a visible gap
+   between adjacent tiles even at the lens centre. */
+.payment-fisheye {
   position: relative;
   width: 100%;
-  height: 940px;
+  max-width: 1180px;
   margin: 0 auto;
   isolation: isolate;
-  touch-action: pan-y;
-  cursor: grab;
 }
 
-.payment-sphere-node {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 184px;
-  height: 184px;
-  transform: translate(-50%, -50%);
-  will-change: transform, opacity;
-  transition: filter 200ms ease;
+.payment-fisheye-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 0;
+  width: 100%;
 }
 
-/* Rounded white card behind each logo (theme-aware tokens) */
-.payment-sphere-tile {
+.payment-fisheye-cell {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Rounded white card behind each logo (theme-aware tokens).
+   width/height = 100% of the cell so the JS transform: scale() controls the
+   visible size; padding is a percentage of the cell so the logo inset scales
+   proportionally as the tile is scaled. */
+.payment-fisheye-tile {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 18px;
+  padding: 14%;
   background: var(--dark-card);
   border: 0;
-  border-radius: 28px;
-  box-shadow: 0 10px 28px -16px rgba(28, 40, 80, 0.26);
+  border-radius: 22px;
+  box-shadow: 0 8px 22px -16px rgba(28, 40, 80, 0.26);
+  transform: scale(0.55);
+  transform-origin: center center;
+  will-change: transform, opacity;
+  transition: filter 200ms ease;
 }
 
-.payment-sphere-node:hover {
+.payment-fisheye-tile:hover {
   z-index: 200 !important;
   filter: drop-shadow(0 10px 20px rgba(140, 95, 0, 0.24));
 }
 
-.payment-sphere-inner {
+.payment-fisheye-inner {
   width: 100%;
   height: 100%;
   display: flex;
@@ -3307,7 +3318,7 @@ html {
   justify-content: center;
   pointer-events: none;
 }
-.payment-sphere-inner > * {
+.payment-fisheye-inner > * {
   display: flex !important;
   align-items: center;
   justify-content: center;
@@ -3316,8 +3327,8 @@ html {
   max-width: 100% !important;
   max-height: 100% !important;
 }
-.payment-sphere-inner svg,
-.payment-sphere-inner img {
+.payment-fisheye-inner svg,
+.payment-fisheye-inner img {
   width: 100% !important;
   height: 100% !important;
   max-width: 100% !important;
@@ -3325,36 +3336,28 @@ html {
   object-fit: contain;
   display: block;
 }
-.payment-sphere-inner .payment-logo-svg svg {
+.payment-fisheye-inner .payment-logo-svg svg {
   width: 100% !important;
   height: 100% !important;
 }
 
 @media (max-width: 900px) {
-  .payment-sphere {
-    height: 780px;
+  .payment-fisheye-grid {
+    grid-template-columns: repeat(6, 1fr);
   }
-  .payment-sphere-node {
-    width: 156px;
-    height: 156px;
-  }
-  .payment-sphere-tile {
-    padding: 16px;
-    border-radius: 24px;
+  .payment-fisheye-tile {
+    border-radius: 18px;
+    padding: 13%;
   }
 }
 
 @media (max-width: 640px) {
-  .payment-sphere {
-    height: 640px;
+  .payment-fisheye-grid {
+    grid-template-columns: repeat(4, 1fr);
   }
-  .payment-sphere-node {
-    width: 128px;
-    height: 128px;
-  }
-  .payment-sphere-tile {
-    padding: 14px;
-    border-radius: 20px;
+  .payment-fisheye-tile {
+    border-radius: 16px;
+    padding: 12%;
   }
 }
 
