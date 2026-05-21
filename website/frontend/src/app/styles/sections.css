@@ -3832,12 +3832,15 @@ html {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+/* Hover lift matches the b2c #features cards: no shadow at rest,
+   4px lift + soft shadow on hover. */
 .addon-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
 }
 
 .addon-label {
@@ -4283,17 +4286,24 @@ html {
   gap: 14px;
 }
 
+/* Icon tile matches the b2c #features icons: 52px solid-gold rounded
+   square with a soft gold glow and black line icons. */
 .addon-card-icon {
   display: inline-flex;
-  width: 40px;
-  height: 40px;
+  width: 52px;
+  height: 52px;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius);
-  background: var(--primary-dim);
-  color: var(--primary);
+  border-radius: 14px;
+  background: var(--primary, #febf1d);
+  color: #181818;
   flex-shrink: 0;
-  transition: background 220ms, color 220ms;
+  box-shadow: 0 0 20px rgba(254, 191, 29, 0.35);
+}
+
+.addon-card-icon svg {
+  width: 26px;
+  height: 26px;
 }
 
 .addon-card-body {
@@ -4301,11 +4311,6 @@ html {
   flex-direction: column;
   gap: 4px;
   min-width: 0;
-}
-
-.addon-card:hover .addon-card-icon {
-  background: var(--primary);
-  color: var(--black);
 }
 
 /* Comparison table — header polish + sticky first column on mobile */
