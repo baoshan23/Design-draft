@@ -3298,7 +3298,7 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 14%;
+  padding: 6%;
   background: var(--dark-card);
   border: 0;
   border-radius: 22px;
@@ -3351,7 +3351,7 @@ html {
   }
   .payment-fisheye-tile {
     border-radius: 18px;
-    padding: 13%;
+    padding: 6%;
   }
 }
 
@@ -3361,7 +3361,7 @@ html {
   }
   .payment-fisheye-tile {
     border-radius: 16px;
-    padding: 12%;
+    padding: 6%;
   }
 }
 
