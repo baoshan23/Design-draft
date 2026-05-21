@@ -4366,16 +4366,13 @@ html {
    cells so the gap stays yellow rather than showing the table's
    glass-bg through. */
 
+/* First column left-aligned for both the yellow header cell (功能) and
+   the body feature-name cells, so 功能 lines up with the column below. */
 .comparison-table td:first-child,
 .comparison-table th:first-child {
+  text-align: left;
   font-weight: 600;
   color: var(--text-primary);
-}
-
-/* Body feature-name column stays left-aligned; the yellow header's
-   first cell (功能) keeps the centered alignment of the thead. */
-.comparison-table td:first-child {
-  text-align: left;
 }
 
 .comparison-table td {
