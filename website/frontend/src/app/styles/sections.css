@@ -3090,6 +3090,14 @@ html {
   box-shadow: none;
   padding: 0;
   margin: 0;
+  /* Drop the global .card backdrop-filter:blur(20px). The card is fully
+     transparent over flat yellow here, so the blur adds nothing visible —
+     but it forces the card onto its own filter render-surface, which,
+     nested inside .b2c-lang-panel's rounded overflow:hidden clip and the
+     transform-composited .animate-on-scroll layer, made Chrome
+     double-rasterize the form text (a ghosted offset copy of the title). */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   /* Drop the global .lang-request-card max-width:600px constraint so
      the form fills the full aside width. */
   max-width: none;
