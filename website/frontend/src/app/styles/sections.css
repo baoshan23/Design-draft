@@ -3116,6 +3116,13 @@ html {
 .b2c-lang-aside .lang-request-card::after {
   display: none;
 }
+/* The form card carries class="card" only to theme its inputs/button —
+   it must NOT itself react to hover. Cancel the global .card:hover
+   transform:translateY(-4px) lift so hovering the form area is static;
+   only the inner .form-input / .btn controls give hover feedback. */
+.b2c-lang-aside .lang-request-card:hover {
+  transform: none;
+}
 .b2c-lang-aside .lang-request-title {
   margin: 0 0 6px;
   font-size: 1.05rem;
