@@ -3109,6 +3109,13 @@ html {
   max-width: none;
   width: 100%;
 }
+/* Kill the global .card::after "glass edge highlight" (a 1px white
+   gradient line at the card's top edge). On a dark glass card it's a
+   subtle highlight; on this transparent card over flat yellow it shows
+   as an unwanted white streak across the form title. */
+.b2c-lang-aside .lang-request-card::after {
+  display: none;
+}
 .b2c-lang-aside .lang-request-title {
   margin: 0 0 6px;
   font-size: 1.05rem;
