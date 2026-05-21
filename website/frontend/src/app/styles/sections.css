@@ -3305,7 +3305,7 @@ html {
   background: var(--dark-card);
   border: 0;
   border-radius: 22px;
-  box-shadow: 0 8px 22px -16px rgba(40, 40, 45, 0.32);
+  box-shadow: 0 8px 22px -16px rgba(40, 40, 45, 0.2);
   transform: scale(0.55);
   transform-origin: center center;
   will-change: transform, opacity;
@@ -3314,7 +3314,7 @@ html {
 
 .payment-fisheye-tile:hover {
   z-index: 200 !important;
-  filter: drop-shadow(0 10px 20px rgba(40, 40, 45, 0.3));
+  filter: drop-shadow(0 10px 20px rgba(40, 40, 45, 0.18));
 }
 
 .payment-fisheye-inner {
