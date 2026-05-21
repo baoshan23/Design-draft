@@ -183,7 +183,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
             <div style={{ marginTop: 80 }}>
               <div className="feature-row">
                 <div className="feature-image-placeholder">
-                  <Image src="/images/ui-design-b2c-2.png" alt={t('product.ui.title')} width={1332} height={1000} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 14 }} />
+                  <Image src="/images/ui-design-b2c-2.png" alt={t('product.ui.title')} width={1332} height={1000} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 20 }} />
                 </div>
                 <div className="feature-text">
                   <h3>{t('product.ui.title')}</h3>
@@ -216,7 +216,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
             <div style={{ marginTop: 40 }}>
               <div className="feature-row reverse b2c-feat-shift">
                 <div className="feature-image-placeholder">
-                  <Image src="/images/OEM.png" alt={t('product.brand.title')} width={1920} height={1080} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 14 }} />
+                  <Image src="/images/OEM.png" alt={t('product.brand.title')} width={1920} height={1080} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 20 }} />
                 </div>
                 <div className="feature-text">
                   <h3>{t('product.brand.title')}</h3>
@@ -289,7 +289,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                     height: 500,
                     maxWidth: '100%',
                     aspectRatio: '666 / 500',
-                    borderRadius: 16,
+                    borderRadius: 20,
                     overflow: 'hidden',
                     isolation: 'isolate',
                     background: 'linear-gradient(180deg, #F1F2F4 0%, #FFFFFF 100%)',
@@ -301,7 +301,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                     alt={t('product.ops.title')}
                     fill
                     sizes="(max-width: 900px) 100vw, 560px"
-                    style={{ objectFit: 'cover', objectPosition: 'center', borderRadius: 16 }}
+                    style={{ objectFit: 'cover', objectPosition: 'center', borderRadius: 20 }}
                     priority={false}
                   />
                 </div>
