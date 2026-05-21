@@ -235,33 +235,8 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
 
     return (
         <>
-            {/* Hero + audience picker */}
-            <section
-                className="section pricing-hero"
-                style={{
-                    paddingTop: 140,
-                    paddingBottom: 56,
-                    textAlign: 'center',
-                    backgroundImage: 'url(/images/pricing-hero-bg.png)',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                }}
-            >
-                <div className="container">
-                    <ScrollAnimation>
-                        <div className="section-header">
-                            <span className="section-label">{t('pricing.label')}</span>
-                            <h1>{t('pricing.title')}</h1>
-                            <p>{t('pricing.desc')}</p>
-                        </div>
-                    </ScrollAnimation>
-
-                </div>
-            </section>
-
             {/* Plans — B2C / B2B tabbed switcher */}
-            <section id="plans" className="section pricing-section pricing-section--tabs" style={{ paddingTop: 56, background: '#F1F2F4' }}>
+            <section id="plans" className="section pricing-section pricing-section--tabs" style={{ paddingTop: 128, background: '#F1F2F4' }}>
                 <div className="container">
                     <ScrollAnimation>
                         <PricingTabs
