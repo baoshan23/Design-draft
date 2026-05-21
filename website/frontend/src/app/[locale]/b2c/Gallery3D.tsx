@@ -9,9 +9,9 @@ type Phone = { src: string; label: string };
 const SLOTS = ['g3d-slot-bl', 'g3d-slot-fl', 'g3d-slot-fr', 'g3d-slot-br'] as const;
 
 /**
- * Product gallery rendered as a 3D perspective cluster of phones.
+ * Product gallery rendered as a 3D perspective cluster of phone mockups.
  * Interaction: the whole stage parallax-tilts toward the cursor, and any
- * single phone straightens + floats forward (with its caption) on hover/focus.
+ * single phone straightens + floats forward on hover/focus.
  */
 export default function Gallery3D({ phones }: { phones: Phone[] }) {
     const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
@@ -55,7 +55,6 @@ export default function Gallery3D({ phones }: { phones: Phone[] }) {
                             </div>
                             <span className="g3d-notch" aria-hidden />
                         </div>
-                        <span className="g3d-label">{p.label}</span>
                     </div>
                 ))}
             </div>

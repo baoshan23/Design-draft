@@ -613,19 +613,19 @@ main :not(pre) > code {
 
 /* Slot composition: back pair stand tall & recede, front pair lean closer. */
 .g3d-slot-bl {
-  left: 23%; top: 35%; width: 17.5%; z-index: 1;
+  left: 23%; top: 35%; width: 18%; z-index: 1;
   transform: translate(-50%, -50%) translateZ(-90px) rotateX(7deg) rotateY(31deg) rotateZ(-6deg);
 }
 .g3d-slot-br {
-  left: 77%; top: 35%; width: 17.5%; z-index: 1;
+  left: 77%; top: 35%; width: 18%; z-index: 1;
   transform: translate(-50%, -50%) translateZ(-90px) rotateX(7deg) rotateY(-31deg) rotateZ(6deg);
 }
 .g3d-slot-fl {
-  left: 37%; top: 58%; width: 20%; z-index: 3;
+  left: 37%; top: 58%; width: 20.5%; z-index: 3;
   transform: translate(-50%, -50%) translateZ(70px) rotateX(11deg) rotateY(23deg) rotateZ(-6deg);
 }
 .g3d-slot-fr {
-  left: 63%; top: 58%; width: 20%; z-index: 3;
+  left: 63%; top: 58%; width: 20.5%; z-index: 3;
   transform: translate(-50%, -50%) translateZ(70px) rotateX(11deg) rotateY(-23deg) rotateZ(6deg);
 }
 
@@ -636,33 +636,61 @@ main :not(pre) > code {
   transform: translate(-50%, -50%) translateZ(240px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
 }
 
+/* ----- Phone mockup ----- */
+
+/* Graphite device body — the frame around each screen. */
 .g3d-device {
   position: relative;
   width: 100%;
-  padding: 3.3%;
-  border-radius: 16% / 7.7%;
-  background: linear-gradient(150deg, #3a3a3c 0%, #1c1c1e 62%);
+  padding: 4.2%;
+  border-radius: 19% / 9.2%;
+  background: linear-gradient(157deg, #45454b 0%, #2a2a2f 34%, #19191c 68%, #313137 100%);
   box-shadow:
-    0 34px 54px -14px rgba(0, 0, 0, 0.55),
-    0 10px 22px rgba(0, 0, 0, 0.32),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+    0 40px 64px -18px rgba(0, 0, 0, 0.6),
+    0 16px 30px rgba(0, 0, 0, 0.34),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.6),
+    inset 0 3px 5px rgba(255, 255, 255, 0.16);
   transition: box-shadow 0.45s ease;
+}
+
+/* Bright metallic rim drawn only along the outer frame edge. */
+.g3d-device::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.6px;
+  background: linear-gradient(
+    150deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.1) 24%,
+    rgba(0, 0, 0, 0.55) 50%,
+    rgba(255, 255, 255, 0.45) 74%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 3;
 }
 
 .g3d-phone:hover .g3d-device,
 .g3d-phone:focus-visible .g3d-device {
   box-shadow:
-    0 44px 70px -16px rgba(0, 0, 0, 0.5),
-    0 12px 26px rgba(0, 0, 0, 0.3),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.09),
-    0 0 0 3px rgba(254, 191, 29, 0.55);
+    0 56px 84px -20px rgba(0, 0, 0, 0.55),
+    0 22px 40px rgba(0, 0, 0, 0.32),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.6),
+    inset 0 3px 5px rgba(255, 255, 255, 0.18);
 }
 
 .g3d-screen {
   position: relative;
-  border-radius: 13% / 6%;
+  border-radius: 13.5% / 6.2%;
   overflow: hidden;
   background: #000;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.9);
 }
 
 .g3d-screen img {
@@ -674,41 +702,16 @@ main :not(pre) > code {
 /* Dynamic-island pill sitting over the screenshot status bar. */
 .g3d-notch {
   position: absolute;
-  top: 3.4%;
+  top: 4.4%;
   left: 50%;
-  width: 26%;
-  height: 2.4%;
-  min-height: 8px;
+  width: 27%;
+  height: 2.7%;
+  min-height: 9px;
   transform: translateX(-50%);
-  background: #1c1c1e;
+  background: #08080a;
   border-radius: 999px;
-  z-index: 2;
-}
-
-/* Floating caption — revealed on hover / focus. */
-.g3d-label {
-  position: absolute;
-  left: 50%;
-  bottom: -34px;
-  white-space: nowrap;
-  padding: 6px 16px;
-  border-radius: 999px;
-  background: rgba(26, 18, 16, 0.94);
-  color: #fff;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  opacity: 0;
-  transform: translateX(-50%) translateY(8px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 0 0 1px rgba(254, 191, 29, 0.4), 0 10px 22px rgba(0, 0, 0, 0.32);
-  pointer-events: none;
-}
-
-.g3d-phone:hover .g3d-label,
-.g3d-phone:focus-visible .g3d-label {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
+  box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.07);
+  z-index: 4;
 }
 
 /* Mobile — drop the 3D stage for a flat, tappable 2-column grid. */
@@ -725,7 +728,7 @@ main :not(pre) > code {
     transform-style: flat;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 44px 18px;
+    gap: 30px 22px;
   }
   .g3d-phone {
     position: static;
@@ -736,25 +739,12 @@ main :not(pre) > code {
   .g3d-phone:focus-visible {
     transform: translateY(-6px) !important;
   }
-  .g3d-label {
-    position: static;
-    display: block;
-    width: fit-content;
-    margin: 14px auto 0;
-    opacity: 1;
-    transform: none;
-  }
-  .g3d-phone:hover .g3d-label,
-  .g3d-phone:focus-visible .g3d-label {
-    transform: none;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .gallery-3d-stage,
   .g3d-phone,
-  .g3d-device,
-  .g3d-label {
+  .g3d-device {
     transition-duration: 0ms;
   }
 }
