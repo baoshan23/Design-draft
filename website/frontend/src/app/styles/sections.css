@@ -3848,7 +3848,7 @@ html {
 }
 
 .addon-price {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: var(--primary);
   font-variant-numeric: tabular-nums;
@@ -4260,7 +4260,7 @@ html {
   flex-grow: 0;
 }
 
-/* Add-on cards — icon + body row layout (was a flat label/price stack) */
+/* Add-on cards — icon stacked above the label/price body */
 .addons-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -4278,7 +4278,7 @@ html {
 }
 
 .addon-card {
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   gap: 14px;
 }
