@@ -3030,9 +3030,10 @@ html {
 .b2c-lang-panel {
   display: grid;
   /* Aside is a flexible track (not minmax(_,560px)) — paired with a plain
-     1fr the minmax track stays pinned at its min, starving the form. A
-     flex max lets the yellow aside take a real ~44% share of the panel. */
-  grid-template-columns: minmax(400px, 1fr) 1.25fr;
+     1fr the minmax track stays pinned at its min, starving the form. The
+     fr ratio gives the yellow aside ~38% of the panel; the language grid
+     takes the wider remainder. */
+  grid-template-columns: minmax(400px, 1fr) 1.6fr;
   max-width: 1440px;
   margin: 40px auto 0;
   border: 1px solid var(--border-subtle);
