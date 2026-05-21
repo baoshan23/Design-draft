@@ -569,56 +569,194 @@ main :not(pre) > code {
   filter: brightness(1.05);
 }
 
-/* ---------- Product gallery phone screenshots ---------- */
+/* ---------- Product gallery — 3D phone showcase ---------- */
 
-.gallery-grid {
-  gap: 24px;
+.gallery-3d {
+  position: relative;
+  max-width: 1080px;
+  margin: 32px auto 0;
+  aspect-ratio: 9 / 5;
+  perspective: 2000px;
+  perspective-origin: 50% 44%;
 }
 
-.gallery-phone {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  animation: gallery-float 4.2s ease-in-out infinite;
-  transform-origin: center;
+/* Soft contact shadow anchoring the floating cluster to the page. */
+.gallery-3d::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 3%;
+  width: 60%;
+  height: 64px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.22) 0%, transparent 72%);
+  filter: blur(7px);
+  z-index: 0;
+  pointer-events: none;
 }
 
-.gallery-phone img {
+.gallery-3d-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transform-style: preserve-3d;
+  transition: transform 0.32s ease-out;
+  will-change: transform;
+}
+
+.g3d-phone {
+  position: absolute;
+  outline: none;
+  cursor: pointer;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Slot composition: back pair stand tall & recede, front pair lean closer. */
+.g3d-slot-bl {
+  left: 23%; top: 35%; width: 17.5%; z-index: 1;
+  transform: translate(-50%, -50%) translateZ(-90px) rotateX(7deg) rotateY(31deg) rotateZ(-6deg);
+}
+.g3d-slot-br {
+  left: 77%; top: 35%; width: 17.5%; z-index: 1;
+  transform: translate(-50%, -50%) translateZ(-90px) rotateX(7deg) rotateY(-31deg) rotateZ(6deg);
+}
+.g3d-slot-fl {
+  left: 37%; top: 58%; width: 20%; z-index: 3;
+  transform: translate(-50%, -50%) translateZ(70px) rotateX(11deg) rotateY(23deg) rotateZ(-6deg);
+}
+.g3d-slot-fr {
+  left: 63%; top: 58%; width: 20%; z-index: 3;
+  transform: translate(-50%, -50%) translateZ(70px) rotateX(11deg) rotateY(-23deg) rotateZ(6deg);
+}
+
+/* Hover / keyboard focus — straighten the phone and float it to the front. */
+.g3d-phone:hover,
+.g3d-phone:focus-visible {
+  z-index: 10;
+  transform: translate(-50%, -50%) translateZ(240px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+
+.g3d-device {
+  position: relative;
+  width: 100%;
+  padding: 3.3%;
+  border-radius: 16% / 7.7%;
+  background: linear-gradient(150deg, #3a3a3c 0%, #1c1c1e 62%);
   box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(254, 191, 29, 0.22),
-    0 0 28px rgba(254, 191, 29, 0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    0 34px 54px -14px rgba(0, 0, 0, 0.55),
+    0 10px 22px rgba(0, 0, 0, 0.32),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+  transition: box-shadow 0.45s ease;
 }
 
-.gallery-label {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  font-weight: 500;
+.g3d-phone:hover .g3d-device,
+.g3d-phone:focus-visible .g3d-device {
+  box-shadow:
+    0 44px 70px -16px rgba(0, 0, 0, 0.5),
+    0 12px 26px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.09),
+    0 0 0 3px rgba(254, 191, 29, 0.55);
+}
+
+.g3d-screen {
+  position: relative;
+  border-radius: 13% / 6%;
+  overflow: hidden;
+  background: #000;
+}
+
+.g3d-screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Dynamic-island pill sitting over the screenshot status bar. */
+.g3d-notch {
+  position: absolute;
+  top: 3.4%;
+  left: 50%;
+  width: 26%;
+  height: 2.4%;
+  min-height: 8px;
+  transform: translateX(-50%);
+  background: #1c1c1e;
+  border-radius: 999px;
+  z-index: 2;
+}
+
+/* Floating caption — revealed on hover / focus. */
+.g3d-label {
+  position: absolute;
+  left: 50%;
+  bottom: -34px;
+  white-space: nowrap;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(26, 18, 16, 0.94);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
   letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateX(-50%) translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 0 0 1px rgba(254, 191, 29, 0.4), 0 10px 22px rgba(0, 0, 0, 0.32);
+  pointer-events: none;
 }
 
-.gallery-phone:nth-child(1) { animation-delay: 0s; }
-.gallery-phone:nth-child(2) { animation-delay: -1.05s; }
-.gallery-phone:nth-child(3) { animation-delay: -2.1s; }
-.gallery-phone:nth-child(4) { animation-delay: -3.15s; }
-
-@keyframes gallery-float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(-0.6deg); }
+.g3d-phone:hover .g3d-label,
+.g3d-phone:focus-visible .g3d-label {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
-.gallery-phone:hover {
-  animation-play-state: paused;
-  transform: translateY(-10px) scale(1.04);
+/* Mobile — drop the 3D stage for a flat, tappable 2-column grid. */
+@media (max-width: 760px) {
+  .gallery-3d {
+    aspect-ratio: auto;
+    max-width: 460px;
+    perspective: none;
+  }
+  .gallery-3d::after { display: none; }
+  .gallery-3d-stage {
+    position: static;
+    transform: none !important;
+    transform-style: flat;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 44px 18px;
+  }
+  .g3d-phone {
+    position: static;
+    width: auto !important;
+    transform: none !important;
+  }
+  .g3d-phone:hover,
+  .g3d-phone:focus-visible {
+    transform: translateY(-6px) !important;
+  }
+  .g3d-label {
+    position: static;
+    display: block;
+    width: fit-content;
+    margin: 14px auto 0;
+    opacity: 1;
+    transform: none;
+  }
+  .g3d-phone:hover .g3d-label,
+  .g3d-phone:focus-visible .g3d-label {
+    transform: none;
+  }
 }
 
-.gallery-phone:hover img {
-  box-shadow:
-    0 30px 60px rgba(0, 0, 0, 0.4),
-    0 0 0 1.5px rgba(254, 191, 29, 0.4),
-    0 0 50px rgba(254, 191, 29, 0.25);
+@media (prefers-reduced-motion: reduce) {
+  .gallery-3d-stage,
+  .g3d-phone,
+  .g3d-device,
+  .g3d-label {
+    transition-duration: 0ms;
+  }
 }
 
 /* ---------- Forum thread post polish ---------- */
@@ -899,7 +1037,6 @@ main :not(pre) > code {
     transition-duration: 0ms;
   }
   .section-label::before,
-  .gallery-phone,
   #gallery::before,
   #gallery::after {
     animation: none;
