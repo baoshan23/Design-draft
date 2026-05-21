@@ -4090,6 +4090,26 @@ html {
   transform: translateY(-1px);
 }
 
+/* Pricing page — #plans "价格方案" section image backdrop.
+   The light-blue 3D-plate render is painted by a ::before layer over the
+   section's white background, then dissolved into white toward the bottom
+   via a mask gradient so the pricing cards melt into the page. */
+.pricing-section--tabs {
+  position: relative;
+  isolation: isolate;
+}
+
+.pricing-section--tabs::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url('/images/pricing-plans-bg.png') center top / cover no-repeat;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 95%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 95%);
+  pointer-events: none;
+}
+
 /* Pricing page — B2C / B2B segmented tab switcher.
    Centered pill containing two buttons. Active button has the brand-yellow
    pill background; idle button is transparent with muted text. */
