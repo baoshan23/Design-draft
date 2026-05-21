@@ -3145,6 +3145,15 @@ html {
 .b2c-lang-aside .lang-request-card .form-input::placeholder {
   color: rgba(24, 24, 24, 0.45);
 }
+/* Hover affordance — the aside's higher-specificity base rule above was
+   silently overriding the global .form-input:hover, leaving the form
+   inert on hover. Brighten the frosted input on hover (kept before
+   :focus so focus still wins when both states apply). The base
+   .form-input transition animates background + border-color. */
+.b2c-lang-aside .lang-request-card .form-input:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: #ffffff;
+}
 .b2c-lang-aside .lang-request-card .form-input:focus {
   background: rgba(255, 255, 255, 0.85);
   border-color: #181818;
@@ -3159,9 +3168,18 @@ html {
   color: #fff;
   border-color: #181818;
 }
+/* Lift + shadow on hover (the old hover was only #181818→#000, an
+   invisible black-on-black change) and a press-down on :active. The
+   global .btn transition:all 0.3s animates both. */
 .b2c-lang-aside .lang-request-card .btn-primary:hover {
   background: #000;
   border-color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
+}
+.b2c-lang-aside .lang-request-card .btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
 }
 /* Grid sits flush in the panel — the panel owns the frame/rounding;
    the grid keeps overflow:hidden so its own edge "+" marks are clipped
