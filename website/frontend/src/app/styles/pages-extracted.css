@@ -1722,7 +1722,7 @@ body:has(.product-hero) {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(37, 99, 235, 0.08), transparent 60%);
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(254, 191, 29, 0.08), transparent 60%);
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -1731,10 +1731,13 @@ body:has(.product-hero) {
   opacity: 1;
 }
 
+/* Hover shadow/border colour unified with the site-standard .card:hover
+   (sections.css ~2389): neutral shadow + faint gold accent — was a
+   one-off blue (rgb(37,99,235)). */
 .contact-method-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.12);
-  border-color: rgba(37, 99, 235, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  border-color: rgba(254, 191, 29, 0.15);
 }
 
 .method-icon {
