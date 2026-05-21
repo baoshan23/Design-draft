@@ -4014,20 +4014,21 @@ html {
    i18n-aware ribbon span instead. */
 .pricing-card.featured::before { content: none; }
 
-/* Unified pricing card frame: borderless white panels, no shadow.
-   Applies to all cards in the pricing grid (highlighted and
-   non-highlighted alike). Class-chained for high specificity (0,2,0)
+/* Unified pricing card frame: white panels with a hairline #e5e5e5
+   edge, no shadow. Applies to all cards in the pricing grid (the
+   /pricing B2C+B2B tabs, the /b2b page, the /b2c page) — highlighted
+   and non-highlighted alike. Class-chained for high specificity (0,2,0)
    to beat .glass-card rules that live in polish.css (loaded after
    sections.css). */
 .pricing-card.glass-card {
   background: #ffffff !important;
-  border: 0 !important;
+  border: 1px solid #e5e5e5 !important;
   box-shadow: none !important;
 }
 
 .pricing-card.glass-card:hover {
   background: #ffffff !important;
-  border: 0 !important;
+  border: 1px solid #e5e5e5 !important;
   box-shadow: none !important;
 }
 
