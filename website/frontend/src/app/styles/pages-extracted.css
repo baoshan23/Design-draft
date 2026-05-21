@@ -1330,12 +1330,21 @@ body:has(.product-hero) {
   font-size: 1.05rem;
 }
 
+/* Filters + pagination share one toolbar row above the post list. */
+.blog-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
 .blog-filters {
   display: flex;
   justify-content: center;
   gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 48px;
 }
 
 .filter-btn {
@@ -1595,7 +1604,6 @@ body:has(.product-hero) {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 48px;
 }
 
 .page-btn {

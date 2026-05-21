@@ -70,20 +70,30 @@ export default function BlogPage() {
         </ScrollAnimation>
       </section>
 
-      {/* Filters */}
+      {/* Filters + pagination toolbar */}
       <section className="section-sm">
         <div className="container">
           <ScrollAnimation>
-            <div className="blog-filters">
-              {filters.map((f) => (
-                <button
-                  key={f.key}
-                  className={`filter-btn${activeFilter === f.key ? ' active' : ''}`}
-                  onClick={() => setActiveFilter(f.key)}
-                >
-                  {f.label}
+            <div className="blog-toolbar">
+              <div className="blog-filters">
+                {filters.map((f) => (
+                  <button
+                    key={f.key}
+                    className={`filter-btn${activeFilter === f.key ? ' active' : ''}`}
+                    onClick={() => setActiveFilter(f.key)}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+              <div className="pagination">
+                <button className="page-btn active">1</button>
+                <button className="page-btn">2</button>
+                <button className="page-btn">3</button>
+                <button className="page-btn" aria-label={t('blog.pagination.next')} title={t('blog.pagination.next')}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6" /></svg>
                 </button>
-              ))}
+              </div>
             </div>
           </ScrollAnimation>
 
@@ -157,16 +167,6 @@ export default function BlogPage() {
 
             </div>
           </ScrollAnimation>
-
-          {/* Pagination */}
-          <div className="pagination">
-            <button className="page-btn active">1</button>
-            <button className="page-btn">2</button>
-            <button className="page-btn">3</button>
-            <button className="page-btn" aria-label={t('blog.pagination.next')} title={t('blog.pagination.next')}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6" /></svg>
-            </button>
-          </div>
         </div>
       </section>
 
