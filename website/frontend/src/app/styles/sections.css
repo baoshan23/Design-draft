@@ -4254,6 +4254,22 @@ html {
   margin-top: 0;
   border: none;
   border-radius: 0;
+  /* Drop the table's own overflow:hidden — inside the wrap it has no
+     rounded corners to clip, and as a scroll container it would pin the
+     sticky <thead> to the table instead of letting it reach the viewport. */
+  overflow: visible;
+}
+
+/* On viewports wide enough for the 980px-min table to fit, the wrap no
+   longer needs horizontal scroll. overflow-x:auto makes the wrap a scroll
+   container (spec forces overflow-y to auto too), which traps the sticky
+   yellow <thead> inside it. overflow:clip still clips to the rounded
+   frame but is NOT a scroll container, so the plan header sticks under
+   the fixed site header while the table body scrolls past it. */
+@media (min-width: 1040px) {
+  .comparison-table-wrap {
+    overflow: clip;
+  }
 }
 
 .comparison-plan-name {
