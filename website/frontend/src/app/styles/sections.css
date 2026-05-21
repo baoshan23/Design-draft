@@ -4247,7 +4247,9 @@ html {
   -webkit-overflow-scrolling: touch;
   margin-top: 60px;
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
+  /* Square the top corners so the yellow header is a flat banner;
+     bottom corners stay rounded with the table body. */
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
 
 .comparison-table-wrap .comparison-table {
@@ -4333,9 +4335,9 @@ html {
   top: var(--header-height);
   z-index: 10;
   border-bottom: 1px solid var(--border-subtle);
-  padding-top: 16px;
-  padding-bottom: 33px;
-  vertical-align: top;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  vertical-align: middle;
   line-height: 1.15;
 }
 
@@ -4358,9 +4360,14 @@ html {
 
 .comparison-table td:first-child,
 .comparison-table th:first-child {
-  text-align: left;
   font-weight: 600;
   color: var(--text-primary);
+}
+
+/* Body feature-name column stays left-aligned; the yellow header's
+   first cell (功能) keeps the centered alignment of the thead. */
+.comparison-table td:first-child {
+  text-align: left;
 }
 
 .comparison-table td {
