@@ -139,7 +139,7 @@ export default function ContactPage() {
             <span className="section-label">{t('contact.label')}</span>
             <h1>
               <span>{t('contact.title1')}</span><br />
-              <span className="gradient-text-animated">{t('contact.title2')}</span>
+              <span style={{ color: 'var(--primary)' }}>{t('contact.title2')}</span>
             </h1>
             <p>{t('contact.desc')}</p>
           </div>
