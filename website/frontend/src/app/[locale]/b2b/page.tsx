@@ -6,6 +6,7 @@ import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import Image from 'next/image';
 import SubNav from './SubNav';
 import ScrollResetOnLoad from '@/components/effects/ScrollResetOnLoad';
+import B2BDemoCredCard from './B2BDemoCredCard';
 
 const DEMO_QR_URLS = {
   mobile: 'https://app.gcss.hk/',
@@ -454,58 +455,46 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
           </ScrollAnimation>
           <div className="b2b-demo-grid">
             <ScrollAnimation>
-              <div className="b2c-demo-card">
-                <div className="b2c-demo-card-head">
-                  <div className="b2c-demo-card-icon">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="3" y="4" width="18" height="14" rx="2" />
-                      <line x1="3" y1="9" x2="21" y2="9" />
-                      <line x1="8" y1="20" x2="16" y2="20" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="b2c-demo-card-title">{t('b2b.demo.admin.title')}</h4>
-                    <span className="b2c-demo-card-tag">{t('b2b.demo.admin.subtitle')}</span>
-                  </div>
-                </div>
-                <div className="b2c-demo-creds">
-                  <div className="b2c-demo-cred-header">{t('b2b.demo.demoAccount')}</div>
-                  <div className="b2c-demo-cred-row">
-                    <span className="b2c-demo-cred-key">{t('b2b.demo.account')}</span>
-                    <code className="b2c-demo-cred-value">{DEMO_CREDS.admin.account}</code>
-                  </div>
-                  <div className="b2c-demo-cred-row">
-                    <span className="b2c-demo-cred-key">{t('b2b.demo.password')}</span>
-                    <code className="b2c-demo-cred-value">{DEMO_CREDS.admin.pass}</code>
-                  </div>
-                </div>
-                <div className="b2c-demo-card-actions">
-                  <button type="button" className="btn btn-primary">{t('b2b.demo.launch')}</button>
-                </div>
-              </div>
+              <B2BDemoCredCard
+                account={DEMO_CREDS.admin.account}
+                password={DEMO_CREDS.admin.pass}
+              />
             </ScrollAnimation>
             <ScrollAnimation style={{ transitionDelay: '0.15s' }}>
-              <div className="b2b-demo-qrs">
-                <a
-                  className="b2c-demo-qr"
-                  href={DEMO_QR_URLS.mobile}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={t('b2b.demo.mobileDemo')}
-                >
-                  <div className="b2c-qr" dangerouslySetInnerHTML={{ __html: mobileQr }} />
-                  <span className="b2c-demo-qr-label">{t('b2b.demo.mobileDemo')}</span>
-                </a>
-                <a
-                  className="b2c-demo-qr"
-                  href={DEMO_QR_URLS.web}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={t('b2b.demo.webDemo')}
-                >
-                  <div className="b2c-qr" dangerouslySetInnerHTML={{ __html: webQr }} />
-                  <span className="b2c-demo-qr-label">{t('b2b.demo.webDemo')}</span>
-                </a>
+              <div className="b2b-demo-qr-card">
+                <div className="b2b-demo-qrs">
+                  <a
+                    className="b2c-demo-qr"
+                    href={DEMO_QR_URLS.mobile}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={t('b2b.demo.mobileDemo')}
+                  >
+                    <div className="b2c-qr" dangerouslySetInnerHTML={{ __html: mobileQr }} />
+                    <span className="b2c-demo-qr-label">{t('b2b.demo.mobileDemo')}</span>
+                  </a>
+                  <a
+                    className="b2c-demo-qr"
+                    href={DEMO_QR_URLS.web}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={t('b2b.demo.webDemo')}
+                  >
+                    <div className="b2c-qr" dangerouslySetInnerHTML={{ __html: webQr }} />
+                    <span className="b2c-demo-qr-label">{t('b2b.demo.webDemo')}</span>
+                  </a>
+                </div>
+                <div className="b2b-demo-qr-cta">
+                  <p>{t('b2b.demo.desc')}</p>
+                  <a
+                    href={DEMO_QR_URLS.web}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary"
+                  >
+                    {t('b2b.demo.launchOnline')}
+                  </a>
+                </div>
               </div>
             </ScrollAnimation>
           </div>

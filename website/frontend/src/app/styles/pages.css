@@ -2654,6 +2654,44 @@ h3.matrix-header,
   padding-top: 12px;
 }
 
+/* White card wrapping the QR pair + CTA, mirrors b2c .b2c-demo-qr-row chrome */
+.b2b-demo-qr-card {
+  background: #fff;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: 100%;
+}
+[data-theme="dark"] .b2b-demo-qr-card {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.b2b-demo-qr-card .b2b-demo-qrs {
+  padding-top: 0;
+}
+.b2b-demo-qr-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+  text-align: center;
+}
+[data-theme="dark"] .b2b-demo-qr-cta {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+.b2b-demo-qr-cta p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 360px;
+}
+
 .b2b-demo-qr-block {
   text-align: center;
   display: inline-block;

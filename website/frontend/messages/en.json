@@ -2464,7 +2464,11 @@
       "password": "Password",
       "launch": "Launch",
       "mobileDemo": "Mobile App",
-      "webDemo": "Web App"
+      "webDemo": "Web App",
+      "desc": "Try GCSS yourself. Choose an edition to explore the live system.",
+      "launchOnline": "Launch live demo",
+      "copy": "Copy",
+      "copied": "Copied"
     }
   },
   "faq": {
