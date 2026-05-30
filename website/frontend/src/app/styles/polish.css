@@ -590,6 +590,12 @@ main :not(pre) > code {
   width: 250px;
   outline: none;
   cursor: pointer;
+  /* <button> resets so the markup looks identical to the prior <div>. */
+  padding: 0;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  color: inherit;
   filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.18));
   transform-origin: 50% 100%;
   transition:
@@ -597,39 +603,16 @@ main :not(pre) > code {
     filter 0.45s ease;
 }
 
-/* Featured 2nd phone in the static state — slightly larger + modest
-   upward lift so it reads as the hero of the row. The -20px lift stays
-   well within the gallery's 80px top-padding buffer, so the subtitle
-   above the row never gets covered. Source-ordered BEFORE the `:hover`
-   rule so hover (same specificity) wins on any phone. */
-.g3d-phone:nth-child(2) {
+/* Click-driven active state — only the phone with `.is-active` is enlarged.
+   Component defaults `active = 1` (2nd phone) so the row opens with the
+   2nd phone featured; clicking any phone moves the active class onto it
+   and the previously-active one snaps back to the row size. No `:hover`
+   enlargement — interaction is click-only per user request. */
+.g3d-phone.is-active {
   width: 310px;
   transform: translateY(-20px);
   z-index: 1;
   filter: drop-shadow(0 28px 36px rgba(0, 0, 0, 0.26));
-}
-
-/* When the row is being interacted with (hover/focus on ANY phone), drop
-   the static "featured 2nd" sizing so only the actually-hovered phone is
-   enlarged. `:not(:hover)` / `:not(:focus-visible)` lets the 2nd phone
-   keep its size when it IS the one being interacted with — combined with
-   the `:hover, :focus-visible` rule below, that promotes it to the full
-   scale(1.35) instead. This block sits AFTER the featured rule and
-   BEFORE the individual hover rule so source order produces:
-   featured-2nd → reset-on-row-hover → scale-on-self-hover. */
-.gallery-row:hover .g3d-phone:nth-child(2):not(:hover),
-.gallery-row:focus-within .g3d-phone:nth-child(2):not(:focus-visible) {
-  width: 250px;
-  transform: none;
-  z-index: auto;
-  filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.18));
-}
-
-.g3d-phone:hover,
-.g3d-phone:focus-visible {
-  transform: scale(1.35) translateY(-24px);
-  z-index: 2;
-  filter: drop-shadow(0 36px 44px rgba(0, 0, 0, 0.32));
 }
 
 .g3d-phone:focus-visible {
@@ -716,18 +699,14 @@ main :not(pre) > code {
   .g3d-phone {
     width: auto;
   }
-  /* Reset the desktop featured-2nd-phone rule on mobile — the 2-col
-     grid wants all four phones the same size. Specificity 0,2,1 beats
-     the desktop `:nth-child(2)` at 0,2,0. */
-  .g3d-phone:nth-child(2) {
+  /* Reset the desktop `.is-active` enlargement on mobile — the 2-col grid
+     wants all four phones the same size. Specificity 0,2,1 beats the
+     desktop `.is-active` at 0,2,0. */
+  .g3d-phone.is-active {
     width: auto;
     transform: none;
     z-index: auto;
     filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.18));
-  }
-  .g3d-phone:hover,
-  .g3d-phone:focus-visible {
-    transform: scale(1.08) translateY(-6px);
   }
 }
 

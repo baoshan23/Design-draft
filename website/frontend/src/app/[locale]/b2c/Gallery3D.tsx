@@ -1,17 +1,28 @@
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
 
 type Phone = { src: string; label: string };
 
 /**
- * Product gallery: four phone mockups in an evenly-distributed row, all
- * the same size in the static state. Hovering (or keyboard-focusing) any
- * phone enlarges it.
+ * Product gallery: four phone mockups in an evenly-distributed row. The
+ * 2nd phone is enlarged by default; clicking any phone makes it the
+ * enlarged one. No hover behaviour — click only.
  */
 export default function Gallery3D({ phones }: { phones: Phone[] }) {
+    const [active, setActive] = useState(1);
     return (
         <div className="gallery-row">
-            {phones.slice(0, 4).map((p) => (
-                <div key={p.src} className="g3d-phone" tabIndex={0} role="img" aria-label={p.label}>
+            {phones.slice(0, 4).map((p, i) => (
+                <button
+                    key={p.src}
+                    type="button"
+                    className={`g3d-phone${active === i ? ' is-active' : ''}`}
+                    onClick={() => setActive(i)}
+                    aria-pressed={active === i}
+                    aria-label={p.label}
+                >
                     <div className="g3d-device">
                         <div className="g3d-screen">
                             <Image
@@ -24,7 +35,7 @@ export default function Gallery3D({ phones }: { phones: Phone[] }) {
                         </div>
                         <span className="g3d-notch" aria-hidden />
                     </div>
-                </div>
+                </button>
             ))}
         </div>
     );
