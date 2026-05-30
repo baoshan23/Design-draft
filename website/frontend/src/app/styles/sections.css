@@ -4281,24 +4281,35 @@ html {
 }
 
 .addon-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 24px 16px;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 14px;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+  box-shadow: none;
+  transition: none;
 }
 
-/* Icon tile matches the b2c #features icons: 52px solid-gold rounded
-   square with a soft gold glow and black line icons. */
+.addon-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Icon tile: black rounded square with yellow line icon, no shadow. */
 .addon-card-icon {
   display: inline-flex;
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   align-items: center;
   justify-content: center;
   border-radius: 14px;
-  background: var(--primary, #febf1d);
-  color: #181818;
+  background: #181818;
+  color: var(--primary, #febf1d);
   flex-shrink: 0;
-  box-shadow: 0 0 20px rgba(254, 191, 29, 0.35);
+  box-shadow: none;
 }
 
 .addon-card-icon svg {
@@ -4308,9 +4319,26 @@ html {
 
 .addon-card-body {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex-direction: column-reverse;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
   min-width: 0;
+}
+
+.addon-card .addon-label {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-secondary, #555);
+  line-height: 1.45;
+}
+
+.addon-card .addon-price {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
 }
 
 /* Comparison table — header polish + sticky first column on mobile */
