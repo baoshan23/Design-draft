@@ -1,30 +1,16 @@
-'use client';
-
-import { useState } from 'react';
 import Image from 'next/image';
 
 type Phone = { src: string; label: string };
 
 /**
- * Product gallery: a row of four phone mockups. One phone is "featured"
- * (larger, slightly tilted, lifted) at any given time; hovering or focusing
- * another phone hands the spotlight to that one.
+ * Product gallery: four phone mockups aligned in a single evenly-distributed
+ * row. Static — no hover or focus interaction.
  */
 export default function Gallery3D({ phones }: { phones: Phone[] }) {
-    const [active, setActive] = useState(1);
-
     return (
-        <div className="gallery-row" onMouseLeave={() => setActive(1)}>
-            {phones.slice(0, 4).map((p, i) => (
-                <div
-                    key={p.src}
-                    className={`g3d-phone${active === i ? ' is-active' : ''}`}
-                    onMouseEnter={() => setActive(i)}
-                    onFocus={() => setActive(i)}
-                    tabIndex={0}
-                    role="img"
-                    aria-label={p.label}
-                >
+        <div className="gallery-row">
+            {phones.slice(0, 4).map((p) => (
+                <div key={p.src} className="g3d-phone" role="img" aria-label={p.label}>
                     <div className="g3d-device">
                         <div className="g3d-screen">
                             <Image
