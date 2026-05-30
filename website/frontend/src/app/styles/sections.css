@@ -4298,7 +4298,7 @@ html {
   box-shadow: none;
 }
 
-/* Icon tile: black rounded square with yellow line icon, no shadow. */
+/* Icon tile: yellow rounded square with black line icon, no shadow. */
 .addon-card-icon {
   display: inline-flex;
   width: 56px;
@@ -4306,8 +4306,8 @@ html {
   align-items: center;
   justify-content: center;
   border-radius: 14px;
-  background: #181818;
-  color: var(--primary, #febf1d);
+  background: var(--primary, #febf1d);
+  color: #181818;
   flex-shrink: 0;
   box-shadow: none;
 }
