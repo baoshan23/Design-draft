@@ -2687,7 +2687,7 @@ html {
   margin-top: 0;
   width: auto;
   padding: 8px 14px;
-  border-radius: 999px;
+  border-radius: var(--radius);
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.12);
   color: #1f1f1f;
