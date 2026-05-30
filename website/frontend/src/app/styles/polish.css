@@ -609,6 +609,22 @@ main :not(pre) > code {
   filter: drop-shadow(0 28px 36px rgba(0, 0, 0, 0.26));
 }
 
+/* When the row is being interacted with (hover/focus on ANY phone), drop
+   the static "featured 2nd" sizing so only the actually-hovered phone is
+   enlarged. `:not(:hover)` / `:not(:focus-visible)` lets the 2nd phone
+   keep its size when it IS the one being interacted with — combined with
+   the `:hover, :focus-visible` rule below, that promotes it to the full
+   scale(1.35) instead. This block sits AFTER the featured rule and
+   BEFORE the individual hover rule so source order produces:
+   featured-2nd → reset-on-row-hover → scale-on-self-hover. */
+.gallery-row:hover .g3d-phone:nth-child(2):not(:hover),
+.gallery-row:focus-within .g3d-phone:nth-child(2):not(:focus-visible) {
+  width: 250px;
+  transform: none;
+  z-index: auto;
+  filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.18));
+}
+
 .g3d-phone:hover,
 .g3d-phone:focus-visible {
   transform: scale(1.35) translateY(-24px);
