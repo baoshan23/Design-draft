@@ -575,8 +575,11 @@ main :not(pre) > code {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  gap: 32px;
-  max-width: 1280px;
+  gap: 24px;
+  /* Sized so `space-between` produces ~29px gaps with 3 base phones at
+     250px + 1 featured 2nd at 310px: 1180 - 32 padding = 1148 content;
+     1148 - 1060 (3×250 + 310) = 88; 88 / 3 = ~29px between phones. */
+  max-width: 1180px;
   margin: 32px auto 0;
   padding: 80px 16px 40px;
 }
@@ -584,7 +587,7 @@ main :not(pre) > code {
 .g3d-phone {
   position: relative;
   flex: 0 0 auto;
-  width: 220px;
+  width: 250px;
   outline: none;
   cursor: pointer;
   filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.18));
@@ -592,6 +595,18 @@ main :not(pre) > code {
   transition:
     transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
     filter 0.45s ease;
+}
+
+/* Featured 2nd phone in the static state — slightly larger + modest
+   upward lift so it reads as the hero of the row. The -20px lift stays
+   well within the gallery's 80px top-padding buffer, so the subtitle
+   above the row never gets covered. Source-ordered BEFORE the `:hover`
+   rule so hover (same specificity) wins on any phone. */
+.g3d-phone:nth-child(2) {
+  width: 310px;
+  transform: translateY(-20px);
+  z-index: 1;
+  filter: drop-shadow(0 28px 36px rgba(0, 0, 0, 0.26));
 }
 
 .g3d-phone:hover,
@@ -684,6 +699,15 @@ main :not(pre) > code {
   }
   .g3d-phone {
     width: auto;
+  }
+  /* Reset the desktop featured-2nd-phone rule on mobile — the 2-col
+     grid wants all four phones the same size. Specificity 0,2,1 beats
+     the desktop `:nth-child(2)` at 0,2,0. */
+  .g3d-phone:nth-child(2) {
+    width: auto;
+    transform: none;
+    z-index: auto;
+    filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.18));
   }
   .g3d-phone:hover,
   .g3d-phone:focus-visible {
