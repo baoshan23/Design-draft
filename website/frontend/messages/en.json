@@ -994,6 +994,13 @@
       "s4": {
         "title": "1-on-1 Direct Technical Support",
         "desc": "Enterprise customers get dedicated technical support with guaranteed response times."
+      },
+      "bento": {
+        "lesson1": "Installation & Setup",
+        "lesson2": "Device Onboarding",
+        "lesson3": "Billing & Operations",
+        "lesson4": "Advanced Features",
+        "accentLabel": "Dedicated channel"
       }
     },
     "demo": {
