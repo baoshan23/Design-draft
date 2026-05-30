@@ -142,19 +142,17 @@ body:has(.hero-with-video) .header.scrolled {
 
 /* Demo / pricing page (yellow hero) — keep the header readable on the warm
    bg by forcing a near-opaque white frost on top, regardless of scroll.
-   Static state shows only the border line (no shadow); the shadow fades
-   in once the user scrolls, matching the rest of the site. */
+   No drop-shadow in EITHER state — only the 1px border line separates the
+   nav from the content (user request: "只有边线"). */
 body:has(.demo-hero) .header,
-body:has(.pricing-hero) .header {
+body:has(.demo-hero) .header.scrolled,
+body:has(.pricing-hero) .header,
+body:has(.pricing-hero) .header.scrolled {
   background: rgba(255, 255, 255, 0.92);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   backdrop-filter: blur(24px) saturate(180%);
   border-bottom-color: rgba(0, 0, 0, 0.06);
   box-shadow: none;
-}
-body:has(.demo-hero) .header.scrolled,
-body:has(.pricing-hero) .header.scrolled {
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
 }
 
 /* Pages with a sub-nav strip: drop the header drop-shadow and use a thin
