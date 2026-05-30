@@ -234,14 +234,18 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               <p>{t('b2b.modes.desc')}</p>
             </div>
           </ScrollAnimation>
-          <div className="grid-4">
+          <div className="modes-bento-grid">
             {modes.map((mode, i) => (
               <ScrollAnimation key={mode} style={{ transitionDelay: `${i * 0.1}s` }}>
-                <div className="card glass-card" style={{ height: '100%' }}>
-                  <div className="card-icon">{modeIcons[i]}</div>
-                  <h3>{t(`b2b.modes.${mode}.title`)}</h3>
-                  <p>{t(`b2b.modes.${mode}.desc`)}</p>
-                </div>
+                <article className="mode-bento-card">
+                  <div className="mode-bento-visual">
+                    <div className="mode-bento-icon">{modeIcons[i]}</div>
+                  </div>
+                  <div className="mode-bento-body">
+                    <h3>{t(`b2b.modes.${mode}.title`)}</h3>
+                    <p>{t(`b2b.modes.${mode}.desc`)}</p>
+                  </div>
+                </article>
               </ScrollAnimation>
             ))}
           </div>
@@ -450,46 +454,57 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
           </ScrollAnimation>
           <div className="b2b-demo-grid">
             <ScrollAnimation>
-              <div className="b2b-demo-cards">
-                <div className="b2b-demo-card glass-card" data-accent="blue">
-                  <div className="b2b-demo-card-head">
-                    <h3>{t('b2b.demo.admin.title')}</h3>
-                    <span className="b2b-demo-card-sub">{t('b2b.demo.admin.subtitle')}</span>
+              <div className="b2c-demo-card">
+                <div className="b2c-demo-card-head">
+                  <div className="b2c-demo-card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="4" width="18" height="14" rx="2" />
+                      <line x1="3" y1="9" x2="21" y2="9" />
+                      <line x1="8" y1="20" x2="16" y2="20" />
+                    </svg>
                   </div>
-                  <div className="b2b-demo-card-creds-label">{t('b2b.demo.demoAccount')}</div>
-                  <div className="b2b-demo-field"><span>{t('b2b.demo.account')}:</span><code>{DEMO_CREDS.admin.account}</code></div>
-                  <div className="b2b-demo-field"><span>{t('b2b.demo.password')}:</span><code>{DEMO_CREDS.admin.pass}</code></div>
-                  <button type="button" className="btn btn-secondary b2b-demo-launch">{t('b2b.demo.launch')}</button>
+                  <div>
+                    <h4 className="b2c-demo-card-title">{t('b2b.demo.admin.title')}</h4>
+                    <span className="b2c-demo-card-tag">{t('b2b.demo.admin.subtitle')}</span>
+                  </div>
+                </div>
+                <div className="b2c-demo-creds">
+                  <div className="b2c-demo-cred-header">{t('b2b.demo.demoAccount')}</div>
+                  <div className="b2c-demo-cred-row">
+                    <span className="b2c-demo-cred-key">{t('b2b.demo.account')}</span>
+                    <code className="b2c-demo-cred-value">{DEMO_CREDS.admin.account}</code>
+                  </div>
+                  <div className="b2c-demo-cred-row">
+                    <span className="b2c-demo-cred-key">{t('b2b.demo.password')}</span>
+                    <code className="b2c-demo-cred-value">{DEMO_CREDS.admin.pass}</code>
+                  </div>
+                </div>
+                <div className="b2c-demo-card-actions">
+                  <button type="button" className="btn btn-primary">{t('b2b.demo.launch')}</button>
                 </div>
               </div>
             </ScrollAnimation>
             <ScrollAnimation style={{ transitionDelay: '0.15s' }}>
               <div className="b2b-demo-qrs">
                 <a
-                  className="b2b-demo-qr-block"
+                  className="b2c-demo-qr"
                   href={DEMO_QR_URLS.mobile}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={t('b2b.demo.mobileDemo')}
                 >
-                  <div
-                    className="b2b-demo-qr glass-card"
-                    aria-label={t('b2b.demo.mobileDemo')}
-                    dangerouslySetInnerHTML={{ __html: mobileQr }}
-                  />
-                  <div className="b2b-demo-qr-label">{t('b2b.demo.mobileDemo')}</div>
+                  <div className="b2c-qr" dangerouslySetInnerHTML={{ __html: mobileQr }} />
+                  <span className="b2c-demo-qr-label">{t('b2b.demo.mobileDemo')}</span>
                 </a>
                 <a
-                  className="b2b-demo-qr-block"
+                  className="b2c-demo-qr"
                   href={DEMO_QR_URLS.web}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={t('b2b.demo.webDemo')}
                 >
-                  <div
-                    className="b2b-demo-qr glass-card"
-                    aria-label={t('b2b.demo.webDemo')}
-                    dangerouslySetInnerHTML={{ __html: webQr }}
-                  />
-                  <div className="b2b-demo-qr-label">{t('b2b.demo.webDemo')}</div>
+                  <div className="b2c-qr" dangerouslySetInnerHTML={{ __html: webQr }} />
+                  <span className="b2c-demo-qr-label">{t('b2b.demo.webDemo')}</span>
                 </a>
               </div>
             </ScrollAnimation>
