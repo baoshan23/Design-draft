@@ -2571,7 +2571,10 @@ h3.matrix-header,
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
-  align-items: start;
+  align-items: stretch;
+}
+.b2b-demo-grid > div {
+  height: 100%;
 }
 
 @media (max-width: 900px) {
