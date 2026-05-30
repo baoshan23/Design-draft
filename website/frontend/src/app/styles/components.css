@@ -198,16 +198,11 @@ body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
   color: var(--primary);
 }
 
-/* Glass header edge highlight */
+/* Glass header edge highlight — removed per user request (`去掉投影`):
+   the 1px white highlight + backdrop-blur combo read visually as a soft
+   shadow band under the nav over the diagram-modal overlay. */
 .header::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  pointer-events: none;
+  content: none;
 }
 
 .header .container {

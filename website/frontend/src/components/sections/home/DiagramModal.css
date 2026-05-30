@@ -62,7 +62,7 @@
     justify-content: center;
     transition: all 0.2s ease;
     z-index: 10001;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: none;
 }
 
 .diagram-modal-close:hover {
@@ -70,7 +70,7 @@
     border-color: #FEBF1D;
     color: #181818;
     transform: scale(1.08);
-    box-shadow: 0 4px 16px rgba(254, 191, 29, 0.35);
+    box-shadow: none;
 }
 
 .diagram-modal-body {
