@@ -1157,3 +1157,154 @@ footer {
      atmosphere for reduced-motion users. */
 }
 
+/* =====================================================================
+   Homepage "灵活的运营模式" (#models) — 2-col split layout.
+   Left: header (label/title/desc) + illustration card (user inserts art).
+   Right: vertical list of tab-buttons (B2C / B2B2C). Clicking switches
+   `data-mode` on the illustration slot so per-mode art can swap in.
+   ===================================================================== */
+.models-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  gap: 56px;
+  align-items: start;
+}
+
+.models-left {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-width: 0;
+}
+
+.models-header {
+  text-align: left;
+}
+.models-header .section-label {
+  display: inline-flex;
+  margin-bottom: 16px;
+}
+.models-header h2 {
+  margin: 0 0 16px;
+  text-align: left;
+}
+.models-header p {
+  margin: 0;
+  color: var(--text-secondary, #6c717a);
+  max-width: 540px;
+  line-height: 1.7;
+}
+
+.models-illustration-card {
+  position: relative;
+  background: linear-gradient(180deg, #f8f8fb 0%, #eef0f4 100%);
+  border: 1px solid var(--border-light, rgba(0, 0, 0, 0.08));
+  border-radius: 24px;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+}
+.models-illustration-slot {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 280ms ease;
+}
+.models-illustration-hint {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #888);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.models-right {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.models-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  width: 100%;
+  padding: 22px 24px;
+  background: #fff;
+  border: 1px solid var(--border-light, rgba(0, 0, 0, 0.08));
+  border-radius: 18px;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease, transform 200ms ease;
+}
+.models-item:hover {
+  border-color: rgba(254, 191, 29, 0.5);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+.models-item.is-active {
+  border-color: var(--primary, #febf1d);
+  box-shadow: 0 14px 30px rgba(254, 191, 29, 0.22);
+  background: linear-gradient(180deg, #fffdf3 0%, #fff 100%);
+}
+.models-item:focus-visible {
+  outline: 2px solid var(--primary, #febf1d);
+  outline-offset: 4px;
+}
+
+.models-item-icon {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(254, 191, 29, 0.18);
+  color: #181818;
+  border-radius: 12px;
+  transition: background 200ms ease;
+}
+.models-item.is-active .models-item-icon {
+  background: var(--primary, #febf1d);
+}
+
+.models-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.models-item-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary, #181818);
+  line-height: 1.35;
+}
+.models-item-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary, #6c717a);
+  line-height: 1.6;
+}
+
+@media (max-width: 960px) {
+  .models-split {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .models-illustration-card {
+    aspect-ratio: 16 / 10;
+  }
+  .models-header h2 { text-align: left; }
+}
+
+@media (max-width: 560px) {
+  .models-item { padding: 18px; border-radius: 14px; gap: 14px; }
+  .models-item-icon { flex-basis: 38px; width: 38px; height: 38px; }
+  .models-item-title { font-size: 1rem; }
+  .models-item-desc { font-size: 0.86rem; }
+}
+
