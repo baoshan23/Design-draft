@@ -4290,11 +4290,40 @@ html {
   gap: 18px;
   box-shadow: none;
   transition: none;
+  position: relative;
 }
 
 .addon-card:hover {
   transform: none;
   box-shadow: none;
+}
+
+/* Vertical dividers between cards — thin line centered in the grid gap,
+   scoped to non-first-column cards so the outer edges stay clean. */
+@media (min-width: 901px) {
+  .addons-grid .addon-card:not(:nth-child(3n + 1))::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 12%;
+    bottom: 12%;
+    width: 1px;
+    background: rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 900px) and (min-width: 561px) {
+  .addons-grid .addon-card:nth-child(2n)::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 12%;
+    bottom: 12%;
+    width: 1px;
+    background: rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+  }
 }
 
 /* Icon tile: yellow rounded square with black line icon, no shadow. */
