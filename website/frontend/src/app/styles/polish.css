@@ -569,7 +569,7 @@ main :not(pre) > code {
   filter: brightness(1.05);
 }
 
-/* ---------- Product gallery — bottom-aligned row, 2nd phone featured ---------- */
+/* ---------- Product gallery — equal row, click to enlarge ---------- */
 
 .gallery-row {
   display: flex;
@@ -585,32 +585,24 @@ main :not(pre) > code {
   position: relative;
   flex: 0 0 auto;
   width: 220px;
+  padding: 0;
+  background: transparent;
+  border: none;
   outline: none;
   cursor: pointer;
+  font: inherit;
+  color: inherit;
   filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.18));
+  transform-origin: 50% 100%;
   transition:
     transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
     filter 0.45s ease;
 }
 
-/* 2nd phone — featured: wider, slightly raised above the baseline. */
-.g3d-phone:nth-child(2) {
-  width: 300px;
-  transform: translateY(-32px);
-  filter: drop-shadow(0 30px 38px rgba(0, 0, 0, 0.28));
+.g3d-phone.is-active {
+  transform: scale(1.35) translateY(-24px);
   z-index: 2;
-}
-
-.g3d-phone:hover,
-.g3d-phone:focus-visible {
-  transform: translateY(-24px);
   filter: drop-shadow(0 36px 44px rgba(0, 0, 0, 0.32));
-}
-
-.g3d-phone:nth-child(2):hover,
-.g3d-phone:nth-child(2):focus-visible {
-  transform: translateY(-56px);
-  filter: drop-shadow(0 46px 54px rgba(0, 0, 0, 0.4));
 }
 
 .g3d-phone:focus-visible {
@@ -684,7 +676,7 @@ main :not(pre) > code {
   z-index: 4;
 }
 
-/* Mobile — 2-column grid; equal sizes, soft hover lift. */
+/* Mobile — 2-column grid; click-to-enlarge keeps a small pop. */
 @media (max-width: 760px) {
   .gallery-row {
     display: grid;
@@ -694,16 +686,11 @@ main :not(pre) > code {
     max-width: 460px;
     padding: 24px 16px;
   }
-  .g3d-phone,
-  .g3d-phone:nth-child(2) {
+  .g3d-phone {
     width: auto;
-    transform: none;
   }
-  .g3d-phone:hover,
-  .g3d-phone:focus-visible,
-  .g3d-phone:nth-child(2):hover,
-  .g3d-phone:nth-child(2):focus-visible {
-    transform: translateY(-8px);
+  .g3d-phone.is-active {
+    transform: scale(1.08) translateY(-6px);
   }
 }
 
