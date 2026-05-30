@@ -2448,10 +2448,12 @@ body:has(.product-hero) .glass-card [class*="icon"] {
   content: none !important;
 }
 
-/* Outer hero carries the bg so it fills the WHOLE first screen edge-to-edge
-   (no white margin / inset panel). The `:not()` mirror beats polish.css's
-   `background: none` rule. `background-attachment: local` keeps the image
-   pinned through the hero's `overflow:hidden` compression. */
+/* Hero now renders as an inset rounded card (user ref: Quiety hero) —
+   small gutter on all sides + 32px radius so the orange bg reads as a
+   panel on the page, not edge-to-edge. The fixed 72px nav previously
+   ate the hero's `padding-top: 72px+…`; that 72px moves into
+   `margin-top` so the panel itself starts BELOW the nav with a visible
+   gap, otherwise the rounded top corners would be hidden under the nav. */
 html:not([data-theme="dark"]) .hero.hero-centered,
 html[data-theme="dark"] .hero.hero-centered {
   background-color: #f5f6f8;
@@ -2459,23 +2461,32 @@ html[data-theme="dark"] .hero.hero-centered {
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
-  /* First-fold target: hero + trusted-bar (180px) = 100vh, so the marquee's
-     bottom edge lands flush with the viewport bottom. The 72px header is
-     `position: fixed` (an overlay — doesn't take layout space), so it
-     should NOT be subtracted from the hero height. Top padding INCLUDES
-     a 72px buffer + extra white space so the panel sits visually lower.
-     `max-height` is enforced so content overflow can't push the marquee
-     out of the first fold; the dashboard's flex behaviour + `min-height: 0`
-     handle the compression. */
-  min-height: calc(100vh - 180px);
-  min-height: calc(100svh - 180px);
-  max-height: calc(100svh - 180px);
-  padding: calc(72px + clamp(2px, 0.5vh, 8px)) clamp(16px, 3vw, 32px) clamp(12px, 1.5vh, 24px);
+  margin: 84px 16px 12px;
+  border-radius: 32px;
+  /* First-fold target: top-margin (84) + hero + bottom-margin (12)
+     + trusted-bar (180) = 100vh, so the marquee still lands flush with
+     the viewport bottom. `max-height` keeps content overflow from
+     pushing the marquee out of the first fold; the dashboard's flex
+     + `min-height: 0` handle compression. */
+  min-height: calc(100vh - 276px);
+  min-height: calc(100svh - 276px);
+  max-height: calc(100svh - 276px);
+  padding: clamp(12px, 1.5vh, 24px) clamp(16px, 3vw, 32px) clamp(12px, 1.5vh, 24px);
   isolation: isolate;
   overflow: hidden;
   display: flex;
   align-items: stretch;
   justify-content: center;
+}
+
+@media (max-width: 600px) {
+  html:not([data-theme="dark"]) .hero.hero-centered,
+  html[data-theme="dark"] .hero.hero-centered {
+    margin: 80px 8px 8px;
+    border-radius: 20px;
+    min-height: calc(100svh - 268px);
+    max-height: calc(100svh - 268px);
+  }
 }
 
 /* `.hero-centered-inner` doubles as the .container element — but we override
