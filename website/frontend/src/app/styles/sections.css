@@ -406,11 +406,12 @@
   box-shadow: none;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-/* No shadow at rest (border only); shadow appears on hover, matching
-   the other cards across the site. */
+/* No shadow at rest AND no shadow on hover (user request: `交互时，
+   卡片无投影`). The -4px lift stays as the only interaction signal —
+   icon tile also flips to gold via the rule at line ~460. */
 .b2c-feature-cell:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
 }
 /* Icon sits to the LEFT of the title (grid col 1); the title and the
    description stack in col 2 so the body text is left-aligned with the
