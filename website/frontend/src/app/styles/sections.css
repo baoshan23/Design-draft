@@ -2689,6 +2689,7 @@ html {
   padding: 8px 14px;
   border-radius: 999px;
   background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
   color: #1f1f1f;
   box-shadow: none;
   font-weight: 600;
