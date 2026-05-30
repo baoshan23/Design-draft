@@ -1813,15 +1813,14 @@
   line-height: 1.15;
 }
 
-/* b2b hero: keep the main title "SaaS平台版运营模式" on ONE line at the
-   ORIGINAL h1 size (user: 字号不要改). Only `white-space:nowrap` is
-   forced here — NO font-size override (base h1 clamp(2rem,5vw,3.5rem)
-   stays). The text column was widened (see the grid rule ~1707) so the
-   full-size title fits one line. The (B2B2C) tag drops to its own line.
-   Scoped to the b2b hero only; specificity (0,3,0) > base. */
-.product-hero.particles-bg .hero-title {
-  white-space: nowrap;
-}
+/* b2b hero title: keep the ORIGINAL h1 size (user: 字号不要改) and the
+   (B2B2C) tag on its own line. Title wraps naturally — ZH "SaaS 平台
+   版运营模式" still fits one line at 560px col width because CJK glyphs
+   are compact; EN "SaaS Platform Operator Mode" is ~900px at 3.5rem and
+   wraps to two lines instead of overflowing under the illustration
+   (previous `white-space: nowrap` clipped the EN title). The tag itself
+   keeps nowrap so "(B2B2C)" never splits. Scoped to the b2b hero;
+   specificity (0,3,0) > base. */
 .product-hero.particles-bg .hero-title-tag {
   display: block;
   margin-left: 0;
