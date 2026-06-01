@@ -592,9 +592,9 @@ main :not(pre) > code {
   bottom: 8px;
   left: 50%;
   transform: translateX(-50%);
-  width: 560px;
-  height: 300px;
-  max-width: 80%;
+  width: 820px;
+  height: 420px;
+  max-width: 96%;
   border-radius: 50%;
   background: radial-gradient(
     ellipse at center,
@@ -602,7 +602,7 @@ main :not(pre) > code {
     rgba(254, 191, 29, 0.28) 42%,
     rgba(254, 191, 29, 0) 72%
   );
-  filter: blur(56px);
+  filter: blur(64px);
   pointer-events: none;
   z-index: 0;
 }
