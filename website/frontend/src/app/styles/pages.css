@@ -1515,14 +1515,13 @@ h3.matrix-header,
   background: #ffffff;
   border: 1.5px solid rgba(254, 191, 29, 0.55);
   color: var(--primary-text, #8C5F00);
-  box-shadow: 0 6px 16px rgba(214, 158, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 240ms ease, border-color 240ms ease;
+  box-shadow: none;
+  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), border-color 240ms ease;
 }
 
 .b2b-flow-node:hover .b2b-flow-node-ic {
   transform: translateY(-2px) scale(1.06);
   border-color: var(--primary, #FEBF1D);
-  box-shadow: 0 10px 22px rgba(214, 158, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .b2b-flow-node-label {
@@ -1541,14 +1540,64 @@ h3.matrix-header,
 .b2b-flow-rail--l { grid-column: 2; }
 .b2b-flow-rail--r { grid-column: 4; }
 
+/* CSS-drawn elbow wire with rounded corners (no SVG → no aspect-ratio
+   distortion). Element bg paints the full-width horizontal feeder at the
+   vertical centre; ::before / ::after are the two branch corner boxes whose
+   border-radius gives the rounded elbows. --wire = line colour. */
 .b2b-flow-wire {
+  --wire: rgba(214, 158, 0, 0.42);
+  --wire-w: 2px;
+  --wire-r: 12px;
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  color: rgba(214, 158, 0, 0.42);
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent calc(50% - 1px),
+    var(--wire) calc(50% - 1px),
+    var(--wire) calc(50% + 1px),
+    transparent calc(50% + 1px)
+  );
+}
+
+.b2b-flow-wire::before,
+.b2b-flow-wire::after {
+  content: '';
+  position: absolute;
+  width: 18%;
+  height: 33.3%;
+}
+
+/* left rail: bus near the nodes (left edge), branches round inward */
+.b2b-flow-rail--l .b2b-flow-wire::before {
+  left: 0;
+  top: 16.7%;
+  border-top: var(--wire-w) solid var(--wire);
+  border-right: var(--wire-w) solid var(--wire);
+  border-top-right-radius: var(--wire-r);
+}
+.b2b-flow-rail--l .b2b-flow-wire::after {
+  left: 0;
+  top: 50%;
+  border-bottom: var(--wire-w) solid var(--wire);
+  border-right: var(--wire-w) solid var(--wire);
+  border-bottom-right-radius: var(--wire-r);
+}
+
+/* right rail: mirror — bus near the right edge, branches round outward */
+.b2b-flow-rail--r .b2b-flow-wire::before {
+  right: 0;
+  top: 16.7%;
+  border-top: var(--wire-w) solid var(--wire);
+  border-left: var(--wire-w) solid var(--wire);
+  border-top-left-radius: var(--wire-r);
+}
+.b2b-flow-rail--r .b2b-flow-wire::after {
+  right: 0;
+  top: 50%;
+  border-bottom: var(--wire-w) solid var(--wire);
+  border-left: var(--wire-w) solid var(--wire);
+  border-bottom-left-radius: var(--wire-r);
 }
 
 .b2b-flow-tier {
@@ -1568,7 +1617,7 @@ h3.matrix-header,
   font-weight: 700;
   letter-spacing: 0.01em;
   white-space: nowrap;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  box-shadow: none;
   z-index: 2;
 }
 
@@ -1596,10 +1645,10 @@ h3.matrix-header,
   text-align: center;
   padding: 32px 30px;
   background: #ffffff;
-  border: 1px solid var(--border-subtle);
+  border: 4px solid rgba(254, 191, 29, 0.1);
   border-radius: 26px;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(254, 191, 29, 0.06);
-  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 320ms ease;
+  box-shadow: none;
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), border-color 320ms ease;
 }
 
 .b2b-flow-core::before {
@@ -1614,7 +1663,7 @@ h3.matrix-header,
 
 .b2b-flow-core:hover {
   transform: translateY(-4px);
-  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(254, 191, 29, 0.12);
+  border-color: rgba(254, 191, 29, 0.22);
 }
 
 .b2b-flow-core-badge {
@@ -1678,7 +1727,6 @@ h3.matrix-header,
   border-color: transparent;
   color: #1f1f1f;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(254, 191, 29, 0.35);
 }
 
 .b2b-flow-core-caption {

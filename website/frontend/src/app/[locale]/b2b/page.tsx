@@ -7,6 +7,7 @@ import Image from 'next/image';
 import SubNav from './SubNav';
 import ScrollResetOnLoad from '@/components/effects/ScrollResetOnLoad';
 import B2BDemoCredCard from './B2BDemoCredCard';
+import RevenueAccordion from './RevenueAccordion';
 
 const DEMO_QR_URLS = {
   mobile: 'https://app.gcss.hk/',
@@ -64,15 +65,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
     <svg key="ref" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 11-6.219-8.56" /><polyline points="21 3 21 9 15 9" /></svg>,
   ];
 
-  const revenueIcons = [
-    <svg key="coin" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" /></svg>,
-    <svg key="bank" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="10" width="18" height="11" rx="1" /><path d="M12 3l9 7H3z" /><line x1="7" y1="14" x2="7" y2="17" /><line x1="12" y1="14" x2="12" y2="17" /><line x1="17" y1="14" x2="17" y2="17" /></svg>,
-    <svg key="zap" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>,
-    <svg key="meg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>,
-  ];
-
   const modes = ['mode1', 'mode2', 'mode3', 'mode4'] as const;
-  const revenues = ['item1', 'item2', 'item3', 'item4'] as const;
   const feats = ['feat1', 'feat2', 'feat3'] as const;
   const aftersalesItems = ['item1', 'item2', 'item3', 'item4'] as const;
   const aftersalesIcons = [
@@ -158,9 +151,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
 
               {/* left rail: elbow connector merging operators → core, with tier pill */}
               <div className="b2b-flow-rail b2b-flow-rail--l">
-                <svg className="b2b-flow-wire" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                  <path d="M0 16.7 H14 M0 50 H14 M0 83.3 H14 M14 16.7 V83.3 M14 50 H100" fill="none" stroke="currentColor" strokeWidth="1.4" vectorEffect="non-scaling-stroke" />
-                </svg>
+                <span className="b2b-flow-wire" aria-hidden="true" />
                 <span className="b2b-flow-tier" data-role="operator">{t('b2b.overview.operator')}</span>
               </div>
 
@@ -182,9 +173,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
 
               {/* right rail: elbow connector core → users, with tier pill */}
               <div className="b2b-flow-rail b2b-flow-rail--r">
-                <svg className="b2b-flow-wire" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                  <path d="M0 50 H86 M86 16.7 V83.3 M86 16.7 H100 M86 50 H100 M86 83.3 H100" fill="none" stroke="currentColor" strokeWidth="1.4" vectorEffect="non-scaling-stroke" />
-                </svg>
+                <span className="b2b-flow-wire" aria-hidden="true" />
                 <span className="b2b-flow-tier" data-role="user">{t('b2b.overview.user')}</span>
               </div>
 
@@ -254,17 +243,9 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               <p>{t('b2b.revenue.desc')}</p>
             </div>
           </ScrollAnimation>
-          <div className="grid-4">
-            {revenues.map((item, i) => (
-              <ScrollAnimation key={item} style={{ transitionDelay: `${i * 0.1}s` }}>
-                <div className="card glass-card" style={{ height: '100%' }}>
-                  <div className="card-icon">{revenueIcons[i]}</div>
-                  <h3>{t(`b2b.revenue.${item}.title`)}</h3>
-                  <p>{t(`b2b.revenue.${item}.desc`)}</p>
-                </div>
-              </ScrollAnimation>
-            ))}
-          </div>
+          <ScrollAnimation>
+            <RevenueAccordion />
+          </ScrollAnimation>
         </div>
       </section>
 
