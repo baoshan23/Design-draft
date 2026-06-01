@@ -277,15 +277,18 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
           </ScrollAnimation>
           <div className="b2b-hiw">
             <div className="b2b-hiw-grid">
-              {feats.map((feat, i) => (
-                <ScrollAnimation key={feat} style={{ transitionDelay: `${i * 0.1}s` }}>
-                  <article className={`b2b-hiw-card${i === 0 ? ' b2b-hiw-card--wide' : ''}`}>
+              {feats.map((feat, i) => {
+                const wide = i === 0 || i === 2;
+                const full = i === 2;
+                return (
+                <ScrollAnimation key={feat} style={{ transitionDelay: `${i * 0.1}s`, ...(full ? { gridColumn: '1 / -1' } : {}) }}>
+                  <article className={`b2b-hiw-card${wide ? ' b2b-hiw-card--wide' : ''}${full ? ' b2b-hiw-card--full' : ''}`}>
                     <div className="b2b-hiw-content">
                       <span className="b2b-hiw-step">{t('b2b.features.step')} {i + 1}</span>
                       <h3>{t(`b2b.features.${feat}.title`)}</h3>
                       <p>{t(`b2b.features.${feat}.desc`)}</p>
                     </div>
-                    {i === 0 ? (
+                    {wide ? (
                       <div className="b2b-hiw-visual" aria-hidden="true">
                         <span className="b2b-hiw-bignum">0{i + 1}</span>
                       </div>
@@ -294,7 +297,8 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                     )}
                   </article>
                 </ScrollAnimation>
-              ))}
+                );
+              })}
             </div>
             <ScrollAnimation style={{ transitionDelay: `${feats.length * 0.1}s` }}>
               <div className="b2b-hiw-bar">

@@ -5773,9 +5773,12 @@ html {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  /* icon pinned top-left, title/desc block pushed to the bottom-left
+     (graphic sits on the right via the bg) — matches the reference layout */
+  justify-content: space-between;
   gap: 20px;
-  padding: 28px;
-  min-height: 300px;
+  padding: 28px 32px;
+  min-height: 320px;
   /* Banner artwork as the full-card background (pale-gold gradient + graphic
      bottom-right). Fallback colour shows before the image loads. */
   background-color: #fffaf0;
@@ -5809,6 +5812,8 @@ html {
 }
 .mode-bento-body {
   padding: 0;
+  /* keep title/desc clear of the right-side graphic in the bg */
+  max-width: 66%;
 }
 .mode-bento-body h3 {
   margin: 0 0 10px;
@@ -5832,6 +5837,9 @@ html {
     padding: 22px;
     min-height: 240px;
     border-radius: 20px;
+  }
+  .mode-bento-body {
+    max-width: 78%;
   }
 }
 

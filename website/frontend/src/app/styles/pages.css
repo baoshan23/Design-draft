@@ -1470,22 +1470,22 @@ h3.matrix-header,
   position: relative;
   display: grid;
   grid-template-columns:
-    minmax(130px, 0.95fr)   /* operator nodes */
-    172px                   /* left rail (fixed → predictable pill clearance) */
-    minmax(360px, 2fr)      /* platform core  */
-    172px                   /* right rail     */
-    minmax(130px, 0.95fr);  /* user nodes     */
-  grid-template-rows: 328px auto;
+    minmax(142px, 1fr)      /* operator nodes */
+    188px                   /* left rail (fixed → predictable pill clearance) */
+    minmax(400px, 2fr)      /* platform core  */
+    188px                   /* right rail     */
+    minmax(142px, 1fr);     /* user nodes     */
+  grid-template-rows: 372px auto;
   align-items: stretch;
   column-gap: 8px;
-  row-gap: 20px;
-  max-width: 1320px;
+  row-gap: 22px;
+  max-width: 1440px;
   margin: 0 auto;
   /* light-yellow "tech" panel — warm radial wash behind the whole diagram */
   background: radial-gradient(circle at 50% 42%, #FCF9F2 0%, #F5EFE2 100%);
   border: 1px solid rgba(230, 162, 60, 0.14);
   border-radius: 28px;
-  padding: 56px 72px 48px;
+  padding: 64px 80px 52px;
 }
 
 /* ---- node columns (3 instances each) ---- */
@@ -1512,8 +1512,8 @@ h3.matrix-header,
 }
 
 .b2b-flow-node-ic {
-  width: 66px;
-  height: 66px;
+  width: 74px;
+  height: 74px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1525,7 +1525,7 @@ h3.matrix-header,
   transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), border-color 240ms ease, box-shadow 240ms ease;
 }
 
-.b2b-flow-node-ic svg { width: 26px; height: 26px; }
+.b2b-flow-node-ic svg { width: 30px; height: 30px; }
 
 .b2b-flow-node:hover .b2b-flow-node-ic {
   transform: translateY(-2px) scale(1.06);
@@ -2151,11 +2151,16 @@ h3.matrix-header,
 }
 
 .b2b-hiw-card--wide {
-  grid-column: 1 / -1;
   display: grid;
   grid-template-columns: 1.25fr 0.9fr;
   gap: 28px;
   align-items: center;
+}
+
+/* full-width Step 3 (spans both columns) — cap the number panel width
+   so it doesn't balloon across the whole row */
+.b2b-hiw-card--full {
+  grid-template-columns: 1fr 300px;
 }
 
 .b2b-hiw-step {
@@ -2289,7 +2294,8 @@ h3.matrix-header,
     grid-template-columns: 1fr;
     gap: 16px;
   }
-  .b2b-hiw-card--wide {
+  .b2b-hiw-card--wide,
+  .b2b-hiw-card--full {
     grid-column: auto;
     grid-template-columns: 1fr;
   }
