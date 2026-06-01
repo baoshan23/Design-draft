@@ -5762,7 +5762,9 @@ html {
 .modes-bento-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  gap: 16px;
+  max-width: 1080px;
+  margin: 0 auto;
 }
 .modes-bento-grid > div {
   height: 100%;
@@ -5776,9 +5778,9 @@ html {
   /* icon pinned top-left, title/desc block pushed to the bottom-left
      (graphic sits on the right via the bg) — matches the reference layout */
   justify-content: space-between;
-  gap: 20px;
-  padding: 28px 32px;
-  min-height: 320px;
+  gap: 16px;
+  padding: 24px 28px;
+  min-height: 268px;
   /* Banner artwork as the full-card background (pale-gold gradient + graphic
      bottom-right). Fallback colour shows before the image loads. */
   background-color: #fffaf0;
@@ -5803,8 +5805,8 @@ html {
   color: #1a1a1a;
 }
 .mode-bento-icon svg {
-  width: 42px;
-  height: 42px;
+  width: 36px;
+  height: 36px;
 }
 .mode-bento-icon svg .mode-ic-accent {
   stroke: var(--primary, #febf1d);
@@ -5815,16 +5817,16 @@ html {
   max-width: 66%;
 }
 .mode-bento-body h3 {
-  margin: 0 0 10px;
-  font-size: 1.2rem;
+  margin: 0 0 8px;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -.01em;
 }
 .mode-bento-body p {
   margin: 0;
-  font-size: .92rem;
-  line-height: 1.65;
+  font-size: .88rem;
+  line-height: 1.6;
   color: var(--text-secondary);
 }
 @media (max-width: 760px) {
