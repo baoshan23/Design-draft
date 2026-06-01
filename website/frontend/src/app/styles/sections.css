@@ -5824,10 +5824,7 @@ html {
   border-radius: 24px;
   transition: background 0.25s ease, box-shadow 0.25s ease;
 }
-/* collapsed: plain row, soft gold tint on hover */
-.revenue-acc-item:not(.is-open):hover {
-  background: rgba(254, 233, 168, 0.28);
-}
+/* collapsed rows are plain (no hover feedback) */
 /* open: solid gold card */
 .revenue-acc-item.is-open {
   background: linear-gradient(135deg, #fdcd54 0%, #f9bb31 100%);
@@ -5867,43 +5864,16 @@ html {
 .revenue-acc-item.is-open .revenue-acc-title {
   color: #1a1505;
 }
-/* +/- toggle drawn with two bars; open hides the vertical bar -> becomes minus */
-.revenue-acc-toggle {
-  position: relative;
-  width: 22px;
-  height: 22px;
+/* chevron: points down when collapsed, rotates 180deg (up) when open */
+.revenue-acc-chevron {
+  display: inline-flex;
   flex-shrink: 0;
   color: var(--text-secondary, #888);
-  transition: color 0.25s ease;
+  transition: transform 0.3s ease, color 0.25s ease;
 }
-.revenue-acc-item.is-open .revenue-acc-toggle {
+.revenue-acc-item.is-open .revenue-acc-chevron {
+  transform: rotate(180deg);
   color: #1a1505;
-}
-.revenue-acc-toggle::before,
-.revenue-acc-toggle::after {
-  content: '';
-  position: absolute;
-  background: currentColor;
-  border-radius: 2px;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-.revenue-acc-toggle::before {
-  left: 2px;
-  right: 2px;
-  top: 50%;
-  height: 2px;
-  transform: translateY(-50%);
-}
-.revenue-acc-toggle::after {
-  top: 2px;
-  bottom: 2px;
-  left: 50%;
-  width: 2px;
-  transform: translateX(-50%);
-}
-.revenue-acc-item.is-open .revenue-acc-toggle::after {
-  opacity: 0;
-  transform: translateX(-50%) rotate(90deg);
 }
 .revenue-acc-body {
   display: grid;
@@ -5935,9 +5905,6 @@ html {
 [data-theme='dark'] .revenue-acc-title {
   color: #f3f3f3;
 }
-[data-theme='dark'] .revenue-acc-item:not(.is-open):hover {
-  background: rgba(254, 191, 29, 0.1);
-}
 /* open card keeps the gold fill in dark mode; dark text reads fine on gold */
 @media (max-width: 760px) {
   .revenue-acc-head {
@@ -5955,9 +5922,7 @@ html {
   .revenue-acc-item,
   .revenue-acc-title,
   .revenue-acc-icon,
-  .revenue-acc-toggle,
-  .revenue-acc-toggle::before,
-  .revenue-acc-toggle::after,
+  .revenue-acc-chevron,
   .revenue-acc-body {
     transition: none;
   }
