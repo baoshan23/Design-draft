@@ -5755,6 +5755,13 @@ html {
   }
 }
 
+/* b2b #modes + #revenue: force a white section background (drop the
+   grey `.section-alt` tint on #modes; pin #revenue white too) — user req. */
+#modes.section-alt,
+#revenue.section {
+  background: #fff;
+}
+
 /* ===========================================================
    b2b `#modes` — bento card grid (2x2)
    White card, gold icon tile top-left, title/desc below.
