@@ -1572,8 +1572,8 @@ h3.matrix-header,
   width: 54px;
   height: 54px;
   border-radius: 50%;
-  background: rgba(254, 191, 29, 0.14);
-  color: #B07A1E;
+  background: var(--primary, #febf1d);
+  color: #1a1a1a;
 }
 .b2b-hub-avatar-label {
   font-size: 0.84rem;
