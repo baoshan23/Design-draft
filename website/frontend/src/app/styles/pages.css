@@ -1547,8 +1547,8 @@ h3.matrix-header,
    vertical centre; ::before / ::after are the two branch corner boxes whose
    border-radius gives the rounded elbows. --wire = line colour. */
 .b2b-flow-wire {
-  --wire-from: rgba(214, 158, 0, 0.7);   /* strong end — tier / core side */
-  --wire-to: rgba(214, 158, 0, 0.12);    /* faint end — toward the A/B/N nodes */
+  --wire-from: rgba(214, 158, 0, 0.85);  /* strong end — tier / core side */
+  --wire-to: rgba(214, 158, 0, 0.4);     /* faint (but still visible) end — toward the A/B/N nodes */
   --wire-w: 3px;
   --wire-r: 14px;
   position: absolute;
