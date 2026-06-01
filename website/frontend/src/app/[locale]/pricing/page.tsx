@@ -87,14 +87,18 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
         ),
         adminLang: (
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <rect x="3" y="4" width="18" height="14" rx="2" />
-                <path className="ic-accent" d="M3 9h18M7 13h4M16 13l3 0M7 13v2" />
+                <path d="M4 5h7" />
+                <path d="M9 3v2c0 3.5-2 6.6-5 8.2" />
+                <path d="M5 9c0 2 2 4 5 5.4" />
+                <path className="ic-accent" d="M12.5 20l4-9 4 9" />
+                <path className="ic-accent" d="M14 16.5h5" />
             </svg>
         ),
         gateway: (
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <rect x="2" y="6" width="20" height="13" rx="2" />
-                <path className="ic-accent" d="M2 11h20M6 16h3" />
+                <rect x="2" y="5" width="20" height="14" rx="2.5" />
+                <rect className="ic-accent" x="5" y="9" width="4.5" height="3.2" rx="0.6" />
+                <path className="ic-accent" d="M14 15h4" />
             </svg>
         ),
         pos: (
