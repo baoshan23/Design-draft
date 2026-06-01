@@ -1641,6 +1641,7 @@ h3.matrix-header,
   font-weight: 800;
   letter-spacing: 0.5px;
   color: #2C2519;
+  white-space: nowrap;
 }
 .b2b-hub-core-pill {
   display: inline-flex;
