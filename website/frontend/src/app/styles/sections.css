@@ -2636,8 +2636,8 @@ html {
    Scoped to this marquee so the global .tag chips elsewhere keep their fill. */
 .b2c-pay-card .tag {
   background: transparent;
-  border: 1px solid rgba(214, 158, 0, 0.35);
-  color: var(--primary-text, #8C5F00);
+  border: 1px solid var(--primary, #febf1d);
+  color: var(--primary, #febf1d);
 }
 .b2c-pay-card .tag:hover {
   box-shadow: none;

@@ -470,9 +470,6 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
             <div className="support-bento">
               {/* Tall left — video tutorials */}
               <article className="support-bento-card support-bento-tall">
-                <div className="support-bento-icon support-bento-icon--gold">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="23 7 16 12 23 17 23 7" /><rect x="1" y="5" width="15" height="14" rx="2" /></svg>
-                </div>
                 <h3>{t('product.support.s1.title')}</h3>
                 <p>{t('product.support.s1.desc')}</p>
                 <ul className="support-bento-list" aria-hidden="true">
@@ -486,9 +483,6 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
               {/* Wide top-right — technical docs */}
               <article className="support-bento-card support-bento-wide">
                 <div className="support-bento-wide-text">
-                  <div className="support-bento-icon support-bento-icon--ink">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>
-                  </div>
                   <h3>{t('product.support.s2.title')}</h3>
                   <p>{t('product.support.s2.desc')}</p>
                 </div>
@@ -508,9 +502,6 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
 
               {/* Small bottom-middle — community forum */}
               <article className="support-bento-card support-bento-small">
-                <div className="support-bento-icon support-bento-icon--cream">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" /></svg>
-                </div>
                 <h3>{t('product.support.s3.title')}</h3>
                 <p>{t('product.support.s3.desc')}</p>
                 <div className="support-bento-avatars" aria-hidden="true">
