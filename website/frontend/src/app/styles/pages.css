@@ -2318,6 +2318,14 @@ h3.matrix-header,
   }
 }
 
+/* b2b #aftersales — cards stack full-width (the .grid-2 here is not a
+   real grid); space them out with an explicit flex-column gap. */
+#aftersales .grid-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
 /* ====================================================================
    Multi-Platform Feature Support Matrix (B2B Section 8)
    Per-column accent color, staggered row reveal, hover highlight.

@@ -5795,20 +5795,19 @@ html {
   border-color: rgba(254, 191, 29, 0.28);
   box-shadow: 0 14px 32px rgba(214, 158, 0, 0.10);
 }
+/* No tile background — bare two-tone line icon (black base + gold accent). */
 .mode-bento-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
-  background: var(--primary, #febf1d);
-  color: #1f1f1f;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 20px rgba(254, 191, 29, 0.28);
+  color: #1a1a1a;
 }
 .mode-bento-icon svg {
-  width: 28px;
-  height: 28px;
+  width: 42px;
+  height: 42px;
+}
+.mode-bento-icon svg .mode-ic-accent {
+  stroke: var(--primary, #febf1d);
 }
 .mode-bento-body {
   padding: 0;
