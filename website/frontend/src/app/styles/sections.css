@@ -5860,11 +5860,11 @@ html {
 #revenue .b2b-revenue-panel {
   background: #f2f2f2;
   border-radius: 28px;
-  padding: 56px 48px;
+  padding: 96px 48px;
 }
 @media (max-width: 760px) {
   #revenue .b2b-revenue-panel {
-    padding: 36px 20px;
+    padding: 60px 20px;
     border-radius: 20px;
   }
 }

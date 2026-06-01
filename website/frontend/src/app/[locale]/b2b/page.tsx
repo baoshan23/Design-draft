@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { Building2, User, Globe, Play, BookOpen, MessageSquare, Headphones } from 'lucide-react';
+import { Building2, User, Globe, Play, BookOpen, MessageSquare, Gem } from 'lucide-react';
 import QRCode from 'qrcode';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import Image from 'next/image';
