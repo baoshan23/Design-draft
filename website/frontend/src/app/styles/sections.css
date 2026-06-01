@@ -5866,7 +5866,7 @@ html {
   transition: color 0.25s ease;
 }
 .revenue-acc-item.is-open .revenue-acc-icon {
-  color: #1a1505;
+  color: #fff;
 }
 .revenue-acc-title {
   flex: 1;
