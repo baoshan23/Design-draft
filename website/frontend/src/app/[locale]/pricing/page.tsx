@@ -81,8 +81,8 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <rect x="6" y="2" width="12" height="20" rx="2.5" />
                 <path d="M9 6h6M11 18h2" />
-                <circle cx="12" cy="12" r="3" />
-                <path d="M9 12h6M12 9v6" />
+                <circle className="ic-accent" cx="12" cy="12" r="3" />
+                <path className="ic-accent" d="M9 12h6M12 9v6" />
             </svg>
         ),
         adminLang: (

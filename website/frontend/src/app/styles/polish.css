@@ -687,8 +687,11 @@ main :not(pre) > code {
   position: relative;
   border-radius: 13.5% / 6.2%;
   overflow: hidden;
-  background: #000;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.9);
+  /* White bg (was #000) + hairline ring (was a heavy 0.9-alpha black ring):
+     a dark screen bg bleeds a black fringe through the rounded-corner AA
+     edge of the (square-cornered) screenshot it clips. White can't fringe. */
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 .g3d-screen img {
