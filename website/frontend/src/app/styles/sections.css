@@ -5804,29 +5804,32 @@ html {
 
 /* ==================== b2b #revenue — accordion (yellow theme) ==================== */
 .revenue-accordion {
-  max-width: 880px;
+  max-width: 1080px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
 }
 .revenue-acc-item {
-  background: rgba(254, 233, 168, 0.22);
-  border: 1px solid transparent;
-  border-radius: 16px;
-  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  background: transparent;
+  border-radius: 24px;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
 }
+/* collapsed: plain row, soft gold tint on hover */
+.revenue-acc-item:not(.is-open):hover {
+  background: rgba(254, 233, 168, 0.28);
+}
+/* open: solid gold card */
 .revenue-acc-item.is-open {
-  background: rgba(254, 191, 29, 0.12);
-  border-color: rgba(214, 158, 0, 0.3);
-  box-shadow: 0 12px 32px rgba(214, 158, 0, 0.1);
+  background: linear-gradient(135deg, #fdcd54 0%, #f9bb31 100%);
+  box-shadow: 0 18px 44px rgba(214, 158, 0, 0.28);
 }
 .revenue-acc-head {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 22px 28px;
+  gap: 18px;
+  padding: 24px 32px;
   margin: 0;
   background: none;
   border: none;
@@ -5837,29 +5840,61 @@ html {
 }
 .revenue-acc-icon {
   display: inline-flex;
-  color: var(--primary-text, #8c5f00);
+  color: var(--primary, #febf1d);
   flex-shrink: 0;
+  transition: color 0.25s ease;
+}
+.revenue-acc-item.is-open .revenue-acc-icon {
+  color: #1a1505;
 }
 .revenue-acc-title {
   flex: 1;
-  font-size: 1.1rem;
+  font-size: 1.12rem;
   font-weight: 700;
   line-height: 1.4;
   color: var(--text-primary, #1a1a1a);
   transition: color 0.25s ease;
 }
 .revenue-acc-item.is-open .revenue-acc-title {
-  color: var(--primary-text, #8c5f00);
+  color: #1a1505;
 }
-.revenue-acc-chevron {
-  display: inline-flex;
+/* +/- toggle drawn with two bars; open hides the vertical bar -> becomes minus */
+.revenue-acc-toggle {
+  position: relative;
+  width: 22px;
+  height: 22px;
   flex-shrink: 0;
-  color: var(--text-secondary, #777);
-  transition: transform 0.3s ease, color 0.25s ease;
+  color: var(--text-secondary, #888);
+  transition: color 0.25s ease;
 }
-.revenue-acc-item.is-open .revenue-acc-chevron {
-  transform: rotate(180deg);
-  color: var(--primary-text, #8c5f00);
+.revenue-acc-item.is-open .revenue-acc-toggle {
+  color: #1a1505;
+}
+.revenue-acc-toggle::before,
+.revenue-acc-toggle::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+  border-radius: 2px;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.revenue-acc-toggle::before {
+  left: 2px;
+  right: 2px;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+}
+.revenue-acc-toggle::after {
+  top: 2px;
+  bottom: 2px;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+}
+.revenue-acc-item.is-open .revenue-acc-toggle::after {
+  opacity: 0;
+  transform: translateX(-50%) rotate(90deg);
 }
 .revenue-acc-body {
   display: grid;
@@ -5875,32 +5910,26 @@ html {
 }
 .revenue-acc-body p {
   margin: 0;
-  padding: 0 28px 24px 66px;
-  color: var(--text-secondary, #555);
+  padding: 0 32px 26px 72px;
+  color: rgba(26, 21, 5, 0.72);
   line-height: 1.7;
-  font-size: 0.96rem;
+  font-size: 0.98rem;
 }
 .revenue-acc-head:focus-visible {
   outline: 2px solid var(--primary, #febf1d);
   outline-offset: 2px;
-  border-radius: 16px;
+  border-radius: 24px;
 }
-[data-theme='dark'] .revenue-acc-item {
-  background: var(--dark-card, #1b1b1b);
-  border-color: var(--border-subtle, rgba(255, 255, 255, 0.08));
-}
-[data-theme='dark'] .revenue-acc-item.is-open {
-  background: rgba(254, 191, 29, 0.1);
-  border-color: rgba(254, 191, 29, 0.35);
+.revenue-acc-item.is-open .revenue-acc-head:focus-visible {
+  outline-color: #1a1505;
 }
 [data-theme='dark'] .revenue-acc-title {
   color: #f3f3f3;
 }
-[data-theme='dark'] .revenue-acc-item.is-open .revenue-acc-title,
-[data-theme='dark'] .revenue-acc-icon,
-[data-theme='dark'] .revenue-acc-item.is-open .revenue-acc-chevron {
-  color: var(--primary, #febf1d);
+[data-theme='dark'] .revenue-acc-item:not(.is-open):hover {
+  background: rgba(254, 191, 29, 0.1);
 }
+/* open card keeps the gold fill in dark mode; dark text reads fine on gold */
 @media (max-width: 760px) {
   .revenue-acc-head {
     padding: 18px 20px;
@@ -5910,13 +5939,16 @@ html {
     font-size: 1rem;
   }
   .revenue-acc-body p {
-    padding: 0 20px 20px 54px;
+    padding: 0 20px 20px 50px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
   .revenue-acc-item,
   .revenue-acc-title,
-  .revenue-acc-chevron,
+  .revenue-acc-icon,
+  .revenue-acc-toggle,
+  .revenue-acc-toggle::before,
+  .revenue-acc-toggle::after,
   .revenue-acc-body {
     transition: none;
   }
