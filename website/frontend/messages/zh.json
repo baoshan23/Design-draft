@@ -2199,7 +2199,7 @@
         "扫码充电",
         "账户管理"
       ],
-      "center": "APP · CPMS · ADMIN",
+      "center": "APP/CPMS/ADMIN",
       "model": "自营+运营商模式",
       "coreLabel": "核心系统管理"
     },

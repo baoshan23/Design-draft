@@ -5858,7 +5858,7 @@ html {
 
 /* b2b #revenue — wrap the header + accordion in a soft grey rounded panel. */
 #revenue .b2b-revenue-panel {
-  background: rgba(242, 242, 242, 0.25);
+  background: rgba(242, 242, 242, 0.5);
   border-radius: 28px;
   padding: 96px 48px;
 }
