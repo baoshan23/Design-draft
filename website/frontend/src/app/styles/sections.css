@@ -2632,6 +2632,21 @@ html {
   background: transparent;
   box-shadow: none;
 }
+/* Payment-method chips: border-only (drop the pale-gold fill), AA gold text.
+   Scoped to this marquee so the global .tag chips elsewhere keep their fill. */
+.b2c-pay-card .tag {
+  background: transparent;
+  border: 1px solid rgba(214, 158, 0, 0.35);
+  color: var(--primary-text, #8C5F00);
+}
+.b2c-pay-card .tag:hover {
+  box-shadow: none;
+  transform: none;
+}
+[data-theme="dark"] .b2c-pay-card .tag {
+  border-color: rgba(254, 191, 29, 0.4);
+  color: var(--primary, #febf1d);
+}
 @keyframes b2cPaySlide {
   from { transform: translateX(-50%); }
   to   { transform: translateX(0); }
