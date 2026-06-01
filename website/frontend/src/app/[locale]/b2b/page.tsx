@@ -70,8 +70,9 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
   const feats = ['feat1', 'feat2', 'feat3'] as const;
   // After-sales support — orbital diagram. Each item maps to a card + a node
   // on the rings. pos drives absolute placement (tl/tr/bl/br).
-  const supportCards: { key: string; pos: string; Icon: typeof Play; nodeImg?: string }[] = [
-    { key: 'item1', pos: 'tl', Icon: Play, nodeImg: '/images/b2b-support/node-video.png' }, // 视频部署指南
+  // Option A: uniform gradient-circle ring nodes, each with its own line glyph.
+  const supportCards: { key: string; pos: string; Icon: typeof Play }[] = [
+    { key: 'item1', pos: 'tl', Icon: Play },          // 视频部署指南
     { key: 'item3', pos: 'tr', Icon: MessageSquare }, // 官方社区论坛
     { key: 'item2', pos: 'bl', Icon: BookOpen },      // 全方位知识库
     { key: 'item4', pos: 'br', Icon: Gem },           // 专业技术团队
@@ -421,12 +422,8 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
             {/* orbit nodes + floating cards (grouped for linked hover) */}
             {supportCards.map((c, i) => (
               <div key={c.key} className="b2b-support-orbit" style={{ display: 'contents' }}>
-                <span className={`b2b-support-node b2b-support-node--${c.pos}${c.nodeImg ? ' b2b-support-node--img' : ''}`} aria-hidden="true">
-                  {c.nodeImg ? (
-                    <Image src={c.nodeImg} alt="" width={44} height={44} />
-                  ) : (
-                    <c.Icon size={18} strokeWidth={2} />
-                  )}
+                <span className={`b2b-support-node b2b-support-node--${c.pos}`} aria-hidden="true">
+                  <c.Icon size={18} strokeWidth={2} />
                 </span>
                 <article className={`b2b-support-card b2b-support-card--${c.pos}`} style={{ ['--i' as string]: i }}>
                   <span className="b2b-support-card-ic b2b-support-card-ic--img" aria-hidden="true">
