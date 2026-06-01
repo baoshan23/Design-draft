@@ -49,7 +49,7 @@ Backend: `node deploy/deploy-backend.js` cross-compiles Go + SFTP + systemd rest
 
 ## Last session
 
-- 2026-06-01 — **b2b `#revenue` grey panel — bg opacity halved** (`sections.css` `#revenue .b2b-revenue-panel`). User: `背景颜色降低50%`. Background `#f2f2f2` → `rgba(242,242,242,0.5)` (50% alpha, so the white section shows through → reads as a lighter ~#f8f8f8 panel). `tsc` n/a (CSS only). Revert: back to solid `#f2f2f2`.
+- 2026-06-01 — **b2b `#revenue` grey panel — bg opacity lowered to 25%** (`sections.css` `#revenue .b2b-revenue-panel`). User: `背景颜色降低50%` then `再降低50%`. Background `#f2f2f2` → `rgba(242,242,242,0.5)` → `rgba(242,242,242,0.25)` (very faint grey wash over the white section). `tsc` n/a (CSS only). Revert: back to solid `#f2f2f2`.
 
 - 2026-06-01 — **b2b `#revenue` grey panel — taller** (`sections.css` `#revenue .b2b-revenue-panel`). User: `背景高度高一点` (typo "高一旦"). Vertical padding `56→96px` (mobile `36→60px`); horizontal padding (48/20) + radius (28/20) unchanged. `tsc` n/a (CSS only). Revert: padding back to `56px 48px` / mobile `36px 20px`.
 
