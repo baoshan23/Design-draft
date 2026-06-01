@@ -142,9 +142,17 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                 ))}
               </div>
 
-              {/* left rail: elbow connector merging operators → core, with tier pill */}
+              {/* left rail: bezier connector — 3 operators fan into the tier pill, one line out to core */}
               <div className="b2b-flow-rail b2b-flow-rail--l">
-                <span className="b2b-flow-wire" aria-hidden="true" />
+                <svg className="b2b-flow-wire" viewBox="0 0 160 284" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="b2b-wire-l" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="160" y2="0">
+                      <stop offset="0" stopColor="#E6A23C" stopOpacity="0.45" />
+                      <stop offset="1" stopColor="#E6A23C" stopOpacity="1" />
+                    </linearGradient>
+                  </defs>
+                  <path className="connector-line" stroke="url(#b2b-wire-l)" d="M0 47 C34 47 68 95 68 142 M0 142 H68 M0 236 C34 236 68 189 68 142 M92 142 H160" />
+                </svg>
                 <span className="b2b-flow-tier" data-role="operator">{t('b2b.overview.operator')}</span>
               </div>
 
@@ -164,9 +172,17 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                 <div className="b2b-flow-core-caption">{t('b2b.overview.model')}</div>
               </div>
 
-              {/* right rail: elbow connector core → users, with tier pill */}
+              {/* right rail: bezier connector — core → tier pill, fans out to 3 users */}
               <div className="b2b-flow-rail b2b-flow-rail--r">
-                <span className="b2b-flow-wire" aria-hidden="true" />
+                <svg className="b2b-flow-wire" viewBox="0 0 160 284" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="b2b-wire-r" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="160" y2="0">
+                      <stop offset="0" stopColor="#E6A23C" stopOpacity="1" />
+                      <stop offset="1" stopColor="#E6A23C" stopOpacity="0.45" />
+                    </linearGradient>
+                  </defs>
+                  <path className="connector-line" stroke="url(#b2b-wire-r)" d="M0 142 H68 M160 47 C126 47 92 95 92 142 M160 142 H92 M160 236 C126 236 92 189 92 142" />
+                </svg>
                 <span className="b2b-flow-tier" data-role="user">{t('b2b.overview.user')}</span>
               </div>
 
