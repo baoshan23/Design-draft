@@ -5729,9 +5729,7 @@ html {
 
 /* ===========================================================
    b2b `#modes` — bento card grid (2x2)
-   Outer warm-grey tile + inner white visual panel with the
-   gold icon centered. Mirrors the reference layout where each
-   card has a "preview" zone on top and a title/desc block below.
+   White card, gold icon tile top-left, title/desc below.
    =========================================================== */
 .modes-bento-grid {
   display: grid;
@@ -5749,6 +5747,7 @@ html {
   align-items: flex-start;
   gap: 20px;
   padding: 28px;
+  min-height: 300px;
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 24px;
@@ -5775,7 +5774,7 @@ html {
   height: 28px;
 }
 .mode-bento-body {
-  padding: 4px 12px 12px;
+  padding: 0;
 }
 .mode-bento-body h3 {
   margin: 0 0 10px;
@@ -5796,15 +5795,9 @@ html {
     gap: 16px;
   }
   .mode-bento-card {
-    padding: 16px;
+    padding: 22px;
+    min-height: 240px;
     border-radius: 20px;
-  }
-  .mode-bento-visual {
-    min-height: 130px;
-    padding: 32px 20px;
-  }
-  .mode-bento-body {
-    padding: 4px 8px 8px;
   }
 }
 
