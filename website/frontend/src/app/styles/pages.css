@@ -1481,9 +1481,9 @@ h3.matrix-header,
   row-gap: 22px;
   max-width: 1440px;
   margin: 0 auto;
-  /* light-yellow "tech" panel — warm radial wash behind the whole diagram */
-  background: radial-gradient(circle at 50% 42%, #FCF9F2 0%, #F5EFE2 100%);
-  border: 1px solid rgba(230, 162, 60, 0.14);
+  /* neutral light-grey panel behind the whole diagram */
+  background: #F1F2F4;
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 28px;
   padding: 64px 80px 52px;
 }
