@@ -49,6 +49,8 @@ Backend: `node deploy/deploy-backend.js` cross-compiles Go + SFTP + systemd rest
 
 ## Last session
 
+- 2026-06-01 — **b2b `#architecture` hub cards — shadow color warm-brown/gold → faint light-grey** (`pages.css` `.b2b-hub-card` 1509, `.b2b-hub-card::before/::after` 1522, `.b2b-hub-core` 1630). User screenshot of the rendered hub + `投影颜色改成浅灰色，一点点淡淡的就行`. Outer cards `0 18px 44px rgba(140,120,80,.08)` → `0 16px 40px rgba(0,0,0,.05)`; stacked-deck pseudo layers `0 14px 30px rgba(140,120,80,.07)` → `0 12px 28px rgba(0,0,0,.04)`; core `0 22px 60px rgba(212,158,0,.14)` (gold tint) → `0 20px 50px rgba(0,0,0,.06)`. All now neutral grey + very subtle. CSS-only. NOTE: a concurrent session was committing in the repo this turn, so these edits landed bundled into HEAD `ee3790e` (not a standalone commit) — verified present via `git show HEAD:`; fork up-to-date. Revert: restore the brown/gold rgba shadow values.
+
 - 2026-06-01 — **b2b `#revenue` grey panel — bg opacity lowered to 25%** (`sections.css` `#revenue .b2b-revenue-panel`). User: `背景颜色降低50%` then `再降低50%`. Background `#f2f2f2` → `rgba(242,242,242,0.5)` → `rgba(242,242,242,0.25)` (very faint grey wash over the white section). `tsc` n/a (CSS only). Revert: back to solid `#f2f2f2`.
 
 - 2026-06-01 — **b2b `#revenue` grey panel — taller** (`sections.css` `#revenue .b2b-revenue-panel`). User: `背景高度高一点` (typo "高一旦"). Vertical padding `56→96px` (mobile `36→60px`); horizontal padding (48/20) + radius (28/20) unchanged. `tsc` n/a (CSS only). Revert: padding back to `56px 48px` / mobile `36px 20px`.
