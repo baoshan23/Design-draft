@@ -49,6 +49,8 @@ Backend: `node deploy/deploy-backend.js` cross-compiles Go + SFTP + systemd rest
 
 ## Last session
 
+- 2026-06-01 — **b2b `#revenue` accordion — wider gap between items** (`sections.css` `.revenue-accordion` ~5845). User red-boxed the 4 accordion rows + `这里的间距再大一点`. `gap: 10px → 22px`. `tsc` n/a (CSS only). Revert: gap back to 10px.
+
 - 2026-06-01 — **b2b `#architecture` hub avatar icon circles — faint-gold tint → solid yellow bg + black icon** (`pages.css` `.b2b-hub-avatar-ic` 1568). User red-boxed the 6 operator/user avatar circles + `这里的图标颜色改成黄色底，黑色线性图标`. `background: rgba(254,191,29,.14)` (faint tint) + `color: #B07A1E` (brown icon) → `background: var(--primary,#febf1d)` (solid yellow) + `color: #1a1a1a` (black line icon, lucide Building2/User inherit via currentColor). CSS-only. Also this turn: operator/user 3rd node label `N → C` (`b2b/page.tsx` `['A','B','N']`→`['A','B','C']` both rows, `72f4059`). Pushed `e1be3e3`. Revert: bg back to `rgba(254,191,29,.14)` + color `#B07A1E`.
 
 - 2026-06-01 — **b2b `#architecture` hub core title — "APP · CPMS · ADMIN" → "APP/CPMS/ADMIN", forced single line** (`messages/{en,zh}.json` `b2b.overview.center`, `pages.css` `.b2b-hub-core-title` 1639). User: `APP · CPMS · ADMIN 中间卡片的标题改成APP/CPMS/ADMIN,确保内容不换行`. Changed the i18n value in BOTH locales (· dot-separated → slash) and added `white-space: nowrap` to `.b2b-hub-core-title` so the 2.2rem bold title stays one line (fits the col2 ~380px content width; mobile ≤460 drops to 1.5rem so still fits). `center` is also the core div's aria-label — fine. `tsc` n/a. Pushed `7b4a293`. Revert: value back to `APP · CPMS · ADMIN`, drop the `white-space: nowrap`.
