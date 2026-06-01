@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { Building2, User, Smartphone, Server as ServerIcon, ShieldCheck } from 'lucide-react';
+import { Building2, User, Smartphone, Server as ServerIcon, ShieldCheck, Globe, Play, BookOpen, MessageSquare, Headphones } from 'lucide-react';
 import QRCode from 'qrcode';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import Image from 'next/image';
@@ -68,12 +68,13 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
 
   const modes = ['mode1', 'mode2', 'mode3', 'mode4'] as const;
   const feats = ['feat1', 'feat2', 'feat3'] as const;
-  const aftersalesItems = ['item1', 'item2', 'item3', 'item4'] as const;
-  const aftersalesIcons = [
-    <svg key="vid" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="5 3 19 12 5 21 5 3" /></svg>,
-    <svg key="book" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" /></svg>,
-    <svg key="chat" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>,
-    <svg key="target" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg>,
+  // After-sales support — orbital diagram. Each item maps to a card + a node
+  // on the rings. pos drives absolute placement (tl/tr/bl/br).
+  const supportCards = [
+    { key: 'item1', pos: 'tl', Icon: Play },        // 视频部署指南
+    { key: 'item3', pos: 'tr', Icon: MessageSquare }, // 官方社区论坛
+    { key: 'item2', pos: 'bl', Icon: BookOpen },      // 全方位知识库
+    { key: 'item4', pos: 'br', Icon: Headphones },    // 专业技术团队
   ];
 
   return (
@@ -415,7 +416,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
       </section>
 
       {/* ==================== Section 10: After-Sales ==================== */}
-      <section className="section" id="aftersales">
+      <section className="section b2b-support" id="aftersales">
         <div className="container">
           <ScrollAnimation>
             <div className="section-header">
@@ -424,15 +425,32 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               <p>{t('b2b.aftersales.desc')}</p>
             </div>
           </ScrollAnimation>
-          <div className="grid-2">
-            {aftersalesItems.map((item, i) => (
-              <ScrollAnimation key={item} style={{ transitionDelay: `${i * 0.1}s` }}>
-                <div className="card glass-card" style={{ height: '100%' }}>
-                  <div className="card-icon">{aftersalesIcons[i]}</div>
-                  <h3>{t(`b2b.aftersales.${item}.title`)}</h3>
-                  <p>{t(`b2b.aftersales.${item}.desc`)}</p>
-                </div>
-              </ScrollAnimation>
+          <div className="b2b-support-stage">
+            {/* concentric rings */}
+            <div className="b2b-support-rings" aria-hidden="true">
+              <span className="b2b-support-ring b2b-support-ring--1" />
+              <span className="b2b-support-ring b2b-support-ring--2" />
+              <span className="b2b-support-ring b2b-support-ring--3" />
+              <span className="b2b-support-ring b2b-support-ring--dash" />
+            </div>
+            {/* central globe */}
+            <div className="b2b-support-core" aria-hidden="true">
+              <Globe size={44} strokeWidth={1.6} />
+            </div>
+            {/* orbit nodes + floating cards (grouped for linked hover) */}
+            {supportCards.map((c, i) => (
+              <div key={c.key} className="b2b-support-orbit" style={{ display: 'contents' }}>
+                <span className={`b2b-support-node b2b-support-node--${c.pos}`} aria-hidden="true">
+                  <c.Icon size={18} strokeWidth={2} />
+                </span>
+                <article className={`b2b-support-card b2b-support-card--${c.pos}`} style={{ ['--i' as string]: i }}>
+                  <span className="b2b-support-card-ic" aria-hidden="true"><c.Icon size={22} strokeWidth={2} /></span>
+                  <div className="b2b-support-card-body">
+                    <h3>{t(`b2b.aftersales.${c.key}.title`)}</h3>
+                    <p>{t(`b2b.aftersales.${c.key}.desc`)}</p>
+                  </div>
+                </article>
+              </div>
             ))}
           </div>
         </div>
