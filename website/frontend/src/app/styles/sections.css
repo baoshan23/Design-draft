@@ -2622,6 +2622,15 @@ html {
   flex: 0 0 300px;
   width: 300px;
   margin: 0;
+  /* Border-only: drop the pale-gold glass fill + shadow, keep just the line. */
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+}
+.b2c-pay-card:hover {
+  background: transparent;
+  box-shadow: none;
 }
 @keyframes b2cPaySlide {
   from { transform: translateX(-50%); }
