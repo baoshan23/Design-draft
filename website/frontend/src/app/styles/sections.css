@@ -5786,16 +5786,20 @@ html {
   border-color: rgba(254, 191, 29, 0.28);
   box-shadow: 0 14px 32px rgba(214, 158, 0, 0.10);
 }
-/* Banner artwork (pale-gold gradient + graphic, 1372×646 ≈ 2.12:1) at the
-   top of each card; full natural aspect so the bottom-right graphic isn't cropped. */
-.mode-bento-visual {
-  width: 100%;
-  aspect-ratio: 1372 / 646;
+.mode-bento-icon {
+  width: 64px;
+  height: 64px;
   border-radius: 16px;
-  background-color: #fffaf0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: var(--primary, #febf1d);
+  color: #1f1f1f;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(254, 191, 29, 0.28);
+}
+.mode-bento-icon svg {
+  width: 28px;
+  height: 28px;
 }
 .mode-bento-body {
   padding: 0;

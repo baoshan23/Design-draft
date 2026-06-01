@@ -184,7 +184,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
             <div style={{ marginTop: 80 }}>
               <div className="feature-row">
                 <div className="feature-image-placeholder">
-                  <Image src="/images/ui-design-b2c-2.png" alt={t('product.ui.title')} width={1332} height={1000} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 20 }} />
+                  <Image src="/images/ui-design-b2c-2.png" alt={t('product.ui.title')} width={1332} height={1000} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
                 <div className="feature-text">
                   <h3>{t('product.ui.title')}</h3>
@@ -217,7 +217,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
             <div style={{ marginTop: 40 }}>
               <div className="feature-row reverse b2c-feat-shift">
                 <div className="feature-image-placeholder">
-                  <Image src="/images/OEM.png" alt={t('product.brand.title')} width={1920} height={1080} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 20 }} />
+                  <Image src="/images/OEM.png" alt={t('product.brand.title')} width={1920} height={1080} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
                 <div className="feature-text">
                   <h3>{t('product.brand.title')}</h3>
