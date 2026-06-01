@@ -2122,15 +2122,6 @@ h3.matrix-header,
   margin: 0 auto;
 }
 
-/* After-sales section: white background + single centred illustration */
-.b2b-aftersales-section {
-  background: #ffffff;
-}
-
-.b2b-aftersales-illustration {
-  max-width: 760px;
-  margin: 0 auto;
-}
 
 .b2b-hiw-grid {
   display: grid;
