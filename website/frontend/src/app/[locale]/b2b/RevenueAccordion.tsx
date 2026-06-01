@@ -30,11 +30,7 @@ export default function RevenueAccordion() {
             >
               <span className="revenue-acc-icon" aria-hidden>{icons[i]}</span>
               <span className="revenue-acc-title">{t(`b2b.revenue.${item}.title`)}</span>
-              <span className="revenue-acc-chevron" aria-hidden>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </span>
+              <span className="revenue-acc-toggle" aria-hidden />
             </button>
             <div className="revenue-acc-body">
               <div className="revenue-acc-body-inner">

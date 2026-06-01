@@ -2748,10 +2748,11 @@ html {
   background-repeat: no-repeat;
 }
 
+/* No card-level hover feedback — only the button reacts to interaction (user request) */
 .model-card:hover {
   border-color: var(--border-subtle);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  transform: translateY(-4px);
+  box-shadow: none;
+  transform: none;
 }
 
 .model-card .model-icon {
