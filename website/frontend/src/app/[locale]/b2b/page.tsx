@@ -58,13 +58,6 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
     return Array.isArray(v) ? (v as string[]) : [];
   };
 
-  const modeIcons = [
-    <svg key="net" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" /></svg>,
-    <svg key="bld" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 21h18M9 8h1M9 12h1M9 16h1M14 8h1M14 12h1M14 16h1" /><rect x="5" y="3" width="14" height="18" rx="1" /></svg>,
-    <svg key="link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" /></svg>,
-    <svg key="ref" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 11-6.219-8.56" /><polyline points="21 3 21 9 15 9" /></svg>,
-  ];
-
   const modes = ['mode1', 'mode2', 'mode3', 'mode4'] as const;
   const feats = ['feat1', 'feat2', 'feat3'] as const;
   const aftersalesItems = ['item1', 'item2', 'item3', 'item4'] as const;
@@ -219,7 +212,10 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
             {modes.map((mode, i) => (
               <ScrollAnimation key={mode} style={{ transitionDelay: `${i * 0.1}s` }}>
                 <article className="mode-bento-card">
-                  <div className="mode-bento-icon">{modeIcons[i]}</div>
+                  <div
+                    className="mode-bento-visual"
+                    style={{ backgroundImage: `url(/images/b2b-modes/mode-${i + 1}.png)` }}
+                  />
                   <div className="mode-bento-body">
                     <h3>{t(`b2b.modes.${mode}.title`)}</h3>
                     <p>{t(`b2b.modes.${mode}.desc`)}</p>
@@ -256,36 +252,36 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               <h2>{t('b2b.features.title')}</h2>
             </div>
           </ScrollAnimation>
-          <div style={{ maxWidth: 800, margin: '0 auto' }}>
-            {feats.map((feat, i) => (
-              <ScrollAnimation key={feat} style={{ transitionDelay: `${i * 0.1}s` }}>
-                <div className="b2b-feat-item">
-                  <div className="b2b-feat-num">{i + 1}</div>
-                  <div>
-                    <h3 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: 8 }}>{t(`b2b.features.${feat}.title`)}</h3>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: 1.7 }}>{t(`b2b.features.${feat}.desc`)}</p>
-                  </div>
-                </div>
-              </ScrollAnimation>
-            ))}
-            <ScrollAnimation style={{ transitionDelay: `${feats.length * 0.1}s` }}>
-              <div className="b2b-payment-flow-wrap">
-                <h4 className="b2b-payment-flow-title">{t('b2b.advantages.paymentTitle')}</h4>
-                <div className="b2b-payment-flow" role="list">
-                  {[t('b2b.advantages.payment1'), t('b2b.advantages.payment2'), t('b2b.advantages.payment3')].map((step, i, arr) => (
-                    <div key={i} className="b2b-payment-step-wrap" role="listitem">
-                      <div className="b2b-payment-step-card" style={{ ['--i' as string]: i }}>
-                        <div className="b2b-payment-step-num">{i + 1}</div>
-                        <div className="b2b-payment-step-text">{step}</div>
+          <div className="b2b-hiw">
+            <div className="b2b-hiw-grid">
+              {feats.map((feat, i) => (
+                <ScrollAnimation key={feat} style={{ transitionDelay: `${i * 0.1}s` }}>
+                  <article className={`b2b-hiw-card${i === 0 ? ' b2b-hiw-card--wide' : ''}`}>
+                    <div className="b2b-hiw-content">
+                      <span className="b2b-hiw-step">{t('b2b.features.step')} {i + 1}</span>
+                      <h3>{t(`b2b.features.${feat}.title`)}</h3>
+                      <p>{t(`b2b.features.${feat}.desc`)}</p>
+                    </div>
+                    {i === 0 ? (
+                      <div className="b2b-hiw-visual" aria-hidden="true">
+                        <span className="b2b-hiw-bignum">0{i + 1}</span>
                       </div>
-                      {i < arr.length - 1 && (
-                        <div className="b2b-payment-step-arrow" aria-hidden="true">
-                          <svg width="32" height="20" viewBox="0 0 32 20" fill="none">
-                            <line x1="2" y1="10" x2="26" y2="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeDasharray="3 4" />
-                            <path d="M22 4 L30 10 L22 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                          </svg>
-                        </div>
-                      )}
+                    ) : (
+                      <span className="b2b-hiw-num" aria-hidden="true">{i + 1}</span>
+                    )}
+                  </article>
+                </ScrollAnimation>
+              ))}
+            </div>
+            <ScrollAnimation style={{ transitionDelay: `${feats.length * 0.1}s` }}>
+              <div className="b2b-hiw-bar">
+                <span className="b2b-hiw-bar-kicker">{t('b2b.advantages.paymentTitle')}</span>
+                <div className="b2b-hiw-bar-steps" role="list">
+                  {[t('b2b.advantages.payment1'), t('b2b.advantages.payment2'), t('b2b.advantages.payment3')].map((step, i, arr) => (
+                    <div key={i} className="b2b-hiw-bar-step" role="listitem">
+                      <span className="b2b-hiw-bar-num">{i + 1}</span>
+                      <span className="b2b-hiw-bar-text">{step}</span>
+                      {i < arr.length - 1 && <span className="b2b-hiw-bar-arrow" aria-hidden="true">→</span>}
                     </div>
                   ))}
                 </div>

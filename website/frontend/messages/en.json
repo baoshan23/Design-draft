@@ -2267,7 +2267,8 @@
       "feat3": {
         "title": "Powerful APIs & High Scalability",
         "desc": "Complete set of open APIs for seamless third-party integration, with deep secondary development support from our engineering team."
-      }
+      },
+      "step": "Step"
     },
     "advantages": {
       "title": "Exquisite UI/UX, Extraordinary Experience",

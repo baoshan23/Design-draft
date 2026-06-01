@@ -2154,6 +2154,206 @@ h3.matrix-header,
 }
 
 /* ====================================================================
+   B2B #features — "How It Works" bento step cards + dark summary bar
+   Wide Step-1 card on top (text + big-number visual), Steps 2/3 below,
+   then a dark warm-brown bar holding the payment flow.
+   ==================================================================== */
+
+.b2b-hiw {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.b2b-hiw-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.b2b-hiw-grid > div {
+  height: 100%;
+}
+
+.b2b-hiw-card {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  padding: 30px 32px;
+  background: #f7f6f2;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 24px;
+  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s, border-color .35s;
+}
+
+.b2b-hiw-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(254, 191, 29, 0.28);
+  box-shadow: 0 14px 32px rgba(214, 158, 0, 0.10);
+}
+
+.b2b-hiw-card--wide {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1.25fr 0.9fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.b2b-hiw-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 13px;
+  margin-bottom: 16px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid rgba(254, 191, 29, 0.45);
+  color: var(--primary-text, #8C5F00);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.b2b-hiw-card h3 {
+  margin: 0 0 12px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.b2b-hiw-card p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* corner watermark number on the two small cards */
+.b2b-hiw-num {
+  position: absolute;
+  top: 16px;
+  right: 26px;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(254, 191, 29, 0.16);
+  pointer-events: none;
+}
+
+/* wide-card right visual panel */
+.b2b-hiw-visual {
+  align-self: stretch;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(254, 191, 29, 0.18), rgba(254, 233, 168, 0.40));
+  border: 1px solid rgba(254, 191, 29, 0.22);
+}
+
+.b2b-hiw-bignum {
+  font-size: 4.5rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--primary-text, #8C5F00);
+}
+
+/* dark summary bar — payment flow */
+.b2b-hiw-bar {
+  margin-top: 20px;
+  padding: 28px 34px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  background: linear-gradient(135deg, #1d1a14, #2a241a);
+  border: 1px solid rgba(254, 191, 29, 0.22);
+  border-radius: 24px;
+}
+
+.b2b-hiw-bar-kicker {
+  flex-shrink: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary, #febf1d);
+  letter-spacing: 0.02em;
+}
+
+.b2b-hiw-bar-steps {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.b2b-hiw-bar-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 0;
+  min-width: 180px;
+}
+
+.b2b-hiw-bar-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #1f1a10;
+  background: var(--primary, #febf1d);
+}
+
+.b2b-hiw-bar-text {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.b2b-hiw-bar-arrow {
+  flex-shrink: 0;
+  margin: 0 4px;
+  color: rgba(254, 191, 29, 0.6);
+  font-size: 1.1rem;
+}
+
+@media (max-width: 760px) {
+  .b2b-hiw-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .b2b-hiw-card--wide {
+    grid-column: auto;
+    grid-template-columns: 1fr;
+  }
+  .b2b-hiw-card--wide .b2b-hiw-visual {
+    display: none;
+  }
+  .b2b-hiw-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 24px;
+  }
+  .b2b-hiw-bar-steps {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .b2b-hiw-bar-arrow {
+    display: none;
+  }
+}
+
+/* ====================================================================
    Multi-Platform Feature Support Matrix (B2B Section 8)
    Per-column accent color, staggered row reveal, hover highlight.
    ==================================================================== */
