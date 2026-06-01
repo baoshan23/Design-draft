@@ -1534,7 +1534,7 @@ h3.matrix-header,
 }
 
 .b2b-flow-node-label {
-  font-size: 0.92rem;
+  font-size: 0.98rem;
   font-weight: 600;
   color: #5C4B37;
   white-space: nowrap;
@@ -1666,7 +1666,7 @@ h3.matrix-header,
 
 .b2b-flow-core-title {
   position: relative;
-  font-size: 1.95rem;
+  font-size: 2.15rem;
   font-weight: 800;
   color: #2C2519;
   letter-spacing: 0.02em;
@@ -1682,12 +1682,12 @@ h3.matrix-header,
 
 /* capability tags (.function-tag spec) — white, warm border, brown text */
 .b2b-flow-pill {
-  padding: 11px 20px;
+  padding: 12px 22px;
   border-radius: 8px;
   background: #ffffff;
   border: 1px solid #EBE4D3;
   color: #5C4B37;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 600;
   line-height: 1.2;
   cursor: default;
