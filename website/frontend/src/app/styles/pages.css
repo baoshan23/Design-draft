@@ -1481,9 +1481,9 @@ h3.matrix-header,
   row-gap: 22px;
   max-width: 1440px;
   margin: 0 auto;
-  /* neutral light-grey panel behind the whole diagram */
-  background: #F1F2F4;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  /* panel bg removed — diagram sits directly on the section */
+  background: transparent;
+  border: none;
   border-radius: 28px;
   padding: 64px 80px 52px;
 }
