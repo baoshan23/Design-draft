@@ -11309,8 +11309,12 @@ details.admin-legacy-group > .admin-settings-group:last-child {
   justify-content: center;
   background: linear-gradient(140deg, #FFD45E 0%, #F5A623 100%);
   color: #1a1a1a;
+  overflow: hidden;
   transition: background .3s ease, color .3s ease, transform .3s ease;
 }
+/* card chip rendered from an uploaded image */
+.b2b-support-card-ic--img { background: transparent; }
+.b2b-support-card-ic img { width: 100%; height: 100%; border-radius: 11px; display: block; }
 .b2b-support-card-body h3 {
   font-size: 1rem;
   font-weight: 700;
