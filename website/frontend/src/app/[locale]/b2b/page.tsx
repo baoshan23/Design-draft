@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { Building2, User, Smartphone, Server as ServerIcon, ShieldCheck, Globe, Play, BookOpen, MessageSquare, Headphones } from 'lucide-react';
+import { Building2, User, Globe, Play, BookOpen, MessageSquare, Headphones } from 'lucide-react';
 import QRCode from 'qrcode';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import Image from 'next/image';
@@ -138,86 +138,70 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
             </div>
           </ScrollAnimation>
           <ScrollAnimation>
-            <div className="b2b-flow" aria-label={t('b2b.overview.title')}>
-              {/* ---- left tier: operators (flow inward) ---- */}
-              <div className="b2b-flow-nodes b2b-flow-nodes--op">
-                {['A', 'B', 'N'].map((letter, i) => (
-                  <div key={letter} className="b2b-flow-node" style={{ ['--i' as string]: i }}>
-                    <span className="b2b-flow-node-ic" aria-hidden="true">
-                      <Building2 size={20} strokeWidth={2} />
-                    </span>
-                    <span className="b2b-flow-node-label">{t('b2b.overview.operator')} {letter}</span>
-                  </div>
-                ))}
-              </div>
+            <div className="b2b-hub" aria-label={t('b2b.overview.title')}>
+              {/* connector lines (behind cards) — core → platform / operators / users */}
+              <svg className="b2b-hub-links" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">
+                <path className="b2b-hub-link" d="M50 32 V17" />
+                <path className="b2b-hub-link" d="M41 40 H26" />
+                <path className="b2b-hub-link" d="M59 40 H74" />
+              </svg>
 
-              {/* left rail: bezier connector — 3 operators fan into the tier pill, one line out to core */}
-              <div className="b2b-flow-rail b2b-flow-rail--l">
-                <svg className="b2b-flow-wire" viewBox="0 0 160 284" preserveAspectRatio="none" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="b2b-wire-l" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="160" y2="0">
-                      <stop offset="0" stopColor="#E6A23C" stopOpacity="0.45" />
-                      <stop offset="1" stopColor="#E6A23C" stopOpacity="1" />
-                    </linearGradient>
-                  </defs>
-                  <path className="connector-line" stroke="url(#b2b-wire-l)" d="M0 47 C34 47 68 95 68 142 M0 142 H68 M0 236 C34 236 68 189 68 142 M92 142 H160" />
-                </svg>
-                <span className="b2b-flow-tier" data-role="operator">{t('b2b.overview.operator')}</span>
-              </div>
-
-              {/* ---- center: platform core card ---- */}
-              <div className="b2b-flow-core" aria-label={t('b2b.overview.platform')}>
-                <div className="b2b-flow-core-badge" aria-label={t('b2b.overview.center')}>
-                  <span><Smartphone size={14} strokeWidth={2.2} /> APP</span>
-                  <span><ServerIcon size={14} strokeWidth={2.2} /> CPMS</span>
-                  <span><ShieldCheck size={14} strokeWidth={2.2} /> ADMIN</span>
-                </div>
-                <div className="b2b-flow-core-title">{t('b2b.overview.platform')}</div>
-                <div className="b2b-flow-core-pills">
+              {/* ---- top: platform side ---- */}
+              <article className="b2b-hub-card b2b-hub-platform">
+                <span className="b2b-hub-card-title">{t('b2b.overview.platform')}</span>
+                <div className="b2b-hub-tags b2b-hub-tags--grid">
                   {rawList('b2b.overview.platformItems').map((item, i) => (
-                    <span key={i} className="b2b-flow-pill" style={{ ['--i' as string]: i }}>{item}</span>
+                    <span key={i} className="b2b-hub-tag">{item}</span>
                   ))}
                 </div>
-                <div className="b2b-flow-core-caption">{t('b2b.overview.model')}</div>
+              </article>
+
+              {/* ---- left: operators ---- */}
+              <article className="b2b-hub-card b2b-hub-operators">
+                <span className="b2b-hub-card-title">{t('b2b.overview.operator')}</span>
+                <div className="b2b-hub-avatars">
+                  {['A', 'B', 'N'].map((letter) => (
+                    <div key={letter} className="b2b-hub-avatar">
+                      <span className="b2b-hub-avatar-ic" aria-hidden="true">
+                        <Building2 size={18} strokeWidth={2} />
+                      </span>
+                      <span className="b2b-hub-avatar-label">{t('b2b.overview.operator')} {letter}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="b2b-hub-tags b2b-hub-tags--grid">
+                  {rawList('b2b.overview.operatorItems').map((item, i) => (
+                    <span key={i} className="b2b-hub-tag">{item}</span>
+                  ))}
+                </div>
+              </article>
+
+              {/* ---- center: core system ---- */}
+              <div className="b2b-hub-core" aria-label={t('b2b.overview.center')}>
+                <span className="b2b-hub-core-eyebrow">{t('b2b.overview.coreLabel')}</span>
+                <span className="b2b-hub-core-title">{t('b2b.overview.center')}</span>
+                <span className="b2b-hub-core-pill">{t('b2b.overview.model')}</span>
               </div>
 
-              {/* right rail: bezier connector — core → tier pill, fans out to 3 users */}
-              <div className="b2b-flow-rail b2b-flow-rail--r">
-                <svg className="b2b-flow-wire" viewBox="0 0 160 284" preserveAspectRatio="none" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="b2b-wire-r" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="160" y2="0">
-                      <stop offset="0" stopColor="#E6A23C" stopOpacity="1" />
-                      <stop offset="1" stopColor="#E6A23C" stopOpacity="0.45" />
-                    </linearGradient>
-                  </defs>
-                  <path className="connector-line" stroke="url(#b2b-wire-r)" d="M0 142 H68 M160 47 C126 47 92 95 92 142 M160 142 H92 M160 236 C126 236 92 189 92 142" />
-                </svg>
-                <span className="b2b-flow-tier" data-role="user">{t('b2b.overview.user')}</span>
-              </div>
-
-              {/* ---- right tier: users (flow outward) ---- */}
-              <div className="b2b-flow-nodes b2b-flow-nodes--user">
-                {['A', 'B', 'N'].map((letter, i) => (
-                  <div key={letter} className="b2b-flow-node" style={{ ['--i' as string]: i }}>
-                    <span className="b2b-flow-node-ic" aria-hidden="true">
-                      <User size={20} strokeWidth={2} />
-                    </span>
-                    <span className="b2b-flow-node-label">{t('b2b.overview.user')} {letter}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* ---- tier capability chips (row 2 under each side) ---- */}
-              <div className="b2b-flow-chips b2b-flow-chips--op">
-                {rawList('b2b.overview.operatorItems').map((item, i) => (
-                  <span key={i} className="b2b-flow-chip" style={{ ['--i' as string]: i }}>{item}</span>
-                ))}
-              </div>
-              <div className="b2b-flow-chips b2b-flow-chips--user">
-                {rawList('b2b.overview.userItems').map((item, i) => (
-                  <span key={i} className="b2b-flow-chip" style={{ ['--i' as string]: i }}>{item}</span>
-                ))}
-              </div>
+              {/* ---- right: users ---- */}
+              <article className="b2b-hub-card b2b-hub-users">
+                <span className="b2b-hub-card-title">{t('b2b.overview.user')}</span>
+                <div className="b2b-hub-avatars">
+                  {['A', 'B', 'N'].map((letter) => (
+                    <div key={letter} className="b2b-hub-avatar">
+                      <span className="b2b-hub-avatar-ic" aria-hidden="true">
+                        <User size={18} strokeWidth={2} />
+                      </span>
+                      <span className="b2b-hub-avatar-label">{t('b2b.overview.user')} {letter}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="b2b-hub-tags b2b-hub-tags--grid">
+                  {rawList('b2b.overview.userItems').map((item, i) => (
+                    <span key={i} className="b2b-hub-tag">{item}</span>
+                  ))}
+                </div>
+              </article>
             </div>
           </ScrollAnimation>
         </div>

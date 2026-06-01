@@ -1237,7 +1237,6 @@
     },
     "table": {
       "feature": "Feature",
-
       "fees": "Pricing",
       "hostingfee": "Hosting (server rental) fee",
       "chargercount": "Charger count",
@@ -1258,7 +1257,6 @@
       "price21800once": "$21,800 one-time",
       "price34200once": "$68,000 one-time",
       "price1500": "$1,500",
-
       "baseservice": "Core Service",
       "driverapp": "Driver / user app",
       "ocpp": "OCPP 1.6J",
@@ -1287,7 +1285,6 @@
       "leaseGcss": "Lease GCSS / Bring your own",
       "ownGcss": "GCSS",
       "ownClient": "Customer",
-
       "cpms": "CPMS / Admin / CPO Management",
       "dashboard": "Dashboard",
       "langswitch": "Language switching",
@@ -1306,13 +1303,11 @@
       "fmt2": "2 formats",
       "fmt3": "3 formats",
       "emails1k": "1,000 emails ($6 per extra 1,000)",
-
       "drivermgmt": "Driver / User Management",
       "balanceview": "View user balance",
       "balanceadjust": "Adjust user balance",
       "userexport": "User info export",
       "wallethist": "Wallet top-up records & export",
-
       "b2b": "B2B Features",
       "cpomgmt": "Operator (CPO) creation & management",
       "gatewayconfig": "Payment-gateway configuration",
@@ -1321,7 +1316,6 @@
       "cpoperms": "CPO permission configuration",
       "cpoorders": "CPO order/transaction management",
       "cporevenue": "Commission / hosted-mode revenue analytics",
-
       "driverappFn": "Driver-side APP / Web APP",
       "qrcharge": "QR-code charging",
       "tapcharge": "Tap-to-charge",
@@ -1333,7 +1327,6 @@
       "langselect": "Language selection",
       "loginmethods": "Sign-up / Sign-in",
       "loginsList": "Facebook / Email / Google / Apple",
-
       "remote": "Remote Maintenance",
       "firmware": "Firmware upgrade",
       "logdownload": "Remote charger log download",
@@ -1343,7 +1336,6 @@
       "syscfg": "Charger base-system configuration",
       "remoteenable": "Remote enable / disable gun",
       "ocpp90d": "90 days",
-
       "aria": {
         "included": "Included",
         "notIncluded": "Not included"
@@ -1451,9 +1443,14 @@
       "title": "Send Us a",
       "title2": "Message",
       "desc": "Fill out the form and our team will get back to you within 24 hours. We're excited to learn about your EV charging project.",
-      "phone": "Phone & WhatsApp",
+      "phone": {
+        "hours": "Available Mon-Fri, 9am-6pm HKT"
+      },
       "email": "Email",
-      "office": "Office Locations",
+      "office": {
+        "hk": "Hong Kong",
+        "cn": "Mainland China"
+      },
       "hk": "Hong Kong",
       "cn": "Mainland China",
       "card": {
@@ -1475,14 +1472,7 @@
       "submit": "Send Message",
       "submitting": "Sending…",
       "success": "Message sent successfully! We will get back to you within 24 hours.",
-      "error": "Something went wrong. Please try again, or email support@gcss.hk.",
-      "phone": {
-        "hours": "Available Mon-Fri, 9am-6pm HKT"
-      },
-      "office": {
-        "hk": "Hong Kong",
-        "cn": "Mainland China"
-      }
+      "error": "Something went wrong. Please try again, or email support@gcss.hk."
     },
     "office": {
       "label": "Our Offices",
@@ -1517,11 +1507,10 @@
       "sections": "Sections",
       "all": "All",
       "announce": "Official Announcements",
-      "title": "B2C Enterprise",
+      "title": "B2B2C Platform",
       "discuss": "Discussion & Sharing",
       "myposts": "My Posts",
       "tags": "Tags",
-      "title": "B2B2C Platform",
       "install": "Installation & Deployment",
       "help": "Help Requests",
       "feature": "Feature Suggestions",
@@ -2211,7 +2200,8 @@
         "Account Management"
       ],
       "center": "APP · CPMS · ADMIN",
-      "model": "Self-Operated + Operator Model"
+      "model": "Self-Operated + Operator Model",
+      "coreLabel": "Core System Admin"
     },
     "modes": {
       "title": "Diversified Operation Modes for Ultimate Flexibility",

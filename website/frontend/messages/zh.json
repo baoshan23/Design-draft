@@ -1237,7 +1237,6 @@
     },
     "table": {
       "feature": "功能",
-
       "fees": "费用",
       "hostingfee": "托管费（服务器租赁费）",
       "chargercount": "充电桩数量",
@@ -1258,7 +1257,6 @@
       "price21800once": "$21,800（一次性）",
       "price34200once": "$68,000（一次性）",
       "price1500": "$1,500",
-
       "baseservice": "基础服务",
       "driverapp": "司机 / 用户应用",
       "ocpp": "OCPP 1.6J",
@@ -1287,7 +1285,6 @@
       "leaseGcss": "租赁 GCSS / 自行提供",
       "ownGcss": "GCSS",
       "ownClient": "归属于客户",
-
       "cpms": "CPMS / 后台管理 / CPO 管理",
       "dashboard": "仪表盘",
       "langswitch": "语言切换",
@@ -1306,13 +1303,11 @@
       "fmt2": "2 种格式",
       "fmt3": "3 种格式",
       "emails1k": "1,000 次（每增 $6/1,000 封）",
-
       "drivermgmt": "司机 / 用户管理",
       "balanceview": "用户余额查看",
       "balanceadjust": "用户余额增减",
       "userexport": "用户信息导出",
       "wallethist": "钱包充值记录管理与导出",
-
       "b2b": "B2B 功能",
       "cpomgmt": "运营商新建和管理（CPO）",
       "gatewayconfig": "支付网关配置和管理",
@@ -1321,7 +1316,6 @@
       "cpoperms": "CPO 权限配置",
       "cpoorders": "CPO 订单流水管理",
       "cporevenue": "抽佣 / 托管模式收益统计与分析",
-
       "driverappFn": "司机端 APP / Web APP 功能",
       "qrcharge": "扫码充电",
       "tapcharge": "碰一碰充电",
@@ -1333,7 +1327,6 @@
       "langselect": "语言选择",
       "loginmethods": "注册 / 登录",
       "loginsList": "Facebook / 邮箱 / Google / Apple",
-
       "remote": "远程维护操作",
       "firmware": "固件升级",
       "logdownload": "远程下载充电桩日志",
@@ -1343,7 +1336,6 @@
       "syscfg": "充电桩基础系统功能配置",
       "remoteenable": "远程禁用 / 启用充电枪",
       "ocpp90d": "90 天",
-
       "aria": {
         "included": "包含",
         "notIncluded": "不包含"
@@ -1451,9 +1443,14 @@
       "title": "给我们发送",
       "title2": "消息",
       "desc": "填写表单，我们的团队将在 24 小时内回复。期待了解您的 EV 充电项目。",
-      "phone": "电话与 WhatsApp",
+      "phone": {
+        "hours": "周一至周五 9:00-18:00 (香港时间)"
+      },
       "email": "邮箱",
-      "office": "办公地点",
+      "office": {
+        "hk": "中国香港",
+        "cn": "中国大陆"
+      },
       "hk": "香港",
       "cn": "中国大陆",
       "card": {
@@ -1475,14 +1472,7 @@
       "submit": "发送消息",
       "submitting": "发送中…",
       "success": "消息发送成功！我们将在24小时内回复您。",
-      "error": "发送失败，请重试，或邮件联系 support@gcss.hk。",
-      "phone": {
-        "hours": "周一至周五 9:00-18:00 (香港时间)"
-      },
-      "office": {
-        "hk": "中国香港",
-        "cn": "中国大陆"
-      }
+      "error": "发送失败，请重试，或邮件联系 support@gcss.hk。"
     },
     "office": {
       "label": "我们的办公室",
@@ -1517,11 +1507,10 @@
       "sections": "版块",
       "all": "全部",
       "announce": "官方公告",
-      "title": "B2C 企业版",
+      "title": "B2B2C 平台",
       "discuss": "讨论与分享",
       "myposts": "我的帖子",
       "tags": "标签",
-      "title": "B2B2C 平台",
       "install": "安装与部署",
       "help": "求助帖",
       "feature": "功能建议",
@@ -2211,7 +2200,8 @@
         "账户管理"
       ],
       "center": "APP · CPMS · ADMIN",
-      "model": "自营+运营商模式"
+      "model": "自营+运营商模式",
+      "coreLabel": "核心系统管理"
     },
     "modes": {
       "title": "多元化运营模式，成就极致灵活性",
