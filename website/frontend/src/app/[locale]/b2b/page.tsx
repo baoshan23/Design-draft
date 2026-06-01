@@ -143,82 +143,73 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
             </div>
           </ScrollAnimation>
           <ScrollAnimation>
-            <div className="b2b-arch-diagram" aria-label={t('b2b.overview.title')}>
-              {/* Connecting lines (behind boxes) */}
-              <svg className="b2b-arch-connectors" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                {/* Platform → Center (vertical) */}
-                <line x1="50" y1="26" x2="50" y2="48" stroke="currentColor" strokeWidth="0.4" strokeDasharray="1 1" className="b2b-arch-connector" />
-                {/* Operator → Center (horizontal-ish) */}
-                <line x1="24" y1="62" x2="42" y2="62" stroke="currentColor" strokeWidth="0.4" strokeDasharray="1 1" className="b2b-arch-connector b2b-arch-connector--2" />
-                {/* User → Center */}
-                <line x1="58" y1="62" x2="76" y2="62" stroke="currentColor" strokeWidth="0.4" strokeDasharray="1 1" className="b2b-arch-connector b2b-arch-connector--3" />
-              </svg>
+            <div className="b2b-flow" aria-label={t('b2b.overview.title')}>
+              {/* ---- left tier: operators (flow inward) ---- */}
+              <div className="b2b-flow-nodes b2b-flow-nodes--op">
+                {['A', 'B', 'N'].map((letter, i) => (
+                  <div key={letter} className="b2b-flow-node" style={{ ['--i' as string]: i }}>
+                    <span className="b2b-flow-node-ic" aria-hidden="true">
+                      <Building2 size={20} strokeWidth={2} />
+                    </span>
+                    <span className="b2b-flow-node-label">{t('b2b.overview.operator')} {letter}</span>
+                  </div>
+                ))}
+              </div>
 
-              {/* Platform box — top */}
-              <div className="b2b-arch-box" data-role="platform">
-                <div className="b2b-arch-box-header">
-                  <span className="b2b-arch-box-title">{t('b2b.overview.platform')}</span>
+              {/* left rail: elbow connector merging operators → core, with tier pill */}
+              <div className="b2b-flow-rail b2b-flow-rail--l">
+                <svg className="b2b-flow-wire" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M0 16.7 H14 M0 50 H14 M0 83.3 H14 M14 16.7 V83.3 M14 50 H100" fill="none" stroke="currentColor" strokeWidth="1.4" vectorEffect="non-scaling-stroke" />
+                </svg>
+                <span className="b2b-flow-tier" data-role="operator">{t('b2b.overview.operator')}</span>
+              </div>
+
+              {/* ---- center: platform core card ---- */}
+              <div className="b2b-flow-core" aria-label={t('b2b.overview.platform')}>
+                <div className="b2b-flow-core-badge" aria-label={t('b2b.overview.center')}>
+                  <span><Smartphone size={14} strokeWidth={2.2} /> APP</span>
+                  <span><ServerIcon size={14} strokeWidth={2.2} /> CPMS</span>
+                  <span><ShieldCheck size={14} strokeWidth={2.2} /> ADMIN</span>
                 </div>
-                <div className="b2b-arch-pills">
+                <div className="b2b-flow-core-title">{t('b2b.overview.platform')}</div>
+                <div className="b2b-flow-core-pills">
                   {rawList('b2b.overview.platformItems').map((item, i) => (
-                    <span key={i} className="b2b-arch-pill" style={{ ['--i' as string]: i }}>{item}</span>
+                    <span key={i} className="b2b-flow-pill" style={{ ['--i' as string]: i }}>{item}</span>
                   ))}
                 </div>
+                <div className="b2b-flow-core-caption">{t('b2b.overview.model')}</div>
               </div>
 
-              {/* Operator box — left */}
-              <div className="b2b-arch-box" data-role="operator">
-                <div className="b2b-arch-box-header">
-                  <span className="b2b-arch-box-title">{t('b2b.overview.operator')}</span>
-                </div>
-                <div className="b2b-arch-instances">
-                  {['A', 'B', 'N'].map((letter, i) => (
-                    <div key={letter} className="b2b-arch-instance" style={{ ['--i' as string]: i }}>
-                      <span className="b2b-arch-instance-dot" aria-hidden="true">
-                        <Building2 size={22} strokeWidth={2} />
-                      </span>
-                      <span className="b2b-arch-instance-label">{t('b2b.overview.operator')} {letter}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="b2b-arch-pills">
-                  {rawList('b2b.overview.operatorItems').map((item, i) => (
-                    <span key={i} className="b2b-arch-pill" style={{ ['--i' as string]: i }}>{item}</span>
-                  ))}
-                </div>
+              {/* right rail: elbow connector core → users, with tier pill */}
+              <div className="b2b-flow-rail b2b-flow-rail--r">
+                <svg className="b2b-flow-wire" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M0 50 H86 M86 16.7 V83.3 M86 16.7 H100 M86 50 H100 M86 83.3 H100" fill="none" stroke="currentColor" strokeWidth="1.4" vectorEffect="non-scaling-stroke" />
+                </svg>
+                <span className="b2b-flow-tier" data-role="user">{t('b2b.overview.user')}</span>
               </div>
 
-              {/* Center circle — APP · CPMS · ADMIN */}
-              <div className="b2b-arch-center" aria-label={t('b2b.overview.center')}>
-                <div className="b2b-arch-center-ring" aria-hidden="true" />
-                <div className="b2b-arch-center-inner">
-                  <span><Smartphone size={18} strokeWidth={2} /> APP</span>
-                  <span><ServerIcon size={18} strokeWidth={2} /> CPMS</span>
-                  <span><ShieldCheck size={18} strokeWidth={2} /> ADMIN</span>
-                </div>
-                <div className="b2b-arch-center-caption">{t('b2b.overview.model')}</div>
+              {/* ---- right tier: users (flow outward) ---- */}
+              <div className="b2b-flow-nodes b2b-flow-nodes--user">
+                {['A', 'B', 'N'].map((letter, i) => (
+                  <div key={letter} className="b2b-flow-node" style={{ ['--i' as string]: i }}>
+                    <span className="b2b-flow-node-ic" aria-hidden="true">
+                      <User size={20} strokeWidth={2} />
+                    </span>
+                    <span className="b2b-flow-node-label">{t('b2b.overview.user')} {letter}</span>
+                  </div>
+                ))}
               </div>
 
-              {/* User box — right */}
-              <div className="b2b-arch-box" data-role="user">
-                <div className="b2b-arch-box-header">
-                  <span className="b2b-arch-box-title">{t('b2b.overview.user')}</span>
-                </div>
-                <div className="b2b-arch-instances">
-                  {['A', 'B', 'N'].map((letter, i) => (
-                    <div key={letter} className="b2b-arch-instance" style={{ ['--i' as string]: i }}>
-                      <span className="b2b-arch-instance-dot" aria-hidden="true">
-                        <User size={22} strokeWidth={2} />
-                      </span>
-                      <span className="b2b-arch-instance-label">{t('b2b.overview.user')} {letter}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="b2b-arch-pills">
-                  {rawList('b2b.overview.userItems').map((item, i) => (
-                    <span key={i} className="b2b-arch-pill" style={{ ['--i' as string]: i }}>{item}</span>
-                  ))}
-                </div>
+              {/* ---- tier capability chips (row 2 under each side) ---- */}
+              <div className="b2b-flow-chips b2b-flow-chips--op">
+                {rawList('b2b.overview.operatorItems').map((item, i) => (
+                  <span key={i} className="b2b-flow-chip" style={{ ['--i' as string]: i }}>{item}</span>
+                ))}
+              </div>
+              <div className="b2b-flow-chips b2b-flow-chips--user">
+                {rawList('b2b.overview.userItems').map((item, i) => (
+                  <span key={i} className="b2b-flow-chip" style={{ ['--i' as string]: i }}>{item}</span>
+                ))}
               </div>
             </div>
           </ScrollAnimation>
