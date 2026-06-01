@@ -1506,7 +1506,7 @@ h3.matrix-header,
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 24px;
   padding: 30px 34px;
-  box-shadow: 0 18px 44px rgba(140, 120, 80, 0.08);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.05);
 }
 
 /* stacked-deck effect — two fainter, narrower card layers behind */
@@ -1519,7 +1519,7 @@ h3.matrix-header,
   border-radius: inherit;
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 14px 30px rgba(140, 120, 80, 0.07);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.04);
 }
 .b2b-hub-card::after {
   transform: translateY(10px) scaleX(0.95);
@@ -1627,7 +1627,7 @@ h3.matrix-header,
   border: 1px solid rgba(230, 162, 60, 0.2);
   border-radius: 28px;
   padding: 54px 46px;
-  box-shadow: 0 22px 60px rgba(212, 158, 0, 0.14);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
 }
 .b2b-hub-core-eyebrow {
   font-size: 0.84rem;
@@ -11249,13 +11249,21 @@ details.admin-legacy-group > .admin-settings-group:last-child {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--primary, #FEBF1D);
+  background: linear-gradient(140deg, #FFD45E 0%, #F5A623 100%);
   color: #1a1a1a;
   border: none;
   box-shadow: 0 6px 16px rgba(245, 166, 35, 0.35);
   z-index: 2;
   transform: translate(-50%, -50%);
   transition: transform .3s cubic-bezier(.22, 1, .36, 1), background .3s ease, color .3s ease, box-shadow .3s ease;
+}
+/* node rendered from an uploaded image (the image is the whole circle) */
+.b2b-support-node--img { background: transparent; }
+.b2b-support-node img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: block;
 }
 .b2b-support-node--tl { top: 31%; left: 35%; }
 .b2b-support-node--tr { top: 27%; left: 60%; }
@@ -11296,7 +11304,7 @@ details.admin-legacy-group > .admin-settings-group:last-child {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--primary, #FEBF1D);
+  background: linear-gradient(140deg, #FFD45E 0%, #F5A623 100%);
   color: #1a1a1a;
   transition: background .3s ease, color .3s ease, transform .3s ease;
 }
