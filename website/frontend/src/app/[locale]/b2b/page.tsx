@@ -160,7 +160,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               <article className="b2b-hub-card b2b-hub-operators">
                 <span className="b2b-hub-card-title">{t('b2b.overview.operator')}</span>
                 <div className="b2b-hub-avatars">
-                  {['A', 'B', 'N'].map((letter) => (
+                  {['A', 'B', 'C'].map((letter) => (
                     <div key={letter} className="b2b-hub-avatar">
                       <span className="b2b-hub-avatar-ic" aria-hidden="true">
                         <Building2 size={18} strokeWidth={2} />
@@ -187,7 +187,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               <article className="b2b-hub-card b2b-hub-users">
                 <span className="b2b-hub-card-title">{t('b2b.overview.user')}</span>
                 <div className="b2b-hub-avatars">
-                  {['A', 'B', 'N'].map((letter) => (
+                  {['A', 'B', 'C'].map((letter) => (
                     <div key={letter} className="b2b-hub-avatar">
                       <span className="b2b-hub-avatar-ic" aria-hidden="true">
                         <User size={18} strokeWidth={2} />
