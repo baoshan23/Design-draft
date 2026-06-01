@@ -1654,14 +1654,14 @@ h3.matrix-header,
   gap: 6px;
   padding: 6px 16px;
   border-radius: 20px;
-  background: #2C2519;
-  color: #FFF9E6;
+  background: var(--primary, #febf1d);
+  color: #1a1a1a;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 1px;
 }
 
-.b2b-flow-core-badge svg { flex-shrink: 0; color: #E6A23C; }
+.b2b-flow-core-badge svg { flex-shrink: 0; color: #1a1a1a; }
 
 .b2b-flow-core-title {
   position: relative;
@@ -2119,6 +2119,16 @@ h3.matrix-header,
 
 .b2b-hiw {
   max-width: 980px;
+  margin: 0 auto;
+}
+
+/* After-sales section: white background + single centred illustration */
+.b2b-aftersales-section {
+  background: #ffffff;
+}
+
+.b2b-aftersales-illustration {
+  max-width: 760px;
   margin: 0 auto;
 }
 

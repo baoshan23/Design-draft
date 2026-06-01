@@ -572,6 +572,7 @@ main :not(pre) > code {
 /* ---------- Product gallery — equal row, hover to enlarge ---------- */
 
 .gallery-row {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -584,8 +585,31 @@ main :not(pre) > code {
   padding: 80px 16px 40px;
 }
 
+/* Soft blurred yellow glow behind the phones, anchored to the bottom. */
+.gallery-row::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 560px;
+  height: 300px;
+  max-width: 80%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(254, 191, 29, 0.55) 0%,
+    rgba(254, 191, 29, 0.28) 42%,
+    rgba(254, 191, 29, 0) 72%
+  );
+  filter: blur(56px);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .g3d-phone {
   position: relative;
+  z-index: 1;
   flex: 0 0 auto;
   width: 250px;
   outline: none;
@@ -628,13 +652,16 @@ main :not(pre) > code {
   width: 100%;
   padding: 4.2%;
   border-radius: 19% / 9.2%;
-  background: linear-gradient(157deg, #45454b 0%, #2a2a2f 34%, #19191c 68%, #313137 100%);
+  /* White-10% frosted-glass frame (was graphite gradient) */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow:
-    inset 0 -3px 6px rgba(0, 0, 0, 0.6),
-    inset 0 3px 5px rgba(255, 255, 255, 0.16);
+    inset 0 -2px 5px rgba(0, 0, 0, 0.1),
+    inset 0 2px 5px rgba(255, 255, 255, 0.45);
 }
 
-/* Bright metallic rim drawn only along the outer frame edge. */
+/* Soft light rim drawn only along the outer frame edge. */
 .g3d-device::before {
   content: '';
   position: absolute;
@@ -643,11 +670,10 @@ main :not(pre) > code {
   padding: 1.6px;
   background: linear-gradient(
     150deg,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(255, 255, 255, 0.1) 24%,
-    rgba(0, 0, 0, 0.55) 50%,
-    rgba(255, 255, 255, 0.45) 74%,
-    rgba(0, 0, 0, 0.5) 100%
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.35) 38%,
+    rgba(255, 255, 255, 0.15) 60%,
+    rgba(255, 255, 255, 0.6) 100%
   );
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
