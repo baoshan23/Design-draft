@@ -1470,11 +1470,11 @@ h3.matrix-header,
   position: relative;
   display: grid;
   grid-template-columns:
-    minmax(118px, 0.9fr)    /* operator nodes */
-    minmax(66px, 0.75fr)    /* left rail      */
-    minmax(340px, 2fr)      /* platform core  */
-    minmax(66px, 0.75fr)    /* right rail     */
-    minmax(118px, 0.9fr);   /* user nodes     */
+    minmax(118px, 0.85fr)   /* operator nodes */
+    minmax(130px, 0.95fr)   /* left rail      */
+    minmax(320px, 2.1fr)    /* platform core  */
+    minmax(130px, 0.95fr)   /* right rail     */
+    minmax(118px, 0.85fr);  /* user nodes     */
   grid-template-rows: 284px auto;
   align-items: stretch;
   column-gap: 8px;
@@ -1547,8 +1547,8 @@ h3.matrix-header,
    vertical centre; ::before / ::after are the two branch corner boxes whose
    border-radius gives the rounded elbows. --wire = line colour. */
 .b2b-flow-wire {
-  --wire-from: rgba(214, 158, 0, 0.85);  /* strong end — tier / core side */
-  --wire-to: rgba(214, 158, 0, 0.4);     /* faint (but still visible) end — toward the A/B/N nodes */
+  --wire-from: rgba(214, 158, 0, 0.9);   /* strong end — tier / core side */
+  --wire-to: rgba(214, 158, 0, 0.5);     /* faint (but clearly visible) end — toward the A/B/N nodes */
   --wire-w: 3px;
   --wire-r: 14px;
   position: absolute;
@@ -1567,11 +1567,13 @@ h3.matrix-header,
   background-image: linear-gradient(to right, var(--wire-from), var(--wire-to));
 }
 
+/* merge bus sits close to the nodes (12% in from the node edge) so the
+   centred tier pill never overlaps / hides the branch elbows */
 .b2b-flow-wire::before,
 .b2b-flow-wire::after {
   content: '';
   position: absolute;
-  width: 18%;
+  width: 12%;
   height: 33.3%;
 }
 
@@ -1616,12 +1618,12 @@ h3.matrix-header,
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 9px 17px;
+  padding: 8px 15px;
   border-radius: 999px;
   background: #ffffff;
   border: 1px solid rgba(254, 191, 29, 0.45);
   color: var(--text-primary);
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.01em;
   white-space: nowrap;
@@ -1795,9 +1797,9 @@ h3.matrix-header,
 /* ---- responsive: tablet ---- */
 @media (max-width: 1100px) and (min-width: 821px) {
   .b2b-flow {
-    grid-template-columns: minmax(104px, 0.85fr) minmax(48px, 0.65fr) minmax(290px, 1.95fr) minmax(48px, 0.65fr) minmax(104px, 0.85fr);
+    grid-template-columns: minmax(100px, 0.8fr) minmax(108px, 0.9fr) minmax(280px, 2fr) minmax(108px, 0.9fr) minmax(100px, 0.8fr);
     grid-template-rows: 248px auto;
-    max-width: 960px;
+    max-width: 1000px;
   }
   .b2b-flow-node-ic { width: 50px; height: 50px; }
   .b2b-flow-node-ic svg { width: 21px; height: 21px; }

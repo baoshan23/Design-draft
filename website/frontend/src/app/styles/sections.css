@@ -5548,9 +5548,9 @@ html {
   align-items: center;
   justify-content: center;
 }
-.support-bento-icon--gold  { background: rgba(254, 191, 29, 0.18); color: #8C5F00; }
-.support-bento-icon--ink   { background: rgba(24, 24, 24, 0.06);    color: #1F1F1F; }
-.support-bento-icon--cream { background: rgba(254, 233, 168, 0.55); color: #8C5F00; }
+.support-bento-icon--gold,
+.support-bento-icon--ink,
+.support-bento-icon--cream { background: var(--primary, #febf1d); color: #181818; }
 
 /* --- Grid placement --- */
 .support-bento-tall   { grid-row: span 2; }
@@ -5578,6 +5578,9 @@ html {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  /* grow to fill the tall card so the box bottom aligns with the right column */
+  flex: 1;
+  justify-content: space-between;
 }
 .support-bento-list li {
   display: flex;
