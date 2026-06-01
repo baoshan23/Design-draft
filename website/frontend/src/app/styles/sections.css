@@ -5856,6 +5856,19 @@ html {
   }
 }
 
+/* b2b #revenue — wrap the header + accordion in a soft grey rounded panel. */
+#revenue .b2b-revenue-panel {
+  background: #f2f2f2;
+  border-radius: 28px;
+  padding: 56px 48px;
+}
+@media (max-width: 760px) {
+  #revenue .b2b-revenue-panel {
+    padding: 36px 20px;
+    border-radius: 20px;
+  }
+}
+
 /* ==================== b2b #revenue — accordion (yellow theme) ==================== */
 .revenue-accordion {
   max-width: 1080px;

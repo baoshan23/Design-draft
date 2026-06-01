@@ -239,16 +239,18 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
       {/* ==================== Section 4: Revenue Sources ==================== */}
       <section className="section" id="revenue">
         <div className="container">
-          <ScrollAnimation>
-            <div className="section-header">
-              <span className="section-label">{t('b2b.nav.revenue')}</span>
-              <h2>{t('b2b.revenue.title')}</h2>
-              <p>{t('b2b.revenue.desc')}</p>
-            </div>
-          </ScrollAnimation>
-          <ScrollAnimation>
-            <RevenueAccordion />
-          </ScrollAnimation>
+          <div className="b2b-revenue-panel">
+            <ScrollAnimation>
+              <div className="section-header">
+                <span className="section-label">{t('b2b.nav.revenue')}</span>
+                <h2>{t('b2b.revenue.title')}</h2>
+                <p>{t('b2b.revenue.desc')}</p>
+              </div>
+            </ScrollAnimation>
+            <ScrollAnimation>
+              <RevenueAccordion />
+            </ScrollAnimation>
+          </div>
         </div>
       </section>
 
