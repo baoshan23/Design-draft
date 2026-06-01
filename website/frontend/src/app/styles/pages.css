@@ -1991,17 +1991,29 @@ h3.matrix-header,
   box-shadow: 0 14px 32px rgba(214, 158, 0, 0.10);
 }
 
-.b2b-hiw-card--wide {
+/* Top Step 1 card spans the full width — text on the left, visual on the
+   right (horizontal split), matching the reference hero step. */
+.b2b-hiw-card--top {
   display: grid;
-  grid-template-columns: 1.25fr 0.9fr;
-  gap: 28px;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 32px;
   align-items: center;
 }
 
-/* full-width Step 3 (spans both columns) — cap the number panel width
-   so it doesn't balloon across the whole row */
-.b2b-hiw-card--full {
-  grid-template-columns: 1fr 300px;
+/* The two lower cards (Step 2 / Step 3) sit side by side, each stacking
+   text above its visual panel (vertical split). */
+.b2b-hiw-card--half {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.b2b-hiw-card--half .b2b-hiw-content {
+  flex: 0 0 auto;
+}
+
+.b2b-hiw-card--half .b2b-hiw-visual {
+  flex: 1 1 auto;
 }
 
 .b2b-hiw-step {
@@ -2135,13 +2147,15 @@ h3.matrix-header,
     grid-template-columns: 1fr;
     gap: 16px;
   }
-  .b2b-hiw-card--wide,
-  .b2b-hiw-card--full {
+  .b2b-hiw-card--top {
     grid-column: auto;
     grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
-  .b2b-hiw-card--wide .b2b-hiw-visual {
-    display: none;
+  .b2b-hiw-visual {
+    min-height: 120px;
   }
   .b2b-hiw-bar {
     flex-direction: column;
