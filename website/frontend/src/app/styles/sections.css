@@ -5776,9 +5776,15 @@ html {
   gap: 20px;
   padding: 28px;
   min-height: 300px;
-  background: #fff;
+  /* Banner artwork as the full-card background (pale-gold gradient + graphic
+     bottom-right). Fallback colour shows before the image loads. */
+  background-color: #fffaf0;
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 24px;
+  overflow: hidden;
   transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s, border-color .35s;
 }
 .mode-bento-card:hover {
