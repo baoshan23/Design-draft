@@ -5559,7 +5559,7 @@ html {
 
 /* --- Grid placement --- */
 .support-bento-tall   { grid-row: span 2; }
-.support-bento-wide   { grid-column: span 2; flex-direction: row; align-items: center; gap: 32px; }
+.support-bento-wide   { grid-column: span 2; flex-direction: row; align-items: flex-start; gap: 32px; }
 .support-bento-small  { /* default cell */ }
 .support-bento-accent {
   background: linear-gradient(135deg, #1d1a14 0%, #2a241a 100%);
