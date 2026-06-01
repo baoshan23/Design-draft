@@ -429,12 +429,8 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                   )}
                 </span>
                 <article className={`b2b-support-card b2b-support-card--${c.pos}`} style={{ ['--i' as string]: i }}>
-                  <span className={`b2b-support-card-ic${c.nodeImg ? ' b2b-support-card-ic--img' : ''}`} aria-hidden="true">
-                    {c.nodeImg ? (
-                      <Image src={c.nodeImg} alt="" width={40} height={40} />
-                    ) : (
-                      <c.Icon size={22} strokeWidth={2} />
-                    )}
+                  <span className="b2b-support-card-ic b2b-support-card-ic--img" aria-hidden="true">
+                    <Image src="/images/b2b-support/card-badge.png" alt="" width={40} height={40} />
                   </span>
                   <div className="b2b-support-card-body">
                     <h3>{t(`b2b.aftersales.${c.key}.title`)}</h3>
