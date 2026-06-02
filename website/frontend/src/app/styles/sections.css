@@ -5500,7 +5500,7 @@ html {
 }
 .support-bento-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 14px 32px rgba(214, 158, 0, 0.10);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.10);
 }
 .support-bento-card h3 {
   margin: 0;
