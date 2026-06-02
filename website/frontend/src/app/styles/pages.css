@@ -11234,10 +11234,10 @@ details.admin-legacy-group > .admin-settings-group:last-child {
 /* cross-staggered around the orbit (per reference effect image):
    video indented from left + highest, forum hugs right edge,
    knowledge hugs left edge, team indented from right + lowest */
-.b2b-support-card--tl { top: 0; left: 12%; }
-.b2b-support-card--tr { top: 18%; right: 0; }
+.b2b-support-card--tl { top: 0; left: 3%; }
+.b2b-support-card--tr { top: 16%; right: 0; }
 .b2b-support-card--bl { top: 56%; left: 0; }
-.b2b-support-card--br { bottom: 0; right: 12%; }
+.b2b-support-card--br { bottom: 0; right: 3%; }
 
 .b2b-support-card-ic {
   flex-shrink: 0;
