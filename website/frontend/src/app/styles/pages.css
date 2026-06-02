@@ -11190,7 +11190,7 @@ details.admin-legacy-group > .admin-settings-group:last-child {
 .b2b-support-stage {
   position: relative;
   width: 100%;
-  max-width: 920px;
+  max-width: 1120px;
   min-height: 600px;
   margin: 28px auto 0;
 }
@@ -11203,6 +11203,8 @@ details.admin-legacy-group > .admin-settings-group:last-child {
   transform: translate(-50%, -50%);
   width: 520px;
   height: auto;
+  display: block;
+  margin: 0 auto;
   z-index: 1;
   pointer-events: none;
   user-select: none;

@@ -553,9 +553,9 @@
 }
 .b2c-demo-card:hover,
 .b2c-demo-card:focus-within {
-  transform: translateY(-4px);
+  transform: none;
   box-shadow: none;
-  border-color: var(--border-light);
+  border-color: var(--border-subtle);
 }
 [data-theme="dark"] .b2c-demo-card {
   background: rgba(255, 255, 255, 0.04);
