@@ -2529,6 +2529,8 @@ html[data-theme="dark"] .hero.hero-centered {
 .hero.hero-centered .hero-title {
   text-align: center;
   font-size: 56px;
+  /* Lighter Arcadia display weight (was inheriting the base h1 700). */
+  font-weight: 500;
   line-height: 1.1;
   letter-spacing: -0.02em;
   max-width: 900px;
