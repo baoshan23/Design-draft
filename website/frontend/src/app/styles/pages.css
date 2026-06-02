@@ -3122,6 +3122,15 @@ h3.matrix-header,
   background: #ffffff;
 }
 
+/* When jumping to #features via the "功能" nav anchor, land the section
+   right under the fixed nav (smaller scroll offset) and trim its top
+   padding so the "功能亮点" title sits near the top of the viewport and
+   more of the cards are visible in the first fold. */
+#features {
+  scroll-margin-top: calc(var(--header-height, 72px) + 8px);
+  padding-top: 40px;
+}
+
 .hiw-card {
   position: relative;
   display: flex;
