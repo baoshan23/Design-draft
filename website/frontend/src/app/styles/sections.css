@@ -194,7 +194,7 @@
   background: var(--primary);
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(254, 191, 29, 0.25);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
   filter: none;
 }
 .hero-with-video .hero-buttons {
@@ -2387,28 +2387,23 @@ html {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Premium Glass Card Treatment --- */
+/* --- Canonical card surface — Arcadia-clean: flat solid white, a hairline
+   neutral border, and a soft restrained shadow. No frosted-glass blur and no
+   gold tint, so cards read crisp and consistent across every page. --- */
 .card,
 .model-card,
 .glass-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(1.2);
-  -webkit-backdrop-filter: blur(20px) saturate(1.2);
-  border: 1px solid var(--glass-border);
-  box-shadow:
-    var(--shadow-sm),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  background: var(--dark-card);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card:hover,
 .model-card:hover,
 .glass-card:hover {
-  border-color: rgba(254, 191, 29, 0.15);
-  box-shadow:
-    var(--shadow-md),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    0 0 30px rgba(254, 191, 29, 0.06);
+  border-color: var(--border-light);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
   transform: translateY(-4px);
 }
 
@@ -2754,7 +2749,7 @@ html {
   transform: none;
   background: var(--primary);
   color: #1f1f1f;
-  box-shadow: 0 6px 20px rgba(254, 191, 29, 0.25);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
   filter: none;
 }
 
@@ -3954,8 +3949,8 @@ html {
 
 .audience-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(254, 191, 29, 0.4);
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(254, 191, 29, 0.18);
+  border-color: var(--border-light);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
 }
 
 .audience-card:hover::after { opacity: 1; }
@@ -4146,7 +4141,7 @@ html {
   padding: 5px 14px;
   border-radius: 999px;
   white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(254, 191, 29, 0.32);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 /* Inline cross-link between sections */
@@ -4242,7 +4237,7 @@ html {
 .pricing-tabs-btn.is-active {
   color: #1a1a1a;
   background: var(--primary);
-  box-shadow: 0 4px 14px rgba(254, 191, 29, 0.35);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
 }
 
 .pricing-tabs-panel {
