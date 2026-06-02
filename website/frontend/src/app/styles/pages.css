@@ -1999,6 +1999,13 @@ h3.matrix-header,
   gap: 32px;
   align-items: center;
   background: #F1F2F4;
+  /* No vertical padding so the illustration reaches the card's top/bottom
+     edges (gap 0); the text block carries its own vertical padding instead. */
+  padding: 0 32px;
+}
+
+.b2b-hiw-card--top .b2b-hiw-content {
+  padding: 32px 0;
 }
 
 /* The two lower cards (Step 2 / Step 3) sit side by side, each stacking
