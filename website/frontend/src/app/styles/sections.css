@@ -554,7 +554,7 @@
 .b2c-demo-card:hover,
 .b2c-demo-card:focus-within {
   transform: translateY(-4px);
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+  box-shadow: none;
   border-color: var(--border-light);
 }
 [data-theme="dark"] .b2c-demo-card {
