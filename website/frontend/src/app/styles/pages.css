@@ -1995,9 +1995,10 @@ h3.matrix-header,
    right (horizontal split), matching the reference hero step. */
 .b2b-hiw-card--top {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1.1fr 1fr;
   gap: 32px;
   align-items: center;
+  background: #F1F2F4;
 }
 
 /* The two lower cards (Step 2 / Step 3) sit side by side, each stacking
@@ -2079,11 +2080,7 @@ h3.matrix-header,
 }
 
 .b2b-hiw-visual-fill {
-  position: absolute;
-  top: -30px;
-  bottom: -30px;
-  right: -32px;
-  left: 0;
+  width: 100%;
 }
 
 .b2b-hiw-bignum {

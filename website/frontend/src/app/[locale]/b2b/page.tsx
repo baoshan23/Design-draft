@@ -284,8 +284,8 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                             alt=""
                             width={1108}
                             height={736}
-                            sizes="(max-width: 760px) 90vw, 420px"
-                            style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'right center' }}
+                            sizes="(max-width: 760px) 90vw, 460px"
+                            style={{ width: '100%', height: 'auto', display: 'block' }}
                           />
                         </div>
                       ) : (
