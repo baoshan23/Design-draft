@@ -278,14 +278,16 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                     </div>
                     <div className={`b2b-hiw-visual${top ? ' b2b-hiw-visual--img' : ''}`} aria-hidden="true">
                       {top ? (
-                        <Image
-                          src="/images/b2b-features-step1.png"
-                          alt=""
-                          width={1108}
-                          height={736}
-                          sizes="(max-width: 760px) 90vw, 420px"
-                          style={{ position: 'absolute', top: -30, bottom: -30, right: -32, left: 0, width: 'auto', height: 'auto', objectFit: 'cover', objectPosition: 'center' }}
-                        />
+                        <div className="b2b-hiw-visual-fill">
+                          <Image
+                            src="/images/b2b-features-step1.png"
+                            alt=""
+                            width={1108}
+                            height={736}
+                            sizes="(max-width: 760px) 90vw, 420px"
+                            style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'right center' }}
+                          />
+                        </div>
                       ) : (
                         <span className="b2b-hiw-bignum">0{i + 1}</span>
                       )}

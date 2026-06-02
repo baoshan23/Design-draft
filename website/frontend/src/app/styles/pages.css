@@ -2070,11 +2070,20 @@ h3.matrix-header,
 }
 
 /* Stretch the visual cell to the card's full height (driven by the text
-   column). The illustration is pushed out past the card's padding (negative
-   insets) to sit flush against the card's top/bottom/right edges — the card's
-   own overflow:hidden + border-radius clips it to the rounded corners. */
+   column). The fill box is pushed out past the card's padding (negative
+   insets) to sit flush against the card's top/bottom/right edges; the image
+   inside is object-fit:contain (right-aligned) so the WHOLE illustration
+   shows at full card height without cropping. */
 .b2b-hiw-card--top {
   align-items: stretch;
+}
+
+.b2b-hiw-visual-fill {
+  position: absolute;
+  top: -30px;
+  bottom: -30px;
+  right: -32px;
+  left: 0;
 }
 
 .b2b-hiw-bignum {
@@ -2166,6 +2175,9 @@ h3.matrix-header,
   }
   .b2b-hiw-card--top {
     overflow: hidden;
+  }
+  .b2b-hiw-visual-fill {
+    position: static !important;
   }
   .b2b-hiw-visual--img img {
     position: static !important;
@@ -11185,6 +11197,7 @@ details.admin-legacy-group > .admin-settings-group:last-child {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  background: #fff;
 }
 
 .b2b-support-stage {
