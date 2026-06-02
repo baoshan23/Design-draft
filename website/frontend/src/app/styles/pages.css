@@ -2061,12 +2061,18 @@ h3.matrix-header,
 /* Step 1 visual holds an illustration instead of the big number — drop the
    grey panel chrome so the artwork sits directly on the white card. */
 .b2b-hiw-visual--img {
+  position: relative;
   background: transparent;
   border: none;
   border-radius: 0;
   min-height: 0;
   padding: 0;
-  justify-content: flex-end;
+}
+
+/* The illustration is positioned absolutely so it keeps its full size while
+   overflowing the (shorter) card — the card height is driven by the text. */
+.b2b-hiw-card--top {
+  overflow: visible;
 }
 
 .b2b-hiw-bignum {
@@ -2155,6 +2161,13 @@ h3.matrix-header,
   }
   .b2b-hiw-visual {
     min-height: 120px;
+  }
+  .b2b-hiw-card--top {
+    overflow: hidden;
+  }
+  .b2b-hiw-visual--img img {
+    position: static !important;
+    transform: none !important;
   }
   .b2b-hiw-bar {
     flex-direction: column;

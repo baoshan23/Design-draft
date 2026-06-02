@@ -284,7 +284,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                           width={1108}
                           height={736}
                           sizes="(max-width: 760px) 90vw, 420px"
-                          style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: 190, objectFit: 'contain' }}
+                          style={{ position: 'absolute', top: '50%', right: 0, transform: 'translateY(-50%)', width: '100%', height: 'auto', objectFit: 'contain' }}
                         />
                       ) : (
                         <span className="b2b-hiw-bignum">0{i + 1}</span>
