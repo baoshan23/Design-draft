@@ -11204,7 +11204,27 @@ details.admin-legacy-group > .admin-settings-group:last-child {
   }
 }
 /* ============================================================
-   b2b #aftersales — full-screen orbital support diagram
+   b2b #aftersales — clean Arcadia 4-up feature-card grid
+   (replaced the orbital diagram; .b2b-support* rules below are
+   now unused/dead but left harmless).
+   ============================================================ */
+.b2b-aftersales-grid .card {
+  display: flex;
+  flex-direction: column;
+}
+.b2b-aftersales-grid .card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+.b2b-aftersales-grid .card p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ============================================================
+   b2b #aftersales — full-screen orbital support diagram (LEGACY/DEAD)
    central globe + concentric rings + 4 node/card pairs
    ============================================================ */
 .b2b-support {

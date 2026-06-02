@@ -71,11 +71,39 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
   // After-sales support — orbital diagram. Each item maps to a card + a node
   // on the rings. pos drives absolute placement (tl/tr/bl/br).
   // Option A: uniform gradient-circle ring nodes, each with its own line glyph.
-  const supportCards: { key: string; pos: string }[] = [
-    { key: 'item1', pos: 'tl' }, // 视频部署指南
-    { key: 'item3', pos: 'tr' }, // 官方社区论坛
-    { key: 'item2', pos: 'bl' }, // 全方位知识库
-    { key: 'item4', pos: 'br' }, // 专业技术团队
+  const supportCards = [
+    {
+      key: 'item1', // 视频部署指南
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="3" /><path d="m10 9 5 3-5 3z" />
+        </svg>
+      ),
+    },
+    {
+      key: 'item2', // 全方位知识库
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+        </svg>
+      ),
+    },
+    {
+      key: 'item3', // 官方社区论坛
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+      ),
+    },
+    {
+      key: 'item4', // 专业技术团队
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 18v-5a9 9 0 0 1 18 0v5" /><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+        </svg>
+      ),
+    },
   ];
 
   return (
@@ -411,7 +439,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
       </section>
 
       {/* ==================== Section 10: After-Sales ==================== */}
-      <section className="section b2b-support" id="aftersales">
+      <section className="section" id="aftersales">
         <div className="container">
           <ScrollAnimation>
             <div className="section-header">
@@ -420,33 +448,17 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               <p>{t('b2b.aftersales.desc')}</p>
             </div>
           </ScrollAnimation>
-          <div className="b2b-support-stage">
-            {/* orbital diagram (rings + globe + nodes baked into one graphic) */}
-            <Image
-              className="b2b-support-orbit-img"
-              src="/images/b2b-support/orbit-diagram.png"
-              alt=""
-              width={1282}
-              height={1160}
-              aria-hidden="true"
-            />
-            {/* floating cards spread + staggered around the orbit */}
-            {supportCards.map((c, i) => (
-              <article
-                key={c.key}
-                className={`b2b-support-card b2b-support-card--${c.pos}`}
-                style={{ ['--i' as string]: i }}
-              >
-                <span className="b2b-support-card-ic b2b-support-card-ic--img" aria-hidden="true">
-                  <Image src="/images/b2b-support/card-badge.png" alt="" width={40} height={40} />
-                </span>
-                <div className="b2b-support-card-body">
+          <ScrollAnimation>
+            <div className="grid grid-4 b2b-aftersales-grid">
+              {supportCards.map((c) => (
+                <article key={c.key} className="card">
+                  <div className="card-icon" aria-hidden="true">{c.icon}</div>
                   <h3>{t(`b2b.aftersales.${c.key}.title`)}</h3>
                   <p>{t(`b2b.aftersales.${c.key}.desc`)}</p>
-                </div>
-              </article>
-            ))}
-          </div>
+                </article>
+              ))}
+            </div>
+          </ScrollAnimation>
         </div>
       </section>
 
