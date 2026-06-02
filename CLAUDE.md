@@ -49,6 +49,8 @@ Backend: `node deploy/deploy-backend.js` cross-compiles Go + SFTP + systemd rest
 
 ## Last session
 
+- 2026-06-02 — **b2c `#payments` "全球支付矩阵" — nudged the 申请支付方式 CTA button up** (`pages.css` `.payment-request-cta` 380). User screenshot red-boxed the centered yellow `申请支付方式` button + `将这个按钮的位置网上移一点`. The button is `.payment-request-cta` (the CTA row that replaces the inline form, `PaymentRequestForm.tsx` 157) — `margin-top: 32px` → `8px` to raise it closer to the section description. `tsc` n/a (CSS only). Pushed `9c3adb2`. Revert: margin-top back to `32px`.
+
 - 2026-06-02 — **b2c `#demo` "系统演示" — restored its grey section background** (`sections.css` ~5748, new `.b2c-demo-section` rule). User screenshot of the b2c demo (now white after the body→white fix `e1a4592`) + `将这里的系统演示的背景，恢复之前的灰色`. b2c `#demo` is `<section className="section b2c-demo-section">` (plain transparent `.section`) — so the prior body→white change turned its surround white. Added `.b2c-demo-section { background: var(--dark) }` (= #F1F2F4 grey in light mode) scoped to its unique class to bring back the previous grey band (b2b `#demo` is a separate `section-alt`, already grey from `0f6beff`). `tsc` n/a (CSS only). Pushed `ba53ff1`. Revert: delete the `.b2c-demo-section` rule.
 
 - 2026-06-02 — **b2c `#support` bento cards — hover shadow gold-tint → neutral black** (`sections.css` `.support-bento-card:hover` 5503). User: `卡片的投影颜色，与其他的统一一致，不要黄色`. The 4 bento cards' shared hover `box-shadow` was `0 14px 32px rgba(214,158,0,.10)` (gold) → `rgba(0,0,0,.10)` (neutral, matching the site's other white cards). `tsc` n/a (CSS only). Pushed `cc4be98`. Revert: back to `rgba(214,158,0,.10)`.
