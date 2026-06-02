@@ -276,8 +276,19 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                       <h3>{t(`b2b.features.${feat}.title`)}</h3>
                       <p>{t(`b2b.features.${feat}.desc`)}</p>
                     </div>
-                    <div className="b2b-hiw-visual" aria-hidden="true">
-                      <span className="b2b-hiw-bignum">0{i + 1}</span>
+                    <div className={`b2b-hiw-visual${top ? ' b2b-hiw-visual--img' : ''}`} aria-hidden="true">
+                      {top ? (
+                        <Image
+                          src="/images/b2b-features-step1.png"
+                          alt=""
+                          width={1108}
+                          height={736}
+                          sizes="(max-width: 760px) 90vw, 420px"
+                          style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+                        />
+                      ) : (
+                        <span className="b2b-hiw-bignum">0{i + 1}</span>
+                      )}
                     </div>
                   </article>
                 </ScrollAnimation>

@@ -2058,6 +2058,16 @@ h3.matrix-header,
   border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
+/* Step 1 visual holds an illustration instead of the big number — drop the
+   grey panel chrome so the artwork sits directly on the white card. */
+.b2b-hiw-visual--img {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  padding: 0;
+}
+
 .b2b-hiw-bignum {
   font-size: 4.5rem;
   font-weight: 800;
@@ -11156,7 +11166,7 @@ details.admin-legacy-group > .admin-settings-group:last-child {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .b2b-support-stage {
