@@ -808,9 +808,9 @@ body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
 }
 
 .scroll-to-top:hover {
-  color: var(--primary);
-  border-color: var(--primary);
+  color: var(--text-primary);
+  border-color: var(--border-medium);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg), 0 0 20px var(--primary-dim);
+  box-shadow: var(--shadow-lg);
 }
 

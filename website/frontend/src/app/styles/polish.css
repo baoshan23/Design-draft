@@ -173,7 +173,9 @@ select {
 input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):hover,
 textarea:hover,
 select:hover {
-  border-color: rgba(254, 191, 29, 0.4);
+  /* Neutral hover — gold is reserved for the focus ring below (the active
+     state), keeping interaction colour consistent with the card/button pass. */
+  border-color: var(--border-medium);
 }
 
 input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
