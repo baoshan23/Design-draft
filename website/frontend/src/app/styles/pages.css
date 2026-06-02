@@ -2075,6 +2075,7 @@ h3.matrix-header,
    without exceeding the card. */
 .b2b-hiw-card--top {
   align-items: stretch;
+  min-height: 300px;
 }
 
 .b2b-hiw-bignum {
