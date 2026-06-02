@@ -218,16 +218,16 @@ body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
   font-family: var(--font-display);
   color: var(--text-primary);
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   letter-spacing: -0.02em;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 11px;
 }
 
 .logo img {
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
 }
 
 .logo span {
