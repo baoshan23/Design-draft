@@ -53,6 +53,9 @@
   background-size: cover;
   background-position: right center;
   background-repeat: no-repeat;
+  /* b2b first screen a bit shorter than b2c (user request). Specificity
+     (0,2,0) > the base .product-hero (0,1,0). */
+  min-height: calc(60svh - 42px);
 }
 
 /* b2b/b2c page body — white (was #F1F2F4 grey, which showed through every
