@@ -380,7 +380,9 @@
 .payment-request-cta {
   display: flex;
   justify-content: center;
-  margin-top: -16px;
+  /* Was -16px, which pulled the button up over the subtitle. Small positive
+     gap so it sits clear of the description text. */
+  margin-top: 8px;
 }
 .payment-request-cta-btn {
   display: inline-flex;

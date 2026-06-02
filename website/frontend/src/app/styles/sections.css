@@ -2339,18 +2339,18 @@ html {
   margin: 0 auto 72px;
 }
 
-/* Arcadia-editorial eyebrow — a clean uppercase accent label (no filled
-   pill / no border), paired with a small static dot from polish.css. */
+/* Eyebrow — a refined rounded pill: faint gold fill, subtle gold border, AA
+   gold uppercase text, with the small static dot (from polish.css) inside. */
 .section-label {
   display: inline-flex;
-  padding: 0;
-  background: none;
-  border: none;
+  padding: 7px 16px;
+  background: var(--primary-dim);
+  border: 1px solid rgba(254, 191, 29, 0.25);
+  border-radius: 999px;
   color: var(--primary-text);
   font-size: 0.75rem;
   font-weight: 700;
-  border-radius: 0;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-bottom: 22px;
 }
