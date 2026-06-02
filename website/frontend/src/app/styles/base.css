@@ -149,7 +149,7 @@ p {
 }
 
 .section {
-  padding: 100px 0;
+  padding: 120px 0;
   position: relative;
 }
 
@@ -212,12 +212,12 @@ p {
 }
 
 .section-lg {
-  padding: 120px 0;
+  padding: 144px 0;
 }
 
 .grid {
   display: grid;
-  gap: 24px;
+  gap: 28px;
   align-items: stretch;
 }
 

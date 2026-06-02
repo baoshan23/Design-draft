@@ -2395,7 +2395,7 @@ html {
 .glass-card {
   background: var(--dark-card);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   padding: 32px;
   position: relative;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
