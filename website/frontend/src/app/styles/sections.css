@@ -5732,10 +5732,16 @@ html {
   }
 }
 
-/* b2b #modes + #revenue: force a white section background (drop the
-   grey `.section-alt` tint on #modes; pin #revenue white too) — user req. */
+/* b2b + b2c: force white section backgrounds (drop the grey `.section-alt`
+   tint) across all grey-banded sections — user req. These IDs are used only
+   on the b2b/b2c pages, so this stays scoped to those two pages. */
 #modes.section-alt,
-#revenue.section {
+#revenue.section,
+#support.section-alt,
+#license.section-alt,
+#changelog.section-alt,
+#releases.section-alt,
+#demo.section-alt {
   background: #fff;
 }
 
