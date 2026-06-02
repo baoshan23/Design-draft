@@ -5741,7 +5741,8 @@ html {
 #license.section-alt,
 #changelog.section-alt,
 #releases.section-alt,
-#demo.section-alt {
+#demo.section-alt,
+#pricing.section {
   background: #fff;
 }
 
