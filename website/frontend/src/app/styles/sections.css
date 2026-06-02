@@ -2373,6 +2373,19 @@ html {
   line-height: 1.7;
 }
 
+/* Keep Chinese section headlines on a single line. CJK glyphs are wider than
+   their Latin equivalents at the same size, so the larger Arcadia headline
+   scale made dense ZH titles wrap inside the 760px header. nowrap (centered,
+   so it overflows the box symmetrically — never clipped on desktop) keeps them
+   one line. Scoped to lang=zh + desktop: English titles are far longer and
+   must still wrap, and a long CJK title can't physically fit one line on a
+   phone, so below 768px it wraps normally to avoid being clipped. */
+@media (min-width: 768px) {
+  html[lang="zh"] .section-header h2 {
+    white-space: nowrap;
+  }
+}
+
 /* --- Cards --- */
 .card,
 .glass-card {
