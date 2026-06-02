@@ -2355,15 +2355,15 @@ html {
   margin-bottom: 22px;
 }
 
-/* Big, bold, tight section headlines — the dominant Arcadia layout signal. */
+/* Large, light, tight section headlines — Arcadia's airy editorial display
+   style (big size + lighter weight, not heavy/black). */
 .section-header h2 {
   font-family: var(--font-display);
   /* Max capped at 3.4rem (~54px) — keeps the nowrap ZH titles from overflowing
      a narrow laptop while still reading large/editorial. */
   font-size: clamp(2.25rem, 4.8vw, 3.4rem);
-  /* 700 (bold, not extrabold) — cleaner/more refined at large sizes, esp. for
-     the heavier CJK glyphs which looked blocky at 800. */
-  font-weight: 700;
+  /* 500 (medium, not bold) — Arcadia-style light display headline. */
+  font-weight: 500;
   letter-spacing: -0.035em;
   line-height: 1.08;
   color: #181818;
@@ -4918,9 +4918,9 @@ html {
 
 .mobile-showcase-info h2 {
   font-family: var(--font-display);
-  /* Match the standard section title scale (.section-header h2). */
+  /* Match the standard section title scale + light weight (.section-header h2). */
   font-size: clamp(2.25rem, 4.8vw, 3.4rem);
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: -0.035em;
   line-height: 1.08;
   color: #181818;
