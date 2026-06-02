@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { Building2, User, Play, BookOpen, MessageSquare, Gem } from 'lucide-react';
+import { Building2, User } from 'lucide-react';
 import QRCode from 'qrcode';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import Image from 'next/image';
@@ -71,11 +71,11 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
   // After-sales support — orbital diagram. Each item maps to a card + a node
   // on the rings. pos drives absolute placement (tl/tr/bl/br).
   // Option A: uniform gradient-circle ring nodes, each with its own line glyph.
-  const supportCards: { key: string; pos: string; Icon: typeof Play }[] = [
-    { key: 'item1', pos: 'tl', Icon: Play },          // 视频部署指南
-    { key: 'item3', pos: 'tr', Icon: MessageSquare }, // 官方社区论坛
-    { key: 'item2', pos: 'bl', Icon: BookOpen },      // 全方位知识库
-    { key: 'item4', pos: 'br', Icon: Gem },           // 专业技术团队
+  const supportCards: { key: string; pos: string }[] = [
+    { key: 'item1', pos: 'tl' }, // 视频部署指南
+    { key: 'item3', pos: 'tr' }, // 官方社区论坛
+    { key: 'item2', pos: 'bl' }, // 全方位知识库
+    { key: 'item4', pos: 'br' }, // 专业技术团队
   ];
 
   return (
@@ -284,7 +284,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                           width={1108}
                           height={736}
                           sizes="(max-width: 760px) 90vw, 420px"
-                          style={{ position: 'absolute', bottom: 0, right: 0, width: '100%', height: 'auto', objectFit: 'contain' }}
+                          style={{ position: 'absolute', top: 0, bottom: 0, right: 0, height: '100%', width: 'auto', objectFit: 'contain' }}
                         />
                       ) : (
                         <span className="b2b-hiw-bignum">0{i + 1}</span>
@@ -419,33 +419,30 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
             </div>
           </ScrollAnimation>
           <div className="b2b-support-stage">
-            {/* concentric rings */}
-            <div className="b2b-support-rings" aria-hidden="true">
-              <span className="b2b-support-ring b2b-support-ring--1" />
-              <span className="b2b-support-ring b2b-support-ring--2" />
-              <span className="b2b-support-ring b2b-support-ring--3" />
-              <span className="b2b-support-ring b2b-support-ring--dash" />
-            </div>
-            {/* central globe */}
-            <div className="b2b-support-core" aria-hidden="true">
-              <Image src="/images/b2b-support/center-globe.png" alt="" width={104} height={104} />
-            </div>
-            {/* orbit nodes + floating cards (grouped for linked hover) */}
+            {/* orbital diagram (rings + globe + nodes baked into one graphic) */}
+            <Image
+              className="b2b-support-orbit-img"
+              src="/images/b2b-support/orbit-diagram.png"
+              alt=""
+              width={1282}
+              height={1160}
+              aria-hidden="true"
+            />
+            {/* floating cards spread + staggered around the orbit */}
             {supportCards.map((c, i) => (
-              <div key={c.key} className="b2b-support-orbit" style={{ display: 'contents' }}>
-                <span className={`b2b-support-node b2b-support-node--${c.pos}`} aria-hidden="true">
-                  <c.Icon size={18} strokeWidth={2} />
+              <article
+                key={c.key}
+                className={`b2b-support-card b2b-support-card--${c.pos}`}
+                style={{ ['--i' as string]: i }}
+              >
+                <span className="b2b-support-card-ic b2b-support-card-ic--img" aria-hidden="true">
+                  <Image src="/images/b2b-support/card-badge.png" alt="" width={40} height={40} />
                 </span>
-                <article className={`b2b-support-card b2b-support-card--${c.pos}`} style={{ ['--i' as string]: i }}>
-                  <span className="b2b-support-card-ic b2b-support-card-ic--img" aria-hidden="true">
-                    <Image src="/images/b2b-support/card-badge.png" alt="" width={40} height={40} />
-                  </span>
-                  <div className="b2b-support-card-body">
-                    <h3>{t(`b2b.aftersales.${c.key}.title`)}</h3>
-                    <p>{t(`b2b.aftersales.${c.key}.desc`)}</p>
-                  </div>
-                </article>
-              </div>
+                <div className="b2b-support-card-body">
+                  <h3>{t(`b2b.aftersales.${c.key}.title`)}</h3>
+                  <p>{t(`b2b.aftersales.${c.key}.desc`)}</p>
+                </div>
+              </article>
             ))}
           </div>
         </div>
