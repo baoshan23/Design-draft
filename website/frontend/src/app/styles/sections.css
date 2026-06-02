@@ -2335,36 +2335,41 @@ html {
 /* --- Section Headers --- */
 .section-header {
   text-align: center;
-  max-width: 700px;
-  margin: 0 auto 56px;
+  max-width: 760px;
+  margin: 0 auto 72px;
 }
 
+/* Arcadia-editorial eyebrow — a clean uppercase accent label (no filled
+   pill / no border), paired with a small static dot from polish.css. */
 .section-label {
   display: inline-flex;
-  padding: 6px 14px;
-  background: var(--primary-dim);
-  color: var(--primary);
-  font-size: 0.75rem;
-  font-weight: 600;
-  border-radius: 100px;
-  letter-spacing: 0.06em;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--primary-text);
+  font-size: 0.78rem;
+  font-weight: 700;
+  border-radius: 0;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  border: 1px solid rgba(230, 168, 23, 0.2);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
+/* Big, bold, tight section headlines — the dominant Arcadia layout signal. */
 .section-header h2 {
   font-family: var(--font-display);
-  font-size: 36px;
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
   letter-spacing: -0.03em;
+  line-height: 1.1;
   color: #181818;
-  margin-bottom: 12px;
+  margin-bottom: 18px;
 }
 
+/* Muted lead with a touch more presence and comfortable measure. */
 .section-header p {
-  color: #6C717A;
-  font-size: 16px;
+  color: var(--text-secondary);
+  font-size: 1.0625rem;
   line-height: 1.7;
 }
 

@@ -248,23 +248,22 @@ main a:not(.btn):not(.nav-link):not(.logo):not(.footer-col a):not(.dropdown-text
 /* ---------- Section header upgrades ---------- */
 
 .section-header h2 {
-  letter-spacing: -0.022em;
+  letter-spacing: -0.03em;
 }
 
 .section-label {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
 }
 
+/* Small static accent dot before the eyebrow — calm, no pulse/glow. */
 .section-label::before {
   content: '';
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: var(--primary);
-  box-shadow: 0 0 8px var(--primary);
-  animation: polish-label-pulse 2.4s ease-in-out infinite;
 }
 
 @keyframes polish-label-pulse {
