@@ -5536,10 +5536,9 @@ html {
 .support-bento-accent {
   background: linear-gradient(135deg, #1d1a14 0%, #2a241a 100%);
   border-color: rgba(254, 191, 29, 0.25);
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
 }
 .support-bento-accent h3 { color: #fff; }
 .support-bento-accent p  { color: rgba(255, 255, 255, 0.72); }
@@ -5547,17 +5546,15 @@ html {
 /* --- Tall left card decorations: video-lesson list --- */
 .support-bento-list {
   list-style: none;
-  margin: 8px 0 0;
+  /* sit at the bottom of the tall card, sized to content (red-box height) */
+  margin: auto 0 0;
   padding: 16px;
   background: rgba(254, 191, 29, 0.06);
   border: 1px solid rgba(254, 191, 29, 0.18);
   border-radius: 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  /* grow to fill the tall card so the box bottom aligns with the right column */
-  flex: 1;
-  justify-content: space-between;
+  gap: 12px;
 }
 .support-bento-list li {
   display: flex;
@@ -5661,7 +5658,9 @@ html {
   min-width: 0;
 }
 .support-bento-accent-stat {
-  flex-shrink: 0;
+  position: absolute;
+  right: 32px;
+  bottom: 32px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -5720,6 +5719,7 @@ html {
     gap: 18px;
   }
   .support-bento-accent-stat {
+    position: static;
     align-items: flex-start;
     text-align: left;
   }
