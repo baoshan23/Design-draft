@@ -1829,6 +1829,15 @@ a.b2c-demo-qr:hover {
   line-height: 1.15;
 }
 
+/* b2b/b2c first-screen big title synced to the homepage hero style:
+   lighter Arcadia display weight (500, not bold 700) + tighter line-height.
+   Size already matches (both cap at 3.5rem/56px). */
+.product-hero .hero-title {
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
 /* b2b hero title: keep the ORIGINAL h1 size (user: 字号不要改) and the
    (B2B2C) tag on its own line. Title wraps naturally — ZH "SaaS 平台
    版运营模式" still fits one line at 560px col width because CJK glyphs
