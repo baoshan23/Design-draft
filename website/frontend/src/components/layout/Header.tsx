@@ -114,9 +114,9 @@ export default function Header() {
           <Image
             src="/assets/logo.png"
             alt="GCSS"
-            width={32}
-            height={32}
-            style={{ borderRadius: '8px' }}
+            width={44}
+            height={44}
+            style={{ borderRadius: '10px' }}
           />
           <span>GCSS</span>
         </Link>
