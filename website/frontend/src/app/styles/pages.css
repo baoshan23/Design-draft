@@ -2062,7 +2062,6 @@ h3.matrix-header,
    grey panel chrome so the artwork sits directly on the white card. */
 .b2b-hiw-visual--img {
   position: relative;
-  overflow: hidden;
   background: transparent;
   border: none;
   border-radius: 0;
@@ -2071,8 +2070,9 @@ h3.matrix-header,
 }
 
 /* Stretch the visual cell to the card's full height (driven by the text
-   column) so the illustration (object-fit: cover) fills the panel at a
-   large scale; anything past the card edges is cropped, never overflowing. */
+   column). The illustration is pushed out past the card's padding (negative
+   insets) to sit flush against the card's top/bottom/right edges — the card's
+   own overflow:hidden + border-radius clips it to the rounded corners. */
 .b2b-hiw-card--top {
   align-items: stretch;
 }
