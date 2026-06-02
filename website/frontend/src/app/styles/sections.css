@@ -2334,9 +2334,9 @@ html {
 
 /* --- Section Headers --- */
 .section-header {
-  text-align: center;
+  text-align: left;
   max-width: 760px;
-  margin: 0 auto 72px;
+  margin: 0 0 72px;
 }
 
 /* Eyebrow — a refined rounded pill: faint gold fill, subtle gold border, AA
