@@ -2358,7 +2358,9 @@ html {
 /* Big, bold, tight section headlines — the dominant Arcadia layout signal. */
 .section-header h2 {
   font-family: var(--font-display);
-  font-size: clamp(2.25rem, 4.8vw, 3.75rem);
+  /* Max capped at 3.4rem (~54px) — keeps the nowrap ZH titles from overflowing
+     a narrow laptop while still reading large/editorial. */
+  font-size: clamp(2.25rem, 4.8vw, 3.4rem);
   font-weight: 800;
   letter-spacing: -0.035em;
   line-height: 1.08;
