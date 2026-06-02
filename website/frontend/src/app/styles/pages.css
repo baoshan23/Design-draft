@@ -380,7 +380,7 @@
 .payment-request-cta {
   display: flex;
   justify-content: center;
-  margin-top: 32px;
+  margin-top: 8px;
 }
 .payment-request-cta-btn {
   display: inline-flex;
