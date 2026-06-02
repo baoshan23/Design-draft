@@ -5737,7 +5737,7 @@ html {
    on the b2b/b2c pages, so this stays scoped to those two pages. */
 #modes.section-alt,
 #revenue.section,
-#support.section-alt,
+#support,
 #license.section-alt,
 #changelog.section-alt,
 #releases.section-alt,
