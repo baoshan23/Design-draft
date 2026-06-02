@@ -1819,7 +1819,7 @@ h3.matrix-header,
 
 .b2b-payment-step-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1), 0 0 0 1px var(--primary-dim);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.08);
   border-color: transparent;
 }
 
@@ -3031,7 +3031,7 @@ h3.matrix-header,
 
 .mobile-hero-card.is-active {
   background: linear-gradient(45deg, #FEBF1D 0%, #FFD24D 100%);
-  box-shadow: 0 10px 24px rgba(254, 191, 29, 0.22);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
 }
 
 .mobile-hero-card.is-active .mobile-hero-card-icon {
