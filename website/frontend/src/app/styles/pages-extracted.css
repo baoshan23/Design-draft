@@ -55,8 +55,12 @@
   background-repeat: no-repeat;
 }
 
+/* b2b/b2c page body — white (was #F1F2F4 grey, which showed through every
+   transparent `.section`/`.cta-banner` and read as grey bands). Only b2b+b2c
+   use `.product-hero`, so this is scoped to those two pages. User req: all
+   grey section backgrounds → white. The hero keeps its own bg (image/flat). */
 body:has(.product-hero) {
-  background: #F1F2F4;
+  background: #fff;
 }
 
 .product-hero::after {
