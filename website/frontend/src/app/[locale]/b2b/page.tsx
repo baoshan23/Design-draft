@@ -340,7 +340,18 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                 <ScrollAnimation key={i}>
                   <div style={{ marginTop: i === 0 ? 8 : 40 }}>
                     <div className={`feature-row${i === 1 ? ' reverse' : ''}`}>
-                      <div className="feature-image-placeholder b2b-payflow-img" aria-hidden="true" />
+                      <div className="feature-image-placeholder b2b-payflow-img" aria-hidden="true">
+                        {i === 0 && (
+                          <Image
+                            src="/images/b2b-payflow-step1.png"
+                            alt=""
+                            width={1000}
+                            height={1000}
+                            sizes="(max-width: 760px) 90vw, 600px"
+                            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                          />
+                        )}
+                      </div>
                       <div className="feature-text">
                         <span className="b2b-payflow-step">{t('b2b.features.step')} {i + 1}</span>
                         <h3>{step}</h3>
