@@ -664,13 +664,18 @@
   isolation: isolate;
 }
 /* Scrim: darker on the left (behind the text) → lighter on the right so
-   the illustration still reads. */
+   the illustration still reads. Heavier (more opaque black) at rest; on
+   hover the whole scrim fades down so the photo "fades in". */
 .b2b-contact-cta::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(90deg, rgba(10, 18, 32, 0.82) 0%, rgba(10, 18, 32, 0.62) 42%, rgba(10, 18, 32, 0.28) 100%);
+  background: linear-gradient(90deg, rgba(8, 14, 26, 0.92) 0%, rgba(8, 14, 26, 0.8) 42%, rgba(8, 14, 26, 0.55) 100%);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.b2b-contact-cta:hover::before {
+  opacity: 0.5;
 }
 .b2b-contact-cta-inner {
   max-width: 560px;
@@ -700,7 +705,7 @@
     border-radius: 20px;
   }
   .b2b-contact-cta::before {
-    background: linear-gradient(180deg, rgba(10, 18, 32, 0.72) 0%, rgba(10, 18, 32, 0.82) 100%);
+    background: linear-gradient(180deg, rgba(8, 14, 26, 0.82) 0%, rgba(8, 14, 26, 0.92) 100%);
   }
 }
 

@@ -1262,24 +1262,47 @@ footer {
     transform: scale(1.045);
   }
 
-  /* --- 5. Section reveal: each <section> glides up + fades in as it
-     enters the viewport, so scrolling reads as one screen sliding into
-     place after the next (go-electra style). Driven by SectionReveal.tsx
-     (home / b2b / b2c). The end state is `transform: none` (NOT
-     translateY(0)) so a revealed section stops forming a containing block
-     — keeping the b2c sticky stacking deck + the fixed sub-nav working. --- */
-  .section-reveal {
+  /* --- 5. Section reveal: a revealed (non-pinned) panel glides up + fades
+     in as it enters. The end state is `transform: none` (NOT translateY(0))
+     so the section stops forming a containing block. --- */
+  .section-reveal:not(.section-panel--pin) {
     opacity: 0;
-    transform: translateY(52px);
+    transform: translateY(56px);
     transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
-  .section-reveal.is-in {
+  .section-reveal:not(.section-panel--pin).is-in {
     opacity: 1;
     transform: none;
     will-change: auto;
   }
+  /* Pinned panels fade only — a translate would fight the sticky offset. */
+  .section-reveal.section-panel--pin {
+    opacity: 0;
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .section-reveal.section-panel--pin.is-in {
+    opacity: 1;
+  }
+}
+
+/* --- "Color-block switch": each white / grey <section> is a rounded-top
+   opaque panel; the next one slides up + stacks over the previous as you
+   scroll (go-electra style). Driven by SectionReveal.tsx (home/b2b/b2c).
+   Panel chrome lives outside the reduced-motion guard so the rounded blocks
+   exist for everyone; only the slide-in is motion-gated above. --- */
+.section-panel {
+  position: relative;
+  border-top-left-radius: clamp(20px, 2.6vw, 40px);
+  border-top-right-radius: clamp(20px, 2.6vw, 40px);
+  margin-top: -1px; /* kill the sub-pixel seam between stacked panels */
+  box-shadow: 0 -14px 38px -22px rgba(0, 0, 0, 0.22);
+}
+/* Blocks that fit a screen freeze at the top so the next block covers them. */
+.section-panel--pin {
+  position: sticky;
+  /* `top` is set inline (header [+ sub-nav] height) by SectionReveal.tsx */
 }
 
 @keyframes heroEntrance {
