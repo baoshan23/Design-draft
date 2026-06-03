@@ -226,8 +226,8 @@ body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
 }
 
 .logo img {
-  width: 52px;
-  height: 52px;
+  width: 64px;
+  height: 64px;
 }
 
 .logo span {
