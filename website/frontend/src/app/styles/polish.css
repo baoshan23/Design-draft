@@ -1230,6 +1230,7 @@ footer {
   .hero .hero-desc,
   .hero .hero-buttons,
   .hero .hero-footer-bar,
+  .hero .hero-stats,
   .hero .hero-video-wrap,
   .hero .hero-media-bare {
     animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -1238,7 +1239,8 @@ footer {
   .hero .hero-title { animation-delay: 0.12s; }
   .hero .hero-desc { animation-delay: 0.22s; }
   .hero .hero-buttons { animation-delay: 0.32s; }
-  .hero .hero-footer-bar { animation-delay: 0.42s; }
+  .hero .hero-footer-bar,
+  .hero .hero-stats { animation-delay: 0.42s; }
   .hero .hero-video-wrap,
   .hero .hero-media-bare { animation-delay: 0.18s; }
 
