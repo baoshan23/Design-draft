@@ -354,7 +354,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                         )}
                         {i === 1 && (
                           <Image
-                            src="/images/b2b-payflow-step2-v3.png"
+                            src="/images/b2b-payflow-step2-v4.png"
                             alt=""
                             width={1040}
                             height={1040}
