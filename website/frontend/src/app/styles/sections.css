@@ -589,7 +589,7 @@
    stubs sit under the left-col (~25%) and right-col (~75%) image centers. */
 .b2b-payflow-link {
   position: relative;
-  height: 104px;
+  height: 72px;
   margin: 0 0 -8px;
 }
 .b2b-payflow-link span {
@@ -597,20 +597,20 @@
 }
 .b2b-payflow-link-v1 {
   left: 25%;
-  top: 16px;
-  height: 36px;
+  top: 12px;
+  height: 24px;
   border-left: 2px dashed #1a1a1a;
 }
 .b2b-payflow-link-h {
   left: 25%;
   right: 25%;
-  top: 52px;
+  top: 36px;
   border-top: 2px dashed #1a1a1a;
 }
 .b2b-payflow-link-v2 {
   left: 75%;
-  top: 52px;
-  height: 36px;
+  top: 36px;
+  height: 24px;
   border-left: 2px dashed #1a1a1a;
 }
 .b2b-payflow-link-arrow {
@@ -624,7 +624,7 @@
 }
 .b2b-payflow-link-arrow--down {
   left: 75%;
-  top: 86px;
+  top: 56px;
 }
 /* step2→step3: mirror horizontally — up-arrow/top-stub on the RIGHT (75%,
    under step 2's right illustration), down-arrow/bottom-stub on the LEFT
