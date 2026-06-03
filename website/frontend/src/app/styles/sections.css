@@ -649,6 +649,61 @@
   }
 }
 
+/* b2b closing contact CTA — full-bleed rounded banner with the EV-city /
+   AI illustration as the background, a dark scrim for legibility, and
+   left-aligned eyebrow + title + subtitle + gold button (Arcadia ref). */
+.b2b-contact-cta {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  padding: clamp(48px, 6vw, 88px) clamp(28px, 5vw, 72px);
+  background-color: #14223a;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  isolation: isolate;
+}
+/* Scrim: darker on the left (behind the text) → lighter on the right so
+   the illustration still reads. */
+.b2b-contact-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(10, 18, 32, 0.82) 0%, rgba(10, 18, 32, 0.62) 42%, rgba(10, 18, 32, 0.28) 100%);
+}
+.b2b-contact-cta-inner {
+  max-width: 560px;
+}
+.b2b-contact-cta-inner .section-label {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.b2b-contact-cta-inner h2 {
+  margin: 0 0 16px;
+  color: #fff;
+  font-size: clamp(2rem, 4.4vw, 3.2rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.b2b-contact-cta-inner p {
+  margin: 0 0 32px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  max-width: 460px;
+}
+@media (max-width: 600px) {
+  .b2b-contact-cta {
+    border-radius: 20px;
+  }
+  .b2b-contact-cta::before {
+    background: linear-gradient(180deg, rgba(10, 18, 32, 0.72) 0%, rgba(10, 18, 32, 0.82) 100%);
+  }
+}
+
 /* B2C demo — card shell unified with the /demo page "platform editions"
    style (.demo-edition-card / .demo-cred-block / .demo-b2b-qr-row). Top
    row: CPO console + demo account; below: a full-width QR card. */

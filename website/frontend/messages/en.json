@@ -2460,6 +2460,12 @@
       "launchOnline": "Launch live demo",
       "copy": "Copy",
       "copied": "Copied"
+    },
+    "contactCta": {
+      "label": "Contact Us",
+      "title": "Let's get in touch",
+      "desc": "Contact our team today to learn how GCSS can meet your charging operation needs.",
+      "cta": "Contact Now"
     }
   },
   "faq": {
