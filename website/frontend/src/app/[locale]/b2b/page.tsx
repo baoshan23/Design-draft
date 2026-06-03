@@ -339,7 +339,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               </ScrollAnimation>
               {[t('b2b.advantages.payment1'), t('b2b.advantages.payment2'), t('b2b.advantages.payment3')].map((step, i) => (
                 <ScrollAnimation key={i}>
-                  <div style={{ marginTop: i === 0 ? 8 : 40 }}>
+                  <div style={{ marginTop: i === 0 ? 8 : 16 }}>
                     <div className={`feature-row${i === 1 ? ' reverse' : ''}`}>
                       <div className="feature-image-placeholder b2b-payflow-img" aria-hidden="true">
                         {i === 0 && (
