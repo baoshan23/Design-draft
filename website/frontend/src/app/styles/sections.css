@@ -2794,6 +2794,46 @@ html {
   }
 }
 
+/* b2c #features — sticky stacking deck. The 4 feature rows are siblings in
+   one container; each card is position:sticky so it pins under the header and
+   the next card scrolls up and layers over it. Incremental top offsets leave
+   each prior card's top edge peeking, giving the stacked-deck look from the
+   reference. Disabled ≤900px (cards taller than the viewport → just stack). */
+.b2c-feature-stack {
+  margin-top: 80px;
+}
+.b2c-stack-card {
+  position: sticky;
+  top: calc(var(--header-height, 72px) + 24px);
+  background: #fff;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl, 24px);
+  box-shadow: 0 12px 44px rgba(0, 0, 0, 0.07);
+  padding: 36px 48px;
+  margin-bottom: 32px;
+}
+.b2c-stack-card:nth-child(2) {
+  top: calc(var(--header-height, 72px) + 44px);
+}
+.b2c-stack-card:nth-child(3) {
+  top: calc(var(--header-height, 72px) + 64px);
+}
+.b2c-stack-card:nth-child(4) {
+  top: calc(var(--header-height, 72px) + 84px);
+  margin-bottom: 0;
+}
+.b2c-stack-card .feature-row {
+  padding: 0;
+}
+@media (max-width: 900px) {
+  .b2c-stack-card {
+    position: static;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm, 0 4px 12px rgba(0, 0, 0, 0.05));
+  }
+}
+
 /* b2c Global Payment Matrix → continuous right-sliding card marquee.
    The track holds the 6 region cards duplicated (2 identical sets);
    it starts shifted left by one full set (-50%) and slides to 0, so
