@@ -413,6 +413,12 @@
   transform: translateY(-4px);
   box-shadow: none;
 }
+/* b2b #features cells (inside .b2b-hiw): the CARD has no hover animation —
+   only the icon tile flips to gold (user: 卡片无交互动效，只有图标有).
+   Scoped to .b2b-hiw so the b2c #features cards keep their -4px lift. */
+.b2b-hiw .b2c-feature-cell:hover {
+  transform: none;
+}
 /* Icon sits to the LEFT of the title (grid col 1); the title and the
    description stack in col 2 so the body text is left-aligned with the
    title. DOM order is icon, h3, p (no JSX change). */
