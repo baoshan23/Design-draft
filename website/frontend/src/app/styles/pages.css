@@ -11210,23 +11210,38 @@ details.admin-legacy-group > .admin-settings-group:last-child {
    ============================================================ */
 .b2b-aftersales-grid .card,
 .b2b-revenue-grid .card,
-.b2b-modes-grid .card {
+.b2b-modes-grid .card,
+.b2b-features-grid .card {
   display: flex;
   flex-direction: column;
 }
 .b2b-aftersales-grid .card h3,
 .b2b-revenue-grid .card h3,
-.b2b-modes-grid .card h3 {
+.b2b-modes-grid .card h3,
+.b2b-features-grid .card h3 {
   font-size: 1.2rem;
   font-weight: 700;
   margin: 0 0 10px;
 }
 .b2b-aftersales-grid .card p,
 .b2b-revenue-grid .card p,
-.b2b-modes-grid .card p {
+.b2b-modes-grid .card p,
+.b2b-features-grid .card p {
   font-size: 0.95rem;
   line-height: 1.65;
   margin: 0;
+}
+/* Big Arcadia step number on the #features cards */
+.b2b-features-grid .b2b-feature-num {
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--primary);
+  margin-bottom: 14px;
+}
+.b2b-features-grid .card h3 {
+  margin-top: 0;
 }
 
 /* ============================================================

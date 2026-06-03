@@ -302,38 +302,17 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
             </div>
           </ScrollAnimation>
           <div className="b2b-hiw">
-            <div className="b2b-hiw-grid">
-              {feats.map((feat, i) => {
-                const top = i === 0;
-                return (
-                <ScrollAnimation key={feat} style={{ transitionDelay: `${i * 0.1}s`, ...(top ? { gridColumn: '1 / -1' } : {}) }}>
-                  <article className={`b2b-hiw-card${top ? ' b2b-hiw-card--top' : ' b2b-hiw-card--half'}`}>
-                    <div className="b2b-hiw-content">
-                      <span className="b2b-hiw-step">{t('b2b.features.step')} {i + 1}</span>
-                      <h3>{t(`b2b.features.${feat}.title`)}</h3>
-                      <p>{t(`b2b.features.${feat}.desc`)}</p>
-                    </div>
-                    <div className={`b2b-hiw-visual${top ? ' b2b-hiw-visual--img' : ''}`} aria-hidden="true">
-                      {top ? (
-                        <div className="b2b-hiw-visual-fill">
-                          <Image
-                            src="/images/b2b-features-step1.png"
-                            alt=""
-                            width={1108}
-                            height={736}
-                            sizes="(max-width: 760px) 90vw, 460px"
-                            style={{ width: '100%', height: 'auto', display: 'block', transform: 'translateY(-12px)' }}
-                          />
-                        </div>
-                      ) : (
-                        <span className="b2b-hiw-bignum">0{i + 1}</span>
-                      )}
-                    </div>
+            <ScrollAnimation>
+              <div className="grid grid-3 b2b-features-grid">
+                {feats.map((feat, i) => (
+                  <article key={feat} className="card">
+                    <span className="b2b-feature-num" aria-hidden="true">0{i + 1}</span>
+                    <h3>{t(`b2b.features.${feat}.title`)}</h3>
+                    <p>{t(`b2b.features.${feat}.desc`)}</p>
                   </article>
-                </ScrollAnimation>
-                );
-              })}
-            </div>
+                ))}
+              </div>
+            </ScrollAnimation>
             <ScrollAnimation style={{ transitionDelay: `${feats.length * 0.1}s` }}>
               <div className="b2b-hiw-bar">
                 <span className="b2b-hiw-bar-kicker">{t('b2b.advantages.paymentTitle')}</span>
