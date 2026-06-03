@@ -475,7 +475,9 @@
 .b2c-feature-cell .feature-card-icon svg path,
 .b2c-feature-cell .feature-card-icon svg circle,
 .b2c-feature-cell .feature-card-icon svg rect,
-.b2c-feature-cell .feature-card-icon svg line {
+.b2c-feature-cell .feature-card-icon svg line,
+.b2c-feature-cell .feature-card-icon svg polyline,
+.b2c-feature-cell .feature-card-icon svg polygon {
   stroke: #181818;
 }
 /* Card bg (--dark-card) is a theme-aware token; borderless, so no dark

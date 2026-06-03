@@ -94,6 +94,15 @@ select {
 }
 
 /* --- Typography --- */
+/* ============================================================
+   Canonical type scale (Arcadia-clean). Three weight tiers:
+   display headings 500, subheads 600, body 400.
+     H1  首页/页面主标题   42 → 60px   500
+     H2  内容区大标题       36 → 54px   500
+     H3  小标题/子标题       20 → 24px   600
+     H4  18px 600 · H5 16px 600
+     P   正文 16px 400 / lh 1.7
+   ============================================================ */
 h1,
 h2,
 h3,
@@ -101,34 +110,49 @@ h4,
 h5,
 h6 {
   font-family: var(--font-display);
-  font-weight: 700;
-  line-height: 1.2;
   color: var(--text-primary);
 }
 
+/* 主标题 — large, light editorial display */
 h1 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  letter-spacing: -0.02em;
+  font-size: clamp(2.625rem, 5.5vw, 3.75rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
 }
 
+/* 内容大标题 — same scale as .section-header h2 (the dominant content title) */
 h2 {
-  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-size: clamp(2.25rem, 4.8vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+/* 小标题 / 子标题 */
+h3 {
+  font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.3;
   letter-spacing: -0.01em;
 }
 
-h3 {
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
-}
-
 h4 {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
 h5 {
-  font-size: 1.125rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
+/* 正文 */
 p {
+  font-size: 1rem;
+  font-weight: 400;
   color: var(--text-secondary);
   line-height: 1.7;
 }

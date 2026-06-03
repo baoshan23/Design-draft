@@ -59,6 +59,13 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
 
   const modes = ['mode1', 'mode2', 'mode3', 'mode4'] as const;
   const feats = ['feat1', 'feat2', 'feat3'] as const;
+  // Line icons for the feature cells (B2C lined-grid style). feat1 cross-platform
+  // access, feat2 flexible deployment, feat3 powerful API / extensibility.
+  const featIcons = [
+    (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" /></svg>),
+    (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" /><rect x="2" y="14" width="20" height="8" rx="2" /><line x1="6" y1="6" x2="6.01" y2="6" /><line x1="6" y1="18" x2="6.01" y2="18" /></svg>),
+    (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>),
+  ];
   // After-sales support — orbital diagram. Each item maps to a card + a node
   // on the rings. pos drives absolute placement (tl/tr/bl/br).
   // Option A: uniform gradient-circle ring nodes, each with its own line glyph.
@@ -259,11 +266,11 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                   </div>
                   <div className="b2b-mode-card-body">
                     <div className="b2b-mode-card-head">
+                      <h3>{t(`b2b.modes.${mode}.title`)}</h3>
                       <span className="b2b-mode-card-arrow" aria-hidden="true">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
                       </span>
                     </div>
-                    <h3>{t(`b2b.modes.${mode}.title`)}</h3>
                     <p>{t(`b2b.modes.${mode}.desc`)}</p>
                   </div>
                 </article>
@@ -311,14 +318,18 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
           </ScrollAnimation>
           <div className="b2b-hiw">
             <ScrollAnimation>
-              <div className="grid grid-3 b2b-features-grid">
-                {feats.map((feat, i) => (
-                  <article key={feat} className="card">
-                    <span className="b2b-feature-num" aria-hidden="true">0{i + 1}</span>
-                    <h3>{t(`b2b.features.${feat}.title`)}</h3>
-                    <p>{t(`b2b.features.${feat}.desc`)}</p>
-                  </article>
-                ))}
+              <div className="b2c-feature-lined">
+                <div className="b2c-feature-row">
+                  {feats.map((feat, i) => (
+                    <div key={feat} className="b2c-feature-cell">
+                      <div className="feature-card-icon" aria-hidden="true">
+                        {featIcons[i]}
+                      </div>
+                      <h3>{t(`b2b.features.${feat}.title`)}</h3>
+                      <p>{t(`b2b.features.${feat}.desc`)}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </ScrollAnimation>
             <ScrollAnimation style={{ transitionDelay: `${feats.length * 0.1}s` }}>

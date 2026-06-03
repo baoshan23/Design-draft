@@ -2531,11 +2531,12 @@ html[data-theme="dark"] .hero.hero-centered {
 
 .hero.hero-centered .hero-title {
   text-align: center;
-  font-size: 56px;
-  /* Lighter Arcadia display weight (was inheriting the base h1 700). */
+  /* Canonical H1 scale (fluid — was a fixed 56px that overflowed narrow
+     phones). Matches base h1 + the b2b/b2c product heroes. */
+  font-size: clamp(2.625rem, 5.5vw, 3.75rem);
   font-weight: 500;
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   max-width: 900px;
   margin-bottom: 12px !important;
 }
