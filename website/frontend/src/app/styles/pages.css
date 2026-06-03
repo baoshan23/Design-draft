@@ -3127,10 +3127,23 @@ h3.matrix-header,
   margin: 32px auto 0;
 }
 
-#how-it-works.section-alt,
 #features.section-alt,
 #models.section-alt {
   background: #ffffff;
+}
+
+/* #how-it-works (homepage "3 步快速上线") — inset grey rounded panel:
+   the section stays white and gets horizontal padding so the grey panel
+   doesn't reach the viewport edges (left/right gaps); the container becomes
+   the grey #F1F2F4 panel with rounded corners on all sides. */
+#how-it-works.section-alt {
+  background: #ffffff;
+  padding: clamp(40px, 6vh, 72px) clamp(16px, 4vw, 80px);
+}
+#how-it-works.section-alt .container {
+  background: var(--dark);
+  border-radius: clamp(20px, 3vw, 32px);
+  padding: clamp(48px, 7vw, 88px) clamp(20px, 4vw, 56px);
 }
 
 /* #features — B2B ONLY: vertical gradient yellow → white → yellow
