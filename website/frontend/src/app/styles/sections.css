@@ -549,8 +549,12 @@
   background: none;
   border: none;
 }
+/* Enlarge the contained square illustrations (content has built-in padding). */
+.b2b-payflow .b2b-payflow-img img {
+  transform: scale(1.3);
+}
 .b2b-payflow .feature-row:hover .b2b-payflow-img img {
-  transform: none;
+  transform: scale(1.3);
 }
 .b2b-payflow-step {
   display: inline-block;
