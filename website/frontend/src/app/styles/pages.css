@@ -3138,9 +3138,10 @@ h3.matrix-header,
    the grey #F1F2F4 panel with rounded corners on all sides. */
 #how-it-works.section-alt {
   background: #ffffff;
-  padding: clamp(40px, 6vh, 72px) clamp(16px, 4vw, 80px);
+  padding: clamp(40px, 6vh, 72px) clamp(16px, 1.5vw, 24px);
 }
 #how-it-works.section-alt .container {
+  max-width: none;
   background: var(--dark);
   border-radius: clamp(20px, 3vw, 32px);
   padding: clamp(48px, 7vw, 88px) clamp(20px, 4vw, 56px);
