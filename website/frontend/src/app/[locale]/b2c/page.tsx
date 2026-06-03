@@ -44,6 +44,42 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
   const webAppQr = await QRCode.toString('https://app.gcss.hk/', QR_OPTS);
   const mobileAppQr = await QRCode.toString('https://app.gcss.hk/', QR_OPTS);
 
+  // After-sales support — clean 4-card grid (matches b2b #aftersales).
+  const supportCards = [
+    {
+      key: 's1', // 分步视频教程
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="3" /><path d="m10 9 5 3-5 3z" />
+        </svg>
+      ),
+    },
+    {
+      key: 's2', // 完整技术文档
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+        </svg>
+      ),
+    },
+    {
+      key: 's3', // 官方社区论坛
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+      ),
+    },
+    {
+      key: 's4', // 一对一技术支持
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 18v-5a9 9 0 0 1 18 0v5" /><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+        </svg>
+      ),
+    },
+  ];
+
   return (
     <>
       <ScrollResetOnLoad />
@@ -467,62 +503,14 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
           </ScrollAnimation>
 
           <ScrollAnimation>
-            <div className="support-bento">
-              {/* Tall left — video tutorials */}
-              <article className="support-bento-card support-bento-tall">
-                <h3>{t('product.support.s1.title')}</h3>
-                <p>{t('product.support.s1.desc')}</p>
-                <ul className="support-bento-list" aria-hidden="true">
-                  <li><span className="support-bento-list-dot" />01 · {t('product.support.bento.lesson1')}</li>
-                  <li><span className="support-bento-list-dot support-bento-list-dot--active" />02 · {t('product.support.bento.lesson2')}</li>
-                  <li><span className="support-bento-list-dot" />03 · {t('product.support.bento.lesson3')}</li>
-                  <li><span className="support-bento-list-dot" />04 · {t('product.support.bento.lesson4')}</li>
-                </ul>
-              </article>
-
-              {/* Wide top-right — technical docs */}
-              <article className="support-bento-card support-bento-wide">
-                <div className="support-bento-wide-text">
-                  <h3>{t('product.support.s2.title')}</h3>
-                  <p>{t('product.support.s2.desc')}</p>
-                </div>
-                <div className="support-bento-docs" aria-hidden="true">
-                  <div className="support-bento-doc">
-                    <span className="support-bento-doc-tag">API</span>
-                    <span className="support-bento-doc-line" style={{ width: '78%' }} />
-                    <span className="support-bento-doc-line" style={{ width: '52%' }} />
-                  </div>
-                  <div className="support-bento-doc">
-                    <span className="support-bento-doc-tag">SDK</span>
-                    <span className="support-bento-doc-line" style={{ width: '64%' }} />
-                    <span className="support-bento-doc-line" style={{ width: '42%' }} />
-                  </div>
-                </div>
-              </article>
-
-              {/* Small bottom-middle — community forum */}
-              <article className="support-bento-card support-bento-small">
-                <h3>{t('product.support.s3.title')}</h3>
-                <p>{t('product.support.s3.desc')}</p>
-                <div className="support-bento-avatars" aria-hidden="true">
-                  <span className="support-bento-avatar">L</span>
-                  <span className="support-bento-avatar">M</span>
-                  <span className="support-bento-avatar">W</span>
-                  <span className="support-bento-avatar support-bento-avatar--more">+12</span>
-                </div>
-              </article>
-
-              {/* Dark accent bottom-right — 1:1 technical support */}
-              <article className="support-bento-card support-bento-accent">
-                <div className="support-bento-accent-body">
-                  <h3>{t('product.support.s4.title')}</h3>
-                  <p>{t('product.support.s4.desc')}</p>
-                </div>
-                <div className="support-bento-accent-stat" aria-hidden="true">
-                  <div className="support-bento-accent-number">1<span className="support-bento-accent-divider">:</span>1</div>
-                  <div className="support-bento-accent-label">{t('product.support.bento.accentLabel')}</div>
-                </div>
-              </article>
+            <div className="grid grid-4 b2b-aftersales-grid">
+              {supportCards.map((c) => (
+                <article key={c.key} className="card">
+                  <div className="card-icon" aria-hidden="true">{c.icon}</div>
+                  <h3>{t(`product.support.${c.key}.title`)}</h3>
+                  <p>{t(`product.support.${c.key}.desc`)}</p>
+                </article>
+              ))}
             </div>
           </ScrollAnimation>
         </div>
