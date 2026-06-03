@@ -6128,7 +6128,7 @@ html {
    subtitle) on the left, a divided item-list (title + desc + arrow) on
    the right. */
 #revenue.section.b2b-revenue-section {
-  background: #F1F2F4;
+  background: #fff;
 }
 .b2b-revenue-split {
   display: grid;
