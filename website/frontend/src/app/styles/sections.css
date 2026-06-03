@@ -2380,11 +2380,11 @@ html {
   margin-bottom: 18px;
 }
 
-/* Muted lead with a touch more presence and comfortable measure. */
+/* Lead under the content title — canonical 18px lead size. */
 .section-header p {
   color: var(--text-secondary);
-  font-size: 1.0625rem;
-  line-height: 1.7;
+  font-size: 1.125rem;
+  line-height: 1.6;
 }
 
 /* Keep Chinese section headlines on a single line. CJK glyphs are wider than
@@ -3111,7 +3111,7 @@ html {
      fr ratio gives the yellow aside ~38% of the panel; the language grid
      takes the wider remainder. */
   grid-template-columns: minmax(400px, 1fr) 1.6fr;
-  max-width: 1440px;
+  max-width: 1280px;
   margin: 40px auto 0;
   border: 1px solid var(--border-subtle);
   border-radius: 20px;
@@ -5794,7 +5794,6 @@ html {
    tint) across all grey-banded sections — user req. These IDs are used only
    on the b2b/b2c pages, so this stays scoped to those two pages. */
 #modes.section-alt,
-#revenue.section,
 #support,
 #license.section-alt,
 #changelog.section-alt,
@@ -5900,16 +5899,95 @@ html {
   }
 }
 
-/* b2b #revenue — wrap the header + accordion in a soft grey rounded panel. */
-#revenue .b2b-revenue-panel {
-  background: rgba(242, 242, 242, 0.5);
-  border-radius: 28px;
-  padding: 96px 48px;
+/* b2b #revenue — full-bleed grey section; intro (title + subtitle) on the
+   left, a divided item-list (title + desc + arrow) on the right. */
+#revenue.section.b2b-revenue-section {
+  background: #F1F2F4;
 }
-@media (max-width: 760px) {
-  #revenue .b2b-revenue-panel {
-    padding: 60px 20px;
-    border-radius: 20px;
+.b2b-revenue-split {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 72px;
+  align-items: start;
+}
+.b2b-revenue-intro h2 {
+  margin-bottom: 18px;
+}
+.b2b-revenue-intro p {
+  color: var(--text-secondary);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  max-width: 420px;
+}
+.b2b-revenue-list {
+  display: flex;
+  flex-direction: column;
+}
+.b2b-revenue-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 30px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.b2b-revenue-item:first-child {
+  padding-top: 4px;
+}
+.b2b-revenue-item:last-child {
+  border-bottom: none;
+}
+.b2b-revenue-item-text h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 10px;
+}
+.b2b-revenue-item-text p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 56ch;
+}
+.b2b-revenue-item-arrow {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  transition: background 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.b2b-revenue-item:hover .b2b-revenue-item-arrow {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #1a1a1a;
+  transform: translateX(2px);
+}
+@media (max-width: 900px) {
+  .b2b-revenue-split {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .b2b-revenue-intro p {
+    max-width: none;
+  }
+}
+@media (max-width: 600px) {
+  .b2b-revenue-item {
+    gap: 20px;
+    padding: 24px 0;
+  }
+  .b2b-revenue-item-arrow {
+    width: 40px;
+    height: 40px;
   }
 }
 

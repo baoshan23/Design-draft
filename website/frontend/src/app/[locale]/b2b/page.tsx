@@ -57,14 +57,6 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
     return Array.isArray(v) ? (v as string[]) : [];
   };
 
-  // Two-tone line icons: base strokes = black (currentColor), accent element = gold (.mode-ic-accent).
-  const modeIcons = [
-    <svg key="net" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="9" y="2" width="6" height="6" rx="1" /><path d="M12 8v4M5 16v-3a1 1 0 011-1h12a1 1 0 011 1v3" /><rect className="mode-ic-accent" x="2" y="16" width="6" height="6" rx="1" /><rect className="mode-ic-accent" x="16" y="16" width="6" height="6" rx="1" /></svg>,
-    <svg key="bld" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="5" y="3" width="14" height="18" rx="1" /><path className="mode-ic-accent" d="M3 21h18M9 8h1M9 12h1M9 16h1M14 8h1M14 12h1M14 16h1" /></svg>,
-    <svg key="link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" /><path className="mode-ic-accent" d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" /></svg>,
-    <svg key="ref" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 11-6.219-8.56" /><polyline className="mode-ic-accent" points="21 3 21 9 15 9" /></svg>,
-  ];
-
   const modes = ['mode1', 'mode2', 'mode3', 'mode4'] as const;
   const feats = ['feat1', 'feat2', 'feat3'] as const;
   // After-sales support — orbital diagram. Each item maps to a card + a node
@@ -255,10 +247,25 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
           <ScrollAnimation>
             <div className="grid grid-2 b2b-modes-grid">
               {modes.map((mode, i) => (
-                <article key={mode} className="card">
-                  <div className="card-icon" aria-hidden="true">{modeIcons[i]}</div>
-                  <h3>{t(`b2b.modes.${mode}.title`)}</h3>
-                  <p>{t(`b2b.modes.${mode}.desc`)}</p>
+                <article key={mode} className="card b2b-mode-card">
+                  <div className="b2b-mode-card-media">
+                    <Image
+                      src={`/images/b2b-modes/mode-${i + 1}.jpg`}
+                      alt=""
+                      width={1100}
+                      height={642}
+                      sizes="(max-width: 760px) 90vw, 560px"
+                    />
+                  </div>
+                  <div className="b2b-mode-card-body">
+                    <div className="b2b-mode-card-head">
+                      <span className="b2b-mode-card-arrow" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                      </span>
+                    </div>
+                    <h3>{t(`b2b.modes.${mode}.title`)}</h3>
+                    <p>{t(`b2b.modes.${mode}.desc`)}</p>
+                  </div>
                 </article>
               ))}
             </div>
@@ -267,26 +274,27 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
       </section>
 
       {/* ==================== Section 4: Revenue Sources ==================== */}
-      <section className="section" id="revenue">
+      <section className="section b2b-revenue-section" id="revenue">
         <div className="container">
-          <div className="b2b-revenue-panel">
-            <ScrollAnimation>
-              <div className="section-header">
-                <span className="section-label">{t('b2b.nav.revenue')}</span>
-                <h2>{t('b2b.revenue.title')}</h2>
-                <p>{t('b2b.revenue.desc')}</p>
-              </div>
+          <div className="b2b-revenue-split">
+            <ScrollAnimation className="b2b-revenue-intro">
+              <h2>{t('b2b.revenue.title')}</h2>
+              <p>{t('b2b.revenue.desc')}</p>
             </ScrollAnimation>
-            <ScrollAnimation>
-              <div className="grid grid-2 b2b-revenue-grid">
-                {revenueCards.map((c) => (
-                  <article key={c.key} className="card">
-                    <div className="card-icon" aria-hidden="true">{c.icon}</div>
+            <ScrollAnimation className="b2b-revenue-list">
+              {revenueCards.map((c) => (
+                <div key={c.key} className="b2b-revenue-item">
+                  <div className="b2b-revenue-item-text">
                     <h3>{t(`b2b.revenue.${c.key}.title`)}</h3>
                     <p>{t(`b2b.revenue.${c.key}.desc`)}</p>
-                  </article>
-                ))}
-              </div>
+                  </div>
+                  <span className="b2b-revenue-item-arrow" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </span>
+                </div>
+              ))}
             </ScrollAnimation>
           </div>
         </div>
