@@ -49,7 +49,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
       key: 's1', // 分步视频教程
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="4" width="20" height="16" rx="3" /><path d="m10 9 5 3-5 3z" />
+          <rect x="2" y="4" width="20" height="16" rx="3" /><path className="ic-accent" d="m10 9 5 3-5 3z" />
         </svg>
       ),
     },
@@ -57,7 +57,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
       key: 's2', // 完整技术文档
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /><path className="ic-accent" d="M9 7h7M9 11h6" />
         </svg>
       ),
     },
@@ -65,7 +65,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
       key: 's3', // 官方社区论坛
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /><path className="ic-accent" d="M8 9h8M8 12h4" />
         </svg>
       ),
     },
@@ -73,7 +73,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
       key: 's4', // 一对一技术支持
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M3 18v-5a9 9 0 0 1 18 0v5" /><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+          <path d="M3 18v-5a9 9 0 0 1 18 0v5" /><path className="ic-accent" d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
         </svg>
       ),
     },

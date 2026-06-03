@@ -11246,19 +11246,27 @@ details.admin-legacy-group > .admin-settings-group:last-child {
   display: flex;
   flex-direction: column;
 }
-/* After-sales / support icon tiles: solid yellow bg + black line icon
-   (shared by b2b #aftersales and b2c #support). ID-qualified + explicit svg
-   stroke so nothing (e.g. polish.css's #support rules) can override it. */
+/* After-sales / support icons: bare TWO-TONE line icons (black base + gold
+   accent via .ic-accent), no tile (shared by b2b #aftersales and b2c
+   #support). ID-qualified + explicit svg stroke so nothing (e.g. polish.css's
+   #support rules) can override it. */
 .b2b-aftersales-grid .card-icon,
 #aftersales .b2b-aftersales-grid .card-icon,
 #support .b2b-aftersales-grid .card-icon {
-  background: var(--primary);
+  background: transparent;
   color: #1a1a1a;
 }
 .b2b-aftersales-grid .card-icon svg,
 #aftersales .b2b-aftersales-grid .card-icon svg,
 #support .b2b-aftersales-grid .card-icon svg {
   stroke: #1a1a1a;
+}
+/* Two-tone accent strokes → brand gold. ID-qualified to outrank the black
+   base rule above (id beats the class-only accent selector otherwise). */
+.b2b-aftersales-grid .card-icon svg .ic-accent,
+#aftersales .b2b-aftersales-grid .card-icon svg .ic-accent,
+#support .b2b-aftersales-grid .card-icon svg .ic-accent {
+  stroke: var(--primary);
 }
 .b2b-aftersales-grid .card h3,
 .b2b-revenue-grid .card h3,
