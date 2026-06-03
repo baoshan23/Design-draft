@@ -560,12 +560,6 @@
   height: auto !important;
   transform: none;
 }
-/* Step 1 illustration — slightly smaller than the column, centered. */
-.b2b-payflow .feature-row:not(.reverse) .b2b-payflow-img img {
-  width: 90%;
-  display: block;
-  margin-inline: auto;
-}
 .b2b-payflow .feature-row:hover .b2b-payflow-img img {
   transform: none;
 }

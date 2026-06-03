@@ -349,7 +349,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                             width={956}
                             height={900}
                             sizes="(max-width: 760px) 90vw, 600px"
-                            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                            style={{ width: '88%', height: 'auto', objectFit: 'contain', display: 'block', marginInline: 'auto' }}
                           />
                         )}
                         {i === 1 && (
