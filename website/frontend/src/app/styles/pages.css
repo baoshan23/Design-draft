@@ -1509,6 +1509,15 @@ h3.matrix-header,
   border-radius: 24px;
   padding: 30px 34px;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.05);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Gentle hover lift — matches the Arcadia card grids elsewhere on the page
+   so interactions feel consistent (the stacked-deck pseudos lift with it). */
+.b2b-hub-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 52px rgba(0, 0, 0, 0.08);
 }
 
 /* stacked-deck effect — two fainter, narrower card layers behind */
