@@ -351,6 +351,16 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                             style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                           />
                         )}
+                        {i === 1 && (
+                          <Image
+                            src="/images/b2b-payflow-step2.png"
+                            alt=""
+                            width={1000}
+                            height={1000}
+                            sizes="(max-width: 760px) 90vw, 600px"
+                            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                          />
+                        )}
                       </div>
                       <div className="feature-text">
                         <span className="b2b-payflow-step">{t('b2b.features.step')} {i + 1}</span>
