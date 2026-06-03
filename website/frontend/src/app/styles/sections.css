@@ -5955,10 +5955,18 @@ html {
   }
 }
 
-/* b2b #revenue — full-bleed grey section; intro (title + subtitle) on the
-   left, a divided item-list (title + desc + arrow) on the right. */
+/* b2b #revenue — full-bleed YELLOW section; intro (eyebrow + title +
+   subtitle) on the left, a divided item-list (title + desc + arrow) on
+   the right. */
 #revenue.section.b2b-revenue-section {
-  background: #F1F2F4;
+  background: var(--primary, #febf1d);
+}
+/* Eyebrow reads as a clean white pill on the yellow bg (the default gold
+   pill would vanish). Matches the white icon-hover fill below. */
+.b2b-revenue-intro .section-label {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #1a1a1a;
 }
 .b2b-revenue-split {
   display: grid;
@@ -6025,9 +6033,10 @@ html {
               color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
+/* On the yellow section a gold fill would disappear → hover fills WHITE. */
 .b2b-revenue-item:hover .b2b-revenue-item-arrow {
-  background: var(--primary);
-  border-color: var(--primary);
+  background: #fff;
+  border-color: #fff;
   color: #1a1a1a;
   transform: translateX(2px);
 }
