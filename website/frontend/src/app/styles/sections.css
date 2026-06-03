@@ -2806,7 +2806,7 @@ html {
   position: sticky;
   top: calc(var(--header-height, 72px) + 24px);
   background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.09);
+  border: none;
   border-radius: var(--radius-xl, 24px);
   box-shadow: none;
   padding: 36px 48px;
