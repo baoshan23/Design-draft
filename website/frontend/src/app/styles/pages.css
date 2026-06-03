@@ -11225,10 +11225,18 @@ details.admin-legacy-group > .admin-settings-group:last-child {
   flex-direction: column;
 }
 /* After-sales / support icon tiles: solid yellow bg + black line icon
-   (shared by b2b #aftersales and b2c #support). */
-.b2b-aftersales-grid .card-icon {
+   (shared by b2b #aftersales and b2c #support). ID-qualified + explicit svg
+   stroke so nothing (e.g. polish.css's #support rules) can override it. */
+.b2b-aftersales-grid .card-icon,
+#aftersales .b2b-aftersales-grid .card-icon,
+#support .b2b-aftersales-grid .card-icon {
   background: var(--primary);
   color: #1a1a1a;
+}
+.b2b-aftersales-grid .card-icon svg,
+#aftersales .b2b-aftersales-grid .card-icon svg,
+#support .b2b-aftersales-grid .card-icon svg {
+  stroke: #1a1a1a;
 }
 .b2b-aftersales-grid .card h3,
 .b2b-revenue-grid .card h3,
@@ -11246,6 +11254,18 @@ details.admin-legacy-group > .admin-settings-group:last-child {
   line-height: 1.65;
   margin: 0;
 }
+/* Anchor-jump fit: clicking the 模式 nav lands #modes too low (global
+   scroll-margin + the 120px .section top padding), pushing the bottom row
+   of cards below the fold. Tighten the jump offset + top padding and trim
+   the title→grid gap so the whole block sits higher. */
+#modes {
+  scroll-margin-top: calc(var(--header-height, 72px) + 8px);
+  padding-top: 36px;
+}
+#modes .section-header {
+  margin-bottom: 48px;
+}
+
 /* ============================================================
    #modes — Arcadia-style image-top cards: full-bleed top media →
    eyebrow + circular arrow row → title → desc. Overrides the shared
