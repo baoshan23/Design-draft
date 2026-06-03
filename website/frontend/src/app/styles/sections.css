@@ -5880,7 +5880,7 @@ html {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
-  max-width: 1080px;
+  max-width: 1360px;
   margin: 0 auto;
 }
 .modes-bento-grid > div {
