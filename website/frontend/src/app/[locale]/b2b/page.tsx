@@ -343,17 +343,17 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                       <div className="feature-image-placeholder b2b-payflow-img" aria-hidden="true">
                         {i === 0 && (
                           <Image
-                            src="/images/b2b-payflow-step1-v2.png"
+                            src="/images/b2b-payflow-step1-v3.png"
                             alt=""
-                            width={1000}
-                            height={1000}
+                            width={956}
+                            height={900}
                             sizes="(max-width: 760px) 90vw, 600px"
                             style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                           />
                         )}
                         {i === 1 && (
                           <Image
-                            src="/images/b2b-payflow-step2.png"
+                            src="/images/b2b-payflow-step2-v2.png"
                             alt=""
                             width={1000}
                             height={1000}
