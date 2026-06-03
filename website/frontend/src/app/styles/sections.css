@@ -3739,6 +3739,27 @@ html {
   margin-top: clamp(-36px, -3vw, -20px);
 }
 
+/* b2b: round the BOTTOM corners of the white #releases section (the last content
+   block before the dark footer). #releases is already an opaque white section;
+   it sits above the footer (z-index:1) and the footer is pulled up by the same
+   radius so its dark #181818 fills the carved corner notches. The footer's top
+   edge is then hidden behind the white section, so its border/pinstripe is
+   dropped on this page to avoid a stray line in the notches. Scoped to the b2b
+   page via main:has(#releases). */
+#releases {
+  position: relative;
+  z-index: 1;
+  border-bottom-left-radius: clamp(20px, 3vw, 36px);
+  border-bottom-right-radius: clamp(20px, 3vw, 36px);
+}
+main:has(#releases) + .footer {
+  margin-top: clamp(-36px, -3vw, -20px);
+  border-top: none;
+}
+main:has(#releases) + .footer .footer-rule {
+  display: none;
+}
+
 .cta-section::before {
   content: '';
   position: absolute;
