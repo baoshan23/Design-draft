@@ -532,7 +532,12 @@
   margin-top: 64px;
 }
 .b2b-payflow-head {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+}
+/* The payflow head has only the eyebrow (no title), so drop the eyebrow's
+   bottom margin — it would otherwise leave a gap before step 1's illustration. */
+.b2b-payflow-head .section-label {
+  margin-bottom: 0;
 }
 .b2b-payflow .b2b-payflow-img {
   background: linear-gradient(180deg, #F1F2F4 0%, #FFFFFF 100%);
