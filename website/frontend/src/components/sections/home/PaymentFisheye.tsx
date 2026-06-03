@@ -25,8 +25,8 @@ export default function PaymentFisheye({ items }: { items: Item[] }) {
 
     // Lens parameters — wider sigma = softer falloff.
     const SIGMA = 1.7;
-    const MIN_SCALE = 0.32;
-    const MAX_SCALE = 0.92; // < 1 keeps a visible gap between adjacent tiles
+    const MIN_SCALE = 0.5;
+    const MAX_SCALE = 0.98; // < 1 keeps a visible gap between adjacent tiles
     const MIN_OPACITY = 0.22;
 
     // Read live column count from the CSS grid; reacts to breakpoints.

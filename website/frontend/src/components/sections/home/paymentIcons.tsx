@@ -5,27 +5,27 @@ import type { ReactNode } from 'react';
 // were placeholder/empty. Uses each brand's primary color.
 const LOGO_NODE: Record<string, ReactNode> = {
   MoMo: (
-    <svg viewBox="0 0 96 96" width="96" height="96" preserveAspectRatio="xMidYMid meet" role="img" aria-label="MoMo">
-      <rect x="4" y="32" width="88" height="32" rx="6" fill="#A50064" />
-      <text x="48" y="54" textAnchor="middle" fill="#FFFFFF" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="16" fontWeight="800" letterSpacing="-0.5">MoMo</text>
+    <svg viewBox="0 0 120 56" width="120" height="56" preserveAspectRatio="xMidYMid meet" role="img" aria-label="MoMo">
+      <rect x="1" y="1" width="118" height="54" rx="12" fill="#A50064" />
+      <text x="60" y="37" textAnchor="middle" fill="#FFFFFF" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="24" fontWeight="800" letterSpacing="-0.5">MoMo</text>
     </svg>
   ),
   'Toss Pay': (
-    <svg viewBox="0 0 96 96" width="96" height="96" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Toss Pay">
-      <rect x="4" y="32" width="88" height="32" rx="6" fill="#0064FF" />
-      <text x="48" y="53" textAnchor="middle" fill="#FFFFFF" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="13" fontWeight="800" letterSpacing="-0.3">Toss Pay</text>
+    <svg viewBox="0 0 120 56" width="120" height="56" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Toss Pay">
+      <rect x="1" y="1" width="118" height="54" rx="12" fill="#0064FF" />
+      <text x="60" y="36" textAnchor="middle" fill="#FFFFFF" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="19" fontWeight="800" letterSpacing="-0.3">Toss Pay</text>
     </svg>
   ),
   Tabby: (
-    <svg viewBox="0 0 96 96" width="96" height="96" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Tabby">
-      <rect x="4" y="32" width="88" height="32" rx="6" fill="#292929" />
-      <text x="48" y="53" textAnchor="middle" fill="#3BFFC1" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="14" fontWeight="800" letterSpacing="0">tabby</text>
+    <svg viewBox="0 0 120 56" width="120" height="56" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Tabby">
+      <rect x="1" y="1" width="118" height="54" rx="12" fill="#292929" />
+      <text x="60" y="36" textAnchor="middle" fill="#3BFFC1" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="21" fontWeight="800" letterSpacing="0">tabby</text>
     </svg>
   ),
   Sezzle: (
-    <svg viewBox="0 0 96 96" width="96" height="96" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Sezzle">
-      <rect x="4" y="32" width="88" height="32" rx="6" fill="#9B5BFC" />
-      <text x="48" y="53" textAnchor="middle" fill="#FFFFFF" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="14" fontWeight="800" letterSpacing="0">sezzle</text>
+    <svg viewBox="0 0 120 56" width="120" height="56" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Sezzle">
+      <rect x="1" y="1" width="118" height="54" rx="12" fill="#9B5BFC" />
+      <text x="60" y="36" textAnchor="middle" fill="#FFFFFF" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="21" fontWeight="800" letterSpacing="0">sezzle</text>
     </svg>
   ),
 };
