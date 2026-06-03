@@ -354,10 +354,10 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                         )}
                         {i === 1 && (
                           <Image
-                            src="/images/b2b-payflow-step2-v2.png"
+                            src="/images/b2b-payflow-step2-v3.png"
                             alt=""
-                            width={1000}
-                            height={1000}
+                            width={1040}
+                            height={1040}
                             sizes="(max-width: 760px) 90vw, 600px"
                             style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                           />
