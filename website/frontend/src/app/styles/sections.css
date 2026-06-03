@@ -3775,15 +3775,16 @@ html {
   align-items: center;
   gap: 36px;
   background: linear-gradient(115deg, #FEBF1D 0%, #F2A300 100%);
-  /* Full-bleed: yellow band spans the full viewport width (横向拉满);
-     content stays centered at the container width via horizontal padding.
-     1392px = --max-width 1440 minus the .container 2×24px gutter. */
-  width: 100vw;
+  /* Near-full-width band: breaks out of .container but keeps a 24px gap on
+     each side (不完全靠边) + rounded corners on all sides. Content stays
+     aligned to the container's content edges via the horizontal padding
+     (1392px = --max-width 1440 minus the .container 2×24px gutter). */
+  width: calc(100vw - 48px);
   left: 50%;
-  margin-left: -50vw;
-  border-radius: 0;
-  padding: 52px max(24px, calc((100vw - 1392px) / 2));
-  box-shadow: none;
+  margin-left: calc(-50vw + 24px);
+  border-radius: 28px;
+  padding: 52px max(40px, calc((100vw - 1392px) / 2 - 24px));
+  box-shadow: 0 30px 60px -28px rgba(242, 163, 0, 0.5);
 }
 .cta-banner-media {
   align-self: end;
