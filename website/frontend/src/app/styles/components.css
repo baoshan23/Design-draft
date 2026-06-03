@@ -425,7 +425,7 @@ body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
 
 /* Small column-header label (e.g. "Products" / "Community") */
 .nav-dropdown-menu .dropdown-section-header {
-  max-width: 1280px;
+  max-width: 1360px;
   margin: 0 auto;
   padding: 0 32px 12px;
   font-size: 0.72rem;
@@ -436,7 +436,7 @@ body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
 }
 
 .nav-dropdown-menu .dropdown-items {
-  max-width: 1280px;
+  max-width: 1360px;
   margin: 0 auto;
   padding: 0 32px;
   display: grid;

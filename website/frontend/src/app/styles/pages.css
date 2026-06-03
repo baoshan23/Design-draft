@@ -1970,7 +1970,7 @@ h3.matrix-header,
    ==================================================================== */
 
 .b2b-hiw {
-  max-width: 1280px;
+  max-width: 1360px;
   margin: 0 auto;
 }
 
@@ -11264,69 +11264,6 @@ details.admin-legacy-group > .admin-settings-group:last-child {
 }
 #modes .section-header {
   margin-bottom: 32px;
-}
-
-/* ============================================================
-   #modes — Arcadia-style image-top cards: full-bleed top media →
-   eyebrow + circular arrow row → title → desc. Overrides the shared
-   flat-text .b2b-modes-grid .card layout above.
-   ============================================================ */
-.b2b-mode-card {
-  /* Image is INSET inside the card — uniform gap on top/left/right
-     (Arcadia ref), not bled to the card edge. */
-  padding: 12px;
-}
-.b2b-mode-card-media {
-  position: relative;
-  width: 100%;
-  /* Shorter than 16:9 so two rows of cards + the header fit one screen. */
-  aspect-ratio: 16 / 7;
-  background: #fff;
-  overflow: hidden;
-  border-radius: 14px;
-}
-.b2b-mode-card-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-.b2b-mode-card-body {
-  display: flex;
-  flex-direction: column;
-  padding: 14px 6px 6px;
-}
-.b2b-mode-card-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-.b2b-mode-card-head h3 {
-  margin: 0;
-}
-.b2b-mode-card-arrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 1px solid var(--border-light);
-  color: var(--text-secondary);
-  flex-shrink: 0;
-  transition:
-    background 240ms cubic-bezier(0.16, 1, 0.3, 1),
-    color 240ms cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 240ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-.b2b-mode-card:hover .b2b-mode-card-arrow {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: #1a1a1a;
-  transform: translateX(2px);
 }
 
 /* Big Arcadia step number on the #features cards */

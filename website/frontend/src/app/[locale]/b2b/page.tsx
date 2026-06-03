@@ -58,6 +58,14 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
   };
 
   const modes = ['mode1', 'mode2', 'mode3', 'mode4'] as const;
+  // Bento mode cards — bare two-tone line icons (black base + gold accent
+  // via .mode-ic-accent). Card bg artwork comes from mode-{i}.png.
+  const modeIcons = [
+    <svg key="net" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="9" y="2" width="6" height="6" rx="1" /><path d="M12 8v4M5 16v-3a1 1 0 011-1h12a1 1 0 011 1v3" /><rect className="mode-ic-accent" x="2" y="16" width="6" height="6" rx="1" /><rect className="mode-ic-accent" x="16" y="16" width="6" height="6" rx="1" /></svg>,
+    <svg key="bld" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="5" y="3" width="14" height="18" rx="1" /><path className="mode-ic-accent" d="M3 21h18M9 8h1M9 12h1M9 16h1M14 8h1M14 12h1M14 16h1" /></svg>,
+    <svg key="link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" /><path className="mode-ic-accent" d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" /></svg>,
+    <svg key="ref" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 11-6.219-8.56" /><polyline className="mode-ic-accent" points="21 3 21 9 15 9" /></svg>,
+  ];
   const feats = ['feat1', 'feat2', 'feat3'] as const;
   // Line icons for the feature cells (B2C lined-grid style). feat1 cross-platform
   // access, feat2 flexible deployment, feat3 powerful API / extensibility.
@@ -251,32 +259,22 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               <p>{t('b2b.modes.desc')}</p>
             </div>
           </ScrollAnimation>
-          <ScrollAnimation>
-            <div className="grid grid-2 b2b-modes-grid">
-              {modes.map((mode, i) => (
-                <article key={mode} className="card b2b-mode-card">
-                  <div className="b2b-mode-card-media">
-                    <Image
-                      src={`/images/b2b-modes/mode-${i + 1}.jpg`}
-                      alt=""
-                      width={1100}
-                      height={642}
-                      sizes="(max-width: 760px) 90vw, 560px"
-                    />
-                  </div>
-                  <div className="b2b-mode-card-body">
-                    <div className="b2b-mode-card-head">
-                      <h3>{t(`b2b.modes.${mode}.title`)}</h3>
-                      <span className="b2b-mode-card-arrow" aria-hidden="true">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-                      </span>
-                    </div>
+          <div className="modes-bento-grid">
+            {modes.map((mode, i) => (
+              <ScrollAnimation key={mode} style={{ transitionDelay: `${i * 0.1}s` }}>
+                <article
+                  className="mode-bento-card"
+                  style={{ backgroundImage: `url(/images/b2b-modes/mode-${i + 1}.png)` }}
+                >
+                  <div className="mode-bento-icon">{modeIcons[i]}</div>
+                  <div className="mode-bento-body">
+                    <h3>{t(`b2b.modes.${mode}.title`)}</h3>
                     <p>{t(`b2b.modes.${mode}.desc`)}</p>
                   </div>
                 </article>
-              ))}
-            </div>
-          </ScrollAnimation>
+              </ScrollAnimation>
+            ))}
+          </div>
         </div>
       </section>
 
