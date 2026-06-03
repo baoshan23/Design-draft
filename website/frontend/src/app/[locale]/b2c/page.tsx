@@ -474,6 +474,22 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
               ))}
             </div>
           </ScrollAnimation>
+
+          <ScrollAnimation>
+            <div
+              className="b2b-contact-cta"
+              style={{ backgroundImage: 'url(/images/b2b-contact-cta.jpg)', marginTop: 64 }}
+            >
+              <div className="b2b-contact-cta-inner">
+                <span className="section-label">{t('b2b.contactCta.label')}</span>
+                <h2>{t('b2b.contactCta.title')}</h2>
+                <p>{t('b2b.contactCta.desc')}</p>
+                <Link href="/contact" className="btn btn-primary btn-lg">
+                  {t('b2b.contactCta.cta')}
+                </Link>
+              </div>
+            </div>
+          </ScrollAnimation>
         </div>
       </section>
 
