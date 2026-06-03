@@ -6046,8 +6046,18 @@ html {
    It's a plain transparent `.section`; now that the page body is white
    (pages-extracted.css `body:has(.product-hero)`) it would read white, so
    set the previous grey explicitly. var(--dark) = #F1F2F4 in light mode. */
+/* System Demo: white surround + an inset grey rounded panel (matches the
+   homepage #how-it-works treatment — near-full-width with a small L/R gap,
+   rounded corners), instead of the old full-bleed grey band. */
 .b2c-demo-section {
+  background: #fff;
+  padding: clamp(40px, 6vh, 72px) clamp(16px, 1.5vw, 24px);
+}
+.b2c-demo-section .container {
+  max-width: none;
   background: var(--dark);
+  border-radius: clamp(20px, 3vw, 32px);
+  padding: clamp(48px, 7vw, 88px) clamp(20px, 4vw, 56px);
 }
 
 /* ===========================================================

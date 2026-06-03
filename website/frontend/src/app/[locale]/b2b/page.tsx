@@ -6,6 +6,7 @@ import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import Image from 'next/image';
 import SubNav from './SubNav';
 import ScrollResetOnLoad from '@/components/effects/ScrollResetOnLoad';
+import SectionReveal from '@/components/effects/SectionReveal';
 import B2BDemoCredCard from './B2BDemoCredCard';
 
 const DEMO_QR_URLS = {
@@ -122,6 +123,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
   return (
     <>
       <ScrollResetOnLoad />
+      <SectionReveal />
       <SubNav />
 
       {/* ==================== Section 1: Hero ==================== */}

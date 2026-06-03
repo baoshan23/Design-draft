@@ -1261,6 +1261,25 @@ footer {
   .card-with-img:hover .card-image {
     transform: scale(1.045);
   }
+
+  /* --- 5. Section reveal: each <section> glides up + fades in as it
+     enters the viewport, so scrolling reads as one screen sliding into
+     place after the next (go-electra style). Driven by SectionReveal.tsx
+     (home / b2b / b2c). The end state is `transform: none` (NOT
+     translateY(0)) so a revealed section stops forming a containing block
+     — keeping the b2c sticky stacking deck + the fixed sub-nav working. --- */
+  .section-reveal {
+    opacity: 0;
+    transform: translateY(52px);
+    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .section-reveal.is-in {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
 }
 
 @keyframes heroEntrance {
