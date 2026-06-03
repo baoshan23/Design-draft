@@ -531,7 +531,6 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               style={{ backgroundImage: 'url(/images/b2b-contact-cta.jpg)' }}
             >
               <div className="b2b-contact-cta-inner">
-                <span className="section-label">{t('b2b.contactCta.label')}</span>
                 <h2>{t('b2b.contactCta.title')}</h2>
                 <p>{t('b2b.contactCta.desc')}</p>
                 <Link href="/contact" className="btn btn-primary btn-lg">
