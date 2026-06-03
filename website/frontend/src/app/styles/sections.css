@@ -3687,17 +3687,12 @@ html {
   object-fit: contain;
   display: block;
 }
-/* Inline-SVG wordmark pills (MoMo / Toss Pay / Tabby / Sezzle): keep their
-   own aspect ratio and let the flex parent center them vertically — object-fit
-   centering is unreliable on inline <svg>, which left these pills top-biased. */
-.payment-fisheye-inner .payment-logo-svg {
-  align-items: center !important;
-}
+/* Inline-SVG wordmark pills (MoMo / Toss Pay / Tabby / Sezzle) use a SQUARE
+   viewBox with the colored pill centered inside it, so a square svg in a square
+   tile renders the pill dead-center with no reliance on object-fit/flex quirks. */
 .payment-fisheye-inner .payment-logo-svg svg {
   width: 100% !important;
-  height: auto !important;
-  max-height: 100% !important;
-  object-fit: unset !important;
+  height: 100% !important;
 }
 
 @media (max-width: 900px) {
@@ -3726,6 +3721,15 @@ html {
   padding: 80px 0;
   text-align: center;
   position: relative;
+}
+
+/* Homepage: round the TOP corners of the grey CTA band that follows the white
+   testimonials section, so the white area above reads as having rounded bottom
+   corners (the white page body shows through the carved corners). Scoped via the
+   adjacent #testimonials sibling so only the homepage CTA is affected. */
+#testimonials + .cta-section {
+  border-top-left-radius: clamp(20px, 3vw, 36px);
+  border-top-right-radius: clamp(20px, 3vw, 36px);
 }
 
 .cta-section::before {

@@ -2794,7 +2794,6 @@ h3.matrix-header,
   min-height: 180px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--border-subtle);
   background: var(--black);
 }
 
