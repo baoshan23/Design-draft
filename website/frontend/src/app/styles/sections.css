@@ -402,7 +402,7 @@
   padding: 30px 32px;
   background: var(--dark-card);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   box-shadow: none;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -420,7 +420,7 @@
   grid-column: 2;
   grid-row: 1;
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.35;
   color: #181818;
@@ -2689,7 +2689,7 @@ html {
   width: 100%;
   aspect-ratio: 4/3;
   background: linear-gradient(135deg, #1a1a2e, #0f3460);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   display: flex;
   align-items: center;
   justify-content: center;
