@@ -11209,18 +11209,21 @@ details.admin-legacy-group > .admin-settings-group:last-child {
    now unused/dead but left harmless).
    ============================================================ */
 .b2b-aftersales-grid .card,
-.b2b-revenue-grid .card {
+.b2b-revenue-grid .card,
+.b2b-modes-grid .card {
   display: flex;
   flex-direction: column;
 }
 .b2b-aftersales-grid .card h3,
-.b2b-revenue-grid .card h3 {
+.b2b-revenue-grid .card h3,
+.b2b-modes-grid .card h3 {
   font-size: 1.2rem;
   font-weight: 700;
   margin: 0 0 10px;
 }
 .b2b-aftersales-grid .card p,
-.b2b-revenue-grid .card p {
+.b2b-revenue-grid .card p,
+.b2b-modes-grid .card p {
   font-size: 0.95rem;
   line-height: 1.65;
   margin: 0;

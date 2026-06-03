@@ -252,22 +252,17 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               <p>{t('b2b.modes.desc')}</p>
             </div>
           </ScrollAnimation>
-          <div className="modes-bento-grid">
-            {modes.map((mode, i) => (
-              <ScrollAnimation key={mode} style={{ transitionDelay: `${i * 0.1}s` }}>
-                <article
-                  className="mode-bento-card"
-                  style={{ backgroundImage: `url(/images/b2b-modes/mode-${i + 1}.png)` }}
-                >
-                  <div className="mode-bento-icon">{modeIcons[i]}</div>
-                  <div className="mode-bento-body">
-                    <h3>{t(`b2b.modes.${mode}.title`)}</h3>
-                    <p>{t(`b2b.modes.${mode}.desc`)}</p>
-                  </div>
+          <ScrollAnimation>
+            <div className="grid grid-2 b2b-modes-grid">
+              {modes.map((mode, i) => (
+                <article key={mode} className="card">
+                  <div className="card-icon" aria-hidden="true">{modeIcons[i]}</div>
+                  <h3>{t(`b2b.modes.${mode}.title`)}</h3>
+                  <p>{t(`b2b.modes.${mode}.desc`)}</p>
                 </article>
-              </ScrollAnimation>
-            ))}
-          </div>
+              ))}
+            </div>
+          </ScrollAnimation>
         </div>
       </section>
 
