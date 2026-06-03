@@ -3687,9 +3687,17 @@ html {
   object-fit: contain;
   display: block;
 }
+/* Inline-SVG wordmark pills (MoMo / Toss Pay / Tabby / Sezzle): keep their
+   own aspect ratio and let the flex parent center them vertically — object-fit
+   centering is unreliable on inline <svg>, which left these pills top-biased. */
+.payment-fisheye-inner .payment-logo-svg {
+  align-items: center !important;
+}
 .payment-fisheye-inner .payment-logo-svg svg {
   width: 100% !important;
-  height: 100% !important;
+  height: auto !important;
+  max-height: 100% !important;
+  object-fit: unset !important;
 }
 
 @media (max-width: 900px) {
