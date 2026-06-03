@@ -3723,13 +3723,20 @@ html {
   position: relative;
 }
 
-/* Homepage: round the TOP corners of the grey CTA band that follows the white
-   testimonials section, so the white area above reads as having rounded bottom
-   corners (the white page body shows through the carved corners). Scoped via the
-   adjacent #testimonials sibling so only the homepage CTA is affected. */
+/* Homepage: round the BOTTOM corners of the white testimonials section. The
+   section gets an explicit white bg + bottom radius and sits above the grey CTA
+   band, which is pulled up by the same radius so the grey fills the carved corner
+   notches. Scoped via the adjacent #testimonials sibling so only the homepage is
+   affected. */
+#testimonials {
+  background: #fff;
+  position: relative;
+  z-index: 1;
+  border-bottom-left-radius: clamp(20px, 3vw, 36px);
+  border-bottom-right-radius: clamp(20px, 3vw, 36px);
+}
 #testimonials + .cta-section {
-  border-top-left-radius: clamp(20px, 3vw, 36px);
-  border-top-right-radius: clamp(20px, 3vw, 36px);
+  margin-top: clamp(-36px, -3vw, -20px);
 }
 
 .cta-section::before {

@@ -7,14 +7,18 @@
   left: 0 !important;
   right: 0 !important;
   z-index: 99 !important;
-  background: rgba(255, 255, 255, 0.65);
+  /* Near-opaque white frost — matches the primary header (.header) and the
+     base .sub-nav so all nav strips read consistently and stay readable when
+     the fixed sub-nav scrolls over a yellow/orange section (handled the same
+     way as the primary nav on yellow heroes). */
+  background: rgba(255, 255, 255, 0.92);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   backdrop-filter: blur(24px) saturate(180%);
   border-bottom: 1px solid var(--border-subtle);
 }
 
 [data-theme="dark"] .product-sub-nav {
-  background: rgba(12, 10, 9, 0.65);
+  background: rgba(12, 10, 9, 0.92);
 }
 
 /* Product hero: occupy exactly the first screen so the
