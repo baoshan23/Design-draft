@@ -398,7 +398,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
           </ScrollAnimation>
           <ScrollAnimation>
-            <div className="language-grid" role="list" aria-label="Supported languages">
+            <div className="b2c-lang-grid" role="list" aria-label="Supported languages">
               <span role="listitem">你好</span>
               <span role="listitem">Hello</span>
               <span role="listitem">Xin chào</span>
