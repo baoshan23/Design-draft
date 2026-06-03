@@ -368,6 +368,21 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                         <h3>{step}</h3>
                       </div>
                     </div>
+                    {/* Dashed connector: step 1 (left illustration) → step 2
+                        (right illustration). Up-arrow → down → across → down-arrow. */}
+                    {i === 0 && (
+                      <div className="b2b-payflow-link" aria-hidden="true">
+                        <span className="b2b-payflow-link-arrow b2b-payflow-link-arrow--up">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 13l6-6 6 6" /></svg>
+                        </span>
+                        <span className="b2b-payflow-link-v1" />
+                        <span className="b2b-payflow-link-h" />
+                        <span className="b2b-payflow-link-v2" />
+                        <span className="b2b-payflow-link-arrow b2b-payflow-link-arrow--down">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 11l6 6 6-6" /></svg>
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </ScrollAnimation>
               ))}

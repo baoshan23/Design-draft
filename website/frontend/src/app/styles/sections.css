@@ -584,6 +584,55 @@
   line-height: 1.25;
   margin-bottom: 0;
 }
+/* Dashed connector between step 1 (left illustration) and step 2 (right
+   illustration): up-arrow ↑ → down → across → ↓ down-arrow. The vertical
+   stubs sit under the left-col (~25%) and right-col (~75%) image centers. */
+.b2b-payflow-link {
+  position: relative;
+  height: 104px;
+  margin: 0 0 -8px;
+}
+.b2b-payflow-link span {
+  position: absolute;
+}
+.b2b-payflow-link-v1 {
+  left: 25%;
+  top: 16px;
+  height: 36px;
+  border-left: 2px dashed #1a1a1a;
+}
+.b2b-payflow-link-h {
+  left: 25%;
+  right: 25%;
+  top: 52px;
+  border-top: 2px dashed #1a1a1a;
+}
+.b2b-payflow-link-v2 {
+  left: 75%;
+  top: 52px;
+  height: 36px;
+  border-left: 2px dashed #1a1a1a;
+}
+.b2b-payflow-link-arrow {
+  display: inline-flex;
+  line-height: 0;
+  transform: translateX(-50%);
+}
+.b2b-payflow-link-arrow--up {
+  left: 25%;
+  top: 2px;
+}
+.b2b-payflow-link-arrow--down {
+  left: 75%;
+  top: 86px;
+}
+/* Stacked single-column layout (≤900): the two illustrations are no longer
+   side-by-side, so the horizontal connector makes no sense — hide it. */
+@media (max-width: 900px) {
+  .b2b-payflow-link {
+    display: none;
+  }
+}
 
 /* B2C demo — card shell unified with the /demo page "platform editions"
    style (.demo-edition-card / .demo-cred-block / .demo-b2b-qr-row). Top
