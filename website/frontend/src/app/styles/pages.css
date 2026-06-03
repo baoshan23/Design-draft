@@ -3128,20 +3128,31 @@ h3.matrix-header,
 }
 
 #how-it-works.section-alt,
+#features.section-alt,
 #models.section-alt {
   background: #ffffff;
 }
 
-/* #features — vertical gradient yellow → white → yellow (Arcadia-style
-   "comprehensive approach" band). Soft brand-gold tint at top & bottom
-   fading through white in the middle. */
-#features.section-alt {
+/* #features — B2B ONLY: vertical gradient yellow → white → yellow
+   (Arcadia-style "comprehensive approach" band). Scoped to the b2b page
+   (its hero carries `.particles-bg`) so the homepage + b2c #features stay
+   plain white (their original). */
+body:has(.product-hero.particles-bg) #features.section-alt {
   background: linear-gradient(
     180deg,
     rgba(254, 191, 29, 0.22) 0%,
     #ffffff 50%,
     rgba(254, 191, 29, 0.22) 100%
   );
+}
+
+/* Homepage: every section background is white EXCEPT the hero (first screen)
+   and the "无需信用卡" CTA (which sets its own grey via an inline style).
+   The homepage hero carries `.hero-with-video`, unique to the homepage, so
+   this whitens its grey `.section-alt` bands (#matrix, payment) without
+   touching b2b/b2c. user req. */
+body:has(.hero-with-video) .section-alt {
+  background: #ffffff;
 }
 
 /* When jumping to #features via the "功能" nav anchor, land the section
