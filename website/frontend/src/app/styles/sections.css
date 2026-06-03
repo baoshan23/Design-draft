@@ -500,9 +500,10 @@
   margin-bottom: 18px;
 }
 .b2c-feature-head h2 {
-  font-size: clamp(2rem, 3.4vw, 2.9rem);
-  font-weight: 700;
-  line-height: 1.15;
+  /* Aligned with the standard light Arcadia section title. */
+  font-size: clamp(2.25rem, 4.8vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.1;
 }
 .b2c-feature-head p {
   font-size: 1.05rem;
@@ -2648,30 +2649,30 @@ html {
   flex: 0 0 300px;
   width: 300px;
   margin: 0;
-  /* Border-only: drop the pale-gold glass fill + shadow, keep just the line. */
-  background: transparent;
+  /* Clean Arcadia card: solid white, hairline border (from .card) + soft shadow. */
+  background: var(--dark-card);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  box-shadow: none;
+  box-shadow: var(--shadow-sm);
 }
 .b2c-pay-card:hover {
-  background: transparent;
-  box-shadow: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
-/* Payment-method chips: border-only (drop the pale-gold fill), AA gold text.
-   Scoped to this marquee so the global .tag chips elsewhere keep their fill. */
+/* Payment-method chips: clean neutral Arcadia chip (light grey fill, hairline
+   border, muted text) — dropped the loud yellow border/text. */
 .b2c-pay-card .tag {
-  background: transparent;
-  border: 1px solid var(--primary, #febf1d);
-  color: var(--primary, #febf1d);
+  background: #F4F5F7;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  color: var(--text-secondary);
 }
 .b2c-pay-card .tag:hover {
   box-shadow: none;
   transform: none;
 }
 [data-theme="dark"] .b2c-pay-card .tag {
-  border-color: rgba(254, 191, 29, 0.4);
-  color: var(--primary, #febf1d);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--text-secondary);
 }
 @keyframes b2cPaySlide {
   from { transform: translateX(-50%); }
