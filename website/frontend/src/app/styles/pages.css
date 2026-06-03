@@ -3128,9 +3128,20 @@ h3.matrix-header,
 }
 
 #how-it-works.section-alt,
-#features.section-alt,
 #models.section-alt {
   background: #ffffff;
+}
+
+/* #features — vertical gradient yellow → grey → yellow (Arcadia-style
+   "comprehensive approach" band). Soft brand-gold tint at top & bottom
+   fading through the neutral grey in the middle. */
+#features.section-alt {
+  background: linear-gradient(
+    180deg,
+    rgba(254, 191, 29, 0.22) 0%,
+    #f1f2f4 50%,
+    rgba(254, 191, 29, 0.22) 100%
+  );
 }
 
 /* When jumping to #features via the "功能" nav anchor, land the section
