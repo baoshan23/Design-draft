@@ -626,6 +626,21 @@
   left: 75%;
   top: 86px;
 }
+/* step2→step3: mirror horizontally — up-arrow/top-stub on the RIGHT (75%,
+   under step 2's right illustration), down-arrow/bottom-stub on the LEFT
+   (25%, over step 3's left illustration). Horizontal bar (-h) unchanged. */
+.b2b-payflow-link--mirror .b2b-payflow-link-v1 {
+  left: 75%;
+}
+.b2b-payflow-link--mirror .b2b-payflow-link-v2 {
+  left: 25%;
+}
+.b2b-payflow-link--mirror .b2b-payflow-link-arrow--up {
+  left: 75%;
+}
+.b2b-payflow-link--mirror .b2b-payflow-link-arrow--down {
+  left: 25%;
+}
 /* Stacked single-column layout (≤900): the two illustrations are no longer
    side-by-side, so the horizontal connector makes no sense — hide it. */
 @media (max-width: 900px) {
