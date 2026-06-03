@@ -543,6 +543,15 @@
   background: linear-gradient(180deg, #F1F2F4 0%, #FFFFFF 100%);
   border: 1px solid var(--border-subtle);
 }
+/* The placeholder that actually holds an illustration: no fill, no border,
+   no hover motion (empty step placeholders keep the grey fill above). */
+.b2b-payflow .b2b-payflow-img:has(img) {
+  background: none;
+  border: none;
+}
+.b2b-payflow .feature-row:hover .b2b-payflow-img img {
+  transform: none;
+}
 .b2b-payflow-step {
   display: inline-block;
   margin-bottom: 14px;
