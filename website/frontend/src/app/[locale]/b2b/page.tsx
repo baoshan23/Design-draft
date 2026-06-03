@@ -296,9 +296,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                     <p>{t(`b2b.revenue.${c.key}.desc`)}</p>
                   </div>
                   <span className="b2b-revenue-item-arrow" aria-hidden="true">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                    </svg>
+                    {c.icon}
                   </span>
                 </div>
               ))}
@@ -332,20 +330,28 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                 </div>
               </div>
             </ScrollAnimation>
-            <ScrollAnimation style={{ transitionDelay: `${feats.length * 0.1}s` }}>
-              <div className="b2b-hiw-bar">
-                <span className="b2b-hiw-bar-kicker">{t('b2b.advantages.paymentTitle')}</span>
-                <div className="b2b-hiw-bar-steps" role="list">
-                  {[t('b2b.advantages.payment1'), t('b2b.advantages.payment2'), t('b2b.advantages.payment3')].map((step, i, arr) => (
-                    <div key={i} className="b2b-hiw-bar-step" role="listitem">
-                      <span className="b2b-hiw-bar-num">{i + 1}</span>
-                      <span className="b2b-hiw-bar-text">{step}</span>
-                      {i < arr.length - 1 && <span className="b2b-hiw-bar-arrow" aria-hidden="true">→</span>}
-                    </div>
-                  ))}
+            {/* Payment flow — B2C-style feature rows (image left, text right).
+                Image containers left EMPTY on purpose; user will insert artwork. */}
+            <div className="b2b-payflow">
+              <ScrollAnimation>
+                <div className="b2b-payflow-head section-header">
+                  <span className="section-label">{t('b2b.advantages.paymentTitle')}</span>
                 </div>
-              </div>
-            </ScrollAnimation>
+              </ScrollAnimation>
+              {[t('b2b.advantages.payment1'), t('b2b.advantages.payment2'), t('b2b.advantages.payment3')].map((step, i) => (
+                <ScrollAnimation key={i}>
+                  <div style={{ marginTop: i === 0 ? 8 : 40 }}>
+                    <div className="feature-row">
+                      <div className="feature-image-placeholder b2b-payflow-img" aria-hidden="true" />
+                      <div className="feature-text">
+                        <span className="b2b-payflow-step">{t('b2b.features.step')} {i + 1}</span>
+                        <h3>{step}</h3>
+                      </div>
+                    </div>
+                  </div>
+                </ScrollAnimation>
+              ))}
+            </div>
           </div>
         </div>
       </section>

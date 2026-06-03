@@ -11263,7 +11263,7 @@ details.admin-legacy-group > .admin-settings-group:last-child {
   padding-top: 36px;
 }
 #modes .section-header {
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 }
 
 /* ============================================================
@@ -11274,12 +11274,13 @@ details.admin-legacy-group > .admin-settings-group:last-child {
 .b2b-mode-card {
   /* Image is INSET inside the card — uniform gap on top/left/right
      (Arcadia ref), not bled to the card edge. */
-  padding: 14px;
+  padding: 12px;
 }
 .b2b-mode-card-media {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  /* Shorter than 16:9 so two rows of cards + the header fit one screen. */
+  aspect-ratio: 16 / 7;
   background: #fff;
   overflow: hidden;
   border-radius: 14px;
@@ -11293,14 +11294,14 @@ details.admin-legacy-group > .admin-settings-group:last-child {
 .b2b-mode-card-body {
   display: flex;
   flex-direction: column;
-  padding: 18px 6px 6px;
+  padding: 14px 6px 6px;
 }
 .b2b-mode-card-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 .b2b-mode-card-head h3 {
   margin: 0;

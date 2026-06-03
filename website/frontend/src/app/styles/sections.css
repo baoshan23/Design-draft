@@ -525,6 +525,35 @@
   }
 }
 
+/* B2B #features payment-flow — B2C-style feature rows (image left, text
+   right). Image containers are intentionally EMPTY (user inserts artwork);
+   give them a clean light placeholder bg instead of the default dark navy. */
+.b2b-payflow {
+  margin-top: 64px;
+}
+.b2b-payflow-head {
+  margin-bottom: 8px;
+}
+.b2b-payflow .b2b-payflow-img {
+  background: linear-gradient(180deg, #F1F2F4 0%, #FFFFFF 100%);
+  border: 1px solid var(--border-subtle);
+}
+.b2b-payflow-step {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary-text, #8c5f00);
+}
+.b2b-payflow .feature-text h3 {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 500;
+  line-height: 1.25;
+  margin-bottom: 0;
+}
+
 /* B2C demo — card shell unified with the /demo page "platform editions"
    style (.demo-edition-card / .demo-cred-block / .demo-b2b-qr-row). Top
    row: CPO console + demo account; below: a full-width QR card. */
@@ -5951,6 +5980,10 @@ html {
   line-height: 1.6;
   margin: 0;
   max-width: 56ch;
+}
+.b2b-revenue-item-arrow svg {
+  width: 22px;
+  height: 22px;
 }
 .b2b-revenue-item-arrow {
   flex-shrink: 0;
