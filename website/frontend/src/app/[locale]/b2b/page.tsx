@@ -7,7 +7,6 @@ import Image from 'next/image';
 import SubNav from './SubNav';
 import ScrollResetOnLoad from '@/components/effects/ScrollResetOnLoad';
 import B2BDemoCredCard from './B2BDemoCredCard';
-import RevenueAccordion from './RevenueAccordion';
 
 const DEMO_QR_URLS = {
   mobile: 'https://app.gcss.hk/',
@@ -71,6 +70,13 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
   // After-sales support — orbital diagram. Each item maps to a card + a node
   // on the rings. pos drives absolute placement (tl/tr/bl/br).
   // Option A: uniform gradient-circle ring nodes, each with its own line glyph.
+  const revenueCards = [
+    { key: 'item1', icon: (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" /></svg>) },
+    { key: 'item2', icon: (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="10" width="18" height="11" rx="1" /><path d="M12 3l9 7H3z" /><line x1="7" y1="14" x2="7" y2="17" /><line x1="12" y1="14" x2="12" y2="17" /><line x1="17" y1="14" x2="17" y2="17" /></svg>) },
+    { key: 'item3', icon: (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>) },
+    { key: 'item4', icon: (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>) },
+  ];
+
   const supportCards = [
     {
       key: 'item1', // 视频部署指南
@@ -277,7 +283,15 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               </div>
             </ScrollAnimation>
             <ScrollAnimation>
-              <RevenueAccordion />
+              <div className="grid grid-2 b2b-revenue-grid">
+                {revenueCards.map((c) => (
+                  <article key={c.key} className="card">
+                    <div className="card-icon" aria-hidden="true">{c.icon}</div>
+                    <h3>{t(`b2b.revenue.${c.key}.title`)}</h3>
+                    <p>{t(`b2b.revenue.${c.key}.desc`)}</p>
+                  </article>
+                ))}
+              </div>
             </ScrollAnimation>
           </div>
         </div>
