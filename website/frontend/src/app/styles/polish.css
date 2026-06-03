@@ -589,26 +589,7 @@ main :not(pre) > code {
 }
 
 /* Soft blurred yellow glow behind the phones, anchored to the bottom. */
-.gallery-row::after {
-  content: '';
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 820px;
-  height: 420px;
-  max-width: 96%;
-  border-radius: 50%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(254, 191, 29, 0.44) 0%,
-    rgba(254, 191, 29, 0.22) 42%,
-    rgba(254, 191, 29, 0) 72%
-  );
-  filter: blur(64px);
-  pointer-events: none;
-  z-index: 0;
-}
+/* Yellow blurred glow behind the phone row — removed per user request. */
 
 .g3d-phone {
   position: relative;
