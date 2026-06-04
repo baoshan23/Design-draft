@@ -1262,47 +1262,24 @@ footer {
     transform: scale(1.045);
   }
 
-  /* --- 5. Section reveal: a revealed (non-pinned) panel glides up + fades
-     in as it enters. The end state is `transform: none` (NOT translateY(0))
-     so the section stops forming a containing block. --- */
-  .section-reveal:not(.section-panel--pin) {
+  /* --- 5. Section reveal: a section glides up + fades in as it enters. Fires
+     ONLY where the background colour changes from the section above (driven by
+     SectionReveal.tsx); white→white is seamless with no animation. There is no
+     sticky stacking-cover (叠盖) — the old "color-block switch" panels were
+     removed (user: 无切屏叠盖的效果). End state is `transform: none` (NOT
+     translateY(0)) so the section stops forming a containing block. --- */
+  .section-reveal {
     opacity: 0;
     transform: translateY(56px);
     transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
-  .section-reveal:not(.section-panel--pin).is-in {
+  .section-reveal.is-in {
     opacity: 1;
     transform: none;
     will-change: auto;
   }
-  /* Pinned panels fade only — a translate would fight the sticky offset. */
-  .section-reveal.section-panel--pin {
-    opacity: 0;
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .section-reveal.section-panel--pin.is-in {
-    opacity: 1;
-  }
-}
-
-/* --- "Color-block switch": each white / grey <section> is a rounded-top
-   opaque panel; the next one slides up + stacks over the previous as you
-   scroll (go-electra style). Driven by SectionReveal.tsx (home/b2b/b2c).
-   Panel chrome lives outside the reduced-motion guard so the rounded blocks
-   exist for everyone; only the slide-in is motion-gated above. --- */
-.section-panel {
-  position: relative;
-  border-top-left-radius: clamp(20px, 2.6vw, 40px);
-  border-top-right-radius: clamp(20px, 2.6vw, 40px);
-  margin-top: -1px; /* kill the sub-pixel seam between stacked panels */
-  /* No drop-shadow between stacked panels (user: 取消每一屏切换之间的投影). */
-}
-/* Blocks that fit a screen freeze at the top so the next block covers them. */
-.section-panel--pin {
-  position: sticky;
-  /* `top` is set inline (header [+ sub-nav] height) by SectionReveal.tsx */
 }
 
 @keyframes heroEntrance {
