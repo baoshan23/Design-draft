@@ -942,6 +942,14 @@
    bottom, uncovering the wordmark in a clean wipe (like go-electra). */
 .footer-reveal-wrap {
   position: relative;
+  /* Clip the sticky reveal panel so it can't peek ABOVE the footer's top edge
+     mid-scroll (the panel is `sticky; bottom:0` + a negative margin-top, which
+     lifts its border-box ~radius px above the wrap top). `overflow: clip` clips
+     that poke WITHOUT creating a scroll container, so `position: sticky` on the
+     panel still pins to the viewport and the go-electra wipe still works. The
+     bottom reveal + the footer's rounded-corner yellow notches are inside the
+     wrap box, so they're untouched. */
+  overflow: clip;
 }
 /* The dark footer rounds its OWN bottom-left/right corners; the yellow reveal
    panel is pulled up under them (panel z-index:1 < footer z-index:2) so the
@@ -4226,9 +4234,15 @@ body:has(.hero-with-video) .section-alt {
   }
 
   /* Dropdown menu — accordion style */
+  .nav.mobile-open .nav-dropdown-menu::before {
+    display: none;
+  }
+
   .nav.mobile-open .nav-dropdown-menu {
     position: static;
     transform: none;
+    width: auto;
+    max-width: none;
     min-width: unset;
     box-shadow: none;
     border: none;

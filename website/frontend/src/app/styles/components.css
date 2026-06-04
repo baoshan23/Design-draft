@@ -337,29 +337,27 @@ body:has(.hero-with-video) .sub-nav {
   gap: 4px;
 }
 
-/* Moss-style mega-menu: full-width frosted-glass panel anchored below the
-   header, content centered in a max-width grid. */
+/* Compact rounded-card dropdown (ELECTRA-style) anchored under its own trigger
+   — NOT a full-width bar (user: 圆角小卡片). */
 .nav-dropdown-menu {
-  position: fixed;
-  top: var(--header-height, 72px);
+  position: absolute;
+  /* The trigger (~32px) is centered in the 72px header, so its bottom (100%)
+     sits ~20px above the header's bottom edge — offset past it + a small gap. */
+  top: calc(100% + 24px);
   left: 0;
-  right: 0;
-  width: 100%;
-  min-width: 0;
-  max-width: none;
-  transform: translateY(12px);
-  /* Solid white, no frosted glass (user: 取消磨砂玻璃效果，直接做白). */
+  right: auto;
+  width: max-content;
+  min-width: 300px;
+  max-width: min(92vw, 460px);
+  transform: translateY(8px);
+  /* Solid white card, no frosted glass (user: 取消磨砂玻璃效果，直接做白). */
   background: #ffffff;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
-  border: none;
-  /* No drop-shadow — a 1px line separates the panel from the page below
-     (user: 下拉菜单投影取消，用线条做区分). */
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
-  box-shadow: none;
-  border-radius: 0;
-  padding: 32px 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  padding: 12px;
   opacity: 0;
   visibility: hidden;
   transition:
@@ -369,13 +367,23 @@ body:has(.hero-with-video) .sub-nav {
   z-index: 1000;
 }
 
+/* Invisible bridge spanning the trigger→card gap so hover doesn't drop while
+   the cursor travels down into the card. Hidden (inherits visibility) at rest. */
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -24px;
+  left: 0;
+  right: 0;
+  height: 24px;
+}
+
 [data-theme="dark"] .nav-dropdown-menu {
-  background: rgba(20, 18, 16, 0.65);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
-  border-top-color: rgba(255, 255, 255, 0.10);
-  border-bottom-color: rgba(255, 255, 255, 0.10);
-  box-shadow: none;
+  background: #141210;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
 }
 
 .nav-dropdown:hover .nav-dropdown-menu,
@@ -406,9 +414,7 @@ body:has(.hero-with-video) .sub-nav {
 
 /* Small column-header label (e.g. "Products" / "Community") */
 .nav-dropdown-menu .dropdown-section-header {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 0 32px 12px;
+  padding: 4px 8px 10px;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -416,13 +422,11 @@ body:has(.hero-with-video) .sub-nav {
   color: var(--text-tertiary);
 }
 
+/* Vertical stack inside the card (was a full-width centered grid). */
 .nav-dropdown-menu .dropdown-items {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 0 32px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .nav-dropdown-menu a {
@@ -436,25 +440,17 @@ body:has(.hero-with-video) .sub-nav {
   white-space: nowrap;
 }
 
-/* Thin vertical divider sits in the center of the grid gap between
-   adjacent columns. Hidden when items wrap (no two items share a row). */
+/* The old inter-column divider is meaningless in the vertical card stack. */
 .nav-dropdown-menu .dropdown-items > a + a::before {
-  content: '';
-  position: absolute;
-  left: -16px;
-  top: 10px;
-  bottom: 10px;
-  width: 1px;
-  background: rgba(140, 95, 0, 0.14);
-  pointer-events: none;
-}
-[data-theme="dark"] .nav-dropdown-menu .dropdown-items > a + a::before {
-  background: rgba(255, 255, 255, 0.10);
+  display: none;
 }
 
 .nav-dropdown-menu a:hover {
-  background: transparent !important;
+  background: rgba(0, 0, 0, 0.04) !important;
   color: var(--text-primary) !important;
+}
+[data-theme="dark"] .nav-dropdown-menu a:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
 }
 
 .nav-dropdown-menu .dropdown-icon {
@@ -499,6 +495,7 @@ body:has(.hero-with-video) .sub-nav {
   color: var(--text-tertiary);
   font-weight: 400;
   line-height: 1.45;
+  white-space: normal;
 }
 
 .header-actions {
