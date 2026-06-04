@@ -352,9 +352,11 @@ body:has(.hero-with-video) .sub-nav {
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   backdrop-filter: blur(24px) saturate(180%);
   border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.6);
-  border-bottom: 1px solid rgba(140, 95, 0, 0.06);
-  box-shadow: 0 12px 32px rgba(15, 15, 15, 0.08);
+  /* No drop-shadow — a 1px line separates the panel from the page below
+     (user: 下拉菜单投影取消，用线条做区分). */
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: none;
   border-radius: 0;
   padding: 32px 0;
   opacity: 0;
@@ -371,8 +373,8 @@ body:has(.hero-with-video) .sub-nav {
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   backdrop-filter: blur(24px) saturate(180%);
   border-top-color: rgba(255, 255, 255, 0.10);
-  border-bottom-color: rgba(255, 255, 255, 0.06);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  border-bottom-color: rgba(255, 255, 255, 0.10);
+  box-shadow: none;
 }
 
 .nav-dropdown:hover .nav-dropdown-menu,
