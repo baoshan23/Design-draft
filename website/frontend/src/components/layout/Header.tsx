@@ -117,7 +117,6 @@ export default function Header() {
             width={52}
             height={52}
           />
-          <span>GCSS</span>
         </Link>
 
         <nav className={`nav${mobileOpen ? ' mobile-open' : ''}`} id="primary-navigation">
