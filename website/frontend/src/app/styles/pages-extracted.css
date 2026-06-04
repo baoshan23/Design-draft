@@ -7,14 +7,13 @@
   left: 0 !important;
   right: 0 !important;
   z-index: 99 !important;
-  /* Near-opaque white frost — matches the primary header (.header) and the
-     base .sub-nav so all nav strips read consistently and stay readable when
-     the fixed sub-nav scrolls over a yellow/orange section (handled the same
-     way as the primary nav on yellow heroes). */
-  background: rgba(255, 255, 255, 0.92);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
+  /* Solid white, no frost/shadow — stays pure white when it scrolls over the
+     yellow header block (user request: 直接做白处理，不要有任何投影). */
+  background: #ffffff;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
   border-bottom: 1px solid var(--border-subtle);
+  box-shadow: none;
 }
 
 [data-theme="dark"] .product-sub-nav {
