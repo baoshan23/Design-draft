@@ -108,7 +108,7 @@ export default function Header() {
   const dropdownTriggerClass = 'nav-dropdown-trigger';
 
   return (
-    <header className={`header glass${scrolled ? ' scrolled' : ''}`}>
+    <header className={`header${scrolled ? ' scrolled' : ''}`}>
       <div className="container">
         <Link href="/" className="logo" onClick={closeMenu}>
           <Image
