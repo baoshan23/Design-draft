@@ -3169,7 +3169,7 @@ h3.matrix-header,
 }
 #how-it-works.section-alt .container {
   max-width: none;
-  background: var(--dark);
+  background: #FEF1D6;
   border-radius: clamp(20px, 3vw, 32px);
   padding: clamp(48px, 7vw, 88px) clamp(20px, 4vw, 56px);
 }
