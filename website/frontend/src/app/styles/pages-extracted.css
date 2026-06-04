@@ -2617,6 +2617,10 @@ html[data-theme="dark"] .hero.hero-centered {
           mask-image: linear-gradient(180deg, #000 0%, #000 88%, transparent 100%);
 }
 
+/* No frame container — the dashboard image is a self-contained card with its
+   own rounded corners + transparent surround, so we drop the white card chrome
+   (border / bg / shadow / sheen / radius clip) and let it float on the grid
+   (user: 不要有容器限制，去掉边框). */
 .hero-dashboard-frame {
   position: relative;
   width: 100%;
@@ -2625,33 +2629,21 @@ html[data-theme="dark"] .hero.hero-centered {
      where it flex-fills + crops via the bottom mask. */
   aspect-ratio: 2400 / 1317;
   height: auto;
-  border-radius: 16px;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow:
-    0 24px 48px -18px rgba(20, 20, 30, 0.18),
-    0 10px 22px -10px rgba(20, 20, 30, 0.10),
-    0 0 0 1px rgba(255, 255, 255, 0.6) inset;
-  overflow: hidden;
+  background: transparent;
+  border: none;
+  box-shadow: none;
   transform: translateZ(0);
-}
-
-.hero-dashboard-frame::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 30%);
 }
 
 .hero-dashboard-img {
   display: block;
   width: 100%;
   height: 100%;
+  /* Aspect matches the frame at natural size (full image, no crop); on large
+     screens the frame flex-fills a taller box and `cover` crops to fill the
+     fold, top-anchored. */
   object-fit: cover;
   object-position: top center;
-  border-radius: 14px;
 }
 
 /* Large screens — dashboard flex-fills to the fold so the 合作商 bar lands
@@ -2678,13 +2670,13 @@ html[data-theme="dark"] .hero.hero-centered {
     border-radius: 14px;
   }
   .hero-dashboard-mock {
-    width: calc(100% - 8px);
-    max-height: 320px;
+    width: 100%;
     flex: 0 0 auto;
   }
+  /* Keep the natural aspect on mobile too so the whole dashboard shows
+     un-cropped (no frame, no fixed 16/11 crop). */
   .hero-dashboard-frame {
-    border-radius: 12px;
-    aspect-ratio: 16 / 11;
+    aspect-ratio: 2400 / 1317;
     height: auto;
   }
 }
