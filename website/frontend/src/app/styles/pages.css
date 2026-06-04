@@ -1263,11 +1263,11 @@
    is now text-only (no Image), sized large to match the Moss reference. */
 .footer-logo {
   gap: 0 !important;
-  margin-top: -4px !important;
+  margin-top: -20px !important;
   margin-bottom: 16px !important;
 }
 .footer-logo img {
-  height: 64px;
+  height: 88px;
   width: auto;
   display: block;
 }
