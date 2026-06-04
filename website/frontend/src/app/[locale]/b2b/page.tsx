@@ -453,6 +453,9 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
       </section>
 
       {/* ==================== Section 10: After-Sales ==================== */}
+      {/* 售后(#aftersales) → 系统演示(#demo) sticky-stack — same interaction as
+         b2c #support→#demo: #aftersales pins while the #demo screen rises + 叠盖s it. */}
+      <div className="section-stack">
       <section className="section" id="aftersales">
         <div className="container">
           <ScrollAnimation>
@@ -549,6 +552,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
           </div>
         </div>
       </section>
+      </div>
 
       {/* ==================== Section 13: Pricing ==================== */}
       <section className="section" id="pricing">

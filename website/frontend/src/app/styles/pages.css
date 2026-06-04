@@ -3227,30 +3227,31 @@ body:has(.product-hero.particles-bg) #revenue.b2b-revenue-section.section-reveal
   }
 }
 
-/* b2c 售后(#support) → 系统演示(#demo) sticky-stack — SAME pattern as the b2b
-   营收→功能 pair above: #support PINS (sticky, roughly screen-centred) while
-   #demo rises in normal flow and 叠盖s (covers) it. #demo is already opaque
-   (white surround) + z-index:3 + a negative margin-top overlap (sections.css
-   .b2c-demo-section), and its grey panel gets the extra scroll-linked rise from
-   SectionReveal's panelGrey branch — so adding the pin completes the stack.
-   Scoped to b2c via the `.b2c-supdemo-stack` wrapper (b2c-only). */
-.b2c-supdemo-stack {
+/* 售后 → 系统演示 sticky-stack — SAME pattern as the b2b 营收→功能 pair above,
+   shared by BOTH b2c (#support → #demo) AND b2b (#aftersales → #demo): the FIRST
+   section (the 售后 one) PINS (sticky, roughly screen-centred) while #demo rises
+   in normal flow and 叠盖s (covers) it. #demo is already opaque (white surround)
+   + z-index:3 + a negative margin-top overlap (sections.css .b2c-demo-section /
+   #demo.b2b-demo-section), and its grey panel gets the extra scroll-linked rise
+   from SectionReveal's panelGrey branch — so adding the pin completes the stack.
+   `> section:first-of-type` = the pinned 售后 section on either page. */
+.section-stack {
   position: relative;
 }
-.b2c-supdemo-stack #support {
+.section-stack > section:first-of-type {
   position: sticky;
   top: clamp(72px, calc(50vh - 340px), 16vh);
   z-index: 1;
 }
-/* The pinned #support must not also be transform-offset by a stray fade-up. */
-.b2c-supdemo-stack #support.section-reveal {
+/* The pinned section must not also be transform-offset by a stray fade-up. */
+.section-stack > section:first-of-type.section-reveal {
   opacity: 1;
   transform: none;
 }
-/* Mobile: drop the pin — #support (cards + contact banner) exceeds the
+/* Mobile: drop the pin — the 售后 section (cards + contact banner) exceeds the
    viewport on a phone, so just flow normally. */
 @media (max-width: 900px) {
-  .b2c-supdemo-stack #support {
+  .section-stack > section:first-of-type {
     position: static;
   }
 }
