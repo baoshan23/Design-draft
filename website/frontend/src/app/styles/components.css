@@ -91,109 +91,77 @@
 /* --- Header / Navigation --- */
 .header {
   position: fixed;
-  /* Site-wide floating rounded "pill" nav — centered, max 1440px wide, with a
-     full black 1px border + large radius and NO colour fill (transparent).
-     Unified across every page + scroll state (user: 全站统一 / 1440宽 / 无颜色
-     填充 / 边线黑色). NB: do NOT add `transform` here — the mobile nav overlay
-     is position:fixed and a transform on .header would become its containing
-     block and break it (regression bfd5410); centering uses auto margins. */
-  top: 12px;
-  left: 16px;
-  right: 16px;
-  width: auto;
-  max-width: 1440px;
-  margin-left: auto;
-  margin-right: auto;
-  height: var(--header-height);
-  z-index: 100;
-  background: #ffffff;
-  border: 2px solid #000;
-  border-radius: 9999px;
-  box-shadow: none;
-  transition: background 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              border-radius 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-/* Content fills the pill (logo pinned left, actions pinned right) instead of
-   collapsing to the narrow page max-width. */
-.header > .container {
-  max-width: none;
-}
-/* --- Interaction (scroll) state: the floating white pill expands into a
-   full-width edge-to-edge YELLOW bar, with the active/selected nav item in
-   white (user: 当开始交互时变成黄色，横向铺满；选中的文字改成白色). --- */
-.header.scrolled,
-body:has(.hero-with-video) .header.scrolled,
-body:has(.demo-hero) .header.scrolled,
-body:has(.pricing-hero) .header.scrolled,
-body:has(.sub-nav) .header.scrolled {
   top: 0;
   left: 0;
   right: 0;
-  max-width: none;
-  margin-left: 0;
-  margin-right: 0;
-  border: none;
-  border-radius: 0;
-  background: var(--primary);
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
+  height: var(--header-height);
+  z-index: 100;
+  /* Unified site-wide nav frost — near-opaque white on every page in both
+     scroll states; thin bottom border line, no shadow. */
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.header.scrolled {
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  /* No drop-shadow — only the 1px border line separates nav from content. */
   box-shadow: none;
+  border-bottom-color: rgba(0, 0, 0, 0.06);
 }
-/* Active / selected nav item → white on the yellow bar. */
-.header.scrolled .nav a.active,
-.header.scrolled .nav-dropdown-trigger.active {
-  color: #fff;
-}
-.header.scrolled .nav a.active::after {
-  background: #fff;
-}
-/* Buy-now CTA + wordmark stay legible on the yellow bar (white pill button,
-   matching the reference; dark wordmark instead of gold-on-yellow). */
-.header.scrolled .header-actions .btn-buy {
-  background: #fff;
-  color: #1a1a1a;
-}
-.header.scrolled .header-actions .btn-buy:hover {
-  background: #f3f3f3;
-}
-.header.scrolled .logo span {
-  color: #1a1a1a;
+[data-theme="dark"] .header,
+[data-theme="dark"] .header.scrolled {
+  background: rgba(12, 10, 9, 0.92);
+  border-bottom-color: rgba(255, 255, 255, 0.10);
 }
 
-[data-theme="dark"] .header {
-  background: #ffffff;
-  border-color: #000;
-}
-@media (max-width: 600px) {
-  .header {
-    top: 8px;
-    left: 8px;
-    right: 8px;
-  }
-}
-
-/* Rest state (top, not scrolled) — solid-white black-outlined pill on every
-   page (base .header already sets this; these just kill any leftover
-   backdrop-filter and lock the white fill). */
-body:has(.hero-with-video) .header:not(.scrolled),
-body:has(.demo-hero) .header:not(.scrolled),
-body:has(.pricing-hero) .header:not(.scrolled),
-body:has(.sub-nav) .header:not(.scrolled) {
-  background: #ffffff;
+/* Homepage (has the charger bg image) — at the top (unscrolled) the nav is
+   fully transparent (floats over the light hero); the frosted white fades in
+   on scroll. */
+body:has(.hero-with-video) .header:not(.scrolled) {
+  background: transparent;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
-  border-color: #000;
+  border-bottom-color: transparent;
   box-shadow: none;
 }
 body:has(.hero-with-video) .header:not(.scrolled)::after {
   display: none;
 }
+body:has(.hero-with-video) .header.scrolled {
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: none;
+  border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+
+/* Demo / pricing page (yellow hero) — near-opaque white frost regardless of
+   scroll, only the 1px border line separates nav from content. */
+body:has(.demo-hero) .header,
+body:has(.demo-hero) .header.scrolled,
+body:has(.pricing-hero) .header,
+body:has(.pricing-hero) .header.scrolled {
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  border-bottom-color: rgba(0, 0, 0, 0.06);
+  box-shadow: none;
+}
+
+/* Pages with a sub-nav strip: drop the header drop-shadow and use a thin
+   line as the divider between the primary nav and the sub-nav. */
+body:has(.sub-nav) .header,
+body:has(.sub-nav) .header.scrolled {
+  box-shadow: none;
+  border-bottom: 1px solid var(--border-subtle);
+}
 
 /* Sub-nav frosted-glass: mirror the primary header on the same page so the
-   two strips read as one continuous bar. Override matches each header's
-   per-page rule above. */
+   two strips read as one continuous bar. */
 body:has(.hero-with-video) .sub-nav {
   background: rgba(255, 255, 255, 0.92);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
@@ -219,7 +187,7 @@ body:has(.hero-with-video) .header.scrolled .settings-trigger[aria-expanded="tru
 }
 body:has(.hero-with-video) .header.scrolled .nav a.active,
 body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
-  color: #fff;
+  color: var(--primary);
 }
 
 /* Glass header edge highlight — removed per user request (`去掉投影`):
@@ -384,26 +352,21 @@ body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
    header, content centered in a max-width grid. */
 .nav-dropdown-menu {
   position: fixed;
-  /* Aligned to the floating nav pill: same inset (16px) + max-width (1440)
-     + auto-centring, sitting just below the pill (pill = top12 + height) +
-     an 8px gap. Solid-white rounded card (user: 宽度跟顶部导航栏一样宽 +
-     填充白色). */
-  top: calc(12px + var(--header-height, 72px) + 8px);
-  left: 16px;
-  right: 16px;
-  width: auto;
+  top: var(--header-height, 72px);
+  left: 0;
+  right: 0;
+  width: 100%;
   min-width: 0;
-  max-width: 1440px;
-  margin-left: auto;
-  margin-right: auto;
-  transform: translateY(8px);
-  background: #ffffff;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 16px 40px rgba(15, 15, 15, 0.12);
-  border-radius: 24px;
-  overflow: hidden;
+  max-width: none;
+  transform: translateY(12px);
+  background: rgba(255, 255, 255, 0.65);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
+  border-bottom: 1px solid rgba(140, 95, 0, 0.06);
+  box-shadow: 0 12px 32px rgba(15, 15, 15, 0.08);
+  border-radius: 0;
   padding: 32px 0;
   opacity: 0;
   visibility: hidden;

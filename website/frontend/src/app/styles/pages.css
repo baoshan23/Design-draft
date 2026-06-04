@@ -380,9 +380,9 @@
 .payment-request-cta {
   display: flex;
   justify-content: center;
-  /* Was -16px, which pulled the button up over the subtitle. Small positive
-     gap so it sits clear of the description text. */
-  margin-top: 8px;
+  /* Unified subtitle→button gap (20px) — matches the homepage language
+     section's button so every section-description→CTA spacing is consistent. */
+  margin-top: 20px;
 }
 .payment-request-cta-btn {
   display: inline-flex;
@@ -4072,8 +4072,7 @@ body:has(.hero-with-video) .section-alt {
     display: flex;
     flex-direction: column;
     position: fixed;
-    /* Clears the floating pill nav (pill = top:12px + 72px height). */
-    top: calc(var(--header-height) + 12px);
+    top: var(--header-height);
     left: 0;
     right: 0;
     bottom: 0;
