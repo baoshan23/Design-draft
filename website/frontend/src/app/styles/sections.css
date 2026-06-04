@@ -6082,12 +6082,16 @@ main:has(#releases) + .footer .footer-rule {
    set the previous grey explicitly. var(--dark) = #F1F2F4 in light mode. */
 /* System Demo: white surround + an inset grey rounded panel (matches the
    homepage #how-it-works treatment — near-full-width with a small L/R gap,
-   rounded corners), instead of the old full-bleed grey band. */
-.b2c-demo-section {
+   rounded corners), instead of the old full-bleed grey band. Shared by b2c
+   (#demo .b2c-demo-section) AND b2b (#demo .b2b-demo-section) — the b2b one
+   is id-qualified so it beats the `.section-alt` grey it also carries. */
+.b2c-demo-section,
+#demo.b2b-demo-section {
   background: #fff;
   padding: clamp(40px, 6vh, 72px) clamp(16px, 1.5vw, 24px);
 }
-.b2c-demo-section .container {
+.b2c-demo-section .container,
+#demo.b2b-demo-section .container {
   max-width: none;
   background: var(--dark);
   border-radius: clamp(20px, 3vw, 32px);
