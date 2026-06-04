@@ -3764,8 +3764,10 @@ html {
    full-width section regardless of page (homepage grey CTA, b2b #releases, b2c
    #changelog, pricing #plans, …) and ignores the transient diagram-modal overlay
    div (not a <section>). Works whenever that section's bg is lighter than the
-   footer; if it matches the footer dark, the notches are simply invisible. */
-main > section:last-of-type {
+   footer; if it matches the footer dark, the notches are simply invisible.
+   NOTE: sections live inside template.tsx's `.page-transition` wrapper (main >
+   .page-transition > section), so the child combinator targets that wrapper. */
+.page-transition > section:last-of-type {
   position: relative;
   z-index: 1;
   border-bottom-left-radius: clamp(20px, 3vw, 36px);
