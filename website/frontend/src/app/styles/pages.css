@@ -3157,16 +3157,17 @@ h3.matrix-header,
 #how-it-works.section-alt {
   background: #ffffff;
   padding: clamp(40px, 6vh, 72px) clamp(16px, 1.5vw, 24px);
-  /* "叠盖": the COLORED panel must lead the cover with NO white above it
-     (user: 使用流程的背景颜色直接开始覆盖，背景颜色上面不要有任何留白). The pinned
-     MobileShowcase above has a fixed 80px bottom padding, so pull the section
-     up by ~that amount and drop the top padding to 0 → the colored panel's top
-     edge meets the phone bottom, the colour covers directly, and no white
-     (neither the section padding nor the showcase's bottom padding) shows
-     above the colour. */
+  /* Sticky-stack cover. Two requirements:
+     1. AT REST (before scroll) there's a visible gap between the pinned
+        MobileShowcase phone screen and this section — keep the original
+        margin-top so that spacing is restored (user: 之前的间隙恢复).
+     2. DURING the cover (scroll) the COLORED panel leads with NO white above
+        it (user: 背景颜色直接覆盖，上面不要留白) — so padding-top:0 puts the colored
+        panel flush at the section top edge (no white band atop it), and the
+        sticky pin (NOT a cover-rise down-push) does the covering. */
   position: relative;
   z-index: 3;
-  margin-top: -84px;
+  margin-top: clamp(-40px, -3vw, -24px);
   padding-top: 0;
 }
 #how-it-works.section-alt .container {
