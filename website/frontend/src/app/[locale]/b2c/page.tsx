@@ -8,6 +8,7 @@ import SubNav from './SubNav';
 import DemoTabs from './DemoTabs';
 import ScrollResetOnLoad from '@/components/effects/ScrollResetOnLoad';
 import SectionReveal from '@/components/effects/SectionReveal';
+import CtaScrollExpand from '@/components/effects/CtaScrollExpand';
 
 const QR_OPTS = {
   type: 'svg' as const,
@@ -84,6 +85,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
     <>
       <ScrollResetOnLoad />
       <SectionReveal />
+      <CtaScrollExpand />
       {/* ==================== Sub Navigation ==================== */}
       <SubNav />
 

@@ -3813,16 +3813,26 @@ main:has(#releases) + .footer .footer-rule {
   align-items: center;
   gap: 36px;
   background: linear-gradient(115deg, #FEBF1D 0%, #F2A300 100%);
-  /* Near-full-width band: breaks out of .container but keeps a 24px gap on
-     each side (不完全靠边) + rounded corners on all sides. Content stays
-     aligned to the container's content edges via the horizontal padding
-     (1392px = --max-width 1440 minus the .container 2×24px gutter). */
-  width: calc(100vw - 48px);
+  /* Scroll-driven width. Starts CONTAINED (≤1360px) then expands toward a
+     near-full-bleed band (100vw - 48px, 24px gap each side) as the section
+     scrolls toward the screen middle — --cta-expand (0→1) is written by
+     CtaScrollExpand.tsx (defaults to 1 so SSR / no-JS shows the full band).
+     Centring uses left:50% (→ container-content centre == viewport centre)
+     + a negative half-width margin, so it stays centred at any width.
+     Padding interpolates from a contained inset to the full-bleed inset that
+     aligns content to the container edges (1392px = --max-width 1440 − 48). */
+  --cta-expand: 1;
+  --cta-base: min(1360px, calc(100vw - 48px));
+  --cta-full: calc(100vw - 48px);
+  --cta-w: calc(var(--cta-base) + (var(--cta-full) - var(--cta-base)) * var(--cta-expand));
+  width: var(--cta-w);
   left: 50%;
-  margin-left: calc(-50vw + 24px);
+  margin-left: calc(var(--cta-w) / -2);
   border-radius: 28px;
-  padding: 52px max(40px, calc((100vw - 1392px) / 2 - 24px));
+  padding-block: 52px;
+  padding-inline: calc(56px + (max(40px, calc((100vw - 1392px) / 2 - 24px)) - 56px) * var(--cta-expand));
   box-shadow: 0 30px 60px -28px rgba(242, 163, 0, 0.5);
+  transition: width 0.18s ease-out, margin-left 0.18s ease-out, padding-inline 0.18s ease-out;
 }
 .cta-banner-media {
   align-self: end;
