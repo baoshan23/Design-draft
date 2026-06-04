@@ -4927,10 +4927,9 @@ main + .footer-reveal-wrap {
   padding-bottom: 24px;
   vertical-align: middle;
   line-height: 1.15;
-  /* Soft downward elevation so when the row is PINNED (scrolling the body
-     beneath it) it reads as a floating bar, not part of the scroll. Barely
-     visible at rest. */
-  box-shadow: 0 8px 14px -10px rgba(0, 0, 0, 0.28);
+  /* Downward elevation so when the row is PINNED (scrolling the body beneath
+     it) it reads clearly as a floating bar, not part of the scroll. */
+  box-shadow: 0 12px 22px -10px rgba(0, 0, 0, 0.4);
 }
 
 /* Additional spacing OUTSIDE the yellow thead so the first data row
