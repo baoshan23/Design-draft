@@ -3778,6 +3778,26 @@ main:has(#releases) + .footer .footer-rule {
   display: none;
 }
 
+/* Homepage: round the BOTTOM corners of the grey CTA section (the last content
+   block before the dark footer) — same treatment as b2b #releases. The grey CTA
+   sits above the footer (z-index:1) and the footer is pulled up by the same
+   radius so its dark #181818 fills the carved corner notches; the footer's top
+   edge is hidden behind the CTA so its border/pinstripe is dropped here to avoid
+   a stray line in the notches. Scoped to the homepage via main:has(#testimonials). */
+main:has(#testimonials) .cta-section {
+  position: relative;
+  z-index: 1;
+  border-bottom-left-radius: clamp(20px, 3vw, 36px);
+  border-bottom-right-radius: clamp(20px, 3vw, 36px);
+}
+main:has(#testimonials) + .footer {
+  margin-top: clamp(-36px, -3vw, -20px);
+  border-top: none;
+}
+main:has(#testimonials) + .footer .footer-rule {
+  display: none;
+}
+
 .cta-section::before {
   content: '';
   position: absolute;
