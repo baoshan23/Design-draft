@@ -6,31 +6,34 @@ import type { ReactNode } from 'react';
 const LOGO_NODE: Record<string, ReactNode> = {
   // The colored pill (rect) is inset with even margins on all four sides of the
   // 120x56 viewBox (x=10..110, y=6..50 → pill center stays 60,28), so it reads
-  // as a centered block within the square tile rather than a full-bleed band
-  // hugging the L/R edges. Text is centered on the pill center via
-  // dominantBaseline=middle.
+  // as a centered block within the square tile. The wordmark is centered ON the
+  // pill via an EXPLICIT baseline y (NOT dominant-baseline:central, which centers
+  // on the font's em-box and drifts with system-ui font fallback — esp. CJK).
+  // Each y was tuned per word in headless Chromium to land the glyph bbox within
+  // ±0.5px of the pill's vertical centre (28): baseline ≈ 28 + ~0.36·fontSize,
+  // adjusted for ascenders/descenders (tabby's 'y' descender → higher position).
   MoMo: (
     <svg viewBox="0 0 120 56" width="120" height="56" preserveAspectRatio="xMidYMid meet" role="img" aria-label="MoMo">
       <rect x="10" y="6" width="100" height="44" rx="11" fill="#A50064" />
-      <text x="60" y="28" textAnchor="middle" dominantBaseline="central" fill="#FFFFFF" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="22" fontWeight="800" letterSpacing="-0.5">MoMo</text>
+      <text x="60" y="36" textAnchor="middle" fill="#FFFFFF" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="22" fontWeight="800" letterSpacing="-0.5">MoMo</text>
     </svg>
   ),
   'Toss Pay': (
     <svg viewBox="0 0 120 56" width="120" height="56" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Toss Pay">
       <rect x="10" y="6" width="100" height="44" rx="11" fill="#0064FF" />
-      <text x="60" y="28" textAnchor="middle" dominantBaseline="central" fill="#FFFFFF" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="18" fontWeight="800" letterSpacing="-0.3">Toss Pay</text>
+      <text x="60" y="35" textAnchor="middle" fill="#FFFFFF" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="18" fontWeight="800" letterSpacing="-0.3">Toss Pay</text>
     </svg>
   ),
   Tabby: (
     <svg viewBox="0 0 120 56" width="120" height="56" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Tabby">
       <rect x="10" y="6" width="100" height="44" rx="11" fill="#292929" />
-      <text x="60" y="28" textAnchor="middle" dominantBaseline="central" fill="#3BFFC1" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="20" fontWeight="800" letterSpacing="0">tabby</text>
+      <text x="60" y="33" textAnchor="middle" fill="#3BFFC1" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="20" fontWeight="800" letterSpacing="0">tabby</text>
     </svg>
   ),
   Sezzle: (
     <svg viewBox="0 0 120 56" width="120" height="56" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Sezzle">
       <rect x="10" y="6" width="100" height="44" rx="11" fill="#9B5BFC" />
-      <text x="60" y="28" textAnchor="middle" dominantBaseline="central" fill="#FFFFFF" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="20" fontWeight="800" letterSpacing="0">sezzle</text>
+      <text x="60" y="35" textAnchor="middle" fill="#FFFFFF" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="20" fontWeight="800" letterSpacing="0">sezzle</text>
     </svg>
   ),
 };

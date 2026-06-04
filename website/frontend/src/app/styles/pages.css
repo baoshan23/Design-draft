@@ -1712,7 +1712,9 @@ h3.matrix-header,
 }
 .b2b-arch-core {
   position: absolute;
-  top: 50%;
+  /* Sit lower than the geometric centre — in the band the user red-boxed
+     (just below where the orbit ellipses cross). */
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: min(48%, 640px);
