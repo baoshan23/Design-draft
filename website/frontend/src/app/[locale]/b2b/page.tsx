@@ -178,7 +178,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
           <ScrollAnimation>
             <div className="b2b-arch">
               <Image
-                src="/images/b2b-architecture-v2.png"
+                src={locale === 'zh' ? '/images/b2b-architecture-zh.png' : '/images/b2b-architecture-v2.png'}
                 alt={t('b2b.overview.title')}
                 width={1920}
                 height={1064}
