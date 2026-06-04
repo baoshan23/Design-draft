@@ -3770,11 +3770,14 @@ html {
 .page-transition > section:last-of-type {
   position: relative;
   z-index: 1;
-  border-bottom-left-radius: clamp(20px, 3vw, 36px);
-  border-bottom-right-radius: clamp(20px, 3vw, 36px);
+  border-bottom-left-radius: clamp(24px, 3vw, 44px);
+  border-bottom-right-radius: clamp(24px, 3vw, 44px);
 }
+/* Pull the footer up by AT LEAST the radius so its dark #181818 fully fills the
+   carved corner notches (if the pull is shallower than the radius, the top of
+   the notch shows the white body instead and the rounding reads as "square"). */
 main + .footer {
-  margin-top: clamp(-36px, -3vw, -20px);
+  margin-top: clamp(-44px, -3vw, -24px);
   border-top: none;
 }
 main + .footer .footer-rule {
