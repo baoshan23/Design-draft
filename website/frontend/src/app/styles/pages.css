@@ -3192,21 +3192,21 @@ body:has(.product-hero.particles-bg) #features.section-alt {
 }
 
 /* 营收→功能 sticky-stack wrapper (b2b page.tsx wraps #revenue + #features).
-   #revenue becomes a full-screen sticky panel that PINS at the top with its
-   content vertically centred ("营收在屏幕正中间"); #features (z-index 2, opaque,
-   above) then rises as a whole to cover it on scroll. The wrapper bounds
-   #revenue's sticky range to just this pair, so it releases before #support and
-   never bleeds over later sections. */
+   #revenue keeps its NATURAL height + normal section padding (so the gaps to
+   #modes above and #features below stay compact — user: 恢复之前的间距), and
+   simply PINS roughly screen-centred via a `top` offset (NOT min-height:100vh,
+   which forced a full-screen panel and blew the gaps open). #features (z-index 2,
+   opaque, above) then rises as a whole to cover it on scroll — animation
+   unchanged. The wrapper bounds #revenue's sticky range to just this pair, so it
+   releases before #support and never bleeds over later sections.
+   `top` ≈ (viewport − ~600px revenue) / 2, clamped so it never tucks under the
+   nav or sits too low. */
 .b2b-revfeat-stack {
   position: relative;
 }
 body:has(.product-hero.particles-bg) #revenue.b2b-revenue-section {
   position: sticky;
-  top: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  top: clamp(88px, calc(50vh - 300px), 30vh);
   z-index: 1;
 }
 /* The sticky #revenue must not also be transform-offset by the JS fade-up
@@ -3215,13 +3215,11 @@ body:has(.product-hero.particles-bg) #revenue.b2b-revenue-section.section-reveal
   opacity: 1;
   transform: none;
 }
-/* Mobile: drop the full-screen pin — revenue content can exceed the viewport
-   on a phone, so just flow normally. */
+/* Mobile: drop the pin — revenue content can exceed the viewport on a phone,
+   so just flow normally. */
 @media (max-width: 900px) {
   body:has(.product-hero.particles-bg) #revenue.b2b-revenue-section {
     position: static;
-    min-height: 0;
-    display: block;
   }
 }
 
