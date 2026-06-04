@@ -970,7 +970,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  height: min(72vh, 560px);
+  height: min(86vh, 700px);
   background: var(--primary, #FEBF1D);
 }
 .footer-reveal-word {
@@ -985,7 +985,7 @@
 }
 @media (max-width: 600px) {
   .footer-reveal {
-    height: min(48vh, 360px);
+    height: min(60vh, 460px);
   }
 }
 
