@@ -6240,7 +6240,10 @@ main + .footer-reveal-wrap {
   position: relative;
   z-index: 3;
   margin-top: clamp(-104px, -8.5vw, -64px);
-  padding-top: clamp(12px, 2vh, 20px); /* grey panel leads so it overlaps */
+  /* grey panel leads the cover with NO white strip above it (user:
+     "做切屏叠盖时，直接是灰色块背景去叠盖") — the grey inset panel's top edge is
+     flush with the section top so the GREY directly covers the block above. */
+  padding-top: 0;
 }
 
 /* 白色 → 灰色 切屏：灰色块"叠盖"上滑 (cover-on-scroll).
