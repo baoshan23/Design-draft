@@ -6102,10 +6102,20 @@ main:has(#releases) + .footer .footer-rule {
 }
 .b2c-demo-section .container,
 #demo.b2b-demo-section .container {
-  max-width: none;
   background: var(--dark);
   border-radius: clamp(20px, 3vw, 32px);
+}
+/* b2c: near-full-bleed panel — its inner grid has its own max-width so the
+   content stays centred regardless. */
+.b2c-demo-section .container {
+  max-width: none;
   padding: clamp(48px, 7vw, 88px) clamp(20px, 4vw, 56px);
+}
+/* b2b: ONLY the background changes — keep the default container max-width +
+   the original 24px horizontal padding so the demo grid (no max-width of its
+   own) is NOT stretched / re-laid-out. Add vertical padding for the panel. */
+#demo.b2b-demo-section .container {
+  padding: clamp(48px, 7vw, 88px) 24px;
 }
 
 /* 售后服务(white) → 系统演示: the grey demo panel does a contained "叠盖"
