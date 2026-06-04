@@ -107,7 +107,7 @@
   height: var(--header-height);
   z-index: 100;
   background: transparent;
-  border: 1px solid #000;
+  border: 2px solid #000;
   border-radius: 9999px;
   box-shadow: none;
   transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
