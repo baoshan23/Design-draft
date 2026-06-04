@@ -3167,7 +3167,7 @@ h3.matrix-header,
         sticky pin (NOT a cover-rise down-push) does the covering. */
   position: relative;
   z-index: 3;
-  margin-top: clamp(-16px, -1vw, -8px);
+  margin-top: clamp(-8px, -0.5vw, 0px);
   padding-top: 0;
 }
 #how-it-works.section-alt .container {
