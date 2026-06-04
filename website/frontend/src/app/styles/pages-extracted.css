@@ -2623,7 +2623,7 @@ html[data-theme="dark"] .hero.hero-centered {
   /* Matches the hero-dashboard-13.png aspect so the whole dashboard shows
      (no crop) at natural size; overridden to height:100% on large screens
      where it flex-fills + crops via the bottom mask. */
-  aspect-ratio: 2400 / 691;
+  aspect-ratio: 2400 / 1317;
   height: auto;
   border-radius: 16px;
   background: #ffffff;
