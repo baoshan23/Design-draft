@@ -35,9 +35,21 @@ export default function SectionReveal() {
       el.classList.contains('cta-banner') ||
       el.querySelector('.b2c-feature-stack') !== null;
 
-    const panels = Array.from(document.querySelectorAll<HTMLElement>('section')).filter(
-      (el) => !skip(el)
-    );
+    // Effective bg of EVERY section (transparent → white, since the page is
+    // white). Used to decide where a "colour-block switch" actually happens.
+    const norm = (c: string) =>
+      c === 'rgba(0, 0, 0, 0)' || c === 'transparent' ? 'rgb(255, 255, 255)' : c;
+    const allSections = Array.from(document.querySelectorAll<HTMLElement>('section'));
+    const bgs = allSections.map((s) => norm(getComputedStyle(s).backgroundColor));
+    // A section's bg differs from the section directly above it → a real
+    // colour change. White→white (same colour) gets NO switch animation.
+    const isColorChange = (sec: HTMLElement) => {
+      const i = allSections.indexOf(sec);
+      const prevBg = i > 0 ? bgs[i - 1] : 'rgb(255, 255, 255)';
+      return bgs[i] !== prevBg;
+    };
+
+    const panels = allSections.filter((el) => !skip(el));
 
     const headerH =
       parseInt(
@@ -58,9 +70,10 @@ export default function SectionReveal() {
         sec.style.backgroundColor = '#fff';
       }
 
-      // Pin only blocks that fit a screen — taller ones would hide their own
-      // lower content if frozen at the top.
-      if (sec.getBoundingClientRect().height <= vh * 0.96) {
+      // Pin (freeze-then-cover) ONLY where the colour changes AND the block
+      // fits a screen. Same-colour blocks (e.g. white→white) just flow + cover
+      // via z-index, so there is no visible switch between them.
+      if (isColorChange(sec) && sec.getBoundingClientRect().height <= vh * 0.96) {
         sec.classList.add('section-panel--pin');
         sec.style.top = `${pinTop}px`;
       }
@@ -83,6 +96,9 @@ export default function SectionReveal() {
     panels.forEach((sec) => {
       // Skip anything already in / near the first screen so it never flickers.
       if (sec.getBoundingClientRect().top < vh * 0.85) return;
+      // Only animate the switch when the colour actually changes from the
+      // section above (user: 白色到白色无切屏效果 — same colour = seamless).
+      if (!isColorChange(sec)) return;
       sec.classList.add('section-reveal');
       io.observe(sec);
     });
