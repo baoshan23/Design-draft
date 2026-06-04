@@ -2472,15 +2472,19 @@ html[data-theme="dark"] .hero.hero-centered {
   background-repeat: no-repeat;
   margin: 0;
   border-radius: 0;
-  /* First-fold target: hero + trusted-bar (180) = 100vh, so the marquee
-     still lands flush with the viewport bottom. `max-height` keeps content
-     overflow from pushing the marquee out of the first fold. */
+  /* First-fold TARGET only — `min-height` lets the hero fill the fold on
+     tall screens, but NO `max-height`/`overflow:hidden` cap so that on
+     short/adaptive viewports the hero GROWS with its content instead of
+     crushing the title + dashboard bg + stats into one overlapping stack.
+     The trusted-logo bar (合作商) is a separate section after this one, so
+     it just flows naturally below the hero rather than being pinned to the
+     fold (user: 不用固定死在首屏底部 — pinning caused the title/content/bg
+     to overlap on responsive sizes). */
   min-height: calc(100vh - 180px);
   min-height: calc(100svh - 180px);
-  max-height: calc(100svh - 180px);
   padding: calc(72px + clamp(8px, 1.5vh, 24px)) clamp(16px, 3vw, 32px) clamp(12px, 1.5vh, 24px);
   isolation: isolate;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -2490,7 +2494,6 @@ html[data-theme="dark"] .hero.hero-centered {
   html:not([data-theme="dark"]) .hero.hero-centered,
   html[data-theme="dark"] .hero.hero-centered {
     min-height: calc(100svh - 180px);
-    max-height: calc(100svh - 180px);
   }
 }
 
@@ -2509,7 +2512,7 @@ html[data-theme="dark"] .hero.hero-centered {
   min-height: 0;
   padding: clamp(38px, calc(5vh + 10px), 90px) clamp(24px, 3vw, 48px) 0;
   background: transparent;
-  overflow: hidden;
+  overflow: visible;
   flex: 1 1 auto;
 }
 
