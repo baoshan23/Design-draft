@@ -60,7 +60,7 @@ export default function LanguageMap() {
       if (wrapperRef.current) {
         setDims({
           w: wrapperRef.current.clientWidth,
-          h: Math.max(640, Math.round(wrapperRef.current.clientWidth * 0.72)),
+          h: Math.max(600, Math.round(wrapperRef.current.clientWidth * 0.66)),
         });
       }
     };
@@ -90,6 +90,25 @@ export default function LanguageMap() {
     const { w, h } = dims;
     const projection = d3.geoNaturalEarth1().fitExtent([[16, 16], [w - 16, h - 16]], worldData);
     const path = d3.geoPath().projection(projection);
+
+    // fitExtent "contains" the map (fits to width on a wide world map), so on a
+    // tall card it leaves big empty bands top/bottom and the map looks small.
+    // Scale it up to FILL the card height (cover); horizontal overflow is clipped
+    // by .language-map's overflow:hidden so the map reads as large as the card.
+    {
+      const b = path.bounds(worldData);
+      const mapH = b[1][1] - b[0][1];
+      const targetH = h - 32;
+      if (mapH > 0 && targetH / mapH > 1.01) {
+        projection.scale(projection.scale() * (targetH / mapH));
+        const nb = path.bounds(worldData);
+        const [tx, ty] = projection.translate();
+        projection.translate([
+          tx + (w / 2 - (nb[0][0] + nb[1][0]) / 2),
+          ty + (h / 2 - (nb[0][1] + nb[1][1]) / 2),
+        ]);
+      }
+    }
 
     const defs = svg.append('defs');
     const oceanGrad = defs.append('linearGradient')
