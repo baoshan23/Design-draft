@@ -102,8 +102,10 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
               <p className="hero-desc">{t('product.desc')}</p>
               <div className="hero-buttons">
                 <a href="#demo" className="btn btn-primary btn-lg">
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor"><path d="M7.5 4.5v9l6-4.5-6-4.5z" /></svg>
                   <span>{t('product.cta1')}</span>
+                  <svg className="hero-btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M7 17L17 7M17 7H8M17 7v9" />
+                  </svg>
                 </a>
                 <a href="#license" className="btn btn-secondary btn-lg">
                   <span>{t('product.cta2')}</span>

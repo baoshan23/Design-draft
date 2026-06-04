@@ -112,11 +112,10 @@ export default function Header() {
       <div className="container">
         <Link href="/" className="logo" onClick={closeMenu}>
           <Image
-            src="/assets/logo.png"
+            src="/assets/logo-gcss.png"
             alt="GCSS"
             width={52}
             height={52}
-            style={{ borderRadius: '11px' }}
           />
           <span>GCSS</span>
         </Link>

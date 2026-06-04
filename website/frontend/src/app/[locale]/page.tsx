@@ -8,7 +8,7 @@ import BusinessModelsSection from '@/components/sections/home/BusinessModelsSect
 import MobileShowcase from '@/components/sections/home/MobileShowcase';
 import MobileHeroTabs from '@/components/sections/home/MobileHeroTabs';
 import { DiagramModalProvider } from '@/components/sections/home/DiagramModal';
-import GlobeVisualization from '@/components/sections/home/GlobeVisualization';
+import CoverageMap from '@/components/sections/home/CoverageMap';
 import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
 import TestimonialsTabs from '@/components/sections/home/TestimonialsTabs';
 import ScrollResetOnLoad from '@/components/effects/ScrollResetOnLoad';
@@ -56,17 +56,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
               <div className="hero-buttons">
                 <Link href="/b2c" className="btn btn-primary btn-lg">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
                   <span>{t('hero.cta1')}</span>
+                  <svg className="hero-btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M7 17L17 7M17 7H8M17 7v9" />
+                  </svg>
                 </Link>
                 <Link href="/pricing" className="btn btn-secondary btn-lg">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" y1="15" x2="12" y2="3" />
-                  </svg>
                   <span>{t('hero.cta2')}</span>
                 </Link>
               </div>
@@ -389,7 +384,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </ScrollAnimation>
         </div>
         <div className="map-fullbleed">
-          <GlobeVisualization />
+          <CoverageMap />
         </div>
       </section>
 
