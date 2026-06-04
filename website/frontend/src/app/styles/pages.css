@@ -3169,7 +3169,14 @@ h3.matrix-header,
 }
 #how-it-works.section-alt .container {
   max-width: none;
-  background: #FEF1D6;
+  /* Same yellow as the B2B #features band, but ending directly in white
+     (yellow → white, top → bottom) per user. */
+  background: linear-gradient(
+    180deg,
+    rgba(254, 191, 29, 0.22) 0%,
+    #ffffff 100%
+  );
+  background-color: #ffffff;
   border-radius: clamp(20px, 3vw, 32px);
   padding: clamp(48px, 7vw, 88px) clamp(20px, 4vw, 56px);
 }
