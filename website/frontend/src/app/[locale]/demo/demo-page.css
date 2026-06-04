@@ -102,8 +102,10 @@
 /* ---------- Hero ---------- */
 .demo-hero {
   position: relative;
-  padding: 120px 0 80px;
+  margin: calc(var(--header-height, 72px) + 12px) clamp(16px, 3vw, 40px) 12px;
+  padding: clamp(48px, 6vw, 80px) 0;
   overflow: hidden;
+  border-radius: clamp(24px, 3vw, 44px);
   background: #FEBF1D;
 }
 
@@ -655,7 +657,9 @@
 
 @media (max-width: 720px) {
   .demo-hero {
-    padding: 96px 0 64px;
+    margin: calc(var(--header-height, 72px) + 8px) 8px 8px;
+    padding: 56px 0;
+    border-radius: 20px;
   }
 
   .demo-hero-stats {
