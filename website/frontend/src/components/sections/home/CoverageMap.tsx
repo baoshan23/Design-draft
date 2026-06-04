@@ -102,6 +102,28 @@ export default function CoverageMap() {
         map.touchZoomRotate.disableRotation();
         map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
 
+        // Localise the basemap's own place/country labels to the site language.
+        // OpenFreeMap (OpenMapTiles schema) exposes name:zh / name:en fields;
+        // fall back to latin/native when a translation is missing.
+        const localeName =
+          locale === 'zh'
+            ? ['coalesce', ['get', 'name:zh'], ['get', 'name:zh-Hans'], ['get', 'name:latin'], ['get', 'name']]
+            : ['coalesce', ['get', 'name:en'], ['get', 'name:latin'], ['get', 'name']];
+        const localizeLabels = () => {
+          for (const layer of map.getStyle().layers || []) {
+            if (layer.type !== 'symbol') continue;
+            try {
+              const tf = map.getLayoutProperty(layer.id, 'text-field');
+              if (tf != null) map.setLayoutProperty(layer.id, 'text-field', localeName);
+            } catch {
+              /* layer without a text-field — skip */
+            }
+          }
+        };
+        map.on('load', localizeLabels);
+        // Style can reload (e.g. on HMR) — re-apply on every styledata event too.
+        map.on('styledata', localizeLabels);
+
         // Station-style markers (go-electra: a lightning bolt inside a circle).
         // Built as HTML markers so every served location is always visible and
         // prominent, with the location name labelled beneath it.
