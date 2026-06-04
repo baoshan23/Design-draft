@@ -97,8 +97,8 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <Link href="/" className="logo footer-logo">
-              G<span>CSS</span>
+            <Link href="/" className="logo footer-logo" aria-label="GCSS">
+              <img src="/assets/logo-gcss-gold.png" alt="GCSS" />
             </Link>
             <p className="footer-tagline">{t('tagline')}</p>
 
@@ -190,10 +190,10 @@ export default function Footer() {
       </div>
     </footer>
 
-    {/* go-electra-style sticky reveal: a giant GCSS logo pinned to the
+    {/* go-electra-style sticky reveal: a giant GCSS wordmark pinned to the
         viewport bottom that the dark footer scrolls up to uncover. */}
     <section className="footer-reveal" aria-hidden="true">
-      <img className="footer-reveal-logo" src="/assets/logo-gcss-reveal.png" alt="" />
+      <span className="footer-reveal-word">GCSS</span>
     </section>
     </div>
   );

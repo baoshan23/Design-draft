@@ -965,19 +965,19 @@
   height: min(72vh, 560px);
   background: var(--primary, #FEBF1D);
 }
-.footer-reveal-logo {
-  width: min(64vw, 760px);
-  height: auto;
+.footer-reveal-word {
+  font-weight: 800;
+  font-size: 38vw;
+  line-height: 0.78;
+  letter-spacing: -0.02em;
+  color: #181818;
+  white-space: nowrap;
   user-select: none;
   -webkit-user-select: none;
-  pointer-events: none;
 }
 @media (max-width: 600px) {
   .footer-reveal {
     height: min(48vh, 360px);
-  }
-  .footer-reveal-logo {
-    width: 80vw;
   }
 }
 
@@ -1254,16 +1254,14 @@
 /* Scoped overrides: yellow brand wordmark + column headers. The wordmark
    is now text-only (no Image), sized large to match the Moss reference. */
 .footer-logo {
-  font-size: 64px !important;
-  line-height: 1;
   gap: 0 !important;
-  color: var(--primary) !important;
-  letter-spacing: -0.02em;
-  margin-top: -14px !important;
+  margin-top: -4px !important;
   margin-bottom: 16px !important;
 }
-.footer-logo span {
-  color: var(--primary);
+.footer-logo img {
+  height: 64px;
+  width: auto;
+  display: block;
 }
 .footer-col h4,
 .footer h4 {
