@@ -5317,9 +5317,13 @@ main + .footer .footer-rule {
   transition: background 0.2s ease, padding 0.2s ease;
 }
 
+/* Auto-cycling active row → gold-filled icon tile with a dark glyph (matches
+   the b2c #features icon flip). Static rows are transparent + black icon. */
 .mobile-showcase-list-item.is-active .mobile-showcase-list-icon {
   background: var(--primary);
-  color: #ffffff;
+  border-color: transparent;
+  color: #1a1a1a;
+  box-shadow: 0 0 18px rgba(254, 191, 29, 0.35);
 }
 
 .mobile-showcase-list-item.is-active .mobile-showcase-list-text strong {
@@ -5338,9 +5342,14 @@ main + .footer .footer-rule {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: rgba(254, 191, 29, 0.14);
-  color: var(--primary);
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #181818;
   flex-shrink: 0;
+  transition: background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .mobile-showcase-list-text {
