@@ -4658,9 +4658,10 @@ main + .footer .footer-rule {
 
 .addon-card {
   background: transparent;
-  border: none;
-  border-radius: 0;
-  padding: 24px 16px;
+  /* Card border matching the site's other cards (user: 参考其他边线颜色，统一). */
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 28px 22px;
   flex-direction: column;
   align-items: center;
   text-align: center;
