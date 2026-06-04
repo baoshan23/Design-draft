@@ -457,6 +457,9 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
       </section>
 
       {/* ==================== Section 6: After-sales Service ==================== */}
+      {/* 售后(#support) → 系统演示(#demo) sticky-stack — mirrors the b2b 营收→功能
+         pair: #support pins while the #demo screen rises up and 叠盖s (covers) it. */}
+      <div className="b2c-supdemo-stack">
       <section className="section section-alt" id="support">
         <div className="container">
           <ScrollAnimation>

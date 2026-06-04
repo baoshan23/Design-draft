@@ -182,7 +182,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                 alt={t('b2b.overview.title')}
                 width={1920}
                 height={1064}
-                sizes="(max-width: 1320px) 100vw, 1320px"
+                sizes="(max-width: 1440px) 100vw, 1440px"
                 style={{ width: '100%', height: 'auto', display: 'block' }}
               />
               {/* Centered title overlay (text in the empty middle of the orbit). */}
