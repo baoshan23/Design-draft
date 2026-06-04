@@ -103,6 +103,8 @@ export default function CoverageMap() {
           dragRotate: false,
           pitchWithRotate: false,
           touchPitch: false,
+          // Don't tile/repeat the world horizontally — show a single globe.
+          renderWorldCopies: false,
           attributionControl: { compact: true },
         });
         mapRef.current = map;

@@ -106,7 +106,7 @@
   margin-right: auto;
   height: var(--header-height);
   z-index: 100;
-  background: transparent;
+  background: #ffffff;
   border: 2px solid #000;
   border-radius: 9999px;
   box-shadow: none;

@@ -2898,6 +2898,14 @@ h3.matrix-header,
   max-width: 110px;
 }
 
+/* Enlarge a few wide wordmarks that read small at the default 44px height */
+.marquee-item img[alt="Lifud"],
+.marquee-item img[alt="TOPSTAR"],
+.marquee-item img[alt="Xupernova"] {
+  height: 64px;
+  max-width: 260px;
+}
+
 @keyframes marqueeScroll {
   0% {
     transform: translateX(0);
