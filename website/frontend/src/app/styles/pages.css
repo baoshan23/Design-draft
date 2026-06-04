@@ -932,15 +932,21 @@
 
 /* ── go-electra-style footer reveal ────────────────────────────────────────
    A full-width yellow panel with a giant black "GCSS" wordmark, placed AFTER
-   the dark footer in the DOM. It is `position:sticky; bottom:0` and pinned to
-   the viewport bottom while the page scrolls; `z-index:-1` keeps it BEHIND the
-   opaque dark footer (z-index:0) and main (z-index:1) so it stays hidden until
-   the footer scrolls up off it at the very bottom — uncovering the wordmark in
-   a clean wipe, exactly like https://www.go-electra.com/ . */
+   the dark footer INSIDE a `.footer-reveal-wrap` container. The panel is
+   `position:sticky; bottom:0` so it pins to the viewport bottom — but only
+   WHILE its containing block (the wrap) intersects the viewport, i.e. near the
+   very bottom of the page. While you scroll through `main`, the wrap is still
+   below the fold so the panel is NOT pinned and stays off-screen — this is what
+   stops it leaking through transparent `main` sections. The opaque dark footer
+   (z-index:2) sits over the panel (z-index:1) and scrolls up off it at the
+   bottom, uncovering the wordmark in a clean wipe (like go-electra). */
+.footer-reveal-wrap {
+  position: relative;
+}
 .footer-reveal {
   position: sticky;
   bottom: 0;
-  z-index: -1;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -90,7 +90,7 @@ export default function Footer() {
   };
 
   return (
-    <>
+    <div className="footer-reveal-wrap">
     <footer className="footer">
       <div className="footer-rule" aria-hidden="true" />
 
@@ -195,6 +195,6 @@ export default function Footer() {
     <section className="footer-reveal" aria-hidden="true">
       <span className="footer-reveal-word">GCSS</span>
     </section>
-    </>
+    </div>
   );
 }
