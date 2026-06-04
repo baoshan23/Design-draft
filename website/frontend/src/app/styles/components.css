@@ -348,9 +348,10 @@ body:has(.hero-with-video) .sub-nav {
   min-width: 0;
   max-width: none;
   transform: translateY(12px);
-  background: rgba(255, 255, 255, 0.65);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
+  /* Solid white, no frosted glass (user: 取消磨砂玻璃效果，直接做白). */
+  background: #ffffff;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
   border: none;
   /* No drop-shadow — a 1px line separates the panel from the page below
      (user: 下拉菜单投影取消，用线条做区分). */
