@@ -6261,24 +6261,16 @@ main + .footer-reveal-wrap {
 #demo.b2b-demo-section {
   position: relative;
   z-index: 3;
-  /* The previous `.section` (#support / #contact-cta) has a FIXED 120px bottom
-     padding; pull the grey panel up by exactly that so its top edge meets the
-     dark contact banner's bottom — NO white strip between them (user red-boxed
-     the residual white gap). The old clamp only reached -104px → left a
-     16-56px white strip. */
-  margin-top: -120px;
-  /* grey panel leads the cover with NO white strip above it (user:
-     "做切屏叠盖时，直接是灰色块背景去叠盖") — the grey inset panel's top edge is
-     flush with the section top so the GREY directly covers the block above. */
+  /* Keep a resting gap between the dark contact banner and the grey panel (user:
+     "恢复和灰色背景的间距") — the negative margin overlaps part of the previous
+     `.section`'s 120px bottom padding, leaving a visible gap at rest. The COVER
+     itself happens DURING SCROLL via the `.section-stack` sticky pin: #support
+     pins while #demo (z-index:3) rises up and 叠盖s over it, so the grey block
+     directly covers as you scroll ("滑动交互时，灰色块直接覆盖叠盖切屏"). */
+  margin-top: clamp(-104px, -8.5vw, -64px);
+  /* padding-top:0 so the grey inset panel's top edge is flush with the section
+     top → the GREY (not a white strip) leads the cover. */
   padding-top: 0;
-}
-/* ≤480px the previous `.section` bottom padding compresses to 48px (base.css),
-   so match the overlap there to avoid over-pulling the grey over the banner. */
-@media (max-width: 480px) {
-  .b2c-demo-section,
-  #demo.b2b-demo-section {
-    margin-top: -48px;
-  }
 }
 
 /* 白色 → 灰色 切屏：灰色块"叠盖"上滑 (cover-on-scroll).
