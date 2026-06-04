@@ -1706,9 +1706,14 @@ h3.matrix-header,
    gold pill). The .b2b-hub* rules above are now dead/unused.
    ============================================================ */
 .b2b-arch {
+  /* Break out of the 1440 .container so the illustration can grow a little
+     wider than the container content width; stays viewport-centred. */
+  --arch-w: min(1560px, calc(100vw - 32px));
   position: relative;
-  max-width: 1440px;
-  margin: 0 auto;
+  width: var(--arch-w);
+  max-width: none;
+  left: 50%;
+  margin-left: calc(var(--arch-w) / -2);
 }
 .b2b-arch-core {
   position: absolute;
