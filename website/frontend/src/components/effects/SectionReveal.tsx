@@ -82,6 +82,16 @@ export default function SectionReveal() {
         (sec.previousElementSibling as HTMLElement | null)?.id === 'testimonials';
       if (isHomeCta) return;
 
+      // #demo (系统演示) lives inside a `.section-stack`: the previous section
+      // PINS (sticky) and #demo scrolls up over it (z-index:3 + negative margin),
+      // so the sticky stack ALREADY produces the 叠盖 cover. The scroll-linked
+      // cover-rise below would additionally shove the inset grey panel DOWN by
+      // COVER_OFFSET (120px) during scroll-in, exposing the white section bg
+      // above the grey panel — that's the white strip the user sees covering
+      // first. Skip #demo so ONLY the grey block covers, directly. (user:
+      // "做切屏叠盖时，直接是灰色块背景去叠盖")
+      if (sec.id === 'demo') return;
+
       if (featCover || (secBg === GREY && prevBg === WHITE)) {
         covers.push({ sec, el: sec }); // full-bleed grey block
       } else if (panelGrey) {
