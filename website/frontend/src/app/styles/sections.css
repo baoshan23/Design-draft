@@ -178,10 +178,10 @@
   color: #6C717A;
 }
 
-/* Primary CTA on the hero — solid 100% gold, white text + icon. */
+/* Primary CTA on the hero — solid 100% gold, black text + icon. */
 .hero-with-video .btn-primary {
   background: var(--primary);
-  color: #ffffff;
+  color: #1a1a1a;
   border: none;
   box-shadow: none;
   backdrop-filter: none;
@@ -192,7 +192,7 @@
 }
 .hero-with-video .btn-primary:hover {
   background: var(--primary);
-  color: #ffffff;
+  color: #1a1a1a;
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
   filter: none;
@@ -4990,8 +4990,7 @@ main + .footer .footer-rule {
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-bottom: 1px solid var(--border-subtle);
   position: fixed;
-  /* Sits flush below the floating pill nav (pill = top:12px + 72px height). */
-  top: calc(var(--header-height) + 12px);
+  top: var(--header-height);
   left: 0;
   right: 0;
   z-index: 99;
