@@ -3738,23 +3738,23 @@ html {
   position: relative;
 }
 
-/* Homepage white(#testimonials) → grey(CTA) "叠盖": the grey CTA block is now
-   the one on TOP — rounded-top corners + higher z-index + a negative margin so
-   it overlaps and COVERS the bottom of the white testimonials section (grey
-   covers white, per user). The white section stays flat (its old rounded-bottom
-   is hidden behind the grey anyway). NO shadow. Rise-on-scroll = .cover-rise.
+/* Homepage white(#testimonials) → grey(CTA): the WHITE section is the one with
+   the rounded corners (rounded BOTTOM) and sits on TOP (higher z-index); the grey
+   CTA is pulled UP behind it by the same radius so its grey fills the carved
+   corner notches. So the white block reads as a rounded-bottom card with grey
+   peeking in the corners — per user (白色做圆角, not 灰色). NO shadow.
    Scoped via the adjacent #testimonials sibling so only the homepage is hit. */
 #testimonials {
   background: #fff;
   position: relative;
-  z-index: 1;
+  z-index: 3;
+  border-bottom-left-radius: clamp(24px, 3vw, 44px);
+  border-bottom-right-radius: clamp(24px, 3vw, 44px);
 }
 #testimonials + .cta-section {
   position: relative;
-  z-index: 3;
+  z-index: 1;
   margin-top: clamp(-72px, -6vw, -44px);
-  border-top-left-radius: clamp(24px, 3vw, 44px);
-  border-top-right-radius: clamp(24px, 3vw, 44px);
 }
 
 /* b2b: round the BOTTOM corners of the white #releases section (the last content
@@ -6145,37 +6145,14 @@ main:has(#releases) + .footer .footer-rule {
   padding-top: clamp(12px, 2vh, 20px); /* grey panel leads so it overlaps */
 }
 
-/* ===========================================================
-   白色 → 灰色 切屏：灰色块"叠盖"上滑 (cover-rise)
-   Every white→grey switch on home / b2b / b2c does this: the grey block (or
-   the inset grey panel inside a white section) slides up into place as it
-   scrolls in. Pure transform — OPAQUE, NO opacity fade, NO shadow — so it
-   reads as a clean colour-block cover, not a translucent ghost/"投影".
-   Driven by SectionReveal.tsx (`.cover-rise` / `.cover-rise--panel` + `.is-in`).
-   Any per-section overlap (negative margin + z-index, e.g. .b2c-demo-section
-   above) is layered on top in that section's own rules. */
-@media (prefers-reduced-motion: no-preference) {
-  /* full-bleed grey section — the whole grey block rises up to cover */
-  .cover-rise {
-    transform: translateY(96px);
-    transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform;
-  }
-  .cover-rise.is-in {
-    transform: none;
-    will-change: auto;
-  }
-  /* inset grey panel — translate the grey `.container`, not the white surround */
-  .cover-rise--panel .container {
-    transform: translateY(96px);
-    transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform;
-  }
-  .cover-rise--panel.is-in .container {
-    transform: none;
-    will-change: auto;
-  }
-}
+/* 白色 → 灰色 切屏：灰色块"叠盖"上滑 (cover-on-scroll).
+   The rise itself is now driven DIRECTLY by the scroll wheel in
+   SectionReveal.tsx (it writes an inline `transform: translateY(...)` on the
+   grey block / inset grey `.container`, tracking scroll both directions — pure
+   transform, OPAQUE, NO opacity, NO shadow). The static overlap (negative
+   margin + z-index, e.g. .b2c-demo-section / #demo.b2b-demo-section /
+   #how-it-works / #testimonials+.cta-section / #features) lives in each
+   section's own rules so at rest the grey sits in its covering position. */
 
 /* ===========================================================
    b2b `#modes` — bento card grid (2x2)
