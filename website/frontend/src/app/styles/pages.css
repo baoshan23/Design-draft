@@ -3138,6 +3138,14 @@ h3.matrix-header,
 #how-it-works.section-alt {
   background: #ffffff;
   padding: clamp(40px, 6vh, 72px) clamp(16px, 1.5vw, 24px);
+  /* white → grey "叠盖": the grey panel leads (reduced top padding) + the
+     section is pulled up so the grey panel covers the bottom of the trusted-bar
+     above. Modest overlap — the trusted-bar only has 32px bottom padding, so
+     keep it small to stay off the logo marquee. Rise-on-scroll = .cover-rise. */
+  position: relative;
+  z-index: 3;
+  margin-top: clamp(-40px, -3vw, -24px);
+  padding-top: clamp(12px, 2vh, 20px);
 }
 #how-it-works.section-alt .container {
   max-width: none;

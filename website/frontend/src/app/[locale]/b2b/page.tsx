@@ -182,71 +182,14 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
             </div>
           </ScrollAnimation>
           <ScrollAnimation>
-            <div className="b2b-hub" aria-label={t('b2b.overview.title')}>
-              {/* connector lines (behind cards) — core → platform / operators / users */}
-              <svg className="b2b-hub-links" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">
-                <path className="b2b-hub-link" d="M50 32 V17" />
-                <path className="b2b-hub-link" d="M41 40 H26" />
-                <path className="b2b-hub-link" d="M59 40 H74" />
-              </svg>
-
-              {/* ---- top: platform side ---- */}
-              <article className="b2b-hub-card b2b-hub-platform">
-                <span className="b2b-hub-card-title">{t('b2b.overview.platform')}</span>
-                <div className="b2b-hub-tags b2b-hub-tags--grid">
-                  {rawList('b2b.overview.platformItems').map((item, i) => (
-                    <span key={i} className="b2b-hub-tag">{item}</span>
-                  ))}
-                </div>
-              </article>
-
-              {/* ---- left: operators ---- */}
-              <article className="b2b-hub-card b2b-hub-operators">
-                <span className="b2b-hub-card-title">{t('b2b.overview.operator')}</span>
-                <div className="b2b-hub-avatars">
-                  {['A', 'B', 'C'].map((letter) => (
-                    <div key={letter} className="b2b-hub-avatar">
-                      <span className="b2b-hub-avatar-ic" aria-hidden="true">
-                        <Building2 size={18} strokeWidth={2} />
-                      </span>
-                      <span className="b2b-hub-avatar-label">{t('b2b.overview.operator')} {letter}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="b2b-hub-tags b2b-hub-tags--grid">
-                  {rawList('b2b.overview.operatorItems').map((item, i) => (
-                    <span key={i} className="b2b-hub-tag">{item}</span>
-                  ))}
-                </div>
-              </article>
-
-              {/* ---- center: core system ---- */}
-              <div className="b2b-hub-core" aria-label={t('b2b.overview.center')}>
-                <span className="b2b-hub-core-eyebrow">{t('b2b.overview.coreLabel')}</span>
-                <span className="b2b-hub-core-title">{t('b2b.overview.center')}</span>
-                <span className="b2b-hub-core-pill">{t('b2b.overview.model')}</span>
-              </div>
-
-              {/* ---- right: users ---- */}
-              <article className="b2b-hub-card b2b-hub-users">
-                <span className="b2b-hub-card-title">{t('b2b.overview.user')}</span>
-                <div className="b2b-hub-avatars">
-                  {['A', 'B', 'C'].map((letter) => (
-                    <div key={letter} className="b2b-hub-avatar">
-                      <span className="b2b-hub-avatar-ic" aria-hidden="true">
-                        <User size={18} strokeWidth={2} />
-                      </span>
-                      <span className="b2b-hub-avatar-label">{t('b2b.overview.user')} {letter}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="b2b-hub-tags b2b-hub-tags--grid">
-                  {rawList('b2b.overview.userItems').map((item, i) => (
-                    <span key={i} className="b2b-hub-tag">{item}</span>
-                  ))}
-                </div>
-              </article>
-            </div>
+            <Image
+              src="/images/b2b-architecture.png"
+              alt={t('b2b.overview.title')}
+              width={1920}
+              height={1064}
+              sizes="(max-width: 1100px) 100vw, 1100px"
+              style={{ width: '100%', height: 'auto', display: 'block', maxWidth: 1100, margin: '0 auto' }}
+            />
           </ScrollAnimation>
         </div>
       </section>
