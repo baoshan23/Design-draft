@@ -3157,14 +3157,15 @@ h3.matrix-header,
 #how-it-works.section-alt {
   background: #ffffff;
   padding: clamp(40px, 6vh, 72px) clamp(16px, 1.5vw, 24px);
-  /* white → grey "叠盖": the grey panel leads (reduced top padding) + the
-     section is pulled up so the grey panel covers the bottom of the trusted-bar
-     above. Modest overlap — the trusted-bar only has 32px bottom padding, so
-     keep it small to stay off the logo marquee. Rise-on-scroll = .cover-rise. */
+  /* white → grey "叠盖": the grey panel leads (near-zero top padding) + the
+     section is pulled up so the grey panel covers the bottom of the pinned
+     MobileShowcase above (sticky-stack, .section-stack). The showcase has 80px
+     bottom padding, so the overlap must eat that white gap and reach the phone
+     — matches the b2c #demo overlap (user: 直接是灰色块开始叠盖，间隙不要). */
   position: relative;
   z-index: 3;
-  margin-top: clamp(-40px, -3vw, -24px);
-  padding-top: clamp(12px, 2vh, 20px);
+  margin-top: clamp(-110px, -8vw, -80px);
+  padding-top: clamp(0px, 1vh, 8px);
 }
 #how-it-works.section-alt .container {
   max-width: none;
