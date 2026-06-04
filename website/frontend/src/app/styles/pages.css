@@ -943,10 +943,21 @@
 .footer-reveal-wrap {
   position: relative;
 }
+/* The dark footer rounds its OWN bottom-left/right corners; the yellow reveal
+   panel is pulled up under them (panel z-index:1 < footer z-index:2) so the
+   yellow shows through the carved notches — per user "要做圆角的是页脚的下面
+   两个角". `|panel pull| == footer radius` so the yellow fills the full notch. */
+.footer-reveal-wrap > .footer {
+  position: relative;
+  z-index: 2;
+  border-bottom-left-radius: clamp(24px, 3vw, 44px);
+  border-bottom-right-radius: clamp(24px, 3vw, 44px);
+}
 .footer-reveal {
   position: sticky;
   bottom: 0;
   z-index: 1;
+  margin-top: clamp(-44px, -3vw, -24px);
   display: flex;
   align-items: center;
   justify-content: center;

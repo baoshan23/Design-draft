@@ -3842,45 +3842,15 @@ html {
   margin-top: clamp(-72px, -6vw, -44px);
 }
 
-/* ALL pages: round the BOTTOM corners of the last content <section> before the
-   dark footer (the light "色块" sitting ABOVE the footer — homepage grey CTA,
-   b2b #releases, b2c #changelog, pricing #plans), and pull the footer up so its
-   dark #181818 fills the carved corner notches (footer top border/pinstripe
-   dropped to avoid a stray line). The last section sits on top (z-index:1).
-   `main > section:last-of-type` is the final full-width section on any page and
-   ignores the transient diagram-modal overlay div (not a <section>). NOTE:
-   sections live inside template.tsx's `.page-transition` wrapper (main >
-   .page-transition > section), so the child combinator targets that wrapper. */
-.page-transition > section:last-of-type {
-  position: relative;
-  z-index: 1;
-  border-bottom-left-radius: clamp(24px, 3vw, 44px);
-  border-bottom-right-radius: clamp(24px, 3vw, 44px);
-}
-/* Pull the footer up by AT LEAST the radius so its dark #181818 fully fills the
-   carved corner notches (if the pull is shallower than the radius, the top of
-   the notch shows the body bg instead and the rounding reads as "square").
-   CRITICAL: polish.css gives BOTH `main` and `footer` `position:relative;
-   z-index:1`. Same z-index + footer is the LATER sibling → the footer would
-   paint ON TOP of main and its flat dark top edge would COVER the section's
-   rounded corners (the bug: "看不到圆角"). Force the footer BEHIND main
-   (z-index:0 < main's 1) so main's grey section paints on top and its rounded
-   bottom corners reveal the dark footer through the carved notches.
-   NOTE: the footer is wrapped in `.footer-reveal-wrap` (footer + the
-   go-electra GCSS reveal panel), so the pull/z-index now lives on the wrap;
-   inside it the footer is z-index:2 so it paints over the reveal panel
-   (z-index:1) and scrolls up off it at the very bottom. */
+/* ALL pages: the last content <section> before the footer sits flush with
+   SQUARE bottom corners and the footer keeps its normal top edge + pinstripe
+   (the earlier rounded-notch seam ABOVE the footer was reverted per user
+   "页脚上面的圆角恢复原来的直角"). The rounding now lives on the footer's OWN
+   bottom corners — see `.footer-reveal-wrap > .footer` in pages.css — which
+   reveal the yellow GCSS panel beneath through the carved notches. */
 main + .footer-reveal-wrap {
   position: relative;
-  z-index: 0;
-  margin-top: clamp(-44px, -3vw, -24px);
-}
-main + .footer-reveal-wrap > .footer {
-  z-index: 2;
-  border-top: none;
-}
-main + .footer-reveal-wrap > .footer .footer-rule {
-  display: none;
+  z-index: 1;
 }
 
 .cta-section::before {
