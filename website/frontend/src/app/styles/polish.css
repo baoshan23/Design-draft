@@ -98,6 +98,23 @@ html {
   filter: brightness(0.97);
 }
 
+/* All yellow buttons site-wide: BLACK text + icons regardless of theme
+   (user: 全站黄色按钮上的文字和图标，全部改成黑色). The base rules used
+   `color: var(--black)` which flips to #fff in light mode → white text;
+   force a fixed near-black here. Icons use currentColor so they follow. */
+.btn-primary,
+.btn-accent,
+.header-actions .btn-buy,
+.mobile-nav-cta .btn-buy {
+  color: #1a1a1a;
+}
+.btn-primary svg,
+.btn-accent svg,
+.header-actions .btn-buy svg,
+.mobile-nav-cta .btn-buy svg {
+  color: #1a1a1a;
+}
+
 .btn-secondary {
   backdrop-filter: blur(12px) saturate(1.2);
   -webkit-backdrop-filter: blur(12px) saturate(1.2);
