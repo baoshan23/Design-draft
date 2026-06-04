@@ -60,7 +60,7 @@ export default function LanguageMap() {
       if (wrapperRef.current) {
         setDims({
           w: wrapperRef.current.clientWidth,
-          h: Math.max(420, Math.round(wrapperRef.current.clientWidth * 0.5)),
+          h: Math.max(560, Math.round(wrapperRef.current.clientWidth * 0.62)),
         });
       }
     };
