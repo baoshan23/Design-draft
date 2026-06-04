@@ -70,6 +70,14 @@ export default function SectionReveal() {
       const panelGrey =
         secBg === WHITE && !!panel && norm(getComputedStyle(panel).backgroundColor) === GREY;
 
+      // #how-it-works (homepage) lives in a .section-stack: the sticky pin on
+      // the MobileShowcase above already produces the 叠盖 cover as the grey
+      // panel scrolls up over the pinned phone. The extra COVER_OFFSET
+      // down-push only opens a white gap below the phone before the grey
+      // arrives (user: 直接是灰色块开始叠盖，间隙不要), so skip the scroll-linked
+      // rise here — the static overlap (margin-top) + pin do the covering.
+      if (sec.id === 'how-it-works') return;
+
       // b2b 营收(white) → 功能(#features): the gradient band has no bg-COLOR
       // (reads white), so the white→grey compare misses it — cover it too.
       const featCover = isB2b && sec.id === 'features';
