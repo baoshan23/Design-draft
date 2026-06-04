@@ -101,6 +101,9 @@
      (positions) is UNCHANGED — only the colours transition. */
   background: #ffffff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  /* No drop-shadow in EITHER state — only the 1px border line separates the
+     nav from the content below it (user: 投影去掉). */
+  box-shadow: none;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .header.scrolled {
@@ -154,22 +157,11 @@ body:has(.hero-with-video) .sub-nav {
   border-bottom-color: rgba(0, 0, 0, 0.06);
 }
 
-/* --- Scrolled (yellow) state: knock the nav content out to WHITE (反白).
-   Logo is intentionally left untouched (user: logo不要改). --- */
-.header.scrolled .nav a,
-.header.scrolled .nav-dropdown-trigger,
-.header.scrolled .header-actions .btn-login,
-.header.scrolled .settings-trigger {
-  color: #ffffff;
-}
-.header.scrolled .nav a:hover,
-.header.scrolled .nav-dropdown-trigger:hover,
-.header.scrolled .header-actions .btn-login:hover,
-.header.scrolled .settings-trigger:hover,
-.header.scrolled .settings-trigger[aria-expanded="true"] {
-  color: #ffffff;
-  opacity: 0.82;
-}
+/* --- Scrolled (yellow) state — ONLY the originally-gold content is knocked
+   out to white so it stays visible on yellow (user: 原来黄色的内容反白). The
+   originally-black text (nav links, dropdown triggers, Login, the language /
+   settings icon) STAYS black/dark on the yellow bar (user: 黑色文字一样黑色，
+   切换语言的小图标颜色也不要改). Logo also untouched (user: logo不要改). --- */
 .header.scrolled .nav a.active,
 .header.scrolled .nav-dropdown-trigger.active {
   color: #ffffff;
@@ -177,18 +169,14 @@ body:has(.hero-with-video) .sub-nav {
 .header.scrolled .nav a.active::after {
   background: #ffffff;
 }
-/* Logo left unchanged on the yellow bar (user: logo不要改). */
-/* Buy-now CTA → white pill so it stays a visible button on yellow. */
+/* Buy-now CTA was a gold pill → reverse to a white pill so it stays a visible
+   button on the yellow bar. */
 .header.scrolled .header-actions .btn-buy {
   background: #ffffff;
   color: #1a1a1a;
 }
 .header.scrolled .header-actions .btn-buy:hover {
   background: #f3f3f3;
-}
-/* Mobile hamburger bars → white on yellow. */
-.header.scrolled .mobile-toggle span {
-  background: #ffffff;
 }
 
 /* Glass header edge highlight — removed per user request (`去掉投影`):
