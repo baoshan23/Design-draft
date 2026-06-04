@@ -2531,7 +2531,7 @@ html[data-theme="dark"] .hero.hero-centered {
   text-align: center;
   /* Canonical H1 scale (fluid — was a fixed 56px that overflowed narrow
      phones). Matches base h1 + the b2b/b2c product heroes. */
-  font-size: clamp(2.625rem, 5.5vw, 3.75rem);
+  font-size: clamp(2.625rem, 5.5vw, 3.5rem);
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: -0.03em;
@@ -2543,7 +2543,7 @@ html[data-theme="dark"] .hero.hero-centered {
   text-align: center;
   max-width: 640px;
   margin: 0 auto 20px;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.55;
   color: #5e6470;
 }
