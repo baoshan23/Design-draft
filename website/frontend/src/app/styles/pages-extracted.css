@@ -2561,9 +2561,8 @@ html[data-theme="dark"] .hero.hero-centered {
   align-items: center;
   justify-content: center;
   gap: clamp(44px, 6vw, 80px);
-  /* Pushed further down from the CTA buttons so the stats sit in the band
-     just above the dashboard mock (user red-boxed that position). */
-  margin: clamp(24px, 4vh, 56px) 0 0;
+  /* Nudged up a touch from the prior band position (user: 三个数据位置往上移一点). */
+  margin: clamp(12px, 2.4vh, 32px) 0 0;
 }
 
 .hero.hero-centered .hero-stat {
