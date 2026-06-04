@@ -187,8 +187,8 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               alt={t('b2b.overview.title')}
               width={1920}
               height={1064}
-              sizes="(max-width: 1100px) 100vw, 1100px"
-              style={{ width: '100%', height: 'auto', display: 'block', maxWidth: 1100, margin: '0 auto' }}
+              sizes="(max-width: 1320px) 100vw, 1320px"
+              style={{ width: '100%', height: 'auto', display: 'block', maxWidth: 1320, margin: '0 auto' }}
             />
           </ScrollAnimation>
         </div>
