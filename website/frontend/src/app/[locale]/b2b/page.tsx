@@ -223,6 +223,11 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
         </div>
       </section>
 
+      {/* Sections 4–5 sticky-stack: 营收 pins (centered on screen) while 功能亮点
+          rises as a whole block to cover it on scroll (叠盖, no shadow). The
+          wrapper bounds #revenue's sticky range to just this pair so it releases
+          before #support. CSS in pages.css (.b2b-revfeat-stack). */}
+      <div className="b2b-revfeat-stack">
       {/* ==================== Section 4: Revenue Sources ==================== */}
       <section className="section b2b-revenue-section" id="revenue">
         <div className="container">
@@ -347,6 +352,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
           </div>
         </div>
       </section>
+      </div>{/* /.b2b-revfeat-stack */}
 
       {/* ==================== Section 8: Feature Support Matrix ==================== */}
       <section className="section" id="support">

@@ -3112,16 +3112,52 @@ body:has(.product-hero.particles-bg) #features.section-alt {
     #ffffff 50%,
     rgba(254, 191, 29, 0.22) 100%
   );
-  /* 营收(#revenue) → 功能: the features band overlaps the #revenue block above
-     (rounded top + negative margin) for a clean 叠盖 look — NO seam shadow
-     (user: 不要投影). #features reads white-ish (a gradient, not the site grey),
-     so SectionReveal's white→grey cover-rise doesn't fire here; the static
-     overlap is the whole effect. Scoped to b2b via the particles-bg hero. */
+  /* Opaque (white behind the translucent gradient) so the band cleanly COVERS
+     the pinned #revenue beneath it as it rises — no bleed-through. */
+  background-color: #ffffff;
+  /* 营收(#revenue) → 功能 sticky-stack: #revenue pins centered while this band
+     rises as a whole to 叠盖 (cover) it — NO seam shadow (user: 不要投影). The
+     rise itself is scroll-linked (SectionReveal featCover); the overlap + rounded
+     top live here. Scoped to b2b via the particles-bg hero. */
   position: relative;
   z-index: 2;
   margin-top: clamp(-48px, -4.5vw, -30px);
   border-top-left-radius: clamp(20px, 3vw, 40px);
   border-top-right-radius: clamp(20px, 3vw, 40px);
+}
+
+/* 营收→功能 sticky-stack wrapper (b2b page.tsx wraps #revenue + #features).
+   #revenue becomes a full-screen sticky panel that PINS at the top with its
+   content vertically centred ("营收在屏幕正中间"); #features (z-index 2, opaque,
+   above) then rises as a whole to cover it on scroll. The wrapper bounds
+   #revenue's sticky range to just this pair, so it releases before #support and
+   never bleeds over later sections. */
+.b2b-revfeat-stack {
+  position: relative;
+}
+body:has(.product-hero.particles-bg) #revenue.b2b-revenue-section {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 1;
+}
+/* The sticky #revenue must not also be transform-offset by the JS fade-up
+   (SectionReveal may tag it `.section-reveal` for the #modes→#revenue change). */
+body:has(.product-hero.particles-bg) #revenue.b2b-revenue-section.section-reveal {
+  opacity: 1;
+  transform: none;
+}
+/* Mobile: drop the full-screen pin — revenue content can exceed the viewport
+   on a phone, so just flow normally. */
+@media (max-width: 900px) {
+  body:has(.product-hero.particles-bg) #revenue.b2b-revenue-section {
+    position: static;
+    min-height: 0;
+    display: block;
+  }
 }
 
 /* Homepage: every section background is white EXCEPT the hero (first screen)
