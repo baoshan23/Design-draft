@@ -6264,13 +6264,13 @@ main + .footer-reveal-wrap {
 #demo.b2b-demo-section {
   position: relative;
   z-index: 3;
-  /* Keep a resting gap between the dark contact banner and the grey panel (user:
-     "恢复和灰色背景的间距") — the negative margin overlaps part of the previous
-     `.section`'s 120px bottom padding, leaving a visible gap at rest. The COVER
-     itself happens DURING SCROLL via the `.section-stack` sticky pin: #support
-     pins while #demo (z-index:3) rises up and 叠盖s over it, so the grey block
-     directly covers as you scroll ("滑动交互时，灰色块直接覆盖叠盖切屏"). */
-  margin-top: clamp(-104px, -8.5vw, -64px);
+  /* Keep a CLEAR resting gap between the dark contact banner and the grey panel
+     (user: "恢复和灰色背景的间距") — only a small negative margin so most of the
+     previous `.section`'s 120px bottom padding stays visible as a gap (~80-96px).
+     The COVER itself happens DURING SCROLL via the `.section-stack` sticky pin:
+     #support pins while #demo (z-index:3) rises up and 叠盖s over it, so the grey
+     block directly covers as you scroll ("滑动交互时，灰色块直接覆盖叠盖切屏"). */
+  margin-top: clamp(-40px, -3vw, -24px);
   /* padding-top:0 so the grey inset panel's top edge is flush with the section
      top → the GREY (not a white strip) leads the cover. */
   padding-top: 0;
