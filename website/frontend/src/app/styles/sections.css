@@ -3659,7 +3659,7 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2%;
+  padding: 0;
   background: var(--dark-card);
   border: 0;
   border-radius: 22px;
