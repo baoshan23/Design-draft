@@ -4064,7 +4064,8 @@ body:has(.hero-with-video) .section-alt {
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: var(--header-height);
+    /* Clears the floating pill nav (pill = top:12px + 72px height). */
+    top: calc(var(--header-height) + 12px);
     left: 0;
     right: 0;
     bottom: 0;

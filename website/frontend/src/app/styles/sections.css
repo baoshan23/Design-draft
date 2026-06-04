@@ -4942,7 +4942,8 @@ main + .footer .footer-rule {
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-bottom: 1px solid var(--border-subtle);
   position: fixed;
-  top: var(--header-height);
+  /* Sits flush below the floating pill nav (pill = top:12px + 72px height). */
+  top: calc(var(--header-height) + 12px);
   left: 0;
   right: 0;
   z-index: 99;
