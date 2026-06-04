@@ -96,72 +96,57 @@
   right: 0;
   height: var(--header-height);
   z-index: 100;
-  /* Unified site-wide nav frost — near-opaque white on every page in both
-     scroll states; thin bottom border line, no shadow. */
-  background: rgba(255, 255, 255, 0.92);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
+  /* Rest (static) = solid WHITE; on scroll the whole bar turns YELLOW with its
+     content knocked out to white (user: 静态白色 / 滚动变黄 / 内容反白). Geometry
+     (positions) is UNCHANGED — only the colours transition. */
+  background: #ffffff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .header.scrolled {
-  background: rgba(255, 255, 255, 0.92);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
-  /* No drop-shadow — only the 1px border line separates nav from content. */
+  background: var(--primary);
   box-shadow: none;
+  border-bottom-color: transparent;
+}
+[data-theme="dark"] .header {
+  background: #ffffff;
   border-bottom-color: rgba(0, 0, 0, 0.06);
 }
-[data-theme="dark"] .header,
-[data-theme="dark"] .header.scrolled {
-  background: rgba(12, 10, 9, 0.92);
-  border-bottom-color: rgba(255, 255, 255, 0.10);
-}
 
-/* Homepage (has the charger bg image) — at the top (unscrolled) the nav is
-   fully transparent (floats over the light hero); the frosted white fades in
-   on scroll. */
-body:has(.hero-with-video) .header:not(.scrolled) {
-  background: transparent;
+/* All pages — static (unscrolled) state is solid white (homepage is no longer
+   transparent at the top). */
+body:has(.hero-with-video) .header:not(.scrolled),
+body:has(.demo-hero) .header:not(.scrolled),
+body:has(.pricing-hero) .header:not(.scrolled),
+body:has(.sub-nav) .header:not(.scrolled) {
+  background: #ffffff;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
-  border-bottom-color: transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.06);
   box-shadow: none;
 }
 body:has(.hero-with-video) .header:not(.scrolled)::after {
   display: none;
 }
-body:has(.hero-with-video) .header.scrolled {
-  background: rgba(255, 255, 255, 0.92);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
-  box-shadow: none;
-  border-bottom-color: rgba(0, 0, 0, 0.06);
-}
 
-/* Demo / pricing page (yellow hero) — near-opaque white frost regardless of
-   scroll, only the 1px border line separates nav from content. */
-body:has(.demo-hero) .header,
+/* All pages — scrolled state is the yellow bar. */
+body:has(.hero-with-video) .header.scrolled,
 body:has(.demo-hero) .header.scrolled,
-body:has(.pricing-hero) .header,
-body:has(.pricing-hero) .header.scrolled {
-  background: rgba(255, 255, 255, 0.92);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
-  border-bottom-color: rgba(0, 0, 0, 0.06);
+body:has(.pricing-hero) .header.scrolled,
+body:has(.sub-nav) .header.scrolled {
+  background: var(--primary);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
   box-shadow: none;
 }
 
-/* Pages with a sub-nav strip: drop the header drop-shadow and use a thin
-   line as the divider between the primary nav and the sub-nav. */
-body:has(.sub-nav) .header,
-body:has(.sub-nav) .header.scrolled {
-  box-shadow: none;
+/* Sub-nav pages: thin divider line below the primary nav at rest. */
+body:has(.sub-nav) .header:not(.scrolled) {
   border-bottom: 1px solid var(--border-subtle);
 }
 
-/* Sub-nav frosted-glass: mirror the primary header on the same page so the
-   two strips read as one continuous bar. */
+/* Sub-nav frosted-glass mirror (homepage has no sub-nav; harmless). */
 body:has(.hero-with-video) .sub-nav {
   background: rgba(255, 255, 255, 0.92);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
@@ -169,25 +154,41 @@ body:has(.hero-with-video) .sub-nav {
   border-bottom-color: rgba(0, 0, 0, 0.06);
 }
 
-body:has(.hero-with-video) .header.scrolled .logo,
-body:has(.hero-with-video) .header.scrolled .header-actions .btn-login,
-body:has(.hero-with-video) .header.scrolled .settings-trigger {
-  color: var(--text-primary);
+/* --- Scrolled (yellow) state: knock the nav content out to WHITE (反白).
+   Logo is intentionally left untouched (user: logo不要改). --- */
+.header.scrolled .nav a,
+.header.scrolled .nav-dropdown-trigger,
+.header.scrolled .header-actions .btn-login,
+.header.scrolled .settings-trigger {
+  color: #ffffff;
 }
-body:has(.hero-with-video) .header.scrolled .nav a,
-body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger {
-  color: var(--text-secondary);
+.header.scrolled .nav a:hover,
+.header.scrolled .nav-dropdown-trigger:hover,
+.header.scrolled .header-actions .btn-login:hover,
+.header.scrolled .settings-trigger:hover,
+.header.scrolled .settings-trigger[aria-expanded="true"] {
+  color: #ffffff;
+  opacity: 0.82;
 }
-body:has(.hero-with-video) .header.scrolled .nav a:hover,
-body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger:hover,
-body:has(.hero-with-video) .header.scrolled .header-actions .btn-login:hover,
-body:has(.hero-with-video) .header.scrolled .settings-trigger:hover,
-body:has(.hero-with-video) .header.scrolled .settings-trigger[aria-expanded="true"] {
-  color: var(--text-primary);
+.header.scrolled .nav a.active,
+.header.scrolled .nav-dropdown-trigger.active {
+  color: #ffffff;
 }
-body:has(.hero-with-video) .header.scrolled .nav a.active,
-body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
-  color: var(--primary);
+.header.scrolled .nav a.active::after {
+  background: #ffffff;
+}
+/* Logo left unchanged on the yellow bar (user: logo不要改). */
+/* Buy-now CTA → white pill so it stays a visible button on yellow. */
+.header.scrolled .header-actions .btn-buy {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+.header.scrolled .header-actions .btn-buy:hover {
+  background: #f3f3f3;
+}
+/* Mobile hamburger bars → white on yellow. */
+.header.scrolled .mobile-toggle span {
+  background: #ffffff;
 }
 
 /* Glass header edge highlight — removed per user request (`去掉投影`):
@@ -394,22 +395,21 @@ body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
   transform: translateY(0);
 }
 
-/* When any dropdown is open, drop the header's own backdrop-filter so
-   the dropdown menu's frosted-glass actually shows. Nested backdrop-
-   filters don't compound — the inner one would otherwise operate on
-   the parent's already-blurred output (= no visible additional frost).
-   Header keeps an opaque-ish bg so its content stays legible. */
-.header:has(.nav-dropdown:hover),
-.header:has(.nav-dropdown:focus-within),
-.header:has(.nav-dropdown.open) {
+/* When a dropdown is open, keep the rest-state header solid white so the
+   menu reads cleanly. Scoped to `:not(.scrolled)` so it does NOT override the
+   scrolled yellow bar (otherwise the white-knockout nav text would vanish on
+   a forced-white bg). */
+.header:not(.scrolled):has(.nav-dropdown:hover),
+.header:not(.scrolled):has(.nav-dropdown:focus-within),
+.header:not(.scrolled):has(.nav-dropdown.open) {
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
   background: #ffffff !important;
 }
 
-[data-theme="dark"] .header:has(.nav-dropdown:hover),
-[data-theme="dark"] .header:has(.nav-dropdown:focus-within),
-[data-theme="dark"] .header:has(.nav-dropdown.open) {
+[data-theme="dark"] .header:not(.scrolled):has(.nav-dropdown:hover),
+[data-theme="dark"] .header:not(.scrolled):has(.nav-dropdown:focus-within),
+[data-theme="dark"] .header:not(.scrolled):has(.nav-dropdown.open) {
   background: rgba(20, 18, 16, 0.88) !important;
 }
 
