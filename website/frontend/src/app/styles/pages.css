@@ -3157,6 +3157,31 @@ body:has(.product-hero.particles-bg) #features.section-alt {
     #ffffff 50%,
     rgba(254, 191, 29, 0.22) 100%
   );
+  /* 营收(#revenue) → 功能 切屏叠盖: the features band rises up + overlaps the
+     #revenue block above (rounded top + upward cover-shadow), go-electra
+     色块切换 style. Animation driven by SectionReveal.tsx (`.feat-cover` +
+     `.is-in`). Scoped to b2b only via the particles-bg hero. */
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(-48px, -4.5vw, -30px);
+  border-top-left-radius: clamp(20px, 3vw, 40px);
+  border-top-right-radius: clamp(20px, 3vw, 40px);
+  box-shadow: 0 -18px 46px -20px rgba(0, 0, 0, 0.26);
+}
+@media (prefers-reduced-motion: no-preference) {
+  body:has(.product-hero.particles-bg) #features.feat-cover {
+    opacity: 0;
+    transform: translateY(90px);
+    transition:
+      opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  body:has(.product-hero.particles-bg) #features.feat-cover.is-in {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
 }
 
 /* Homepage: every section background is white EXCEPT the hero (first screen)

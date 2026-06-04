@@ -70,6 +70,18 @@ export default function SectionReveal() {
       io.observe(demo);
     }
 
+    // b2b 营收(#revenue) → 功能(#features): the #features band does a contained
+    // "叠盖" cover switch — it rises up + overlaps the block above (rounded top +
+    // cover-shadow). Scoped to the b2b page (its hero carries `.particles-bg`).
+    // #features's section bg computes as white like #revenue above it, so the
+    // colour-change loop skips it — handle it explicitly here.
+    const isB2b = !!document.querySelector('.product-hero.particles-bg');
+    const feat = document.querySelector<HTMLElement>('#features');
+    if (isB2b && feat && feat.getBoundingClientRect().top >= vh * 0.85) {
+      feat.classList.add('feat-cover');
+      io.observe(feat);
+    }
+
     return () => io.disconnect();
   }, []);
 
