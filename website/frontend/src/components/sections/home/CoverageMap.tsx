@@ -111,65 +111,59 @@ export default function CoverageMap() {
 
         map.on('load', () => {
           if (cancelled) return;
+          // No clustering — every served country stays individually visible
+          // and prominent at all zoom levels.
           map.addSource('coverage', {
             type: 'geojson',
             data: geojson,
-            cluster: true,
-            clusterMaxZoom: 6,
-            clusterRadius: 44,
           });
 
-          // Clustered groups
+          // Soft glow halo behind each pin so the marked countries pop on the map
           map.addLayer({
-            id: 'clusters',
+            id: 'points-glow',
             type: 'circle',
             source: 'coverage',
-            filter: ['has', 'point_count'],
             paint: {
               'circle-color': '#FEBF1D',
-              'circle-radius': ['step', ['get', 'point_count'], 16, 4, 22, 10, 28],
-              'circle-stroke-width': 2,
-              'circle-stroke-color': '#ffffff',
+              'circle-radius': ['case', ['get', 'isOrigin'], 26, 20],
+              'circle-blur': 0.9,
+              'circle-opacity': 0.45,
             },
-          });
-          map.addLayer({
-            id: 'cluster-count',
-            type: 'symbol',
-            source: 'coverage',
-            filter: ['has', 'point_count'],
-            layout: {
-              'text-field': ['get', 'point_count_abbreviated'],
-              'text-font': ['Noto Sans Regular'],
-              'text-size': 13,
-            },
-            paint: { 'text-color': '#1a1a1a' },
           });
 
-          // Individual pins
+          // Bold pins
           map.addLayer({
             id: 'points',
             type: 'circle',
             source: 'coverage',
-            filter: ['!', ['has', 'point_count']],
             paint: {
-              'circle-color': ['case', ['get', 'isOrigin'], '#FEBF1D', '#F2A300'],
-              'circle-radius': ['case', ['get', 'isOrigin'], 9, 7],
-              'circle-stroke-width': 2,
+              'circle-color': ['case', ['get', 'isOrigin'], '#F59E00', '#FEBF1D'],
+              'circle-radius': ['case', ['get', 'isOrigin'], 13, 10],
+              'circle-stroke-width': 3,
               'circle-stroke-color': '#ffffff',
             },
           });
 
-          // Click a cluster → zoom into it
-          map.on('click', 'clusters', (e: any) => {
-            const f = map.queryRenderedFeatures(e.point, { layers: ['clusters'] })[0];
-            if (!f) return;
-            const clusterId = f.properties.cluster_id;
-            const src = map.getSource('coverage');
-            const zoomTo = (z: number) =>
-              map.easeTo({ center: f.geometry.coordinates, zoom: z, duration: 600 });
-            const res = src.getClusterExpansionZoom(clusterId);
-            if (res && typeof res.then === 'function') res.then(zoomTo).catch(() => {});
-            else if (typeof res === 'number') zoomTo(res);
+          // Always-visible country-name labels — the key to "more obvious"
+          map.addLayer({
+            id: 'point-labels',
+            type: 'symbol',
+            source: 'coverage',
+            layout: {
+              'text-field': ['get', 'name'],
+              'text-font': ['Noto Sans Bold', 'Noto Sans Regular'],
+              'text-size': ['case', ['get', 'isOrigin'], 15, 13],
+              'text-offset': [0, 1.3],
+              'text-anchor': 'top',
+              'text-allow-overlap': true,
+              'text-padding': 2,
+            },
+            paint: {
+              'text-color': '#1a1a1a',
+              'text-halo-color': '#ffffff',
+              'text-halo-width': 2,
+              'text-halo-blur': 0.5,
+            },
           });
 
           // Click a pin → popup with the location name
@@ -177,16 +171,14 @@ export default function CoverageMap() {
             const f = e.features?.[0];
             if (!f) return;
             const coords = f.geometry.coordinates.slice();
-            new maplibregl.Popup({ closeButton: false, offset: 12 })
+            new maplibregl.Popup({ closeButton: false, offset: 16 })
               .setLngLat(coords)
               .setHTML(`<div class="coverage-popup">${f.properties.name}</div>`)
               .addTo(map);
           });
 
-          for (const layer of ['clusters', 'points']) {
-            map.on('mouseenter', layer, () => (map.getCanvas().style.cursor = 'pointer'));
-            map.on('mouseleave', layer, () => (map.getCanvas().style.cursor = ''));
-          }
+          map.on('mouseenter', 'points', () => (map.getCanvas().style.cursor = 'pointer'));
+          map.on('mouseleave', 'points', () => (map.getCanvas().style.cursor = ''));
         });
       })
       .catch(() => {
