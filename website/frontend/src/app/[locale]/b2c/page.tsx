@@ -535,6 +535,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
           </ScrollAnimation>
         </div>
       </section>
+      </div>
 
       {/* ==================== Section 8: Purchase & License ==================== */}
       <section className="section section-alt" id="license">
