@@ -115,6 +115,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               { name: 'Fullwatt', src: '/images/manufacturers/fullwatt.png' },
               { name: 'Xupernova', src: '/images/manufacturers/xupernova.png' },
               { name: 'UNIT', src: '/images/manufacturers/unit.png' },
+              { name: 'OLINK', src: '/images/manufacturers/olink.png' },
+              { name: 'Max Power', src: '/images/manufacturers/maxpower.png' },
+              { name: 'Winline', src: '/images/manufacturers/winline.png' },
+              { name: 'Jing Charging', src: '/images/manufacturers/jingcharging.png' },
+              { name: 'TITANS', src: '/images/manufacturers/titans.png' },
+              { name: 'YES', src: '/images/manufacturers/yes.png' },
             ];
             return (
               <div className="marquee">
