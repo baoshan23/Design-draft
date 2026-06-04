@@ -521,16 +521,13 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
               ))}
             </div>
           </ScrollAnimation>
-        </div>
-      </section>
 
-      {/* ==================== Section 11.5: Contact CTA banner ==================== */}
-      <section className="section" id="contact-cta">
-        <div className="container">
+          {/* Contact CTA banner — inside #aftersales, matching b2c #support spacing (marginTop:64) */}
           <ScrollAnimation>
             <div
+              id="contact-cta"
               className="b2b-contact-cta"
-              style={{ backgroundImage: 'url(/images/b2b-contact-cta.jpg)' }}
+              style={{ backgroundImage: 'url(/images/b2b-contact-cta.jpg)', marginTop: 64 }}
             >
               <div className="b2b-contact-cta-inner">
                 <h2>{t('b2b.contactCta.title')}</h2>
