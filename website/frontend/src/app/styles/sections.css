@@ -6142,16 +6142,15 @@ main:has(#releases) + .footer .footer-rule {
   padding-top: clamp(12px, 2vh, 20px); /* grey panel leads so it overlaps */
 }
 @media (prefers-reduced-motion: no-preference) {
+  /* Fully OPAQUE slide — the grey panel just rises up and covers; NO opacity
+     fade (a fade reads as a translucent ghost/"投影", which the user does not
+     want). Pure transform = a clean 叠盖 switch. */
   .b2c-demo-section.demo-cover .container {
-    opacity: 0;
-    transform: translateY(96px);
-    transition:
-      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
+    transform: translateY(90px);
+    transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
   }
   .b2c-demo-section.demo-cover.is-in .container {
-    opacity: 1;
     transform: none;
     will-change: auto;
   }
