@@ -3074,7 +3074,14 @@ html {
   width: 100%;
   max-width: none;
   margin: 40px 0 0;
-  padding: 0;
+  /* Side gaps so the map card doesn't run edge-to-edge */
+  padding: 0 clamp(16px, 4vw, 64px);
+}
+
+/* Map display area as a bordered, rounded card */
+.globe-wrapper {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: clamp(16px, 2vw, 28px);
 }
 
 .map-section h2 {

@@ -301,7 +301,7 @@ export default function GlobeVisualization() {
       className="globe-wrapper"
       style={{
         width: '100%',
-        height: '600px',
+        height: '720px',
         position: 'relative',
         overflow: 'hidden',
         background: '#FFFFFF',
