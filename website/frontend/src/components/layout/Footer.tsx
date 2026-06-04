@@ -190,10 +190,10 @@ export default function Footer() {
       </div>
     </footer>
 
-    {/* go-electra-style sticky reveal: a giant GCSS wordmark pinned to the
+    {/* go-electra-style sticky reveal: a giant GCSS logo pinned to the
         viewport bottom that the dark footer scrolls up to uncover. */}
     <section className="footer-reveal" aria-hidden="true">
-      <span className="footer-reveal-word">GCSS</span>
+      <img className="footer-reveal-logo" src="/assets/logo-gcss-reveal.png" alt="" />
     </section>
     </div>
   );

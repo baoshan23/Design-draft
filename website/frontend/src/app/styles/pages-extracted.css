@@ -2465,21 +2465,23 @@ body:has(.product-hero) .glass-card [class*="icon"] {
    the top (behind/under the nav) while the content starts below it. */
 html:not([data-theme="dark"]) .hero.hero-centered,
 html[data-theme="dark"] .hero.hero-centered {
+  /* Grid-ONLY background. The dashboard mock is now a real flowing element
+     (.hero-dashboard-mock) instead of being baked into this bg, so the
+     title/content can never overlap it on adaptive/narrow viewports. */
   background-color: #f5f6f8;
-  background-image: url('/images/hero-bg-13.png');
+  background-image: url('/images/hero-grid-bg.png');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
   margin: 0;
   border-radius: 0;
-  /* First-fold TARGET only — `min-height` lets the hero fill the fold on
-     tall screens, but NO `max-height`/`overflow:hidden` cap so that on
-     short/adaptive viewports the hero GROWS with its content instead of
-     crushing the title + dashboard bg + stats into one overlapping stack.
-     The trusted-logo bar (合作商) is a separate section after this one, so
-     it just flows naturally below the hero rather than being pinned to the
-     fold (user: 不用固定死在首屏底部 — pinning caused the title/content/bg
-     to overlap on responsive sizes). */
+  /* Base = flows: `min-height` lets the hero fill the fold, but NO
+     `max-height`/`overflow:hidden` cap, so on short/adaptive viewports the
+     hero GROWS with its content (text → stats → dashboard stacked in flow,
+     never overlapping). The trusted-logo bar (合作商) is a separate section
+     after this one and just flows below. On LARGE screens the cap is
+     re-added (below) so the dashboard flex-fills to the fold and the
+     trusted-bar lands at the first-screen bottom. */
   min-height: calc(100vh - 180px);
   min-height: calc(100svh - 180px);
   padding: calc(72px + clamp(8px, 1.5vh, 24px)) clamp(16px, 3vw, 32px) clamp(12px, 1.5vh, 24px);
@@ -2488,6 +2490,18 @@ html[data-theme="dark"] .hero.hero-centered {
   display: flex;
   align-items: stretch;
   justify-content: center;
+}
+
+/* LARGE screens only — pin the hero to the first fold so the dashboard
+   flex-fills and the 合作商 trusted-bar sits at the bottom of the first
+   screen (user: 大屏展示时，合作商展示在首屏的底部). Below this breakpoint
+   the hero flows so the title never collides with the dashboard. */
+@media (min-width: 1100px) and (min-height: 760px) {
+  html:not([data-theme="dark"]) .hero.hero-centered,
+  html[data-theme="dark"] .hero.hero-centered {
+    max-height: calc(100svh - 180px);
+    overflow: hidden;
+  }
 }
 
 @media (max-width: 600px) {
@@ -2590,25 +2604,27 @@ html[data-theme="dark"] .hero.hero-centered {
    so the dashboard blends into the panel rather than ending hard. */
 .hero-dashboard-mock {
   width: 100%;
-  max-width: 1440px;
-  margin: clamp(12px, 2vh, 26px) auto 0;
-  flex: 1 1 auto;
+  max-width: 1100px;
+  margin: clamp(16px, 2.5vh, 34px) auto 0;
+  /* Base = natural size (flows below the text — never overlaps it). On
+     large screens (media query below) this switches to flex:1 1 auto so
+     the dashboard flex-fills the remaining hero height up to the fold. */
+  flex: 0 0 auto;
   min-height: 0;
   display: flex;
-  /* No height cap: the mock flex-fills the space left below the hero
-     text up to the panel's fixed bottom (the trusted-logo bar is a
-     separate section after this fixed-height overflow:hidden hero, so
-     it is not affected). The part that exceeds the fold fades out via
-     the bottom mask. */
   max-height: none;
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 80%, transparent 100%);
-          mask-image: linear-gradient(180deg, #000 0%, #000 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 88%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 0%, #000 88%, transparent 100%);
 }
 
 .hero-dashboard-frame {
   position: relative;
   width: 100%;
-  height: 100%;
+  /* Matches the hero-dashboard-13.png aspect so the whole dashboard shows
+     (no crop) at natural size; overridden to height:100% on large screens
+     where it flex-fills + crops via the bottom mask. */
+  aspect-ratio: 2400 / 691;
+  height: auto;
   border-radius: 16px;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.06);
@@ -2636,6 +2652,20 @@ html[data-theme="dark"] .hero.hero-centered {
   object-fit: cover;
   object-position: top center;
   border-radius: 14px;
+}
+
+/* Large screens — dashboard flex-fills to the fold so the 合作商 bar lands
+   at the first-screen bottom (pairs with the .hero.hero-centered max-height
+   pin at the same breakpoint). The bottom mask fades the cropped edge. */
+@media (min-width: 1100px) and (min-height: 760px) {
+  .hero-dashboard-mock {
+    flex: 1 1 auto;
+    max-width: 1440px;
+  }
+  .hero-dashboard-frame {
+    aspect-ratio: auto;
+    height: 100%;
+  }
 }
 
 @media (max-width: 720px) {

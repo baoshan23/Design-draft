@@ -96,6 +96,18 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
             </div>
           </div>
+
+          {/* Dashboard mock — a real flowing element below the stats (NOT
+              baked into the hero bg), so the title/content can never overlap
+              it on adaptive/narrow viewports. On large screens it flex-fills
+              to the fold (see .hero-dashboard-mock); on small screens it sits
+              at its natural size below the text. */}
+          <div className="hero-dashboard-mock" aria-hidden="true">
+            <div className="hero-dashboard-frame">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/hero-dashboard-13.png" alt="" className="hero-dashboard-img" />
+            </div>
+          </div>
         </div>
       </section>
 
