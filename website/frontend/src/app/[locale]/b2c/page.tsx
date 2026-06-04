@@ -340,9 +340,8 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                 <span className="section-label">{t('product.pay.label')}</span>
                 <h2>{t('product.pay.title')}</h2>
                 <p>{t('product.pay.desc')}</p>
+                <PaymentRequestForm />
               </div>
-
-              <PaymentRequestForm />
 
               {(() => {
                 const PAY_REGIONS = [

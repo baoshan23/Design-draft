@@ -979,7 +979,9 @@
 }
 .footer-reveal-word {
   font-weight: 800;
-  font-size: 38vw;
+  /* Smaller than the panel height so the centered wordmark leaves a clear
+     yellow band above AND below it (per user red-box). */
+  font-size: 32vw;
   line-height: 0.78;
   letter-spacing: -0.02em;
   color: #181818;
@@ -1271,7 +1273,7 @@
   margin-bottom: 16px !important;
 }
 .footer-logo img {
-  height: 88px;
+  height: 78px;
   width: auto;
   display: block;
 }
