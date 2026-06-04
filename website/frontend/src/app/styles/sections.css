@@ -6129,27 +6129,44 @@ main:has(#releases) + .footer .footer-rule {
 /* 售后服务(white) → 系统演示: the grey demo panel does a contained "叠盖"
    cover switch — it OVERLAPS the white block above (negative margin pulls the
    grey panel up over #support's bottom; grey-on-white reads as a stacked block
-   on its own — NO shadow, per user) and rises up into the overlap on scroll
-   (driven by SectionReveal.tsx adding `.demo-cover` then `.is-in`). Scoped to
-   #demo only, so it can't jumble neighbours the way the old global sticky
-   stacking did. The overlap (≤~90px) stays inside #support's 120px bottom
-   padding, so it covers empty white space — not the contact banner above. */
+   on its own — NO shadow, per user). The overlap (≤~90px) stays inside
+   #support's 120px bottom padding, so it covers empty white space — not the
+   contact banner above. The rise-on-scroll itself is the shared `.cover-rise`
+   mechanism below. */
 .b2c-demo-section {
   position: relative;
   z-index: 2;
   margin-top: clamp(-104px, -8.5vw, -64px);
   padding-top: clamp(12px, 2vh, 20px); /* grey panel leads so it overlaps */
 }
+
+/* ===========================================================
+   白色 → 灰色 切屏：灰色块"叠盖"上滑 (cover-rise)
+   Every white→grey switch on home / b2b / b2c does this: the grey block (or
+   the inset grey panel inside a white section) slides up into place as it
+   scrolls in. Pure transform — OPAQUE, NO opacity fade, NO shadow — so it
+   reads as a clean colour-block cover, not a translucent ghost/"投影".
+   Driven by SectionReveal.tsx (`.cover-rise` / `.cover-rise--panel` + `.is-in`).
+   Any per-section overlap (negative margin + z-index, e.g. .b2c-demo-section
+   above) is layered on top in that section's own rules. */
 @media (prefers-reduced-motion: no-preference) {
-  /* Fully OPAQUE slide — the grey panel just rises up and covers; NO opacity
-     fade (a fade reads as a translucent ghost/"投影", which the user does not
-     want). Pure transform = a clean 叠盖 switch. */
-  .b2c-demo-section.demo-cover .container {
-    transform: translateY(90px);
+  /* full-bleed grey section — the whole grey block rises */
+  .cover-rise {
+    transform: translateY(64px);
     transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform;
   }
-  .b2c-demo-section.demo-cover.is-in .container {
+  .cover-rise.is-in {
+    transform: none;
+    will-change: auto;
+  }
+  /* inset grey panel — translate the grey `.container`, not the white surround */
+  .cover-rise--panel .container {
+    transform: translateY(84px);
+    transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+  .cover-rise--panel.is-in .container {
     transform: none;
     will-change: auto;
   }

@@ -3,14 +3,14 @@
 import { useEffect } from 'react';
 
 /**
- * Gentle per-section reveal for the home / b2b / b2c pages.
+ * Per-section scroll transitions for the home / b2b / b2c pages.
  *
- * The old "color-block switch" used sticky stacking panels (each section
- * pinned + covered by the next). That produced broken overlaps where a tall
- * inset-panel section (e.g. #demo) froze and bled into its neighbours, so the
- * sticky stacking is gone. What remains is a subtle fade-up that fires ONLY
- * when a section's background colour differs from the section directly above
- * it (white→white is seamless — no animation).
+ * Every white → grey background switch does a "灰色块叠盖" cover-rise: the grey
+ * block (or the inset grey panel inside a white section) slides up into place
+ * as it scrolls in — pure transform, OPAQUE, no opacity fade, no shadow, so it
+ * reads as a clean colour-block cover, not a translucent ghost. All other
+ * colour changes (e.g. grey → white) keep a gentle fade-up; white → white is
+ * seamless (no animation).
  *
  * - The hero, the trusted-bar marquee, the full-bleed CTA banner, and the b2c
  *   sticky stacking-deck section (#features) are skipped.
@@ -28,10 +28,11 @@ export default function SectionReveal() {
       el.querySelector('.b2c-feature-stack') !== null;
 
     // Effective bg of EVERY section (transparent → white, since the page is
-    // white). A section's bg differing from the one directly above it is a
-    // real colour change; same colour (white→white) gets no animation.
+    // white). The site grey is var(--dark) = #F1F2F4 = rgb(241, 242, 244).
+    const WHITE = 'rgb(255, 255, 255)';
+    const GREY = 'rgb(241, 242, 244)';
     const norm = (c: string) =>
-      c === 'rgba(0, 0, 0, 0)' || c === 'transparent' ? 'rgb(255, 255, 255)' : c;
+      c === 'rgba(0, 0, 0, 0)' || c === 'transparent' ? WHITE : c;
     const allSections = Array.from(document.querySelectorAll<HTMLElement>('section'));
     const bgs = allSections.map((s) => norm(getComputedStyle(s).backgroundColor));
     const vh = window.innerHeight;
@@ -52,35 +53,31 @@ export default function SectionReveal() {
       if (skip(sec)) return;
       // Skip anything already in / near the first screen so it never flickers.
       if (sec.getBoundingClientRect().top < vh * 0.85) return;
-      // Only fade in where the colour actually changes from the section above.
-      const prevBg = i > 0 ? bgs[i - 1] : 'rgb(255, 255, 255)';
-      if (bgs[i] === prevBg) return;
-      sec.classList.add('section-reveal');
-      io.observe(sec);
+
+      const secBg = bgs[i];
+      const prevBg = i > 0 ? bgs[i - 1] : WHITE;
+
+      // Inset grey panel: a WHITE section whose inner `.container` is the grey
+      // block (#how-it-works, #demo) — the section bg reads white like the one
+      // above it, so the bg compare alone would miss it.
+      const panel = sec.querySelector<HTMLElement>('.container');
+      const panelGrey =
+        secBg === WHITE && !!panel && norm(getComputedStyle(panel).backgroundColor) === GREY;
+
+      if (secBg === GREY && prevBg === WHITE) {
+        // full-bleed grey block → rises up to cover the white above (叠盖)
+        sec.classList.add('cover-rise');
+        io.observe(sec);
+      } else if (panelGrey) {
+        // inset grey panel → the grey panel rises up to cover
+        sec.classList.add('cover-rise--panel');
+        io.observe(sec);
+      } else if (secBg !== prevBg) {
+        // any other colour change (grey → white, …) keeps the gentle fade-up
+        sec.classList.add('section-reveal');
+        io.observe(sec);
+      }
     });
-
-    // 售后服务(white) → 系统演示: the b2c #demo grey inner panel does a
-    // contained "叠盖" cover switch — it rises up + overlaps the block above.
-    // Scoped to #demo alone so it can't jumble neighbours the way the old
-    // global sticky stacking did. (#demo's SECTION bg is white like #support
-    // above it, so the colour-change loop skips it — handle it explicitly.)
-    const demo = document.querySelector<HTMLElement>('.b2c-demo-section');
-    if (demo && demo.getBoundingClientRect().top >= vh * 0.85) {
-      demo.classList.add('demo-cover');
-      io.observe(demo);
-    }
-
-    // b2b 营收(#revenue) → 功能(#features): the #features band does a contained
-    // "叠盖" cover switch — it rises up + overlaps the block above (rounded top +
-    // cover-shadow). Scoped to the b2b page (its hero carries `.particles-bg`).
-    // #features's section bg computes as white like #revenue above it, so the
-    // colour-change loop skips it — handle it explicitly here.
-    const isB2b = !!document.querySelector('.product-hero.particles-bg');
-    const feat = document.querySelector<HTMLElement>('#features');
-    if (isB2b && feat && feat.getBoundingClientRect().top >= vh * 0.85) {
-      feat.classList.add('feat-cover');
-      io.observe(feat);
-    }
 
     return () => io.disconnect();
   }, []);
