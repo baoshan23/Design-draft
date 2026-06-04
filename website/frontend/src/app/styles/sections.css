@@ -3757,44 +3757,25 @@ html {
   margin-top: clamp(-72px, -6vw, -44px);
 }
 
-/* b2b: round the BOTTOM corners of the white #releases section (the last content
-   block before the dark footer). #releases is already an opaque white section;
-   it sits above the footer (z-index:1) and the footer is pulled up by the same
-   radius so its dark #181818 fills the carved corner notches. The footer's top
-   edge is then hidden behind the white section, so its border/pinstripe is
-   dropped on this page to avoid a stray line in the notches. Scoped to the b2b
-   page via main:has(#releases). */
-#releases {
+/* ALL pages: round the BOTTOM corners of the last content <section> before the
+   dark footer, and pull the footer up so its dark #181818 fills the carved corner
+   notches (footer top border/pinstripe dropped to avoid a stray line). The last
+   section sits on top (z-index:1). `main > section:last-of-type` targets the final
+   full-width section regardless of page (homepage grey CTA, b2b #releases, b2c
+   #changelog, pricing #plans, …) and ignores the transient diagram-modal overlay
+   div (not a <section>). Works whenever that section's bg is lighter than the
+   footer; if it matches the footer dark, the notches are simply invisible. */
+main > section:last-of-type {
   position: relative;
   z-index: 1;
   border-bottom-left-radius: clamp(20px, 3vw, 36px);
   border-bottom-right-radius: clamp(20px, 3vw, 36px);
 }
-main:has(#releases) + .footer {
+main + .footer {
   margin-top: clamp(-36px, -3vw, -20px);
   border-top: none;
 }
-main:has(#releases) + .footer .footer-rule {
-  display: none;
-}
-
-/* Homepage: round the BOTTOM corners of the grey CTA section (the last content
-   block before the dark footer) — same treatment as b2b #releases. The grey CTA
-   sits above the footer (z-index:1) and the footer is pulled up by the same
-   radius so its dark #181818 fills the carved corner notches; the footer's top
-   edge is hidden behind the CTA so its border/pinstripe is dropped here to avoid
-   a stray line in the notches. Scoped to the homepage via main:has(#testimonials). */
-main:has(#testimonials) .cta-section {
-  position: relative;
-  z-index: 1;
-  border-bottom-left-radius: clamp(20px, 3vw, 36px);
-  border-bottom-right-radius: clamp(20px, 3vw, 36px);
-}
-main:has(#testimonials) + .footer {
-  margin-top: clamp(-36px, -3vw, -20px);
-  border-top: none;
-}
-main:has(#testimonials) + .footer .footer-rule {
+main + .footer .footer-rule {
   display: none;
 }
 
