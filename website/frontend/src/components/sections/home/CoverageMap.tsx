@@ -80,15 +80,6 @@ export default function CoverageMap() {
       { name: t('map.countries.ethiopia'), lng: 40.4897, lat: 9.145, isOrigin: false },
     ];
 
-    const geojson = {
-      type: 'FeatureCollection',
-      features: points.map((p) => ({
-        type: 'Feature',
-        properties: { name: p.name, isOrigin: p.isOrigin },
-        geometry: { type: 'Point', coordinates: [p.lng, p.lat] },
-      })),
-    };
-
     loadMapLibre()
       .then((maplibregl) => {
         if (cancelled || !containerRef.current) return;
@@ -111,77 +102,22 @@ export default function CoverageMap() {
         map.touchZoomRotate.disableRotation();
         map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
 
-        map.on('load', () => {
-          if (cancelled) return;
-          // No clustering — every served country stays individually visible
-          // and prominent at all zoom levels.
-          map.addSource('coverage', {
-            type: 'geojson',
-            data: geojson,
-          });
+        // Station-style markers (go-electra: a lightning bolt inside a circle).
+        // Built as HTML markers so every served location is always visible and
+        // prominent, with the location name labelled beneath it.
+        const lightning =
+          '<svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M13 2L4.5 13.5H11l-1 8.5L19.5 10H13z"/></svg>';
 
-          // Soft glow halo behind each pin so the marked countries pop on the map
-          map.addLayer({
-            id: 'points-glow',
-            type: 'circle',
-            source: 'coverage',
-            paint: {
-              'circle-color': '#FEBF1D',
-              'circle-radius': ['case', ['get', 'isOrigin'], 26, 20],
-              'circle-blur': 0.9,
-              'circle-opacity': 0.45,
-            },
-          });
-
-          // Bold pins
-          map.addLayer({
-            id: 'points',
-            type: 'circle',
-            source: 'coverage',
-            paint: {
-              'circle-color': ['case', ['get', 'isOrigin'], '#F59E00', '#FEBF1D'],
-              'circle-radius': ['case', ['get', 'isOrigin'], 13, 10],
-              'circle-stroke-width': 3,
-              'circle-stroke-color': '#ffffff',
-            },
-          });
-
-          // Always-visible country-name labels — the key to "more obvious"
-          map.addLayer({
-            id: 'point-labels',
-            type: 'symbol',
-            source: 'coverage',
-            layout: {
-              'text-field': ['get', 'name'],
-              'text-font': ['Noto Sans Bold', 'Noto Sans Regular'],
-              'text-size': ['case', ['get', 'isOrigin'], 15, 13],
-              'text-offset': [0, 1.3],
-              'text-anchor': 'top',
-              'text-allow-overlap': true,
-              'text-padding': 2,
-            },
-            paint: {
-              'text-color': '#1a1a1a',
-              'text-halo-color': '#ffffff',
-              'text-halo-width': 2,
-              'text-halo-blur': 0.5,
-            },
-          });
-
-          // Click a pin → popup with the location name
-          map.on('click', 'points', (e: any) => {
-            const f = e.features?.[0];
-            if (!f) return;
-            const coords = f.geometry.coordinates.slice();
-            new maplibregl.Popup({ closeButton: false, offset: 16 })
-              .setLngLat(coords)
-              .setHTML(`<div class="coverage-popup">${f.properties.name}</div>`)
-              .addTo(map);
-          });
-
-          map.on('mouseenter', 'points', () => (map.getCanvas().style.cursor = 'pointer'));
-          map.on('mouseleave', 'points', () => (map.getCanvas().style.cursor = ''));
-        });
+        for (const p of points) {
+          const el = document.createElement('div');
+          el.className = 'coverage-pin' + (p.isOrigin ? ' coverage-pin--origin' : '');
+          el.innerHTML =
+            `<span class="coverage-pin-badge">${lightning}</span>` +
+            `<span class="coverage-pin-label">${p.name}</span>`;
+          new maplibregl.Marker({ element: el, anchor: 'bottom' })
+            .setLngLat([p.lng, p.lat])
+            .addTo(map);
+        }
       })
       .catch(() => {
         /* offline / CDN blocked — leave the empty container, no crash */
