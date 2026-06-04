@@ -36,6 +36,7 @@ export default function SectionReveal() {
     const allSections = Array.from(document.querySelectorAll<HTMLElement>('section'));
     const bgs = allSections.map((s) => norm(getComputedStyle(s).backgroundColor));
     const vh = window.innerHeight;
+    const isB2b = !!document.querySelector('.product-hero.particles-bg');
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -64,8 +65,13 @@ export default function SectionReveal() {
       const panelGrey =
         secBg === WHITE && !!panel && norm(getComputedStyle(panel).backgroundColor) === GREY;
 
-      if (secBg === GREY && prevBg === WHITE) {
-        // full-bleed grey block → rises up to cover the white above (叠盖)
+      // b2b 营收(white) → 功能(#features): the gradient features band has no
+      // bg-COLOR (reads white), so the white→grey compare misses it. Trigger the
+      // same opaque cover-rise (NO shadow) so it 叠盖s the revenue block above.
+      const featCover = isB2b && sec.id === 'features';
+
+      if (featCover || (secBg === GREY && prevBg === WHITE)) {
+        // full-bleed block → rises up to cover the white above (叠盖)
         sec.classList.add('cover-rise');
         io.observe(sec);
       } else if (panelGrey) {
