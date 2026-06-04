@@ -59,6 +59,17 @@ export default function SectionReveal() {
       io.observe(sec);
     });
 
+    // 售后服务(white) → 系统演示: the b2c #demo grey inner panel does a
+    // contained "叠盖" cover switch — it rises up + overlaps the block above.
+    // Scoped to #demo alone so it can't jumble neighbours the way the old
+    // global sticky stacking did. (#demo's SECTION bg is white like #support
+    // above it, so the colour-change loop skips it — handle it explicitly.)
+    const demo = document.querySelector<HTMLElement>('.b2c-demo-section');
+    if (demo && demo.getBoundingClientRect().top >= vh * 0.85) {
+      demo.classList.add('demo-cover');
+      io.observe(demo);
+    }
+
     return () => io.disconnect();
   }, []);
 

@@ -6068,18 +6068,13 @@ main:has(#releases) + .footer .footer-rule {
    tint) across all grey-banded sections — user req. These IDs are used only
    on the b2b/b2c pages, so this stays scoped to those two pages. */
 #modes.section-alt,
+#support,
 #license.section-alt,
 #changelog.section-alt,
 #releases.section-alt,
 #pricing.section {
   background: #fff;
 }
-
-/* b2c `#support` (售后服务) kept its natural `.section-alt` grey so it reads
-   as a distinct colour block under the white `#gallery` (产品展示) above it —
-   that white→grey change is what drives the "色块切换" transition between the
-   two. (b2b `#support` is a plain transparent `.section` over the white body,
-   so it stays white regardless.) */
 
 /* b2c `#demo` "系统演示" — keep its grey band (user req: 恢复之前的灰色).
    It's a plain transparent `.section`; now that the page body is white
@@ -6097,6 +6092,36 @@ main:has(#releases) + .footer .footer-rule {
   background: var(--dark);
   border-radius: clamp(20px, 3vw, 32px);
   padding: clamp(48px, 7vw, 88px) clamp(20px, 4vw, 56px);
+}
+
+/* 售后服务(white) → 系统演示: the grey demo panel does a contained "叠盖"
+   cover switch — it sits slightly over the white block above (top
+   cover-shadow + a small negative margin) and rises up into place on scroll
+   (driven by SectionReveal.tsx adding `.demo-cover` then `.is-in`). Scoped to
+   #demo only, so it can't jumble neighbours the way the old global sticky
+   stacking did. */
+.b2c-demo-section {
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(-44px, -4vw, -28px);
+}
+.b2c-demo-section .container {
+  box-shadow: 0 -16px 42px -18px rgba(0, 0, 0, 0.26);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .b2c-demo-section.demo-cover .container {
+    opacity: 0;
+    transform: translateY(86px);
+    transition:
+      opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .b2c-demo-section.demo-cover.is-in .container {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
 }
 
 /* ===========================================================
