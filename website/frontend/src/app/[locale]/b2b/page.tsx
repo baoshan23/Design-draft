@@ -176,20 +176,23 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
       <section className="section" id="architecture">
         <div className="container">
           <ScrollAnimation>
-            <div className="section-header">
-              <span className="section-label">{t('b2b.nav.overview')}</span>
-              <h2>{t('b2b.overview.title')}</h2>
+            <div className="b2b-arch">
+              <Image
+                src="/images/b2b-architecture.png"
+                alt={t('b2b.overview.title')}
+                width={1920}
+                height={1064}
+                sizes="(max-width: 1320px) 100vw, 1320px"
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+              />
+              {/* Centered title overlay (text in the empty middle of the orbit). */}
+              <div className="b2b-arch-core">
+                <span className="b2b-arch-headline">{t('b2b.overview.title')}</span>
+                <span className="b2b-arch-eyebrow">{t('b2b.overview.coreLabel')}</span>
+                <span className="b2b-arch-name">{t('b2b.overview.center')}</span>
+                <span className="b2b-arch-pill">{t('b2b.overview.model')}</span>
+              </div>
             </div>
-          </ScrollAnimation>
-          <ScrollAnimation>
-            <Image
-              src="/images/b2b-architecture.png"
-              alt={t('b2b.overview.title')}
-              width={1920}
-              height={1064}
-              sizes="(max-width: 1320px) 100vw, 1320px"
-              style={{ width: '100%', height: 'auto', display: 'block', maxWidth: 1320, margin: '0 auto' }}
-            />
           </ScrollAnimation>
         </div>
       </section>
