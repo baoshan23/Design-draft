@@ -100,6 +100,11 @@
 }
 
 /* ---------- Hero ---------- */
+/* Grey page bg so the inset hero's surround matches the next (.section-alt) screen */
+body:has(#demo-hero) {
+  background: #F1F2F4;
+}
+
 .demo-hero {
   position: relative;
   margin: calc(var(--header-height, 72px) + 12px) clamp(16px, 3vw, 40px) 12px;
