@@ -6068,13 +6068,18 @@ main:has(#releases) + .footer .footer-rule {
    tint) across all grey-banded sections — user req. These IDs are used only
    on the b2b/b2c pages, so this stays scoped to those two pages. */
 #modes.section-alt,
-#support,
 #license.section-alt,
 #changelog.section-alt,
 #releases.section-alt,
 #pricing.section {
   background: #fff;
 }
+
+/* b2c `#support` (售后服务) kept its natural `.section-alt` grey so it reads
+   as a distinct colour block under the white `#gallery` (产品展示) above it —
+   that white→grey change is what drives the "色块切换" transition between the
+   two. (b2b `#support` is a plain transparent `.section` over the white body,
+   so it stays white regardless.) */
 
 /* b2c `#demo` "系统演示" — keep its grey band (user req: 恢复之前的灰色).
    It's a plain transparent `.section`; now that the page body is white
