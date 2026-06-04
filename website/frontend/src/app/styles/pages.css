@@ -954,7 +954,8 @@
   border-bottom-right-radius: clamp(24px, 3vw, 44px);
 }
 .footer-reveal {
-  position: relative;
+  position: sticky;
+  bottom: 0;
   z-index: 1;
   margin-top: clamp(-44px, -3vw, -24px);
   display: flex;
