@@ -88,50 +88,6 @@
   width: 100%;
 }
 
-/* --- First-screen (hero) buttons — unified pill spec (user ref) ---
-   Primary: solid amber pill + black text + trailing ↗ arrow.
-   Secondary: white pill + thin dark outline + dark text, no icon.
-   Scoped to .hero-buttons so it overrides the base/polish .btn rules
-   without touching buttons elsewhere on the site. */
-.hero-buttons .btn,
-.hero-buttons .btn-lg {
-  border-radius: 999px;
-  padding: 15px 32px;
-  font-size: 1rem;
-  font-weight: 600;
-  gap: 12px;
-}
-.hero-buttons .btn-primary {
-  background: var(--primary);
-  color: #1a1a1a;
-  border: 1px solid var(--primary);
-  box-shadow: none;
-}
-.hero-buttons .btn-primary:hover {
-  background: var(--primary-hover);
-  border-color: var(--primary-hover);
-  box-shadow: none;
-  transform: translateY(-1px);
-}
-.hero-buttons .btn-primary .hero-btn-arrow {
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.hero-buttons .btn-primary:hover .hero-btn-arrow {
-  transform: translate(2px, -2px);
-}
-.hero-buttons .btn-secondary {
-  background: #fff;
-  color: #1a1a1a;
-  border: 1.5px solid #1a1a1a;
-  box-shadow: none;
-}
-.hero-buttons .btn-secondary:hover {
-  background: #1a1a1a;
-  color: #fff;
-  border-color: #1a1a1a;
-  transform: translateY(-1px);
-}
-
 /* --- Header / Navigation --- */
 .header {
   position: fixed;
