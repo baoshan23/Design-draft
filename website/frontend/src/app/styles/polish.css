@@ -1297,7 +1297,7 @@ footer {
   border-top-left-radius: clamp(20px, 2.6vw, 40px);
   border-top-right-radius: clamp(20px, 2.6vw, 40px);
   margin-top: -1px; /* kill the sub-pixel seam between stacked panels */
-  box-shadow: 0 -14px 38px -22px rgba(0, 0, 0, 0.22);
+  /* No drop-shadow between stacked panels (user: 取消每一屏切换之间的投影). */
 }
 /* Blocks that fit a screen freeze at the top so the next block covers them. */
 .section-panel--pin {
