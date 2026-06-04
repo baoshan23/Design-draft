@@ -3157,15 +3157,17 @@ h3.matrix-header,
 #how-it-works.section-alt {
   background: #ffffff;
   padding: clamp(40px, 6vh, 72px) clamp(16px, 1.5vw, 24px);
-  /* white → grey "叠盖": the grey panel leads (near-zero top padding) + the
-     section is pulled up so the grey panel covers the bottom of the pinned
-     MobileShowcase above (sticky-stack, .section-stack). The showcase has 80px
-     bottom padding, so the overlap must eat that white gap and reach the phone
-     — matches the b2c #demo overlap (user: 直接是灰色块开始叠盖，间隙不要). */
+  /* "叠盖": the COLORED panel must lead the cover with NO white above it
+     (user: 使用流程的背景颜色直接开始覆盖，背景颜色上面不要有任何留白). The pinned
+     MobileShowcase above has a fixed 80px bottom padding, so pull the section
+     up by ~that amount and drop the top padding to 0 → the colored panel's top
+     edge meets the phone bottom, the colour covers directly, and no white
+     (neither the section padding nor the showcase's bottom padding) shows
+     above the colour. */
   position: relative;
   z-index: 3;
-  margin-top: clamp(-110px, -8vw, -80px);
-  padding-top: clamp(0px, 1vh, 8px);
+  margin-top: -84px;
+  padding-top: 0;
 }
 #how-it-works.section-alt .container {
   max-width: none;
