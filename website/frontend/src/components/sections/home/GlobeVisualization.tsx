@@ -268,10 +268,25 @@ export default function GlobeVisualization() {
         .attr('fill-opacity', 0.6 * (1 - t));
     });
 
-    // Zoom behavior
+    // Zoom + pan behaviour — tuned to feel like a real slippy map (Mapbox/
+    // Google style): wheel zooms toward the cursor, double-click zooms in,
+    // drag pans, and releasing a drag glides with inertia. d3.zoom gives us
+    // everything except momentum, which we add manually below.
+    let lastPan: [number, number] | null = null;
+    let lastPanT = 0;
+    let velX = 0;
+    let velY = 0;
+
     const zoomBehavior = d3.zoom<SVGSVGElement, unknown>()
-      .scaleExtent([1, 6])
+      .scaleExtent([1, 12])
       .translateExtent([[0, 0], [w, h]])
+      .on('start', (event) => {
+        const st = event.sourceEvent?.type ?? '';
+        if (/mousedown|touchstart|pointerdown/.test(st)) svg.style('cursor', 'grabbing');
+        lastPan = null;
+        velX = 0;
+        velY = 0;
+      })
       .on('zoom', (event) => {
         root.attr('transform', event.transform);
         // Counter-scale marker text/dots so they stay readable
@@ -279,6 +294,38 @@ export default function GlobeVisualization() {
         markersGroup.selectAll('text').attr('font-size', (d: any) => (d.isOrigin ? 11 : 9) / k);
         root.selectAll<SVGPathElement, unknown>('.country').attr('stroke-width', 0.8 / k);
         arcsGroup.selectAll('.arc').attr('stroke-width', 1 / k);
+
+        // Track pointer-drag velocity (screen px / ms) for the inertia glide.
+        const se = event.sourceEvent;
+        if (se && /move/.test(se.type)) {
+          const now = performance.now();
+          const pt: [number, number] = [event.transform.x, event.transform.y];
+          if (lastPan && now > lastPanT) {
+            const dt = now - lastPanT;
+            velX = (pt[0] - lastPan[0]) / dt;
+            velY = (pt[1] - lastPan[1]) / dt;
+          }
+          lastPan = pt;
+          lastPanT = now;
+        }
+      })
+      .on('end', (event) => {
+        svg.style('cursor', 'grab');
+        // Momentum: if the drag was moving fast enough, keep gliding and let it
+        // ease out. translateBy works in pre-scale coords, hence the /k.
+        const speed = Math.hypot(velX, velY);
+        if (event.sourceEvent && /mouse|touch|pointer/.test(event.sourceEvent.type) && speed > 0.08) {
+          const k = event.transform.k;
+          const glide = 220; // distance multiplier (px per px/ms of velocity)
+          svg
+            .transition()
+            .duration(750)
+            .ease(d3.easeCubicOut)
+            .call(zoomBehavior.translateBy, (velX * glide) / k, (velY * glide) / k);
+        }
+        lastPan = null;
+        velX = 0;
+        velY = 0;
       });
 
     zoomBehaviorRef.current = zoomBehavior;
@@ -288,6 +335,7 @@ export default function GlobeVisualization() {
       mounted = false;
       pulseTimer.stop();
       svg.on('.zoom', null);
+      svg.interrupt();
     };
     // Effect depends on `locale` so it re-runs on language switch, while
     // `origin`/`countries` are read from the current render closure
