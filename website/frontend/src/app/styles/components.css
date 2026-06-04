@@ -91,22 +91,26 @@
 /* --- Header / Navigation --- */
 .header {
   position: fixed;
-  /* Site-wide floating rounded "pill" nav — inset from all four edges with a
-     full 1px border + large radius, frosted white. Unified across every page
-     and scroll state (user request: 顶部导航栏全站统一改成这种样式). */
+  /* Site-wide floating rounded "pill" nav — centered, max 1440px wide, with a
+     full black 1px border + large radius and NO colour fill (transparent).
+     Unified across every page + scroll state (user: 全站统一 / 1440宽 / 无颜色
+     填充 / 边线黑色). NB: do NOT add `transform` here — the mobile nav overlay
+     is position:fixed and a transform on .header would become its containing
+     block and break it (regression bfd5410); centering uses auto margins. */
   top: 12px;
   left: 16px;
   right: 16px;
+  width: auto;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
   height: var(--header-height);
   z-index: 100;
-  background: rgba(255, 255, 255, 0.92);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(0, 0, 0, 0.10);
+  background: transparent;
+  border: 1px solid #000;
   border-radius: 9999px;
   box-shadow: none;
-  transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 /* Content fills the pill (logo pinned left, actions pinned right) instead of
@@ -115,18 +119,16 @@
   max-width: none;
 }
 .header.scrolled {
-  background: rgba(255, 255, 255, 0.92);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
-  /* No drop-shadow — only the 1px border outlines the pill
-     (user request: "顶部导航栏静态展示时，无投影，只有边线"). */
+  /* Transparent — no colour fill in any scroll state (user: 无颜色填充).
+     Only the 1px black border outlines the pill. */
+  background: transparent;
   box-shadow: none;
-  border-color: rgba(0, 0, 0, 0.10);
+  border-color: #000;
 }
 [data-theme="dark"] .header,
 [data-theme="dark"] .header.scrolled {
-  background: rgba(12, 10, 9, 0.92);
-  border-color: rgba(255, 255, 255, 0.12);
+  background: transparent;
+  border-color: #000;
 }
 @media (max-width: 600px) {
   .header {
@@ -136,49 +138,24 @@
   }
 }
 
-/* Homepage (has the charger bg image) — the floating pill is now always the
-   frosted-white bar (was transparent-when-unscrolled). Unified with the rest
-   of the site (user request: 全站统一). */
-body:has(.hero-with-video) .header:not(.scrolled) {
-  background: rgba(255, 255, 255, 0.92);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
-  border-color: rgba(0, 0, 0, 0.10);
+/* Homepage / demo / pricing / sub-nav pages — all unified to the same
+   transparent black-outlined pill (no per-page colour fill). */
+body:has(.hero-with-video) .header:not(.scrolled),
+body:has(.hero-with-video) .header.scrolled,
+body:has(.demo-hero) .header,
+body:has(.demo-hero) .header.scrolled,
+body:has(.pricing-hero) .header,
+body:has(.pricing-hero) .header.scrolled,
+body:has(.sub-nav) .header,
+body:has(.sub-nav) .header.scrolled {
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-color: #000;
   box-shadow: none;
 }
 body:has(.hero-with-video) .header:not(.scrolled)::after {
   display: none;
-}
-body:has(.hero-with-video) .header.scrolled {
-  background: rgba(255, 255, 255, 0.92);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
-  /* No drop-shadow — only the 1px border outlines the pill
-     (user request: "顶部导航栏静态展示时，无投影，只有边线"). */
-  box-shadow: none;
-  border-color: rgba(0, 0, 0, 0.10);
-}
-
-/* Demo / pricing page (yellow hero) — keep the header readable on the warm
-   bg by forcing a near-opaque white frost on top, regardless of scroll.
-   No drop-shadow in EITHER state — only the 1px border outlines the pill. */
-body:has(.demo-hero) .header,
-body:has(.demo-hero) .header.scrolled,
-body:has(.pricing-hero) .header,
-body:has(.pricing-hero) .header.scrolled {
-  background: rgba(255, 255, 255, 0.92);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
-  border-color: rgba(0, 0, 0, 0.10);
-  box-shadow: none;
-}
-
-/* Pages with a sub-nav strip: keep the full pill border (the sub-nav strip
-   sits below the floating pill, pushed down via the .sub-nav top offset). */
-body:has(.sub-nav) .header,
-body:has(.sub-nav) .header.scrolled {
-  box-shadow: none;
-  border-color: rgba(0, 0, 0, 0.10);
 }
 
 /* Sub-nav frosted-glass: mirror the primary header on the same page so the
