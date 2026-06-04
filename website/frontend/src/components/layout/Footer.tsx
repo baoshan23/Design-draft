@@ -90,6 +90,7 @@ export default function Footer() {
   };
 
   return (
+    <>
     <footer className="footer">
       <div className="footer-rule" aria-hidden="true" />
 
@@ -188,5 +189,12 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+
+    {/* go-electra-style sticky reveal: a giant GCSS wordmark pinned to the
+        viewport bottom that the dark footer scrolls up to uncover. */}
+    <section className="footer-reveal" aria-hidden="true">
+      <span className="footer-reveal-word">GCSS</span>
+    </section>
+    </>
   );
 }

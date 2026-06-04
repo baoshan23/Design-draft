@@ -930,6 +930,39 @@
   pointer-events: none;
 }
 
+/* ── go-electra-style footer reveal ────────────────────────────────────────
+   A full-width yellow panel with a giant black "GCSS" wordmark, placed AFTER
+   the dark footer in the DOM. It is `position:sticky; bottom:0` and pinned to
+   the viewport bottom while the page scrolls; `z-index:-1` keeps it BEHIND the
+   opaque dark footer (z-index:0) and main (z-index:1) so it stays hidden until
+   the footer scrolls up off it at the very bottom — uncovering the wordmark in
+   a clean wipe, exactly like https://www.go-electra.com/ . */
+.footer-reveal {
+  position: sticky;
+  bottom: 0;
+  z-index: -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  height: min(72vh, 560px);
+  background: var(--primary, #FEBF1D);
+}
+.footer-reveal-word {
+  font-weight: 800;
+  font-size: 38vw;
+  line-height: 0.78;
+  letter-spacing: -0.02em;
+  color: #181818;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+}
+@media (max-width: 600px) {
+  .footer-reveal {
+    height: min(48vh, 360px);
+  }
+}
 
 .footer-grid {
   display: grid;
