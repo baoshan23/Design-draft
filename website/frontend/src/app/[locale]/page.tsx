@@ -136,6 +136,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Business Models Section */}
       <BusinessModelsSection />
 
+      {/* Mobile App Showcase → How It Works: sticky-stack cover (same transition
+          as the b2c 售后→系统演示 pair). The showcase PINS while #how-it-works
+          rises in normal flow and 叠盖s (covers) it. */}
+      <div className="section-stack">
+
       {/* Mobile App Showcase */}
       <MobileShowcase />
 
@@ -198,6 +203,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </ScrollAnimation>
         </div>
       </section>
+
+      </div>{/* /.section-stack */}
 
       {/* Core Features Section */}
       <section className="section section-alt" id="features">
