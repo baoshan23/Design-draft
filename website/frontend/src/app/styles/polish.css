@@ -635,7 +635,7 @@ main :not(pre) > code {
   position: relative;
   width: 100%;
   padding: 4.2%;
-  border-radius: 19% / 9.2%;
+  border-radius: 15% / 7.4%;
   /* White-10% frosted-glass frame (was graphite gradient) */
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
