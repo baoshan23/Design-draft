@@ -11383,6 +11383,14 @@ details.admin-legacy-group > .admin-settings-group:last-child {
 #support .b2b-aftersales-grid .card-icon svg .ic-accent {
   stroke: var(--primary);
 }
+/* No icon interaction on hover (user: 这里的图标无交互动效). Kills the generic
+   `.card:hover .card-icon` scale + the #support scale/glow from polish.css. */
+.b2b-aftersales-grid .card:hover .card-icon,
+#aftersales .b2b-aftersales-grid .card:hover .card-icon,
+#support .b2b-aftersales-grid .card:hover .card-icon {
+  transform: none;
+  box-shadow: none;
+}
 .b2b-aftersales-grid .card h3,
 .b2b-revenue-grid .card h3,
 .b2b-modes-grid .card h3,
