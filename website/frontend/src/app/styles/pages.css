@@ -3184,13 +3184,15 @@ body:has(.product-hero.particles-bg) #features.section-alt {
   background-color: #ffffff;
   /* 营收(#revenue) → 功能 sticky-stack: #revenue pins centered while this band
      rises as a whole to 叠盖 (cover) it — NO seam shadow (user: 不要投影). The
-     rise itself is scroll-linked (SectionReveal featCover); the overlap + rounded
-     top live here. Scoped to b2b via the particles-bg hero. */
+     rise itself is scroll-linked (SectionReveal featCover); the overlap lives
+     here. Scoped to b2b via the particles-bg hero. */
   position: relative;
   z-index: 2;
   margin-top: clamp(-48px, -4.5vw, -30px);
-  border-top-left-radius: clamp(20px, 3vw, 40px);
-  border-top-right-radius: clamp(20px, 3vw, 40px);
+  /* Inset card like the grey panels: small L/R gap (matches the grey-panel
+     width) + all-four rounded corners (user: 四角都做圆角，左右不靠边). */
+  margin-inline: clamp(16px, 1.5vw, 24px);
+  border-radius: clamp(20px, 3vw, 32px);
 }
 
 /* 营收→功能 sticky-stack wrapper (b2b page.tsx wraps #revenue + #features).
