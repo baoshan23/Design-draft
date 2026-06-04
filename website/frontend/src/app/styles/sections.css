@@ -5115,6 +5115,14 @@ main:has(#testimonials) + .footer .footer-rule {
   transition-delay: 0.4s;
 }
 
+/* b2c #features sticky stacking deck: these rows are wrapped in
+   .b2c-stack-card (no .animate-on-scroll ancestor), so the checkmark
+   draw-in above never fires — show the icons by default here. */
+.b2c-stack-card .feature-list li svg {
+  opacity: 1;
+  transform: none;
+}
+
 /* --- Forum --- */
 /* --- Changelog --- */
 .changelog-section {
