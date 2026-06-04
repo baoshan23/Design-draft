@@ -540,11 +540,11 @@
 /* Enlarge the payflow illustrations: the text side is only a short eyebrow +
    title, so give the image column the larger share of the row and tighten the
    gap. The image fills its column (img width:100%), so a wider column = a
-   bigger illustration. Reverse rows (rtl) keep the image in col 1 (1.4fr).
+   bigger illustration. Reverse rows (rtl) keep the image in col 1 (1.2fr).
    Single-column mobile (≤900) is unaffected. */
 .b2b-payflow .feature-row {
-  grid-template-columns: 1.4fr 1fr;
-  gap: 44px;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 52px;
 }
 .b2b-payflow-head {
   margin-bottom: 4px;
