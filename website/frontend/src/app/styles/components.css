@@ -110,7 +110,9 @@
   border: 2px solid #000;
   border-radius: 9999px;
   box-shadow: none;
-  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+  transition: background 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-radius 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 /* Content fills the pill (logo pinned left, actions pinned right) instead of
@@ -118,15 +120,49 @@
 .header > .container {
   max-width: none;
 }
-.header.scrolled {
-  /* Solid white fill in every scroll state (user: 顶部导航栏填充白色).
-     Black border outlines the pill. */
-  background: #ffffff;
+/* --- Interaction (scroll) state: the floating white pill expands into a
+   full-width edge-to-edge YELLOW bar, with the active/selected nav item in
+   white (user: 当开始交互时变成黄色，横向铺满；选中的文字改成白色). --- */
+.header.scrolled,
+body:has(.hero-with-video) .header.scrolled,
+body:has(.demo-hero) .header.scrolled,
+body:has(.pricing-hero) .header.scrolled,
+body:has(.sub-nav) .header.scrolled {
+  top: 0;
+  left: 0;
+  right: 0;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  border: none;
+  border-radius: 0;
+  background: var(--primary);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
   box-shadow: none;
-  border-color: #000;
 }
-[data-theme="dark"] .header,
-[data-theme="dark"] .header.scrolled {
+/* Active / selected nav item → white on the yellow bar. */
+.header.scrolled .nav a.active,
+.header.scrolled .nav-dropdown-trigger.active {
+  color: #fff;
+}
+.header.scrolled .nav a.active::after {
+  background: #fff;
+}
+/* Buy-now CTA + wordmark stay legible on the yellow bar (white pill button,
+   matching the reference; dark wordmark instead of gold-on-yellow). */
+.header.scrolled .header-actions .btn-buy {
+  background: #fff;
+  color: #1a1a1a;
+}
+.header.scrolled .header-actions .btn-buy:hover {
+  background: #f3f3f3;
+}
+.header.scrolled .logo span {
+  color: #1a1a1a;
+}
+
+[data-theme="dark"] .header {
   background: #ffffff;
   border-color: #000;
 }
@@ -138,16 +174,13 @@
   }
 }
 
-/* Homepage / demo / pricing / sub-nav pages — all unified to the same
-   solid-white black-outlined pill (user: 顶部导航栏填充白色). */
+/* Rest state (top, not scrolled) — solid-white black-outlined pill on every
+   page (base .header already sets this; these just kill any leftover
+   backdrop-filter and lock the white fill). */
 body:has(.hero-with-video) .header:not(.scrolled),
-body:has(.hero-with-video) .header.scrolled,
-body:has(.demo-hero) .header,
-body:has(.demo-hero) .header.scrolled,
-body:has(.pricing-hero) .header,
-body:has(.pricing-hero) .header.scrolled,
-body:has(.sub-nav) .header,
-body:has(.sub-nav) .header.scrolled {
+body:has(.demo-hero) .header:not(.scrolled),
+body:has(.pricing-hero) .header:not(.scrolled),
+body:has(.sub-nav) .header:not(.scrolled) {
   background: #ffffff;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
@@ -186,7 +219,7 @@ body:has(.hero-with-video) .header.scrolled .settings-trigger[aria-expanded="tru
 }
 body:has(.hero-with-video) .header.scrolled .nav a.active,
 body:has(.hero-with-video) .header.scrolled .nav-dropdown-trigger.active {
-  color: var(--primary);
+  color: #fff;
 }
 
 /* Glass header edge highlight — removed per user request (`去掉投影`):
