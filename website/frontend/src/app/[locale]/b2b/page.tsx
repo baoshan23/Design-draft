@@ -43,6 +43,16 @@ function CheckIcon() {
   );
 }
 
+/* Gold check used as the bullet in the #support feature lists (replaces the
+   round .support-row-dot) — same glyph as CheckIcon, styled via the class. */
+function SupportRowCheck() {
+  return (
+    <svg className="support-row-dot" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
+      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" />
+    </svg>
+  );
+}
+
 export default async function B2BPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -382,7 +392,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                 <ul className="support-col-list">
                   {rawList('b2b.support.appFeatures').map((f, i) => (
                     <li key={i} style={{ ['--i' as string]: i }}>
-                      <span className="support-row-dot" aria-hidden="true" />
+                      <SupportRowCheck />
                       <span className="support-row-text">{f}</span>
                     </li>
                   ))}
@@ -411,7 +421,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                 <ul className="support-col-list">
                   {rawList('b2b.support.cpmsFeatures').map((f, i) => (
                     <li key={i} style={{ ['--i' as string]: i }}>
-                      <span className="support-row-dot" aria-hidden="true" />
+                      <SupportRowCheck />
                       <span className="support-row-text">{f}</span>
                     </li>
                   ))}
@@ -419,7 +429,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                     const idx = i + 8;
                     return (
                       <li key={`2-${i}`} style={{ ['--i' as string]: idx }}>
-                        <span className="support-row-dot" aria-hidden="true" />
+                        <SupportRowCheck />
                         <span className="support-row-text">{f}</span>
                       </li>
                     );
@@ -441,7 +451,7 @@ export default async function B2BPage({ params }: { params: Promise<{ locale: st
                 <ul className="support-col-list">
                   {rawList('b2b.support.adminFeatures').map((f, i) => (
                     <li key={i} style={{ ['--i' as string]: i }}>
-                      <span className="support-row-dot" aria-hidden="true" />
+                      <SupportRowCheck />
                       <span className="support-row-text">{f}</span>
                     </li>
                   ))}
