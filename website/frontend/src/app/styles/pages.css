@@ -970,7 +970,11 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  height: min(86vh, 700px);
+  /* Track the wordmark size: the GCSS glyphs are `38vw` with line-height 0.78
+     (~30vw line-box). A fixed px cap clipped them on wide screens, so size the
+     panel in `vw` too — 40vw always contains the full glyph height — with a vh
+     ceiling so it can't overflow a short viewport. */
+  height: min(40vw, 92vh);
   background: var(--primary, #FEBF1D);
 }
 .footer-reveal-word {
@@ -985,7 +989,7 @@
 }
 @media (max-width: 600px) {
   .footer-reveal {
-    height: min(60vh, 460px);
+    height: min(44vw, 70vh);
   }
 }
 
