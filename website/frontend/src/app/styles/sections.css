@@ -4945,6 +4945,18 @@ main + .footer-reveal-wrap {
   color: #111418 !important;
 }
 
+/* JS fallback: a position:fixed COPY of the header row injected by
+   StickyCompareHeader.tsx — appears only if CSS `position: sticky` fails to
+   hold the real header under the nav. Its cells must NOT re-stick (the clone
+   table is already fixed). */
+.comparison-sticky-clone {
+  border-collapse: collapse;
+  box-shadow: 0 12px 22px -8px rgba(0, 0, 0, 0.4);
+}
+.comparison-sticky-clone th {
+  position: static;
+}
+
 /* Breathing room is added INSIDE the thead via padding-bottom on th
    cells so the gap stays yellow rather than showing the table's
    glass-bg through. */
