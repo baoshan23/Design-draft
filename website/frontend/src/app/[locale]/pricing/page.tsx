@@ -3,7 +3,6 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import PricingTabs from '@/components/sections/pricing/PricingTabs';
-import StickyCompareHeader from '@/components/effects/StickyCompareHeader';
 
 export const metadata = {
     title: 'Pricing - GCSS | EV Charging Management Platform',
@@ -302,7 +301,6 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
                         </div>
                     </ScrollAnimation>
 
-                    <StickyCompareHeader />
                     <ScrollAnimation>
                         <div className="comparison-table-wrap">
                             <table className="comparison-table">

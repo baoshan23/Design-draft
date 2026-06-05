@@ -13,6 +13,7 @@ import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
 import TestimonialsTabs from '@/components/sections/home/TestimonialsTabs';
 import ScrollResetOnLoad from '@/components/effects/ScrollResetOnLoad';
 import SectionReveal from '@/components/effects/SectionReveal';
+import CtaScrollExpand from '@/components/effects/CtaScrollExpand';
 import { PAYMENT_ICONS, PAYMENT_METHODS_FLAT } from '@/components/sections/home/paymentIcons';
 import PaymentFisheye from '@/components/sections/home/PaymentFisheye';
 
@@ -42,6 +43,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <DiagramModalProvider>
       <ScrollResetOnLoad />
       <SectionReveal />
+      <CtaScrollExpand selector=".map-fullbleed" varName="--map-expand" />
       {/* Hero Section — centered text + dashboard mock below (Arcadia-style) */}
       <section className="hero hero-with-video hero-centered">
         <div className="container hero-centered-inner">

@@ -3071,11 +3071,23 @@ html {
 }
 
 .map-fullbleed {
-  width: 100%;
+  position: relative;
   max-width: none;
-  margin: 40px 0 0;
-  /* Side gaps so the map card doesn't run edge-to-edge */
-  padding: 0 clamp(16px, 4vw, 64px);
+  margin-top: 40px;
+  /* Scroll-driven width, mirroring the b2c "准备部署？" CTA banner. Starts
+     CONTAINED (≤1360px) then expands toward a near-full-bleed band
+     (100vw - 48px, 24px gap each side) as the section scrolls toward the
+     screen middle. --map-expand (0→1) is written by CtaScrollExpand.tsx
+     (defaults to 1 so SSR / no-JS shows the full band). The map-section has
+     no horizontal padding, so left:50% == viewport centre. */
+  --map-expand: 1;
+  --map-base: min(1360px, calc(100vw - 48px));
+  --map-full: calc(100vw - 48px);
+  --map-w: calc(var(--map-base) + (var(--map-full) - var(--map-base)) * var(--map-expand));
+  width: var(--map-w);
+  left: 50%;
+  margin-left: calc(var(--map-w) / -2);
+  transition: width 0.18s ease-out, margin-left 0.18s ease-out;
 }
 
 /* Map display area as a bordered, rounded card */
@@ -4848,19 +4860,6 @@ main + .footer-reveal-wrap {
     overflow: clip;
   }
 }
-/* Fallback for browsers without `overflow: clip` support (e.g. Safari < 16):
-   the invalid `clip` value above would be ignored, leaving the base
-   `overflow-x: auto` — a scroll container that traps the sticky <thead>.
-   `overflow: visible` is universally supported and is NEVER a scroll
-   container, so the header still sticks to the viewport (it just won't clip
-   the table's square bottom corners to the wrap's rounded frame). */
-@supports not (overflow: clip) {
-  @media (min-width: 1040px) {
-    .comparison-table-wrap {
-      overflow: visible;
-    }
-  }
-}
 
 .comparison-plan-name {
   display: block;
@@ -4927,9 +4926,6 @@ main + .footer-reveal-wrap {
   padding-bottom: 24px;
   vertical-align: middle;
   line-height: 1.15;
-  /* Downward elevation so when the row is PINNED (scrolling the body beneath
-     it) it reads clearly as a floating bar, not part of the scroll. */
-  box-shadow: 0 12px 22px -10px rgba(0, 0, 0, 0.4);
 }
 
 /* Additional spacing OUTSIDE the yellow thead so the first data row
@@ -4943,18 +4939,6 @@ main + .footer-reveal-wrap {
   background: #FEBF1D !important;
   background-color: #FEBF1D !important;
   color: #111418 !important;
-}
-
-/* JS fallback: a position:fixed COPY of the header row injected by
-   StickyCompareHeader.tsx — appears only if CSS `position: sticky` fails to
-   hold the real header under the nav. Its cells must NOT re-stick (the clone
-   table is already fixed). */
-.comparison-sticky-clone {
-  border-collapse: collapse;
-  box-shadow: 0 12px 22px -8px rgba(0, 0, 0, 0.4);
-}
-.comparison-sticky-clone th {
-  position: static;
 }
 
 /* Breathing room is added INSIDE the thead via padding-bottom on th
