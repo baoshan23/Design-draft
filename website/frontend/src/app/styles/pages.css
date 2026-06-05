@@ -970,11 +970,13 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  /* Track the wordmark size: the GCSS glyphs are `38vw` with line-height 0.78
-     (~30vw line-box). A fixed px cap clipped them on wide screens, so size the
-     panel in `vw` too — 40vw always contains the full glyph height — with a vh
-     ceiling so it can't overflow a short viewport. */
-  height: min(40vw, 92vh);
+  /* Track the wordmark size: the GCSS glyphs are `32vw` with line-height 0.78
+     (~25vw line-box). Size the panel in `vw` too so it always contains the
+     glyph, with a vh ceiling capped at 82vh so the FULL reveal completes within
+     roughly one screen of native scroll — snappier, fewer wheel notches to see
+     the GCSS wipe (go-electra feel). The sticky-bottom pin makes the reveal
+     1:1 with the wheel = silky, no JS. */
+  height: min(38vw, 82vh);
   background: var(--primary, #FEBF1D);
 }
 .footer-reveal-word {
@@ -989,9 +991,26 @@
   user-select: none;
   -webkit-user-select: none;
 }
+/* Copyright line — pinned to the bottom-centre of the yellow panel (the
+   "white box" in the user ref), moved out of the dark footer's bottom row. */
+.footer-reveal-copy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(16px, 3vh, 34px);
+  text-align: center;
+  margin: 0;
+  padding: 0 24px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #181818;
+}
 @media (max-width: 600px) {
   .footer-reveal {
     height: min(44vw, 70vh);
+  }
+  .footer-reveal-copy {
+    font-size: 0.72rem;
   }
 }
 
@@ -1201,7 +1220,9 @@
   margin-top: 32px;
   padding-top: 24px;
   display: flex;
-  justify-content: space-between;
+  /* Copyright moved to the yellow reveal panel — only the privacy/terms/
+     back-to-top links remain here; keep them right-aligned as before. */
+  justify-content: flex-end;
   align-items: center;
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.78);

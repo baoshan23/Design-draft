@@ -174,7 +174,6 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p>{t('copyright')}</p>
           <div className="footer-bottom-links">
             <Link href="/privacy">{t('privacy')}</Link>
             <Link href="/terms">{t('terms')}</Link>
@@ -191,9 +190,12 @@ export default function Footer() {
     </footer>
 
     {/* go-electra-style sticky reveal: a giant GCSS wordmark pinned to the
-        viewport bottom that the dark footer scrolls up to uncover. */}
-    <section className="footer-reveal" aria-hidden="true">
-      <span className="footer-reveal-word">GCSS</span>
+        viewport bottom that the dark footer scrolls up to uncover. The
+        copyright line sits at the very bottom of the panel (the white-box spot
+        in the user ref), moved here out of the dark footer's bottom row. */}
+    <section className="footer-reveal">
+      <span className="footer-reveal-word" aria-hidden="true">GCSS</span>
+      <p className="footer-reveal-copy">{t('copyright')}</p>
     </section>
     </div>
   );
