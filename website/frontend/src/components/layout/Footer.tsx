@@ -2,6 +2,7 @@
 
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
+import { useEffect, useRef } from 'react';
 
 const SOCIALS = [
   {
@@ -82,6 +83,54 @@ const APPS = [
 
 export default function Footer() {
   const t = useTranslations('footer');
+  const revealRef = useRef<HTMLElement>(null);
+
+  /* Scroll-linked fade-in + slide for the yellow GCSS panel: as the dark footer
+     scrolls UP and uncovers the panel, drive a 0→1 `--gcss-fade` progress var
+     (0 = still covered, 1 = fully uncovered) that the CSS maps to opacity +
+     translateY. Pure entrance polish — the sticky reveal mechanism and every
+     other interaction stay untouched. rAF-throttled, same pattern as
+     CtaScrollExpand/SectionReveal. */
+  useEffect(() => {
+    const section = revealRef.current;
+    if (!section) return;
+    const word = section.querySelector('.footer-reveal-word') as HTMLElement | null;
+    if (!word) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      section.style.setProperty('--gcss-fade', '1');
+      return;
+    }
+
+    // The dark footer is the panel's previous sibling inside .footer-reveal-wrap.
+    const footer = section.previousElementSibling as HTMLElement | null;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const wr = word.getBoundingClientRect();
+      let p = 1;
+      if (footer) {
+        const fb = footer.getBoundingClientRect().bottom;
+        // Uncovered fraction of the wordmark: the footer covers everything above
+        // its bottom edge, so the word is fully covered while fb ≥ wr.bottom and
+        // fully clear once fb ≤ wr.top.
+        p = (wr.bottom - fb) / (wr.height || 1);
+      }
+      p = Math.max(0, Math.min(1, p));
+      section.style.setProperty('--gcss-fade', p.toFixed(3));
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 
   const scrollTop = () => {
     if (typeof window !== 'undefined') {
@@ -193,7 +242,7 @@ export default function Footer() {
         viewport bottom that the dark footer scrolls up to uncover. The
         copyright line sits at the very bottom of the panel (the white-box spot
         in the user ref), moved here out of the dark footer's bottom row. */}
-    <section className="footer-reveal">
+    <section className="footer-reveal" ref={revealRef}>
       <span className="footer-reveal-word" aria-hidden="true">GCSS</span>
       <p className="footer-reveal-copy">{t('copyright')}</p>
     </section>

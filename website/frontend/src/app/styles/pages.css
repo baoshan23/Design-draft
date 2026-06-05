@@ -990,6 +990,11 @@
   white-space: nowrap;
   user-select: none;
   -webkit-user-select: none;
+  /* Scroll-linked fade-in + slide as the footer uncovers the panel. `--gcss-fade`
+     (0→1) is driven by Footer.tsx; defaults to 1 so SSR / no-JS shows it fully. */
+  opacity: var(--gcss-fade, 1);
+  transform: translateY(calc((1 - var(--gcss-fade, 1)) * 64px));
+  will-change: opacity, transform;
 }
 /* Copyright line — pinned to the bottom-centre of the yellow panel (the
    "white box" in the user ref), moved out of the dark footer's bottom row. */
@@ -1004,6 +1009,8 @@
   font-size: 0.82rem;
   font-weight: 500;
   color: #181818;
+  /* Fades in with the wordmark (same scroll-linked progress var). */
+  opacity: var(--gcss-fade, 1);
 }
 @media (max-width: 600px) {
   .footer-reveal {
