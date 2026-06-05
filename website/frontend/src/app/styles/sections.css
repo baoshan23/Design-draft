@@ -3087,7 +3087,8 @@ html {
   width: var(--map-w);
   left: 50%;
   margin-left: calc(var(--map-w) / -2);
-  transition: width 0.18s ease-out, margin-left 0.18s ease-out;
+  /* No CSS transition — CtaScrollExpand.tsx eases --map-expand per frame, so a
+     transition here would double-ease and rubber-band. */
 }
 
 /* Map display area as a bordered, rounded card */
@@ -3951,7 +3952,8 @@ main + .footer-reveal-wrap {
   padding-block: 52px;
   padding-inline: calc(56px + (max(40px, calc((100vw - 1392px) / 2 - 24px)) - 56px) * var(--cta-expand));
   box-shadow: 0 30px 60px -28px rgba(242, 163, 0, 0.5);
-  transition: width 0.18s ease-out, margin-left 0.18s ease-out, padding-inline 0.18s ease-out;
+  /* No CSS transition — CtaScrollExpand.tsx eases --cta-expand per frame, so a
+     transition here would double-ease and rubber-band. */
 }
 .cta-banner-media {
   align-self: end;
@@ -6231,6 +6233,12 @@ main + .footer-reveal-wrap {
 #releases.section-alt,
 #pricing.section {
   background: #fff;
+}
+
+/* b2c #support (售后) — pull the whole block up a bit (trim the leading
+   `.section` 120px top padding → ~48px) so it sits higher in the fold. */
+#support {
+  padding-top: clamp(32px, 5vh, 56px);
 }
 
 /* b2c `#demo` "系统演示" — keep its grey band (user req: 恢复之前的灰色).

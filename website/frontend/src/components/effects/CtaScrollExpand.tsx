@@ -38,14 +38,12 @@ export default function CtaScrollExpand({
     }
 
     const mqSmall = window.matchMedia('(max-width: 860px)');
+    const EASE = 0.16; // glide factor — discrete wheel ticks ease smoothly
     let raf = 0;
+    let cur = -1; // applied 0→1 value; -1 = unset (snap on first frame)
 
-    const update = () => {
-      raf = 0;
-      if (mqSmall.matches) {
-        el.style.setProperty(varName, '1');
-        return;
-      }
+    const targetFor = () => {
+      if (mqSmall.matches) return 1;
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight;
       const center = rect.top + rect.height / 2;
@@ -53,21 +51,35 @@ export default function CtaScrollExpand({
       // middle (expand 1). The ~0.38·vh band ≈ three wheel notches of scrolling.
       const start = vh * 0.88;
       const end = vh * 0.5;
-      let p = (start - center) / (start - end);
-      p = Math.max(0, Math.min(1, p));
-      el.style.setProperty(varName, p.toFixed(4));
+      const p = (start - center) / (start - end);
+      return Math.max(0, Math.min(1, p));
     };
 
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update);
+    // A persistent rAF loop EASES the applied value toward the scroll-derived
+    // target instead of snapping each scroll event, so the width glides smoothly
+    // with a discrete mouse wheel. It parks once settled and re-wakes on scroll.
+    const frame = () => {
+      const target = targetFor();
+      if (cur < 0) cur = target; // first frame: snap (no load-time animation)
+      else cur += (target - cur) * EASE;
+      let moving = true;
+      if (Math.abs(target - cur) < 0.0008) {
+        cur = target;
+        moving = false;
+      }
+      el.style.setProperty(varName, cur.toFixed(4));
+      raf = moving ? requestAnimationFrame(frame) : 0;
+    };
+    const wake = () => {
+      if (!raf) raf = requestAnimationFrame(frame);
     };
 
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    wake();
+    window.addEventListener('scroll', wake, { passive: true });
+    window.addEventListener('resize', wake);
     return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      window.removeEventListener('scroll', wake);
+      window.removeEventListener('resize', wake);
       if (raf) cancelAnimationFrame(raf);
     };
   }, [selector, varName]);

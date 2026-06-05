@@ -107,38 +107,53 @@ export default function SectionReveal() {
     // part of the viewport; the grey block is pushed DOWN by COVER_OFFSET at
     // p=0 (revealing the white above) and slides up to its resting / overlapped
     // position (y=0) at p=1 — so the cover tracks the wheel, both directions.
+    //
+    // To feel "丝滑" with a discrete mouse wheel, we DON'T snap the transform to
+    // the raw scroll position each event (that makes every wheel notch a visible
+    // jump). Instead a persistent rAF loop EASES the applied offset toward the
+    // scroll-derived target (`cur += (target - cur) * EASE`), so a single wheel
+    // tick produces a smooth glide. The loop parks itself once everything has
+    // settled and is re-woken on scroll, so it costs nothing at rest.
     const COVER_OFFSET = 120;
+    const EASE = 0.16; // lower = floatier glide, higher = snappier
+    // Promote each cover to its own compositor layer ONCE (toggling will-change
+    // per frame thrashes layer create/destroy — a big source of the jank).
+    for (const c of covers) {
+      c.el.style.willChange = 'transform';
+      c.el.style.backfaceVisibility = 'hidden';
+    }
+    const cur = covers.map(() => COVER_OFFSET); // applied y per cover
     let raf = 0;
-    const update = () => {
-      raf = 0;
+    const frame = () => {
       const vh = window.innerHeight;
       const enter = vh * 0.95; // sec top here → p=0 (grey fully lowered)
       const settle = vh * 0.42; // sec top here → p=1 (grey fully risen / covering)
-      for (const c of covers) {
+      let moving = false;
+      for (let i = 0; i < covers.length; i++) {
+        const c = covers[i];
         const top = c.sec.getBoundingClientRect().top;
         let p = (enter - top) / (enter - settle);
         p = p < 0 ? 0 : p > 1 ? 1 : p;
-        const y = COVER_OFFSET * (1 - p);
-        if (y > 0.5) {
-          c.el.style.transform = `translateY(${y.toFixed(1)}px)`;
-          c.el.style.willChange = 'transform';
-        } else {
-          c.el.style.transform = '';
-          c.el.style.willChange = '';
-        }
+        const target = COVER_OFFSET * (1 - p);
+        let y = cur[i] + (target - cur[i]) * EASE;
+        if (Math.abs(target - y) < 0.1) y = target; // snap the tail
+        else moving = true;
+        cur[i] = y;
+        c.el.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0)`;
       }
+      raf = moving ? requestAnimationFrame(frame) : 0;
     };
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update);
+    const wake = () => {
+      if (!raf) raf = requestAnimationFrame(frame);
     };
 
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    wake();
+    window.addEventListener('scroll', wake, { passive: true });
+    window.addEventListener('resize', wake);
     return () => {
       io.disconnect();
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      window.removeEventListener('scroll', wake);
+      window.removeEventListener('resize', wake);
       if (raf) cancelAnimationFrame(raf);
     };
   }, []);
