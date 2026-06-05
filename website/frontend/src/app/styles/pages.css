@@ -930,58 +930,58 @@
   pointer-events: none;
 }
 
-/* ── go-electra-style footer reveal (sticky-pin + cover) ───────────────────
-   The go-electra last screen = the footer pins flush under the nav while the
-   giant logo screen covers up over it. We replicate that WITHOUT the old
-   leak (a behind-`main` pinned panel bled through our transparent mid-page
-   sections — fix `343efc2`) by keeping everything CONTAINED in
-   `.footer-reveal-wrap` (position:relative → the stickies only engage when the
-   wrap reaches the viewport, i.e. at the very bottom; never mid-page):
-
-   1. The dark footer is `position:sticky; top:header` (z1) → as you reach the
-      bottom it slides up and PINS flush under the fixed nav ("页脚贴合顶部").
-   2. The yellow GCSS panel is a FULL screen (`height: 100vh - header`) in
-      normal flow below it, z2 → it scrolls up and COVERS (叠盖) the pinned
-      footer, ending as a full-screen yellow with the wordmark fully shown
-      ("完全展示 logo"), centred with margin top & bottom. */
+/* ── go-electra-style footer reveal ────────────────────────────────────────
+   A full-width yellow panel with a giant black "GCSS" wordmark, placed AFTER
+   the dark footer INSIDE a `.footer-reveal-wrap` container. The panel is
+   `position:sticky; bottom:0` so it pins to the viewport bottom — but only
+   WHILE its containing block (the wrap) intersects the viewport, i.e. near the
+   very bottom of the page. While you scroll through `main`, the wrap is still
+   below the fold so the panel is NOT pinned and stays off-screen — this is what
+   stops it leaking through transparent `main` sections. The opaque dark footer
+   (z-index:2) sits over the panel (z-index:1) and scrolls up off it at the
+   bottom, uncovering the wordmark in a clean wipe (like go-electra). */
 .footer-reveal-wrap {
   position: relative;
-  /* Clip the panel's negative-margin notch-poke without making a scroll
-     container, so `position:sticky` on the footer still pins. */
+  /* Clip the sticky reveal panel so it can't peek ABOVE the footer's top edge
+     mid-scroll (the panel is `sticky; bottom:0` + a negative margin-top, which
+     lifts its border-box ~radius px above the wrap top). `overflow: clip` clips
+     that poke WITHOUT creating a scroll container, so `position: sticky` on the
+     panel still pins to the viewport and the go-electra wipe still works. The
+     bottom reveal + the footer's rounded-corner yellow notches are inside the
+     wrap box, so they're untouched. */
   overflow: clip;
 }
-/* The dark footer pins flush under the nav and rounds its OWN bottom corners;
-   the yellow panel rises up over them (panel z2 > footer z1) so during the
-   cover the rounded bottom edge wipes cleanly under the yellow. */
+/* The dark footer rounds its OWN bottom-left/right corners; the yellow reveal
+   panel is pulled up under them (panel z-index:1 < footer z-index:2) so the
+   yellow shows through the carved notches — per user "要做圆角的是页脚的下面
+   两个角". `|panel pull| == footer radius` so the yellow fills the full notch. */
 .footer-reveal-wrap > .footer {
-  position: sticky;
-  top: var(--header-height, 72px);
-  z-index: 1;
+  position: relative;
+  z-index: 2;
   border-bottom-left-radius: clamp(24px, 3vw, 44px);
   border-bottom-right-radius: clamp(24px, 3vw, 44px);
 }
 .footer-reveal {
-  position: relative;
-  /* Cover (叠盖) the pinned footer as it scrolls up. */
-  z-index: 2;
-  /* A FULL screen below the nav, so when scrolled to the very bottom the panel
-     fills the viewport top-to-bottom and the wordmark is fully shown. */
-  height: calc(100vh - var(--header-height, 72px));
-  /* Pull up by the footer's corner radius so the yellow meets the footer's
-     rounded bottom with no seam. */
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
   margin-top: clamp(-44px, -3vw, -24px);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  /* Track the wordmark size: the GCSS glyphs are `38vw` with line-height 0.78
+     (~30vw line-box). A fixed px cap clipped them on wide screens, so size the
+     panel in `vw` too — 40vw always contains the full glyph height — with a vh
+     ceiling so it can't overflow a short viewport. */
+  height: min(40vw, 92vh);
   background: var(--primary, #FEBF1D);
 }
 .footer-reveal-word {
   font-weight: 800;
-  /* Big "go-electra" wordmark; the `vh` ceiling keeps the glyph fully inside
-     the full-screen panel so it's centred with a clear yellow margin above AND
-     below (flex centres it). */
-  font-size: min(34vw, 58vh);
+  /* Smaller than the panel height so the centered wordmark leaves a clear
+     yellow band above AND below it (per user red-box). */
+  font-size: 32vw;
   line-height: 0.78;
   letter-spacing: -0.02em;
   color: #181818;
@@ -991,11 +991,7 @@
 }
 @media (max-width: 600px) {
   .footer-reveal {
-    /* Mobile nav/footer are taller; keep a generous but bounded panel. */
-    height: min(88vh, calc(100vh - var(--header-height, 72px)));
-  }
-  .footer-reveal-word {
-    font-size: min(44vw, 52vh);
+    height: min(44vw, 70vh);
   }
 }
 
