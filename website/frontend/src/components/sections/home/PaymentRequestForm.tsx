@@ -12,6 +12,7 @@ export default function PaymentRequestForm() {
   const [error, setError] = useState('');
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const closeRef = useRef<HTMLButtonElement | null>(null);
+  const hasOpened = useRef(false);
 
   useEffect(() => {
     if (!open) return;
@@ -28,7 +29,14 @@ export default function PaymentRequestForm() {
   }, [open]);
 
   useEffect(() => {
-    if (!open) triggerRef.current?.focus();
+    // Return focus to the trigger only after the modal has actually been
+    // opened and then closed — NOT on initial mount. Focusing on mount would
+    // scroll the page down to this section (the "全球支付矩阵" jump bug).
+    if (open) {
+      hasOpened.current = true;
+    } else if (hasOpened.current) {
+      triggerRef.current?.focus({ preventScroll: true });
+    }
   }, [open]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
