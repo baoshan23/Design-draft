@@ -612,7 +612,7 @@
 }
 
 .auth-visual {
-  background: linear-gradient(160deg, #1c1917 0%, #292524 40%, #44403c 100%);
+  background: #fff2d7;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -641,7 +641,7 @@
 }
 
 .auth-visual h2 {
-  color: #faf8f5;
+  color: #181818;
   font-size: 1.6rem;
   font-weight: 700;
   margin-bottom: 12px;
@@ -649,7 +649,7 @@
 }
 
 .auth-visual-subtitle {
-  color: rgba(250, 248, 245, 0.6);
+  color: rgba(24, 24, 24, 0.65);
   font-size: 0.95rem;
   max-width: 320px;
   margin: 0 auto 24px;
@@ -670,12 +670,12 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  color: rgba(250, 248, 245, 0.8);
+  color: rgba(24, 24, 24, 0.85);
   font-size: 0.9rem;
 }
 
 .auth-visual-features li svg {
-  color: var(--primary, #FEBF1D);
+  color: #181818;
   flex-shrink: 0;
 }
 
