@@ -1,7 +1,5 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
-import TypingText from '@/components/effects/TypingText';
-import CounterAnimation from '@/components/effects/CounterAnimation';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
 import { Link } from '@/i18n/navigation';
 import BusinessModelsSection from '@/components/sections/home/BusinessModelsSection';
@@ -9,6 +7,7 @@ import MobileShowcase from '@/components/sections/home/MobileShowcase';
 import MobileHeroTabs from '@/components/sections/home/MobileHeroTabs';
 import { DiagramModalProvider } from '@/components/sections/home/DiagramModal';
 import CoverageMap from '@/components/sections/home/CoverageMap';
+import MapHero from '@/components/sections/home/MapHero';
 import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
 import TestimonialsTabs from '@/components/sections/home/TestimonialsTabs';
 import ScrollResetOnLoad from '@/components/effects/ScrollResetOnLoad';
@@ -44,74 +43,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <ScrollResetOnLoad />
       <SectionReveal />
       <CtaScrollExpand selector=".map-fullbleed" varName="--map-expand" />
-      {/* Hero Section — centered text + dashboard mock below (Arcadia-style) */}
-      <section className="hero hero-with-video hero-centered">
-        <div className="container hero-centered-inner">
-          <div className="hero-content">
-            <div className="hero-text">
-              <h1 className="hero-title" style={{ marginBottom: 16 }}>
-                <span>{t('hero.title1')}</span><br />
-                <TypingText words={['CSMS Platform', '管理系统', 'Charge Hub', '充电平台']} />
-              </h1>
-
-              <p className="hero-desc">{t('hero.desc')}</p>
-
-              <div className="hero-buttons">
-                <Link href="/b2c" className="btn btn-primary btn-lg">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
-                  <span>{t('hero.cta1')}</span>
-                </Link>
-                <Link href="/pricing" className="btn btn-secondary btn-lg">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" y1="15" x2="12" y2="3" />
-                  </svg>
-                  <span>{t('hero.cta2')}</span>
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <div className="hero-stats">
-            <div className="hero-stat">
-              <div className="hero-stat-value"><CounterAnimation target={9999} suffix="" /></div>
-              <div className="hero-stat-meta">
-                <Image src="/assets/icons/hero-stats/downloads.svg" alt="" width={16} height={16} className="hero-stat-icon" />
-                <span className="hero-stat-label">{t('hero.stat1')}</span>
-              </div>
-            </div>
-            <div className="hero-stat">
-              <div className="hero-stat-value"><CounterAnimation target={1069} suffix="+" /></div>
-              <div className="hero-stat-meta">
-                <Image src="/assets/icons/hero-stats/chargers.svg" alt="" width={16} height={16} className="hero-stat-icon" />
-                <span className="hero-stat-label">{t('hero.stat2')}</span>
-              </div>
-            </div>
-            <div className="hero-stat">
-              <div className="hero-stat-value"><CounterAnimation target={100} suffix="+" /></div>
-              <div className="hero-stat-meta">
-                <Image src="/assets/icons/hero-stats/countries.svg" alt="" width={16} height={16} className="hero-stat-icon" />
-                <span className="hero-stat-label">{t('hero.stat3')}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Dashboard mock — a real flowing element below the stats (NOT
-              baked into the hero bg), so the title/content can never overlap
-              it on adaptive/narrow viewports. On large screens it flex-fills
-              to the fold (see .hero-dashboard-mock); on small screens it sits
-              at its natural size below the text. */}
-          <div className="hero-dashboard-mock" aria-hidden="true">
-            <div className="hero-dashboard-frame">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/hero-dashboard-13.png" alt="" className="hero-dashboard-img" />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Section — full-screen interactive map with floating search bar +
+          action card (go-electra station-app style). */}
+      <MapHero />
 
       {/* EV Charger Manufacturers Bar */}
       <section className="trusted-bar">
