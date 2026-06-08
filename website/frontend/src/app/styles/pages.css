@@ -958,14 +958,14 @@
 .footer-reveal-wrap > .footer {
   position: relative;
   z-index: 2;
-  border-bottom-left-radius: clamp(24px, 3vw, 44px);
-  border-bottom-right-radius: clamp(24px, 3vw, 44px);
+  border-bottom-left-radius: clamp(36px, 4.5vw, 64px);
+  border-bottom-right-radius: clamp(36px, 4.5vw, 64px);
 }
 .footer-reveal {
   position: sticky;
   bottom: 0;
   z-index: 1;
-  margin-top: clamp(-44px, -3vw, -24px);
+  margin-top: clamp(-64px, -4.5vw, -36px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -990,11 +990,6 @@
   white-space: nowrap;
   user-select: none;
   -webkit-user-select: none;
-  /* Scroll-linked fade-in + slide as the footer uncovers the panel. `--gcss-fade`
-     (0→1) is driven by Footer.tsx; defaults to 1 so SSR / no-JS shows it fully. */
-  opacity: var(--gcss-fade, 1);
-  transform: translateY(calc((1 - var(--gcss-fade, 1)) * 64px));
-  will-change: opacity, transform;
 }
 /* Copyright line — pinned to the bottom-centre of the yellow panel (the
    "white box" in the user ref), moved out of the dark footer's bottom row. */
@@ -1009,8 +1004,6 @@
   font-size: 0.82rem;
   font-weight: 500;
   color: #181818;
-  /* Fades in with the wordmark (same scroll-linked progress var). */
-  opacity: var(--gcss-fade, 1);
 }
 @media (max-width: 600px) {
   .footer-reveal {
