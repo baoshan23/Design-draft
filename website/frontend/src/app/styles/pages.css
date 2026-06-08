@@ -970,23 +970,20 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  /* The reveal scroll distance == the panel height: the dark footer's bottom
-     edge must travel from the viewport bottom up to the panel's top (= vh −
-     panelTop = panelH), 1:1 with the wheel (sticky pin, no JS). So the panel
-     height directly sets how many wheel notches reveal the full GCSS. The vw/vh
-     terms scale it with the viewport, but a fixed `520px` cap keeps the reveal
-     at ~5 wheel notches (~100px each) on EVERY desktop width — without the cap,
-     `38vw` makes the panel ~760px on a wide screen = ~8 notches (user
-     "用鼠标滚轮5下，即可展开全部"). */
-  height: min(38vw, 82vh, 520px);
+  /* Track the wordmark size: the GCSS glyphs are `32vw` with line-height 0.78
+     (~25vw line-box). Size the panel in `vw` too so it always contains the
+     glyph, with a vh ceiling capped at 82vh so the FULL reveal completes within
+     roughly one screen of native scroll — snappier, fewer wheel notches to see
+     the GCSS wipe (go-electra feel). The sticky-bottom pin makes the reveal
+     1:1 with the wheel = silky, no JS. */
+  height: min(38vw, 82vh);
   background: var(--primary, #FEBF1D);
 }
 .footer-reveal-word {
   font-weight: 800;
-  /* Cap the glyph too (line-box ≈ 0.78 × font), so it still leaves a clear
-     yellow band above AND below it inside the now-capped 520px panel on wide
-     screens (32vw alone would be ~640px+ and clip). */
-  font-size: min(32vw, 440px);
+  /* Smaller than the panel height so the centered wordmark leaves a clear
+     yellow band above AND below it (per user red-box). */
+  font-size: 32vw;
   line-height: 0.78;
   letter-spacing: -0.02em;
   color: #181818;
