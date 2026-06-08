@@ -286,14 +286,6 @@
     "stat2": "充电桩数量",
     "stat3": "覆盖国家"
   },
-  "heroMap": {
-    "searchPlaceholder": "搜索地址",
-    "search": "搜索",
-    "menu": "菜单",
-    "locate": "我的位置",
-    "smartCharging": "智能充电",
-    "smartChargingDesc": "查找并管理全球充电桩"
-  },
   "businessFlow": {
     "label": "平台架构",
     "title": "GCSS 如何连接一切",

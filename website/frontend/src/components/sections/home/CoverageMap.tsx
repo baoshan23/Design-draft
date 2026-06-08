@@ -47,15 +47,7 @@ function loadMapLibre(): Promise<any> {
   return mapLibrePromise;
 }
 
-export default function CoverageMap({
-  scrollZoom = true,
-  controlPosition = 'top-right',
-}: {
-  /** Wheel/scroll zoom. Disable on the full-screen hero so the page can still
-   *  scroll past the map to the content below. */
-  scrollZoom?: boolean;
-  controlPosition?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
-} = {}) {
+export default function CoverageMap() {
   const locale = useLocale();
   const t = useTranslations();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -108,10 +100,7 @@ export default function CoverageMap({
         });
         mapRef.current = map;
         map.touchZoomRotate.disableRotation();
-        // On the full-screen hero we disable wheel zoom so the page keeps
-        // scrolling to the content below instead of zooming the map.
-        if (!scrollZoom) map.scrollZoom.disable();
-        map.addControl(new maplibregl.NavigationControl({ showCompass: false }), controlPosition);
+        map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
 
         // Localise the basemap's own place/country labels to the site language.
         // OpenFreeMap (OpenMapTiles schema) exposes name:zh / name:en fields;
@@ -161,7 +150,7 @@ export default function CoverageMap({
       if (map) map.remove();
       mapRef.current = null;
     };
-  }, [locale, t, scrollZoom, controlPosition]);
+  }, [locale, t]);
 
   return <div ref={containerRef} className="coverage-map" aria-label="GCSS global coverage map" />;
 }

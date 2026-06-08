@@ -286,14 +286,6 @@
     "stat2": "Charge Points",
     "stat3": "Countries"
   },
-  "heroMap": {
-    "searchPlaceholder": "Search a location",
-    "search": "Search",
-    "menu": "Menu",
-    "locate": "My location",
-    "smartCharging": "Smart Charging",
-    "smartChargingDesc": "Find and manage chargers worldwide"
-  },
   "businessFlow": {
     "label": "Platform Architecture",
     "title": "How GCSS Connects Everything",
