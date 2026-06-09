@@ -14,7 +14,6 @@ import TestimonialsTabs from '@/components/sections/home/TestimonialsTabs';
 import ScrollResetOnLoad from '@/components/effects/ScrollResetOnLoad';
 import SectionReveal from '@/components/effects/SectionReveal';
 import CtaScrollExpand from '@/components/effects/CtaScrollExpand';
-import SmoothScroll from '@/components/effects/SmoothScroll';
 import { PAYMENT_ICONS, PAYMENT_METHODS_FLAT } from '@/components/sections/home/paymentIcons';
 import PaymentFisheye from '@/components/sections/home/PaymentFisheye';
 
@@ -42,7 +41,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <DiagramModalProvider>
-      <SmoothScroll />
       <ScrollResetOnLoad />
       <SectionReveal />
       <CtaScrollExpand selector=".map-fullbleed" varName="--map-expand" />
