@@ -91,7 +91,7 @@ export default function BlogPage() {
         <ScrollAnimation>
           <div className="container">
             <span className="section-label">{t('blog.label')}</span>
-            <h1>{t('blog.title')} {t('blog.title2')}</h1>
+            <h1>{t('blog.title')}{locale === 'zh' ? '' : ' '}{t('blog.title2')}</h1>
             <p>{t('blog.desc')}</p>
           </div>
         </ScrollAnimation>
