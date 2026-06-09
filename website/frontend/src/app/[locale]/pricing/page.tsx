@@ -78,46 +78,33 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
     // Add-on icons — 22×22 line style, currentColor stroke. One per add-on key.
     const addonIcons: Record<string, ReactNode> = {
         mobileLang: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <rect x="6" y="2" width="12" height="20" rx="2.5" />
-                <path d="M9 6h6M11 18h2" />
-                <circle className="ic-accent" cx="12" cy="12" r="3" />
-                <path className="ic-accent" d="M9 12h6M12 9v6" />
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path fillRule="evenodd" clipRule="evenodd" d="M7 1h10a2 2 0 0 1 2 2v18a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm0 3v14h10V4H7zm3 16h4v-1h-4v1z" />
             </svg>
         ),
         adminLang: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M4 5h7" />
-                <path d="M9 3v2c0 3.5-2 6.6-5 8.2" />
-                <path d="M5 9c0 2 2 4 5 5.4" />
-                <path className="ic-accent" d="M12.5 20l4-9 4 9" />
-                <path className="ic-accent" d="M14 16.5h5" />
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12.87 15.07l-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v1.99h11.17A14.4 14.4 0 0 1 9 11.35 14.6 14.6 0 0 1 6.69 8h-2a16.7 16.7 0 0 0 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z" />
             </svg>
         ),
         gateway: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <rect x="2" y="5" width="20" height="14" rx="2.5" />
-                <rect className="ic-accent" x="5" y="9" width="4.5" height="3.2" rx="0.6" />
-                <path className="ic-accent" d="M14 15h4" />
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20 4H4a2 2 0 0 0-1.99 2L2 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" />
             </svg>
         ),
         pos: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <rect x="4" y="3" width="16" height="14" rx="2" />
-                <path d="M8 21h8M12 17v4" />
-                <path className="ic-accent" d="M9 8h6M9 12h4" />
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20 4h-4V2a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h.4l1.42 9.21A2 2 0 0 0 7.78 22h8.44a2 2 0 0 0 1.96-1.79L19.6 11H20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM10 2h4v2h-4V2zm6.22 18H7.78l-1.4-9h11.24l-1.4 9zM20 9H4V6h16v3z" />
             </svg>
         ),
         custom: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M9 8l-5 4 5 4M15 8l5 4-5 4" />
-                <path className="ic-accent" d="M14 4l-4 16" />
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" />
             </svg>
         ),
         store: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M3 6h18M5 6l1 14h12l1-14" />
-                <path className="ic-accent" d="M9 11l3 3 3-3" />
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M21.9 8.89l-1.05-4.37A1.99 1.99 0 0 0 18.91 3H5.12a2 2 0 0 0-1.94 1.52L2.13 8.89c-.24 1.02-.02 2.06.62 2.88.08.11.19.19.28.29V19a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6.94c.09-.09.2-.18.28-.28.64-.82.87-1.87.61-2.89zM6 19v-6.03c.08.01.16.03.24.03.87 0 1.66-.36 2.24-.95.6.6 1.4.95 2.31.95.87 0 1.65-.36 2.23-.93.59.57 1.39.93 2.29.93.84 0 1.64-.35 2.24-.95.58.59 1.37.95 2.24.95.08 0 .16-.02.24-.03V19H6z" />
             </svg>
         ),
     };

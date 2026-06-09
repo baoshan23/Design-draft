@@ -4748,6 +4748,7 @@ main + .footer-reveal-wrap {
 /* Add-on cards — icon stacked above the label/price body */
 .addons-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 36px 40px;
 }
 
 @media (max-width: 900px) {
@@ -4762,15 +4763,16 @@ main + .footer-reveal-wrap {
   }
 }
 
+/* Horizontal layout (reference): soft rounded icon tile on the left,
+   bold black title + grey description stacked on the right. */
 .addon-card {
   background: transparent;
-  /* Card border matching the site's other cards (user: 参考其他边线颜色，统一). */
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xl);
-  padding: 28px 22px;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  border: none;
+  border-radius: 0;
+  padding: 8px 4px;
+  flex-direction: row;
+  align-items: flex-start;
+  text-align: left;
   gap: 18px;
   box-shadow: none;
   transition: none;
@@ -4782,52 +4784,51 @@ main + .footer-reveal-wrap {
   box-shadow: none;
 }
 
-/* Icon tile: yellow rounded square with black line icon, no shadow. */
+/* Icon tile: soft gold rounded square with a filled (面性) gold glyph. */
 .addon-card-icon {
   display: inline-flex;
-  width: 56px;
-  height: 56px;
+  width: 58px;
+  height: 58px;
   align-items: center;
   justify-content: center;
-  border-radius: 14px;
-  background: transparent;
-  color: #1a1a1a;
+  border-radius: 16px;
+  background: rgba(254, 191, 29, 0.12);
+  color: var(--primary, #febf1d);
   flex-shrink: 0;
   box-shadow: none;
 }
 
 .addon-card-icon svg {
-  width: 30px;
-  height: 30px;
-}
-
-/* two-tone line icons: base strokes black, accent element gold */
-.addon-card-icon svg .ic-accent {
-  stroke: var(--primary, #febf1d);
+  width: 28px;
+  height: 28px;
 }
 
 .addon-card-body {
   display: flex;
   flex-direction: column-reverse;
-  align-items: center;
-  text-align: center;
-  gap: 8px;
+  align-items: flex-start;
+  text-align: left;
+  gap: 5px;
   min-width: 0;
+  padding-top: 4px;
 }
 
+/* Description — grey, regular weight. */
 .addon-card .addon-label {
-  font-size: 0.92rem;
-  font-weight: 500;
-  color: var(--text-secondary, #555);
-  line-height: 1.45;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--text-secondary, #6b7280);
+  line-height: 1.5;
 }
 
+/* Title — black, bold (user: 小标题黑色加粗). */
 .addon-card .addon-price {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--primary);
-  line-height: 1.1;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary, #1a1a1a);
+  line-height: 1.25;
   letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Comparison table — header polish + sticky first column on mobile */
