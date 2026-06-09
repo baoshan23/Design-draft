@@ -4748,7 +4748,7 @@ main + .footer-reveal-wrap {
 /* Add-on cards — icon stacked above the label/price body */
 .addons-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 36px 40px;
+  gap: 64px 40px;
 }
 
 @media (max-width: 900px) {
