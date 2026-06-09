@@ -2856,37 +2856,38 @@ html {
 .b2c-pay-marquee {
   display: flex;
   overflow: hidden;
-  /* Break out of .container to span the full viewport width. */
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
+  /* Contained scroll lane — capped at 1360px, centred in the container. */
+  width: 100%;
+  max-width: 1360px;
+  margin-left: auto;
+  margin-right: auto;
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
   mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
 }
 .b2c-pay-track {
   display: flex;
-  gap: 24px;
+  gap: 32px;
   width: max-content;
   will-change: transform;
-  /* Smooth, continuous glide — go-electra-style partner strip. */
-  animation: b2cPaySlide 60s linear infinite;
+  /* Slow, smooth continuous glide — go-electra-style partner strip. */
+  animation: b2cPaySlide 80s linear infinite;
 }
 .b2c-pay-marquee:hover .b2c-pay-track {
   animation-play-state: paused;
 }
-/* Each pill = a compact rounded white capsule holding one real payment
-   logo, centered. Border line only — no shadow. Sized to match the
-   go-electra landowner partner strip: modest logo, many pills in view. */
+/* Bare logo (no card / border / shadow), centred with even side padding.
+   Grayscale at rest → original colour on hover, matching go-electra's
+   desaturated partner strip. */
 .b2c-pay-pill {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 116px;
-  min-width: 260px;
-  padding: 0 52px;
-  background: #fff;
-  border: 1px solid var(--border-subtle);
-  border-radius: 9999px;
+  height: 96px;
+  padding: 0 36px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
   box-shadow: none;
 }
 .b2c-pay-pill .payment-logo-img,
@@ -2895,21 +2896,25 @@ html {
   height: 52px !important;
   max-width: 180px;
   object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.78;
+  transition: filter 0.3s ease, opacity 0.3s ease;
 }
 .b2c-pay-pill .payment-logo-svg svg {
   width: auto;
   height: 52px;
 }
-[data-theme="dark"] .b2c-pay-pill {
-  background: rgba(255, 255, 255, 0.94);
-  border-color: rgba(255, 255, 255, 0.12);
+.b2c-pay-pill:hover .payment-logo-img,
+.b2c-pay-pill:hover .payment-logo-svg {
+  filter: grayscale(0);
+  opacity: 1;
 }
 @keyframes b2cPaySlide {
   from { transform: translateX(-50%); }
   to   { transform: translateX(0); }
 }
 @media (max-width: 700px) {
-  .b2c-pay-pill { height: 88px; min-width: 190px; padding: 0 40px; }
+  .b2c-pay-pill { height: 76px; padding: 0 28px; }
   .b2c-pay-pill .payment-logo-img,
   .b2c-pay-pill .payment-logo-svg { height: 40px !important; max-width: 140px; }
   .b2c-pay-pill .payment-logo-svg svg { height: 40px; }
