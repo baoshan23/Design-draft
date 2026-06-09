@@ -1418,7 +1418,9 @@
       "placeholder": "Enter your email",
       "btn": "Subscribe"
     },
-    "minread": "min read"
+    "minread": "min read",
+    "featuredStories": "Featured stories",
+    "recent": "Recently published"
   },
   "contact": {
     "label": "Contact Us",

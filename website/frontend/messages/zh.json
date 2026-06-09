@@ -1418,7 +1418,9 @@
       "placeholder": "输入您的邮箱",
       "btn": "订阅"
     },
-    "minread": "分钟阅读"
+    "minread": "分钟阅读",
+    "featuredStories": "精选文章",
+    "recent": "最新发布"
   },
   "contact": {
     "label": "联系我们",
