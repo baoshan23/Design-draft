@@ -345,30 +345,23 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
               </div>
 
               {(() => {
-                // Each pill holds one real payment-method logo. Split the
-                // curated flat list into two staggered rows for the marquee.
-                const half = Math.ceil(PAYMENT_METHODS_FLAT.length / 2);
-                const PAY_ROWS = [
-                  PAYMENT_METHODS_FLAT.slice(0, half),
-                  PAYMENT_METHODS_FLAT.slice(half),
-                ];
+                // Single full-bleed row of logo pills, duplicated twice so the
+                // marquee loops seamlessly.
                 return (
                   <div className="b2c-pay-marquee" style={{ marginTop: 32 }}>
-                    {PAY_ROWS.map((row, ri) => (
-                      <div className={`b2c-pay-track b2c-pay-track--${ri + 1}`} key={ri}>
-                        {[0, 1].flatMap((copy) =>
-                          row.map((name) => (
-                            <div
-                              key={`${name}-${copy}`}
-                              className="b2c-pay-pill"
-                              aria-hidden={copy === 1 ? true : undefined}
-                            >
-                              {PAYMENT_ICONS[name]}
-                            </div>
-                          ))
-                        )}
-                      </div>
-                    ))}
+                    <div className="b2c-pay-track">
+                      {[0, 1].flatMap((copy) =>
+                        PAYMENT_METHODS_FLAT.map((name) => (
+                          <div
+                            key={`${name}-${copy}`}
+                            className="b2c-pay-pill"
+                            aria-hidden={copy === 1 ? true : undefined}
+                          >
+                            {PAYMENT_ICONS[name]}
+                          </div>
+                        ))
+                      )}
+                    </div>
                   </div>
                 );
               })()}
