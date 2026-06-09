@@ -1898,8 +1898,28 @@ a.b2c-demo-qr:hover {
      from scaling up on wide screens, so every extra px goes to the
      image. The title clamp shrinks on narrower screens so 560px stays
      enough at all ≥901px widths; ≤900px stacks (rule below). */
-  grid-template-columns: minmax(0, 560px) minmax(0, 1fr);
-  gap: 40px;
+  /* Keep the text column just wide enough for the title + the (longer EN)
+     button row so nothing wraps/clips; give the gap a small trim. The big
+     enlargement comes from the right-bleed below, not from squeezing the
+     text. */
+  grid-template-columns: minmax(0, 520px) minmax(0, 1fr);
+  gap: 24px;
+}
+/* Bleed the illustration's RIGHT edge out to the viewport edge so it uses
+   the entire gutter — biggest on wide screens (.hero has overflow:hidden
+   at the viewport edge, so it clips exactly there, never spilling). The
+   extra width X = distance from the container's right content edge to the
+   viewport edge = 24px (the container padding) on ≤max-width, growing by
+   (100vw − contentWidth)/2 on wider screens. Width on the wrapper (not a
+   transform) — the wrapper's heroEntrance animation only touches its
+   transform, so width is safe. Image is width:100% → fills the new width. */
+.product-hero.particles-bg .hero-media-bare {
+  width: calc(100% + max(24px, (100vw - var(--max-width) + 48px) / 2));
+}
+@media (max-width: 900px) {
+  .product-hero.particles-bg .hero-media-bare {
+    width: 100%;
+  }
 }
 /* Keep the ≤900px single-column stack: this scoped rule's (0,4,0)
    would otherwise out-specify the base `@media` 1-col rule (0,2,0). */
