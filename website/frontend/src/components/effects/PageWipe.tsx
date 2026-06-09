@@ -6,9 +6,11 @@ import { setupGsap } from '@/lib/gsap';
 
 const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
-// Matches arcadia.com's PageTransition timing (each phase ~0.9s, panels
-// staggered 0.2s, brand ArcadiaEase).
-const DUR = 0.9;
+// Cover (panels grow up to cover) ~0.9s; reveal (single panel slides off to
+// the right) is snappier so arriving on a page feels quick. Panels staggered
+// 0.2s, brand ArcadiaEase.
+const COVER_DUR = 0.9;
+const REVEAL_DUR = 0.6;
 const STAGGER = 0.2;
 
 /**
@@ -66,7 +68,7 @@ export default function PageWipe() {
       gsap.set(overlay, { autoAlpha: 0 });
       gsap.set(gold, { autoAlpha: 0 });
       gsap.set(black, { autoAlpha: 1, scaleX: 1, scaleY: 1, transformOrigin: 'right center' });
-      gsap.to(black, { duration: DUR, scaleX: 0, ease: 'ArcadiaEase', onComplete: hideAll });
+      gsap.to(black, { duration: REVEAL_DUR, scaleX: 0, ease: 'ArcadiaEase', onComplete: hideAll });
     });
 
     return () => ctx.revert();
@@ -120,10 +122,10 @@ export default function PageWipe() {
           },
         })
         .addLabel('start')
-        .fromTo(overlay, { autoAlpha: 0 }, { autoAlpha: 0.5, duration: DUR, ease: 'ArcadiaEase' }, 'start')
+        .fromTo(overlay, { autoAlpha: 0 }, { autoAlpha: 0.5, duration: COVER_DUR, ease: 'ArcadiaEase' }, 'start')
         .set([gold, black], { autoAlpha: 1, scaleX: 1, scaleY: 0, transformOrigin: 'center bottom' }, 'start')
-        .fromTo(gold, { scaleY: 0 }, { scaleY: 1, duration: DUR, ease: 'ArcadiaEase' }, 'start')
-        .fromTo(black, { scaleY: 0 }, { scaleY: 1, duration: DUR, ease: 'ArcadiaEase' }, `start+=${STAGGER}`);
+        .fromTo(gold, { scaleY: 0 }, { scaleY: 1, duration: COVER_DUR, ease: 'ArcadiaEase' }, 'start')
+        .fromTo(black, { scaleY: 0 }, { scaleY: 1, duration: COVER_DUR, ease: 'ArcadiaEase' }, `start+=${STAGGER}`);
     };
 
     document.addEventListener('click', onClick, true);

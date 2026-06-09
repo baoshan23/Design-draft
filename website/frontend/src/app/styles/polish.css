@@ -1384,7 +1384,7 @@ footer {
   z-index: 2;
   transform-origin: right center;
   transform: scaleX(1);
-  animation: pageWipeReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: pageWipeReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 @keyframes pageWipeReveal {
   to {
