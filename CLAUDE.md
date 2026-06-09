@@ -49,6 +49,8 @@ Backend: `node deploy/deploy-backend.js` cross-compiles Go + SFTP + systemd rest
 
 ## Last session
 
+- 2026-06-09 followup — **payment marquee — enlarged Swish + MobilePay** (`9eb2c86`; user red-boxed them row 2 `红框的logo放大一点`). Dedicated override `[alt="Swish"],[alt="MobilePay"]{height:122px; max-width:208px}` (mobile 88/150) — their marks sit small in padded PNGs. Revert: drop the override.
+
 - 2026-06-09 followup — **payment marquee — enlarged Samsung Pay a touch** (`32cdb89`; user red-boxed Samsung Pay `再放大一点点`). Added a dedicated override `[alt="Samsung Pay"]{height:118px; max-width:222px}` (mobile 86/164), like the Mastercard one. Revert: drop the Samsung Pay override.
 
 - 2026-06-09 followup — **payment marquee → full-bleed + TWO staggered scrolling rows** (`c3d2e05`; user `展开区域横向铺满，然后做两行滚动展示`). `sections.css` `.b2c-pay-marquee`: dropped `max-width:1360px; margin:auto` → full-bleed `width:100vw; margin-left:calc(-50vw+50%)` (breaks out of the grey band's padding to span the whole viewport); added `flex-direction:column; gap:28px` for two rows; mask fade tightened 6→5%. New `.b2c-pay-track--2` (dur 94s / delay -41s / `padding-left:200px`) so row 2 staggers vs row 1. `b2c/page.tsx`: split `PAYMENT_METHODS_FLAT` into 2 halves, render 2 `.b2c-pay-track` rows (each still ×2 copies for seamless loop). tsc 0. Revert: marquee back to `max-width:1360; margin:auto` single row + drop `.b2c-pay-track--2` + the page back to one track over the full list.
