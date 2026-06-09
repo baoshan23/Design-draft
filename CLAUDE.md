@@ -49,7 +49,7 @@ Backend: `node deploy/deploy-backend.js` cross-compiles Go + SFTP + systemd rest
 
 ## Last session
 
-- 2026-06-09 followup — **payment marquee — balanced the screen's top/bottom spacing around the now-132px-tall row** (`29f532f`; user `调整下这一屏的上下间距`). The marquee grew tall but its gaps stayed 72px (header→marquee) / 80px (→next) → cramped. Gave it symmetric 96px air: `.b2c-pay-marquee` inline `marginTop:24` (72+24=96 above) + the `#multilingual` languages block `marginTop:80→96` (96 below). tsc 0. Revert: drop the marquee `marginTop:24` + languages block back to 80.
+- 2026-06-09 followup — **payment marquee — enlarged ONLY the gap to the multilingual screen below (128px)** (`5153aa3`; user clarified `我的意思是，调整支付这一屏和下面多语言的间距` → AskUserQuestion: 加大). Reverted the `29f532f` header-side change (marquee `marginTop:24` dropped → header→marquee back to the standard 72px); set the `#multilingual` languages block `marginTop:96→128` (only the payment→languages gap is enlarged). tsc 0. Revert: languages block `marginTop` back to 80.
 
 - 2026-06-09 followup — **payment logo marquee — base tier 88→104px (wide wordmarks too small)** (`a17edce`; user red-boxed Samsung Pay/Amazon Pay/Cash App Pay/Revolut Pay `这几个logo也偏小`). Those AR~1.8–1.9 wordmarks sat in the base-88 tier, smaller than the 104 neighbours. Raised `.b2c-pay-pill .payment-logo-img` base `88→104px`, max-width `180→200` (so wide ones grow before capping; Cash App 1.92→200 wide caps at ~104 tall). Net: EVERYTHING except the very-wide MoMo/Toss/Tabby/Sezzle pills (still 64px) is now 104px — the per-AR low-tier overrides are now redundant-but-harmless. Mobile base `64→76`, pill `96→110`, max-width `132→150`. CSS-only. Revert: base back to 88/180, mobile 64/132.
 
