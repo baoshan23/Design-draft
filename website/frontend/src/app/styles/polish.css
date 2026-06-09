@@ -1307,3 +1307,33 @@ footer {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+
+/* ============================================================
+   Unified content-page hero titles + subtitles
+   Scope: blog / forum / faq / contact / about / careers /
+   partners / privacy / terms.
+   Marketing heroes (home .hero-centered, b2b/b2c .product-hero)
+   are intentionally EXCLUDED (they keep their tuned sizes).
+   Lives in polish.css (loads last) so it wins over each page's
+   per-hero size AND their mobile @media shrinks.
+   ============================================================ */
+.blog-hero h1,
+.forum-hero h1,
+.contact-hero h1,
+.faq-hero .section-header h1,
+.hero.mesh-bg .hero-title {
+  font-size: clamp(2.625rem, 5.5vw, 3.75rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.blog-hero p,
+.forum-hero p,
+.contact-hero p,
+.faq-hero .section-header p,
+.hero.mesh-bg .hero-desc {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}

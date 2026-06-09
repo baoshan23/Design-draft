@@ -33,7 +33,7 @@ export default function FaqPage() {
   return (
     <>
       {/* Hero */}
-      <section className="section mesh-bg" style={{ paddingTop: 140, paddingBottom: 60, textAlign: 'center' }}>
+      <section className="section mesh-bg faq-hero" style={{ paddingTop: 140, paddingBottom: 60, textAlign: 'center' }}>
         <div className="container">
           <ScrollAnimation>
             <div className="section-header">

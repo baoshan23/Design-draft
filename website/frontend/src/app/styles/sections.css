@@ -2861,7 +2861,7 @@ html {
 .b2c-pay-marquee {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 12px;
   overflow: hidden;
   /* Full-bleed scroll area — spans the whole viewport (breaks out of the
      grey band's padding). */
