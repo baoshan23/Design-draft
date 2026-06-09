@@ -1420,7 +1420,8 @@
     },
     "minread": "min read",
     "featuredStories": "Featured stories",
-    "recent": "Recently published"
+    "recent": "Recently published",
+    "searchPlaceholder": "Search"
   },
   "contact": {
     "label": "Contact Us",

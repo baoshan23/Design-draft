@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
-import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
 import { Link } from '@/i18n/navigation';
 import { apiListBlogPosts, type ApiBlogPost } from '@/lib/api/contentApi';
 import { listStaticBlogPosts } from '@/lib/content/staticContent';
@@ -12,6 +11,7 @@ export default function BlogPage() {
   const locale = useLocale();
   const t = useTranslations();
   const [activeFilter, setActiveFilter] = useState('all');
+  const [query, setQuery] = useState('');
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -19,9 +19,14 @@ export default function BlogPage() {
   const [loading, setLoading] = useState(false);
 
   const filteredPosts = useMemo(() => {
-    if (activeFilter === 'all') return posts;
-    return posts.filter((p) => (p.tags || []).includes(activeFilter));
-  }, [posts, activeFilter]);
+    const q = query.trim().toLowerCase();
+    return posts.filter((p) => {
+      const matchFilter = activeFilter === 'all' || (p.tags || []).includes(activeFilter);
+      const matchQuery =
+        !q || p.title.toLowerCase().includes(q) || (p.excerpt || '').toLowerCase().includes(q);
+      return matchFilter && matchQuery;
+    });
+  }, [posts, activeFilter, query]);
 
   useEffect(() => {
     let cancelled = false;
@@ -57,31 +62,16 @@ export default function BlogPage() {
     setTimeout(() => setSubscribed(false), 2000);
   };
 
-  const featured = filteredPosts[0];
-  const featuredStories = filteredPosts.slice(1, 4);
-  const recentPosts = filteredPosts.slice(4);
-
   const fmtDate = (iso?: string | null) =>
     iso ? new Date(iso).toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' }) : '';
 
-  const renderCard = (p: ApiBlogPost, idx: number) => (
-    <article className="blog-card" key={p.slug}>
-      <Link href={`/blog/${p.slug}`} className="blog-card-img">
-        <ImagePlaceholder
-          variant={idx % 3 === 0 ? 'dashboard' : idx % 3 === 1 ? 'api' : 'hero'}
-          aspectRatio="16/10"
-          label={(p.tags?.[0] || 'blog').toUpperCase()}
-        />
-      </Link>
-      <div className="blog-card-body">
-        <span className="post-category">{p.tags?.[0] ?? t('blog.label')}</span>
-        <h3>
-          <Link href={`/blog/${p.slug}`}>{p.title}</Link>
-        </h3>
-        <p>{p.excerpt}</p>
-        <span className="blog-card-date">{fmtDate(p.publishedAt)}</span>
-      </div>
-    </article>
+  const renderCard = (p: ApiBlogPost) => (
+    <Link href={`/blog/${p.slug}`} className="blog-card" key={p.slug}>
+      <span className="post-category">{p.tags?.[0] ?? t('blog.label')}</span>
+      <h3>{p.title}</h3>
+      <p>{p.excerpt}</p>
+      <span className="blog-card-date">{fmtDate(p.publishedAt)}</span>
+    </Link>
   );
 
   return (
@@ -99,18 +89,35 @@ export default function BlogPage() {
 
       <section className="section-sm blog-main">
         <div className="container">
-          {/* Category filter row */}
           <ScrollAnimation>
-            <div className="blog-filters">
-              {filters.map((f) => (
-                <button
-                  key={f.key}
-                  className={`filter-btn${activeFilter === f.key ? ' active' : ''}`}
-                  onClick={() => setActiveFilter(f.key)}
-                >
-                  {f.label}
-                </button>
-              ))}
+            <h2 className="blog-section-title">{t('blog.recent')}</h2>
+
+            {/* Toolbar: filters left, search right */}
+            <div className="blog-toolbar">
+              <div className="blog-filters">
+                {filters.map((f) => (
+                  <button
+                    key={f.key}
+                    className={`filter-btn${activeFilter === f.key ? ' active' : ''}`}
+                    onClick={() => setActiveFilter(f.key)}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+              <div className="blog-search">
+                <input
+                  type="search"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder={t('blog.searchPlaceholder')}
+                  aria-label={t('blog.searchPlaceholder')}
+                />
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+              </div>
             </div>
           </ScrollAnimation>
 
@@ -119,57 +126,9 @@ export default function BlogPage() {
           ) : filteredPosts.length === 0 ? (
             <div className="muted blog-empty">{t('blog.post.none')}</div>
           ) : (
-            <>
-              {/* Featured hero post */}
-              {featured && (
-                <ScrollAnimation>
-                  <article className="featured-post">
-                    <Link href={`/blog/${featured.slug}`} className="featured-img">
-                      <ImagePlaceholder variant="hero" aspectRatio="16/10" label={(featured.tags?.[0] || 'blog').toUpperCase()} />
-                    </Link>
-                    <div className="featured-content">
-                      <span className="post-category">{featured.tags?.[0] ?? t('blog.label')}</span>
-                      <h2>
-                        <Link href={`/blog/${featured.slug}`}>{featured.title}</Link>
-                      </h2>
-                      <p>{featured.excerpt}</p>
-                      <div className="featured-meta">
-                        <span className="featured-author">
-                          <span className="author-avatar">{(featured.authorName ?? 'G').charAt(0)}</span>
-                          {featured.authorName ?? t('blog.featured.team')}
-                        </span>
-                        <span className="featured-dot" aria-hidden>·</span>
-                        <span>{fmtDate(featured.publishedAt)}</span>
-                      </div>
-                    </div>
-                  </article>
-                </ScrollAnimation>
-              )}
-
-              {/* Featured stories */}
-              {featuredStories.length > 0 && (
-                <ScrollAnimation>
-                  <div className="blog-section-head">
-                    <h2>{t('blog.featuredStories')}</h2>
-                  </div>
-                  <div className="blog-grid">
-                    {featuredStories.map((p, idx) => renderCard(p, idx))}
-                  </div>
-                </ScrollAnimation>
-              )}
-
-              {/* Recently published */}
-              {recentPosts.length > 0 && (
-                <ScrollAnimation>
-                  <div className="blog-section-head">
-                    <h2>{t('blog.recent')}</h2>
-                  </div>
-                  <div className="blog-grid">
-                    {recentPosts.map((p, idx) => renderCard(p, idx))}
-                  </div>
-                </ScrollAnimation>
-              )}
-            </>
+            <ScrollAnimation>
+              <div className="blog-grid">{filteredPosts.map((p) => renderCard(p))}</div>
+            </ScrollAnimation>
           )}
         </div>
       </section>

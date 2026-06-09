@@ -377,7 +377,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
 
           {/* 20+ Global Languages */}
           <ScrollAnimation>
-            <div id="multilingual" style={{ marginTop: 96, scrollMarginTop: 'calc(var(--header-height) + 16px)' }}>
+            <div id="multilingual" style={{ marginTop: 128, scrollMarginTop: 'calc(var(--header-height) + 16px)' }}>
               <div className="section-header">
                 <span className="section-label">{t('product.lang.label')}</span>
                 <h2>{t('product.lang.title')}</h2>

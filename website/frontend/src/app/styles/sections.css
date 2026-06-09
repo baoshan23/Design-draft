@@ -2848,14 +2848,9 @@ html {
   }
 }
 
-/* The whole payment "screen" sits on a full-bleed grey band (breaks out
-   of .container) so it reads distinct from the white sections around it. */
+/* The payment "screen" block — plain (no background band). */
 .b2c-pay-screen {
-  margin-top: 88px;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  background: var(--dark);
-  padding: 80px clamp(16px, 4vw, 24px);
+  margin-top: 80px;
 }
 
 /* b2c Global Payment Matrix → single full-bleed logo-pill marquee.
@@ -2960,7 +2955,7 @@ html {
 .b2c-pay-pill .payment-logo-img[alt="Sezzle"],
 .b2c-pay-pill .payment-logo-img[alt="Tabby"],
 .b2c-pay-pill .payment-logo-img[alt="Toss Pay"] {
-  height: 64px !important;
+  height: 56px !important;
 }
 /* Mastercard PNG carries extra internal padding → reads small; bump it. */
 .b2c-pay-pill .payment-logo-img[alt="Mastercard"] {
@@ -3020,7 +3015,7 @@ html {
   .b2c-pay-pill .payment-logo-img[alt="MoMo"],
   .b2c-pay-pill .payment-logo-img[alt="Sezzle"],
   .b2c-pay-pill .payment-logo-img[alt="Tabby"],
-  .b2c-pay-pill .payment-logo-img[alt="Toss Pay"] { height: 46px !important; }
+  .b2c-pay-pill .payment-logo-img[alt="Toss Pay"] { height: 40px !important; }
   .b2c-pay-pill .payment-logo-img[alt="Mastercard"] { height: 90px !important; max-width: 170px; }
   .b2c-pay-pill .payment-logo-img[alt="Samsung Pay"] { height: 86px !important; max-width: 164px; }
   .b2c-pay-pill .payment-logo-img[alt="Swish"],

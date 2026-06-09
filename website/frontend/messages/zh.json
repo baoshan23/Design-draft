@@ -1420,7 +1420,8 @@
     },
     "minread": "分钟阅读",
     "featuredStories": "精选文章",
-    "recent": "最新发布"
+    "recent": "最新发布",
+    "searchPlaceholder": "搜索"
   },
   "contact": {
     "label": "联系我们",
