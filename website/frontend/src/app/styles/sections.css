@@ -2848,6 +2848,16 @@ html {
   }
 }
 
+/* The whole payment "screen" sits on a full-bleed grey band (breaks out
+   of .container) so it reads distinct from the white sections around it. */
+.b2c-pay-screen {
+  margin-top: 88px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  background: var(--dark);
+  padding: 80px clamp(16px, 4vw, 24px);
+}
+
 /* b2c Global Payment Matrix → single full-bleed logo-pill marquee.
    One row of real payment logos in rounded pills, duplicated (2 sets);
    starts shifted left by one set (-50%) and slides to 0, so it loops
@@ -2944,6 +2954,11 @@ html {
 .b2c-pay-pill .payment-logo-img[alt="Toss Pay"] {
   height: 64px !important;
 }
+/* Mastercard PNG carries extra internal padding → reads small; bump it. */
+.b2c-pay-pill .payment-logo-img[alt="Mastercard"] {
+  height: 122px !important;
+  max-width: 230px;
+}
 @keyframes b2cPaySlide {
   from { transform: translateX(-50%); }
   to   { transform: translateX(0); }
@@ -2987,6 +3002,7 @@ html {
   .b2c-pay-pill .payment-logo-img[alt="Sezzle"],
   .b2c-pay-pill .payment-logo-img[alt="Tabby"],
   .b2c-pay-pill .payment-logo-img[alt="Toss Pay"] { height: 46px !important; }
+  .b2c-pay-pill .payment-logo-img[alt="Mastercard"] { height: 90px !important; max-width: 170px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .b2c-pay-track { animation: none; }

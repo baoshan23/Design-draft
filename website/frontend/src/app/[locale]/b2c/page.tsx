@@ -336,7 +336,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
 
           {/* Global Payment Matrix */}
           <ScrollAnimation>
-            <div style={{ marginTop: 80 }}>
+            <div className="b2c-pay-screen">
               <div className="section-header">
                 <span className="section-label">{t('product.pay.label')}</span>
                 <h2>{t('product.pay.title')}</h2>
@@ -370,7 +370,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
 
           {/* 20+ Global Languages */}
           <ScrollAnimation>
-            <div id="multilingual" style={{ marginTop: 128, scrollMarginTop: 'calc(var(--header-height) + 16px)' }}>
+            <div id="multilingual" style={{ marginTop: 96, scrollMarginTop: 'calc(var(--header-height) + 16px)' }}>
               <div className="section-header">
                 <span className="section-label">{t('product.lang.label')}</span>
                 <h2>{t('product.lang.title')}</h2>
