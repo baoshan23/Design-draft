@@ -6,70 +6,73 @@ import { setupGsap } from '@/lib/gsap';
 
 const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
+// Matches arcadia.com's PageTransition timing (each phase ~0.9s, panels
+// staggered 0.2s, brand ArcadiaEase).
+const DUR = 0.9;
+const STAGGER = 0.2;
+
 /**
- * Arcadia-style two-panel page-transition WIPE (切屏效果), GCSS colours
- * (gold + black). Two stacked full-screen panels:
+ * Arcadia-style page-transition WIPE (切屏效果) — faithful 3-layer replica in
+ * GCSS colours (gold + black + a dark overlay scrim).
  *
- *   • COVER (leaving a page / clicking an internal link): the panels grow up
- *     from the bottom edge (scaleY 0→1, transformOrigin "center bottom"),
- *     gold first then black 0.12s later, covering the screen — THEN navigate.
- *   • REVEAL (entering a page / hard refresh): the panels are already covering
- *     and retract to the right (scaleX 1→0, transformOrigin "right center"),
- *     black first then gold 0.15s later, uncovering the page.
+ * Layers (bottom→top): overlay scrim · gold panel · black panel.
  *
- * Mounted in [locale]/template.tsx (re-mounts per route) so REVEAL plays on
- * refresh + every navigation, and COVER plays when an internal link is clicked.
- * App Router has no before-navigate hook, so COVER is done by intercepting
- * link clicks in the capture phase, then router.push() after the cover lands.
- * A 1.5s safety timer hard-navigates if the animation never completes, so a
- * hiccup can never strand the user behind the panels.
+ *   • COVER (onExit — clicking an internal link): the overlay fades the
+ *     current page to 50% dark WHILE the gold then black panels grow up from
+ *     the bottom edge (scaleY 0→1, transformOrigin "center bottom", black
+ *     0.2s after gold) until the screen is covered — THEN navigate.
+ *   • REVEAL (onEnter — refresh / arriving on a page): ONLY the black panel
+ *     retracts to the right (scaleX 1→0, transformOrigin "right center");
+ *     the gold panel + overlay are hidden. This single-layer slide is what
+ *     Arcadia actually does on enter.
  *
- * CSS gives the panels a no-JS fallback reveal animation; this cancels it and
- * takes over. `prefers-reduced-motion` hides the panels and skips interception.
+ * Mounted in [locale]/template.tsx (re-mounts per route): REVEAL plays on
+ * refresh + after every navigation; COVER plays when an internal link is
+ * clicked (intercepted in the capture phase, since App Router has no
+ * before-navigate hook). A safety timer hard-navigates if the cover timeline
+ * never completes, so the user can't be stranded behind the panels.
+ *
+ * `prefers-reduced-motion` hides everything and skips interception. The black
+ * panel also has a CSS-only fallback reveal so a no-JS load never stays dark.
  */
 export default function PageWipe() {
+  const overlayRef = useRef<HTMLDivElement>(null);
   const goldRef = useRef<HTMLDivElement>(null);
   const blackRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  // REVEAL on mount (refresh / after navigation).
+  // REVEAL on mount (refresh / after navigation): black panel slides off right.
   useIsoLayoutEffect(() => {
+    const overlay = overlayRef.current;
     const gold = goldRef.current;
     const black = blackRef.current;
-    if (!gold || !black) return;
+    if (!overlay || !gold || !black) return;
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const hideAll = () => {
+      overlay.style.display = 'none';
       gold.style.display = 'none';
       black.style.display = 'none';
+    };
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      hideAll();
       return;
     }
 
-    gold.style.animation = 'none';
     black.style.animation = 'none';
 
     const { gsap } = setupGsap();
     const ctx = gsap.context(() => {
-      gsap.set([gold, black], {
-        autoAlpha: 1,
-        scaleX: 1,
-        scaleY: 1,
-        transformOrigin: 'right center',
-      });
-      gsap
-        .timeline({
-          onComplete: () => {
-            gold.style.display = 'none';
-            black.style.display = 'none';
-          },
-        })
-        .to(black, { duration: 0.7, scaleX: 0, ease: 'ArcadiaEase' }, 0)
-        .to(gold, { duration: 0.7, scaleX: 0, ease: 'ArcadiaEase' }, 0.15);
+      gsap.set(overlay, { autoAlpha: 0 });
+      gsap.set(gold, { autoAlpha: 0 });
+      gsap.set(black, { autoAlpha: 1, scaleX: 1, scaleY: 1, transformOrigin: 'right center' });
+      gsap.to(black, { duration: DUR, scaleX: 0, ease: 'ArcadiaEase', onComplete: hideAll });
     });
 
     return () => ctx.revert();
   }, []);
 
-  // COVER on internal-link click → then navigate.
+  // COVER on internal-link click → navigate after the panels land.
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -86,12 +89,12 @@ export default function PageWipe() {
 
       const url = new URL(link.href, window.location.href);
       if (url.origin !== window.location.origin) return;
-      // Same page (or in-page anchor) → let native / the Lenis anchor handler deal with it.
-      if (samePath(url.pathname, window.location.pathname)) return;
+      if (samePath(url.pathname, window.location.pathname)) return; // same page / in-page anchor
 
+      const overlay = overlayRef.current;
       const gold = goldRef.current;
       const black = blackRef.current;
-      if (!gold || !black) return;
+      if (!overlay || !gold || !black) return;
 
       e.preventDefault();
       e.stopPropagation();
@@ -99,22 +102,16 @@ export default function PageWipe() {
       const dest = url.pathname + url.search + url.hash;
       const { gsap } = setupGsap();
 
-      gold.style.display = '';
-      black.style.display = '';
-      gold.style.animation = 'none';
-      black.style.animation = 'none';
+      [overlay, gold, black].forEach((el) => {
+        el.style.display = '';
+        el.style.animation = 'none';
+      });
 
-      // Hard-navigate fallback if the animation/onComplete never fires.
+      // Hard-navigate fallback if the timeline / onComplete never fires.
       const safety = window.setTimeout(() => {
         window.location.href = dest;
-      }, 1500);
+      }, 2000);
 
-      gsap.set([gold, black], {
-        autoAlpha: 1,
-        scaleX: 1,
-        scaleY: 0,
-        transformOrigin: 'center bottom',
-      });
       gsap
         .timeline({
           onComplete: () => {
@@ -122,17 +119,20 @@ export default function PageWipe() {
             router.push(dest);
           },
         })
-        .to(gold, { duration: 0.6, scaleY: 1, ease: 'ArcadiaEase' }, 0)
-        .to(black, { duration: 0.6, scaleY: 1, ease: 'ArcadiaEase' }, 0.12);
+        .addLabel('start')
+        .fromTo(overlay, { autoAlpha: 0 }, { autoAlpha: 0.5, duration: DUR, ease: 'ArcadiaEase' }, 'start')
+        .set([gold, black], { autoAlpha: 1, scaleX: 1, scaleY: 0, transformOrigin: 'center bottom' }, 'start')
+        .fromTo(gold, { scaleY: 0 }, { scaleY: 1, duration: DUR, ease: 'ArcadiaEase' }, 'start')
+        .fromTo(black, { scaleY: 0 }, { scaleY: 1, duration: DUR, ease: 'ArcadiaEase' }, `start+=${STAGGER}`);
     };
 
-    // Capture phase so we beat next/link's own click handler.
     document.addEventListener('click', onClick, true);
     return () => document.removeEventListener('click', onClick, true);
   }, [router]);
 
   return (
     <div className="page-wipe-root" aria-hidden="true">
+      <div ref={overlayRef} className="page-wipe-overlay" />
       <div ref={goldRef} className="page-wipe page-wipe-gold" />
       <div ref={blackRef} className="page-wipe page-wipe-black" />
     </div>
