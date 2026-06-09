@@ -1337,3 +1337,50 @@ footer {
   line-height: 1.7;
   color: var(--text-secondary);
 }
+
+/* ============================================================
+   Arcadia-style page-transition WIPE (切屏效果)
+   Two stacked full-screen panels (gold + cream) cover the
+   viewport and scaleY-collapse upward to reveal the page.
+   Driven by GSAP in PageWipe.tsx (mounted in template.tsx so
+   it fires on refresh + every client navigation). The CSS
+   animation below is a no-JS fallback — PageWipe cancels it
+   and takes over the precise timing.
+   ============================================================ */
+.page-wipe-root {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  pointer-events: none;
+}
+.page-wipe {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: center top;
+  transform: scaleY(1);
+  pointer-events: auto;
+  animation: pageWipeReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.page-wipe-gold {
+  background: var(--primary, #febf1d);
+  z-index: 1;
+  animation-delay: 0.15s;
+}
+.page-wipe-cream {
+  background: #fff2d7;
+  z-index: 2;
+  animation-delay: 0s;
+}
+@keyframes pageWipeReveal {
+  to {
+    transform: scaleY(0);
+    visibility: hidden;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-wipe-root {
+    display: none;
+  }
+}
