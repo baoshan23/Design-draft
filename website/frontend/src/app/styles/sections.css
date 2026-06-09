@@ -2906,13 +2906,13 @@ html {
 .b2c-pay-pill .payment-logo-img,
 .b2c-pay-pill .payment-logo-svg {
   width: auto !important;
-  height: 104px !important;
-  max-width: 200px;
+  height: 114px !important;
+  max-width: 216px;
   object-fit: contain;
 }
 .b2c-pay-pill .payment-logo-svg svg {
   width: auto;
-  height: 104px;
+  height: 114px;
 }
 /* Per-logo height tiers so every brand reads at a similar VISUAL WIDTH
    (~150–170px) despite very different aspect ratios — matched to the
@@ -2980,8 +2980,8 @@ html {
 @media (max-width: 700px) {
   .b2c-pay-pill { height: 110px; padding: 0 20px; }
   .b2c-pay-pill .payment-logo-img,
-  .b2c-pay-pill .payment-logo-svg { height: 76px !important; max-width: 150px; }
-  .b2c-pay-pill .payment-logo-svg svg { height: 76px; }
+  .b2c-pay-pill .payment-logo-svg { height: 82px !important; max-width: 162px; }
+  .b2c-pay-pill .payment-logo-svg svg { height: 82px; }
   /* Mobile tiers (scaled down from desktop). */
   .b2c-pay-pill .payment-logo-img[alt="Multibanco"],
   .b2c-pay-pill .payment-logo-img[alt="Interac"],
