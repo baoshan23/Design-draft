@@ -14,6 +14,7 @@ import TestimonialsTabs from '@/components/sections/home/TestimonialsTabs';
 import ScrollResetOnLoad from '@/components/effects/ScrollResetOnLoad';
 import SectionReveal from '@/components/effects/SectionReveal';
 import CtaScrollExpand from '@/components/effects/CtaScrollExpand';
+import ArcadiaReveal from '@/components/effects/ArcadiaReveal';
 import { PAYMENT_ICONS, PAYMENT_METHODS_FLAT } from '@/components/sections/home/paymentIcons';
 import PaymentFisheye from '@/components/sections/home/PaymentFisheye';
 
@@ -44,19 +45,20 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <ScrollResetOnLoad />
       <SectionReveal />
       <CtaScrollExpand selector=".map-fullbleed" varName="--map-expand" />
+      <ArcadiaReveal />
       {/* Hero Section — centered text + dashboard mock below (Arcadia-style) */}
       <section className="hero hero-with-video hero-centered">
         <div className="container hero-centered-inner">
           <div className="hero-content">
             <div className="hero-text">
-              <h1 className="hero-title" style={{ marginBottom: 16 }}>
+              <h1 className="hero-title" style={{ marginBottom: 16 }} data-animate="text">
                 <span>{t('hero.title1')}</span><br />
                 <TypingText words={['CSMS Platform', '管理系统', 'Charge Hub', '充电平台']} />
               </h1>
 
-              <p className="hero-desc">{t('hero.desc')}</p>
+              <p className="hero-desc" data-animate="text">{t('hero.desc')}</p>
 
-              <div className="hero-buttons">
+              <div className="hero-buttons" data-animate="text">
                 <Link href="/b2c" className="btn btn-primary btn-lg">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <polygon points="5 3 19 12 5 21 5 3" />
@@ -75,7 +77,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
           </div>
 
-          <div className="hero-stats">
+          <div className="hero-stats" data-animate="text">
             <div className="hero-stat">
               <div className="hero-stat-value"><CounterAnimation target={9999} suffix="" /></div>
               <div className="hero-stat-meta">
@@ -104,7 +106,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               it on adaptive/narrow viewports. On large screens it flex-fills
               to the fold (see .hero-dashboard-mock); on small screens it sits
               at its natural size below the text. */}
-          <div className="hero-dashboard-mock" aria-hidden="true">
+          <div className="hero-dashboard-mock" aria-hidden="true" data-animate="media">
             <div className="hero-dashboard-frame">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/hero-dashboard-13.png" alt="" className="hero-dashboard-img" />

@@ -1226,25 +1226,27 @@ footer {
 @media (prefers-reduced-motion: no-preference) {
   /* --- 2. Hero entrance: staggered reveal on page load / refresh.
      Base state stays visible (opacity:1) so a no-animation fallback
-     never hides the hero; `both` holds the keyframe ends. --- */
-  .hero .hero-badge,
-  .hero .hero-title,
-  .hero .hero-desc,
-  .hero .hero-buttons,
-  .hero .hero-footer-bar,
-  .hero .hero-stats,
-  .hero .hero-video-wrap,
-  .hero .hero-media-bare {
+     never hides the hero; `both` holds the keyframe ends.
+     `:not([data-animate])` hands any element opted into the GSAP
+     ArcadiaReveal system over to GSAP, so they never double-animate. --- */
+  .hero .hero-badge:not([data-animate]),
+  .hero .hero-title:not([data-animate]),
+  .hero .hero-desc:not([data-animate]),
+  .hero .hero-buttons:not([data-animate]),
+  .hero .hero-footer-bar:not([data-animate]),
+  .hero .hero-stats:not([data-animate]),
+  .hero .hero-video-wrap:not([data-animate]),
+  .hero .hero-media-bare:not([data-animate]) {
     animation: heroEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
-  .hero .hero-badge { animation-delay: 0.05s; }
-  .hero .hero-title { animation-delay: 0.12s; }
-  .hero .hero-desc { animation-delay: 0.22s; }
-  .hero .hero-buttons { animation-delay: 0.32s; }
-  .hero .hero-footer-bar,
-  .hero .hero-stats { animation-delay: 0.42s; }
-  .hero .hero-video-wrap,
-  .hero .hero-media-bare { animation-delay: 0.18s; }
+  .hero .hero-badge:not([data-animate]) { animation-delay: 0.05s; }
+  .hero .hero-title:not([data-animate]) { animation-delay: 0.12s; }
+  .hero .hero-desc:not([data-animate]) { animation-delay: 0.22s; }
+  .hero .hero-buttons:not([data-animate]) { animation-delay: 0.32s; }
+  .hero .hero-footer-bar:not([data-animate]),
+  .hero .hero-stats:not([data-animate]) { animation-delay: 0.42s; }
+  .hero .hero-video-wrap:not([data-animate]),
+  .hero .hero-media-bare:not([data-animate]) { animation-delay: 0.18s; }
 
   /* --- 3. Scroll reveal: stagger the cards inside a revealed block so a
      grid fans in card-by-card rather than all at once. --- */
