@@ -2893,8 +2893,8 @@ html {
 .b2c-pay-pill .payment-logo-img,
 .b2c-pay-pill .payment-logo-svg {
   width: auto !important;
-  height: 52px !important;
-  max-width: 180px;
+  height: 58px !important;
+  max-width: 200px;
   object-fit: contain;
   filter: grayscale(1);
   opacity: 0.78;
@@ -2902,7 +2902,44 @@ html {
 }
 .b2c-pay-pill .payment-logo-svg svg {
   width: auto;
-  height: 52px;
+  height: 58px;
+}
+/* Per-logo height tiers so every brand reads at a similar VISUAL size
+   despite very different aspect ratios. Square/icon logos (low AR) are
+   enlarged; very wide wordmarks (high AR) are pulled down. Base 58px =
+   the common ~1.6–1.9 AR wordmarks. */
+.b2c-pay-pill .payment-logo-img[alt="Multibanco"],
+.b2c-pay-pill .payment-logo-img[alt="Interac"],
+.b2c-pay-pill .payment-logo-img[alt="PayPay"],
+.b2c-pay-pill .payment-logo-img[alt="JCB"],
+.b2c-pay-pill .payment-logo-img[alt="Apple Pay"],
+.b2c-pay-pill .payment-logo-img[alt="Touch'n Go"],
+.b2c-pay-pill .payment-logo-img[alt="UnionPay"],
+.b2c-pay-pill .payment-logo-img[alt="Bancontact"],
+.b2c-pay-pill .payment-logo-img[alt="Google Pay"] {
+  height: 78px !important;
+}
+.b2c-pay-pill .payment-logo-img[alt="BLIK"],
+.b2c-pay-pill .payment-logo-img[alt="MB WAY"],
+.b2c-pay-pill .payment-logo-img[alt="OXXO"],
+.b2c-pay-pill .payment-logo-img[alt="Boleto"],
+.b2c-pay-pill .payment-logo-img[alt="Affirm"],
+.b2c-pay-pill .payment-logo-img[alt="Twint"],
+.b2c-pay-pill .payment-logo-img[alt="Zip"],
+.b2c-pay-pill .payment-logo-img[alt="iDEAL"],
+.b2c-pay-pill .payment-logo-img[alt="KakaoPay"],
+.b2c-pay-pill .payment-logo-img[alt="Pix"],
+.b2c-pay-pill .payment-logo-img[alt="UPI"],
+.b2c-pay-pill .payment-logo-img[alt="Visa"],
+.b2c-pay-pill .payment-logo-img[alt="Przelewy24"],
+.b2c-pay-pill .payment-logo-img[alt="FPX"] {
+  height: 66px !important;
+}
+.b2c-pay-pill .payment-logo-img[alt="MoMo"],
+.b2c-pay-pill .payment-logo-img[alt="Sezzle"],
+.b2c-pay-pill .payment-logo-img[alt="Tabby"],
+.b2c-pay-pill .payment-logo-img[alt="Toss Pay"] {
+  height: 48px !important;
 }
 .b2c-pay-pill:hover .payment-logo-img,
 .b2c-pay-pill:hover .payment-logo-svg {
@@ -2914,10 +2951,38 @@ html {
   to   { transform: translateX(0); }
 }
 @media (max-width: 700px) {
-  .b2c-pay-pill { height: 76px; padding: 0 28px; }
+  .b2c-pay-pill { height: 78px; padding: 0 24px; }
   .b2c-pay-pill .payment-logo-img,
-  .b2c-pay-pill .payment-logo-svg { height: 40px !important; max-width: 140px; }
-  .b2c-pay-pill .payment-logo-svg svg { height: 40px; }
+  .b2c-pay-pill .payment-logo-svg { height: 44px !important; max-width: 150px; }
+  .b2c-pay-pill .payment-logo-svg svg { height: 44px; }
+  /* Mobile tiers (scaled down from desktop). */
+  .b2c-pay-pill .payment-logo-img[alt="Multibanco"],
+  .b2c-pay-pill .payment-logo-img[alt="Interac"],
+  .b2c-pay-pill .payment-logo-img[alt="PayPay"],
+  .b2c-pay-pill .payment-logo-img[alt="JCB"],
+  .b2c-pay-pill .payment-logo-img[alt="Apple Pay"],
+  .b2c-pay-pill .payment-logo-img[alt="Touch'n Go"],
+  .b2c-pay-pill .payment-logo-img[alt="UnionPay"],
+  .b2c-pay-pill .payment-logo-img[alt="Bancontact"],
+  .b2c-pay-pill .payment-logo-img[alt="Google Pay"] { height: 58px !important; }
+  .b2c-pay-pill .payment-logo-img[alt="BLIK"],
+  .b2c-pay-pill .payment-logo-img[alt="MB WAY"],
+  .b2c-pay-pill .payment-logo-img[alt="OXXO"],
+  .b2c-pay-pill .payment-logo-img[alt="Boleto"],
+  .b2c-pay-pill .payment-logo-img[alt="Affirm"],
+  .b2c-pay-pill .payment-logo-img[alt="Twint"],
+  .b2c-pay-pill .payment-logo-img[alt="Zip"],
+  .b2c-pay-pill .payment-logo-img[alt="iDEAL"],
+  .b2c-pay-pill .payment-logo-img[alt="KakaoPay"],
+  .b2c-pay-pill .payment-logo-img[alt="Pix"],
+  .b2c-pay-pill .payment-logo-img[alt="UPI"],
+  .b2c-pay-pill .payment-logo-img[alt="Visa"],
+  .b2c-pay-pill .payment-logo-img[alt="Przelewy24"],
+  .b2c-pay-pill .payment-logo-img[alt="FPX"] { height: 50px !important; }
+  .b2c-pay-pill .payment-logo-img[alt="MoMo"],
+  .b2c-pay-pill .payment-logo-img[alt="Sezzle"],
+  .b2c-pay-pill .payment-logo-img[alt="Tabby"],
+  .b2c-pay-pill .payment-logo-img[alt="Toss Pay"] { height: 38px !important; }
 }
 @media (prefers-reduced-motion: reduce) {
   .b2c-pay-track { animation: none; }
