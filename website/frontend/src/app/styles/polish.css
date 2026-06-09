@@ -1380,7 +1380,7 @@ footer {
    The CSS animation is the no-JS fallback (PageWipe cancels it and takes
    over the precise GSAP timing). */
 .page-wipe-black {
-  background: #181818;
+  background: #fff2d7;
   z-index: 2;
   transform-origin: right center;
   transform: scaleX(1);
