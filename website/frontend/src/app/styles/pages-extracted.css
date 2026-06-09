@@ -1440,10 +1440,11 @@ body:has(.product-hero) {
   transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
 }
 
+/* Card itself is fully static on hover — only the cover image zooms. */
 .blog-card:hover {
-  border-color: rgba(254, 191, 29, 0.55);
+  border-color: var(--border-subtle, rgba(0, 0, 0, 0.1));
   box-shadow: none;
-  transform: translateY(-3px);
+  transform: none;
 }
 
 .blog-card-img {
@@ -1494,7 +1495,7 @@ body:has(.product-hero) {
 }
 
 .blog-card:hover h3 {
-  color: var(--primary-text, #8c5f00);
+  color: var(--text-primary);
 }
 
 .blog-card p {
