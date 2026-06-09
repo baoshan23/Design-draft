@@ -6,12 +6,12 @@ import { setupGsap } from '@/lib/gsap';
 
 const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
-// Cover (panels grow up to cover) ~0.9s; reveal (single panel slides off to
-// the right) is snappier so arriving on a page feels quick. Panels staggered
-// 0.2s, brand ArcadiaEase.
-const COVER_DUR = 0.9;
+// Cover (panels grow up to cover) is kept brisk so the screen doesn't sit
+// fully black for long before the next page reveals; reveal (single panel
+// slides off to the right) is snappy too. Panels staggered, brand ArcadiaEase.
+const COVER_DUR = 0.5;
 const REVEAL_DUR = 0.6;
-const STAGGER = 0.2;
+const STAGGER = 0.08;
 
 /**
  * Arcadia-style page-transition WIPE (切屏效果) — faithful 3-layer replica in
