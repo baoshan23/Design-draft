@@ -2880,41 +2880,48 @@ html {
 .b2c-pay-marquee:hover .b2c-pay-track {
   animation-play-state: paused;
 }
-.b2c-pay-card {
-  flex: 0 0 300px;
-  width: 300px;
-  margin: 0;
-  /* Clean Arcadia card: solid white, hairline border (from .card) + soft shadow. */
-  background: var(--dark-card);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+/* Each pill = a rounded white capsule holding one real payment logo,
+   centered. Ref: horizontal logo-marquee of pill cards. */
+.b2c-pay-pill {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 84px;
+  min-width: 200px;
+  padding: 0 44px;
+  background: #fff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 9999px;
   box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.25s ease;
 }
-.b2c-pay-card:hover {
+.b2c-pay-pill:hover {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
-/* Payment-method chips: clean neutral Arcadia chip (light grey fill, hairline
-   border, muted text) — dropped the loud yellow border/text. */
-.b2c-pay-card .tag {
-  background: #F4F5F7;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  color: var(--text-secondary);
+.b2c-pay-pill .payment-logo-img,
+.b2c-pay-pill .payment-logo-svg {
+  width: auto !important;
+  height: 30px !important;
+  max-width: 120px;
+  object-fit: contain;
 }
-.b2c-pay-card .tag:hover {
-  box-shadow: none;
-  transform: none;
+.b2c-pay-pill .payment-logo-svg svg {
+  width: auto;
+  height: 30px;
 }
-[data-theme="dark"] .b2c-pay-card .tag {
-  background: rgba(255, 255, 255, 0.06);
+[data-theme="dark"] .b2c-pay-pill {
+  background: rgba(255, 255, 255, 0.94);
   border-color: rgba(255, 255, 255, 0.12);
-  color: var(--text-secondary);
 }
 @keyframes b2cPaySlide {
   from { transform: translateX(-50%); }
   to   { transform: translateX(0); }
 }
 @media (max-width: 700px) {
-  .b2c-pay-card { flex-basis: 240px; width: 240px; }
+  .b2c-pay-pill { height: 70px; min-width: 160px; padding: 0 32px; }
+  .b2c-pay-pill .payment-logo-img,
+  .b2c-pay-pill .payment-logo-svg { height: 26px !important; }
 }
 @media (prefers-reduced-motion: reduce) {
   .b2c-pay-track { animation: none; }

@@ -19,6 +19,7 @@ const QR_OPTS = {
 };
 import LanguageRequestForm from './LanguageRequestForm';
 import PaymentRequestForm from '@/components/sections/home/PaymentRequestForm';
+import { PAYMENT_ICONS, PAYMENT_METHODS_FLAT } from '@/components/sections/home/paymentIcons';
 import AppSlideshow from './AppSlideshow';
 import Gallery3D from './Gallery3D';
 
@@ -344,35 +345,25 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
               </div>
 
               {(() => {
-                const PAY_REGIONS = [
-                  { name: t('product.pay.asia'), methods: ['Alipay', 'WeChat Pay', 'GrabPay', 'GCash', 'TrueMoney', 'DragonPay', 'Boost', 'JCB'] },
-                  { name: t('product.pay.europe'), methods: ['Stripe', 'SEPA', 'TrustPay', 'Skrill', 'Neosurf'] },
-                  { name: t('product.pay.oceania'), methods: ['Visa', 'Mastercard', 'Apple Pay', 'Google Pay'] },
-                  { name: t('product.pay.africa'), methods: ['M-PESA', 'PayPal'] },
-                  { name: t('product.pay.southamerica'), methods: ['PIX', 'Visa', 'Mastercard'] },
-                  { name: t('product.pay.northamerica'), methods: ['Stripe', 'Apple Pay', 'Google Pay', 'PayPal'] },
+                // Each pill holds one real payment-method logo. Split the
+                // curated flat list into two staggered rows for the marquee.
+                const half = Math.ceil(PAYMENT_METHODS_FLAT.length / 2);
+                const PAY_ROWS = [
+                  PAYMENT_METHODS_FLAT.slice(0, half),
+                  PAYMENT_METHODS_FLAT.slice(half),
                 ];
-                // Row 2 uses a rotated region order so its cards never
-                // line up with row 1 (交错不对齐).
-                const PAY_ROWS = [PAY_REGIONS, [...PAY_REGIONS.slice(3), ...PAY_REGIONS.slice(0, 3)]];
                 return (
                   <div className="b2c-pay-marquee" style={{ marginTop: 32 }}>
                     {PAY_ROWS.map((row, ri) => (
                       <div className={`b2c-pay-track b2c-pay-track--${ri + 1}`} key={ri}>
                         {[0, 1].flatMap((copy) =>
-                          row.map((r) => (
+                          row.map((name) => (
                             <div
-                              key={`${r.name}-${copy}`}
-                              className="card b2c-pay-card"
-                              style={{ textAlign: 'center' }}
+                              key={`${name}-${copy}`}
+                              className="b2c-pay-pill"
                               aria-hidden={copy === 1 ? true : undefined}
                             >
-                              <h4 style={{ marginBottom: 12 }}>{r.name}</h4>
-                              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
-                                {r.methods.map((m) => (
-                                  <span key={m} className="tag">{m}</span>
-                                ))}
-                              </div>
+                              {PAYMENT_ICONS[name]}
                             </div>
                           ))
                         )}
