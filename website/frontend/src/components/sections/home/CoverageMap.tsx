@@ -152,5 +152,14 @@ export default function CoverageMap() {
     };
   }, [locale, t]);
 
-  return <div ref={containerRef} className="coverage-map" aria-label="GCSS global coverage map" />;
+  // data-lenis-prevent: let the mouse wheel zoom the map instead of being
+  // hijacked by the page's Lenis smooth-scroll.
+  return (
+    <div
+      ref={containerRef}
+      className="coverage-map"
+      aria-label="GCSS global coverage map"
+      data-lenis-prevent
+    />
+  );
 }
