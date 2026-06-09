@@ -348,7 +348,7 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
                 // Single full-bleed row of logo pills, duplicated twice so the
                 // marquee loops seamlessly.
                 return (
-                  <div className="b2c-pay-marquee" style={{ marginTop: 32 }}>
+                  <div className="b2c-pay-marquee">
                     <div className="b2c-pay-track">
                       {[0, 1].flatMap((copy) =>
                         PAYMENT_METHODS_FLAT.map((name) => (

@@ -2864,10 +2864,11 @@ html {
 }
 .b2c-pay-track {
   display: flex;
-  gap: 24px;
+  gap: 32px;
   width: max-content;
   will-change: transform;
-  animation: b2cPaySlide 50s linear infinite;
+  /* Slow, steady glide — same unhurried feel as the homepage 合作商 marquee. */
+  animation: b2cPaySlide 90s linear infinite;
 }
 .b2c-pay-marquee:hover .b2c-pay-track {
   animation-play-state: paused;
@@ -2879,9 +2880,9 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 104px;
-  min-width: 240px;
-  padding: 0 52px;
+  height: 168px;
+  min-width: 340px;
+  padding: 0 72px;
   background: #fff;
   border: 1px solid var(--border-subtle);
   border-radius: 9999px;
@@ -2890,13 +2891,13 @@ html {
 .b2c-pay-pill .payment-logo-img,
 .b2c-pay-pill .payment-logo-svg {
   width: auto !important;
-  height: 44px !important;
-  max-width: 150px;
+  height: 88px !important;
+  max-width: 280px;
   object-fit: contain;
 }
 .b2c-pay-pill .payment-logo-svg svg {
   width: auto;
-  height: 44px;
+  height: 88px;
 }
 [data-theme="dark"] .b2c-pay-pill {
   background: rgba(255, 255, 255, 0.94);
@@ -2907,10 +2908,10 @@ html {
   to   { transform: translateX(0); }
 }
 @media (max-width: 700px) {
-  .b2c-pay-pill { height: 84px; min-width: 180px; padding: 0 36px; }
+  .b2c-pay-pill { height: 120px; min-width: 220px; padding: 0 48px; }
   .b2c-pay-pill .payment-logo-img,
-  .b2c-pay-pill .payment-logo-svg { height: 34px !important; }
-  .b2c-pay-pill .payment-logo-svg svg { height: 34px; }
+  .b2c-pay-pill .payment-logo-svg { height: 60px !important; max-width: 180px; }
+  .b2c-pay-pill .payment-logo-svg svg { height: 60px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .b2c-pay-track { animation: none; }
