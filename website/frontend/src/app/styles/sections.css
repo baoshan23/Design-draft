@@ -2896,9 +2896,6 @@ html {
   height: 88px !important;
   max-width: 180px;
   object-fit: contain;
-  filter: grayscale(1);
-  opacity: 0.88;
-  transition: filter 0.3s ease, opacity 0.3s ease;
 }
 .b2c-pay-pill .payment-logo-svg svg {
   width: auto;
@@ -2932,7 +2929,13 @@ html {
 .b2c-pay-pill .payment-logo-img[alt="UPI"],
 .b2c-pay-pill .payment-logo-img[alt="Visa"],
 .b2c-pay-pill .payment-logo-img[alt="Przelewy24"],
-.b2c-pay-pill .payment-logo-img[alt="FPX"] {
+.b2c-pay-pill .payment-logo-img[alt="FPX"],
+.b2c-pay-pill .payment-logo-img[alt="Swish"],
+.b2c-pay-pill .payment-logo-img[alt="MobilePay"],
+.b2c-pay-pill .payment-logo-img[alt="SPEI"],
+.b2c-pay-pill .payment-logo-img[alt="LINE Pay"],
+.b2c-pay-pill .payment-logo-img[alt="American Express"],
+.b2c-pay-pill .payment-logo-img[alt="SEPA"] {
   height: 104px !important;
 }
 .b2c-pay-pill .payment-logo-img[alt="MoMo"],
@@ -2940,11 +2943,6 @@ html {
 .b2c-pay-pill .payment-logo-img[alt="Tabby"],
 .b2c-pay-pill .payment-logo-img[alt="Toss Pay"] {
   height: 64px !important;
-}
-.b2c-pay-pill:hover .payment-logo-img,
-.b2c-pay-pill:hover .payment-logo-svg {
-  filter: grayscale(0);
-  opacity: 1;
 }
 @keyframes b2cPaySlide {
   from { transform: translateX(-50%); }
@@ -2978,7 +2976,13 @@ html {
   .b2c-pay-pill .payment-logo-img[alt="UPI"],
   .b2c-pay-pill .payment-logo-img[alt="Visa"],
   .b2c-pay-pill .payment-logo-img[alt="Przelewy24"],
-  .b2c-pay-pill .payment-logo-img[alt="FPX"] { height: 76px !important; }
+  .b2c-pay-pill .payment-logo-img[alt="FPX"],
+  .b2c-pay-pill .payment-logo-img[alt="Swish"],
+  .b2c-pay-pill .payment-logo-img[alt="MobilePay"],
+  .b2c-pay-pill .payment-logo-img[alt="SPEI"],
+  .b2c-pay-pill .payment-logo-img[alt="LINE Pay"],
+  .b2c-pay-pill .payment-logo-img[alt="American Express"],
+  .b2c-pay-pill .payment-logo-img[alt="SEPA"] { height: 76px !important; }
   .b2c-pay-pill .payment-logo-img[alt="MoMo"],
   .b2c-pay-pill .payment-logo-img[alt="Sezzle"],
   .b2c-pay-pill .payment-logo-img[alt="Tabby"],
