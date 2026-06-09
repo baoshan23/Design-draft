@@ -2865,14 +2865,15 @@ html {
    reduced-motion stops it. Scoped .b2c-pay-* only. */
 .b2c-pay-marquee {
   display: flex;
+  flex-direction: column;
+  gap: 28px;
   overflow: hidden;
-  /* Contained scroll lane — capped at 1360px, centred in the container. */
-  width: 100%;
-  max-width: 1360px;
-  margin-left: auto;
-  margin-right: auto;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  /* Full-bleed scroll area — spans the whole viewport (breaks out of the
+     grey band's padding). */
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
 }
 .b2c-pay-track {
   display: flex;
@@ -2881,6 +2882,13 @@ html {
   will-change: transform;
   /* Slow, smooth continuous glide — go-electra-style partner strip. */
   animation: b2cPaySlide 80s linear infinite;
+}
+/* Row 2: longer duration + constant phase offset + half-pill left pad so
+   its pills never vertically line up with row 1 (staggered wall). */
+.b2c-pay-track--2 {
+  animation-duration: 94s;
+  animation-delay: -41s;
+  padding-left: 200px;
 }
 .b2c-pay-marquee:hover .b2c-pay-track {
   animation-play-state: paused;

@@ -345,23 +345,30 @@ export default async function B2CPage({ params }: { params: Promise<{ locale: st
               </div>
 
               {(() => {
-                // Single full-bleed row of logo pills, duplicated twice so the
-                // marquee loops seamlessly.
+                // Two staggered full-bleed rows of logo pills; each row is
+                // duplicated twice so the marquee loops seamlessly.
+                const half = Math.ceil(PAYMENT_METHODS_FLAT.length / 2);
+                const PAY_ROWS = [
+                  PAYMENT_METHODS_FLAT.slice(0, half),
+                  PAYMENT_METHODS_FLAT.slice(half),
+                ];
                 return (
                   <div className="b2c-pay-marquee">
-                    <div className="b2c-pay-track">
-                      {[0, 1].flatMap((copy) =>
-                        PAYMENT_METHODS_FLAT.map((name) => (
-                          <div
-                            key={`${name}-${copy}`}
-                            className="b2c-pay-pill"
-                            aria-hidden={copy === 1 ? true : undefined}
-                          >
-                            {PAYMENT_ICONS[name]}
-                          </div>
-                        ))
-                      )}
-                    </div>
+                    {PAY_ROWS.map((row, ri) => (
+                      <div className={`b2c-pay-track b2c-pay-track--${ri + 1}`} key={ri}>
+                        {[0, 1].flatMap((copy) =>
+                          row.map((name) => (
+                            <div
+                              key={`${name}-${copy}`}
+                              className="b2c-pay-pill"
+                              aria-hidden={copy === 1 ? true : undefined}
+                            >
+                              {PAYMENT_ICONS[name]}
+                            </div>
+                          ))
+                        )}
+                      </div>
+                    ))}
                   </div>
                 );
               })()}
