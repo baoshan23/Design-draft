@@ -2972,6 +2972,12 @@ html {
   height: 118px !important;
   max-width: 222px;
 }
+/* Swish / MobilePay marks sit small in their padded PNGs — bump them. */
+.b2c-pay-pill .payment-logo-img[alt="Swish"],
+.b2c-pay-pill .payment-logo-img[alt="MobilePay"] {
+  height: 122px !important;
+  max-width: 208px;
+}
 @keyframes b2cPaySlide {
   from { transform: translateX(-50%); }
   to   { transform: translateX(0); }
@@ -3017,6 +3023,8 @@ html {
   .b2c-pay-pill .payment-logo-img[alt="Toss Pay"] { height: 46px !important; }
   .b2c-pay-pill .payment-logo-img[alt="Mastercard"] { height: 90px !important; max-width: 170px; }
   .b2c-pay-pill .payment-logo-img[alt="Samsung Pay"] { height: 86px !important; max-width: 164px; }
+  .b2c-pay-pill .payment-logo-img[alt="Swish"],
+  .b2c-pay-pill .payment-logo-img[alt="MobilePay"] { height: 88px !important; max-width: 150px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .b2c-pay-track { animation: none; }
