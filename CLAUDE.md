@@ -49,6 +49,8 @@ Backend: `node deploy/deploy-backend.js` cross-compiles Go + SFTP + systemd rest
 
 ## Last session
 
+- 2026-06-09 followup — **payment marquee — shrank MoMo/Toss/Tabby/Sezzle tier 64→56px + REMOVED the grey band** (`1209a3c`; user red-boxed MoMo/Toss `稍微缩小一点点` + `灰色背景去掉`). Very-wide tier `64→56px` (mobile 46→40). `.b2c-pay-screen` stripped back to just `margin-top:80px` (dropped the full-bleed `100vw`/`background:var(--dark)`/`padding:80px` band) → payment screen is plain on white again; the marquee keeps its own `100vw` full-bleed breakout. Restored the `#multilingual` `marginTop:96→128` (the band's padding that justified the earlier trim is gone). tsc 0. Revert: re-add the grey band to `.b2c-pay-screen` + tier back to 64/46.
+
 - 2026-06-09 followup — **payment marquee — enlarged Swish + MobilePay** (`9eb2c86`; user red-boxed them row 2 `红框的logo放大一点`). Dedicated override `[alt="Swish"],[alt="MobilePay"]{height:122px; max-width:208px}` (mobile 88/150) — their marks sit small in padded PNGs. Revert: drop the override.
 
 - 2026-06-09 followup — **payment marquee — enlarged Samsung Pay a touch** (`32cdb89`; user red-boxed Samsung Pay `再放大一点点`). Added a dedicated override `[alt="Samsung Pay"]{height:118px; max-width:222px}` (mobile 86/164), like the Mastercard one. Revert: drop the Samsung Pay override.
