@@ -1,7 +1,63 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ReactLenis } from 'lenis/react';
+import { ReactLenis, useLenis } from 'lenis/react';
+
+/**
+ * Intercepts clicks on same-page anchor links (`<a href="#id">` or a
+ * locale-prefixed link whose hash points at an element on the CURRENT page)
+ * and routes them through `lenis.scrollTo` for a smooth glide instead of the
+ * browser's instant jump.
+ *
+ * The landing position is left IDENTICAL to the native jump: we read the
+ * target's own `scroll-margin-top` (getComputedStyle resolves the `calc(...)`
+ * to px) and pass it as a negative `offset`, so every page's fixed-header /
+ * sub-nav clearance is respected automatically — we only add the smoothing.
+ *
+ * Cross-page links (hash target not present in the current DOM, or a different
+ * pathname) are left untouched so the Next.js router navigates normally.
+ *
+ * Must live INSIDE <ReactLenis> so `useLenis()` can read the instance.
+ */
+function AnchorScrollHandler() {
+  const lenis = useLenis();
+
+  useEffect(() => {
+    if (!lenis) return;
+
+    const samePath = (a: string, b: string) =>
+      a.replace(/\/+$/, '') === b.replace(/\/+$/, '');
+
+    const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
+        return;
+      }
+      const link = (e.target as HTMLElement | null)?.closest?.('a[href]') as HTMLAnchorElement | null;
+      if (!link || link.target === '_blank' || link.hasAttribute('download')) return;
+
+      const url = new URL(link.href, window.location.href);
+      if (url.origin !== window.location.origin) return;
+      if (!url.hash || url.hash === '#') return;
+      // Same page only — otherwise let the router navigate.
+      if (!samePath(url.pathname, window.location.pathname)) return;
+
+      const id = decodeURIComponent(url.hash.slice(1));
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      e.preventDefault();
+      const margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+      lenis.scrollTo(el as HTMLElement, { offset: -margin });
+      // Keep the address bar / history in sync without a second jump.
+      history.pushState(null, '', url.hash);
+    };
+
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, [lenis]);
+
+  return null;
+}
 
 /**
  * Lenis-powered smooth scrolling (go-electra style "丝滑" feel).
@@ -52,6 +108,8 @@ export default function SmoothScroll() {
         // sidebars, tables) natively instead of hijacking the page.
         allowNestedScroll: true,
       }}
-    />
+    >
+      <AnchorScrollHandler />
+    </ReactLenis>
   );
 }
