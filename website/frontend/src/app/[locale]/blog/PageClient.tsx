@@ -57,6 +57,33 @@ export default function BlogPage() {
     setTimeout(() => setSubscribed(false), 2000);
   };
 
+  const featured = filteredPosts[0];
+  const featuredStories = filteredPosts.slice(1, 4);
+  const recentPosts = filteredPosts.slice(4);
+
+  const fmtDate = (iso?: string | null) =>
+    iso ? new Date(iso).toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' }) : '';
+
+  const renderCard = (p: ApiBlogPost, idx: number) => (
+    <article className="blog-card" key={p.slug}>
+      <Link href={`/blog/${p.slug}`} className="blog-card-img">
+        <ImagePlaceholder
+          variant={idx % 3 === 0 ? 'dashboard' : idx % 3 === 1 ? 'api' : 'hero'}
+          aspectRatio="16/10"
+          label={(p.tags?.[0] || 'blog').toUpperCase()}
+        />
+      </Link>
+      <div className="blog-card-body">
+        <span className="post-category">{p.tags?.[0] ?? t('blog.label')}</span>
+        <h3>
+          <Link href={`/blog/${p.slug}`}>{p.title}</Link>
+        </h3>
+        <p>{p.excerpt}</p>
+        <span className="blog-card-date">{fmtDate(p.publishedAt)}</span>
+      </div>
+    </article>
+  );
+
   return (
     <>
       {/* Blog Hero */}
@@ -64,109 +91,86 @@ export default function BlogPage() {
         <ScrollAnimation>
           <div className="container">
             <span className="section-label">{t('blog.label')}</span>
-            <h1>{t('blog.title')}</h1>
+            <h1>{t('blog.title')} {t('blog.title2')}</h1>
             <p>{t('blog.desc')}</p>
           </div>
         </ScrollAnimation>
       </section>
 
-      {/* Filters + pagination toolbar */}
-      <section className="section-sm">
+      <section className="section-sm blog-main">
         <div className="container">
+          {/* Category filter row */}
           <ScrollAnimation>
-            <div className="blog-toolbar">
-              <div className="blog-filters">
-                {filters.map((f) => (
-                  <button
-                    key={f.key}
-                    className={`filter-btn${activeFilter === f.key ? ' active' : ''}`}
-                    onClick={() => setActiveFilter(f.key)}
-                  >
-                    {f.label}
-                  </button>
-                ))}
-              </div>
-              <div className="pagination">
-                <button className="page-btn active">1</button>
-                <button className="page-btn">2</button>
-                <button className="page-btn">3</button>
-                <button className="page-btn" aria-label={t('blog.pagination.next')} title={t('blog.pagination.next')}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6" /></svg>
+            <div className="blog-filters">
+              {filters.map((f) => (
+                <button
+                  key={f.key}
+                  className={`filter-btn${activeFilter === f.key ? ' active' : ''}`}
+                  onClick={() => setActiveFilter(f.key)}
+                >
+                  {f.label}
                 </button>
-              </div>
+              ))}
             </div>
           </ScrollAnimation>
 
-          {/* Featured Post */}
-          <ScrollAnimation>
-            <div className="featured-post">
-              <div className="featured-img">
-                <ImagePlaceholder variant="hero" aspectRatio="16/9" label={t('blog.featured.cat')} />
-              </div>
-              <div className="featured-content">
-                <span className="post-category">{filteredPosts[0]?.tags?.[0] ?? t('blog.featured.cat')}</span>
-                <h2>
-                  {filteredPosts[0] ? (
-                    <Link href={`/blog/${filteredPosts[0].slug}`}>{filteredPosts[0].title}</Link>
-                  ) : (
-                    <span>{t('blog.featured.title')}</span>
-                  )}
-                </h2>
-                <p>{filteredPosts[0]?.excerpt ?? t('blog.featured.desc')}</p>
-                <div className="post-meta">
-                  <div className="author">
-                    <div className="author-avatar">G</div>
-                    <span>{filteredPosts[0]?.authorName ?? t('blog.featured.team')}</span>
-                  </div>
-                  <span>{filteredPosts[0]?.publishedAt ? new Date(filteredPosts[0].publishedAt).toLocaleDateString(locale) : '—'}</span>
-                  <span>{filteredPosts[0]?.tags?.length ? `${filteredPosts[0].tags.length} tags` : '—'}</span>
-                </div>
-              </div>
-            </div>
-          </ScrollAnimation>
-
-          {/* Blog Grid */}
-          <ScrollAnimation>
-            <div className="blog-grid">
-
-              {loading ? (
-                <div className="muted">{t('blog.post.loading')}</div>
-              ) : filteredPosts.length === 0 ? (
-                <div className="muted">{t('blog.post.none')}</div>
-              ) : (
-                filteredPosts.slice(1).map((p, idx) => (
-                  <div className="blog-card" key={p.slug}>
-                    <div className="blog-card-img">
-                      <ImagePlaceholder
-                        variant={idx % 2 === 0 ? 'dashboard' : 'api'}
-                        aspectRatio="16/9"
-                        label={(p.tags?.[0] || 'blog').toUpperCase()}
-                      />
-                    </div>
-                    <div className="blog-card-body">
-                      <span className="post-category cat-guide">{p.tags?.[0] ?? 'Blog'}</span>
-                      <h3>
-                        <Link href={`/blog/${p.slug}`}>{p.title}</Link>
-                      </h3>
-                      <p>{p.excerpt}</p>
-                      <div className="post-meta blog-post-meta-tight">
-                        <span>{p.publishedAt ? new Date(p.publishedAt).toLocaleDateString(locale) : '—'}</span>
-                        <span>{p.tags?.length ? `${p.tags.length} tags` : '—'}</span>
+          {loading ? (
+            <div className="muted blog-empty">{t('blog.post.loading')}</div>
+          ) : filteredPosts.length === 0 ? (
+            <div className="muted blog-empty">{t('blog.post.none')}</div>
+          ) : (
+            <>
+              {/* Featured hero post */}
+              {featured && (
+                <ScrollAnimation>
+                  <article className="featured-post">
+                    <Link href={`/blog/${featured.slug}`} className="featured-img">
+                      <ImagePlaceholder variant="hero" aspectRatio="16/10" label={(featured.tags?.[0] || 'blog').toUpperCase()} />
+                    </Link>
+                    <div className="featured-content">
+                      <span className="post-category">{featured.tags?.[0] ?? t('blog.label')}</span>
+                      <h2>
+                        <Link href={`/blog/${featured.slug}`}>{featured.title}</Link>
+                      </h2>
+                      <p>{featured.excerpt}</p>
+                      <div className="featured-meta">
+                        <span className="featured-author">
+                          <span className="author-avatar">{(featured.authorName ?? 'G').charAt(0)}</span>
+                          {featured.authorName ?? t('blog.featured.team')}
+                        </span>
+                        <span className="featured-dot" aria-hidden>·</span>
+                        <span>{fmtDate(featured.publishedAt)}</span>
                       </div>
-                      <Link href={`/blog/${p.slug}`} className="read-more">
-                        <span>{t('blog.readmore')}</span>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <line x1="5" y1="12" x2="19" y2="12" />
-                          <polyline points="12 5 19 12 12 19" />
-                        </svg>
-                      </Link>
                     </div>
-                  </div>
-                ))
+                  </article>
+                </ScrollAnimation>
               )}
 
-            </div>
-          </ScrollAnimation>
+              {/* Featured stories */}
+              {featuredStories.length > 0 && (
+                <ScrollAnimation>
+                  <div className="blog-section-head">
+                    <h2>{t('blog.featuredStories')}</h2>
+                  </div>
+                  <div className="blog-grid">
+                    {featuredStories.map((p, idx) => renderCard(p, idx))}
+                  </div>
+                </ScrollAnimation>
+              )}
+
+              {/* Recently published */}
+              {recentPosts.length > 0 && (
+                <ScrollAnimation>
+                  <div className="blog-section-head">
+                    <h2>{t('blog.recent')}</h2>
+                  </div>
+                  <div className="blog-grid">
+                    {recentPosts.map((p, idx) => renderCard(p, idx))}
+                  </div>
+                </ScrollAnimation>
+              )}
+            </>
+          )}
         </div>
       </section>
 

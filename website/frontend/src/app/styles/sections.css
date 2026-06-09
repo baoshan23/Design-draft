@@ -2967,6 +2967,11 @@ html {
   height: 122px !important;
   max-width: 230px;
 }
+/* Samsung Pay reads slightly small too — nudge it up a touch. */
+.b2c-pay-pill .payment-logo-img[alt="Samsung Pay"] {
+  height: 118px !important;
+  max-width: 222px;
+}
 @keyframes b2cPaySlide {
   from { transform: translateX(-50%); }
   to   { transform: translateX(0); }
@@ -3011,6 +3016,7 @@ html {
   .b2c-pay-pill .payment-logo-img[alt="Tabby"],
   .b2c-pay-pill .payment-logo-img[alt="Toss Pay"] { height: 46px !important; }
   .b2c-pay-pill .payment-logo-img[alt="Mastercard"] { height: 90px !important; max-width: 170px; }
+  .b2c-pay-pill .payment-logo-img[alt="Samsung Pay"] { height: 86px !important; max-width: 164px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .b2c-pay-track { animation: none; }
