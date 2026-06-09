@@ -1902,8 +1902,8 @@ a.b2c-demo-qr:hover {
      button row so nothing wraps/clips; give the gap a small trim. The big
      enlargement comes from the right-bleed below, not from squeezing the
      text. */
-  grid-template-columns: minmax(0, 520px) minmax(0, 1fr);
-  gap: 24px;
+  grid-template-columns: minmax(0, 530px) minmax(0, 1fr);
+  gap: 28px;
 }
 /* Bleed the illustration's RIGHT edge out to the viewport edge so it uses
    the entire gutter — biggest on wide screens (.hero has overflow:hidden
@@ -1914,7 +1914,9 @@ a.b2c-demo-qr:hover {
    transform) — the wrapper's heroEntrance animation only touches its
    transform, so width is safe. Image is width:100% → fills the new width. */
 .product-hero.particles-bg .hero-media-bare {
-  width: calc(100% + max(24px, (100vw - var(--max-width) + 48px) / 2));
+  /* Capped at +64px so wide screens don't over-enlarge (was full-bleed to
+     the viewport edge → too big). */
+  width: calc(100% + min(64px, max(24px, (100vw - var(--max-width) + 48px) / 2)));
 }
 @media (max-width: 900px) {
   .product-hero.particles-bg .hero-media-bare {
