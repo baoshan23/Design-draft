@@ -2893,8 +2893,8 @@ html {
 .b2c-pay-pill .payment-logo-img,
 .b2c-pay-pill .payment-logo-svg {
   width: auto !important;
-  height: 76px !important;
-  max-width: 240px;
+  height: 88px !important;
+  max-width: 180px;
   object-fit: contain;
   filter: grayscale(1);
   opacity: 0.88;
@@ -2902,12 +2902,14 @@ html {
 }
 .b2c-pay-pill .payment-logo-svg svg {
   width: auto;
-  height: 76px;
+  height: 88px;
 }
-/* Per-logo height tiers so every brand reads at a similar VISUAL size
-   despite very different aspect ratios. Square/icon logos (low AR) are
-   enlarged; very wide wordmarks (high AR) are pulled down. Base 58px =
-   the common ~1.6–1.9 AR wordmarks. */
+/* Per-logo height tiers so every brand reads at a similar VISUAL WIDTH
+   (~150–170px) despite very different aspect ratios — matched to the
+   MoMo / Toss Pay reference the user marked as "normal". Low-AR (square /
+   icon / compact) logos get the tallest height so they fill width; the
+   very-wide colored pills get the shortest. Base 88px = the ~1.6–1.95 AR
+   wordmarks. */
 .b2c-pay-pill .payment-logo-img[alt="Multibanco"],
 .b2c-pay-pill .payment-logo-img[alt="Interac"],
 .b2c-pay-pill .payment-logo-img[alt="PayPay"],
@@ -2916,9 +2918,7 @@ html {
 .b2c-pay-pill .payment-logo-img[alt="Touch'n Go"],
 .b2c-pay-pill .payment-logo-img[alt="UnionPay"],
 .b2c-pay-pill .payment-logo-img[alt="Bancontact"],
-.b2c-pay-pill .payment-logo-img[alt="Google Pay"] {
-  height: 100px !important;
-}
+.b2c-pay-pill .payment-logo-img[alt="Google Pay"],
 .b2c-pay-pill .payment-logo-img[alt="BLIK"],
 .b2c-pay-pill .payment-logo-img[alt="MB WAY"],
 .b2c-pay-pill .payment-logo-img[alt="OXXO"],
@@ -2933,7 +2933,7 @@ html {
 .b2c-pay-pill .payment-logo-img[alt="Visa"],
 .b2c-pay-pill .payment-logo-img[alt="Przelewy24"],
 .b2c-pay-pill .payment-logo-img[alt="FPX"] {
-  height: 88px !important;
+  height: 104px !important;
 }
 .b2c-pay-pill .payment-logo-img[alt="MoMo"],
 .b2c-pay-pill .payment-logo-img[alt="Sezzle"],
@@ -2951,10 +2951,10 @@ html {
   to   { transform: translateX(0); }
 }
 @media (max-width: 700px) {
-  .b2c-pay-pill { height: 100px; padding: 0 22px; }
+  .b2c-pay-pill { height: 96px; padding: 0 20px; }
   .b2c-pay-pill .payment-logo-img,
-  .b2c-pay-pill .payment-logo-svg { height: 56px !important; max-width: 170px; }
-  .b2c-pay-pill .payment-logo-svg svg { height: 56px; }
+  .b2c-pay-pill .payment-logo-svg { height: 64px !important; max-width: 132px; }
+  .b2c-pay-pill .payment-logo-svg svg { height: 64px; }
   /* Mobile tiers (scaled down from desktop). */
   .b2c-pay-pill .payment-logo-img[alt="Multibanco"],
   .b2c-pay-pill .payment-logo-img[alt="Interac"],
@@ -2964,7 +2964,7 @@ html {
   .b2c-pay-pill .payment-logo-img[alt="Touch'n Go"],
   .b2c-pay-pill .payment-logo-img[alt="UnionPay"],
   .b2c-pay-pill .payment-logo-img[alt="Bancontact"],
-  .b2c-pay-pill .payment-logo-img[alt="Google Pay"] { height: 74px !important; }
+  .b2c-pay-pill .payment-logo-img[alt="Google Pay"],
   .b2c-pay-pill .payment-logo-img[alt="BLIK"],
   .b2c-pay-pill .payment-logo-img[alt="MB WAY"],
   .b2c-pay-pill .payment-logo-img[alt="OXXO"],
@@ -2978,11 +2978,11 @@ html {
   .b2c-pay-pill .payment-logo-img[alt="UPI"],
   .b2c-pay-pill .payment-logo-img[alt="Visa"],
   .b2c-pay-pill .payment-logo-img[alt="Przelewy24"],
-  .b2c-pay-pill .payment-logo-img[alt="FPX"] { height: 66px !important; }
+  .b2c-pay-pill .payment-logo-img[alt="FPX"] { height: 76px !important; }
   .b2c-pay-pill .payment-logo-img[alt="MoMo"],
   .b2c-pay-pill .payment-logo-img[alt="Sezzle"],
   .b2c-pay-pill .payment-logo-img[alt="Tabby"],
-  .b2c-pay-pill .payment-logo-img[alt="Toss Pay"] { height: 48px !important; }
+  .b2c-pay-pill .payment-logo-img[alt="Toss Pay"] { height: 46px !important; }
 }
 @media (prefers-reduced-motion: reduce) {
   .b2c-pay-track { animation: none; }
