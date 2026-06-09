@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import ScrollAnimation from '@/components/effects/ScrollAnimation';
+import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
 import { Link } from '@/i18n/navigation';
 import { apiListBlogPosts, type ApiBlogPost } from '@/lib/api/contentApi';
 import { listStaticBlogPosts } from '@/lib/content/staticContent';
@@ -65,12 +66,21 @@ export default function BlogPage() {
   const fmtDate = (iso?: string | null) =>
     iso ? new Date(iso).toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' }) : '';
 
-  const renderCard = (p: ApiBlogPost) => (
+  const renderCard = (p: ApiBlogPost, idx: number) => (
     <Link href={`/blog/${p.slug}`} className="blog-card" key={p.slug}>
-      <span className="post-category">{p.tags?.[0] ?? t('blog.label')}</span>
-      <h3>{p.title}</h3>
-      <p>{p.excerpt}</p>
-      <span className="blog-card-date">{fmtDate(p.publishedAt)}</span>
+      <span className="blog-card-img">
+        <ImagePlaceholder
+          variant={idx % 3 === 0 ? 'dashboard' : idx % 3 === 1 ? 'api' : 'hero'}
+          aspectRatio="16/10"
+          label={(p.tags?.[0] || 'blog').toUpperCase()}
+        />
+      </span>
+      <span className="blog-card-body">
+        <span className="post-category">{p.tags?.[0] ?? t('blog.label')}</span>
+        <h3>{p.title}</h3>
+        <p>{p.excerpt}</p>
+        <span className="blog-card-date">{fmtDate(p.publishedAt)}</span>
+      </span>
     </Link>
   );
 
@@ -127,7 +137,7 @@ export default function BlogPage() {
             <div className="muted blog-empty">{t('blog.post.none')}</div>
           ) : (
             <ScrollAnimation>
-              <div className="blog-grid">{filteredPosts.map((p) => renderCard(p))}</div>
+              <div className="blog-grid">{filteredPosts.map((p, idx) => renderCard(p, idx))}</div>
             </ScrollAnimation>
           )}
         </div>
