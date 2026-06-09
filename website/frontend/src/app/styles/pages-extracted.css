@@ -1442,7 +1442,7 @@ body:has(.product-hero) {
 
 .blog-card:hover {
   border-color: rgba(254, 191, 29, 0.55);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.07);
+  box-shadow: none;
   transform: translateY(-3px);
 }
 
