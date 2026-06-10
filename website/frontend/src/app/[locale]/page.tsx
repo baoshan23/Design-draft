@@ -411,6 +411,37 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
         <div className="map-fullbleed">
           <CoverageMap />
+          {/* Floating "scan to charge" action card → opens the live H5 driver app */}
+          <a
+            href="https://app.gcss.hk/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="map-charge-card"
+          >
+            <span className="map-charge-card-icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M13 2L4.5 13.5H11l-1 8.5L19.5 10H13z" />
+              </svg>
+            </span>
+            <span className="map-charge-card-text">
+              <span className="map-charge-card-title">{t('map.scanCharge')}</span>
+              <span className="map-charge-card-sub">{t('map.scanChargeDesc')}</span>
+            </span>
+            <svg
+              className="map-charge-card-arrow"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <polyline points="9 6 15 12 9 18" />
+            </svg>
+          </a>
         </div>
       </section>
 
