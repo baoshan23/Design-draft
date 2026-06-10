@@ -3328,45 +3328,57 @@ html {
   padding: 2px 4px;
 }
 
-/* Station-style coverage pin — balloon map-pin w/ lightning bolt (true SVG shape) */
+/* Station-style coverage pin (go-electra: lightning bolt inside a circle) */
 .coverage-pin {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
   cursor: pointer;
 }
 
-.coverage-pin-svg {
-  width: 34px;
-  height: auto;
-  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
-  transform-origin: 50% 100%;
+.coverage-pin-badge {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary, #febf1d);
+  color: #1a1a1a;
+  border: 2.5px solid #ffffff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.28);
   transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: visible;
 }
 
-/* Default station — black pin, white bolt */
-.coverage-pin-shape {
-  fill: #181818;
-}
-.coverage-pin-bolt {
-  fill: #ffffff;
+/* Origin (Hong Kong) ONLY — black teardrop marker + enlarged yellow lightning */
+.coverage-pin--origin {
+  /* The rotated teardrop's tip pokes below its layout box — give the label room */
+  gap: 13px;
 }
 
-/* Origin (Hong Kong) / selected — larger yellow pin, black bolt */
-.coverage-pin--origin .coverage-pin-svg {
-  width: 48px;
-}
-.coverage-pin--origin .coverage-pin-shape {
-  fill: var(--primary, #febf1d);
-}
-.coverage-pin--origin .coverage-pin-bolt {
-  fill: #181818;
+.coverage-pin--origin .coverage-pin-badge {
+  width: 54px;
+  height: 54px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: #181818;
+  color: var(--primary, #febf1d);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
 
-.coverage-pin:hover .coverage-pin-svg {
+/* Counter-rotate the lightning so it sits upright inside the rotated teardrop */
+.coverage-pin--origin .coverage-pin-badge svg {
+  width: 28px;
+  height: 28px;
+  transform: rotate(45deg);
+}
+
+.coverage-pin:hover .coverage-pin-badge {
   transform: scale(1.12);
+}
+
+.coverage-pin--origin:hover .coverage-pin-badge {
+  transform: rotate(-45deg) scale(1.12);
 }
 
 .coverage-pin-label {

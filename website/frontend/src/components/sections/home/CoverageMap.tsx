@@ -124,19 +124,18 @@ export default function CoverageMap() {
         // Style can reload (e.g. on HMR) — re-apply on every styledata event too.
         map.on('styledata', localizeLabels);
 
-        // Balloon map-pin markers: a rounded teardrop silhouette with a
-        // lightning bolt, drawn as an SVG path so the shape is a real pin
-        // (not a rotated square). The location name is labelled beneath it.
-        const pinSvg =
-          '<svg class="coverage-pin-svg" viewBox="0 0 40 50" aria-hidden="true">' +
-          '<path class="coverage-pin-shape" d="M20 49C12 40 5 27 5 18A15 15 0 1 1 35 18C35 27 28 40 20 49Z"/>' +
-          '<path class="coverage-pin-bolt" d="M13 2L4.5 13.5H11l-1 8.5L19.5 10H13z" transform="translate(10.4 8.4) scale(0.8)"/>' +
-          '</svg>';
+        // Station-style markers (go-electra: a lightning bolt inside a circle).
+        // Built as HTML markers so every served location is always visible and
+        // prominent, with the location name labelled beneath it.
+        const lightning =
+          '<svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M13 2L4.5 13.5H11l-1 8.5L19.5 10H13z"/></svg>';
 
         for (const p of points) {
           const el = document.createElement('div');
           el.className = 'coverage-pin' + (p.isOrigin ? ' coverage-pin--origin' : '');
-          el.innerHTML = pinSvg + `<span class="coverage-pin-label">${p.name}</span>`;
+          el.innerHTML =
+            `<span class="coverage-pin-badge">${lightning}</span>` +
+            `<span class="coverage-pin-label">${p.name}</span>`;
           new maplibregl.Marker({ element: el, anchor: 'bottom' })
             .setLngLat([p.lng, p.lat])
             .addTo(map);
