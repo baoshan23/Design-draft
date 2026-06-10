@@ -445,8 +445,6 @@
     "label": "Global Coverage",
     "title": "Powering Chargers Across the Globe",
     "desc": "Our platform serves operators in 100+ countries, supporting localized payments, languages, and compliance requirements.",
-    "scanCharge": "Scan to charge",
-    "scanChargeDesc": "Scan + tap to pay — start charging in seconds",
     "countries": {
       "china": "China",
       "hongKong": "Hong Kong",

@@ -445,8 +445,6 @@
     "label": "全球覆盖",
     "title": "为全球充电桩提供动力",
     "desc": "我们的平台服务于 100+ 国家的运营商，支持本地化支付、语言和合规要求。",
-    "scanCharge": "扫码充电",
-    "scanChargeDesc": "扫码 + 点击支付，几秒启动充电",
     "countries": {
       "china": "中国",
       "hongKong": "中国香港",
